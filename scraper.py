@@ -27,7 +27,10 @@ from html.parser import HTMLParser
 # cinema-comoedia.com (orthographe officielle) — fallback cinema-comedia.fr
 URL_PROGRAMME    = "https://www.cinema-comoedia.com/programme-accessible/"
 URL_OMDB_BASE    = "https://www.omdbapi.com/"
-OMDB_API_KEY     = "822f09ad"   # https://www.omdbapi.com/apikey.aspx
+URL_TMDB_BASE    = "https://api.themoviedb.org/3/"
+import os
+OMDB_API_KEY = os.getenv("OMDB_API_KEY", "822f09ad")
+TMDB_API_KEY = os.getenv("TMDB_API_KEY")
 
 OUTPUT_DEFAULT   = Path(__file__).parent / "programme.json"
 
@@ -659,6 +662,8 @@ def enrich_omdb(films: list[dict]) -> list[dict]:
         log.warning("Clé OMDb non configurée — enrichissement ignoré")
         return films
 
+    tmdb_warned = [False]  # évite de logger N fois si TMDB_API_KEY manquante
+
     for film in films:
         titre = film.get("titreOriginal") or film.get("titre", "")
         annee = film.get("annee")
@@ -691,7 +696,41 @@ def enrich_omdb(films: list[dict]) -> list[dict]:
         except Exception as e:
             log.warning(f"  ✗ OMDb erreur pour {titre}: {e}")
 
+        # Fallback TMDB si pas de poster OMDb
+        if not film.get("poster") or film.get("poster") == "N/A":
+            _enrich_tmdb_poster(film, tmdb_warned)
+
     return films
+
+
+def _enrich_tmdb_poster(film: dict, warned: list) -> None:
+    """
+    Cherche le film sur TMDB (search/movie) et remplit poster si trouvé.
+    Appelé uniquement pour les films sans poster OMDb.
+    """
+    if not TMDB_API_KEY:
+        if not warned[0]:
+            log.warning("TMDB_API_KEY non configurée — fallback poster ignoré")
+            warned[0] = True
+        return
+    titre = film.get("titreOriginal") or film.get("titre", "")
+    if not titre:
+        return
+    annee = film.get("annee")
+    params = f"api_key={TMDB_API_KEY}&query={_urlencode(titre)}"
+    if annee:
+        params += f"&year={annee}"
+    url = f"{URL_TMDB_BASE}search/movie?{params}"
+
+    try:
+        data = json.loads(fetch(url, timeout=8))
+        results = data.get("results") or []
+        if results and results[0].get("poster_path"):
+            poster_path = results[0]["poster_path"]
+            film["poster"] = f"https://image.tmdb.org/t/p/w500{poster_path}"
+            log.info(f"  ✓ TMDB poster : {film['titre']}")
+    except Exception as e:
+        log.warning(f"  ✗ TMDB erreur pour {titre}: {e}")
 
 
 def _urlencode(s: str) -> str:

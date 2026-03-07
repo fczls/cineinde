@@ -21,6 +21,7 @@ jobs:
       - name: Lancer le scraper
         env:
           OMDB_API_KEY: ${{ secrets.OMDB_API_KEY }}
+          TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
         run: |
           python3 scraper.py --output programme.json
 
