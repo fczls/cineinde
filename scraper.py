@@ -27,7 +27,7 @@ from html.parser import HTMLParser
 # cinema-comoedia.com (orthographe officielle) — fallback cinema-comedia.fr
 URL_PROGRAMME    = "https://www.cinema-comoedia.com/programme-accessible/"
 URL_OMDB_BASE    = "https://www.omdbapi.com/"
-OMDB_API_KEY     = "VOTRE_CLE_OMDB"   # https://www.omdbapi.com/apikey.aspx
+OMDB_API_KEY     = "822f09ad"   # https://www.omdbapi.com/apikey.aspx
 
 OUTPUT_DEFAULT   = Path(__file__).parent / "programme.json"
 
@@ -389,6 +389,7 @@ def parse_programme(html: str) -> list[dict]:
 def _extract_film_comoedia(titre: str, content: str, week_dates: dict | None) -> dict:
     """Extrait les infos d'un bloc film (titre + content HTML)."""
     from html import unescape
+    titre = unescape(titre)
     content_clean = re.sub(r"<[^>]+>", " ", content)
     content_clean = unescape(content_clean).replace("\xa0", " ")
     content_clean = re.sub(r"\s+", " ", content_clean).strip()
