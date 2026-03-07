@@ -69,99 +69,63 @@ header{
 .ctx a{color:var(--gold-dim);text-decoration:none;}
 .ctx a:hover{color:var(--gold);}
 
-/* ── FILM CARDS ── */
-.film-list{padding:16px 20px 40px;display:flex;flex-direction:column;gap:10px;}
+/* ── FILM CARDS (design maquette) ── */
+.film-list{padding:16px 20px 40px;display:flex;flex-direction:column;gap:16px;}
 
 .film-card{
-  border-radius:var(--r);overflow:hidden;cursor:pointer;
-  border:1px solid var(--border);background:var(--bg2);
+  border-radius:12px;overflow:visible;cursor:pointer;
+  background:#0b0b0b;border:1px solid #3a3a3a;
   transition:transform .2s ease,box-shadow .2s ease,border-color .2s;
+  display:flex;gap:24px;padding:20px;align-items:flex-start;
 }
-.film-card:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(0,0,0,.55);border-color:var(--border2);}
-.film-card.active{border-color:rgba(201,168,76,.45);box-shadow:0 0 0 1px rgba(201,168,76,.15);}
+.film-card:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(0,0,0,.6);border-color:#4a4a4a;}
+.film-card.active{border-color:rgba(201,168,76,.5);box-shadow:0 0 0 1px rgba(201,168,76,.2);}
 
-/* Hero */
-.card-hero{
-  width:100%;height:190px;position:relative;overflow:hidden;
-  background:var(--bg3);
-}
-.card-hero img{
-  width:100%;height:100%;object-fit:cover;display:block;
-  transition:transform .5s ease;
-}
-.film-card:hover .card-hero img{transform:scale(1.04);}
-
-/* gradient bottom */
-.card-hero::after{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(to bottom,transparent 45%,rgba(17,16,16,.9) 100%);
-  pointer-events:none;
-}
-
-/* poster bottom-left inside hero */
+/* poster — 160×240, ratio 2:3 */
+.card-poster-wrap{flex-shrink:0;}
 .card-poster{
-  position:absolute;bottom:12px;left:14px;z-index:2;
-  width:44px;height:66px;border-radius:4px;
-  border:1.5px solid rgba(255,255,255,.15);
-  object-fit:cover;
-  box-shadow:0 4px 16px rgba(0,0,0,.7);
-  background:var(--bg4);
+  width:160px;height:240px;border-radius:10px;
+  object-fit:cover;display:block;
+  box-shadow:0 8px 24px rgba(0,0,0,.5);
+  background:#111;
 }
 
+/* card body */
+.card-body{flex:1;min-width:0;}
+.card-header{margin-bottom:8px;}
+.card-title{font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,48px);font-weight:300;color:#fff;line-height:1.15;}
+.card-meta{font-size:16px;color:#dcdcdc;margin-top:8px;line-height:1.5;}
 
-
-/* note badge */
-.note-badge{
-  position:absolute;top:12px;right:14px;z-index:2;
-  background:rgba(0,0,0,.6);border:1px solid rgba(255,255,255,.12);
-  border-radius:6px;padding:4px 8px;text-align:center;
-  backdrop-filter:blur(8px);
+/* grid langue + créneaux — une ligne par version */
+.card-slots{display:flex;flex-direction:column;gap:12px;margin-top:16px;}
+.card-slot-row{display:flex;flex-wrap:wrap;align-items:center;gap:12px;}
+/* chip langue — bordure dashed */
+.card-lang-chip{
+  flex-shrink:0;min-width:100px;height:56px;
+  display:flex;align-items:center;justify-content:center;
+  border-radius:12px;border:2px dashed #4a4a4a;
+  background:transparent;color:#fff;font-size:18px;font-weight:500;
+  padding:0 18px;
 }
-.note-num{font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:var(--gold);line-height:1;display:block;}
-.note-lbl{font-size:8px;color:var(--text-dim);letter-spacing:.06em;}
-
-/* hero title overlay */
-.hero-over{
-  position:absolute;bottom:0;left:0;right:0;z-index:2;
-  padding:10px 14px 10px 68px;
+/* bouton créneau */
+.card-time-btn{
+  font-family:'DM Mono',monospace;font-size:18px;font-weight:400;
+  height:56px;min-width:100px;padding:0 24px;
+  border-radius:14px;border:1px solid #3a3a3a;
+  background:#2b2b2b;color:#fff;cursor:pointer;
+  display:inline-flex;align-items:center;justify-content:center;
+  transition:background .15s,border-color .15s;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.03);
 }
-.hero-title{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:#fff;line-height:1.2;text-shadow:0 2px 8px rgba(0,0,0,.8);}
-.hero-sub{font-size:11px;color:rgba(255,255,255,.55);margin-top:2px;}
-
-
-
-/* card footer — horaires en avant */
-.card-foot{padding:14px 14px 12px;}
-.card-times{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px;}
-.sc{
-  font-family:'DM Mono',monospace;font-size:15px;font-weight:400;
-  padding:7px 13px;border-radius:8px;
-  background:var(--bg3);border:1px solid var(--border2);
-  color:var(--text);display:flex;align-items:center;gap:7px;
-  white-space:nowrap;transition:border-color .15s,background .15s;
-  letter-spacing:.02em;
-}
-.sc:hover{background:var(--bg4);border-color:rgba(255,255,255,.2);}
-.sc.past{color:var(--text-dim);opacity:.38;font-size:13px;padding:5px 10px;}
-.sc.soon{border-color:var(--accent);color:var(--accent);background:rgba(232,96,58,.08);}
-.sc-v{font-size:9px;opacity:.45;letter-spacing:.08em;}
-/* soon pulse ring */
-.sc.soon::before{content:'';display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--accent);animation:pulse 1.8s ease-in-out infinite;flex-shrink:0;}
-
-/* label row: version + genres inline */
-.card-labels{display:flex;align-items:center;flex-wrap:wrap;gap:5px;}
-.lbl{font-size:10px;padding:2px 8px;border-radius:100px;letter-spacing:.07em;white-space:nowrap;}
-.lbl-vf    {background:rgba(201,168,76,.15);color:#d4b45a;border:1px solid rgba(201,168,76,.25);}
-.lbl-vo    {background:rgba(79,160,106,.13);color:#5eb87a;border:1px solid rgba(79,160,106,.22);}
-.lbl-multi {background:rgba(255,255,255,.07);color:var(--text-mid);border:1px solid rgba(255,255,255,.15);}
-.lbl-genre {background:transparent;color:var(--text-dim);border:1px solid var(--border);}
-.lbl-sep   {width:1px;height:10px;background:var(--border2);margin:0 2px;}
+.card-time-btn:hover{background:#333;border-color:#4a4a4a;}
+.card-time-btn.past{color:#666;opacity:.5;cursor:default;}
+.card-time-btn.soon{border-color:var(--accent);color:var(--accent);background:rgba(232,96,58,.1);}
 
 /* skeleton */
-.sk-card{border-radius:var(--r);overflow:hidden;border:1px solid var(--border);background:var(--bg2);}
-.sk-hero{height:190px;background:var(--bg3);animation:sh 1.6s ease-in-out infinite;}
-.sk-foot{padding:14px;display:flex;flex-direction:column;gap:8px;}
-.sk-line{border-radius:3px;background:var(--bg3);animation:sh 1.6s ease-in-out infinite;}
+.sk-card{border-radius:12px;border:1px solid #3a3a3a;background:#0b0b0b;display:flex;gap:24px;padding:20px;}
+.sk-poster{width:160px;height:240px;border-radius:10px;background:#111;animation:sh 1.6s ease-in-out infinite;flex-shrink:0;}
+.sk-foot{display:flex;flex-direction:column;gap:8px;flex:1;}
+.sk-line{border-radius:3px;background:#1a1a1a;animation:sh 1.6s ease-in-out infinite;}
 @keyframes sh{0%,100%{opacity:.4}50%{opacity:.75}}
 
 /* empty-day message */
@@ -247,6 +211,15 @@ header{
   .h-loc{display:none;}
   .film-list,.events-list{padding:12px 12px 32px;}
   .ctx{padding:8px 16px;}
+  /* Cards responsive: empiler affiche au-dessus du contenu */
+  .film-card{flex-direction:column;align-items:center;padding:16px;}
+  .card-poster{width:140px;height:210px;}
+  .card-title{font-size:24px;text-align:center;}
+  .card-meta{text-align:center;}
+  .card-slots{width:100%;}
+  .card-slot-row{flex-wrap:wrap;}
+  .card-lang-chip{min-width:80px;height:48px;font-size:14px;}
+  .card-time-btn{min-width:80px;height:48px;font-size:16px;}
 }
 
 .hidden{display:none!important;}
@@ -288,9 +261,9 @@ header{
 
       <!-- Skeletons -->
       <div class="film-list" id="skeletons">
-        <div class="sk-card"><div class="sk-hero"></div><div class="sk-foot"><div class="sk-line" style="height:12px;width:45%"></div><div class="sk-line" style="height:17px;width:70%"></div><div style="display:flex;gap:6px;margin-top:2px"><div class="sk-line" style="height:26px;width:62px"></div><div class="sk-line" style="height:26px;width:62px"></div><div class="sk-line" style="height:26px;width:62px"></div></div></div></div>
-        <div class="sk-card"><div class="sk-hero"></div><div class="sk-foot"><div class="sk-line" style="height:12px;width:40%"></div><div class="sk-line" style="height:17px;width:60%"></div><div style="display:flex;gap:6px;margin-top:2px"><div class="sk-line" style="height:26px;width:62px"></div><div class="sk-line" style="height:26px;width:62px"></div></div></div></div>
-        <div class="sk-card"><div class="sk-hero" style="height:160px"></div><div class="sk-foot"><div class="sk-line" style="height:12px;width:50%"></div><div class="sk-line" style="height:17px;width:75%"></div><div style="display:flex;gap:6px;margin-top:2px"><div class="sk-line" style="height:26px;width:62px"></div><div class="sk-line" style="height:26px;width:62px"></div><div class="sk-line" style="height:26px;width:62px"></div></div></div></div>
+        <div class="sk-card"><div class="sk-poster"></div><div class="sk-foot"><div class="sk-line" style="height:12px;width:45%"></div><div class="sk-line" style="height:17px;width:70%"></div><div style="display:flex;gap:6px;margin-top:2px"><div class="sk-line" style="height:26px;width:62px"></div><div class="sk-line" style="height:26px;width:62px"></div><div class="sk-line" style="height:26px;width:62px"></div></div></div></div>
+        <div class="sk-card"><div class="sk-poster"></div><div class="sk-foot"><div class="sk-line" style="height:12px;width:40%"></div><div class="sk-line" style="height:17px;width:60%"></div><div style="display:flex;gap:6px;margin-top:2px"><div class="sk-line" style="height:26px;width:62px"></div><div class="sk-line" style="height:26px;width:62px"></div></div></div></div>
+        <div class="sk-card"><div class="sk-poster"></div><div class="sk-foot"><div class="sk-line" style="height:12px;width:50%"></div><div class="sk-line" style="height:17px;width:75%"></div><div style="display:flex;gap:6px;margin-top:2px"><div class="sk-line" style="height:26px;width:62px"></div><div class="sk-line" style="height:26px;width:62px"></div><div class="sk-line" style="height:26px;width:62px"></div></div></div></div>
       </div>
 
       <div class="film-list hidden" id="filmList"></div>
@@ -323,6 +296,7 @@ header{
 // La clé demo ci-dessous est limitée à 1000 req/jour
 // ═══════════════════════════════════════════════════════════
 const OMDB_KEY = 'trilogy'; // clé démo publique OMDb
+const POSTER_FALLBACK = 'https://images.unsplash.com/photo-1696426483316-7f57831dadc8?w=400&q=80'; // camera on tripod
 
 // ═══════════════════════════════════════════════════════════
 // FILMS — imdbId pour OMDb, images de secours intégrées
@@ -586,44 +560,36 @@ function renderFilms(films, forcedDate) {
   }
 
   const cardsHtml = rows.map(film => {
-    const poster   = film._poster || null;
-    const noteStr  = film.note ? film.note.toFixed(1) : null;
-    const versions = [...new Set(film._day.map(s=>s.v))];
-    const verLabel = versions.length > 1 ? 'VF · VOSTFR' : versions[0];
-    const verLblCls = versions.length > 1 ? 'lbl lbl-multi' : (versions[0]==='VF' ? 'lbl lbl-vf' : 'lbl lbl-vo');
-
-    // Séances : chips horaires proéminents
-    const chips = film._day.map(s => {
-      const soon = isTod && isSoon(s.h);
-      return `<div class="sc${soon?' soon':''}">${s.h}</div>`;
+    const poster   = film._poster || POSTER_FALLBACK;
+    const meta     = [film.genres[0], film.realisateur, film.annee, film.duree + 'min'].filter(Boolean).join(' · ');
+    const byVer = {};
+    film._day.forEach(s => {
+      if (!byVer[s.v]) byVer[s.v] = [];
+      byVer[s.v].push(s);
+    });
+    const verOrder = ['VOSTFR','VF','VO'];
+    const slotRows = verOrder.filter(v => byVer[v]).map(v => {
+      const seances = byVer[v];
+      const btns = seances.map(s => {
+        const soon = isTod && isSoon(s.h);
+        const past = isTod && isPast(s.h);
+        const cls = past ? 'past' : (soon ? 'soon' : '');
+        const aria = 'Réserver ' + s.h + ' — ' + film.titre;
+        return '<button type="button" class="card-time-btn ' + cls + '" aria-label="' + escAttr(aria) + '" onclick="event.stopPropagation();openFilm(\'' + esc(film.titre) + '\')">' + s.h + '</button>';
+      }).join('');
+      return '<div class="card-slot-row"><div class="card-lang-chip">' + v + '</div>' + btns + '</div>';
     }).join('');
 
-    // Labels : version + genres côte à côte
-    const labels = [
-      `<span class="${verLblCls}">${verLabel}</span>`,
-      `<span class="lbl-sep"></span>`,
-      ...film.genres.slice(0,2).map(g => `<span class="lbl lbl-genre">${g}</span>`),
-    ].join('');
-
-    const heroContent = poster
-      ? `<img src="${poster}" alt="${escAttr(film.titre)}" loading="lazy" />`
-      : `<div style="background:${film.color};height:100%;width:100%;display:flex;align-items:flex-end;padding:12px 14px 40px;">
-           <div style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:rgba(255,255,255,.3);line-height:1.2">${film.titre}</div>
-         </div>`;
-
     return `<div class="film-card fade" data-t="${escAttr(film.titre)}" onclick="openFilm('${esc(film.titre)}')">
-      <div class="card-hero" style="${poster?'':'background:'+film.color}">
-        ${heroContent}
-        ${poster ? `<img class="card-poster" src="${poster}" alt="" />` : ''}
-        ${noteStr ? `<div class="note-badge"><span class="note-num">${noteStr}</span><span class="note-lbl">IMDb</span></div>` : ''}
-        <div class="hero-over">
-          <div class="hero-title">${film.titre}</div>
-          <div class="hero-sub">${film.realisateur} · ${film.annee} · ${film.duree}min</div>
-        </div>
+      <div class="card-poster-wrap">
+        <img class="card-poster" src="${poster}" alt="Affiche — ${escAttr(film.titre)}" loading="lazy" onerror="this.src='${POSTER_FALLBACK}'" />
       </div>
-      <div class="card-foot">
-        <div class="card-times">${chips}</div>
-        <div class="card-labels">${labels}</div>
+      <div class="card-body">
+        <div class="card-header">
+          <div class="card-title">${film.titre}</div>
+          <div class="card-meta">${meta}</div>
+        </div>
+        <div class="card-slots">${slotRows}</div>
       </div>
     </div>`;
   }).join('');
