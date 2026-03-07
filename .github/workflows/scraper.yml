@@ -1,0 +1,34 @@
+name: Scraper hebdomadaire Comedia
+
+on:
+  schedule:
+    - cron: '0 1 * * 3'  # Mercredi 1h00 UTC
+  workflow_dispatch:       # Déclenchement manuel possible
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Lancer le scraper
+        env:
+          OMDB_API_KEY: ${{ secrets.OMDB_API_KEY }}
+        run: |
+          python3 scraper.py --output programme.json
+
+      - name: Commit et push programme.json
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add programme.json
+          git diff --cached --quiet || git commit -m "chore: mise à jour programme $(date '+%Y-%m-%d')"
+          git push
+      
