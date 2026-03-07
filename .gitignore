@@ -1,5 +1,6 @@
-programme.json
-programme_sample.html
 __pycache__/
+*.pyc
+*.pyo
 .DS_Store
+.env
 programme_sample.html
