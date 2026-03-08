@@ -95,6 +95,7 @@ header{
 .card-header{margin-bottom:8px;}
 .card-title{font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,48px);font-weight:300;color:#fff;line-height:1.15;}
 .card-meta{font-size:16px;color:#dcdcdc;margin-top:8px;line-height:1.5;}
+.card-actors{font-size:13px;color:var(--text-dim);margin-top:4px;line-height:1.4;}
 
 /* grid langue + créneaux — une ligne par version */
 .card-slots{display:flex;flex-direction:column;gap:12px;margin-top:16px;}
@@ -296,6 +297,7 @@ header{
 // La clé demo ci-dessous est limitée à 1000 req/jour
 // ═══════════════════════════════════════════════════════════
 const OMDB_KEY = 'trilogy'; // clé démo publique OMDb
+const TMDB_KEY = ''; // https://www.themoviedb.org/settings/api — source principale (OMDb en fallback)
 const POSTER_FALLBACK = 'https://images.unsplash.com/photo-1696426483316-7f57831dadc8?w=400&q=80'; // camera on tripod
 
 // ═══════════════════════════════════════════════════════════
@@ -389,28 +391,156 @@ const isPast   = h => parseH(h) < now();
 const isSoon   = h => { const dt=(parseH(h)-now())/60000; return dt>=0&&dt<=60; };
 const esc      = s => s.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
 const escAttr  = s => s.replace(/"/g,'&quot;').replace(/\\/g,'\\\\');
+const escHtml  = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 
 // ═══════════════════════════════════════════════════════════
-// OMDB
+// TMDB (source principale) + OMDb (fallback)
 // ═══════════════════════════════════════════════════════════
+let tmdbCache = {};      // imdbId -> { overview, poster, note, cast }
+let tmdbByTitleCache = {}; // "titre|annee" -> { overview, poster, note, cast, imdbId }
 let omdbCache = {};
+let omdbByTitleCache = {};
+
+async function fetchTMDBByImdbId(imdbId) {
+  if (!TMDB_KEY || tmdbCache[imdbId] !== undefined) return tmdbCache[imdbId];
+  try {
+    const r1 = await fetch(`https://api.themoviedb.org/3/find/${imdbId}?api_key=${TMDB_KEY}&external_source=imdb_id`);
+    if (!r1.ok) return tmdbCache[imdbId] = null;
+    const d1 = await r1.json();
+    const movie = (d1.movie_results || [])[0];
+    if (!movie || !movie.id) return tmdbCache[imdbId] = null;
+    let cast = null;
+    const r2 = await fetch(`https://api.themoviedb.org/3/movie/${movie.id}/credits?api_key=${TMDB_KEY}`);
+    if (r2.ok) {
+      const d2 = await r2.json();
+      const names = (d2.cast || []).slice(0, 3).map(c => c.name).filter(Boolean);
+      cast = names.length ? names.join(', ') : null;
+    }
+    return tmdbCache[imdbId] = {
+      overview: movie.overview || null,
+      poster: movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : null,
+      note: movie.vote_average != null ? movie.vote_average : null,
+      cast,
+    };
+  } catch { return tmdbCache[imdbId] = null; }
+}
+
+async function fetchTMDBByTitle(titre, annee) {
+  if (!TMDB_KEY) return null;
+  const key = `${titre}|${annee || ''}`;
+  if (tmdbByTitleCache[key] !== undefined) return tmdbByTitleCache[key];
+  try {
+    let url = `https://api.themoviedb.org/3/search/movie?api_key=${TMDB_KEY}&query=${encodeURIComponent(titre)}`;
+    if (annee) url += `&year=${annee}`;
+    const r1 = await fetch(url);
+    if (!r1.ok) return tmdbByTitleCache[key] = null;
+    const d1 = await r1.json();
+    const movie = (d1.results || [])[0];
+    if (!movie || !movie.id) return tmdbByTitleCache[key] = null;
+    let cast = null;
+    const r2 = await fetch(`https://api.themoviedb.org/3/movie/${movie.id}/credits?api_key=${TMDB_KEY}`);
+    if (r2.ok) {
+      const d2 = await r2.json();
+      const names = (d2.cast || []).slice(0, 3).map(c => c.name).filter(Boolean);
+      cast = names.length ? names.join(', ') : null;
+    }
+    const r3 = await fetch(`https://api.themoviedb.org/3/movie/${movie.id}?api_key=${TMDB_KEY}`);
+    let imdbId = null;
+    if (r3.ok) {
+      const d3 = await r3.json();
+      imdbId = d3.imdb_id || null;
+    }
+    return tmdbByTitleCache[key] = {
+      overview: movie.overview || null,
+      poster: movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : null,
+      note: movie.vote_average != null ? movie.vote_average : null,
+      cast,
+      imdbId,
+    };
+  } catch { return tmdbByTitleCache[key] = null; }
+}
 
 async function fetchOMDb(imdbId) {
-  if (omdbCache[imdbId]) return omdbCache[imdbId];
+  if (imdbId in omdbCache) return omdbCache[imdbId];
   try {
     const url = `https://www.omdbapi.com/?i=${imdbId}&apikey=${OMDB_KEY}&plot=full`;
-    const r   = await fetch(url);
-    if (!r.ok) return null;
+    const r = await fetch(url);
+    if (!r.ok) return omdbCache[imdbId] = null;
     const d = await r.json();
-    if (d.Response === 'False') return null;
+    if (d.Response === 'False') return omdbCache[imdbId] = null;
     return omdbCache[imdbId] = d;
-  } catch { return null; }
+  } catch { return omdbCache[imdbId] = null; }
+}
+
+async function fetchOMDbByTitle(titre, annee) {
+  const key = `${titre}|${annee || ''}`;
+  if (key in omdbByTitleCache) return omdbByTitleCache[key];
+  try {
+    let url = `https://www.omdbapi.com/?t=${encodeURIComponent(titre)}&apikey=${OMDB_KEY}&type=movie`;
+    if (annee) url += `&y=${annee}`;
+    const r = await fetch(url);
+    if (!r.ok) return omdbByTitleCache[key] = null;
+    const d = await r.json();
+    // If not found with year, retry without year
+    if (d.Response === 'False' && annee) {
+      const r2 = await fetch(`https://www.omdbapi.com/?t=${encodeURIComponent(titre)}&apikey=${OMDB_KEY}&type=movie`);
+      if (r2.ok) {
+        const d2 = await r2.json();
+        if (d2.Response === 'True') return omdbByTitleCache[key] = d2;
+      }
+    }
+    if (d.Response === 'False') return omdbByTitleCache[key] = null;
+    return omdbByTitleCache[key] = d;
+  } catch { return omdbByTitleCache[key] = null; }
+}
+
+async function enrichFilm(f) {
+  const titreOrig = f.titreOriginal || null;
+  const titreFr   = f.titre;
+  let t = null, o = null;
+
+  // 1. TMDB en priorité (si clé configurée)
+  if (TMDB_KEY) {
+    if (f.imdbId) t = await fetchTMDBByImdbId(f.imdbId);
+    if (!t) t = await fetchTMDBByTitle(titreOrig || titreFr, f.annee);
+    // Si pas de résultat avec le titre original, essayer le titre français
+    if (!t && titreOrig && titreOrig !== titreFr) t = await fetchTMDBByTitle(titreFr, f.annee);
+    if (t) {
+      if (t.imdbId && !f.imdbId) f.imdbId = t.imdbId;
+      if (!f._poster   && t.poster)           f._poster   = t.poster;
+      if (!f.note      && t.note != null)      f.note      = t.note;
+      if (!f._cast     && t.cast)              f._cast     = t.cast;
+      if (!f._synopsis && t.overview)          f._synopsis = t.overview;
+    }
+  }
+
+  // 2. OMDb en fallback pour les champs encore manquants
+  const needsMore = !f._cast || !f._synopsis;
+  if (needsMore) {
+    if (f.imdbId) o = await fetchOMDb(f.imdbId);
+    // Essai par titre original puis français si pas d'imdbId ou OMDb vide
+    if (!o && titreOrig) o = await fetchOMDbByTitle(titreOrig, f.annee);
+    if (!o && titreFr !== titreOrig) o = await fetchOMDbByTitle(titreFr, f.annee);
+    if (o) {
+      if (!f.imdbId && o.imdbID)                                         f.imdbId    = o.imdbID;
+      if (!f._poster   && o.Poster   && o.Poster   !== 'N/A')            f._poster   = o.Poster;
+      if (!f.note      && o.imdbRating && o.imdbRating !== 'N/A')        f.note      = parseFloat(o.imdbRating);
+      if (!f._cast     && o.Actors   && o.Actors   !== 'N/A')            f._cast     = o.Actors;
+      if (!f._synopsis && o.Plot     && o.Plot     !== 'N/A')            f._synopsis = o.Plot;
+    }
+  }
+}
+
+function actorsTop3(castStr) {
+  if (!castStr || typeof castStr !== 'string') return null;
+  const list = castStr.split(',').map(s => s.trim()).filter(Boolean);
+  return list.slice(0, 3).join(', ') || null;
 }
 
 // ═══════════════════════════════════════════════════════════
 // LOAD ALL
 // Tente d'abord de charger programme.json (généré par scraper.py)
-// Fallback sur FILMS_DATA + enrichissement OMDb si pas de fichier
+// Fallback sur FILMS_DATA + enrichissement TMDB/OMDb si pas de fichier
 // ═══════════════════════════════════════════════════════════
 async function loadAll() {
   const today = new Date(); today.setHours(0,0,0,0);
@@ -420,11 +550,12 @@ async function loadAll() {
     const res = await fetch('./programme.json');
     if (res.ok) {
       const data = await res.json();
-      const films = data.films.map(f => ({
+      let films = data.films.map(f => ({
         ...f,
         note:    f.imdbRating || f.note || null,
         _poster: f.poster     || null,
         _cast:   f.cast       || null,
+        _synopsis: f.synopsis || null,
         color:   '#1a1a1a',
         _sd: f.seances.map(s => ({
           h: s.heure,
@@ -432,27 +563,20 @@ async function loadAll() {
           date: new Date(s.date + 'T00:00:00'),
         })),
       }));
+      await Promise.all(films.map(enrichFilm));
       console.info(`[Comedia] programme.json chargé — ${films.length} films (généré le ${data.generated_at?.slice(0,16)})`);
       return films;
     }
   } catch (_) { /* pas de fichier JSON, on continue */ }
 
   // ── Essai 2 : données locales + enrichissement OMDb ──
-  console.info('[Comedia] programme.json absent — utilisation des données de démonstration + OMDb');
+  console.info('[Comedia] programme.json absent — utilisation des données de démonstration + TMDB/OMDb');
   const films = FILMS_DATA.map(f => ({
     ...f,
     _sd: f.seances.map(s => ({ ...s, date: addDays(today, s.j) })),
   }));
 
-  await Promise.all(films.map(async f => {
-    const d = await fetchOMDb(f.imdbId);
-    if (d) {
-      if (d.Poster     && d.Poster     !== 'N/A') f._poster   = d.Poster;
-      if (d.imdbRating && d.imdbRating !== 'N/A') f.note      = parseFloat(d.imdbRating);
-      if (d.Actors     && d.Actors     !== 'N/A') f._cast     = d.Actors;
-      if (d.Plot       && d.Plot       !== 'N/A') f._synopsis = d.Plot;
-    }
-  }));
+  await Promise.all(films.map(enrichFilm));
 
   return films;
 }
@@ -562,6 +686,7 @@ function renderFilms(films, forcedDate) {
   const cardsHtml = rows.map(film => {
     const poster   = film._poster || POSTER_FALLBACK;
     const meta     = [film.genres[0], film.realisateur, film.annee, film.duree + 'min'].filter(Boolean).join(' · ');
+    const actors   = actorsTop3(film._cast);
     const byVer = {};
     film._day.forEach(s => {
       if (!byVer[s.v]) byVer[s.v] = [];
@@ -588,6 +713,7 @@ function renderFilms(films, forcedDate) {
         <div class="card-header">
           <div class="card-title">${film.titre}</div>
           <div class="card-meta">${meta}</div>
+          ${actors ? `<div class="card-actors">${escHtml(actors)}</div>` : ''}
         </div>
         <div class="card-slots">${slotRows}</div>
       </div>
