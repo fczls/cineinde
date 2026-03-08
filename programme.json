@@ -1,6 +1,9 @@
 {
-  "generated_at": "2026-03-08T21:52:09.420170",
-  "source": "https://www.cinema-comoedia.com/programme-accessible/",
+  "generated_at": "2026-03-08T23:49:51.937491",
+  "sources": [
+    "https://www.cinema-comoedia.com/programme-accessible/",
+    "https://www.cinemas-lumiere.com/calendrier-general.html"
+  ],
   "films": [
     {
       "titre": "Deux femmes et quelques hommes",
@@ -8,11 +11,9 @@
       "annee": 2025,
       "realisateur": "Chloé Robichaud",
       "duree": 100,
-      "genres": [
-        "Comedy"
-      ],
-      "synopsis": "Violette et Florence ne comprennent plus ce qui leur arrive. Respectivement, en congé de maternité, et en arrêt de travail, l’une, est à fleur de peau, l’autre ne ressent plus rien. Les voisines sont toutes deux habitées par un sentiment d’échec : malgré la carrière et la famille, elles ne sont pas heureuses. La première infidélité de Florence sera une révélation. Et si le bonheur, c’était de se rebeller contre notre rigide société de performance ? Dans un contexte, où avoir du fun est très loin…",
-      "imdbId": "tt31066723",
+      "genres": [],
+      "synopsis": null,
+      "imdbId": null,
       "seances": [
         {
           "date": "2026-03-08",
@@ -30,9 +31,8 @@
           "version": "VOSTFR"
         }
       ],
-      "poster": "https://image.tmdb.org/t/p/w500/w6wUMmrIb075xzUT5OM7thplKNa.jpg",
-      "imdbRating": 6.6,
-      "cast": "Karine Gonthier-Hyndman, Laurence Leboeuf, Félix Moati"
+      "source": "comoedia",
+      "cinema": "Le Comoedia"
     },
     {
       "titre": "La maison des femmes",
@@ -41,8 +41,8 @@
       "realisateur": "Mélisa Godet",
       "duree": 110,
       "genres": [],
-      "synopsis": "À la Maison des femmes, entre soin, écoute et solidarité, une équipe se bat chaque jour pour accompagner les femmes victimes de violences dans leur reconstruction. Dans ce lieu unique, Diane, Manon, Inès, Awa et leurs collègues accueillent, soutiennent, redonnent confiance. Ensemble, avec leurs forces, leurs fragilités, leurs convictions et une énergie inépuisable.",
-      "imdbId": "tt35455708",
+      "synopsis": null,
+      "imdbId": null,
       "seances": [
         {
           "date": "2026-03-08",
@@ -70,9 +70,8 @@
           "version": "VF"
         }
       ],
-      "poster": "https://image.tmdb.org/t/p/w500/3blpQb6lMwX3VW4enxNpkX9po1c.jpg",
-      "imdbRating": 8.9,
-      "cast": "Karin Viard, Laetitia Dosch, Oulaya Amamra"
+      "source": "comoedia",
+      "cinema": "Le Comoedia"
     },
     {
       "titre": "Allah n'est pas obligé",
@@ -83,7 +82,7 @@
       "genres": [
         "Animation"
       ],
-      "synopsis": "Birahima, orphelin guinéen d’une dizaine d’années, raconte avec ironie comment il est précipité dans la guerre en tentant de rejoindre sa tante au Libéria. Yacouba, un homme douteux, le convainc de devenir enfant soldat, tandis qu'il devient grigriman et féticheur parmi les combattants. Baladé entre les factions ennemies, Birahima grandit en accéléré et apprend à se méfier des histoires qu'on lui raconte.",
+      "synopsis": null,
       "imdbId": "tt8110620",
       "seances": [
         {
@@ -102,9 +101,8 @@
           "version": "VF"
         }
       ],
-      "poster": "https://image.tmdb.org/t/p/w500/ha3YGtx48KO3jOLkkByE07m1RrQ.jpg",
-      "imdbRating": 6.5,
-      "cast": "Chris Aboubacar Hanta Traoré / SK 07, Thomas Ngijol, Marc Zinga"
+      "source": "comoedia",
+      "cinema": "Le Comoedia"
     },
     {
       "titre": "Maigret et le mort amoureux",
@@ -112,13 +110,9 @@
       "annee": 2026,
       "realisateur": "Pascal Bonitzer",
       "duree": 80,
-      "genres": [
-        "Crime",
-        "Drama",
-        "Mystery"
-      ],
-      "synopsis": "Le commissaire Maigret, appelé en urgence au Quai d’Orsay, s’y rend avec le commandant Janvier. Ils y trouvent Mademoiselle Larrieu en état de choc. Le matin même, elle a découvert le corps criblé de balles de Monsieur Berthier-Lagès, ancien ambassadeur renommé dont elle est la domestique depuis 46 ans. Dans l’appartement de la victime, Maigret et Janvier mettent la main sur des milliers de lettres. Le diplomate entretenait depuis cinquante ans une correspondance amoureuse avec la princesse de V…",
-      "imdbId": "tt33509147",
+      "genres": [],
+      "synopsis": "Le commissaire Maigret est appelé en urgence au Quai d'Orsay. Monsieur Berthier-Lagès, ancien ambassadeur renommé, a été assassiné. Maigret découvre qu'il entretenait depuis cinquante ans une correspondance amoureuse avec la princesse de Vuynes, dont le mari, étrange coïncidence, vient de décéder. En se confrontant aux membres des deux familles et au mutisme suspect de la domestique du diplomate, Maigret va aller de surprise en surprise...",
+      "imdbId": null,
       "seances": [
         {
           "date": "2026-03-09",
@@ -161,9 +155,10 @@
           "version": "VF"
         }
       ],
-      "poster": "https://image.tmdb.org/t/p/w500/t7KsplyJOPYvQitQmgVixVz8vpL.jpg",
-      "imdbRating": 6.083,
-      "cast": "Denis Podalydès, Olivier Rabourdin, Micha Lescot"
+      "source": "comoedia",
+      "cinema": "Le Comoedia",
+      "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4749/59d850a90c94bb8ebbbb22fbff9d4970/s,490,650-q,90-69711a.jpg",
+      "cast": "D. Podalydès, A. Alvaro, M. Guillot"
     },
     {
       "titre": "Soulèvements",
@@ -172,7 +167,7 @@
       "realisateur": "Thomas Lacoste",
       "duree": 105,
       "genres": [],
-      "synopsis": "Un portrait choral à 16 voix, 16 trajectoires singulières, réflexif et intime d’un mouvement de résistance intergénérationnel porté par une jeunesse qui vit et qui lutte contre l’accaparement des terres et de l’eau, les ravages industriels, la montée des totalitarismes et fait face à la répression politique. Une plongée au cœur des Soulèvements de la Terre.",
+      "synopsis": "Un portrait choral à 16 voix, 16 trajectoires singulières, réflexif et intime d'un mouvement de résistance intergénérationnel porté par une jeunesse qui vit et qui lutte contre l'accaparement des terres et de l'eau, les ravages industriels, la montée des totalitarismes et fait face à la répression politique. Une plongée au coeur des Soulèvements de la Terre révélant la composition inédite des forces multiples déployées un peu partout dans le pays qui expérimentent d'autres modes de vie, tissent …",
       "imdbId": null,
       "seances": [
         {
@@ -191,8 +186,9 @@
           "version": "VF"
         }
       ],
-      "poster": "https://image.tmdb.org/t/p/w500/hrsJkvHpp7cKFGF0zIN6HDmPXwR.jpg",
-      "imdbRating": 7.0
+      "source": "comoedia",
+      "cinema": "Le Comoedia",
+      "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4759/c37aa39be9f24b3762c95b0d28a7f074/s,490,650-q,90-2a2b64.jpg"
     },
     {
       "titre": "Pillion",
@@ -205,7 +201,7 @@
         "Drama",
         "Romance"
       ],
-      "synopsis": "Colin, un jeune homme sans histoire, rencontre Ray, le leader charismatique d'un club de motards. Il l'introduit dans sa communauté queer et fait de Colin son soumis.",
+      "synopsis": "A directionless man is swept off his feet when an enigmatic, impossibly handsome biker takes him on as his submissive.",
       "imdbId": "tt32321317",
       "seances": [
         {
@@ -224,9 +220,11 @@
           "version": "VOSTFR"
         }
       ],
-      "poster": "https://image.tmdb.org/t/p/w500/y92sV0uJiBp7RR02R7yfi6jIyvP.jpg",
-      "imdbRating": 6.163,
-      "cast": "Harry Melling, Alexander Skarsgård, Lesley Sharp"
+      "source": "comoedia",
+      "cinema": "Le Comoedia",
+      "poster": "https://m.media-amazon.com/images/M/MV5BOWEyNTlhYjQtYzNkYi00NTI0LWIzNTYtNjI2Mjg1OGRlMjgxXkEyXkFqcGc@._V1_SX300.jpg",
+      "imdbRating": 6.8,
+      "cast": "Harry Melling, Alexander Skarsgård, Douglas Hodge"
     },
     {
       "titre": "Is this thing on ?",
@@ -238,7 +236,7 @@
         "Comedy",
         "Drama"
       ],
-      "synopsis": "Le mariage d’Alex et Tess ne tient plus qu’à un fil. Alex doit soudain affronter les doutes de la cinquantaine et la menace d’un divorce imminent. A la recherche d’un nouveau souffle, il se lance dans le milieu du stand-up new-yorkais, tandis que Tess remet en question les sacrifices qu’elle a faits pour leur famille... Ils vont devoir composer avec la coparentalité, questionner leurs propres envies et répondre à une interrogation essentielle : l’amour peut-il prendre une nouvelle forme ?",
+      "synopsis": "As their marriage unravels, Alex faces middle age and divorce, seeking new purpose in the New York comedy scene. Meanwhile, his wife Tess confronts sacrifices made for their family, forcing them to navigate co-parenting and identi...",
       "imdbId": "tt28083456",
       "seances": [
         {
@@ -272,8 +270,10 @@
           "version": "VOSTFR"
         }
       ],
-      "poster": "https://image.tmdb.org/t/p/w500/7BTJB1HZXzOmBR20D3Vh0TFnu3R.jpg",
-      "imdbRating": 6.609,
+      "source": "comoedia",
+      "cinema": "Le Comoedia",
+      "poster": "https://m.media-amazon.com/images/M/MV5BZmY0N2YzMTItYmQyNi00MjdjLTk4NDYtOGU5NzhkM2RiMmEzXkEyXkFqcGc@._V1_SX300.jpg",
+      "imdbRating": 6.8,
       "cast": "Will Arnett, Laura Dern, Andra Day"
     },
     {
@@ -282,13 +282,9 @@
       "annee": 2025,
       "realisateur": "Oliver Hermanus",
       "duree": 129,
-      "genres": [
-        "Drama",
-        "History",
-        "Music"
-      ],
-      "synopsis": "Pendant la Première Guerre mondiale, deux jeunes hommes, Lionel et David, entreprennent d'enregistrer les vies, les voix et la musique de leurs compatriotes américains...",
-      "imdbId": "tt15799524",
+      "genres": [],
+      "synopsis": "En 1917, Lionel, étudiant talentueux au conservatoire de Boston, y rencontre David. Les deux jeunes gens se retrouvent autour d’une passion commune pour les chansons traditionnelles. Quelques années plus tard, Lionel reçoit une lettre de David l’invitant à le rejoindre au pied levé pour une expédition de collectage de chansons à travers les forêts du Maine.",
+      "imdbId": null,
       "seances": [
         {
           "date": "2026-03-08",
@@ -321,9 +317,10 @@
           "version": "VOSTFR"
         }
       ],
-      "poster": "https://image.tmdb.org/t/p/w500/fljAPAsvXioFeSU9wuYCk4z4cbE.jpg",
-      "imdbRating": 6.286,
-      "cast": "Paul Mescal, Josh O'Connor, Molly Price"
+      "source": "comoedia",
+      "cinema": "Le Comoedia",
+      "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4757/c6a084a69f3a7a701da8a3308e8d5c5f/s,490,650-q,90-c8c52d.jpg",
+      "cast": "P. Mescal, J. O’Connor, C. Cooper"
     },
     {
       "titre": "Orwell: 2+2=5",
@@ -336,7 +333,7 @@
         "Biography",
         "History"
       ],
-      "synopsis": "Une plongée dans les derniers mois de la vie d’Orwell et dans son œuvre visionnaire pour explorer les racines des concepts troublants qu’il a révélés au monde dans son chef-d’œuvre dystopique : le double discours, le crime par la pensée, la novlangue, le spectre omniprésent de Big Brother… des vérités sociopolitiques qui résonnent encore plus puissamment aujourd’hui.",
+      "synopsis": "An investigation into the life, work, and enduring influence of the writer George Orwell, connecting his ideas to the contemporary world.",
       "imdbId": "tt27052428",
       "seances": [
         {
@@ -385,9 +382,11 @@
           "version": "VOSTFR"
         }
       ],
-      "poster": "https://image.tmdb.org/t/p/w500/tSDjEaCL8HOTtvkTgKcweeN61b3.jpg",
-      "imdbRating": 7.109,
-      "cast": "Damian Lewis, George Orwell, George W. Bush"
+      "source": "comoedia",
+      "cinema": "Le Comoedia",
+      "poster": "https://m.media-amazon.com/images/M/MV5BMTdkNTNhMGItYTQ3Mi00ZWIwLTlkNzYtYjgwYTM2ODM4ZThkXkEyXkFqcGc@._V1_SX300.jpg",
+      "imdbRating": 6.8,
+      "cast": "Damian Lewis, George Orwell, U Win Khine"
     },
     {
       "titre": "Rue Málaga",
@@ -395,12 +394,9 @@
       "annee": 2025,
       "realisateur": "Maryam Touzani",
       "duree": 116,
-      "genres": [
-        "Drama",
-        "Romance"
-      ],
-      "synopsis": "Maria Angeles, une Espagnole de 79 ans, vit seule à Tanger, dans le nord du Maroc, où elle profite de sa ville et de son quotidien. Sa vie bascule lorsque sa fille Clara arrive de Madrid pour vendre l’appartement dans lequel elle a toujours vécu. Déterminée à rester dans cette ville qui l'a vue grandir, elle met tout en œuvre pour garder sa maison et récupérer les objets d'une vie. Contre toute attente, elle redécouvre en chemin l’amour et le désir.",
-      "imdbId": "tt32429174",
+      "genres": [],
+      "synopsis": "Maria Angeles, une Espagnole de 79 ans, vit seule à Tanger, dans le nord du Maroc, où elle profite de sa ville et de son quotidien. Sa vie bascule lorsque sa fille Clara arrive de Madrid pour vendre l'appartement dans lequel elle a toujours vécu. Déterminée à rester dans cette ville qui l'a vue grandir, elle met tout en oeuvre pour garder sa maison et récupérer les objets d'une vie. Contre toute attente, elle redécouvre en chemin l'amour et le désir.",
+      "imdbId": null,
       "seances": [
         {
           "date": "2026-03-08",
@@ -433,9 +429,10 @@
           "version": "VOSTFR"
         }
       ],
-      "poster": "https://image.tmdb.org/t/p/w500/qvfwPBIL4tGoJM2tzOVvrzmRJFd.jpg",
-      "imdbRating": 6.773,
-      "cast": "Carmen Maura, Marta Etura, Ahmed Boulane"
+      "source": "comoedia",
+      "cinema": "Le Comoedia",
+      "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4747/4f46a55374da1919875e846787fd1289/s,490,650-q,90-2e3f1f.jpg",
+      "cast": "C. Maura, M. Etura, A. Boulane"
     },
     {
       "titre": "Woman and child",
@@ -446,7 +443,7 @@
       "genres": [
         "Drama"
       ],
-      "synopsis": "Mahnaz, une infirmière de 45 ans, élève seule ses enfants. Alors qu’elle s’apprête à épouser son petit ami Hamid, son fils Aliyar est renvoyé de l’école. Lorsqu’un un accident tragique vient tout bouleverser, Mahnaz se lance dans une quête de justice pour obtenir réparation...",
+      "synopsis": "Single mother Mahnaz balances nursing work with raising her children. As she plans her wedding to Hamid, her son's school expulsion becomes the least of her worries when an unexpected tragedy forces her to fight for what's right.",
       "imdbId": "tt36631507",
       "seances": [
         {
@@ -455,8 +452,10 @@
           "version": "VOSTFR"
         }
       ],
-      "poster": "https://image.tmdb.org/t/p/w500/96k5GGr51yp2CLyMDepQe76Z6BU.jpg",
-      "imdbRating": 5.4,
+      "source": "comoedia",
+      "cinema": "Le Comoedia",
+      "poster": "https://m.media-amazon.com/images/M/MV5BMjU1YjQ3Y2UtM2E5MC00ZGYxLTg1ZjItYzlhNjdmOGI4M2RkXkEyXkFqcGc@._V1_SX300.jpg",
+      "imdbRating": 5.9,
       "cast": "Parinaz Izadyar, Payman Maadi, Soha Niasti"
     },
     {
@@ -465,13 +464,9 @@
       "annee": 2026,
       "realisateur": "Park Chan-Wook",
       "duree": 139,
-      "genres": [
-        "Comedy",
-        "Crime",
-        "Drama"
-      ],
-      "synopsis": "Cadre dans une usine de papier You Man-su est un homme heureux, il aime sa femme, ses enfants, ses chiens, sa maison.  Lorsqu’il est licencié, sa vie bascule, il ne supporte pas l’idée de perdre son statut social et la vie qui va avec.  Pour retrouver son bonheur perdu, il n’ a aucun  autre choix que d’éliminer tous ses concurrents…",
-      "imdbId": "tt1527793",
+      "genres": [],
+      "synopsis": "Cadre dans une usine de papier You Man-su est un homme heureux, il aime sa femme, ses enfants, ses chiens, sa maison. Lorsqu'il est licencié, sa vie bascule, il ne supporte pas l'idée de perdre son statut social et la vie qui va avec. Pour retrouver son bonheur perdu, il n'a aucun autre choix que d'éliminer tous ses concurrents...",
+      "imdbId": null,
       "seances": [
         {
           "date": "2026-03-08",
@@ -489,9 +484,10 @@
           "version": "VOSTFR"
         }
       ],
-      "poster": "https://image.tmdb.org/t/p/w500/qLaTBpiG8morQgU7kHLcrCKDZkA.jpg",
-      "imdbRating": 7.56,
-      "cast": "Lee Byung-hun, Son Ye-jin, Park Hee-soon"
+      "source": "comoedia",
+      "cinema": "Le Comoedia",
+      "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4735/a4527664f53d4cdc51dbaf628184aff1/s,490,650-q,90-cf3d47.jpg",
+      "cast": "Lee B.-h., Y.-j. Son, S.-w. Cha"
     },
     {
       "titre": "Les Dimanches",
@@ -499,11 +495,9 @@
       "annee": 2026,
       "realisateur": "Alauda Ruíz de Azúa",
       "duree": 118,
-      "genres": [
-        "Drama"
-      ],
-      "synopsis": "Ainara, 17 ans, élève dans un lycée catholique, s'apprête à passer son bac et à choisir son futur parcours universitaire. A la surprise générale, cette brillante jeune fille annonce à sa famille qu'elle souhaite participer à une période d’intégration dans un couvent afin d'embrasser la vie de religieuse. La nouvelle prend tout le monde au dépourvu. Si le père semble se laisser convaincre par les aspirations de sa fille, pour Maite, la tante d’Ainara, cette vocation inattendue est la manifestatio…",
-      "imdbId": "tt35513027",
+      "genres": [],
+      "synopsis": "Ainara, 17 ans, élève dans un lycée catholique, s'apprête à passer son bac et à choisir son futur parcours universitaire. A la surprise générale, cette brillante jeune fille annonce à sa famille qu'elle souhaite participer à une période d'intégration dans un couvent afin d'embrasser la vie de religieuse. La nouvelle prend tout le monde au dépourvu. Si le père semble se laisser convaincre par les aspirations de sa fille, pour Maite, la tante d'Ainara, cette vocation inattendue est la manifestatio…",
+      "imdbId": null,
       "seances": [
         {
           "date": "2026-03-08",
@@ -511,9 +505,10 @@
           "version": "VOSTFR"
         }
       ],
-      "poster": "https://image.tmdb.org/t/p/w500/YfD3npxe1VeMlcEUgwcRJ4JL0P.jpg",
-      "imdbRating": 7.152,
-      "cast": "Blanca Soroa, Patricia López Arnaiz, Miguel Garcés"
+      "source": "comoedia",
+      "cinema": "Le Comoedia",
+      "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4736/18717c10a7a89df2cbf10f6584181ebd/s,490,650-q,90-51869a.jpg",
+      "cast": "B. Soroa, P. López Arnaiz, J. Minujin"
     },
     {
       "titre": "Fantastique",
@@ -521,13 +516,9 @@
       "annee": 2026,
       "realisateur": "Marjolijn Prins",
       "duree": 71,
-      "genres": [
-        "Action",
-        "Adventure",
-        "Sci-Fi"
-      ],
-      "synopsis": "Dans le contexte vibrant d’un monde rétro-futuriste inspiré des années 60, le film présente la première famille de Marvel : Reed Richards/Mister Fantastic, Sue Storm/La Femme Invisible, Johnny Storm/La Torche Humaine et Ben Grimm/La Chose  alors qu’ils font face à leur défi le plus redoutable à ce jour. Contraints d’équilibrer leur rôle de héros avec la force de leur lien familial, ils doivent défendre la Terre contre un dieu spatial vorace appelé Galactus et son énigmatique héraut, le Surfeur d…",
-      "imdbId": "tt10676052",
+      "genres": [],
+      "synopsis": null,
+      "imdbId": null,
       "seances": [
         {
           "date": "2026-03-08",
@@ -545,9 +536,8 @@
           "version": "VF"
         }
       ],
-      "poster": "https://image.tmdb.org/t/p/w500/rNc4KARs6fVa4axzvuv3NfUiNy1.jpg",
-      "imdbRating": 6.971,
-      "cast": "Pedro Pascal, Vanessa Kirby, Ebon Moss-Bachrach"
+      "source": "comoedia",
+      "cinema": "Le Comoedia"
     },
     {
       "titre": "Jean-Michel le caribou et les histoires d'amour interdites",
@@ -556,7 +546,7 @@
       "realisateur": "Matthieu Auvray",
       "duree": null,
       "genres": [],
-      "synopsis": "Rendez-nous l'amour ! C'est d'après les albums de Magali Le Huche que Mathieu Auvray réalise \"Jean-Michel le caribou et les histoires d'amour interdites\", un film d'animation pour enfants dès 4 ans.  Marcel, le maire, décide d’interdire les histoires d’amour : ça n’engendre que des problèmes et ça rend tout le monde malheureux !  Interdire les histoires d’amour ? Jean-Michel n’est pas trop pour et sa petite amie Gisèle encore moins...  Hélas, la répression commence. Nos héros décident d’entrer e…",
+      "synopsis": null,
       "imdbId": null,
       "seances": [
         {
@@ -565,9 +555,8 @@
           "version": "VF"
         }
       ],
-      "poster": "https://image.tmdb.org/t/p/w500/peOnKkiCYuf76hWqlK8IDc3dfKZ.jpg",
-      "imdbRating": 0.0,
-      "cast": "Emmanuel Garijo, Gabriel Bismuth-Bienaimé, Bruno Magne"
+      "source": "comoedia",
+      "cinema": "Le Comoedia"
     },
     {
       "titre": "L'Ourse et l'oiseau",
@@ -576,7 +565,7 @@
       "realisateur": "Marie Caudry, Aurore Peuffier, Nina Bisyarina",
       "duree": null,
       "genres": [],
-      "synopsis": "Au cours de l’été, une ourse et un oiseau sont devenu·es inséparables. Quand l’automne arrive, il faut se rendre à l’évidence : bientôt l’ourse devra hiberner et l’oiseau devra migrer – l’une rêvera tandis que l’autre voyagera. L’heure des adieux approche… Mais on souffle alors à l’ourse une idée extraordinaire qui va changer son hiver.",
+      "synopsis": null,
       "imdbId": null,
       "seances": [
         {
@@ -585,8 +574,1349 @@
           "version": "VF"
         }
       ],
-      "poster": "https://image.tmdb.org/t/p/w500/zekwclen9HXLRjUEh9qSYxLgBOT.jpg",
-      "imdbRating": 0.0
+      "source": "comoedia",
+      "cinema": "Le Comoedia"
+    },
+    {
+      "titre": "Alter Ego",
+      "slug": "alter-ego",
+      "titreOriginal": null,
+      "annee": 2026,
+      "realisateur": "Nicolas Charlet & Bruno Lavaine",
+      "duree": 99,
+      "genres": [],
+      "synopsis": "Alex a un problème : son nouveau voisin est son sosie parfait. Avec des cheveux. Un double en mieux, qui va totalement bouleverser son existence.",
+      "imdbId": null,
+      "source": "lumiere",
+      "cinema": "Lumière Terreaux",
+      "seances": [
+        {
+          "date": "2026-03-08",
+          "heure": "10:15",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-08",
+          "heure": "13:00",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-08",
+          "heure": "15:50",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-08",
+          "heure": "18:40",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-08",
+          "heure": "20:45",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-09",
+          "heure": "10:15",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F362221/D1773047700/VF/"
+        },
+        {
+          "date": "2026-03-09",
+          "heure": "14:00",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F362221/D1773047700/VF/"
+        },
+        {
+          "date": "2026-03-09",
+          "heure": "16:00",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F362221/D1773047700/VF/"
+        },
+        {
+          "date": "2026-03-09",
+          "heure": "18:05",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F362221/D1773047700/VF/"
+        },
+        {
+          "date": "2026-03-09",
+          "heure": "20:20",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F362221/D1773047700/VF/"
+        },
+        {
+          "date": "2026-03-10",
+          "heure": "10:15",
+          "version": "VFST",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F362221/D1773134100/VFST/"
+        },
+        {
+          "date": "2026-03-10",
+          "heure": "13:00",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F362221/D1773134100/VFST/"
+        },
+        {
+          "date": "2026-03-10",
+          "heure": "15:50",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F362221/D1773134100/VFST/"
+        },
+        {
+          "date": "2026-03-10",
+          "heure": "18:40",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F362221/D1773134100/VFST/"
+        },
+        {
+          "date": "2026-03-10",
+          "heure": "20:45",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F362221/D1773134100/VFST/"
+        }
+      ],
+      "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4764/a3212f7a3bc901b69704c09de6e30093/s,490,650-q,90-de068a.jpg",
+      "cast": "L. Lafitte,  B. Gardin,  O. Kurylenko"
+    },
+    {
+      "titre": "Marty Supreme",
+      "slug": "marty-supreme",
+      "titreOriginal": null,
+      "annee": 2026,
+      "realisateur": "Josh Safdie",
+      "duree": 149,
+      "genres": [],
+      "synopsis": "Marty Mauser, un jeune homme à l'ambition démesurée, est prêt à tout pour réaliser son rêve et prouver au monde entier que rien ne lui est impossible.",
+      "imdbId": null,
+      "source": "lumiere",
+      "cinema": "Lumière Terreaux",
+      "seances": [
+        {
+          "date": "2026-03-08",
+          "heure": "10:10",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-08",
+          "heure": "13:00",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-08",
+          "heure": "16:10",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-08",
+          "heure": "17:50",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-08",
+          "heure": "20:40",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-09",
+          "heure": "10:10",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F608592/D1773047400/VO/"
+        },
+        {
+          "date": "2026-03-09",
+          "heure": "14:40",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F608592/D1773047400/VO/"
+        },
+        {
+          "date": "2026-03-09",
+          "heure": "17:30",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F608592/D1773047400/VO/"
+        },
+        {
+          "date": "2026-03-09",
+          "heure": "20:30",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F608592/D1773047400/VO/"
+        },
+        {
+          "date": "2026-03-10",
+          "heure": "10:10",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F608592/D1773133800/VO/"
+        },
+        {
+          "date": "2026-03-10",
+          "heure": "13:00",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F608592/D1773133800/VO/"
+        },
+        {
+          "date": "2026-03-10",
+          "heure": "16:10",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F608592/D1773133800/VO/"
+        },
+        {
+          "date": "2026-03-10",
+          "heure": "17:50",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F608592/D1773133800/VO/"
+        },
+        {
+          "date": "2026-03-10",
+          "heure": "20:40",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F608592/D1773133800/VO/"
+        }
+      ],
+      "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4718/7dcb8416ab4e8fd4ff6eeaed758c6004/s,490,650-q,90-d1612b.jpg",
+      "cast": "T. Chalamet, G. Paltrow, O. A’zion"
+    },
+    {
+      "titre": "Maigret et le mort amoureux",
+      "slug": "maigret-et-le-mort-amoureux",
+      "titreOriginal": null,
+      "annee": 2025,
+      "realisateur": "Pascal Bonitzer",
+      "duree": 80,
+      "genres": [],
+      "synopsis": "Le commissaire Maigret est appelé en urgence au Quai d'Orsay. Monsieur Berthier-Lagès, ancien ambassadeur renommé, a été assassiné. Maigret découvre qu'il entretenait depuis cinquante ans une correspondance amoureuse avec la princesse de Vuynes, dont le mari, étrange coïncidence, vient de décéder. En se confrontant aux membres des deux familles et au mutisme suspect de la domestique du diplomate, Maigret va aller de surprise en surprise...",
+      "imdbId": null,
+      "source": "lumiere",
+      "cinema": "Lumière Terreaux",
+      "seances": [
+        {
+          "date": "2026-03-08",
+          "heure": "10:20",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-08",
+          "heure": "12:50",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-08",
+          "heure": "14:30",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-08",
+          "heure": "19:00",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-08",
+          "heure": "20:40",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-09",
+          "heure": "13:00",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F620842/D1773057600/VF/"
+        },
+        {
+          "date": "2026-03-09",
+          "heure": "16:05",
+          "version": "VFST",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F620842/D1773057600/VF/"
+        },
+        {
+          "date": "2026-03-09",
+          "heure": "18:50",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F620842/D1773057600/VF/"
+        },
+        {
+          "date": "2026-03-10",
+          "heure": "10:20",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F620842/D1773134400/VF/"
+        },
+        {
+          "date": "2026-03-10",
+          "heure": "12:50",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F620842/D1773134400/VF/"
+        },
+        {
+          "date": "2026-03-10",
+          "heure": "14:30",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F620842/D1773134400/VF/"
+        },
+        {
+          "date": "2026-03-10",
+          "heure": "19:00",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F620842/D1773134400/VF/"
+        },
+        {
+          "date": "2026-03-10",
+          "heure": "20:40",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F620842/D1773134400/VF/"
+        }
+      ],
+      "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4749/59d850a90c94bb8ebbbb22fbff9d4970/s,490,650-q,90-69711a.jpg",
+      "cast": "D. Podalydès, A. Alvaro, M. Guillot"
+    },
+    {
+      "titre": "Aucun autre choix",
+      "slug": "aucun-autre-choix",
+      "titreOriginal": null,
+      "annee": 2026,
+      "realisateur": "Park Chan-Wook",
+      "duree": 139,
+      "genres": [],
+      "synopsis": "Cadre dans une usine de papier You Man-su est un homme heureux, il aime sa femme, ses enfants, ses chiens, sa maison. Lorsqu'il est licencié, sa vie bascule, il ne supporte pas l'idée de perdre son statut social et la vie qui va avec. Pour retrouver son bonheur perdu, il n'a aucun autre choix que d'éliminer tous ses concurrents...",
+      "imdbId": null,
+      "source": "lumiere",
+      "cinema": "Lumière Terreaux",
+      "seances": [
+        {
+          "date": "2026-03-08",
+          "heure": "15:05",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-08",
+          "heure": "17:50",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-08",
+          "heure": "20:35",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-09",
+          "heure": "10:15",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F610668/D1773047700/VO/"
+        },
+        {
+          "date": "2026-03-09",
+          "heure": "16:05",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F610668/D1773047700/VO/"
+        },
+        {
+          "date": "2026-03-09",
+          "heure": "20:40",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F610668/D1773047700/VO/"
+        },
+        {
+          "date": "2026-03-10",
+          "heure": "15:05",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F610668/D1773151500/VO/"
+        },
+        {
+          "date": "2026-03-10",
+          "heure": "17:50",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F610668/D1773151500/VO/"
+        },
+        {
+          "date": "2026-03-10",
+          "heure": "20:35",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F610668/D1773151500/VO/"
+        }
+      ],
+      "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4735/a4527664f53d4cdc51dbaf628184aff1/s,490,650-q,90-cf3d47.jpg",
+      "cast": "Lee B.-h., Y.-j. Son, S.-w. Cha"
+    },
+    {
+      "titre": "Julian",
+      "slug": "julian",
+      "titreOriginal": null,
+      "annee": 2026,
+      "realisateur": "Cato Kusters",
+      "duree": 91,
+      "genres": [
+        "Animation",
+        "Family"
+      ],
+      "synopsis": "Fleur et Julian tombent follement amoureuses et décident de se marier dans chaque pays où leur union peut être légalement reconnue. Portées par leur amour et leur engagement, elles s'élancent coeur et âme dans ce projet. Mais après seulement quatre mariages, leur parcours va s'interrompre brusquement...",
+      "imdbId": "tt31109276",
+      "source": "lumiere",
+      "cinema": "Lumière Terreaux",
+      "seances": [
+        {
+          "date": "2026-03-09",
+          "heure": "20:30",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F622386/D1773084600/VF/"
+        }
+      ],
+      "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4723/julian/s,490,650-q,90-e59f90.jpeg",
+      "cast": "N. Meurisse, L. Roothooft"
+    },
+    {
+      "titre": "Le Son des souvenirs",
+      "slug": "le-son-des-souvenirs",
+      "titreOriginal": null,
+      "annee": 2026,
+      "realisateur": "Oliver Hermanus",
+      "duree": 129,
+      "genres": [],
+      "synopsis": "En 1917, Lionel, étudiant talentueux au conservatoire de Boston, y rencontre David. Les deux jeunes gens se retrouvent autour d’une passion commune pour les chansons traditionnelles. Quelques années plus tard, Lionel reçoit une lettre de David l’invitant à le rejoindre au pied levé pour une expédition de collectage de chansons à travers les forêts du Maine.",
+      "imdbId": null,
+      "source": "lumiere",
+      "cinema": "Lumière Terreaux",
+      "seances": [
+        {
+          "date": "2026-03-08",
+          "heure": "10:20",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-08",
+          "heure": "13:30",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-08",
+          "heure": "16:05",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-09",
+          "heure": "10:20",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F383114/D1773048000/VO/"
+        },
+        {
+          "date": "2026-03-09",
+          "heure": "13:30",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F383114/D1773048000/VO/"
+        },
+        {
+          "date": "2026-03-09",
+          "heure": "17:50",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F383114/D1773048000/VO/"
+        },
+        {
+          "date": "2026-03-10",
+          "heure": "10:20",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F383114/D1773134400/VO/"
+        },
+        {
+          "date": "2026-03-10",
+          "heure": "13:30",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F383114/D1773134400/VO/"
+        },
+        {
+          "date": "2026-03-10",
+          "heure": "16:05",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F383114/D1773134400/VO/"
+        }
+      ],
+      "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4757/c6a084a69f3a7a701da8a3308e8d5c5f/s,490,650-q,90-c8c52d.jpg",
+      "cast": "P. Mescal, J. O’Connor, C. Cooper"
+    },
+    {
+      "titre": "Pillion",
+      "slug": "pillion",
+      "titreOriginal": null,
+      "annee": 2026,
+      "realisateur": "Harry Lighton",
+      "duree": 107,
+      "genres": [
+        "Comedy",
+        "Drama",
+        "Romance"
+      ],
+      "synopsis": "Colin, un jeune homme introverti, rencontre Ray, le séduisant et charismatique leader d'un club de motards. Ray l'introduit dans sa communauté et fait de lui son soumis.",
+      "imdbId": "tt32321317",
+      "source": "lumiere",
+      "cinema": "Lumière Bellecour",
+      "seances": [
+        {
+          "date": "2026-03-08",
+          "heure": "18:30",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-08",
+          "heure": "20:45",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-09",
+          "heure": "13:55",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F615474/D1773060900/VO/"
+        },
+        {
+          "date": "2026-03-09",
+          "heure": "18:30",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F615474/D1773060900/VO/"
+        },
+        {
+          "date": "2026-03-09",
+          "heure": "20:45",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F615474/D1773060900/VO/"
+        },
+        {
+          "date": "2026-03-10",
+          "heure": "16:15",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F615474/D1773155700/VO/"
+        },
+        {
+          "date": "2026-03-10",
+          "heure": "20:45",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F615474/D1773155700/VO/"
+        }
+      ],
+      "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4766/534b15308fa026cff713af2a4ccae844/s,490,650-q,90-d9abd6.jpg",
+      "cast": "H. Melling, A. Skarsgård, D. Hodge",
+      "imdbRating": 6.8
+    },
+    {
+      "titre": "Rural",
+      "slug": "rural",
+      "titreOriginal": null,
+      "annee": 2026,
+      "realisateur": "Edouard Bergeon",
+      "duree": 93,
+      "genres": [
+        "Documentary"
+      ],
+      "synopsis": "Edouard Bergeon (« Au Nom de la Terre ») nous plonge dans la vie de Jérôme Bayle, éleveur charismatique du Sud-Ouest et figure nationale de la ruralité. Avec humour et tendresse, il dresse un portrait sensible de l'agriculture familiale française d'aujourd'hui et de ceux qui se battent pour la faire perdurer.",
+      "imdbId": "tt39149462",
+      "source": "lumiere",
+      "cinema": "Lumière Bellecour",
+      "seances": [
+        {
+          "date": "2026-03-08",
+          "heure": "13:50",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-09",
+          "heure": "18:25",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F632283/D1773077100/VF/"
+        },
+        {
+          "date": "2026-03-10",
+          "heure": "14:00",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F632283/D1773147600/VF/"
+        }
+      ],
+      "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4767/76325273dba162d20a31fbc235173f69/s,490,650-q,90-d2a847.jpg",
+      "cast": "Jérôme Bayle"
+    },
+    {
+      "titre": "Nino dans la nuit",
+      "slug": "nino-dans-la-nuit",
+      "titreOriginal": null,
+      "annee": 2026,
+      "realisateur": "Laurent Micheli",
+      "duree": 117,
+      "genres": [],
+      "synopsis": "À 20 ans, Nino Paradis refuse de croire que la vie n'est qu'une suite de désillusions, que les rapports humains se réduisent à l'exploitation ou à la compétition. Il aime Lale d'un amour incandescent et puise sa force dans la nuit et la fête, car il le sent : au bout de la nuit, quelque chose de meilleur les attend.",
+      "imdbId": null,
+      "source": "lumiere",
+      "cinema": "Lumière Bellecour",
+      "seances": [
+        {
+          "date": "2026-03-08",
+          "heure": "15:50",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-08",
+          "heure": "20:25",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-09",
+          "heure": "16:00",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F553912/D1773068400/VF/"
+        },
+        {
+          "date": "2026-03-09",
+          "heure": "20:25",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F553912/D1773068400/VF/"
+        },
+        {
+          "date": "2026-03-10",
+          "heure": "13:55",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F553912/D1773147300/VF/"
+        },
+        {
+          "date": "2026-03-10",
+          "heure": "18:25",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F553912/D1773147300/VF/"
+        }
+      ],
+      "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4765/a6e1705cb838abe8d5d2f3d1ac90ee9b/s,490,650-q,90-7d0b16.jpg",
+      "cast": "O. Hogstrom, M. Taquin, B. Hassani"
+    },
+    {
+      "titre": "Orwell: 2+2=5",
+      "slug": "orwell-2-2-5",
+      "titreOriginal": null,
+      "annee": 2026,
+      "realisateur": "Raoul Peck",
+      "duree": 120,
+      "genres": [
+        "Documentary",
+        "Biography",
+        "History"
+      ],
+      "synopsis": "Le film plonge dans les derniers mois de la vie d’Orwell et dans son œuvre visionnaire pour explorer les racines des concepts troublants qu'il a révélés au monde dans son chef-d'œuvre dystopique : le double discours, le crime par la pensée, la novlangue, le spectre omniprésent de Big Brother... des vérités sociopolitiques qui résonnent encore plus puissamment aujourd'hui.",
+      "imdbId": "tt27052428",
+      "source": "lumiere",
+      "cinema": "Lumière Bellecour",
+      "seances": [
+        {
+          "date": "2026-03-08",
+          "heure": "13:50",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-08",
+          "heure": "20:50",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-09",
+          "heure": "16:05",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F585514/D1773068700/VO/"
+        },
+        {
+          "date": "2026-03-09",
+          "heure": "20:50",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F585514/D1773068700/VO/"
+        },
+        {
+          "date": "2026-03-10",
+          "heure": "16:05",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F585514/D1773155100/VO/"
+        },
+        {
+          "date": "2026-03-10",
+          "heure": "20:50",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F585514/D1773155100/VO/"
+        }
+      ],
+      "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4750/0c2bd5a0e4ca0f608888589f81b6a9b2/s,490,650-q,90-882920.jpg",
+      "cast": "Eric Ruf",
+      "imdbRating": 6.8
+    },
+    {
+      "titre": "Rue Málaga",
+      "slug": "rue-malaga",
+      "titreOriginal": null,
+      "annee": 2025,
+      "realisateur": "Maryam Touzani",
+      "duree": 116,
+      "genres": [],
+      "synopsis": "Maria Angeles, une Espagnole de 79 ans, vit seule à Tanger, dans le nord du Maroc, où elle profite de sa ville et de son quotidien. Sa vie bascule lorsque sa fille Clara arrive de Madrid pour vendre l'appartement dans lequel elle a toujours vécu. Déterminée à rester dans cette ville qui l'a vue grandir, elle met tout en oeuvre pour garder sa maison et récupérer les objets d'une vie. Contre toute attente, elle redécouvre en chemin l'amour et le désir.",
+      "imdbId": null,
+      "source": "lumiere",
+      "cinema": "Lumière Bellecour",
+      "seances": [
+        {
+          "date": "2026-03-08",
+          "heure": "13:45",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-08",
+          "heure": "16:10",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-09",
+          "heure": "13:45",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F628750/D1773060300/VO/"
+        },
+        {
+          "date": "2026-03-09",
+          "heure": "16:10",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F628750/D1773060300/VO/"
+        },
+        {
+          "date": "2026-03-09",
+          "heure": "18:30",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F628750/D1773060300/VO/"
+        },
+        {
+          "date": "2026-03-10",
+          "heure": "13:45",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F628750/D1773146700/VO/"
+        },
+        {
+          "date": "2026-03-10",
+          "heure": "18:30",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F628750/D1773146700/VO/"
+        }
+      ],
+      "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4747/4f46a55374da1919875e846787fd1289/s,490,650-q,90-2e3f1f.jpg",
+      "cast": "C. Maura, M. Etura, A. Boulane"
+    },
+    {
+      "titre": "God Will Not Help",
+      "slug": "god-will-not-help",
+      "titreOriginal": null,
+      "annee": 2025,
+      "realisateur": "Hana Jusic",
+      "duree": null,
+      "genres": [
+        "Drama"
+      ],
+      "synopsis": "A Chilean woman named Teresa arrives at a remote Croatian shepherding community, saying she's their emigrant brother's widow.",
+      "imdbId": "tt37537475",
+      "source": "lumiere",
+      "cinema": "Lumière Bellecour",
+      "seances": [
+        {
+          "date": "2026-03-08",
+          "heure": "16:00",
+          "version": "VOSTFR"
+        }
+      ],
+      "cast": "Manuela Martelli, Ana Marija Veselcic, Filip Djuric"
+    },
+    {
+      "titre": "Le Gâteau du Président",
+      "slug": "le-gateau-du-president",
+      "titreOriginal": null,
+      "annee": 2026,
+      "realisateur": "Hasan Hadi",
+      "duree": 105,
+      "genres": [],
+      "synopsis": "Dans l'Irak de Saddam Hussein, Lamia, 9 ans, se voit confier la lourde tâche de confectionner un gâteau pour célébrer l'anniversaire du président. Sa quête d'ingrédients, accompagnée de son ami Saeed, bouleverse son quotidien.",
+      "imdbId": null,
+      "source": "lumiere",
+      "cinema": "Lumière Bellecour",
+      "seances": [
+        {
+          "date": "2026-03-08",
+          "heure": "18:15",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-09",
+          "heure": "13:50",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F626776/D1773060600/VO/"
+        },
+        {
+          "date": "2026-03-10",
+          "heure": "16:05",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F626776/D1773155100/VO/"
+        }
+      ],
+      "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4642/e6195fdd0bbba065280ae124d28ea94b/s,490,650-q,90-d195a5.jpg",
+      "cast": "B. A. Nayyef, S.M.Qasem, W.T. Khreibat"
+    },
+    {
+      "titre": "Une maison avec deux chiens",
+      "slug": "une-maison-avec-deux-chiens",
+      "titreOriginal": null,
+      "annee": null,
+      "realisateur": null,
+      "duree": null,
+      "genres": [],
+      "synopsis": null,
+      "imdbId": null,
+      "source": "lumiere",
+      "cinema": "Lumière Bellecour",
+      "seances": [
+        {
+          "date": "2026-03-08",
+          "heure": "18:50",
+          "version": "VOSTFR"
+        }
+      ]
+    },
+    {
+      "titre": "Hélène Trésore Transnationale",
+      "slug": "helene-tresore-transnationale",
+      "titreOriginal": null,
+      "annee": 2026,
+      "realisateur": "Judith Abitbol",
+      "duree": 94,
+      "genres": [],
+      "synopsis": "En s'adressant directement, et intimement, à Hélène Hazera, la cinéaste Judith Abitbol réalise le portrait d'une figure importante des contre-cultures de la fin des années 60-90, en France. Membre des Gazolines, membre du F.H.A.R. (Front Homosexuel d'Action Révolutionnaire), activiste LGBTQ infatigable, Hélène Hazera a créé la commission Trans et SIDA au sein d'Act Up, une de ses grandes fiertés. Sa vraie revanche sur une vie qui a démarré dans des années où le désir et la nécessité de changer d…",
+      "imdbId": null,
+      "source": "lumiere",
+      "cinema": "Lumière Bellecour",
+      "seances": [
+        {
+          "date": "2026-03-10",
+          "heure": "18:45",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F633738/D1773164700/VF/"
+        }
+      ],
+      "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4727/f326d0a13e8b4cef12121ac25c51bb89/s,490,650-q,90-fc1053.jpg",
+      "cast": "H. Hazera, C. Chuzel, L. Miesseroff"
+    },
+    {
+      "titre": "Beautiful Evening, Beautiful Day",
+      "slug": "beautiful-evening-beautiful-day",
+      "titreOriginal": null,
+      "annee": 2024,
+      "realisateur": "Ivona Juka",
+      "duree": 131,
+      "genres": [],
+      "synopsis": "Quatre étudiants abandonnent l'université pour rejoindre les Partisans. Après la guerre, ils sont tous des artistes de cinéma reconnus. En 1957, alors qu'ils tournent leur dernier film, la censure interdit une scène décrivant le mécontentement de l'armée. On leur propose alors de se « réhabiliter » en réalisant des films de propagande.",
+      "imdbId": null,
+      "source": "lumiere",
+      "cinema": "Lumière Bellecour",
+      "seances": [
+        {
+          "date": "2026-03-10",
+          "heure": "21:00",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F614294/D1773172800/VO/"
+        }
+      ],
+      "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4732/beautiful evening/s,490,650-q,90-892272.jpeg",
+      "cast": "E. Hadžihafizbegović, S. Doslo, D. Cosic"
+    },
+    {
+      "titre": "Un monde fragile et merveilleux",
+      "slug": "un-monde-fragile-et-merveilleux",
+      "titreOriginal": null,
+      "annee": 2026,
+      "realisateur": "Cyril Aris",
+      "duree": 110,
+      "genres": [],
+      "synopsis": "Nino et Yasmina tombent amoureux dans la cour de leur école à Beyrouth, et rêvent à leur vie d'adulte, à un monde merveilleux. 20 ans plus tard, ils se retrouvent par accident et c'est à nouveau l'amour fou, magnétique, incandescent. Peut-on construire un avenir, dans un pays fracturé, qu'on tente de quitter mais qui vous retient de façon irrésistible ?",
+      "imdbId": null,
+      "source": "lumiere",
+      "cinema": "Lumière Fourmi",
+      "seances": [
+        {
+          "date": "2026-03-08",
+          "heure": "12:40",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-09",
+          "heure": "16:15",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F628867/D1773069300/VO/"
+        },
+        {
+          "date": "2026-03-10",
+          "heure": "16:00",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F628867/D1773154800/VO/"
+        }
+      ],
+      "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4701/9e96bec2d1ac11dba0c4a6c65454a0ef/s,490,650-q,90-5de208.jpg",
+      "cast": "M. Akl, H. Akil, J. Kassar"
+    },
+    {
+      "titre": "Coutures",
+      "slug": "coutures",
+      "titreOriginal": null,
+      "annee": 2025,
+      "realisateur": "Alice Winocour",
+      "duree": 107,
+      "genres": [],
+      "synopsis": "A Paris, dans le tumulte de la Fashion Week, Maxine, une réalisatrice américaine apprend une nouvelle qui va bouleverser sa vie. Elle croise alors le chemin d'Ada, une jeune mannequin sud-soudanaise ayant quitté son pays, et Angèle, une maquilleuse française aspirant à une autre vie. Entre ces trois femmes aux horizons pourtant si différents se tisse une solidarité insoupçonnée. Sous le vernis glamour se révèle une forme de révolte silencieuse : celle de femmes qui recousent, chacune à leur mani…",
+      "imdbId": null,
+      "source": "lumiere",
+      "cinema": "Lumière Fourmi",
+      "seances": [
+        {
+          "date": "2026-03-08",
+          "heure": "13:00",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-09",
+          "heure": "16:50",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F618470/D1773071400/VF/"
+        },
+        {
+          "date": "2026-03-10",
+          "heure": "14:00",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F618470/D1773147600/VF/"
+        }
+      ],
+      "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4748/66c3fe35122f2e0e86e01859a80153b7/s,490,650-q,90-a3f657.jpg",
+      "cast": "A. Jolie, L. Garrel, V. Lindon"
+    },
+    {
+      "titre": "Woman And Child",
+      "slug": "woman-and-child",
+      "titreOriginal": null,
+      "annee": 2026,
+      "realisateur": "Saeed Roustaee",
+      "duree": 131,
+      "genres": [
+        "Drama"
+      ],
+      "synopsis": "Mahnaz, une infirmière de 45 ans, élève seule ses enfants. Alors qu'elle s'apprête à épouser son petit ami Hamid, son fils Aliyar est renvoyé de l'école. Lorsqu'un un accident tragique vient tout bouleverser, Mahnaz se lance dans une quête de justice pour obtenir réparation...",
+      "imdbId": "tt36631507",
+      "source": "lumiere",
+      "cinema": "Lumière Fourmi",
+      "seances": [
+        {
+          "date": "2026-03-08",
+          "heure": "18:25",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-09",
+          "heure": "18:25",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F625030/D1773077100/VO/"
+        },
+        {
+          "date": "2026-03-10",
+          "heure": "18:25",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F625030/D1773163500/VO/"
+        }
+      ],
+      "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4696/womanandchild_doc120_FRANCE CULTURE_WEB_BD/s,490,650-q,90-0fd4cd.jpg",
+      "cast": "P. Izadyar, S. Mohebi, P. Maadi",
+      "imdbRating": 5.9
+    },
+    {
+      "titre": "Les Dimanches",
+      "slug": "les-dimanches",
+      "titreOriginal": null,
+      "annee": 2026,
+      "realisateur": "Alauda Ruíz de Azúa",
+      "duree": 118,
+      "genres": [],
+      "synopsis": "Ainara, 17 ans, élève dans un lycée catholique, s'apprête à passer son bac et à choisir son futur parcours universitaire. A la surprise générale, cette brillante jeune fille annonce à sa famille qu'elle souhaite participer à une période d'intégration dans un couvent afin d'embrasser la vie de religieuse. La nouvelle prend tout le monde au dépourvu. Si le père semble se laisser convaincre par les aspirations de sa fille, pour Maite, la tante d'Ainara, cette vocation inattendue est la manifestatio…",
+      "imdbId": null,
+      "source": "lumiere",
+      "cinema": "Lumière Fourmi",
+      "seances": [
+        {
+          "date": "2026-03-08",
+          "heure": "20:50",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-09",
+          "heure": "16:25",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F625468/D1773069900/VO/"
+        },
+        {
+          "date": "2026-03-10",
+          "heure": "16:05",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F625468/D1773155100/VO/"
+        }
+      ],
+      "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4736/18717c10a7a89df2cbf10f6584181ebd/s,490,650-q,90-51869a.jpg",
+      "cast": "B. Soroa, P. López Arnaiz, J. Minujin"
+    },
+    {
+      "titre": "Soulèvements",
+      "slug": "soulevements",
+      "titreOriginal": null,
+      "annee": 2026,
+      "realisateur": "Thomas Lacoste",
+      "duree": 105,
+      "genres": [],
+      "synopsis": "Un portrait choral à 16 voix, 16 trajectoires singulières, réflexif et intime d'un mouvement de résistance intergénérationnel porté par une jeunesse qui vit et qui lutte contre l'accaparement des terres et de l'eau, les ravages industriels, la montée des totalitarismes et fait face à la répression politique. Une plongée au coeur des Soulèvements de la Terre révélant la composition inédite des forces multiples déployées un peu partout dans le pays qui expérimentent d'autres modes de vie, tissent …",
+      "imdbId": null,
+      "source": "lumiere",
+      "cinema": "Lumière Fourmi",
+      "seances": [
+        {
+          "date": "2026-03-08",
+          "heure": "12:40",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-10",
+          "heure": "18:15",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F629067/D1773162900/VF/"
+        }
+      ],
+      "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4759/c37aa39be9f24b3762c95b0d28a7f074/s,490,650-q,90-2a2b64.jpg"
+    },
+    {
+      "titre": "Sinners",
+      "slug": "sinners",
+      "titreOriginal": null,
+      "annee": 2025,
+      "realisateur": "Ryan Coogler",
+      "duree": null,
+      "genres": [
+        "Action",
+        "Drama",
+        "Horror"
+      ],
+      "synopsis": "Trying to leave their troubled lives behind, twin brothers return to their hometown to start again, only to discover that an even greater evil is waiting to welcome them back.",
+      "imdbId": "tt31193180",
+      "source": "lumiere",
+      "cinema": "Lumière Fourmi",
+      "seances": [
+        {
+          "date": "2026-03-08",
+          "heure": "14:45",
+          "version": "VOSTFR"
+        }
+      ],
+      "poster": "https://m.media-amazon.com/images/M/MV5BNjIwZWY4ZDEtMmIxZS00NDA4LTg4ZGMtMzUwZTYyNzgxMzk5XkEyXkFqcGc@._V1_SX300.jpg",
+      "imdbRating": 7.5,
+      "cast": "Michael B. Jordan, Jack O'Connell, Hailee Steinfeld"
+    },
+    {
+      "titre": "Super Charlie",
+      "slug": "super-charlie",
+      "titreOriginal": null,
+      "annee": 2024,
+      "realisateur": "Jon Holmberg",
+      "duree": null,
+      "genres": [
+        "Animation",
+        "Family"
+      ],
+      "synopsis": null,
+      "imdbId": "tt28639152",
+      "source": "lumiere",
+      "cinema": "Lumière Fourmi",
+      "seances": [
+        {
+          "date": "2026-03-08",
+          "heure": "14:50",
+          "version": "VF"
+        }
+      ]
+    },
+    {
+      "titre": "Les Toutes Petites Créatures 2",
+      "slug": "les-toutes-petites-creatures-2",
+      "titreOriginal": null,
+      "annee": null,
+      "realisateur": null,
+      "duree": null,
+      "genres": [],
+      "synopsis": null,
+      "imdbId": null,
+      "source": "lumiere",
+      "cinema": "Lumière Fourmi",
+      "seances": [
+        {
+          "date": "2026-03-08",
+          "heure": "15:10",
+          "version": "VF"
+        }
+      ]
+    },
+    {
+      "titre": "Dossier 137",
+      "slug": "dossier-137",
+      "titreOriginal": null,
+      "annee": 2025,
+      "realisateur": "Dominik Moll",
+      "duree": 115,
+      "genres": [],
+      "synopsis": "Le dossier 137 est en apparence une affaire de plus pour Stéphanie, enquêtrice à l'IGPN, la police des polices. Une manifestation tendue, un jeune homme blessé par un tir de LBD, des circonstances à éclaircir pour établir une responsabilité... Mais un élément inattendu va troubler Stéphanie, pour qui le dossier 137 devient autre chose qu'un simple numéro.",
+      "imdbId": null,
+      "source": "lumiere",
+      "cinema": "Lumière Fourmi",
+      "seances": [
+        {
+          "date": "2026-03-08",
+          "heure": "16:10",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-09",
+          "heure": "21:00",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F610342/D1773086400/VF/"
+        },
+        {
+          "date": "2026-03-10",
+          "heure": "21:00",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F610342/D1773172800/VF/"
+        }
+      ],
+      "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4305/Dossier 137/s,490,650-q,90-709d38.jpeg",
+      "cast": "L. Drucker, G. Malanda, J. Turnbull"
+    },
+    {
+      "titre": "L'Attachement",
+      "slug": "l-attachement",
+      "titreOriginal": null,
+      "annee": 2025,
+      "realisateur": "Carine Tardieu",
+      "duree": 105,
+      "genres": [],
+      "synopsis": "Sandra, quinquagénaire farouchement indépendante, partage soudainement et malgré elle l'intimité de son voisin de palier et de ses deux enfants. Contre toute attente, elle s'attache peu à peu à cette famille d'adoption.",
+      "imdbId": null,
+      "source": "lumiere",
+      "cinema": "Lumière Fourmi",
+      "seances": [
+        {
+          "date": "2026-03-08",
+          "heure": "16:50",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-09",
+          "heure": "20:55",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F585920/D1773086100/VF/"
+        },
+        {
+          "date": "2026-03-10",
+          "heure": "18:15",
+          "version": "VFST",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F585920/D1773162900/VFST/"
+        }
+      ],
+      "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4128/83a423a22c4438f3ecae29e227b2f6a9/s,490,650-q,90-68332a.jpg",
+      "cast": "V. Bruni Tedeschi, P. Marmaï, V. Pons"
+    },
+    {
+      "titre": "Une bataille après l'autre",
+      "slug": "une-bataille-apres-l-autre",
+      "titreOriginal": null,
+      "annee": 2025,
+      "realisateur": "Paul Thomas Anderson",
+      "duree": 162,
+      "genres": [],
+      "synopsis": "Ancien révolutionnaire désabusé et paranoïaque, Bob vit en marge de la société, avec sa fille Willa , indépendante et pleine de ressources. Quand son ennemi juré refait surface après 16 ans et que Willa disparaît, Bob remue ciel et terre pour la retrouver, affrontant pour la première fois les conséquences de son passé...",
+      "imdbId": null,
+      "source": "lumiere",
+      "cinema": "Lumière Fourmi",
+      "seances": [
+        {
+          "date": "2026-03-08",
+          "heure": "17:25",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-09",
+          "heure": "20:40",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F574974/D1773085200/VO/"
+        }
+      ],
+      "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4447/610dc2fcd83afe3717f771b889b979c2/s,490,650-q,90-8a269a.jpg",
+      "cast": "L. DiCaprio, T. Taylor, S. Penn"
+    },
+    {
+      "titre": "Le Chant des forêts",
+      "slug": "le-chant-des-forets",
+      "titreOriginal": null,
+      "annee": 2025,
+      "realisateur": "Vincent Munier",
+      "duree": 96,
+      "genres": [],
+      "synopsis": "Après La Panthère des neiges, Vincent Munier nous invite au cœur des forêts des Vosges. C’est ici qu’il a tout appris grâce à son père Michel, naturaliste, ayant passé sa vie à l’affut dans les bois. Il est l’heure pour eux de transmettre ce savoir à Simon, le fils de Vincent. Trois regards, trois générations, une même fascination pour la vie sauvage. Nous découvrirons avec eux cerfs, oiseaux rares, renards et lynx… et parfois, le battement d’ailes d’un animal légendaire : le Grand Tétras.",
+      "imdbId": null,
+      "source": "lumiere",
+      "cinema": "Lumière Fourmi",
+      "seances": [
+        {
+          "date": "2026-03-08",
+          "heure": "18:55",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-09",
+          "heure": "18:45",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F606772/D1773078300/VF/"
+        },
+        {
+          "date": "2026-03-10",
+          "heure": "14:00",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F606772/D1773147600/VF/"
+        }
+      ],
+      "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4614/f5523e15c97af96169bdc93479553602/s,490,650-q,90-811db2.jpg",
+      "cast": "Vincent Munier"
+    },
+    {
+      "titre": "Hamnet",
+      "slug": "hamnet",
+      "titreOriginal": null,
+      "annee": 2026,
+      "realisateur": "Chloé Zhao",
+      "duree": 125,
+      "genres": [],
+      "synopsis": "Angleterre, 1580. Un professeur de latin fauché, fait la connaissance d'Agnes, jeune femme à l'esprit libre. Fascinés l'un par l'autre, ils entament une liaison fougueuse avant de se marier et d'avoir trois enfants. Tandis que Will tente sa chance comme dramaturge à Londres, Agnes assume seule les tâches domestiques. Lorsqu'un drame se produit, le couple, autrefois profondément uni, vacille. Mais c'est de leur épreuve commune que naîtra l'inspiration d'un chef d'oeuvre universel.",
+      "imdbId": null,
+      "source": "lumiere",
+      "cinema": "Lumière Fourmi",
+      "seances": [
+        {
+          "date": "2026-03-08",
+          "heure": "20:30",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-10",
+          "heure": "13:40",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F576660/D1773146400/VO/"
+        }
+      ],
+      "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4698/9af5f87b39938fec50f86c32c3d31b69/s,490,650-q,90-885971.jpg",
+      "cast": "P. Mescal, J. Buckley, E. Watson"
+    },
+    {
+      "titre": "The Grandmaster",
+      "slug": "the-grandmaster",
+      "titreOriginal": null,
+      "annee": 2026,
+      "realisateur": "Wong Kar-Wai",
+      "duree": 130,
+      "genres": [],
+      "synopsis": "Chine, 1936. Désigné par le Grand Maître Baosen pour lui succéder à la tête de l'Ordre des Arts Martiaux, Ip Man, maître légendaire de Wing Chun (Kung Fu), doit affronter un à un les plus grands maîtres du kung-fu. Tiraillé entre un amour impossible avec Gong-er, la fille du Grand Maître et l'occupation japonaise qui plonge le pays dans le chaos, Ip Man va forger pendant 20 ans, combat après combat, sa propre légende.",
+      "imdbId": null,
+      "source": "lumiere",
+      "cinema": "Lumière Fourmi",
+      "seances": [
+        {
+          "date": "2026-03-08",
+          "heure": "21:00",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-09",
+          "heure": "13:45",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F10749/D1773060300/VO/"
+        },
+        {
+          "date": "2026-03-10",
+          "heure": "20:25",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F10749/D1773170700/VO/"
+        }
+      ],
+      "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4731/20453b159488d891b11eae6616927016/s,490,650-q,90-cc7a59.jpg",
+      "cast": "T. Leung Chiu-Wai, Z. Zhang, C.Chang"
+    },
+    {
+      "titre": "Le Mage du Kremlin",
+      "slug": "le-mage-du-kremlin",
+      "titreOriginal": null,
+      "annee": 2026,
+      "realisateur": "Olivier Assayas",
+      "duree": 145,
+      "genres": [],
+      "synopsis": "Russie, dans les années 1990. L'URSS s'effondre. Dans le tumulte d'un pays en reconstruction, un jeune homme à l'intelligence redoutable, Vadim Baranov, trace sa voie. D'abord artiste puis producteur de télé-réalité, il devient le conseiller officieux d'un ancien agent du KGB promis à un pouvoir absolu, le futur « Tsar » Vladimir Poutine. Plongé au coeur du système, Baranov devient un rouage central de la nouvelle Russie, façonnant les discours, les images, les perceptions. Mais une présence éch…",
+      "imdbId": null,
+      "source": "lumiere",
+      "cinema": "Lumière Fourmi",
+      "seances": [
+        {
+          "date": "2026-03-09",
+          "heure": "13:40",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F610348/D1773060000/VO/"
+        }
+      ],
+      "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4699/27264fbe0076f4db99b28acfa0e21ac5/s,490,650-q,90-8f8fe1.jpg",
+      "cast": "P. Dano, J. Law, A. Vikander"
+    },
+    {
+      "titre": "À pied d'oeuvre",
+      "slug": "a-pied-d-oeuvre",
+      "titreOriginal": null,
+      "annee": 2026,
+      "realisateur": "Valérie Donzelli",
+      "duree": 92,
+      "genres": [],
+      "synopsis": "Achever un texte ne veut pas dire être publié, être publié ne veut pas dire être lu, être lu ne veut pas dire être aimé, être aimé ne veut pas dire avoir du succès, avoir du succès n'augure aucune fortune. À Pied d'oeuvre raconte l'histoire vraie d'un photographe à succès qui abandonne tout pour se consacrer à l'écriture, et découvre la pauvreté.",
+      "imdbId": null,
+      "source": "lumiere",
+      "cinema": "Lumière Fourmi",
+      "seances": [
+        {
+          "date": "2026-03-09",
+          "heure": "19:00",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F623366/D1773079200/VF/"
+        },
+        {
+          "date": "2026-03-10",
+          "heure": "16:15",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F623366/D1773155700/VF/"
+        }
+      ],
+      "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4644/a pied d'oeuvre (1)/s,490,650-q,90-ea8c51.jpeg",
+      "cast": "B. Bouillon, A. Marcon, V. Ledoyen"
+    },
+    {
+      "titre": "La Sociale",
+      "slug": "la-sociale",
+      "titreOriginal": null,
+      "annee": 2016,
+      "realisateur": "Gilles Perret",
+      "duree": 84,
+      "genres": [
+        "Documentary"
+      ],
+      "synopsis": "En racontant l'étonnante histoire de la Sécu, La Sociale rend justice à ses héros oubliés, mais aussi à une utopie toujours en marche, et dont bénéficient 66 millions de Français.",
+      "imdbId": "tt6244954",
+      "source": "lumiere",
+      "cinema": "Lumière Fourmi",
+      "seances": [
+        {
+          "date": "2026-03-10",
+          "heure": "20:40",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F151184/D1773171600/VF/"
+        }
+      ],
+      "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4722/583394/s,490,650-q,90-6f2203.jpg",
+      "imdbRating": 7.4,
+      "cast": "Colette Bec, Patrick Chêne, Ambroise Croizat"
     }
   ]
 }
