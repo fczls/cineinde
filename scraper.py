@@ -650,87 +650,172 @@ def _extract_seance(node: dict, version_defaut: str) -> dict | None:
 
 
 # ─────────────────────────────────────────────
-# ENRICHISSEMENT OMDB
+# ENRICHISSEMENT TMDB (source principale) + OMDb (fallback)
 # ─────────────────────────────────────────────
 
 def enrich_omdb(films: list[dict]) -> list[dict]:
     """
-    Cherche chaque film sur OMDb et complète :
-    imdbId, note, genres, synopsis (si manquant), affiche.
+    TMDB en première source, OMDb en fallback.
+    Complète : imdbId, poster, note, genres, synopsis, cast.
     """
-    if OMDB_API_KEY == "VOTRE_CLE_OMDB":
-        log.warning("Clé OMDb non configurée — enrichissement ignoré")
+    tmdb_ok = bool(TMDB_API_KEY)
+    omdb_ok = OMDB_API_KEY and OMDB_API_KEY != "VOTRE_CLE_OMDB"
+    if not tmdb_ok and not omdb_ok:
+        log.warning("TMDB_API_KEY et OMDB_API_KEY non configurées — enrichissement ignoré")
         return films
-
-    tmdb_warned = [False]  # évite de logger N fois si TMDB_API_KEY manquante
 
     for film in films:
         titre = film.get("titreOriginal") or film.get("titre", "")
-        annee = film.get("annee")
+        if not titre:
+            continue
+
+        # 1. TMDB en premier (search par titre ou find par imdb_id)
+        if tmdb_ok:
+            _enrich_tmdb_first(film, titre)
+
+        # 2. OMDb en fallback pour les champs manquants
+        if omdb_ok:
+            _enrich_omdb_fallback(film, titre)
+
+    return films
+
+
+def _tmdb_search(query: str, annee: int | None) -> dict | None:
+    """Cherche un film sur TMDB par titre. Retry sans année si pas de résultat."""
+    params = f"api_key={TMDB_API_KEY}&language=fr-FR&query={_urlencode(query)}"
+    if annee:
+        params += f"&year={annee}"
+    url = f"{URL_TMDB_BASE}search/movie?{params}"
+    try:
+        data = json.loads(fetch(url, timeout=8))
+        results = data.get("results") or []
+        if results:
+            return results[0]
+        # Retry sans filtre d'année
+        if annee:
+            url_no_year = f"{URL_TMDB_BASE}search/movie?api_key={TMDB_API_KEY}&language=fr-FR&query={_urlencode(query)}"
+            data2 = json.loads(fetch(url_no_year, timeout=8))
+            results2 = data2.get("results") or []
+            if results2:
+                return results2[0]
+    except Exception as e:
+        log.warning(f"  ✗ TMDB search erreur pour «{query}»: {e}")
+    return None
+
+
+def _enrich_tmdb_first(film: dict, titre: str) -> None:
+    """TMDB : find par imdb_id si dispo, sinon search par titre (avec fallback titre FR)."""
+    annee = film.get("annee")
+    tmdb_id = None
+
+    # A. Find par imdb_id (le plus fiable)
+    if film.get("imdbId"):
+        url = f"{URL_TMDB_BASE}find/{film['imdbId']}?api_key={TMDB_API_KEY}&language=fr-FR&external_source=imdb_id"
+        try:
+            data = json.loads(fetch(url, timeout=8))
+            results = data.get("movie_results") or []
+            if results:
+                m = results[0]
+                tmdb_id = m.get("id")
+                _apply_tmdb_movie(film, m)
+        except Exception as e:
+            log.warning(f"  ✗ TMDB find erreur pour {titre}: {e}")
+
+    # B. Search par titre si pas encore trouvé
+    if not tmdb_id:
+        titre_fr = film.get("titre", "")
+        # Essai 1 : titre transmis (peut être titreOriginal)
+        m = _tmdb_search(titre, annee)
+        # Essai 2 : titre français si différent
+        if not m and titre_fr and titre_fr != titre:
+            m = _tmdb_search(titre_fr, annee)
+        if m:
+            tmdb_id = m.get("id")
+            _apply_tmdb_movie(film, m)
+            # Récupérer imdbId depuis les détails TMDB
+            if not film.get("imdbId") and tmdb_id:
+                try:
+                    det = json.loads(fetch(f"{URL_TMDB_BASE}movie/{tmdb_id}?api_key={TMDB_API_KEY}", timeout=8))
+                    if det.get("imdb_id"):
+                        film["imdbId"] = det["imdb_id"]
+                except Exception:
+                    pass
+            log.info(f"  ✓ TMDB : {film['titre']} → tmdb:{tmdb_id} imdb:{film.get('imdbId', '—')}")
+        else:
+            log.warning(f"  ✗ TMDB introuvable : {titre} ({annee})")
+
+    # C. Cast (credits)
+    if tmdb_id and not film.get("cast"):
+        try:
+            data = json.loads(fetch(f"{URL_TMDB_BASE}movie/{tmdb_id}/credits?api_key={TMDB_API_KEY}", timeout=8))
+            names = [c["name"] for c in (data.get("cast") or [])[:3] if c.get("name")]
+            if names:
+                film["cast"] = ", ".join(names)
+        except Exception:
+            pass
+
+    # D. Synopsis FR depuis les détails si overview vide dans search
+    if tmdb_id and not film.get("synopsis"):
+        try:
+            det = json.loads(fetch(f"{URL_TMDB_BASE}movie/{tmdb_id}?api_key={TMDB_API_KEY}&language=fr-FR", timeout=8))
+            ov = (det.get("overview") or "").strip()
+            if ov:
+                film["synopsis"] = ov[:500] + ("…" if len(ov) > 500 else "")
+        except Exception:
+            pass
+
+
+def _apply_tmdb_movie(film: dict, m: dict) -> None:
+    """Applique les champs d'un objet movie TMDB sur le film (sans écraser l'existant)."""
+    if not film.get("poster") and m.get("poster_path"):
+        film["poster"] = f"https://image.tmdb.org/t/p/w500{m['poster_path']}"
+    if not film.get("synopsis"):
+        ov = (m.get("overview") or "").strip()
+        if ov:
+            film["synopsis"] = ov[:500] + ("…" if len(ov) > 500 else "")
+    if not film.get("imdbRating") and m.get("vote_average") is not None:
+        film["imdbRating"] = float(m["vote_average"])
+
+
+def _enrich_omdb_fallback(film: dict, titre: str) -> None:
+    """OMDb : fallback pour champs manquants (par imdb_id ou par titre)."""
+    annee = film.get("annee")
+    url = None
+    if film.get("imdbId"):
+        url = f"{URL_OMDB_BASE}?i={film['imdbId']}&apikey={OMDB_API_KEY}&plot=full"
+    else:
         params = f"t={_urlencode(titre)}&apikey={OMDB_API_KEY}&type=movie"
         if annee:
             params += f"&y={annee}"
         url = f"{URL_OMDB_BASE}?{params}"
 
-        try:
-            data = json.loads(fetch(url, timeout=8))
-            if data.get("Response") == "True":
-                film["imdbId"]   = data.get("imdbID")
-                film["poster"]   = data.get("Poster")   # URL directe CDN Amazon
-                if not film.get("synopsis") and data.get("Plot") not in (None, "N/A"):
-                    film["synopsis"] = data["Plot"]
-                if not film.get("annee") and data.get("Year"):
-                    try:
-                        film["annee"] = int(data["Year"][:4])
-                    except ValueError:
-                        pass
-                if not film.get("realisateur") and data.get("Director") not in (None, "N/A"):
-                    film["realisateur"] = data["Director"]
-                if not film.get("genres") and data.get("Genre") not in (None, "N/A"):
-                    film["genres"] = [g.strip() for g in data["Genre"].split(",")]
-                if data.get("imdbRating") not in (None, "N/A"):
-                    film["imdbRating"] = float(data["imdbRating"])
-                log.info(f"  ✓ OMDb : {film['titre']} → {film.get('imdbId')}")
-            else:
-                log.warning(f"  ✗ OMDb introuvable : {titre} ({annee})")
-        except Exception as e:
-            log.warning(f"  ✗ OMDb erreur pour {titre}: {e}")
-
-        # Fallback TMDB si pas de poster OMDb
-        if not film.get("poster") or film.get("poster") == "N/A":
-            _enrich_tmdb_poster(film, tmdb_warned)
-
-    return films
-
-
-def _enrich_tmdb_poster(film: dict, warned: list) -> None:
-    """
-    Cherche le film sur TMDB (search/movie) et remplit poster si trouvé.
-    Appelé uniquement pour les films sans poster OMDb.
-    """
-    if not TMDB_API_KEY:
-        if not warned[0]:
-            log.warning("TMDB_API_KEY non configurée — fallback poster ignoré")
-            warned[0] = True
+    if not url:
         return
-    titre = film.get("titreOriginal") or film.get("titre", "")
-    if not titre:
-        return
-    annee = film.get("annee")
-    params = f"api_key={TMDB_API_KEY}&query={_urlencode(titre)}"
-    if annee:
-        params += f"&year={annee}"
-    url = f"{URL_TMDB_BASE}search/movie?{params}"
-
     try:
         data = json.loads(fetch(url, timeout=8))
-        results = data.get("results") or []
-        if results and results[0].get("poster_path"):
-            poster_path = results[0]["poster_path"]
-            film["poster"] = f"https://image.tmdb.org/t/p/w500{poster_path}"
-            log.info(f"  ✓ TMDB poster : {film['titre']}")
+        if data.get("Response") != "True":
+            return
+        if not film.get("imdbId") and data.get("imdbID"):
+            film["imdbId"] = data["imdbID"]
+        if (not film.get("poster") or film.get("poster") == "N/A") and data.get("Poster") not in (None, "N/A"):
+            film["poster"] = data["Poster"]
+        if not film.get("synopsis") and data.get("Plot") not in (None, "N/A"):
+            film["synopsis"] = data["Plot"]
+        if not film.get("annee") and data.get("Year"):
+            try:
+                film["annee"] = int(data["Year"][:4])
+            except ValueError:
+                pass
+        if not film.get("realisateur") and data.get("Director") not in (None, "N/A"):
+            film["realisateur"] = data["Director"]
+        if not film.get("genres") and data.get("Genre") not in (None, "N/A"):
+            film["genres"] = [g.strip() for g in data["Genre"].split(",")]
+        if not film.get("imdbRating") and data.get("imdbRating") not in (None, "N/A"):
+            film["imdbRating"] = float(data["imdbRating"])
+        if not film.get("cast") and data.get("Actors") not in (None, "N/A"):
+            film["cast"] = data["Actors"]
     except Exception as e:
-        log.warning(f"  ✗ TMDB erreur pour {titre}: {e}")
+        log.warning(f"  ✗ OMDb erreur pour {titre}: {e}")
 
 
 def _urlencode(s: str) -> str:
@@ -810,9 +895,9 @@ def main():
         )
         sys.exit(2)
 
-    # 3. Enrichissement OMDb
+    # 3. Enrichissement TMDB + OMDb
     if not args.no_omdb:
-        log.info(f"Enrichissement OMDb pour {len(films)} films…")
+        log.info(f"Enrichissement TMDB/OMDb pour {len(films)} films…")
         films = enrich_omdb(films)
 
     # 4. Filtrage semaine
