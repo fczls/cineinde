@@ -1,60 +1,19 @@
 {
-  "generated_at": "2026-03-07T23:25:39.903689",
+  "generated_at": "2026-03-08T21:52:09.420170",
   "source": "https://www.cinema-comoedia.com/programme-accessible/",
   "films": [
-    {
-      "titre": "Alter Ego",
-      "titreOriginal": null,
-      "annee": 2026,
-      "realisateur": "Nicolas Charlet et Bruno Lavaine",
-      "duree": 99,
-      "genres": [],
-      "synopsis": null,
-      "imdbId": null,
-      "seances": [
-        {
-          "date": "2026-03-07",
-          "heure": "11:15",
-          "version": "VF"
-        },
-        {
-          "date": "2026-03-07",
-          "heure": "13:35",
-          "version": "VF"
-        },
-        {
-          "date": "2026-03-07",
-          "heure": "15:50",
-          "version": "VF"
-        },
-        {
-          "date": "2026-03-07",
-          "heure": "18:00",
-          "version": "VF"
-        },
-        {
-          "date": "2026-03-07",
-          "heure": "20:20",
-          "version": "VF"
-        }
-      ],
-      "poster": "https://image.tmdb.org/t/p/w500/sYOPEWwPz31cXNVPy4Q4SvdU8Kc.jpg"
-    },
     {
       "titre": "Deux femmes et quelques hommes",
       "titreOriginal": null,
       "annee": 2025,
       "realisateur": "Chloé Robichaud",
       "duree": 100,
-      "genres": [],
-      "synopsis": null,
-      "imdbId": null,
+      "genres": [
+        "Comedy"
+      ],
+      "synopsis": "Violette et Florence ne comprennent plus ce qui leur arrive. Respectivement, en congé de maternité, et en arrêt de travail, l’une, est à fleur de peau, l’autre ne ressent plus rien. Les voisines sont toutes deux habitées par un sentiment d’échec : malgré la carrière et la famille, elles ne sont pas heureuses. La première infidélité de Florence sera une révélation. Et si le bonheur, c’était de se rebeller contre notre rigide société de performance ? Dans un contexte, où avoir du fun est très loin…",
+      "imdbId": "tt31066723",
       "seances": [
-        {
-          "date": "2026-03-07",
-          "heure": "20:50",
-          "version": "VOSTFR"
-        },
         {
           "date": "2026-03-08",
           "heure": "20:50",
@@ -71,7 +30,9 @@
           "version": "VOSTFR"
         }
       ],
-      "poster": "https://image.tmdb.org/t/p/w500/t6DEvzbkkTRlTYqsoC4t8K6vEYg.jpg"
+      "poster": "https://image.tmdb.org/t/p/w500/w6wUMmrIb075xzUT5OM7thplKNa.jpg",
+      "imdbRating": 6.6,
+      "cast": "Karine Gonthier-Hyndman, Laurence Leboeuf, Félix Moati"
     },
     {
       "titre": "La maison des femmes",
@@ -80,34 +41,9 @@
       "realisateur": "Mélisa Godet",
       "duree": 110,
       "genres": [],
-      "synopsis": null,
-      "imdbId": null,
+      "synopsis": "À la Maison des femmes, entre soin, écoute et solidarité, une équipe se bat chaque jour pour accompagner les femmes victimes de violences dans leur reconstruction. Dans ce lieu unique, Diane, Manon, Inès, Awa et leurs collègues accueillent, soutiennent, redonnent confiance. Ensemble, avec leurs forces, leurs fragilités, leurs convictions et une énergie inépuisable.",
+      "imdbId": "tt35455708",
       "seances": [
-        {
-          "date": "2026-03-07",
-          "heure": "11:10",
-          "version": "VF"
-        },
-        {
-          "date": "2026-03-07",
-          "heure": "13:30",
-          "version": "VF"
-        },
-        {
-          "date": "2026-03-07",
-          "heure": "16:05",
-          "version": "VF"
-        },
-        {
-          "date": "2026-03-07",
-          "heure": "18:25",
-          "version": "VF"
-        },
-        {
-          "date": "2026-03-07",
-          "heure": "20:45",
-          "version": "VF"
-        },
         {
           "date": "2026-03-08",
           "heure": "11:10",
@@ -134,7 +70,9 @@
           "version": "VF"
         }
       ],
-      "poster": "https://image.tmdb.org/t/p/w500/1CUXmCLU9DkZHH8w4w43ZvOdVTd.jpg"
+      "poster": "https://image.tmdb.org/t/p/w500/3blpQb6lMwX3VW4enxNpkX9po1c.jpg",
+      "imdbRating": 8.9,
+      "cast": "Karin Viard, Laetitia Dosch, Oulaya Amamra"
     },
     {
       "titre": "Allah n'est pas obligé",
@@ -145,14 +83,9 @@
       "genres": [
         "Animation"
       ],
-      "synopsis": null,
+      "synopsis": "Birahima, orphelin guinéen d’une dizaine d’années, raconte avec ironie comment il est précipité dans la guerre en tentant de rejoindre sa tante au Libéria. Yacouba, un homme douteux, le convainc de devenir enfant soldat, tandis qu'il devient grigriman et féticheur parmi les combattants. Baladé entre les factions ennemies, Birahima grandit en accéléré et apprend à se méfier des histoires qu'on lui raconte.",
       "imdbId": "tt8110620",
       "seances": [
-        {
-          "date": "2026-03-07",
-          "heure": "18:10",
-          "version": "VF"
-        },
         {
           "date": "2026-03-08",
           "heure": "18:10",
@@ -169,7 +102,9 @@
           "version": "VF"
         }
       ],
-      "poster": "https://image.tmdb.org/t/p/w500/rMTYzcLFtzXXJMSVffpxBoreYNu.jpg"
+      "poster": "https://image.tmdb.org/t/p/w500/ha3YGtx48KO3jOLkkByE07m1RrQ.jpg",
+      "imdbRating": 6.5,
+      "cast": "Chris Aboubacar Hanta Traoré / SK 07, Thomas Ngijol, Marc Zinga"
     },
     {
       "titre": "Maigret et le mort amoureux",
@@ -177,30 +112,14 @@
       "annee": 2026,
       "realisateur": "Pascal Bonitzer",
       "duree": 80,
-      "genres": [],
-      "synopsis": null,
-      "imdbId": null,
+      "genres": [
+        "Crime",
+        "Drama",
+        "Mystery"
+      ],
+      "synopsis": "Le commissaire Maigret, appelé en urgence au Quai d’Orsay, s’y rend avec le commandant Janvier. Ils y trouvent Mademoiselle Larrieu en état de choc. Le matin même, elle a découvert le corps criblé de balles de Monsieur Berthier-Lagès, ancien ambassadeur renommé dont elle est la domestique depuis 46 ans. Dans l’appartement de la victime, Maigret et Janvier mettent la main sur des milliers de lettres. Le diplomate entretenait depuis cinquante ans une correspondance amoureuse avec la princesse de V…",
+      "imdbId": "tt33509147",
       "seances": [
-        {
-          "date": "2026-03-07",
-          "heure": "13:25",
-          "version": "VF"
-        },
-        {
-          "date": "2026-03-07",
-          "heure": "15:15",
-          "version": "VF"
-        },
-        {
-          "date": "2026-03-07",
-          "heure": "17:10",
-          "version": "VF"
-        },
-        {
-          "date": "2026-03-07",
-          "heure": "19:00",
-          "version": "VF"
-        },
         {
           "date": "2026-03-09",
           "heure": "13:25",
@@ -242,7 +161,9 @@
           "version": "VF"
         }
       ],
-      "poster": "https://image.tmdb.org/t/p/w500/t7KsplyJOPYvQitQmgVixVz8vpL.jpg"
+      "poster": "https://image.tmdb.org/t/p/w500/t7KsplyJOPYvQitQmgVixVz8vpL.jpg",
+      "imdbRating": 6.083,
+      "cast": "Denis Podalydès, Olivier Rabourdin, Micha Lescot"
     },
     {
       "titre": "Soulèvements",
@@ -251,14 +172,9 @@
       "realisateur": "Thomas Lacoste",
       "duree": 105,
       "genres": [],
-      "synopsis": null,
+      "synopsis": "Un portrait choral à 16 voix, 16 trajectoires singulières, réflexif et intime d’un mouvement de résistance intergénérationnel porté par une jeunesse qui vit et qui lutte contre l’accaparement des terres et de l’eau, les ravages industriels, la montée des totalitarismes et fait face à la répression politique. Une plongée au cœur des Soulèvements de la Terre.",
       "imdbId": null,
       "seances": [
-        {
-          "date": "2026-03-07",
-          "heure": "18:45",
-          "version": "VF"
-        },
         {
           "date": "2026-03-08",
           "heure": "18:45",
@@ -275,7 +191,8 @@
           "version": "VF"
         }
       ],
-      "poster": "https://image.tmdb.org/t/p/w500/hrsJkvHpp7cKFGF0zIN6HDmPXwR.jpg"
+      "poster": "https://image.tmdb.org/t/p/w500/hrsJkvHpp7cKFGF0zIN6HDmPXwR.jpg",
+      "imdbRating": 7.0
     },
     {
       "titre": "Pillion",
@@ -288,14 +205,9 @@
         "Drama",
         "Romance"
       ],
-      "synopsis": "A directionless man is swept off his feet when an enigmatic, impossibly handsome biker takes him on as his submissive.",
+      "synopsis": "Colin, un jeune homme sans histoire, rencontre Ray, le leader charismatique d'un club de motards. Il l'introduit dans sa communauté queer et fait de Colin son soumis.",
       "imdbId": "tt32321317",
       "seances": [
-        {
-          "date": "2026-03-07",
-          "heure": "21:05",
-          "version": "VOSTFR"
-        },
         {
           "date": "2026-03-08",
           "heure": "21:05",
@@ -312,26 +224,9 @@
           "version": "VOSTFR"
         }
       ],
-      "poster": "https://m.media-amazon.com/images/M/MV5BOWEyNTlhYjQtYzNkYi00NTI0LWIzNTYtNjI2Mjg1OGRlMjgxXkEyXkFqcGc@._V1_SX300.jpg",
-      "imdbRating": 6.8
-    },
-    {
-      "titre": "5 centimètres par seconde",
-      "titreOriginal": null,
-      "annee": 2025,
-      "realisateur": "Yoshiyuki Okuyama",
-      "duree": 121,
-      "genres": [],
-      "synopsis": null,
-      "imdbId": null,
-      "seances": [
-        {
-          "date": "2026-03-07",
-          "heure": "11:10",
-          "version": "VOSTFR"
-        }
-      ],
-      "poster": "https://image.tmdb.org/t/p/w500/wjLrVkmeZLk8iw1grULvoQgRG4u.jpg"
+      "poster": "https://image.tmdb.org/t/p/w500/y92sV0uJiBp7RR02R7yfi6jIyvP.jpg",
+      "imdbRating": 6.163,
+      "cast": "Harry Melling, Alexander Skarsgård, Lesley Sharp"
     },
     {
       "titre": "Is this thing on ?",
@@ -343,19 +238,9 @@
         "Comedy",
         "Drama"
       ],
-      "synopsis": "As their marriage unravels, Alex faces middle age and divorce, seeking new purpose in the New York comedy scene. Meanwhile, his wife Tess confronts sacrifices made for their family, forcing them to navigate co-parenting and identi...",
+      "synopsis": "Le mariage d’Alex et Tess ne tient plus qu’à un fil. Alex doit soudain affronter les doutes de la cinquantaine et la menace d’un divorce imminent. A la recherche d’un nouveau souffle, il se lance dans le milieu du stand-up new-yorkais, tandis que Tess remet en question les sacrifices qu’elle a faits pour leur famille... Ils vont devoir composer avec la coparentalité, questionner leurs propres envies et répondre à une interrogation essentielle : l’amour peut-il prendre une nouvelle forme ?",
       "imdbId": "tt28083456",
       "seances": [
-        {
-          "date": "2026-03-07",
-          "heure": "15:40",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-03-07",
-          "heure": "20:15",
-          "version": "VOSTFR"
-        },
         {
           "date": "2026-03-08",
           "heure": "15:40",
@@ -387,8 +272,9 @@
           "version": "VOSTFR"
         }
       ],
-      "poster": "https://m.media-amazon.com/images/M/MV5BZmY0N2YzMTItYmQyNi00MjdjLTk4NDYtOGU5NzhkM2RiMmEzXkEyXkFqcGc@._V1_SX300.jpg",
-      "imdbRating": 6.8
+      "poster": "https://image.tmdb.org/t/p/w500/7BTJB1HZXzOmBR20D3Vh0TFnu3R.jpg",
+      "imdbRating": 6.609,
+      "cast": "Will Arnett, Laura Dern, Andra Day"
     },
     {
       "titre": "Le son des souvenirs",
@@ -396,20 +282,14 @@
       "annee": 2025,
       "realisateur": "Oliver Hermanus",
       "duree": 129,
-      "genres": [],
-      "synopsis": null,
-      "imdbId": null,
+      "genres": [
+        "Drama",
+        "History",
+        "Music"
+      ],
+      "synopsis": "Pendant la Première Guerre mondiale, deux jeunes hommes, Lionel et David, entreprennent d'enregistrer les vies, les voix et la musique de leurs compatriotes américains...",
+      "imdbId": "tt15799524",
       "seances": [
-        {
-          "date": "2026-03-07",
-          "heure": "13:15",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-03-07",
-          "heure": "18:15",
-          "version": "VOSTFR"
-        },
         {
           "date": "2026-03-08",
           "heure": "13:15",
@@ -441,7 +321,9 @@
           "version": "VOSTFR"
         }
       ],
-      "poster": "https://image.tmdb.org/t/p/w500/55of0Vy7m32hSRZKsCyyDjZn4AC.jpg"
+      "poster": "https://image.tmdb.org/t/p/w500/fljAPAsvXioFeSU9wuYCk4z4cbE.jpg",
+      "imdbRating": 6.286,
+      "cast": "Paul Mescal, Josh O'Connor, Molly Price"
     },
     {
       "titre": "Orwell: 2+2=5",
@@ -454,24 +336,9 @@
         "Biography",
         "History"
       ],
-      "synopsis": "An investigation into the life, work, and enduring influence of the writer George Orwell, connecting his ideas to the contemporary world.",
+      "synopsis": "Une plongée dans les derniers mois de la vie d’Orwell et dans son œuvre visionnaire pour explorer les racines des concepts troublants qu’il a révélés au monde dans son chef-d’œuvre dystopique : le double discours, le crime par la pensée, la novlangue, le spectre omniprésent de Big Brother… des vérités sociopolitiques qui résonnent encore plus puissamment aujourd’hui.",
       "imdbId": "tt27052428",
       "seances": [
-        {
-          "date": "2026-03-07",
-          "heure": "13:35",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-03-07",
-          "heure": "16:20",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-03-07",
-          "heure": "21:00",
-          "version": "VOSTFR"
-        },
         {
           "date": "2026-03-08",
           "heure": "13:35",
@@ -518,8 +385,9 @@
           "version": "VOSTFR"
         }
       ],
-      "poster": "https://m.media-amazon.com/images/M/MV5BMTdkNTNhMGItYTQ3Mi00ZWIwLTlkNzYtYjgwYTM2ODM4ZThkXkEyXkFqcGc@._V1_SX300.jpg",
-      "imdbRating": 6.8
+      "poster": "https://image.tmdb.org/t/p/w500/tSDjEaCL8HOTtvkTgKcweeN61b3.jpg",
+      "imdbRating": 7.109,
+      "cast": "Damian Lewis, George Orwell, George W. Bush"
     },
     {
       "titre": "Rue Málaga",
@@ -527,20 +395,13 @@
       "annee": 2025,
       "realisateur": "Maryam Touzani",
       "duree": 116,
-      "genres": [],
-      "synopsis": null,
-      "imdbId": null,
+      "genres": [
+        "Drama",
+        "Romance"
+      ],
+      "synopsis": "Maria Angeles, une Espagnole de 79 ans, vit seule à Tanger, dans le nord du Maroc, où elle profite de sa ville et de son quotidien. Sa vie bascule lorsque sa fille Clara arrive de Madrid pour vendre l’appartement dans lequel elle a toujours vécu. Déterminée à rester dans cette ville qui l'a vue grandir, elle met tout en œuvre pour garder sa maison et récupérer les objets d'une vie. Contre toute attente, elle redécouvre en chemin l’amour et le désir.",
+      "imdbId": "tt32429174",
       "seances": [
-        {
-          "date": "2026-03-07",
-          "heure": "16:15",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-03-07",
-          "heure": "18:45",
-          "version": "VOSTFR"
-        },
         {
           "date": "2026-03-08",
           "heure": "16:15",
@@ -572,7 +433,9 @@
           "version": "VOSTFR"
         }
       ],
-      "poster": "https://image.tmdb.org/t/p/w500/fWagBXNDk44UaupYtwQOAvDwGiT.jpg"
+      "poster": "https://image.tmdb.org/t/p/w500/qvfwPBIL4tGoJM2tzOVvrzmRJFd.jpg",
+      "imdbRating": 6.773,
+      "cast": "Carmen Maura, Marta Etura, Ahmed Boulane"
     },
     {
       "titre": "Woman and child",
@@ -583,7 +446,7 @@
       "genres": [
         "Drama"
       ],
-      "synopsis": "Single mother Mahnaz balances nursing work with raising her children. As she plans her wedding to Hamid, her son's school expulsion becomes the least of her worries when an unexpected tragedy forces her to fight for what's right.",
+      "synopsis": "Mahnaz, une infirmière de 45 ans, élève seule ses enfants. Alors qu’elle s’apprête à épouser son petit ami Hamid, son fils Aliyar est renvoyé de l’école. Lorsqu’un un accident tragique vient tout bouleverser, Mahnaz se lance dans une quête de justice pour obtenir réparation...",
       "imdbId": "tt36631507",
       "seances": [
         {
@@ -592,8 +455,9 @@
           "version": "VOSTFR"
         }
       ],
-      "poster": "https://m.media-amazon.com/images/M/MV5BMjU1YjQ3Y2UtM2E5MC00ZGYxLTg1ZjItYzlhNjdmOGI4M2RkXkEyXkFqcGc@._V1_SX300.jpg",
-      "imdbRating": 5.9
+      "poster": "https://image.tmdb.org/t/p/w500/96k5GGr51yp2CLyMDepQe76Z6BU.jpg",
+      "imdbRating": 5.4,
+      "cast": "Parinaz Izadyar, Payman Maadi, Soha Niasti"
     },
     {
       "titre": "Aucun autre choix",
@@ -601,15 +465,14 @@
       "annee": 2026,
       "realisateur": "Park Chan-Wook",
       "duree": 139,
-      "genres": [],
-      "synopsis": null,
-      "imdbId": null,
+      "genres": [
+        "Comedy",
+        "Crime",
+        "Drama"
+      ],
+      "synopsis": "Cadre dans une usine de papier You Man-su est un homme heureux, il aime sa femme, ses enfants, ses chiens, sa maison.  Lorsqu’il est licencié, sa vie bascule, il ne supporte pas l’idée de perdre son statut social et la vie qui va avec.  Pour retrouver son bonheur perdu, il n’ a aucun  autre choix que d’éliminer tous ses concurrents…",
+      "imdbId": "tt1527793",
       "seances": [
-        {
-          "date": "2026-03-07",
-          "heure": "20:55",
-          "version": "VOSTFR"
-        },
         {
           "date": "2026-03-08",
           "heure": "20:55",
@@ -626,7 +489,9 @@
           "version": "VOSTFR"
         }
       ],
-      "poster": "https://image.tmdb.org/t/p/w500/sBpxTGLzKnvPSVtL5yQYpSxvKEb.jpg"
+      "poster": "https://image.tmdb.org/t/p/w500/qLaTBpiG8morQgU7kHLcrCKDZkA.jpg",
+      "imdbRating": 7.56,
+      "cast": "Lee Byung-hun, Son Ye-jin, Park Hee-soon"
     },
     {
       "titre": "Les Dimanches",
@@ -634,9 +499,11 @@
       "annee": 2026,
       "realisateur": "Alauda Ruíz de Azúa",
       "duree": 118,
-      "genres": [],
-      "synopsis": null,
-      "imdbId": null,
+      "genres": [
+        "Drama"
+      ],
+      "synopsis": "Ainara, 17 ans, élève dans un lycée catholique, s'apprête à passer son bac et à choisir son futur parcours universitaire. A la surprise générale, cette brillante jeune fille annonce à sa famille qu'elle souhaite participer à une période d’intégration dans un couvent afin d'embrasser la vie de religieuse. La nouvelle prend tout le monde au dépourvu. Si le père semble se laisser convaincre par les aspirations de sa fille, pour Maite, la tante d’Ainara, cette vocation inattendue est la manifestatio…",
+      "imdbId": "tt35513027",
       "seances": [
         {
           "date": "2026-03-08",
@@ -644,7 +511,9 @@
           "version": "VOSTFR"
         }
       ],
-      "poster": "https://image.tmdb.org/t/p/w500/3682SbY3rsNKsQzFpPUKrWdGmmx.jpg"
+      "poster": "https://image.tmdb.org/t/p/w500/YfD3npxe1VeMlcEUgwcRJ4JL0P.jpg",
+      "imdbRating": 7.152,
+      "cast": "Blanca Soroa, Patricia López Arnaiz, Miguel Garcés"
     },
     {
       "titre": "Fantastique",
@@ -652,15 +521,14 @@
       "annee": 2026,
       "realisateur": "Marjolijn Prins",
       "duree": 71,
-      "genres": [],
-      "synopsis": null,
-      "imdbId": null,
+      "genres": [
+        "Action",
+        "Adventure",
+        "Sci-Fi"
+      ],
+      "synopsis": "Dans le contexte vibrant d’un monde rétro-futuriste inspiré des années 60, le film présente la première famille de Marvel : Reed Richards/Mister Fantastic, Sue Storm/La Femme Invisible, Johnny Storm/La Torche Humaine et Ben Grimm/La Chose  alors qu’ils font face à leur défi le plus redoutable à ce jour. Contraints d’équilibrer leur rôle de héros avec la force de leur lien familial, ils doivent défendre la Terre contre un dieu spatial vorace appelé Galactus et son énigmatique héraut, le Surfeur d…",
+      "imdbId": "tt10676052",
       "seances": [
-        {
-          "date": "2026-03-07",
-          "heure": "14:00",
-          "version": "VF"
-        },
         {
           "date": "2026-03-08",
           "heure": "14:00",
@@ -677,7 +545,9 @@
           "version": "VF"
         }
       ],
-      "poster": "https://image.tmdb.org/t/p/w500/9is4Cw24R9Hz77szyKQM1uJ7fwx.jpg"
+      "poster": "https://image.tmdb.org/t/p/w500/rNc4KARs6fVa4axzvuv3NfUiNy1.jpg",
+      "imdbRating": 6.971,
+      "cast": "Pedro Pascal, Vanessa Kirby, Ebon Moss-Bachrach"
     },
     {
       "titre": "Jean-Michel le caribou et les histoires d'amour interdites",
@@ -686,20 +556,18 @@
       "realisateur": "Matthieu Auvray",
       "duree": null,
       "genres": [],
-      "synopsis": null,
+      "synopsis": "Rendez-nous l'amour ! C'est d'après les albums de Magali Le Huche que Mathieu Auvray réalise \"Jean-Michel le caribou et les histoires d'amour interdites\", un film d'animation pour enfants dès 4 ans.  Marcel, le maire, décide d’interdire les histoires d’amour : ça n’engendre que des problèmes et ça rend tout le monde malheureux !  Interdire les histoires d’amour ? Jean-Michel n’est pas trop pour et sa petite amie Gisèle encore moins...  Hélas, la répression commence. Nos héros décident d’entrer e…",
       "imdbId": null,
       "seances": [
-        {
-          "date": "2026-03-07",
-          "heure": "10:55",
-          "version": "VF"
-        },
         {
           "date": "2026-03-08",
           "heure": "10:55",
           "version": "VF"
         }
-      ]
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/peOnKkiCYuf76hWqlK8IDc3dfKZ.jpg",
+      "imdbRating": 0.0,
+      "cast": "Emmanuel Garijo, Gabriel Bismuth-Bienaimé, Bruno Magne"
     },
     {
       "titre": "L'Ourse et l'oiseau",
@@ -708,21 +576,17 @@
       "realisateur": "Marie Caudry, Aurore Peuffier, Nina Bisyarina",
       "duree": null,
       "genres": [],
-      "synopsis": null,
+      "synopsis": "Au cours de l’été, une ourse et un oiseau sont devenu·es inséparables. Quand l’automne arrive, il faut se rendre à l’évidence : bientôt l’ourse devra hiberner et l’oiseau devra migrer – l’une rêvera tandis que l’autre voyagera. L’heure des adieux approche… Mais on souffle alors à l’ourse une idée extraordinaire qui va changer son hiver.",
       "imdbId": null,
       "seances": [
-        {
-          "date": "2026-03-07",
-          "heure": "10:45",
-          "version": "VF"
-        },
         {
           "date": "2026-03-08",
           "heure": "10:45",
           "version": "VF"
         }
       ],
-      "poster": "https://image.tmdb.org/t/p/w500/zekwclen9HXLRjUEh9qSYxLgBOT.jpg"
+      "poster": "https://image.tmdb.org/t/p/w500/zekwclen9HXLRjUEh9qSYxLgBOT.jpg",
+      "imdbRating": 0.0
     }
   ]
 }
