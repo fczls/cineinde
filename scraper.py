@@ -2,9 +2,8 @@
 from __future__ import annotations
 
 """
-scraper.py — Le Comedia, Lyon
-Scrape le programme depuis https://www.cinema-comedia.fr/programme-accessible/
-Produit un fichier programme.json consommé par le site frontend.
+scraper.py — Multi-Cinémas Lyon (Comoedia + Lumière Terreaux/Bellecour/Fourmi)
+Scrape les programmes et produit programme.json consommé par le site frontend.
 
 Usage : python scraper.py [--debug] [--output /chemin/vers/programme.json]
 Cron  : 0 1 * * 3  /usr/bin/python3 /srv/comedia/scraper.py >> /var/log/comedia-scraper.log 2>&1
@@ -26,6 +25,7 @@ from html.parser import HTMLParser
 # ─────────────────────────────────────────────
 # cinema-comoedia.com (orthographe officielle) — fallback cinema-comedia.fr
 URL_PROGRAMME    = "https://www.cinema-comoedia.com/programme-accessible/"
+URL_LUMIERE_BASE = "https://www.cinemas-lumiere.com/calendrier-general.html"
 URL_OMDB_BASE    = "https://www.omdbapi.com/"
 URL_TMDB_BASE    = "https://api.themoviedb.org/3/"
 import os
@@ -53,6 +53,15 @@ MOIS_FR = {
     "mai": 5, "juin": 6, "juillet": 7, "août": 8,
     "septembre": 9, "octobre": 10, "novembre": 11, "décembre": 12,
 }
+
+
+def get_last_wednesday() -> date:
+    """Retourne le dernier mercredi écoulé (ou aujourd'hui si c'est un mercredi)."""
+    today = date.today()
+    # isoweekday: lundi=1, mardi=2, mercredi=3, ..., dimanche=7
+    days_since_wed = (today.isoweekday() - 3) % 7
+    return today - timedelta(days=days_since_wed)
+
 
 logging.basicConfig(
     level=logging.INFO,
@@ -238,10 +247,12 @@ def parse_heure(s: str) -> str | None:
 
 
 def detect_version(s: str) -> str:
-    """Détecte VF / VOSTFR / VO dans une chaîne."""
+    """Détecte VF / VOSTFR / VO / VFST dans une chaîne."""
     s = s.upper()
     if "VOSTFR" in s or "VOST" in s:
         return "VOSTFR"
+    if "VFST" in s:
+        return "VFST"
     if "VO" in s:
         return "VO"
     if "VF" in s:
@@ -468,6 +479,330 @@ def _extract_film_comoedia(titre: str, content: str, week_dates: dict | None) ->
     return film
 
 
+# ─────────────────────────────────────────────
+# SCRAPER COMOEDIA — wrappeur avec source/cinema
+# ─────────────────────────────────────────────
+
+def scrape_comoedia(html: str | None = None, file_path: str | None = None) -> list[dict]:
+    """Scrape le programme du Comoedia. Retourne les films enrichis de source/cinema."""
+    if file_path:
+        log.info(f"Lecture fichier Comoedia → {file_path}")
+        html_src = Path(file_path).read_text(encoding="utf-8", errors="replace")
+    elif html is not None:
+        html_src = html
+    else:
+        log.info(f"Fetch Comoedia → {URL_PROGRAMME}")
+        try:
+            html_src = fetch(URL_PROGRAMME)
+        except RuntimeError as e:
+            log.error(f"Impossible de télécharger Comoedia : {e}")
+            return []
+
+    log.info(f"Comoedia HTML reçu : {len(html_src):,} caractères")
+    log.info("Parsing HTML Comoedia…")
+    films = parse_programme(html_src)
+    return [{**f, "source": "comoedia", "cinema": "Le Comoedia"} for f in films]
+
+
+# ─────────────────────────────────────────────
+# SCRAPER CINÉMAS LUMIÈRE — calendrier général
+#
+# Structure réelle de la page (inspectée mars 2026) :
+#   <table class="schedule">
+#     <tr class="days">               ← entête : <td> vide + <th class="day-title">×7
+#       <th><time datetime="YYYY-MM-DD HH:MM:SS">…</time></th>
+#     <tr class="cinema striped-background">  ← séparateur de cinéma
+#       <th class="sticky"><div>Lumière <svg><use xlink:href="…#logo-terreaux"/></svg></div></th>
+#       <td>×7  (vides)
+#     <tr class="movie">              ← film
+#       <th class="movie-title sticky"><a href="/film/slug.html">Titre</a></th>
+#       <td class="schedule">×7
+#         <time datetime="YYYY-MM-DD HH:MM:SS" class="session …">
+#           HHhMM
+#           <div class="dropdown-content"><div class="version">VF</div></div>
+#         </time>
+# ─────────────────────────────────────────────
+
+def _direct_children(node: dict, tag: str) -> list[dict]:
+    """Enfants directs d'un nœud filtrés par tag (non-récursif)."""
+    return [c for c in node["children"] if c["tag"] == tag.lower()]
+
+
+def _attrs_contain(node: dict, substring: str) -> bool:
+    """Vérifie si une valeur d'attribut dans le nœud ou ses descendants contient substring."""
+    for v in node["attrs"].values():
+        if substring in v:
+            return True
+    for child in node["children"]:
+        if _attrs_contain(child, substring):
+            return True
+    return False
+
+
+def _lumiere_cinema_from_row(row: dict) -> str | None:
+    """Extrait le nom du cinéma depuis une ligne <tr class='cinema'>."""
+    # Les logos SVG ont des href de type "…#logo-terreaux" dans les attrs
+    for name, key in (
+        ("Lumière Terreaux",  "terreaux"),
+        ("Lumière Bellecour", "bellecour"),
+        ("Lumière Fourmi",    "fourmi"),
+    ):
+        if _attrs_contain(row, key):
+            return name
+    # Fallback texte brut
+    txt = text_of(row).lower()
+    for name, key in (
+        ("Lumière Terreaux",  "terreaux"),
+        ("Lumière Bellecour", "bellecour"),
+        ("Lumière Fourmi",    "fourmi"),
+    ):
+        if key in txt:
+            return name
+    return None
+
+
+def _lumiere_parse_days_row(row: dict) -> list[date | None]:
+    """
+    Extrait les dates depuis la ligne <tr class='days'>.
+    Retourne [None, date_col1, ..., date_col7] (None = colonne titre).
+    Les dates sont lues depuis l'attribut datetime des <time> dans les <th>.
+    """
+    col_dates: list[date | None] = [None]  # index 0 = colonne titre
+    for child in row["children"]:
+        if child["tag"] == "th":
+            time_nodes = find_nodes(child, tag="time")
+            if time_nodes:
+                dt_str = time_nodes[0]["attrs"].get("datetime", "")
+                try:
+                    col_dates.append(date.fromisoformat(dt_str[:10]))
+                    continue
+                except ValueError:
+                    pass
+            col_dates.append(None)
+    return col_dates
+
+
+def _lumiere_parse_schedule_td(td: dict) -> list[dict]:
+    """
+    Extrait les séances depuis un <td class='schedule'>.
+    Chaque <time datetime="YYYY-MM-DD HH:MM:SS" class="session"> → une séance.
+    La version est dans le <div class="version"> imbriqué.
+    """
+    seances: list[dict] = []
+
+    resa_url: str | None = None
+    for link in find_nodes(td, tag="a"):
+        href = link["attrs"].get("href", "")
+        if href and ("cotecine" in href.lower() or "billet" in href.lower() or "reservation" in href.lower()):
+            resa_url = href
+            break
+
+    for time_node in find_nodes(td, tag="time"):
+        if "session" not in time_node["attrs"].get("class", ""):
+            continue
+        dt_str = time_node["attrs"].get("datetime", "")
+        if not dt_str or len(dt_str) < 16:
+            continue
+        try:
+            dt_date = date.fromisoformat(dt_str[:10])
+        except ValueError:
+            continue
+        heure = dt_str[11:16]  # "HH:MM" from "YYYY-MM-DD HH:MM:SS"
+
+        version_nodes = find_nodes(time_node, tag="div", cls="version")
+        version = detect_version(text_of(version_nodes[0]).strip()) if version_nodes else "VF"
+
+        seance: dict = {"date": dt_date.isoformat(), "heure": heure, "version": version}
+        if resa_url:
+            seance["resa_url"] = resa_url
+        seances.append(seance)
+
+    return seances
+
+
+def _lumiere_extract_movie_row(row: dict, cinema: str) -> dict | None:
+    """Extrait un film depuis une <tr class='movie'>."""
+    # Titre depuis le <th> direct (non-récursif pour garder la bonne structure)
+    th_children = _direct_children(row, "th")
+    if not th_children:
+        return None
+
+    titre: str | None = None
+    slug: str | None = None
+    title_links = find_nodes(th_children[0], tag="a")
+    if title_links:
+        titre = text_of(title_links[0]).strip()
+        href = title_links[0]["attrs"].get("href", "")
+        m = re.search(r"/film/([^/?#]+?)(?:\.html)?(?:[?#]|$)", href)
+        if m:
+            slug = m.group(1)
+    if not titre:
+        titre = text_of(th_children[0]).strip()
+    if not titre or len(titre.replace(" ", "")) < 2:
+        return None
+
+    # Séances depuis les <td> directs
+    seances: list[dict] = []
+    for td in _direct_children(row, "td"):
+        td_cls = td["attrs"].get("class", "")
+        if "schedule" in td_cls:
+            seances.extend(_lumiere_parse_schedule_td(td))
+
+    if not seances:
+        return None
+
+    return {
+        "titre": titre,
+        "slug": slug,
+        "titreOriginal": None,
+        "annee": None,
+        "realisateur": None,
+        "duree": None,
+        "genres": [],
+        "synopsis": None,
+        "imdbId": None,
+        "source": "lumiere",
+        "cinema": cinema,
+        "seances": sorted(seances, key=lambda x: (x["date"], x["heure"])),
+    }
+
+
+def _lumiere_fetch_film_detail(slug: str) -> dict:
+    """
+    Fetche la page de détail d'un film Lumière (/film/<slug>.html).
+    Extrait : poster, realisateur, annee, duree, cast, synopsis.
+    Retourne un dict partiel (seulement les champs trouvés).
+    """
+    url = f"https://www.cinemas-lumiere.com/film/{slug}.html"
+    try:
+        html = fetch(url, timeout=10)
+    except RuntimeError as e:
+        log.warning(f"  Lumière détail impossible pour {slug}: {e}")
+        return {}
+
+    root = parse_html(html)
+    result: dict = {}
+
+    # Poster : <figure class="poster"><img data-src="https://...">
+    poster_figs = find_nodes(root, tag="figure", cls="poster")
+    if poster_figs:
+        img_nodes = find_nodes(poster_figs[0], tag="img")
+        if img_nodes:
+            ds = img_nodes[0]["attrs"].get("data-src", "")
+            if ds and ds.startswith("http"):
+                result["poster"] = ds
+
+    # Réalisateur : <p class="filmmakers">de Prénom Nom</p>
+    filmmakers = find_nodes(root, tag="p", cls="filmmakers")
+    if filmmakers:
+        txt = re.sub(r"^de\s+", "", text_of(filmmakers[0]).strip(), flags=re.I)
+        if txt:
+            result["realisateur"] = txt
+
+    # Informations : <p class="informations">Pays | [version] | [année] | durée</p>
+    # Exemples : "France | 1h39"  /  "États-Unis | VOSTF | 2026 | 2h29"
+    infos = find_nodes(root, tag="p", cls="informations")
+    if infos:
+        info_txt = text_of(infos[0]).strip()
+        m_year = re.search(r"\b(19\d{2}|20\d{2})\b", info_txt)
+        if m_year:
+            result["annee"] = int(m_year.group(1))
+        m_dur = re.search(r"(\d{1,2})h(\d{2})", info_txt)
+        if m_dur:
+            result["duree"] = int(m_dur.group(1)) * 60 + int(m_dur.group(2))
+
+    # Acteurs : <p class="actors">Avec A, B, C</p>
+    actors_nodes = find_nodes(root, tag="p", cls="actors")
+    if actors_nodes:
+        txt = re.sub(r"^Avec\s+", "", text_of(actors_nodes[0]).strip(), flags=re.I)
+        if txt:
+            result["cast"] = txt
+
+    # Synopsis : <div class="section synopsis"><p>...</p></div>
+    synopsis_sections = find_nodes(root, tag="div", cls="synopsis")
+    if synopsis_sections:
+        p_nodes = find_nodes(synopsis_sections[0], tag="p")
+        synop = text_of(p_nodes[0] if p_nodes else synopsis_sections[0]).strip()
+        if synop:
+            result["synopsis"] = synop[:500] + ("…" if len(synop) > 500 else "")
+
+    return result
+
+
+def scrape_lumiere(week_date: date | None = None) -> list[dict]:
+    """Scrape le calendrier général des Cinémas Lumière pour la semaine donnée."""
+    if week_date is None:
+        week_date = get_last_wednesday()
+
+    url = f"{URL_LUMIERE_BASE}?week={week_date.isoformat()}"
+    log.info(f"Fetch Lumière → {url}")
+
+    try:
+        html = fetch(url)
+    except RuntimeError as e:
+        log.error(f"Impossible de télécharger Lumière : {e}")
+        return []
+
+    log.info(f"Lumière HTML reçu : {len(html):,} caractères")
+    root = parse_html(html)
+
+    tables = find_nodes(root, tag="table")
+    if not tables:
+        log.warning("Lumière: aucun tableau trouvé dans la page")
+        return []
+
+    # Le tableau principal est le plus grand
+    table = max(tables, key=lambda t: len(find_nodes(t, tag="tr")))
+    rows = find_nodes(table, tag="tr")
+    if not rows:
+        log.warning("Lumière: tableau vide")
+        return []
+
+    films: list[dict] = []
+    current_cinema = "Lumière Terreaux"
+    col_dates: list[date | None] = []
+
+    for row in rows:
+        row_class = row["attrs"].get("class", "")
+
+        if "days" in row_class:
+            col_dates = _lumiere_parse_days_row(row)
+            log.debug(f"Lumière col_dates: {col_dates}")
+
+        elif "cinema" in row_class:
+            cinema = _lumiere_cinema_from_row(row)
+            if cinema:
+                current_cinema = cinema
+                log.debug(f"Section cinéma : {current_cinema}")
+
+        elif "movie" in row_class:
+            film = _lumiere_extract_movie_row(row, current_cinema)
+            if film:
+                films.append(film)
+
+    log.info(f"Lumière: {len(films)} films extraits ({week_date})")
+
+    # Enrichir avec les pages de détail (poster, réalisateur, durée, cast, synopsis)
+    # Une seule requête par slug unique, appliquée à tous les films du même slug
+    slug_map: dict[str, list[dict]] = {}
+    for film in films:
+        slug = film.get("slug")
+        if slug:
+            slug_map.setdefault(slug, []).append(film)
+
+    log.info(f"Lumière: enrichissement détails pour {len(slug_map)} films uniques…")
+    enrich_fields = ["poster", "realisateur", "annee", "duree", "cast", "synopsis"]
+    for slug, slug_films in slug_map.items():
+        detail = _lumiere_fetch_film_detail(slug)
+        if detail:
+            for film in slug_films:
+                for field in enrich_fields:
+                    if detail.get(field) and not film.get(field):
+                        film[field] = detail[field]
+
+    return films
+
+
 def _extract_film(node: dict) -> dict:
     """Extrait les infos d'un nœud film."""
     film: dict = {
@@ -652,6 +987,12 @@ def _extract_seance(node: dict, version_defaut: str) -> dict | None:
 # ─────────────────────────────────────────────
 # ENRICHISSEMENT TMDB (source principale) + OMDb (fallback)
 # ─────────────────────────────────────────────
+
+
+def _normalize_title_key(titre: str) -> str:
+    """Clé normalisée pour regrouper les variantes (ex. Le son / Le Son des souvenirs)."""
+    return re.sub(r"\s+", " ", (titre or "").strip().lower())
+
 
 def enrich_omdb(films: list[dict]) -> list[dict]:
     """
@@ -854,62 +1195,100 @@ def filter_current_week(films: list[dict]) -> list[dict]:
 # ─────────────────────────────────────────────
 
 def main():
-    parser = argparse.ArgumentParser(description="Scraper programme Le Comedia")
-    parser.add_argument("--debug",  action="store_true", help="Mode debug verbose")
-    parser.add_argument("--dry-run", action="store_true", help="Ne pas écrire le fichier JSON")
-    parser.add_argument("--output", default=str(OUTPUT_DEFAULT), help="Chemin du fichier JSON de sortie")
-    parser.add_argument("--no-omdb", action="store_true", help="Désactiver l'enrichissement OMDb")
-    parser.add_argument("--file", default=None, help="Fichier HTML local (pour test, évite le fetch)")
+    parser = argparse.ArgumentParser(description="Scraper programme multi-cinémas Lyon")
+    parser.add_argument("--debug",     action="store_true", help="Mode debug verbose")
+    parser.add_argument("--dry-run",   action="store_true", help="Ne pas écrire le fichier JSON")
+    parser.add_argument("--output",    default=str(OUTPUT_DEFAULT), help="Chemin du fichier JSON de sortie")
+    parser.add_argument("--no-omdb",   action="store_true", help="Désactiver l'enrichissement OMDb")
+    parser.add_argument("--file",      default=None, help="Fichier HTML local Comoedia (pour test)")
     parser.add_argument("--no-filter", action="store_true", help="Ne pas filtrer par semaine (pour test)")
+    parser.add_argument("--no-lumiere", action="store_true", help="Désactiver le scraping des Cinémas Lumière")
     args = parser.parse_args()
 
     if args.debug:
         logging.getLogger().setLevel(logging.DEBUG)
 
     log.info("═" * 55)
-    log.info(f"Comedia Scraper — {datetime.now().strftime('%A %d %B %Y %H:%M')}")
+    log.info(f"Multi-Cinémas Lyon Scraper — {datetime.now().strftime('%A %d %B %Y %H:%M')}")
     log.info("═" * 55)
 
-    # 1. Téléchargement ou lecture fichier
-    if args.file:
-        log.info(f"Lecture fichier → {args.file}")
-        html = Path(args.file).read_text(encoding="utf-8", errors="replace")
-    else:
-        log.info(f"Fetch → {URL_PROGRAMME}")
-        try:
-            html = fetch(URL_PROGRAMME)
-        except RuntimeError as e:
-            log.error(f"Impossible de télécharger la page : {e}")
-            sys.exit(1)
-    log.info(f"HTML reçu : {len(html):,} caractères")
-
-    # 2. Parsing
-    log.info("Parsing HTML…")
-    films = parse_programme(html)
-
-    if not films:
-        log.error(
-            "Aucun film extrait. "
-            "La structure HTML a probablement changé. "
-            "Lancez avec --debug pour inspecter."
+    # 1. Scraping Comoedia
+    comoedia_films = scrape_comoedia(file_path=args.file)
+    if not comoedia_films:
+        log.warning(
+            "Aucun film Comoedia extrait — "
+            "la structure HTML a peut-être changé. Lancez avec --debug."
         )
+
+    # 2. Scraping Cinémas Lumière
+    lumiere_films: list[dict] = []
+    if not args.no_lumiere:
+        lumiere_films = scrape_lumiere()
+
+    # 3. Fusion des deux sources
+    all_films = comoedia_films + lumiere_films
+    if not all_films:
+        log.error("Aucun film extrait (ni Comoedia ni Lumière).")
         sys.exit(2)
+    log.info(
+        f"{len(all_films)} films au total "
+        f"(Comoedia:{len(comoedia_films)}, Lumière:{len(lumiere_films)})"
+    )
 
-    # 3. Enrichissement TMDB + OMDb
+    # 4. Enrichissement TMDB/OMDb avec cache inter-cinémas (un seul appel par titre)
     if not args.no_omdb:
-        log.info(f"Enrichissement TMDB/OMDb pour {len(films)} films…")
-        films = enrich_omdb(films)
+        # Dédupliquer : n'enrichir chaque titre qu'une seule fois (clé normalisée)
+        seen_keys: dict[str, dict] = {}
+        for film in all_films:
+            raw = (film.get("titreOriginal") or film.get("titre", "")).strip()
+            key = _normalize_title_key(raw) if raw else ""
+            if key and key not in seen_keys:
+                seen_keys[key] = film
 
-    # 4. Filtrage semaine
+        unique_films = list(seen_keys.values())
+        log.info(
+            f"Enrichissement TMDB/OMDb pour {len(unique_films)} titres uniques "
+            f"({len(all_films)} films au total)…"
+        )
+        enrich_omdb(unique_films)
+
+        # Propagation bidirectionnelle : regrouper tous les films par titre,
+        # collecter le meilleur champ disponible de n'importe quelle source,
+        # puis l'appliquer à toutes les copies (ex: affiche Lumière → copie Comoedia).
+        enrich_fields = [
+            "imdbId", "poster", "imdbRating", "cast", "synopsis",
+            "genres", "realisateur", "annee", "duree", "titreOriginal",
+        ]
+        title_groups: dict[str, list[dict]] = {}
+        for film in all_films:
+            raw = (film.get("titreOriginal") or film.get("titre", "")).strip()
+            key = _normalize_title_key(raw) if raw else ""
+            if key:
+                title_groups.setdefault(key, []).append(film)
+
+        for group in title_groups.values():
+            # Collecter la meilleure valeur pour chaque champ dans tout le groupe
+            best: dict = {}
+            for film in group:
+                for field in enrich_fields:
+                    if film.get(field) and not best.get(field):
+                        best[field] = film[field]
+            # L'appliquer à tous les membres du groupe
+            for film in group:
+                for field in enrich_fields:
+                    if best.get(field) and not film.get(field):
+                        film[field] = best[field]
+
+    # 5. Filtrage semaine
     if not args.no_filter:
-        films = filter_current_week(films)
-    log.info(f"{len(films)} films retenus pour la semaine")
+        all_films = filter_current_week(all_films)
+    log.info(f"{len(all_films)} films retenus pour la semaine")
 
-    # 5. Écriture JSON
+    # 6. Écriture JSON
     output = {
         "generated_at": datetime.now().isoformat(),
-        "source": URL_PROGRAMME,
-        "films": films,
+        "sources": [URL_PROGRAMME, URL_LUMIERE_BASE],
+        "films": all_films,
     }
 
     if args.dry_run:

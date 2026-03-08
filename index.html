@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Le Comedia — Lyon</title>
+<title>Cinémas Lyon</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400&display=swap" rel="stylesheet">
 <style>
@@ -34,7 +34,7 @@ header{
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
 
 /* ── LAYOUT ── */
-.app{display:grid;grid-template-columns:1fr 360px;max-width:1180px;margin:0 auto;min-height:calc(100vh - 58px);}
+.app{display:grid;grid-template-columns:1fr 440px;max-width:1260px;margin:0 auto;min-height:calc(100vh - 58px);}
 .main{border-right:1px solid var(--border);}
 .side{background:var(--bg);}
 
@@ -63,11 +63,40 @@ header{
 .d-pill.has-s .p-dot{opacity:1;}
 .d-pill.active .p-dot{background:rgba(0,0,0,.35);}
 
+/* ── CINEMA BAR ── */
+.cinema-bar{
+  padding:10px 28px;background:var(--bg2);border-bottom:1px solid var(--border);
+  position:sticky;top:123px;z-index:99;
+}
+.cinema-pills{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none;white-space:nowrap;}
+.cinema-pills::-webkit-scrollbar{display:none;}
+.c-pill{
+  flex-shrink:0;padding:5px 14px;border-radius:100px;
+  border:1px solid var(--border);background:transparent;
+  cursor:pointer;font-family:'DM Sans',sans-serif;font-size:11px;
+  letter-spacing:.07em;text-transform:uppercase;color:var(--text-dim);
+  transition:all .18s;
+}
+.c-pill:hover{border-color:var(--border2);color:var(--text);}
+.c-pill.active{background:var(--gold);border-color:var(--gold);color:#111;font-weight:500;}
+
 /* ── CTX BAR ── */
 .ctx{padding:9px 28px;display:flex;align-items:center;justify-content:space-between;font-size:11px;color:var(--text-dim);border-bottom:1px solid var(--border);}
 .ctx-date{color:var(--text-mid);font-size:12px;}
 .ctx a{color:var(--gold-dim);text-decoration:none;}
 .ctx a:hover{color:var(--gold);}
+
+/* ── CINEMA CHIP (slot row label in "Tous" mode) ── */
+.card-cinema-chip{
+  flex-shrink:0;min-width:82px;height:56px;
+  display:flex;align-items:center;justify-content:center;
+  border-radius:12px;border:1px solid #3a3a3a;
+  background:rgba(255,255,255,.04);color:var(--text-mid);
+  font-size:11px;font-weight:500;letter-spacing:.07em;text-transform:uppercase;
+  padding:0 12px;
+}
+/* tiny version label inside time button */
+.slot-ver{font-size:10px;opacity:.45;margin-left:5px;letter-spacing:.05em;font-family:'DM Sans',sans-serif;}
 
 /* ── FILM CARDS (design maquette) ── */
 .film-list{padding:16px 20px 40px;display:flex;flex-direction:column;gap:16px;}
@@ -91,9 +120,9 @@ header{
 }
 
 /* card body */
-.card-body{flex:1;min-width:0;}
+.card-body{flex:1;min-width:0;padding-top:0px;padding-bottom:0px;}
 .card-header{margin-bottom:8px;}
-.card-title{font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,48px);font-weight:300;color:#fff;line-height:1.15;}
+.card-title{font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,40px);font-weight:300;color:#fff;line-height:1.15;}
 .card-meta{font-size:16px;color:#dcdcdc;margin-top:8px;line-height:1.5;}
 .card-actors{font-size:13px;color:var(--text-dim);margin-top:4px;line-height:1.4;}
 
@@ -154,32 +183,34 @@ header{
 .detail-empty svg{opacity:.1;margin-bottom:4px;}
 .detail-empty strong{font-family:'Playfair Display',serif;font-size:17px;color:var(--text-mid);font-weight:400;font-style:italic;}
 
-.d-hero{position:relative;}
-.d-back{width:100%;height:200px;object-fit:cover;display:block;filter:brightness(.45) saturate(.7);}
-.d-back-ph{height:160px;background:linear-gradient(135deg,var(--bg3),var(--bg));}
-.d-poster-wrap{position:absolute;bottom:-46px;left:22px;filter:drop-shadow(0 10px 24px rgba(0,0,0,.9));}
-.d-poster{width:76px;height:114px;object-fit:cover;border-radius:5px;border:2px solid var(--bg2);display:block;background:var(--bg3);}
-.d-score{position:absolute;top:14px;right:14px;background:rgba(0,0,0,.7);border:1px solid rgba(255,255,255,.1);border-radius:6px;padding:7px 11px;text-align:center;backdrop-filter:blur(8px);}
-.d-score-num{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--gold);line-height:1;display:block;}
-.d-score-lbl{font-size:9px;color:var(--text-dim);letter-spacing:.08em;text-transform:uppercase;}
+.d-hero{position:sticky;top:0;height:calc(100vh - 58px);overflow:hidden;z-index:0;flex-shrink:0;}
+.d-hero::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(17,16,16,.15) 0%,rgba(17,16,16,.65) 55%,var(--bg) 100%);z-index:1;pointer-events:none;}
+.d-back{width:100%;height:100%;object-fit:cover;display:block;filter:brightness(.3) saturate(.5) blur(20px);transform:scale(1.1);}
+.d-back-ph{height:100%;background:linear-gradient(135deg,var(--bg3),var(--bg));}
+.d-score{position:absolute;top:14px;right:14px;z-index:2;background:rgba(0,0,0,.7);border:1px solid rgba(255,255,255,.1);border-radius:6px;padding:9px 14px;text-align:center;backdrop-filter:blur(8px);}
+.d-score-num{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:var(--gold);line-height:1;display:block;}
+.d-score-lbl{font-size:10px;color:var(--text-dim);letter-spacing:.08em;text-transform:uppercase;}
 
-.d-body{padding:58px 22px 32px;}
-.d-title{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;line-height:1.15;margin-bottom:3px;}
-.d-orig{font-family:'Playfair Display',serif;font-style:italic;font-size:13px;color:var(--text-dim);margin-bottom:14px;}
-.d-crew{display:flex;flex-wrap:wrap;gap:16px;margin-bottom:16px;}
-.d-ci .lbl{font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);display:block;margin-bottom:2px;}
-.d-ci .val{font-size:13px;color:var(--text);}
-.d-genres{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:16px;}
-.d-genre{font-size:10px;padding:2px 9px;border-radius:100px;border:1px solid var(--border);color:var(--text-dim);letter-spacing:.05em;}
-.d-synopsis{font-size:13px;line-height:1.8;color:var(--text-mid);margin-bottom:24px;}
-.d-week-lbl{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);margin-bottom:12px;}
-.d-day{margin-bottom:16px;}
-.d-day-lbl{font-size:11px;color:var(--text-dim);margin-bottom:7px;}
-.d-chips{display:flex;flex-wrap:wrap;gap:5px;}
-.d-chip{font-family:'DM Mono',monospace;font-size:12px;padding:5px 11px;border-radius:6px;background:var(--bg3);border:1px solid var(--border);color:var(--text);display:flex;align-items:center;gap:6px;}
+.d-body{position:relative;z-index:1;margin-top:calc(160px - (100vh - 58px));padding:28px 28px 40px;}
+.d-title{font-family:'Playfair Display',serif;font-size:28px;font-weight:700;line-height:1.15;margin-bottom:4px;}
+.d-orig{font-family:'Playfair Display',serif;font-style:italic;font-size:15px;color:var(--text-dim);margin-bottom:18px;}
+.d-crew{display:flex;flex-wrap:wrap;gap:20px;margin-bottom:20px;}
+.d-ci .lbl{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);display:block;margin-bottom:3px;}
+.d-ci .val{font-size:16px;color:var(--text);}
+.d-genres{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:20px;}
+.d-genre{font-size:12px;padding:4px 12px;border-radius:100px;border:1px solid var(--border);color:var(--text-dim);letter-spacing:.05em;}
+.d-synopsis{font-size:15px;line-height:1.8;color:var(--text-mid);margin-bottom:28px;}
+.d-week-lbl{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);margin-bottom:14px;}
+.d-day{margin-bottom:20px;}
+.d-day-lbl{font-size:13px;color:var(--text-dim);margin-bottom:8px;}
+.d-chips{display:flex;flex-wrap:wrap;gap:6px;align-items:center;}
+.d-chip{font-family:'DM Mono',monospace;font-size:14px;padding:7px 14px;border-radius:8px;background:var(--bg3);border:1px solid var(--border);color:var(--text);display:flex;align-items:center;gap:7px;}
 .d-chip.past{color:var(--text-dim);opacity:.45;}
 .d-chip.soon{border-color:var(--accent);color:var(--accent);}
-.d-chip .cv{font-size:9px;opacity:.5;letter-spacing:.06em;}
+.d-chip .cv{font-size:11px;opacity:.5;letter-spacing:.06em;}
+.d-day-row{display:flex;align-items:center;gap:10px;margin-bottom:6px;flex-wrap:wrap;}
+.d-day-row:last-child{margin-bottom:0;}
+.d-cine-tag{flex-shrink:0;min-width:72px;font-size:11px;font-weight:500;letter-spacing:.07em;text-transform:uppercase;color:var(--text-dim);}
 
 /* ── EVENTS ── */
 .events-list{padding:16px 20px 40px;display:flex;flex-direction:column;gap:10px;}
@@ -208,6 +239,7 @@ header{
   .m-back{display:flex;}
   .detail-wrap{position:static;height:auto;}
   .date-bar{top:100px;}
+  .cinema-bar{top:auto;position:relative;padding:8px 12px;}
   header{padding:0 16px;}
   .h-loc{display:none;}
   .film-list,.events-list{padding:12px 12px 32px;}
@@ -221,6 +253,8 @@ header{
   .card-slot-row{flex-wrap:wrap;}
   .card-lang-chip{min-width:80px;height:48px;font-size:14px;}
   .card-time-btn{min-width:80px;height:48px;font-size:16px;}
+  .d-hero{position:relative;height:200px;}
+  .d-body{margin-top:0;}
 }
 
 .hidden{display:none!important;}
@@ -231,9 +265,9 @@ header{
 <body>
 
 <header>
-  <a href="#" class="logo">Comé<em>dia</em></a>
+  <a href="#" class="logo">Cinémas <em>Lyon</em></a>
   <div class="header-right">
-    <span class="h-loc">Lyon · 9 rue de l'Arbre Sec</span>
+    <span class="h-loc">Comoedia · Lumière</span>
     <span class="live"><span class="live-dot"></span>Cette semaine</span>
   </div>
 </header>
@@ -252,12 +286,10 @@ header{
 
     <div id="secSeances">
       <div class="date-bar"><div class="date-pills" id="datePills"></div></div>
+      <div class="cinema-bar"><div class="cinema-pills" id="cinemaBar"></div></div>
       <div class="ctx">
         <span class="ctx-date" id="ctxDate">—</span>
-        <span style="display:flex;align-items:center;gap:12px">
-          <span id="ctxCount" style="font-size:11px;color:var(--text-dim)">—</span>
-          <a href="https://www.cinema-comedia.fr" target="_blank">cinema-comedia.fr ↗</a>
-        </span>
+        <span id="ctxCount" style="font-size:11px;color:var(--text-dim)">—</span>
       </div>
 
       <!-- Skeletons -->
@@ -392,6 +424,8 @@ const isSoon   = h => { const dt=(parseH(h)-now())/60000; return dt>=0&&dt<=60; 
 const esc      = s => s.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
 const escAttr  = s => s.replace(/"/g,'&quot;').replace(/\\/g,'\\\\');
 const escHtml  = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+// Clé normalisée pour déduplication (même film à Comoedia/Lumière avec variantes de casse)
+const normalizeTitle = t => (t||'').toLowerCase().trim().replace(/\s+/g,' ');
 
 // ═══════════════════════════════════════════════════════════
 // TMDB (source principale) + OMDb (fallback)
@@ -514,8 +548,8 @@ async function enrichFilm(f) {
     }
   }
 
-  // 2. OMDb en fallback pour les champs encore manquants
-  const needsMore = !f._cast || !f._synopsis;
+  // 2. OMDb en fallback pour les champs encore manquants (dont affiche)
+  const needsMore = !f._cast || !f._synopsis || !f._poster;
   if (needsMore) {
     if (f.imdbId) o = await fetchOMDb(f.imdbId);
     // Essai par titre original puis français si pas d'imdbId ou OMDb vide
@@ -557,22 +591,26 @@ async function loadAll() {
         _cast:   f.cast       || null,
         _synopsis: f.synopsis || null,
         color:   '#1a1a1a',
+        cinema:  f.cinema     || 'Le Comoedia',
         _sd: f.seances.map(s => ({
           h: s.heure,
           v: s.version,
           date: new Date(s.date + 'T00:00:00'),
+          resa_url: s.resa_url || null,
+          cinema: f.cinema || 'Le Comoedia',
         })),
       }));
       await Promise.all(films.map(enrichFilm));
-      console.info(`[Comedia] programme.json chargé — ${films.length} films (généré le ${data.generated_at?.slice(0,16)})`);
+      console.info(`[CinémasLyon] programme.json chargé — ${films.length} films (généré le ${data.generated_at?.slice(0,16)})`);
       return films;
     }
   } catch (_) { /* pas de fichier JSON, on continue */ }
 
   // ── Essai 2 : données locales + enrichissement OMDb ──
-  console.info('[Comedia] programme.json absent — utilisation des données de démonstration + TMDB/OMDb');
+  console.info('[CinémasLyon] programme.json absent — utilisation des données de démonstration + TMDB/OMDb');
   const films = FILMS_DATA.map(f => ({
     ...f,
+    cinema: f.cinema || 'Le Comoedia',
     _sd: f.seances.map(s => ({ ...s, date: addDays(today, s.j) })),
   }));
 
@@ -586,6 +624,37 @@ async function loadAll() {
 // ═══════════════════════════════════════════════════════════
 let allFilms = [];
 let selDate  = (() => { const d=new Date(); d.setHours(0,0,0,0); return d; })();
+let filtreCinema = 'tous';
+
+const SHORT_CINEMA = {
+  'Le Comoedia':       'Comédia',
+  'Lumière Terreaux':  'Terreaux',
+  'Lumière Bellecour': 'Bellecour',
+  'Lumière Fourmi':    'Fourmi',
+};
+
+const CINEMA_FILTERS = [
+  { id: 'tous',               label: 'Tous les cinémas' },
+  { id: 'Le Comoedia',        label: 'Le Comoedia' },
+  { id: 'Lumière Terreaux',   label: 'Lumière Terreaux' },
+  { id: 'Lumière Bellecour',  label: 'Lumière Bellecour' },
+  { id: 'Lumière Fourmi',     label: 'Lumière Fourmi' },
+];
+
+function buildCinemaBar() {
+  const el = document.getElementById('cinemaBar');
+  if (!el) return;
+  el.innerHTML = CINEMA_FILTERS.map(c =>
+    `<button class="c-pill${filtreCinema===c.id?' active':''}" onclick="setCinema('${esc(c.id)}')">${escHtml(c.label)}</button>`
+  ).join('');
+}
+
+function setCinema(cinema) {
+  filtreCinema = cinema;
+  buildCinemaBar();
+  buildPills(allFilms);
+  renderFilms(allFilms);
+}
 
 // ═══════════════════════════════════════════════════════════
 // DATE PILLS
@@ -593,7 +662,8 @@ let selDate  = (() => { const d=new Date(); d.setHours(0,0,0,0); return d; })();
 function buildPills(films) {
   const today = new Date(); today.setHours(0,0,0,0);
   const hasS  = new Set();
-  films.forEach(f => f._sd.forEach(s => hasS.add(dKey(s.date))));
+  const visibleFilms = filtreCinema === 'tous' ? films : films.filter(f => f.cinema === filtreCinema);
+  visibleFilms.forEach(f => f._sd.forEach(s => hasS.add(dKey(s.date))));
 
   const el = document.getElementById('datePills');
   el.innerHTML = '';
@@ -623,16 +693,40 @@ function renderFilms(films, forcedDate) {
   // Pour aujourd'hui, on filtre les séances déjà passées
   let rows = films
     .map(f => {
+      if (filtreCinema !== 'tous' && f.cinema !== filtreCinema) return null;
       let sd = f._sd.filter(s => sameDay(s.date, displayDate));
       if (!sd.length) return null;
-      // Filtrer passées uniquement pour aujourd'hui
       if (isTod) sd = sd.filter(s => !isPast(s.h));
-      if (!sd.length) return null; // toutes les séances du jour sont passées
+      if (!sd.length) return null;
       sd.sort((a,b) => a.h.localeCompare(b.h));
       return {...f, _day: sd};
     })
-    .filter(Boolean)
-    .sort((a,b) => a._day[0].h.localeCompare(b._day[0].h));
+    .filter(Boolean);
+
+  // En mode "Tous" : dédupliquer les films par titre normalisé (casse insensible)
+  // ex. "Le son des souvenirs" et "Le Son des souvenirs" → une seule entrée
+  if (filtreCinema === 'tous') {
+    const merged = {};
+    rows.forEach(row => {
+      const key = normalizeTitle(row.titre);
+      if (!key) return;
+      if (!merged[key]) {
+        merged[key] = { ...row };
+      } else {
+        const m = merged[key];
+        m._day = [...m._day, ...row._day];
+        m._day.sort((a,b) => a.h.localeCompare(b.h));
+        // Prendre la meilleure valeur disponible parmi toutes les copies
+        if (!m._poster   && row._poster)   m._poster   = row._poster;
+        if (!m._synopsis && row._synopsis) m._synopsis = row._synopsis;
+        if (!m._cast     && row._cast)     m._cast     = row._cast;
+        if (!m.note      && row.note)      m.note      = row.note;
+      }
+    });
+    rows = Object.values(merged);
+  }
+
+  rows.sort((a,b) => a._day[0].h.localeCompare(b._day[0].h));
 
   const container = document.getElementById('filmList');
 
@@ -685,25 +779,48 @@ function renderFilms(films, forcedDate) {
 
   const cardsHtml = rows.map(film => {
     const poster   = film._poster || POSTER_FALLBACK;
-    const meta     = [film.genres[0], film.realisateur, film.annee, film.duree + 'min'].filter(Boolean).join(' · ');
+    const meta     = [(film.genres||[])[0], film.realisateur, film.annee, film.duree ? film.duree + 'min' : null].filter(Boolean).join(' · ');
     const actors   = actorsTop3(film._cast);
-    const byVer = {};
-    film._day.forEach(s => {
-      if (!byVer[s.v]) byVer[s.v] = [];
-      byVer[s.v].push(s);
-    });
-    const verOrder = ['VOSTFR','VF','VO'];
-    const slotRows = verOrder.filter(v => byVer[v]).map(v => {
-      const seances = byVer[v];
-      const btns = seances.map(s => {
-        const soon = isTod && isSoon(s.h);
-        const past = isTod && isPast(s.h);
-        const cls = past ? 'past' : (soon ? 'soon' : '');
-        const aria = 'Réserver ' + s.h + ' — ' + film.titre;
-        return '<button type="button" class="card-time-btn ' + cls + '" aria-label="' + escAttr(aria) + '" onclick="event.stopPropagation();openFilm(\'' + esc(film.titre) + '\')">' + s.h + '</button>';
+    let slotRows;
+    if (filtreCinema === 'tous') {
+      // Mode multi-cinémas : grouper par cinéma, version inline sur le bouton
+      const byCinema = {};
+      film._day.forEach(s => {
+        const c = s.cinema || film.cinema || '';
+        if (!byCinema[c]) byCinema[c] = [];
+        byCinema[c].push(s);
+      });
+      slotRows = Object.entries(byCinema).map(([cinema, seances]) => {
+        const label = SHORT_CINEMA[cinema] || cinema;
+        const btns = seances.map(s => {
+          const soon = isTod && isSoon(s.h);
+          const past = isTod && isPast(s.h);
+          const cls = past ? 'past' : (soon ? 'soon' : '');
+          const aria = 'Réserver ' + s.h + ' ' + cinema + ' — ' + film.titre;
+          return '<button type="button" class="card-time-btn ' + cls + '" aria-label="' + escAttr(aria) + '" onclick="event.stopPropagation();openFilm(\'' + esc(film.titre) + '\')">' + s.h + '<span class="slot-ver">' + s.v + '</span></button>';
+        }).join('');
+        return '<div class="card-slot-row"><div class="card-cinema-chip">' + escHtml(label) + '</div>' + btns + '</div>';
       }).join('');
-      return '<div class="card-slot-row"><div class="card-lang-chip">' + v + '</div>' + btns + '</div>';
-    }).join('');
+    } else {
+      // Mode cinéma unique : grouper par version (comportement actuel)
+      const byVer = {};
+      film._day.forEach(s => {
+        if (!byVer[s.v]) byVer[s.v] = [];
+        byVer[s.v].push(s);
+      });
+      const verOrder = ['VOSTFR','VF','VO','VFST'];
+      slotRows = verOrder.filter(v => byVer[v]).map(v => {
+        const seances = byVer[v];
+        const btns = seances.map(s => {
+          const soon = isTod && isSoon(s.h);
+          const past = isTod && isPast(s.h);
+          const cls = past ? 'past' : (soon ? 'soon' : '');
+          const aria = 'Réserver ' + s.h + ' — ' + film.titre;
+          return '<button type="button" class="card-time-btn ' + cls + '" aria-label="' + escAttr(aria) + '" onclick="event.stopPropagation();openFilm(\'' + esc(film.titre) + '\')">' + s.h + '</button>';
+        }).join('');
+        return '<div class="card-slot-row"><div class="card-lang-chip">' + v + '</div>' + btns + '</div>';
+      }).join('');
+    }
 
     return `<div class="film-card fade" data-t="${escAttr(film.titre)}" onclick="openFilm('${esc(film.titre)}')">
       <div class="card-poster-wrap">
@@ -744,12 +861,27 @@ function jumpToTomorrow() {
 // DETAIL PANEL
 // ═══════════════════════════════════════════════════════════
 function openFilm(titre) {
-  const film = allFilms.find(f => f.titre===titre);
+  let film;
+  if (filtreCinema === 'tous') {
+    const key = normalizeTitle(titre);
+    const matches = allFilms.filter(f => normalizeTitle(f.titre) === key);
+    if (!matches.length) return;
+    film = { ...matches[0], _sd: matches.flatMap(f => f._sd) };
+    for (const m of matches) {
+      if (!film._poster   && m._poster)   film._poster   = m._poster;
+      if (!film._synopsis && m._synopsis) film._synopsis = m._synopsis;
+      if (!film._cast     && m._cast)     film._cast     = m._cast;
+      if (!film.note      && m.note)      film.note      = m.note;
+      if (!film.genres?.length && m.genres?.length) film.genres = m.genres;
+    }
+  } else {
+    film = allFilms.find(f => f.titre === titre);
+  }
   if (!film) return;
 
   document.querySelectorAll('.film-card').forEach(c => c.classList.remove('active'));
   document.querySelectorAll('.film-card').forEach(c => {
-    if (c.dataset.t === titre) c.classList.add('active');
+    if (normalizeTitle(c.dataset.t) === normalizeTitle(titre)) c.classList.add('active');
   });
 
   renderDetail(film);
@@ -775,23 +907,46 @@ function renderDetail(film) {
   const synop  = film._synopsis || film.synopsis;
   const today  = new Date(); today.setHours(0,0,0,0);
 
-  // Grouper toutes les séances par jour
+  // Grouper par jour puis par cinéma (si plusieurs cinémas)
   const byDay = {};
   film._sd.forEach(s => {
     const k = dKey(s.date);
     if (!byDay[k]) byDay[k] = {date:s.date, seances:[]};
     byDay[k].seances.push(s);
   });
+  const cinemas = [...new Set(film._sd.map(s => s.cinema).filter(Boolean))];
+  const multiCinema = cinemas.length > 1;
   const weekHtml = Object.values(byDay)
     .sort((a,b) => a.date-b.date)
     .map(({date,seances}) => {
       const isTod = sameDay(date,today);
       const lbl = isTod ? "Aujourd'hui" : date.toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'short'});
-      const chips = seances.sort((a,b)=>a.h.localeCompare(b.h)).map(s => {
-        const past=isTod&&isPast(s.h), soon=isTod&&isSoon(s.h);
-        return `<div class="d-chip${past?' past':''}${soon?' soon':''}">${s.h}<span class="cv">${s.v}</span></div>`;
-      }).join('');
-      return `<div class="d-day"><div class="d-day-lbl">${lbl}</div><div class="d-chips">${chips}</div></div>`;
+      let content;
+      if (multiCinema) {
+        const byCinema = {};
+        seances.forEach(s => {
+          const c = s.cinema || 'Le Comoedia';
+          if (!byCinema[c]) byCinema[c] = [];
+          byCinema[c].push(s);
+        });
+        content = Object.entries(byCinema)
+          .sort(([a],[b]) => (SHORT_CINEMA[a]||a).localeCompare(SHORT_CINEMA[b]||b))
+          .map(([cinema, sess]) => {
+            const short = SHORT_CINEMA[cinema] || cinema;
+            const chips = sess.sort((a,b)=>a.h.localeCompare(b.h)).map(s => {
+              const past=isTod&&isPast(s.h), soon=isTod&&isSoon(s.h);
+              return `<span class="d-chip${past?' past':''}${soon?' soon':''}">${s.h}<span class="cv">${s.v}</span></span>`;
+            }).join('');
+            return `<div class="d-day-row"><span class="d-cine-tag">${short}</span><span class="d-chips">${chips}</span></div>`;
+          }).join('');
+      } else {
+        const chips = seances.sort((a,b)=>a.h.localeCompare(b.h)).map(s => {
+          const past=isTod&&isPast(s.h), soon=isTod&&isSoon(s.h);
+          return `<div class="d-chip${past?' past':''}${soon?' soon':''}">${s.h}<span class="cv">${s.v}</span></div>`;
+        }).join('');
+        content = `<div class="d-chips">${chips}</div>`;
+      }
+      return `<div class="d-day"><div class="d-day-lbl">${lbl}</div>${content}</div>`;
     }).join('');
 
   document.getElementById('detailEmpty').classList.add('hidden');
@@ -802,13 +957,6 @@ function renderDetail(film) {
       ${poster
         ? `<img class="d-back" src="${poster}" alt="" style="filter:brightness(.35) saturate(.6) blur(4px);transform:scale(1.05);" />`
         : `<div class="d-back-ph" style="background:${film.color}"></div>`}
-      <div class="d-poster-wrap">
-        ${poster
-          ? `<img class="d-poster" src="${poster}" alt="${escAttr(film.titre)}" />`
-          : `<div class="d-poster" style="background:${film.color};display:flex;align-items:center;justify-content:center;">
-               <svg width="24" height="30" viewBox="0 0 24 30" fill="none" style="opacity:.2"><rect x="1" y="1" width="22" height="28" rx="2" stroke="white" stroke-width="1.5"/></svg>
-             </div>`}
-      </div>
       ${note ? `<div class="d-score"><span class="d-score-num">${note}</span><span class="d-score-lbl">IMDb</span></div>` : ''}
     </div>
     <div class="d-body fade">
@@ -820,7 +968,7 @@ function renderDetail(film) {
         <div class="d-ci"><span class="lbl">Durée</span><span class="val">${film.duree} min</span></div>
         ${cast ? `<div class="d-ci"><span class="lbl">Avec</span><span class="val">${cast}</span></div>` : ''}
       </div>
-      <div class="d-genres">${film.genres.map(g=>`<span class="d-genre">${g}</span>`).join('')}</div>
+      <div class="d-genres">${(film.genres||[]).map(g=>`<span class="d-genre">${g}</span>`).join('')}</div>
       <p class="d-synopsis">${synop}</p>
       <div class="d-week-lbl">Séances de la semaine</div>
       ${weekHtml}
@@ -851,6 +999,7 @@ function swTab(t) {
   document.getElementById('secEvents') .classList.toggle('hidden', t!=='events');
   document.getElementById('tabS').classList.toggle('active', t==='seances');
   document.getElementById('tabE').classList.toggle('active', t==='events');
+  document.getElementById('sidePanel').classList.toggle('hidden', t==='events');
 }
 function mTab(t, btn) {
   swTab(t);
@@ -863,13 +1012,14 @@ function mTab(t, btn) {
 // ═══════════════════════════════════════════════════════════
 async function boot() {
   renderEvents();
+  buildCinemaBar();
   try {
     allFilms = await loadAll();
   } catch(e) {
-    // Fallback sans API
     const today = new Date(); today.setHours(0,0,0,0);
     allFilms = FILMS_DATA.map(f => ({
       ...f,
+      cinema: f.cinema || 'Le Comoedia',
       _sd: f.seances.map(s => ({...s, date: addDays(today, s.j)})),
     }));
   }
