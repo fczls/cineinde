@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Import PDF — Comoedia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<style>
+:root {
+  --bg:#111010; --bg2:#191817; --bg3:#201f1d; --bg4:#272523;
+  --border:rgba(255,255,255,.07); --border2:rgba(255,255,255,.13);
+  --gold:#c9a84c; --gold-dim:#7a6430;
+  --text:#f0ebe0; --text-dim:#7a7060; --text-mid:#a09080;
+  --accent:#e8603a; --green:#4fa06a;
+  --r:10px;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;line-height:1.5;min-height:100vh;-webkit-font-smoothing:antialiased;}
+
+/* ── HEADER ── */
+header{
+  padding:0 0 0 28px;display:flex;align-items:stretch;justify-content:space-between;
+  height:72px;
+  background:rgba(17,16,16,.96);backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+}
+.header-brand{display:flex;flex-direction:column;justify-content:center;gap:3px;}
+.logo{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--text);text-decoration:none;line-height:1.2;}
+.logo em{font-style:italic;color:var(--text-mid);font-weight:400;}
+.header-subtitle{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-dim);}
+.header-right{display:flex;align-items:center;padding:0 28px;border-left:1px solid var(--border);}
+.back-link{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);text-decoration:none;transition:color .2s;}
+.back-link:hover{color:var(--text);}
+
+/* ── MAIN ── */
+main{max-width:560px;margin:72px auto 0;padding:48px 24px;}
+
+h1{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:var(--text);margin-bottom:8px;}
+.page-subtitle{font-size:13px;color:var(--text-dim);margin-bottom:40px;line-height:1.6;}
+
+/* ── CARD ── */
+.card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:32px;}
+
+/* ── DROP ZONE ── */
+.drop-zone{
+  border:2px dashed var(--border2);border-radius:8px;
+  padding:48px 24px;text-align:center;cursor:pointer;
+  transition:border-color .2s,background .2s;
+  position:relative;
+}
+.drop-zone.drag-over{border-color:var(--gold);background:rgba(201,168,76,.04);}
+.drop-zone.has-file{border-color:var(--green);border-style:solid;}
+.drop-icon{font-size:36px;margin-bottom:12px;display:block;opacity:.5;}
+.drop-label{font-size:14px;color:var(--text-mid);margin-bottom:6px;}
+.drop-hint{font-size:11px;color:var(--text-dim);letter-spacing:.05em;}
+.drop-filename{font-family:'DM Mono',monospace;font-size:13px;color:var(--green);margin-top:10px;display:none;}
+.drop-zone.has-file .drop-filename{display:block;}
+.drop-zone.has-file .drop-label{color:var(--text);}
+#file-input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
+
+/* ── BUTTON ── */
+.btn{
+  width:100%;margin-top:24px;
+  padding:14px 24px;
+  background:var(--gold);color:#111;
+  border:none;border-radius:8px;
+  font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;
+  cursor:pointer;transition:opacity .2s,background .2s;
+}
+.btn:hover:not(:disabled){background:#d9b85c;}
+.btn:disabled{opacity:.4;cursor:not-allowed;}
+
+/* ── STATUS ── */
+.status{margin-top:24px;padding:16px;border-radius:8px;font-size:13px;display:none;}
+.status.info{background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.2);color:var(--gold);}
+.status.success{background:rgba(79,160,106,.08);border:1px solid rgba(79,160,106,.2);color:var(--green);}
+.status.error{background:rgba(232,96,58,.08);border:1px solid rgba(232,96,58,.2);color:var(--accent);}
+.status.visible{display:block;}
+
+/* ── STEPS ── */
+.steps{margin-top:32px;padding-top:24px;border-top:1px solid var(--border);}
+.steps-title{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-dim);margin-bottom:16px;}
+.step{display:flex;align-items:center;gap:12px;padding:10px 0;}
+.step + .step{border-top:1px solid var(--border);}
+.step-num{width:24px;height:24px;border-radius:50%;border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--text-dim);flex-shrink:0;transition:all .3s;}
+.step-num.active{border-color:var(--gold);color:var(--gold);}
+.step-num.done{background:var(--green);border-color:var(--green);color:#111;}
+.step-num.error{background:var(--accent);border-color:var(--accent);color:#fff;}
+.step-text{font-size:13px;color:var(--text-dim);transition:color .3s;}
+.step-text.active{color:var(--text);}
+.step-text.done{color:var(--text-mid);}
+
+/* ── CONFIG ── */
+.config-section{margin-top:32px;}
+.config-title{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-dim);margin-bottom:12px;}
+.config-field{display:flex;flex-direction:column;gap:6px;margin-bottom:16px;}
+.config-field label{font-size:12px;color:var(--text-mid);}
+.config-field input{
+  background:var(--bg3);border:1px solid var(--border2);border-radius:6px;
+  padding:10px 14px;color:var(--text);font-family:'DM Mono',monospace;font-size:12px;
+  outline:none;transition:border-color .2s;
+}
+.config-field input:focus{border-color:var(--gold);}
+.config-field input::placeholder{color:var(--text-dim);}
+.config-save{
+  padding:8px 16px;background:transparent;border:1px solid var(--border2);border-radius:6px;
+  color:var(--text-mid);font-family:'DM Sans',sans-serif;font-size:12px;cursor:pointer;
+  transition:border-color .2s,color .2s;
+}
+.config-save:hover{border-color:var(--gold);color:var(--gold);}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-brand">
+    <a href="index.html" class="logo">Le <em>Comoedia</em></a>
+    <span class="header-subtitle">Import PDF programme</span>
+  </div>
+  <div class="header-right">
+    <a href="index.html" class="back-link">← Retour au programme</a>
+  </div>
+</header>
+
+<main>
+  <h1>Import du programme PDF</h1>
+  <p class="page-subtitle">
+    Sélectionne le PDF hebdomadaire du Comoedia. Il sera stocké puis analysé automatiquement
+    via GitHub Actions — la base de données sera mise à jour en quelques minutes.
+  </p>
+
+  <div class="card">
+    <!-- Drop zone -->
+    <div class="drop-zone" id="drop-zone">
+      <input type="file" id="file-input" accept="application/pdf">
+      <span class="drop-icon">📄</span>
+      <p class="drop-label">Glisse le PDF ici ou clique pour choisir</p>
+      <p class="drop-hint">Format accepté : PDF uniquement · Max 10 Mo</p>
+      <p class="drop-filename" id="drop-filename"></p>
+    </div>
+
+    <button class="btn" id="submit-btn" disabled>Lancer l'import</button>
+
+    <div class="status" id="status-box"></div>
+
+    <!-- Progress steps -->
+    <div class="steps">
+      <div class="steps-title">Étapes</div>
+      <div class="step" id="step-1">
+        <div class="step-num" id="step-1-num">1</div>
+        <span class="step-text" id="step-1-text">Upload du PDF vers le stockage</span>
+      </div>
+      <div class="step" id="step-2">
+        <div class="step-num" id="step-2-num">2</div>
+        <span class="step-text" id="step-2-text">Déclenchement du scraper GitHub Actions</span>
+      </div>
+      <div class="step" id="step-3">
+        <div class="step-num" id="step-3-num">3</div>
+        <span class="step-text" id="step-3-text">Analyse du PDF et mise à jour de la base</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Config (token GitHub) -->
+  <div class="config-section">
+    <div class="config-title">Configuration</div>
+    <div class="config-field">
+      <label>Token GitHub (Personal Access Token — <code>actions: write</code>)</label>
+      <input type="password" id="github-pat" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx">
+    </div>
+    <button class="config-save" id="config-save-btn">Enregistrer localement</button>
+  </div>
+</main>
+
+<script>
+// ── Config ────────────────────────────────────────────────
+const SUPABASE_URL     = 'https://aaquwublsnfvpklxwxzz.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFhcXV3dWJsc25mdnBrbHh3eHp6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMwMjcwNDEsImV4cCI6MjA4ODYwMzA0MX0.PPb9-tnEapTnEZ7Ayv--Qk7KDyKPhW5UL6E6_u1qXI8';
+const GITHUB_OWNER     = 'fczls';
+const GITHUB_REPO      = 'cineinde';
+const GITHUB_WORKFLOW  = 'scraper.yml';
+const STORAGE_BUCKET   = 'pdfs';
+const PAT_STORAGE_KEY  = 'comedia_github_pat';
+
+// ── Supabase ──────────────────────────────────────────────
+const { createClient } = supabase;
+const sb = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+// ── DOM refs ──────────────────────────────────────────────
+const dropZone   = document.getElementById('drop-zone');
+const fileInput  = document.getElementById('file-input');
+const submitBtn  = document.getElementById('submit-btn');
+const statusBox  = document.getElementById('status-box');
+const dropName   = document.getElementById('drop-filename');
+const patInput   = document.getElementById('github-pat');
+const configSave = document.getElementById('config-save-btn');
+
+let selectedFile = null;
+
+// ── Load saved PAT ────────────────────────────────────────
+const savedPat = localStorage.getItem(PAT_STORAGE_KEY);
+if (savedPat) patInput.value = savedPat;
+
+configSave.addEventListener('click', () => {
+  const val = patInput.value.trim();
+  if (val) {
+    localStorage.setItem(PAT_STORAGE_KEY, val);
+    configSave.textContent = 'Enregistré ✓';
+    setTimeout(() => { configSave.textContent = 'Enregistrer localement'; }, 2000);
+  }
+});
+
+// ── File selection ────────────────────────────────────────
+function onFileSelected(file) {
+  if (!file || file.type !== 'application/pdf') {
+    showStatus('error', 'Fichier invalide — seuls les PDF sont acceptés.');
+    return;
+  }
+  if (file.size > 10 * 1024 * 1024) {
+    showStatus('error', 'Fichier trop volumineux (max 10 Mo).');
+    return;
+  }
+  selectedFile = file;
+  dropName.textContent = file.name;
+  dropZone.classList.add('has-file');
+  submitBtn.disabled = false;
+  clearStatus();
+}
+
+fileInput.addEventListener('change', (e) => onFileSelected(e.target.files[0]));
+
+dropZone.addEventListener('dragover', (e) => {
+  e.preventDefault();
+  dropZone.classList.add('drag-over');
+});
+dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-over'));
+dropZone.addEventListener('drop', (e) => {
+  e.preventDefault();
+  dropZone.classList.remove('drag-over');
+  onFileSelected(e.dataTransfer.files[0]);
+});
+
+// ── Submit ────────────────────────────────────────────────
+submitBtn.addEventListener('click', async () => {
+  const pat = patInput.value.trim() || localStorage.getItem(PAT_STORAGE_KEY);
+  if (!pat) {
+    showStatus('error', 'Token GitHub manquant — renseigne ton PAT dans la section Configuration.');
+    return;
+  }
+  if (!selectedFile) return;
+
+  submitBtn.disabled = true;
+  clearStatus();
+  resetSteps();
+
+  // Step 1 — Upload to Supabase Storage
+  setStep(1, 'active');
+  showStatus('info', 'Upload du PDF en cours…');
+
+  const timestamp = Date.now();
+  const filename  = `programme-${timestamp}.pdf`;
+
+  const { data: uploadData, error: uploadError } = await sb.storage
+    .from(STORAGE_BUCKET)
+    .upload(filename, selectedFile, { contentType: 'application/pdf', upsert: false });
+
+  if (uploadError) {
+    setStep(1, 'error');
+    showStatus('error', `Erreur upload : ${uploadError.message}`);
+    submitBtn.disabled = false;
+    return;
+  }
+
+  const { data: urlData } = sb.storage.from(STORAGE_BUCKET).getPublicUrl(filename);
+  const pdfPublicUrl = urlData.publicUrl;
+  setStep(1, 'done');
+
+  // Step 2 — Trigger GitHub Actions
+  setStep(2, 'active');
+  showStatus('info', 'Déclenchement du workflow GitHub Actions…');
+
+  const ghResponse = await fetch(
+    `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/actions/workflows/${GITHUB_WORKFLOW}/dispatches`,
+    {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/vnd.github+json',
+        'Authorization': `Bearer ${pat}`,
+        'X-GitHub-Api-Version': '2022-11-28',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        ref: 'main',
+        inputs: { pdf_url: pdfPublicUrl },
+      }),
+    }
+  );
+
+  if (!ghResponse.ok) {
+    let errMsg = `HTTP ${ghResponse.status}`;
+    try {
+      const body = await ghResponse.json();
+      errMsg += ` — ${body.message || JSON.stringify(body)}`;
+    } catch {}
+    setStep(2, 'error');
+    showStatus('error', `Erreur GitHub Actions : ${errMsg}`);
+    submitBtn.disabled = false;
+    return;
+  }
+
+  setStep(2, 'done');
+
+  // Step 3 — In progress (async, ~2-5 min)
+  setStep(3, 'active');
+  showStatus('success',
+    `Import lancé avec succès ! Le workflow GitHub Actions analyse maintenant le PDF.<br>
+    La base de données sera mise à jour dans 2–5 minutes.<br>
+    <a href="https://github.com/${GITHUB_OWNER}/${GITHUB_REPO}/actions" target="_blank"
+       style="color:var(--green);text-decoration:underline;">Suivre l'avancement →</a>`
+  );
+});
+
+// ── Helpers ───────────────────────────────────────────────
+function showStatus(type, html) {
+  statusBox.className = `status ${type} visible`;
+  statusBox.innerHTML = html;
+}
+function clearStatus() {
+  statusBox.className = 'status';
+  statusBox.innerHTML = '';
+}
+function resetSteps() {
+  [1, 2, 3].forEach(n => setStep(n, 'idle'));
+}
+function setStep(n, state) {
+  const num  = document.getElementById(`step-${n}-num`);
+  const text = document.getElementById(`step-${n}-text`);
+  num.className  = `step-num${state !== 'idle' ? ' ' + state : ''}`;
+  text.className = `step-text${state !== 'idle' ? ' ' + state : ''}`;
+  if (state === 'done') num.textContent = '✓';
+  else num.textContent = String(n);
+}
+</script>
+</body>
+</html>
