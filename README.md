@@ -50,7 +50,6 @@ comedia/
 python3 -m venv .venv
 source .venv/bin/activate   # ou .venv\Scripts\activate sur Windows
 pip install -r requirements.txt
-playwright install chromium   # pour l’extraction automatique du PDF Comoedia
 cp .env.example .env
 # Éditer .env avec vos clés (voir Variables d'environnement)
 ```
@@ -77,7 +76,7 @@ Pour activer Supabase : renseigner `SUPABASE_URL` et `SUPABASE_ANON_KEY` dans la
 
 ### Sources
 
-- **Le Comoedia** : PDF extrait automatiquement depuis `https://www.cinema-comoedia.com/horaires-semaine-complete/` (Playwright) ou prédiction d’URL
+- **Le Comoedia** : `https://www.cinema-comoedia.com/programme-accessible/` (Gatsby)
 - **Cinémas Lumière** : `https://www.cinemas-lumiere.com/calendrier-general.html`
 
 ### Options
