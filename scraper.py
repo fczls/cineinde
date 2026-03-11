@@ -20,6 +20,13 @@ from urllib.request import urlopen, Request
 from urllib.error import URLError, HTTPError
 from html.parser import HTMLParser
 
+# Charger .env pour SUPABASE_* et clés API
+try:
+    from dotenv import load_dotenv
+    load_dotenv(Path(__file__).parent / ".env")
+except ImportError:
+    pass
+
 # ─────────────────────────────────────────────
 # CONFIG
 # ─────────────────────────────────────────────
@@ -33,6 +40,27 @@ OMDB_API_KEY = os.getenv("OMDB_API_KEY", "822f09ad")
 TMDB_API_KEY = os.getenv("TMDB_API_KEY")
 
 OUTPUT_DEFAULT   = Path(__file__).parent / "programme.json"
+PDF_STATE_PATH   = Path(__file__).parent / "pdf_state.json"
+
+# Page stable listant les horaires (et lien PDF si présent) — programme-semaine renvoie 404
+URL_PDF_LISTING   = "https://www.cinema-comoedia.com/horaires-semaine-complete/"
+URL_COMOEDIA_BASE = "https://www.cinema-comoedia.com"
+
+# Mois → slug URL (sans accents, pour prédiction des noms de fichiers PDF)
+MOIS_SLUG: dict[int, str] = {
+    1: "janvier",   2: "fevrier",   3: "mars",      4: "avril",
+    5: "mai",       6: "juin",      7: "juillet",   8: "aout",
+    9: "septembre", 10: "octobre",  11: "novembre", 12: "decembre",
+}
+# Slug de mois → numéro (avec variantes accentuées en fallback)
+MOIS_SLUG_TO_NUM: dict[str, int] = {v: k for k, v in MOIS_SLUG.items()}
+MOIS_SLUG_TO_NUM.update({"février": 2, "août": 8})
+
+# Abréviation de jour (PDF) → isoweekday (lundi=1…dimanche=7)
+DAY_ABBREVS: dict[str, int] = {
+    "mer": 3, "jeu": 4, "ven": 5, "sam": 6,
+    "dim": 7, "lun": 1, "mar": 2,
+}
 
 HEADERS = {
     "User-Agent": (
@@ -502,6 +530,792 @@ def scrape_comoedia(html: str | None = None, file_path: str | None = None) -> li
     log.info("Parsing HTML Comoedia…")
     films = parse_programme(html_src)
     return [{**f, "source": "comoedia", "cinema": "Le Comoedia"} for f in films]
+
+
+# ─────────────────────────────────────────────
+# PDF SCRAPER COMOEDIA
+# ─────────────────────────────────────────────
+
+# ── État persistant des PDFs traités ──────────
+
+def load_pdf_state() -> dict:
+    """Charge l'état des PDFs déjà traités depuis pdf_state.json."""
+    if PDF_STATE_PATH.exists():
+        try:
+            return json.loads(PDF_STATE_PATH.read_text(encoding="utf-8"))
+        except Exception:
+            pass
+    return {"processed_urls": []}
+
+
+def save_pdf_state(state: dict) -> None:
+    """Sauvegarde l'état dans pdf_state.json."""
+    PDF_STATE_PATH.write_text(
+        json.dumps(state, ensure_ascii=False, indent=2),
+        encoding="utf-8",
+    )
+
+
+# ── Découverte des URLs de PDFs ────────────────
+
+def _fetch_pdf_urls_via_playwright(skip: bool = False) -> list[str]:
+    """
+    Rend la page horaires-semaine-complete avec Playwright et extrait les liens PDF.
+    - Intercepte les requêtes/réponses réseau pour capturer les URLs CDN (*.pdf).
+    - Parse aussi le HTML rendu pour les liens href.
+    Retourne [] si skip=True, Playwright indisponible ou si aucun PDF trouvé.
+    """
+    if skip:
+        return []
+    try:
+        from playwright.sync_api import sync_playwright
+    except ImportError:
+        log.debug("Playwright non installé — extraction PDF via navigateur ignorée")
+        return []
+
+    pdf_urls: list[str] = []
+
+    def _collect_pdf(request_or_url: str) -> None:
+        url = request_or_url if isinstance(request_or_url, str) else getattr(request_or_url, "url", "")
+        if url and ".pdf" in url.lower() and url not in pdf_urls:
+            pdf_urls.append(url)
+
+    try:
+        with sync_playwright() as p:
+            browser = p.chromium.launch(headless=True)
+            try:
+                page = browser.new_page()
+
+                # Intercepter les requêtes pour capturer les URLs PDF (CDN webediamovies, etc.)
+                page.on("request", lambda req: _collect_pdf(req.url))
+                page.on("response", lambda resp: _collect_pdf(resp.url))
+
+                page.goto(
+                    URL_PDF_LISTING,
+                    wait_until="domcontentloaded",
+                    timeout=15000,
+                )
+                page.wait_for_timeout(5000)  # Laisser le JS charger (liens, API, etc.)
+                html = page.content()
+
+                # Liens href contenant .pdf
+                for m in re.findall(r'href=["\']([^"\']+\.pdf[^"\']*)["\']', html, re.I):
+                    url = m if m.startswith("http") else f"{URL_COMOEDIA_BASE}{m}"
+                    if url not in pdf_urls:
+                        pdf_urls.append(url)
+
+                # Fallback : toute URL .pdf dans le HTML
+                if not pdf_urls:
+                    for m in re.findall(r'https?://[^\s"\'<>]+\.pdf[^\s"\'<>]*', html):
+                        if m not in pdf_urls:
+                            pdf_urls.append(m)
+
+                if pdf_urls:
+                    log.info(f"PDFs extraits via Playwright : {len(pdf_urls)}")
+            finally:
+                browser.close()
+    except Exception as e:
+        log.warning(f"Playwright : {e}")
+    return pdf_urls
+
+
+def fetch_pdf_urls(use_playwright: bool = True) -> list[str]:
+    """
+    Récupère les URLs de PDFs automatiquement.
+    1. Variable d'environnement PDF_URL (prioritaire, ex. URL CDN webediamovies).
+    2. Fetch statique (rapide, souvent vide car page en JS).
+    3. Playwright si dispo (rend la page, intercepte requêtes, extrait liens PDF).
+    4. Fallback : prédiction d'URLs (semaine courante + 2 précédentes).
+    """
+    # 1. Env PDF_URL (priorité, pour URL CDN manuelle)
+    env_url = os.getenv("PDF_URL", "").strip()
+    if env_url and ".pdf" in env_url.lower():
+        log.info(f"PDF depuis PDF_URL : {env_url[:60]}...")
+        return [env_url]
+
+    # 2. Fetch statique (HTML brut)
+    try:
+        html = fetch(URL_PDF_LISTING)
+        matches = re.findall(r'href=["\']([^"\']+\.pdf[^"\']*)["\']', html, re.I)
+        seen: set[str] = set()
+        urls: list[str] = []
+        for m in matches:
+            url = m if m.startswith("http") else f"{URL_COMOEDIA_BASE}{m}"
+            if url not in seen:
+                seen.add(url)
+                urls.append(url)
+        if urls:
+            log.info(f"PDFs trouvés (fetch statique) : {len(urls)}")
+            return urls
+    except Exception as e:
+        log.debug(f"Fetch statique : {e}")
+
+    # 3. Playwright (page rendue en JS + interception requêtes)
+    urls = _fetch_pdf_urls_via_playwright(skip=not use_playwright)
+    if urls:
+        return urls
+
+    # 4. Fallback prédiction (URLs cinema-comoedia.com/pdf/... souvent 404)
+    log.warning("Aucun lien PDF détecté — fallback prédiction d'URLs")
+    return predict_pdf_urls()
+
+
+def predict_pdf_url(week_start: date) -> str:
+    """Construit l'URL prédite du PDF pour une semaine (week_start = mercredi)."""
+    week_end = week_start + timedelta(days=6)
+    d1, d2 = week_start.day, week_end.day
+    m1, m2 = MOIS_SLUG[week_start.month], MOIS_SLUG[week_end.month]
+    y = week_end.year
+    if week_start.month == week_end.month:
+        slug = f"du-{d1}-au-{d2}-{m1}-{y}"
+    else:
+        slug = f"du-{d1}-{m1}-au-{d2}-{m2}-{y}"
+    return f"{URL_COMOEDIA_BASE}/pdf/cinema-lyon-comoedia-semaine-{slug}.pdf"
+
+
+def predict_pdf_urls() -> list[str]:
+    """Prédit les URLs des PDFs pour la semaine courante et les 2 précédentes."""
+    today = date.today()
+    # Si mardi, cibler la semaine prochaine (nouveau programme)
+    if today.isoweekday() == 2:
+        today += timedelta(days=1)
+    days_since_wed = (today.isoweekday() - 3) % 7
+    current_wed = today - timedelta(days=days_since_wed)
+    return [predict_pdf_url(current_wed - timedelta(weeks=i)) for i in range(3)]
+
+
+# ── Analyse du slug de l'URL ───────────────────
+
+def parse_week_from_slug(url: str) -> tuple[date, date] | None:
+    """
+    Extrait les dates de début/fin de semaine depuis le slug du nom de fichier PDF.
+    Supporte semaines intra-mois (du-8-au-14-octobre-2025) et
+    inter-mois (du-26-novembre-au-2-decembre-2025), y compris inter-année.
+    """
+    m = re.search(r"semaine-(du-.+?)(?:\.pdf|\?|$)", url, re.I)
+    if not m:
+        return None
+    slug = m.group(1).lower()
+    # Normalise les accents pour la correspondance des noms de mois
+    for src, dst in [("é", "e"), ("è", "e"), ("ê", "e"), ("û", "u"),
+                     ("î", "i"), ("â", "a"), ("ô", "o")]:
+        slug = slug.replace(src, dst)
+
+    # Même mois : du-{d1}-au-{d2}-{mois}-{yyyy}
+    pat_same = re.match(r"du-(\d+)-au-(\d+)-([a-z]+)-(\d{4})$", slug)
+    if pat_same:
+        d1, d2 = int(pat_same.group(1)), int(pat_same.group(2))
+        mois = MOIS_SLUG_TO_NUM.get(pat_same.group(3))
+        year = int(pat_same.group(4))
+        if mois:
+            try:
+                return date(year, mois, d1), date(year, mois, d2)
+            except ValueError:
+                pass
+
+    # Mois différents : du-{d1}-{mois1}-au-{d2}-{mois2}-{yyyy}
+    pat_cross = re.match(r"du-(\d+)-([a-z]+)-au-(\d+)-([a-z]+)-(\d{4})$", slug)
+    if pat_cross:
+        d1 = int(pat_cross.group(1))
+        m1_name = pat_cross.group(2)
+        d2 = int(pat_cross.group(3))
+        m2_name = pat_cross.group(4)
+        year = int(pat_cross.group(5))
+        m1_n = MOIS_SLUG_TO_NUM.get(m1_name)
+        m2_n = MOIS_SLUG_TO_NUM.get(m2_name)
+        if m1_n and m2_n:
+            try:
+                year1 = year - 1 if m1_n > m2_n else year
+                return date(year1, m1_n, d1), date(year, m2_n, d2)
+            except ValueError:
+                pass
+    return None
+
+
+# ── Vérification Supabase ──────────────────────
+
+def check_week_in_supabase(week_start: date, week_end: date) -> bool:
+    """
+    Vérifie si la semaine contient déjà des séances Comoedia dans Supabase.
+    Retourne False si les credentials sont absents ou en cas d'erreur.
+    """
+    sb_url = os.getenv("SUPABASE_URL")
+    sb_key = os.getenv("SUPABASE_SERVICE_ROLE_KEY")
+    if not sb_url or not sb_key:
+        return False
+    try:
+        from supabase import create_client
+        client = create_client(sb_url, sb_key)
+        r = client.table("cinemas").select("id").eq("slug", "comoedia").execute()
+        if not r.data:
+            return False
+        cinema_id = r.data[0]["id"]
+        r2 = (
+            client.table("seances")
+            .select("id", count="exact")
+            .eq("cinema_id", cinema_id)
+            .gte("date", week_start.isoformat())
+            .lte("date", week_end.isoformat())
+            .execute()
+        )
+        count = r2.count or 0
+        if count > 0:
+            log.info(
+                f"Semaine {week_start} déjà dans Supabase "
+                f"({count} séances Comoedia) — ignoré"
+            )
+            return True
+    except Exception as e:
+        log.warning(f"Vérification Supabase échouée : {e} — on continue quand même")
+    return False
+
+
+# ── Téléchargement du PDF ──────────────────────
+
+def download_pdf(url: str) -> bytes | None:
+    """Télécharge le PDF et retourne ses octets (urllib, pas de dépendance requests)."""
+    try:
+        req = Request(url, headers=HEADERS)
+        with urlopen(req, timeout=30) as r:
+            data = r.read()
+        log.info(f"PDF téléchargé ({len(data):,} octets) : {url}")
+        return data
+    except HTTPError as e:
+        log.error(f"Impossible de télécharger le PDF {url} : HTTP {e.code}")
+        return None
+    except Exception as e:
+        log.error(f"Impossible de télécharger le PDF {url} : {e}")
+        return None
+
+
+# ── Parsing du PDF ─────────────────────────────
+
+def parse_comoedia_pdf(
+    pdf_source: "bytes | str | Path",
+) -> "tuple[list[list[str | None]], date | None]":
+    """
+    Ouvre le PDF (bytes, chemin string ou Path) et extrait :
+      - le tableau de la 2e page (index 1)
+      - la date de début de semaine lue en page 1 si possible
+    Retourne (rows, week_start).
+    """
+    try:
+        import pdfplumber
+        import io as _io
+    except ImportError:
+        log.error("pdfplumber non installé — lancez : pip install pdfplumber")
+        return [], None
+
+    if isinstance(pdf_source, (str, Path)):
+        ctx = pdfplumber.open(str(pdf_source))
+    else:
+        ctx = pdfplumber.open(_io.BytesIO(pdf_source))
+
+    week_start: "date | None" = None
+    table: "list[list[str | None]]" = []
+
+    with ctx as pdf:
+        if len(pdf.pages) < 2:
+            log.error("Le PDF n'a que %d page(s) — 2 attendues", len(pdf.pages))
+            return [], None
+
+        # Chercher la date "Du X au Y mois YYYY" dans la page 1
+        p0_text = pdf.pages[0].extract_text() or ""
+        m = re.search(r"[Dd]u\s+(\d+)\s+au\s+\d+\s+(\w+)\s+(\d{4})", p0_text)
+        if m:
+            mois_n = MOIS_FR.get(m.group(2).lower())
+            if mois_n:
+                try:
+                    week_start = date(int(m.group(3)), mois_n, int(m.group(1)))
+                    log.info(f"Début de semaine lu en page 1 : {week_start}")
+                except ValueError:
+                    pass
+
+        # Extraire le tableau de la page 2
+        p1 = pdf.pages[1]
+        raw_table = p1.extract_table()
+        if raw_table:
+            table = raw_table
+            log.info(f"Tableau extrait (page 2) : {len(table)} lignes")
+        else:
+            log.warning(
+                "extract_table() vide en page 2 — tentative via extract_text()"
+            )
+            table = _pdf_text_to_rows(p1.extract_text() or "")
+
+    return table, week_start
+
+
+def _pdf_text_to_rows(text: str) -> "list[list[str | None]]":
+    """
+    Fallback : convertit le texte brut de la page PDF en pseudo-lignes.
+    Structure attendue : chaque film sur une ou plusieurs lignes consécutives
+    avec son titre, sa version, et ses horaires par jour.
+    """
+    rows: "list[list[str | None]]" = []
+    lines = [ln.strip() for ln in text.splitlines() if ln.strip()]
+
+    i = 0
+    while i < len(lines):
+        line = lines[i]
+        abbrevs_in_line = sum(1 for a in DAY_ABBREVS if a in line.lower())
+        if abbrevs_in_line >= 4:
+            # Ligne d'entête de jours — garder telle quelle
+            rows.append([line])
+            i += 1
+            continue
+
+        has_times = bool(re.search(r"\b\d{1,2}[h:]\d{2}\b", line))
+        version_only = bool(re.match(r"^(VF|VO|VOSTFR?|VFST)$", line, re.I))
+
+        if not has_times and not version_only and len(line) > 3:
+            # Probable titre de film : agréger les lignes suivantes
+            row: "list[str | None]" = [line]
+            j = i + 1
+            while j < len(lines) and j < i + 12:
+                nl = lines[j]
+                if (not re.search(r"\b\d{1,2}[h:]\d{2}\b", nl)
+                        and not re.match(r"^(VF|VO|VOSTFR?|VFST)$", nl, re.I)
+                        and len(nl) > 3):
+                    break  # Nouveau titre
+                row.append(nl)
+                j += 1
+            rows.append(row)
+            i = j
+            continue
+
+        i += 1
+    return rows
+
+
+# ── Nettoyage du tableau ───────────────────────
+
+# Noms de jours complets (PDF Comoedia) → isoweekday
+FR_DAY_NAMES: dict[str, int] = {
+    "mercredi": 3, "jeudi": 4, "vendredi": 5, "samedi": 6,
+    "dimanche": 7, "lundi": 1, "mardi": 2,
+}
+
+
+def _infer_col_dates(
+    header_row: "list[str | None]",
+    week_start: "date | None",
+) -> "dict[int, date]":
+    """
+    Construit col_index → date à partir de la ligne d'entête du PDF.
+
+    Format réel observé : 'MERCREDI. 11', 'JEUDI. 12', … (jour + numéro du jour)
+    Aussi supporté : abréviations courtes 'mer', 'jeu', … (fallback).
+
+    Si week_start est fourni il est utilisé directement.
+    Sinon les numéros de jours dans l'entête permettent d'inférer les dates
+    en cherchant la semaine la plus proche de aujourd'hui.
+    """
+    col_dates: "dict[int, date]" = {}
+    day_col_info: "dict[int, tuple[int, int | None]]" = {}  # col → (iso_day, day_num|None)
+
+    for j, cell in enumerate(header_row):
+        cell_l = (cell or "").strip().lower()
+        if not cell_l:
+            continue
+        # Cherche un nom de jour complet ou une abréviation
+        for day_name, iso_day in FR_DAY_NAMES.items():
+            if day_name in cell_l:
+                # Cherche le numéro du jour dans la cellule (ex : "mercredi. 11" → 11)
+                m = re.search(r"\b(\d{1,2})\b", cell_l)
+                day_num = int(m.group(1)) if m else None
+                day_col_info[j] = (iso_day, day_num)
+                break
+        else:
+            # Essai abréviations courtes
+            for abbr, iso_day in DAY_ABBREVS.items():
+                if re.search(rf"\b{abbr}\b", cell_l):
+                    day_col_info[j] = (iso_day, None)
+                    break
+
+    if not day_col_info:
+        return {}
+
+    # Résoudre les dates
+    if week_start:
+        for col_j, (iso_day, _) in day_col_info.items():
+            offset = (iso_day - 3) % 7
+            col_dates[col_j] = week_start + timedelta(days=offset)
+        return col_dates
+
+    # Inférer depuis les numéros de jours : chercher la semaine contenant
+    # un mercredi (ou jeudi si absent) dont le numéro correspond
+    today = date.today()
+    anchor_col = next(
+        (j for j, (iso, _) in day_col_info.items() if iso == 3),
+        next(iter(day_col_info)),
+    )
+    anchor_iso, anchor_day_num = day_col_info[anchor_col]
+
+    if anchor_day_num is not None:
+        # Search from closest to today outward to avoid false matches
+        for delta in sorted(range(-28, 29), key=abs):
+            candidate = today + timedelta(days=delta)
+            if candidate.day == anchor_day_num and candidate.isoweekday() == anchor_iso:
+                for col_j, (iso_day, _) in day_col_info.items():
+                    offset = (iso_day - anchor_iso) % 7
+                    col_dates[col_j] = candidate + timedelta(days=offset)
+                log.info(f"Dates inférées depuis numéros de jours — ancre : {candidate}")
+                return col_dates
+
+    # Dernier recours : utiliser la semaine courante
+    days_since_wed = (today.isoweekday() - 3) % 7
+    wed = today - timedelta(days=days_since_wed)
+    for col_j, (iso_day, _) in day_col_info.items():
+        offset = (iso_day - 3) % 7
+        col_dates[col_j] = wed + timedelta(days=offset)
+    log.warning("Dates inférées depuis la semaine courante (fallback)")
+    return col_dates
+
+
+def clean_pdf_table(
+    rows: "list[list[str | None]]",
+    week_start: "date | None",
+) -> "list[dict]":
+    """
+    Transforme les lignes brutes du tableau PDF en liste de films avec séances.
+
+    Format réel du PDF Comoedia (observé mars 2026) :
+      - Ligne 0 = entête : ['', 'MERCREDI. 11', 'JEUDI. 12', …]
+      - Lignes suivantes = films :
+          col 0 = 'TITRE\\nVERSION / DÉTAIL'
+          col 1-7 = horaires du jour, ex '11h15 / 13h35\\n15h50' ou '-'
+      - Chiffres de note de bas de page collés aux heures : '20h001' → '20h00'
+    """
+    if not rows:
+        return []
+
+    films: "list[dict]" = []
+
+    # 1. Localiser la ligne d'entête (≥ 4 noms de jours)
+    header_idx: "int | None" = None
+
+    for i, row in enumerate(rows):
+        cells_lower = [(c or "").strip().lower() for c in row]
+        count = sum(
+            1 for c in cells_lower
+            if any(d in c for d in FR_DAY_NAMES)
+               or any(re.search(rf"\b{a}\b", c) for a in DAY_ABBREVS)
+        )
+        if count >= 4:
+            header_idx = i
+            log.debug(f"Entête PDF trouvé à la ligne {i}")
+            break
+
+    if header_idx is None:
+        log.warning("Aucun entête de jours trouvé dans le tableau PDF")
+        return []
+
+    col_dates = _infer_col_dates(rows[header_idx], week_start)
+    if not col_dates:
+        log.warning("Impossible de déterminer les dates des colonnes")
+        return []
+
+    # 2. Parcourir les lignes de données (à partir de la ligne après l'entête)
+    for row in rows[header_idx + 1:]:
+        if not row or all(not c for c in row):
+            continue
+
+        first_cell = (row[0] or "").strip()
+        if not first_cell or first_cell == "-":
+            continue
+
+        # Le titre et la version sont dans la même cellule, séparés par \n
+        # Ex : "ALTER EGO\nVF"  ou  "DEUX FEMMES ET QUELQUES\nHOMMES\nVFST"
+        cell_lines = [ln.strip() for ln in first_cell.splitlines() if ln.strip()]
+
+        # Identifier la ligne de version : contient VF / VO / VOST / etc.
+        version_line_idx: "int | None" = None
+        for li, ln in enumerate(cell_lines):
+            if re.search(r"\b(VF|VO|VOST(?:FR)?|VFST)\b", ln, re.I):
+                version_line_idx = li
+                break
+
+        if version_line_idx is not None:
+            titre = " ".join(cell_lines[:version_line_idx]).strip()
+            version_raw = cell_lines[version_line_idx]
+        else:
+            titre = " ".join(cell_lines).strip()
+            version_raw = "VF"
+
+        # Normaliser le titre : retirer les suffixes de catégorie
+        titre = re.sub(r"\s+JP\s*$", "", titre, flags=re.I).strip()
+        titre = re.sub(r"\s+", " ", titre).strip()
+        if not titre or len(titre) < 2:
+            continue
+
+        # Extraire la version (premier segment avant ' / ' ou ' INT' ou ' ANS')
+        version_token = re.split(r"\s*/\s*|\s+INT\b|\s+ANS\b|\s+AVERTISSEMENT\b",
+                                 version_raw, maxsplit=1)[0].strip()
+        version = detect_version(version_token)
+
+        # 3. Séances : parcourir les colonnes de jours
+        seances: "list[dict]" = []
+        for col_j, col_date in col_dates.items():
+            if col_j >= len(row):
+                continue
+            cell = (row[col_j] or "").strip()
+            if not cell or cell == "-":
+                continue
+            # Retirer les chiffres de note de bas de page collés aux heures
+            # Ex : '20h001' → '20h00', '11h004' → '11h00'
+            cell_clean = re.sub(r"(\d{1,2}h\d{2})(\d)", r"\1", cell)
+            for h, mn in re.findall(r"\b(\d{1,2})h(\d{2})\b", cell_clean):
+                seances.append({
+                    "date": col_date.isoformat(),
+                    "heure": f"{int(h):02d}:{mn}",
+                    "version": version,
+                })
+
+        if not seances:
+            continue
+
+        # Dédupliquer et trier
+        seen_keys: "set[tuple]" = set()
+        dedup: "list[dict]" = []
+        for s in seances:
+            k = (s["date"], s["heure"], s["version"])
+            if k not in seen_keys:
+                seen_keys.add(k)
+                dedup.append(s)
+
+        films.append({
+            "titre": titre,
+            "titreOriginal": None,
+            "annee": None,
+            "realisateur": None,
+            "duree": None,
+            "genres": [],
+            "synopsis": None,
+            "imdbId": None,
+            "seances": sorted(dedup, key=lambda x: (x["date"], x["heure"])),
+            "source": "comoedia",
+            "cinema": "Le Comoedia",
+        })
+
+    log.info(f"{len(films)} films extraits du tableau PDF")
+    return films
+
+
+# ── Upsert Supabase ────────────────────────────
+
+CINEMA_SLUGS = {
+    "Le Comoedia": "comoedia",
+    "Lumière Terreaux": "lumiere-terreaux",
+    "Lumière Bellecour": "lumiere-bellecour",
+    "Lumière Fourmi": "lumiere-fourmi",
+}
+
+
+def _cinema_slug(name: str) -> str:
+    return CINEMA_SLUGS.get(name) or name.lower().replace(" ", "-").replace("è", "e")
+
+
+def upsert_all_to_supabase(films: list[dict]) -> None:
+    """
+    Upsert tous les films (Comoedia + Lumière) et leurs séances dans Supabase.
+    Sans effet si SUPABASE_URL / SUPABASE_SERVICE_ROLE_KEY sont absents.
+    """
+    sb_url = os.getenv("SUPABASE_URL")
+    sb_key = os.getenv("SUPABASE_SERVICE_ROLE_KEY")
+    if not sb_url or not sb_key:
+        log.info(
+            "SUPABASE_URL / SUPABASE_SERVICE_ROLE_KEY absents "
+            "— upsert Supabase ignoré"
+        )
+        return
+    if not films:
+        return
+
+    try:
+        from supabase import create_client
+        client = create_client(sb_url, sb_key)
+    except Exception as e:
+        log.error(f"Connexion Supabase impossible : {e}")
+        return
+
+    cinema_ids: "dict[str, str]" = {}
+    film_ids: "dict[tuple, str]" = {}
+    seances_count = 0
+
+    for entry in films:
+        cinema_name = entry.get("cinema") or "Le Comoedia"
+        if cinema_name not in cinema_ids:
+            slug = _cinema_slug(cinema_name)
+            r = client.table("cinemas").upsert(
+                {"name": cinema_name, "slug": slug},
+                on_conflict="name",
+            ).execute()
+            if r.data:
+                cinema_ids[cinema_name] = r.data[0]["id"]
+            else:
+                r2 = client.table("cinemas").select("id").eq("name", cinema_name).execute()
+                if r2.data:
+                    cinema_ids[cinema_name] = r2.data[0]["id"]
+                else:
+                    log.warning(f"Impossible de récupérer l'ID du cinéma : {cinema_name}")
+                    continue
+
+        titre = entry.get("titre") or ""
+        annee = entry.get("annee")
+        realisateur = entry.get("realisateur") or ""
+        key = (titre, annee, realisateur)
+
+        if key not in film_ids:
+            row = {
+                "titre": titre,
+                "titre_original": entry.get("titreOriginal"),
+                "annee": annee,
+                "realisateur": realisateur,
+                "duree": entry.get("duree"),
+                "genres": entry.get("genres") or [],
+                "synopsis": entry.get("synopsis"),
+                "imdb_id": entry.get("imdbId"),
+                "poster": entry.get("poster"),
+                "imdb_rating": entry.get("imdbRating"),
+                "cast": entry.get("cast"),
+                "source": entry.get("source"),
+            }
+            r = client.table("films").upsert(
+                row, on_conflict="titre,annee,realisateur"
+            ).execute()
+            if r.data:
+                film_ids[key] = r.data[0]["id"]
+            else:
+                r2 = (
+                    client.table("films").select("id")
+                    .eq("titre", titre)
+                    .eq("annee", annee)
+                    .eq("realisateur", realisateur)
+                    .execute()
+                )
+                if r2.data:
+                    film_ids[key] = r2.data[0]["id"]
+
+        film_id = film_ids.get(key)
+        cinema_id = cinema_ids.get(cinema_name)
+        if not film_id or not cinema_id:
+            continue
+
+        for s in entry.get("seances", []):
+            d_val = s.get("date")
+            h_val = s.get("heure")
+            if not d_val or not h_val:
+                continue
+            heure = h_val + ":00" if len(h_val) == 5 and ":" in h_val else h_val
+            try:
+                client.table("seances").upsert(
+                    {
+                        "film_id": film_id,
+                        "cinema_id": cinema_id,
+                        "date": d_val,
+                        "heure": heure,
+                        "version": s.get("version"),
+                        "resa_url": s.get("resa_url"),
+                    },
+                    on_conflict="film_id,cinema_id,date,heure",
+                ).execute()
+                seances_count += 1
+            except Exception as e:
+                log.warning(
+                    f"Séance non insérée ({titre} {d_val} {h_val}) : {e}"
+                )
+
+    log.info(
+        f"Supabase : {len(film_ids)} films, {seances_count} séances upsertés "
+        f"({len(cinema_ids)} cinémas)"
+    )
+
+
+# ── Orchestrateur PDF principal ────────────────
+
+def scrape_comoedia_pdf(
+    pdf_file: "str | None" = None,
+    pdf_url_override: "str | None" = None,
+    dry_run: bool = False,
+    use_playwright: bool = True,
+) -> list[dict]:
+    """
+    Orchestrateur du scraper PDF Comoedia.
+    Retourne la liste de films au même format que scrape_comoedia().
+    Gère découverte, déduplication, téléchargement et parsing.
+    """
+    # Mode fichier local (test / debug)
+    if pdf_file:
+        log.info(f"Mode fichier PDF local : {pdf_file}")
+        table, week_start = parse_comoedia_pdf(Path(pdf_file))
+        return clean_pdf_table(table, week_start)
+
+    state = load_pdf_state()
+    processed: list[str] = state.setdefault("processed_urls", [])
+
+    urls_to_check = (
+        [pdf_url_override]
+        if pdf_url_override
+        else fetch_pdf_urls(use_playwright=use_playwright)
+    )
+    all_films: list[dict] = []
+
+    for url in urls_to_check:
+        # ── Garde 1 : déjà traité ? ────────────
+        if url in processed:
+            log.info(f"PDF déjà traité — ignoré : {url}")
+            continue
+
+        # ── Garde 2a : semaine depuis l'URL (rapide, sans download) ──
+        week_range = parse_week_from_slug(url)
+        if week_range:
+            week_start, week_end = week_range
+            log.info(f"Semaine PDF (depuis URL) : {week_start} → {week_end}")
+            if check_week_in_supabase(week_start, week_end):
+                if not dry_run:
+                    processed.append(url)
+                    save_pdf_state(state)
+                continue
+        else:
+            week_start = None
+            log.info(
+                f"URL sans slug de semaine lisible (CDN ?) — "
+                "la date sera lue depuis le contenu du PDF"
+            )
+
+        # ── Téléchargement ─────────────────────
+        pdf_bytes = download_pdf(url)
+        if not pdf_bytes:
+            continue
+
+        # ── Parsing ────────────────────────────
+        table, pdf_week_start = parse_comoedia_pdf(pdf_bytes)
+        # resolved_start may be None for CDN URLs — clean_pdf_table infers from header
+        resolved_start = pdf_week_start or week_start
+
+        # ── Garde 2b : vérification Supabase post-parse (cas CDN) ──
+        if week_start is None and pdf_week_start:
+            week_end_calc = pdf_week_start + timedelta(days=6)
+            if check_week_in_supabase(pdf_week_start, week_end_calc):
+                if not dry_run:
+                    processed.append(url)
+                    save_pdf_state(state)
+                continue
+
+        films = clean_pdf_table(table, resolved_start)  # None → date inference from header
+        if not films:
+            log.warning(f"Aucun film extrait du PDF : {url}")
+            continue
+
+        log.info(f"{len(films)} films extraits de {url}")
+        all_films.extend(films)
+
+        if not dry_run:
+            processed.append(url)
+            save_pdf_state(state)
+
+    return all_films
 
 
 # ─────────────────────────────────────────────
@@ -1196,13 +2010,22 @@ def filter_current_week(films: list[dict]) -> list[dict]:
 
 def main():
     parser = argparse.ArgumentParser(description="Scraper programme multi-cinémas Lyon")
-    parser.add_argument("--debug",     action="store_true", help="Mode debug verbose")
-    parser.add_argument("--dry-run",   action="store_true", help="Ne pas écrire le fichier JSON")
-    parser.add_argument("--output",    default=str(OUTPUT_DEFAULT), help="Chemin du fichier JSON de sortie")
-    parser.add_argument("--no-omdb",   action="store_true", help="Désactiver l'enrichissement OMDb")
-    parser.add_argument("--file",      default=None, help="Fichier HTML local Comoedia (pour test)")
-    parser.add_argument("--no-filter", action="store_true", help="Ne pas filtrer par semaine (pour test)")
+    parser.add_argument("--debug",      action="store_true", help="Mode debug verbose")
+    parser.add_argument("--dry-run",    action="store_true", help="Ne pas écrire le fichier JSON")
+    parser.add_argument("--output",     default=str(OUTPUT_DEFAULT), help="Chemin du fichier JSON de sortie")
+    parser.add_argument("--no-omdb",    action="store_true", help="Désactiver l'enrichissement OMDb/TMDB")
+    parser.add_argument("--no-filter",  action="store_true", help="Ne pas filtrer par semaine (pour test)")
     parser.add_argument("--no-lumiere", action="store_true", help="Désactiver le scraping des Cinémas Lumière")
+    parser.add_argument("--no-comoedia-pdf", action="store_true",
+                        help="Désactiver le scraper PDF Comoedia")
+    parser.add_argument("--pdf-file",   default=None,
+                        help="Fichier PDF local Comoedia (pour test, remplace le téléchargement)")
+    parser.add_argument("--pdf-url",    default=None,
+                        help="URL directe du PDF Comoedia (pour test)")
+    parser.add_argument("--no-playwright", action="store_true",
+                        help="Ne pas utiliser Playwright pour extraire le lien PDF")
+    # Rétrocompatibilité : --file était l'ancien chemin HTML
+    parser.add_argument("--file",       default=None, help=argparse.SUPPRESS)
     args = parser.parse_args()
 
     if args.debug:
@@ -1212,12 +2035,19 @@ def main():
     log.info(f"Multi-Cinémas Lyon Scraper — {datetime.now().strftime('%A %d %B %Y %H:%M')}")
     log.info("═" * 55)
 
-    # 1. Scraping Comoedia
-    comoedia_films = scrape_comoedia(file_path=args.file)
+    # 1. Scraping Comoedia (PDF uniquement — programme-accessible obsolète)
+    comoedia_films: list[dict] = []
+    if not args.no_comoedia_pdf:
+        comoedia_films = scrape_comoedia_pdf(
+            pdf_file=args.pdf_file,
+            pdf_url_override=args.pdf_url,
+            dry_run=args.dry_run,
+            use_playwright=not args.no_playwright,
+        )
     if not comoedia_films:
         log.warning(
-            "Aucun film Comoedia extrait — "
-            "la structure HTML a peut-être changé. Lancez avec --debug."
+            "Aucun film Comoedia extrait — le PDF est la seule source valide. "
+            "Utilisez --pdf-url ou --pdf-file avec l'URL CDN du programme."
         )
 
     # 2. Scraping Cinémas Lumière
@@ -1279,15 +2109,19 @@ def main():
                     if best.get(field) and not film.get(field):
                         film[field] = best[field]
 
-    # 5. Filtrage semaine
+    # 5. Upsert tous les films (Comoedia + Lumière) dans Supabase (avant filtrage)
+    if not args.dry_run:
+        upsert_all_to_supabase(all_films)
+
+    # 6. Filtrage semaine
     if not args.no_filter:
         all_films = filter_current_week(all_films)
     log.info(f"{len(all_films)} films retenus pour la semaine")
 
-    # 6. Écriture JSON
+    # 7. Écriture JSON
     output = {
         "generated_at": datetime.now().isoformat(),
-        "sources": [URL_PROGRAMME, URL_LUMIERE_BASE],
+        "sources": [URL_PDF_LISTING, URL_LUMIERE_BASE],
         "films": all_films,
     }
 
