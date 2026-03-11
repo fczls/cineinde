@@ -179,17 +179,81 @@ header{
 }
 .week-day-header.today{color:var(--gold);}
 
-/* ── COMPACT WEEK (colonnes par jour) ── */
-.compact-list.compact-week{padding:12px 20px 40px;overflow-x:auto;}
-.compact-week-grid{
-  display:grid;gap:20px;align-items:start;
-  min-width:min-content;
+/* ── COMPACT WEEK TABLE ── */
+.compact-list.compact-week{padding:0;overflow-x:auto;}
+.cw-grid{
+  display:grid;
+  min-width:max-content;
+  border-bottom:1px solid var(--border);
 }
-.compact-day-column{
-  min-width:220px;
+/* sticky first column */
+.cw-corner,
+.cw-film-label,
+.cw-cinema-label{
+  position:sticky;left:0;z-index:5;
+  background:var(--bg);
 }
-.compact-day-column .compact-section{margin-bottom:16px;}
-.compact-day-column .compact-section:last-child{margin-bottom:0;}
+.cw-corner{z-index:10;background:var(--bg);}
+
+/* header row */
+.cw-corner{
+  padding:14px 20px;
+  border-bottom:2px solid var(--border);
+  border-right:1px solid var(--border2);
+}
+.cw-day-head{
+  padding:12px 10px;text-align:center;
+  font-size:10px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--text-dim);border-bottom:2px solid var(--border);
+  border-right:1px solid var(--border);
+  white-space:nowrap;
+}
+.cw-day-head.today{
+  background:var(--gold);color:#111;font-weight:700;border-bottom-color:var(--gold);
+}
+
+/* cinema header row */
+.cw-cinema-label{
+  padding:10px 20px;
+  font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--compact-red);
+  border-bottom:1px solid var(--border);border-right:1px solid var(--border2);
+  background:var(--bg);
+}
+.cw-cinema-label em{font-style:italic;font-weight:400;text-transform:lowercase;}
+.cw-cinema-spacer{
+  border-bottom:1px solid var(--border);border-right:1px solid var(--border);
+  background:rgba(255,255,255,.015);
+}
+
+/* film row */
+.cw-film-label{
+  padding:10px 20px;cursor:pointer;
+  font-size:13px;font-weight:700;text-transform:uppercase;color:var(--text);
+  border-bottom:1px solid var(--border);border-right:1px solid var(--border2);
+  line-height:1.35;transition:background .15s;
+}
+.cw-film-label:hover{background:rgba(255,255,255,.04);}
+.cw-film-label.active{background:rgba(201,168,76,.12);}
+.cw-times{
+  padding:10px 10px;text-align:center;
+  font-size:11px;color:var(--compact-times);line-height:1.7;
+  border-bottom:1px solid var(--border);border-right:1px solid var(--border);
+  vertical-align:middle;cursor:pointer;transition:background .15s;
+  white-space:pre-line;
+}
+.cw-times:hover{background:rgba(255,255,255,.03);}
+.cw-times:last-child,.cw-day-head:last-child,.cw-cinema-spacer:last-child{border-right:none;}
+.cw-times.has-time{color:var(--text-mid);}
+.cw-times .t-past{opacity:.4;}
+.cw-times .t-soon{color:var(--accent);}
+
+@media(max-width:820px){
+  .cw-film-label{padding:8px 12px;font-size:12px;}
+  .cw-corner,.cw-cinema-label{padding:8px 12px;}
+  .cw-times{padding:8px 6px;font-size:10px;}
+  .cw-day-head{padding:10px 6px;font-size:9px;}
+}
 .week-day-films{display:flex;flex-direction:column;gap:16px;}
 @media(max-width:820px){
   .view-toggles{padding:8px 16px;gap:8px;}
@@ -1271,50 +1335,75 @@ function renderCompactWeek(films) {
   const { days } = getWeekBounds(today);
   const visibleDays = days.filter(d => d >= today);
   const container = document.getElementById('compactList');
-  const n = visibleDays.length;
-  let html = `<div class="compact-week-grid" style="grid-template-columns:repeat(${n},minmax(220px,1fr))">`;
+  const N = visibleDays.length;
+  const COLS = `200px repeat(${N}, minmax(110px, 1fr))`;
+  const cinemaOrder = ['Le Comoedia','Lumière Terreaux','Lumière Bellecour','Lumière Fourmi'];
+
+  // ── Build data: { cinema → { filmKey → { film, days: { dKey → seances[] } } } } ──
+  const cinemaMap = {}; // cinema → Map<filmKey, { film, dayMap }>
   visibleDays.forEach(d => {
+    const k = dKey(d);
     const rows = getRowsForDate(films, d);
-    const isTod = sameDay(d, today);
-    const dayLabel = isTod ? "Aujourd'hui" : d.toLocaleDateString('fr-FR', {weekday:'long', day:'numeric', month:'short'});
-    html += `<div class="compact-day-column" id="day-${dKey(d)}">
-      <div class="week-day-header${isTod?' today':''}">${dayLabel}</div>`;
-    if (!rows.length) {
-      html += `<div style="padding:8px 0;color:var(--text-dim);font-size:11px;font-style:italic">Aucune séance.</div>`;
-    } else {
-      const byCinema = {};
-      rows.forEach(f => {
-        f._day.forEach(s => {
-          const c = s.cinema || f.cinema || '';
-          if (!byCinema[c]) byCinema[c] = [];
-          byCinema[c].push({ film: f, s });
-        });
-      });
-      const cinemaOrder = ['Le Comoedia','Lumière Terreaux','Lumière Bellecour','Lumière Fourmi'];
-      const cinemas = cinemaOrder.filter(c => byCinema[c]).concat(Object.keys(byCinema).filter(c => !cinemaOrder.includes(c)));
-      cinemas.forEach(cinema => {
-        const items = byCinema[cinema];
-        const byFilm = {};
-        items.forEach(({ film, s }) => {
-          const key = normalizeTitle(film.titre);
-          if (!byFilm[key]) byFilm[key] = { film, times: [] };
-          byFilm[key].times.push(s);
-        });
-        const filmRows = Object.values(byFilm).map(({ film, times }) => {
-          times.sort((a,b) => a.h.localeCompare(b.h));
-          const timesStr = times.map(s => formatTimeCompact(s.h)).join(' · ');
-          return `<div class="compact-row" onclick="openFilm('${esc(film.titre)}')" data-t="${escAttr(film.titre)}" data-poster="${escAttr(film._poster||'')}">
-            <div class="compact-title">${escHtml(film.titre.toUpperCase())}</div>
-            <div class="compact-poster-slot"></div>
-            <div class="compact-times">${escHtml(timesStr)}</div>
-          </div>`;
-        }).join('');
-        html += `<div class="compact-section"><div class="compact-section-header">${getCinemaSectionLabel(cinema)}</div>${filmRows}</div>`;
-      });
-    }
-    html += '</div>';
+    rows.forEach(f => {
+      const cinema = f.cinema || '';
+      if (!cinemaMap[cinema]) cinemaMap[cinema] = new Map();
+      const fk = normalizeTitle(f.titre);
+      if (!cinemaMap[cinema].has(fk)) cinemaMap[cinema].set(fk, { film: f, dayMap: {} });
+      cinemaMap[cinema].get(fk).dayMap[k] = f._day.map(s => ({ h: s.h, v: s.v }));
+    });
   });
-  html += '</div>';
+
+  const cinemas = cinemaOrder.filter(c => cinemaMap[c])
+    .concat(Object.keys(cinemaMap).filter(c => !cinemaOrder.includes(c)));
+
+  if (!cinemas.length) {
+    container.innerHTML = `<div style="padding:32px 20px;text-align:center;color:var(--text-dim);font-size:13px;font-style:italic;font-family:'Playfair Display',serif">Aucune séance cette semaine.</div>`;
+    container.classList.remove('compact-week','hidden');
+    return;
+  }
+
+  // ── Day headers ──
+  let html = `<div class="cw-grid" style="grid-template-columns:${COLS}">`;
+  html += `<div class="cw-corner"></div>`;
+  visibleDays.forEach(d => {
+    const isTod = sameDay(d, today);
+    const label = d.toLocaleDateString('fr-FR', {weekday:'short', day:'2-digit', month:'2-digit'}).toUpperCase();
+    html += `<div class="cw-day-head${isTod?' today':''}" id="day-${dKey(d)}">${label}</div>`;
+  });
+
+  // ── Cinema groups + film rows ──
+  cinemas.forEach(cinema => {
+    const filmEntries = [...cinemaMap[cinema].values()];
+
+    // Cinema header row
+    html += `<div class="cw-cinema-label">${getCinemaSectionLabel(cinema)}</div>`;
+    for (let i = 0; i < N; i++) html += `<div class="cw-cinema-spacer"></div>`;
+
+    // Film rows
+    filmEntries.forEach(({ film, dayMap }) => {
+      const isTod = true; // used below for past/soon per-day
+      html += `<div class="cw-film-label" onclick="openFilm('${esc(film.titre)}')" data-t="${escAttr(film.titre)}" data-poster="${escAttr(film._poster||'')}">${escHtml(film.titre)}</div>`;
+      visibleDays.forEach(d => {
+        const k = dKey(d);
+        const todayDay = sameDay(d, today);
+        const seances = dayMap[k] || [];
+        if (!seances.length) {
+          html += `<div class="cw-times" onclick="openFilm('${esc(film.titre)}')"></div>`;
+        } else {
+          seances.sort((a,b) => a.h.localeCompare(b.h));
+          const lines = seances.map(s => {
+            const past = todayDay && isPast(s.h);
+            const soon = todayDay && isSoon(s.h);
+            const cls = past ? ' t-past' : (soon ? ' t-soon' : '');
+            return `<span class="${cls}">${s.h}</span>`;
+          }).join('\n');
+          html += `<div class="cw-times has-time" onclick="openFilm('${esc(film.titre)}')">${lines}</div>`;
+        }
+      });
+    });
+  });
+
+  html += `</div>`;
   container.innerHTML = html;
   container.classList.add('compact-week');
   container.classList.remove('hidden');
