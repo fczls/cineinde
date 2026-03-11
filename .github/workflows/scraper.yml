@@ -3,7 +3,12 @@ name: Scraper hebdomadaire Multi-Cinémas Lyon
 on:
   schedule:
     - cron: '0 1 * * 3'  # Mercredi 1h00 UTC
-  workflow_dispatch:       # Déclenchement manuel possible
+  workflow_dispatch:
+    inputs:
+      pdf_url:
+        description: 'URL directe du PDF Comoedia (laisser vide pour découverte automatique)'
+        required: false
+        default: ''
 
 jobs:
   scrape:
@@ -28,7 +33,11 @@ jobs:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
         run: |
-          python3 scraper.py --output programme.json
+          PDF_ARG=""
+          if [ -n "${{ github.event.inputs.pdf_url }}" ]; then
+            PDF_ARG="--pdf-url ${{ github.event.inputs.pdf_url }}"
+          fi
+          python3 scraper.py --output programme.json $PDF_ARG
 
       - name: Commit et push programme.json + pdf_state.json
         run: |
