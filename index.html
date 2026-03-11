@@ -466,6 +466,7 @@ header{
   .header-subtitle{display:none;}
   .header-right{flex-shrink:0;align-items:stretch;}
   .h-tab{padding:0 12px;font-size:10px;letter-spacing:.08em;}
+  .date-bar{padding-right:0;}
 }
 
 .hidden{display:none!important;}
@@ -1469,7 +1470,8 @@ function renderCompactWeek(films) {
   const visibleDays = days.filter(d => d >= today);
   const container = document.getElementById('compactList');
   const N = visibleDays.length;
-  const COLS = `200px repeat(${N}, minmax(110px, 1fr))`;
+  const firstCol = window.innerWidth < 600 ? '170px' : '200px';
+  const COLS = `${firstCol} repeat(${N}, minmax(110px, 1fr))`;
   const cinemaOrder = ['Le Comoedia','Lumière Terreaux','Lumière Bellecour','Lumière Fourmi'];
 
   // ── Build data: { cinema → { filmKey → { film, days: { dKey → seances[] } } } } ──
