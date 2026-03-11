@@ -45,7 +45,7 @@ header{
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
 
 /* ── LAYOUT ── */
-.app{display:grid;grid-template-columns:1fr 440px;max-width:1260px;margin:0 auto;min-height:calc(100vh - 64px);}
+.app{display:grid;grid-template-columns:1fr 220px;max-width:1260px;margin:0 auto;min-height:calc(100vh - 64px);}
 .main{border-right:1px solid var(--border);overflow-x:hidden;}
 .side{background:var(--bg);}
 
@@ -296,12 +296,12 @@ header{
 
 /* ── CINEMA CHIP (slot row label in "Tous" mode) ── */
 .card-cinema-chip{
-  flex-shrink:0;width:88px;min-width:82px;height:48px;
+  flex-shrink:0;width:88px;min-width:82px;height:64px;
   display:flex;align-items:center;justify-content:center;
   border-radius:8px;border:1px solid #3a3a3a;
   background:rgba(255,255,255,.04);color:var(--text-mid);
   font-size:11px;font-weight:500;letter-spacing:.07em;text-transform:uppercase;
-  padding:0 12px;
+  padding:8px 12px;
 }
 /* tiny version label inside time button */
 .slot-ver{font-size:10px;opacity:.45;margin-left:5px;letter-spacing:.05em;font-family:'DM Sans',sans-serif;}
@@ -321,7 +321,7 @@ header{
 /* poster — 160×240, ratio 2:3 */
 .card-poster-wrap{flex-shrink:0;}
 .card-poster{
-  width:160px;height:240px;border-radius:10px;
+  width:192px;height:288px;border-radius:10px;
   object-fit:cover;display:block;
   box-shadow:0 8px 24px rgba(0,0,0,.5);
   background:#111;
@@ -330,9 +330,9 @@ header{
 /* card body */
 .card-body{flex:1;min-width:0;padding-top:0px;padding-bottom:0px;}
 .card-header{margin-bottom:8px;}
-.card-title{font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,40px);font-weight:300;color:#fff;line-height:1.15;}
+.card-title{font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,40px);font-weight:300;color:#fff;line-height:1.15;padding-top:8px;}
 .card-meta{font-size:16px;color:#dcdcdc;margin-top:8px;line-height:1.5;}
-.card-actors{font-size:13px;color:var(--text-dim);margin-top:4px;line-height:1.4;text-align:center;}
+.card-actors{font-size:13px;color:var(--text-dim);margin-top:4px;line-height:1.4;text-align:left;}
 
 /* grid langue + créneaux — une ligne par version */
 .card-slots{display:flex;flex-direction:column;gap:12px;margin-top:16px;min-width:0;}
@@ -348,7 +348,7 @@ header{
 /* bouton créneau */
 .card-time-btn{
   font-family:'DM Mono',monospace;font-size:18px;font-weight:400;
-  height:48px;width:88px;min-width:88px;padding:0 24px;
+  height:64px;width:88px;min-width:88px;padding:8px 24px;
   border-radius:8px;border:1px solid rgba(41,40,39,1);
   background:rgba(25,24,23,1);color:#fff;cursor:pointer;
   display:inline-flex;flex-direction:column;align-items:center;justify-content:center;
@@ -361,7 +361,7 @@ header{
 
 /* skeleton */
 .sk-card{border-radius:12px;border:1px solid #3a3a3a;background:#0b0b0b;display:flex;gap:24px;padding:20px;}
-.sk-poster{width:160px;height:240px;border-radius:10px;background:#111;animation:sh 1.6s ease-in-out infinite;flex-shrink:0;}
+.sk-poster{width:192px;height:288px;border-radius:10px;background:#111;animation:sh 1.6s ease-in-out infinite;flex-shrink:0;}
 .sk-foot{display:flex;flex-direction:column;gap:8px;flex:1;}
 .sk-line{border-radius:3px;background:#1a1a1a;animation:sh 1.6s ease-in-out infinite;}
 @keyframes sh{0%,100%{opacity:.4}50%{opacity:.75}}
@@ -453,12 +453,14 @@ header{
   .film-card{flex-direction:column;align-items:center;padding:16px;}
   .card-body{width:100%;}
   .card-poster{width:140px;height:210px;}
+  .sk-poster{width:140px;height:210px;}
+  .card-actors{text-align:center;}
   .card-title{font-size:24px;text-align:center;}
   .card-meta{text-align:center;}
   .card-slots{width:100%;}
   .card-slot-row{flex-wrap:wrap;}
   .card-lang-chip{min-width:80px;height:48px;font-size:14px;}
-  .card-time-btn{min-width:80px;height:48px;font-size:16px;}
+  .card-time-btn{min-width:80px;height:64px;font-size:16px;}
   .d-hero{position:relative;height:200px;}
   .d-body{margin-top:0;}
 }
