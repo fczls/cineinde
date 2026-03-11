@@ -18,18 +18,25 @@ jobs:
         with:
           python-version: '3.11'
 
+      - name: Installer les dépendances
+        run: pip install -r requirements.txt
+
+      - name: Installer Playwright (Chromium)
+        run: playwright install chromium --with-deps
+
       - name: Lancer le scraper
         env:
           OMDB_API_KEY: ${{ secrets.OMDB_API_KEY }}
           TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
         run: |
           python3 scraper.py --output programme.json
 
-      - name: Commit et push programme.json
+      - name: Commit et push programme.json + pdf_state.json
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add -f programme.json
+          git add -f programme.json pdf_state.json
           git diff --cached --quiet || git commit -m "chore: mise à jour programme $(date '+%Y-%m-%d')"
           git push
-      

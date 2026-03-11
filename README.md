@@ -8,9 +8,9 @@ Site programme des cinémas Le Comoedia et Cinémas Lumière (Terreaux, Bellecou
 
 | Composant | Description |
 |-----------|-------------|
-| **Frontend** | `index.html` — affiche le programme, charge `programme.json` |
-| **Scraper** | `scraper.py` — scrape Comoedia + Lumière, produit `programme.json` |
-| **Base de données** | Supabase (PostgreSQL) — optionnel, pour migration JSON → DB |
+| **Frontend** | `index.html` — charge Supabase (source principale), fallback `programme.json` |
+| **Scraper** | `scraper.py` — scrape Comoedia PDF + Lumière, produit `programme.json` et upsert Supabase |
+| **Base de données** | Supabase (PostgreSQL) — source principale du frontend |
 | **CI** | GitHub Actions — scraper hebdomadaire (mercredi 1h UTC) |
 
 ---
@@ -50,6 +50,7 @@ comedia/
 python3 -m venv .venv
 source .venv/bin/activate   # ou .venv\Scripts\activate sur Windows
 pip install -r requirements.txt
+playwright install chromium   # pour l’extraction automatique du PDF Comoedia
 cp .env.example .env
 # Éditer .env avec vos clés (voir Variables d'environnement)
 ```
@@ -66,7 +67,9 @@ python3 scraper.py --output programme.json
 
 ### 3. Consulter le frontend
 
-Ouvrir `index.html` dans un navigateur (ou via un serveur local). Le frontend charge `programme.json` ; en son absence, il utilise des données de démonstration.
+Ouvrir `index.html` dans un navigateur (ou via un serveur local). Le frontend charge **Supabase** en priorité ; en cas d'indisponibilité, il utilise `programme.json` puis les données de démonstration.
+
+Pour activer Supabase : renseigner `SUPABASE_URL` et `SUPABASE_ANON_KEY` dans la section CONFIG de `index.html` (clé anon = publique, safe pour le frontend).
 
 ---
 
@@ -74,7 +77,7 @@ Ouvrir `index.html` dans un navigateur (ou via un serveur local). Le frontend ch
 
 ### Sources
 
-- **Le Comoedia** : `https://www.cinema-comoedia.com/programme-accessible/` (Gatsby)
+- **Le Comoedia** : PDF extrait automatiquement depuis `https://www.cinema-comoedia.com/horaires-semaine-complete/` (Playwright) ou prédiction d’URL
 - **Cinémas Lumière** : `https://www.cinemas-lumiere.com/calendrier-general.html`
 
 ### Options

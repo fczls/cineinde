@@ -442,8 +442,8 @@ header{
   .side.open{display:block;position:fixed;inset:64px 0 0 0;overflow-y:auto;background:var(--bg);z-index:130;}
   .m-back{display:flex;}
   .detail-wrap{position:static;height:auto;}
-  .sub-header{top:104px;}
-  header{padding:0 16px;}
+  header{position:static;padding:0 16px;}
+  .sub-header{top:0;}
   .film-list,.events-list{padding:12px 12px 32px;}
   .ctx{padding:8px 16px;}
   /* Cards responsive: empiler affiche au-dessus du contenu */
@@ -457,6 +457,15 @@ header{
   .card-time-btn{min-width:80px;height:48px;font-size:16px;}
   .d-hero{position:relative;height:200px;}
   .d-body{margin-top:0;}
+}
+
+@media(max-width:600px){
+  header{height:52px;min-height:unset;padding:0 12px;align-items:stretch;flex-wrap:nowrap;}
+  .header-brand{flex-direction:row;align-items:center;gap:0;flex-wrap:nowrap;flex:1;min-width:0;overflow:hidden;}
+  .logo{font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .header-subtitle{display:none;}
+  .header-right{flex-shrink:0;align-items:stretch;}
+  .h-tab{padding:0 12px;font-size:10px;letter-spacing:.08em;}
 }
 
 .hidden{display:none!important;}
@@ -556,14 +565,18 @@ header{
   </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script>
 // ═══════════════════════════════════════════════════════════
 // CONFIG
-// Clé OMDb gratuite : https://www.omdbapi.com/apikey.aspx
-// La clé demo ci-dessous est limitée à 1000 req/jour
+// Supabase = source principale. Si vide, fallback sur programme.json puis FILMS_DATA.
 // ═══════════════════════════════════════════════════════════
-const OMDB_KEY = 'trilogy'; // clé démo publique OMDb
-const TMDB_KEY = ''; // https://www.themoviedb.org/settings/api — source principale (OMDb en fallback)
+const SUPABASE_URL = 'https://aaquwublsnfvpklxwxzz.supabase.co';      // https://xxx.supabase.co — depuis Dashboard → Settings → API
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFhcXV3dWJsc25mdnBrbHh3eHp6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMwMjcwNDEsImV4cCI6MjA4ODYwMzA0MX0.PPb9-tnEapTnEZ7Ayv--Qk7KDyKPhW5UL6E6_u1qXI8'; // clé anon (publique, safe pour le frontend)
+
+// Clé OMDb gratuite : https://www.omdbapi.com/apikey.aspx
+const OMDB_KEY = '822f09ad'; // clé démo publique OMDb
+const TMDB_KEY = '6235c8724e2a2574a056a230f6a271ff'; // https://www.themoviedb.org/settings/api — source principale (OMDb en fallback)
 const POSTER_FALLBACK = 'https://images.unsplash.com/photo-1696426483316-7f57831dadc8?w=400&q=80'; // camera on tripod
 
 // ═══════════════════════════════════════════════════════════
@@ -829,50 +842,170 @@ function actorsTop3(castStr) {
 
 // ═══════════════════════════════════════════════════════════
 // LOAD ALL
-// Tente d'abord de charger programme.json (généré par scraper.py)
-// Fallback sur FILMS_DATA + enrichissement TMDB/OMDb si pas de fichier
+// 1. Supabase (source principale)
+// 2. programme.json (fallback si Supabase indisponible)
+// 3. FILMS_DATA (fallback démo)
 // ═══════════════════════════════════════════════════════════
+function toHeure(h) {
+  if (!h) return '00:00';
+  const s = String(h);
+  return s.length >= 5 ? s.slice(0, 5) : s; // "11:15:00" → "11:15"
+}
+
+function toFrontendFilm(f) {
+  return {
+    ...f,
+    note:    f.imdbRating ?? f.note ?? null,
+    _poster: f.poster     ?? null,
+    _cast:   f.cast       ?? null,
+    _synopsis: f.synopsis ?? null,
+    color:   '#1a1a1a',
+    cinema:  f.cinema     || 'Le Comoedia',
+    _sd: (f.seances || []).map(s => ({
+      h: toHeure(s.heure),
+      v: s.version || 'VF',
+      date: new Date(s.date + 'T00:00:00'),
+      resa_url: s.resa_url || null,
+      cinema: f.cinema || 'Le Comoedia',
+    })),
+  };
+}
+
+async function loadFromSupabase() {
+  if (!SUPABASE_URL || !SUPABASE_ANON_KEY) return null;
+  if (typeof supabase === 'undefined') {
+    console.warn('[CinémasLyon] Script Supabase non chargé');
+    return null;
+  }
+  const { createClient } = supabase;
+  const sb = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  const { data, error } = await sb
+    .from('seances')
+    .select(`
+      date,
+      heure,
+      version,
+      resa_url,
+      films (
+        id,
+        titre,
+        titre_original,
+        annee,
+        realisateur,
+        duree,
+        genres,
+        synopsis,
+        imdb_id,
+        poster,
+        imdb_rating,
+        cast,
+        source
+      ),
+      cinemas (name)
+    `);
+
+  if (error || !data?.length) return null;
+
+  const byKey = {};
+  for (const row of data) {
+    const film = row.films;
+    const cinemaName = row.cinemas?.name || 'Le Comoedia';
+    if (!film) continue;
+    const key = `${film.id}-${cinemaName}`;
+    if (!byKey[key]) {
+      byKey[key] = {
+        titre: film.titre,
+        titreOriginal: film.titre_original,
+        annee: film.annee,
+        realisateur: film.realisateur,
+        duree: film.duree,
+        genres: film.genres || [],
+        synopsis: film.synopsis,
+        imdbId: film.imdb_id,
+        poster: film.poster,
+        imdbRating: film.imdb_rating,
+        cast: film.cast,
+        source: film.source,
+        cinema: cinemaName,
+        seances: [],
+      };
+    }
+    byKey[key].seances.push({
+      date: row.date,
+      heure: row.heure,
+      version: row.version,
+      resa_url: row.resa_url,
+    });
+  }
+
+  return Object.values(byKey).map(toFrontendFilm);
+}
+
+async function loadFromJson() {
+  const res = await fetch('./programme.json');
+  if (!res.ok) return null;
+  const data = await res.json();
+  return (data.films || []).map(f => toFrontendFilm({
+    ...f,
+    seances: f.seances || [],
+  }));
+}
+
 async function loadAll() {
   const today = new Date(); today.setHours(0,0,0,0);
 
-  // ── Essai 1 : fichier JSON généré par le scraper ──
+  // ── 1. Supabase (source principale) ──
+  if (SUPABASE_URL && SUPABASE_ANON_KEY) {
+    try {
+      const films = await loadFromSupabase();
+      if (films?.length) {
+        await Promise.all(films.map(enrichFilm));
+        console.info(`[CinémasLyon] Supabase chargé — ${films.length} films`);
+        return films;
+      }
+      if (films && films.length === 0) console.info('[CinémasLyon] Supabase vide, fallback programme.json');
+    } catch (e) {
+      console.warn('[CinémasLyon] Supabase erreur, fallback programme.json:', e?.message || e);
+    }
+  }
+
+  // ── 2. programme.json (fallback) ──
   try {
-    const res = await fetch('./programme.json');
-    if (res.ok) {
-      const data = await res.json();
-      let films = data.films.map(f => ({
-        ...f,
-        note:    f.imdbRating || f.note || null,
-        _poster: f.poster     || null,
-        _cast:   f.cast       || null,
-        _synopsis: f.synopsis || null,
-        color:   '#1a1a1a',
-        cinema:  f.cinema     || 'Le Comoedia',
-        _sd: f.seances.map(s => ({
-          h: s.heure,
-          v: s.version,
-          date: new Date(s.date + 'T00:00:00'),
-          resa_url: s.resa_url || null,
-          cinema: f.cinema || 'Le Comoedia',
-        })),
-      }));
+    const films = await loadFromJson();
+    if (films?.length) {
       await Promise.all(films.map(enrichFilm));
-      console.info(`[CinémasLyon] programme.json chargé — ${films.length} films (généré le ${data.generated_at?.slice(0,16)})`);
+      console.info(`[CinémasLyon] programme.json chargé — ${films.length} films`);
       return films;
     }
-  } catch (_) { /* pas de fichier JSON, on continue */ }
+  } catch (e) {
+    console.warn('[CinémasLyon] programme.json indisponible:', e?.message || e);
+  }
 
-  // ── Essai 2 : données locales + enrichissement OMDb ──
-  console.info('[CinémasLyon] programme.json absent — utilisation des données de démonstration + TMDB/OMDb');
+  // ── 3. FILMS_DATA (fallback démo) ──
+  console.info('[CinémasLyon] Données de démonstration + TMDB/OMDb');
   const films = FILMS_DATA.map(f => ({
     ...f,
     cinema: f.cinema || 'Le Comoedia',
     _sd: f.seances.map(s => ({ ...s, date: addDays(today, s.j) })),
   }));
-
   await Promise.all(films.map(enrichFilm));
-
   return films;
+}
+
+// Fallback si loadAll retourne vide (évite écran blanc)
+function ensureFilms(films) {
+  if (films?.length) return films;
+  const today = new Date(); today.setHours(0,0,0,0);
+  return FILMS_DATA.map(f => ({
+    ...f,
+    cinema: f.cinema || 'Le Comoedia',
+    _sd: f.seances.map(s => ({
+      ...s,
+      date: addDays(today, s.j),
+      cinema: f.cinema || 'Le Comoedia',
+    })),
+  }));
 }
 
 // ═══════════════════════════════════════════════════════════
@@ -1602,14 +1735,10 @@ async function boot() {
   renderEvents();
   buildCinemaBar();
   try {
-    allFilms = await loadAll();
+    allFilms = ensureFilms(await loadAll());
   } catch(e) {
-    const today = new Date(); today.setHours(0,0,0,0);
-    allFilms = FILMS_DATA.map(f => ({
-      ...f,
-      cinema: f.cinema || 'Le Comoedia',
-      _sd: f.seances.map(s => ({...s, date: addDays(today, s.j)})),
-    }));
+    console.error('[CinémasLyon] Erreur loadAll:', e);
+    allFilms = ensureFilms([]);
   }
   document.getElementById('skeletons').remove();
   document.getElementById('btnViewJour').classList.add('active');
