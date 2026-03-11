@@ -46,6 +46,7 @@ header{
 
 /* ── LAYOUT ── */
 .app{display:grid;grid-template-columns:1fr 220px;max-width:1260px;margin:0 auto;min-height:calc(100vh - 64px);}
+.app.has-detail{grid-template-columns:1fr 432px;}
 .main{border-right:1px solid var(--border);overflow-x:hidden;}
 .side{background:var(--bg);}
 
@@ -1632,6 +1633,13 @@ function openFilm(titre) {
   }
 }
 
+function closeDetail() {
+  document.getElementById('detailEmpty').classList.remove('hidden');
+  document.getElementById('detailContent').classList.add('hidden');
+  document.querySelector('.app')?.classList.remove('has-detail');
+  document.querySelectorAll('.film-card, .compact-row, .cw-film-label, .cw-times').forEach(c => c.classList.remove('active'));
+}
+
 function renderDetail(film) {
   const poster = film._poster || null;
   const note   = film.note ? film.note.toFixed(1) : null;
@@ -1682,6 +1690,7 @@ function renderDetail(film) {
     }).join('');
 
   document.getElementById('detailEmpty').classList.add('hidden');
+  document.querySelector('.app').classList.add('has-detail');
   const el = document.getElementById('detailContent');
   el.classList.remove('hidden');
   el.innerHTML = `
@@ -1753,6 +1762,10 @@ async function boot() {
   document.getElementById('btnViewStandard').classList.add('active');
   buildPills(allFilms);
   renderFilms(allFilms);
+
+  document.querySelector('.main').addEventListener('click', function(e) {
+    if (!e.target.closest('.film-card, .compact-row, .cw-film-label, .cw-times')) closeDetail();
+  });
 }
 
 boot();
