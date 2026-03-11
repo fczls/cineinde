@@ -42,8 +42,8 @@ TMDB_API_KEY = os.getenv("TMDB_API_KEY")
 OUTPUT_DEFAULT   = Path(__file__).parent / "programme.json"
 PDF_STATE_PATH   = Path(__file__).parent / "pdf_state.json"
 
-# Page stable listant les horaires (et lien PDF si présent) — programme-semaine renvoie 404
-URL_PDF_LISTING   = "https://www.cinema-comoedia.com/horaires-semaine-complete/"
+# Page listant les PDFs hebdomadaires du Comoedia
+URL_PDF_LISTING   = "https://www.cinema-comoedia.com/programme-semaine/"
 URL_COMOEDIA_BASE = "https://www.cinema-comoedia.com"
 
 # Mois → slug URL (sans accents, pour prédiction des noms de fichiers PDF)
@@ -558,84 +558,14 @@ def save_pdf_state(state: dict) -> None:
 
 # ── Découverte des URLs de PDFs ────────────────
 
-def _fetch_pdf_urls_via_playwright(skip: bool = False) -> list[str]:
+def fetch_pdf_urls() -> list[str]:
     """
-    Rend la page horaires-semaine-complete avec Playwright et extrait les liens PDF.
-    - Intercepte les requêtes/réponses réseau pour capturer les URLs CDN (*.pdf).
-    - Parse aussi le HTML rendu pour les liens href.
-    Retourne [] si skip=True, Playwright indisponible ou si aucun PDF trouvé.
+    Tente de lire les URLs de PDFs depuis la page de listing.
+    Retombe sur la prédiction si la page est inaccessible ou rendue en JS.
     """
-    if skip:
-        return []
-    try:
-        from playwright.sync_api import sync_playwright
-    except ImportError:
-        log.debug("Playwright non installé — extraction PDF via navigateur ignorée")
-        return []
-
-    pdf_urls: list[str] = []
-
-    def _collect_pdf(request_or_url: str) -> None:
-        url = request_or_url if isinstance(request_or_url, str) else getattr(request_or_url, "url", "")
-        if url and ".pdf" in url.lower() and url not in pdf_urls:
-            pdf_urls.append(url)
-
-    try:
-        with sync_playwright() as p:
-            browser = p.chromium.launch(headless=True)
-            try:
-                page = browser.new_page()
-
-                # Intercepter les requêtes pour capturer les URLs PDF (CDN webediamovies, etc.)
-                page.on("request", lambda req: _collect_pdf(req.url))
-                page.on("response", lambda resp: _collect_pdf(resp.url))
-
-                page.goto(
-                    URL_PDF_LISTING,
-                    wait_until="domcontentloaded",
-                    timeout=15000,
-                )
-                page.wait_for_timeout(5000)  # Laisser le JS charger (liens, API, etc.)
-                html = page.content()
-
-                # Liens href contenant .pdf
-                for m in re.findall(r'href=["\']([^"\']+\.pdf[^"\']*)["\']', html, re.I):
-                    url = m if m.startswith("http") else f"{URL_COMOEDIA_BASE}{m}"
-                    if url not in pdf_urls:
-                        pdf_urls.append(url)
-
-                # Fallback : toute URL .pdf dans le HTML
-                if not pdf_urls:
-                    for m in re.findall(r'https?://[^\s"\'<>]+\.pdf[^\s"\'<>]*', html):
-                        if m not in pdf_urls:
-                            pdf_urls.append(m)
-
-                if pdf_urls:
-                    log.info(f"PDFs extraits via Playwright : {len(pdf_urls)}")
-            finally:
-                browser.close()
-    except Exception as e:
-        log.warning(f"Playwright : {e}")
-    return pdf_urls
-
-
-def fetch_pdf_urls(use_playwright: bool = True) -> list[str]:
-    """
-    Récupère les URLs de PDFs automatiquement.
-    1. Variable d'environnement PDF_URL (prioritaire, ex. URL CDN webediamovies).
-    2. Fetch statique (rapide, souvent vide car page en JS).
-    3. Playwright si dispo (rend la page, intercepte requêtes, extrait liens PDF).
-    4. Fallback : prédiction d'URLs (semaine courante + 2 précédentes).
-    """
-    # 1. Env PDF_URL (priorité, pour URL CDN manuelle)
-    env_url = os.getenv("PDF_URL", "").strip()
-    if env_url and ".pdf" in env_url.lower():
-        log.info(f"PDF depuis PDF_URL : {env_url[:60]}...")
-        return [env_url]
-
-    # 2. Fetch statique (HTML brut)
     try:
         html = fetch(URL_PDF_LISTING)
+        # Capture any .pdf link on the page (comoedia.com direct or CDN)
         matches = re.findall(r'href=["\']([^"\']+\.pdf[^"\']*)["\']', html, re.I)
         seen: set[str] = set()
         urls: list[str] = []
@@ -645,18 +575,11 @@ def fetch_pdf_urls(use_playwright: bool = True) -> list[str]:
                 seen.add(url)
                 urls.append(url)
         if urls:
-            log.info(f"PDFs trouvés (fetch statique) : {len(urls)}")
+            log.info(f"PDFs trouvés sur la page de listing : {len(urls)}")
             return urls
+        log.warning("Page de listing chargée mais aucun lien PDF détecté — fallback prédiction")
     except Exception as e:
-        log.debug(f"Fetch statique : {e}")
-
-    # 3. Playwright (page rendue en JS + interception requêtes)
-    urls = _fetch_pdf_urls_via_playwright(skip=not use_playwright)
-    if urls:
-        return urls
-
-    # 4. Fallback prédiction (URLs cinema-comoedia.com/pdf/... souvent 404)
-    log.warning("Aucun lien PDF détecté — fallback prédiction d'URLs")
+        log.warning(f"Page de listing inaccessible ({e}) — fallback prédiction")
     return predict_pdf_urls()
 
 
@@ -773,16 +696,13 @@ def check_week_in_supabase(week_start: date, week_end: date) -> bool:
 # ── Téléchargement du PDF ──────────────────────
 
 def download_pdf(url: str) -> bytes | None:
-    """Télécharge le PDF et retourne ses octets (urllib, pas de dépendance requests)."""
+    """Télécharge le PDF et retourne ses octets. Utilise requests pour le binaire."""
     try:
-        req = Request(url, headers=HEADERS)
-        with urlopen(req, timeout=30) as r:
-            data = r.read()
-        log.info(f"PDF téléchargé ({len(data):,} octets) : {url}")
-        return data
-    except HTTPError as e:
-        log.error(f"Impossible de télécharger le PDF {url} : HTTP {e.code}")
-        return None
+        import requests as req_lib
+        resp = req_lib.get(url, headers=HEADERS, timeout=30)
+        resp.raise_for_status()
+        log.info(f"PDF téléchargé ({len(resp.content):,} octets) : {url}")
+        return resp.content
     except Exception as e:
         log.error(f"Impossible de télécharger le PDF {url} : {e}")
         return None
@@ -1238,7 +1158,6 @@ def scrape_comoedia_pdf(
     pdf_file: "str | None" = None,
     pdf_url_override: "str | None" = None,
     dry_run: bool = False,
-    use_playwright: bool = True,
 ) -> list[dict]:
     """
     Orchestrateur du scraper PDF Comoedia.
@@ -1254,11 +1173,7 @@ def scrape_comoedia_pdf(
     state = load_pdf_state()
     processed: list[str] = state.setdefault("processed_urls", [])
 
-    urls_to_check = (
-        [pdf_url_override]
-        if pdf_url_override
-        else fetch_pdf_urls(use_playwright=use_playwright)
-    )
+    urls_to_check = [pdf_url_override] if pdf_url_override else fetch_pdf_urls()
     all_films: list[dict] = []
 
     for url in urls_to_check:
@@ -2022,8 +1937,6 @@ def main():
                         help="Fichier PDF local Comoedia (pour test, remplace le téléchargement)")
     parser.add_argument("--pdf-url",    default=None,
                         help="URL directe du PDF Comoedia (pour test)")
-    parser.add_argument("--no-playwright", action="store_true",
-                        help="Ne pas utiliser Playwright pour extraire le lien PDF")
     # Rétrocompatibilité : --file était l'ancien chemin HTML
     parser.add_argument("--file",       default=None, help=argparse.SUPPRESS)
     args = parser.parse_args()
@@ -2042,7 +1955,6 @@ def main():
             pdf_file=args.pdf_file,
             pdf_url_override=args.pdf_url,
             dry_run=args.dry_run,
-            use_playwright=not args.no_playwright,
         )
     if not comoedia_films:
         log.warning(
