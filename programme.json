@@ -1,10 +1,1597 @@
 {
-  "generated_at": "2026-03-24T08:02:46.272482",
+  "generated_at": "2026-03-24T08:55:31.008387",
   "sources": [
     "https://www.cinema-comoedia.com/programme-semaine/",
     "https://www.cinemas-lumiere.com/calendrier-general.html"
   ],
   "films": [
+    {
+      "titre": "RÉTROSPECTIVE SEIJUN SUZUKI",
+      "titreOriginal": null,
+      "annee": null,
+      "realisateur": null,
+      "duree": null,
+      "genres": [],
+      "synopsis": null,
+      "imdbId": null,
+      "seances": [
+        {
+          "date": "2026-03-25",
+          "heure": "18:20",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-26",
+          "heure": "18:20",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-27",
+          "heure": "18:20",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-28",
+          "heure": "18:20",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-29",
+          "heure": "18:20",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-30",
+          "heure": "18:20",
+          "version": "VOSTFR"
+        }
+      ],
+      "source": "comoedia",
+      "cinema": "Le Comoedia"
+    },
+    {
+      "titre": "LE COURT DE CLERMONT-FERRAND",
+      "titreOriginal": null,
+      "annee": null,
+      "realisateur": null,
+      "duree": null,
+      "genres": [],
+      "synopsis": null,
+      "imdbId": null,
+      "seances": [
+        {
+          "date": "2026-03-25",
+          "heure": "20:30",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-26",
+          "heure": "20:30",
+          "version": "VOSTFR"
+        }
+      ],
+      "source": "comoedia",
+      "cinema": "Le Comoedia"
+    },
+    {
+      "titre": "LA PETITE GRAINE",
+      "titreOriginal": null,
+      "annee": 1998,
+      "realisateur": "Tessa Racine",
+      "duree": null,
+      "genres": [
+        "Short"
+      ],
+      "synopsis": "Denis et Céline rêvent d’avoir un enfant. Après des années d’inséminations artificielles infructueuses, ils se lancent dans le plan de la dernière chance : demander à Piche, une vieille connaissance de lycée dont Denis était le souffre-douleur, de leur donner son sperme. Pourquoi lui ? Parce qu’il est le seul à avoir déjà mis Céline enceinte… A 17 ans, à la soirée d’Eglantine Despontin ! Mais l’irruption de ce célibataire endurci, farouchement anti-mômes, va finalement mettre en péril leur coupl…",
+      "imdbId": "tt1068841",
+      "seances": [
+        {
+          "date": "2026-03-30",
+          "heure": "20:30",
+          "version": "VF"
+        }
+      ],
+      "source": "comoedia",
+      "cinema": "Le Comoedia",
+      "poster": "https://image.tmdb.org/t/p/w500/v96beRnso6V6s8CX5JBEMTbxuQo.jpg",
+      "imdbRating": 0.0,
+      "cast": "Sébastien Chassagne, Louise Massin, Oussama Kheddam"
+    },
+    {
+      "titre": "LOVE ON TRIAL",
+      "titreOriginal": null,
+      "annee": 2025,
+      "realisateur": "Kôji Fukada",
+      "duree": null,
+      "genres": [
+        "Drama"
+      ],
+      "synopsis": "Jeune idole de la pop en pleine ascension, Mai commet l’irréparable : tomber amoureuse, malgré l’interdiction formelle inscrite dans son contrat. Lorsque sa relation éclate au grand jour, Mai est traînée par sa propre agence devant la justice. Confrontés à une machine implacable, les deux amants décident de se battre, non seulement pour leur avenir, mais pour défendre le droit le plus simple et le plus universel : celui d’aimer.",
+      "imdbId": "tt17499010",
+      "seances": [
+        {
+          "date": "2026-03-25",
+          "heure": "10:50",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-25",
+          "heure": "15:45",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-25",
+          "heure": "20:50",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-26",
+          "heure": "15:45",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-26",
+          "heure": "20:50",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-27",
+          "heure": "15:45",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-27",
+          "heure": "20:50",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-28",
+          "heure": "10:50",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-28",
+          "heure": "15:45",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-28",
+          "heure": "20:50",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-29",
+          "heure": "10:50",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-29",
+          "heure": "15:45",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-29",
+          "heure": "20:50",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-30",
+          "heure": "15:45",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-30",
+          "heure": "20:50",
+          "version": "VOSTFR"
+        }
+      ],
+      "source": "comoedia",
+      "cinema": "Le Comoedia",
+      "poster": "https://image.tmdb.org/t/p/w500/mhNem03S7TqiU6owyxYmg5rHstX.jpg",
+      "imdbRating": 6.0,
+      "cast": "Kyoko Saito, Yuki Kura, Kenjiro Tsuda"
+    },
+    {
+      "titre": "LA COULEUVRE NOIRE",
+      "titreOriginal": null,
+      "annee": 2025,
+      "realisateur": "Aurélien Vernhes-Lermusiaux",
+      "duree": null,
+      "genres": [
+        "Drama"
+      ],
+      "synopsis": "Après des  années d’absence, Ciro revient chez lui, au chevet de sa mère. Dans ce désert colombien de la Tatacoa,  il retrouve ceux qu’il avait fuis et affronte les derniers gardiens d’un territoire aussi fragile  qu’envoûtant.",
+      "imdbId": "tt32244884",
+      "seances": [
+        {
+          "date": "2026-03-25",
+          "heure": "18:00",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-26",
+          "heure": "18:00",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-27",
+          "heure": "18:00",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-28",
+          "heure": "18:00",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-29",
+          "heure": "18:00",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-30",
+          "heure": "18:00",
+          "version": "VOSTFR"
+        }
+      ],
+      "source": "comoedia",
+      "cinema": "Le Comoedia",
+      "poster": "https://image.tmdb.org/t/p/w500/l84mzS9pItp1DMAagERGDx5b9A7.jpg",
+      "imdbRating": 0.0,
+      "cast": "Alexis Lozano Tafur, Miguel Ángel Viera, Angela Rodriguez"
+    },
+    {
+      "titre": "LE SYNDICAT DU CRIME 3",
+      "titreOriginal": null,
+      "annee": 1989,
+      "realisateur": "Hark Tsui",
+      "duree": null,
+      "genres": [
+        "Action",
+        "Crime",
+        "War"
+      ],
+      "synopsis": "Entre le Vietnam et Hong-Kong, c'est la guerre. La seule façon de s'en sortir est de devenir un traficant. Mark cheung, jeune habitant hongkongais venu à Saïgon chercher son cousin Mun et son oncle s'en rend compte trop tard, et cherche à s'en sortir en s'unissant à Chow Kit, une trafficante. Malheureusement, tout tourne mal...",
+      "imdbId": "tt0098691",
+      "seances": [
+        {
+          "date": "2026-03-25",
+          "heure": "10:50",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-28",
+          "heure": "10:50",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-29",
+          "heure": "10:50",
+          "version": "VOSTFR"
+        }
+      ],
+      "source": "comoedia",
+      "cinema": "Le Comoedia",
+      "poster": "https://image.tmdb.org/t/p/w500/eW3JPfacR3EliW57lIABVQ26HUh.jpg",
+      "imdbRating": 6.4,
+      "cast": "Chow Yun-Fat, Anita Mui, Tony Leung Ka-fai"
+    },
+    {
+      "titre": "UN JOUR AVEC MON PÈRE",
+      "titreOriginal": null,
+      "annee": 2025,
+      "realisateur": "Akinola Davies",
+      "duree": null,
+      "genres": [
+        "Drama"
+      ],
+      "synopsis": "Récit semi-autobiographique se déroulant sur une seule journée dans la mégalopole nigériane, Lagos, pendant la crise électorale de 1993. Un père tente de guider ses deux jeunes fils à travers l'immense ville alors que des troubles politiques menacent.",
+      "imdbId": "tt35695538",
+      "seances": [
+        {
+          "date": "2026-03-25",
+          "heure": "15:55",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-25",
+          "heure": "20:10",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-26",
+          "heure": "15:55",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-26",
+          "heure": "20:10",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-27",
+          "heure": "15:55",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-27",
+          "heure": "20:10",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-28",
+          "heure": "15:55",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-28",
+          "heure": "20:10",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-29",
+          "heure": "15:55",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-29",
+          "heure": "20:10",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-30",
+          "heure": "15:55",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-30",
+          "heure": "20:10",
+          "version": "VOSTFR"
+        }
+      ],
+      "source": "comoedia",
+      "cinema": "Le Comoedia",
+      "poster": "https://image.tmdb.org/t/p/w500/aLQYyqWlIBBU3L8L84txbh0x1nq.jpg",
+      "imdbRating": 8.5,
+      "cast": "Ṣọpẹ́ Dìrísù, Efon Wini, Godwin Egbo"
+    },
+    {
+      "titre": "EDMOND ET LUCY - JP LA FORÊT C'EST, L'AVENTURE !",
+      "titreOriginal": null,
+      "annee": null,
+      "realisateur": null,
+      "duree": null,
+      "genres": [],
+      "synopsis": null,
+      "imdbId": null,
+      "seances": [
+        {
+          "date": "2026-03-25",
+          "heure": "10:45",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-28",
+          "heure": "10:45",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-29",
+          "heure": "10:45",
+          "version": "VF"
+        }
+      ],
+      "source": "comoedia",
+      "cinema": "Le Comoedia"
+    },
+    {
+      "titre": "L'ODYSSÉE DE CÉLESTE",
+      "titreOriginal": null,
+      "annee": 2025,
+      "realisateur": "Kid Koala",
+      "duree": null,
+      "genres": [
+        "Animation"
+      ],
+      "synopsis": "Depuis son enfance, Céleste vit avec son meilleur ami, un robot, qui l’aide à accomplir son rêve : devenir astronaute ! Mais lorsqu’elle embarque pour sa première mission interstellaire, son robot se retrouve seul sur Terre et doit faire face à sa solitude pendant que Céleste affronte des dangers imprévus. Leurs souvenirs communs leur donneront le courage et la force de lutter pour pouvoir se retrouver.",
+      "imdbId": "tt26446095",
+      "seances": [
+        {
+          "date": "2026-03-25",
+          "heure": "11:00",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-25",
+          "heure": "14:00",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-28",
+          "heure": "11:00",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-28",
+          "heure": "14:00",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-29",
+          "heure": "11:00",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-29",
+          "heure": "14:00",
+          "version": "VF"
+        }
+      ],
+      "source": "comoedia",
+      "cinema": "Le Comoedia",
+      "poster": "https://image.tmdb.org/t/p/w500/uxYjhYgmdYgTpJ35ExIEBYLAFpS.jpg",
+      "imdbRating": 5.5
+    },
+    {
+      "titre": "LES CHAILLÉES DE L'ENFER",
+      "titreOriginal": null,
+      "annee": null,
+      "realisateur": null,
+      "duree": null,
+      "genres": [],
+      "synopsis": null,
+      "imdbId": null,
+      "seances": [
+        {
+          "date": "2026-03-28",
+          "heure": "11:05",
+          "version": "VF"
+        }
+      ],
+      "source": "comoedia",
+      "cinema": "Le Comoedia"
+    },
+    {
+      "titre": "LES RAYONS ET LES OMBRES",
+      "titreOriginal": null,
+      "annee": 2026,
+      "realisateur": "Xavier Giannoli",
+      "duree": 195,
+      "genres": [
+        "Drama",
+        "History"
+      ],
+      "synopsis": "Jean et Otto, un homme de presse français et un jeune francophile allemand, se battent pour la paix en Europe. La fille de Jean, Corinne, démarre une brillante carrière d'actrice de cinéma. Mais la guerre éclate et la France est occupée. Les deux amis ont un rôle majeur dans cette nouvelle France. Jean trouve la stature d'un grand patron de presse, ardent promoteur de la Collaboration avec l'occupant, Otto devient l'ambassadeur du Reich à Paris. Corinne, se trouve jetée dans la fosse aux lions…",
+      "imdbId": "tt36187539",
+      "seances": [
+        {
+          "date": "2026-03-25",
+          "heure": "10:45",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-25",
+          "heure": "13:30",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-25",
+          "heure": "15:40",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-25",
+          "heure": "17:30",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-25",
+          "heure": "20:15",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-26",
+          "heure": "13:30",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-26",
+          "heure": "15:40",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-26",
+          "heure": "17:30",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-26",
+          "heure": "20:15",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-27",
+          "heure": "13:30",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-27",
+          "heure": "15:40",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-27",
+          "heure": "17:30",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-27",
+          "heure": "20:15",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-28",
+          "heure": "10:45",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-28",
+          "heure": "13:30",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-28",
+          "heure": "15:40",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-28",
+          "heure": "17:30",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-28",
+          "heure": "20:15",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-29",
+          "heure": "10:45",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-29",
+          "heure": "13:30",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-29",
+          "heure": "15:40",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-29",
+          "heure": "17:30",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-29",
+          "heure": "20:15",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-30",
+          "heure": "13:30",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-30",
+          "heure": "15:40",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-30",
+          "heure": "17:30",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-30",
+          "heure": "20:15",
+          "version": "VF"
+        }
+      ],
+      "source": "comoedia",
+      "cinema": "Le Comoedia",
+      "poster": "https://image.tmdb.org/t/p/w500/uROOJRTrrkpe7F33Y54OcRXsQOu.jpg",
+      "imdbRating": 7.568,
+      "cast": "Jean Dujardin, Nastya Golubeva Carax, August Diehl"
+    },
+    {
+      "titre": "LA GUERRE DES PRIX",
+      "titreOriginal": null,
+      "annee": 2026,
+      "realisateur": "Anthony Dechaux",
+      "duree": 96,
+      "genres": [
+        "Drama"
+      ],
+      "synopsis": "Audrey, fille d’agriculteurs et cheffe de rayon dans un hypermarché en province, se voit propulsée à la centrale d’achat de son enseigne afin d'y défendre la filière bio et locale. Alors qu’elle fait équipe avec un négociateur aux méthodes redoutables, Audrey va devoir se battre pour faire exister ses convictions au sein d'un système impitoyable.",
+      "imdbId": "tt34890499",
+      "seances": [
+        {
+          "date": "2026-03-25",
+          "heure": "13:50",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-25",
+          "heure": "16:15",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-25",
+          "heure": "20:40",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-26",
+          "heure": "13:50",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-26",
+          "heure": "16:15",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-26",
+          "heure": "20:40",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-27",
+          "heure": "13:50",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-27",
+          "heure": "16:15",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-27",
+          "heure": "20:40",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-28",
+          "heure": "13:50",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-28",
+          "heure": "16:15",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-28",
+          "heure": "20:40",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-29",
+          "heure": "13:50",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-29",
+          "heure": "16:15",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-29",
+          "heure": "20:40",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-30",
+          "heure": "13:50",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-30",
+          "heure": "16:15",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-30",
+          "heure": "20:40",
+          "version": "VF"
+        }
+      ],
+      "source": "comoedia",
+      "cinema": "Le Comoedia",
+      "poster": "https://image.tmdb.org/t/p/w500/h42PjQnT2xkH6kkLxID2RckLnT1.jpg",
+      "imdbRating": 6.929,
+      "cast": "Olivier Gourmet, Ana Girardot, Julien Frison"
+    },
+    {
+      "titre": "LAS CORRIENTES",
+      "titreOriginal": null,
+      "annee": 2025,
+      "realisateur": "Milagros Mumenthaler",
+      "duree": null,
+      "genres": [
+        "Drama"
+      ],
+      "synopsis": "Lina, 34 ans est une styliste argentine au sommet de sa carrière. En Suisse pour recevoir un prix prestigieux, elle se jette sans raison apparente dans un fleuve. De retour à Buenos Aires, elle garde le silence sur cet épisode. Pourtant, de façon presque imperceptible, quelque chose en elle a changé. Une peur de l’eau s’installe, insidieuse, et finit par paralyser son quotidien. Peu à peu, ce bouleversement intérieur fait remonter à la surface un passé qu’elle croyait à jamais enfoui.",
+      "imdbId": "tt35746682",
+      "seances": [
+        {
+          "date": "2026-03-25",
+          "heure": "18:25",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-26",
+          "heure": "18:25",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-27",
+          "heure": "18:25",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-28",
+          "heure": "18:25",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-29",
+          "heure": "18:25",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-30",
+          "heure": "18:25",
+          "version": "VOSTFR"
+        }
+      ],
+      "source": "comoedia",
+      "cinema": "Le Comoedia",
+      "poster": "https://image.tmdb.org/t/p/w500/vDyNWGQa0iAhA9EzpFFvaaglZBl.jpg",
+      "imdbRating": 5.75,
+      "cast": "Isabel Aimé González Sola, Esteban Bigliardi, Claudia Sánchez"
+    },
+    {
+      "titre": "LA GIFLE",
+      "titreOriginal": null,
+      "annee": 1974,
+      "realisateur": "Claude Pinoteau",
+      "duree": null,
+      "genres": [
+        "Comedy",
+        "Drama",
+        "Romance"
+      ],
+      "synopsis": "Jean est professeur de géographie dans un lycée parisien. À 50 ans, il n'a rien perdu de son caractère irascible et s'attend à être muté pour avoir blessé deux policiers qui battaient un étudiant. Son tempérament quelque peu excessif ne simplifie pas ses relations avec sa fille, Isabelle, une adolescente qui désire abandonner ses études pour aller vivre avec Marc, le garçon dont elle est éprise. Une gifle retentissante précipite la rupture entre le père et la fille. Isabelle ne tend pas l'autre …",
+      "imdbId": "tt0071550",
+      "seances": [
+        {
+          "date": "2026-03-25",
+          "heure": "14:00",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-26",
+          "heure": "14:00",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-27",
+          "heure": "14:00",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-28",
+          "heure": "14:00",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-29",
+          "heure": "14:00",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-30",
+          "heure": "14:00",
+          "version": "VOSTFR"
+        }
+      ],
+      "source": "comoedia",
+      "cinema": "Le Comoedia",
+      "poster": "https://image.tmdb.org/t/p/w500/wVwU0lKWKfL4jpw12rir5Csjb7d.jpg",
+      "imdbRating": 6.6,
+      "cast": "Lino Ventura, Annie Girardot, Isabelle Adjani"
+    },
+    {
+      "titre": "UNE BATAILLE APRÈS L'AUTRE",
+      "titreOriginal": null,
+      "annee": 2025,
+      "realisateur": "Paul Thomas Anderson",
+      "duree": 162,
+      "genres": [
+        "Action",
+        "Crime",
+        "Drama"
+      ],
+      "synopsis": "Bob Ferguson est un ancien révolutionnaire paranoïaque et désabusé, qui a jadis œuvré avec son ex, Perfidia, au sein du French 75, un groupe militant voué au renversement du gouvernement américain. Seize ans plus tard, Bob vit seul avec sa fille, Willa, quand celle-ci disparaît soudainement. Bob soupçonne son vieil ennemi d’antan, le Colonel Steven J. Lockjaw, d’être responsable de sa disparition. Il décide alors de renouer avec ses anciens frères d’armes pour retrouver sa fille, quitte à confro…",
+      "imdbId": "tt30144839",
+      "seances": [
+        {
+          "date": "2026-03-25",
+          "heure": "10:55",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-25",
+          "heure": "20:35",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-26",
+          "heure": "20:35",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-27",
+          "heure": "20:35",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-28",
+          "heure": "10:55",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-28",
+          "heure": "20:35",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-29",
+          "heure": "10:55",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-29",
+          "heure": "20:35",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-30",
+          "heure": "20:35",
+          "version": "VOSTFR"
+        }
+      ],
+      "source": "comoedia",
+      "cinema": "Le Comoedia",
+      "poster": "https://image.tmdb.org/t/p/w500/vfoxYHHpSOadhOFCmNbtLG2WcUy.jpg",
+      "imdbRating": 7.389,
+      "cast": "Leonardo DiCaprio, Sean Penn, Chase Infiniti"
+    },
+    {
+      "titre": "VICTOR COMME TOUT LE MONDE",
+      "titreOriginal": null,
+      "annee": 2026,
+      "realisateur": "Pascal Bonitzer",
+      "duree": 88,
+      "genres": [
+        "Drama"
+      ],
+      "synopsis": "Habité par Victor Hugo, le comédien Robert Zucchini traîne une douce mélancolie lorsqu'il n'est pas sur scène. Chaque soir, il remplit les salles en transmettant son amour des mots. Jusqu’au jour où réapparaît sa fille, qu’il n’a pas vue grandir… Et si aimer, pour une fois, valait mieux qu’admirer ?",
+      "imdbId": "tt39149806",
+      "seances": [
+        {
+          "date": "2026-03-25",
+          "heure": "11:10",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-25",
+          "heure": "13:30",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-25",
+          "heure": "16:35",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-25",
+          "heure": "18:35",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-26",
+          "heure": "13:30",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-26",
+          "heure": "16:35",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-26",
+          "heure": "18:35",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-27",
+          "heure": "13:30",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-27",
+          "heure": "15:45",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-27",
+          "heure": "21:00",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-28",
+          "heure": "13:30",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-28",
+          "heure": "16:35",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-28",
+          "heure": "18:35",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-28",
+          "heure": "20:35",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-29",
+          "heure": "13:30",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-29",
+          "heure": "16:35",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-29",
+          "heure": "18:35",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-29",
+          "heure": "20:35",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-30",
+          "heure": "13:30",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-30",
+          "heure": "15:45",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-30",
+          "heure": "17:45",
+          "version": "VF"
+        }
+      ],
+      "source": "comoedia",
+      "cinema": "Le Comoedia",
+      "poster": "https://image.tmdb.org/t/p/w500/sYRssxFzHMr3Rz0VTEF21m6iVDU.jpg",
+      "imdbRating": 6.808,
+      "cast": "Fabrice Luchini, Chiara Mastroianni, Louise Orry-Diquéro"
+    },
+    {
+      "titre": "ALTER EGO",
+      "titreOriginal": null,
+      "annee": 2026,
+      "realisateur": "Nicolas Charlet, Bruno Lavaine",
+      "duree": 99,
+      "genres": [],
+      "synopsis": "Alex a un problème : son nouveau voisin est son sosie parfait. Avec des cheveux. Un double en mieux, qui va totalement bouleverser son existence.",
+      "imdbId": "tt35591633",
+      "seances": [
+        {
+          "date": "2026-03-25",
+          "heure": "14:25",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-25",
+          "heure": "16:05",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-25",
+          "heure": "18:15",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-25",
+          "heure": "21:10",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-26",
+          "heure": "13:30",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-26",
+          "heure": "16:05",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-26",
+          "heure": "18:15",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-26",
+          "heure": "21:10",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-27",
+          "heure": "13:30",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-27",
+          "heure": "16:05",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-27",
+          "heure": "18:15",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-27",
+          "heure": "21:10",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-28",
+          "heure": "14:25",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-28",
+          "heure": "16:05",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-28",
+          "heure": "18:15",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-28",
+          "heure": "21:10",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-29",
+          "heure": "14:25",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-29",
+          "heure": "16:05",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-29",
+          "heure": "18:15",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-29",
+          "heure": "21:10",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-30",
+          "heure": "13:30",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-30",
+          "heure": "16:05",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-30",
+          "heure": "18:15",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-30",
+          "heure": "21:10",
+          "version": "VF"
+        }
+      ],
+      "source": "comoedia",
+      "cinema": "Le Comoedia",
+      "poster": "https://image.tmdb.org/t/p/w500/xCJPYlQAmXwvP96qFDZAw18oqk6.jpg",
+      "imdbRating": 6.433,
+      "cast": "Laurent Lafitte, Olga Kurylenko, Blanche Gardin"
+    },
+    {
+      "titre": "LA MAISON DES FEMMES",
+      "titreOriginal": null,
+      "annee": 2025,
+      "realisateur": "Melisa Godet",
+      "duree": null,
+      "genres": [],
+      "synopsis": "À la Maison des femmes, entre soin, écoute et solidarité, une équipe se bat chaque jour pour accompagner les femmes victimes de violences dans leur reconstruction. Dans ce lieu unique, Diane, Manon, Inès, Awa et leurs collègues accueillent, soutiennent, redonnent confiance. Ensemble, avec leurs forces, leurs fragilités, leurs convictions et une énergie inépuisable.",
+      "imdbId": "tt35455708",
+      "seances": [
+        {
+          "date": "2026-03-25",
+          "heure": "13:15",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-25",
+          "heure": "15:35",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-25",
+          "heure": "17:55",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-25",
+          "heure": "20:25",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-26",
+          "heure": "13:15",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-26",
+          "heure": "15:35",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-26",
+          "heure": "17:55",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-26",
+          "heure": "20:25",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-27",
+          "heure": "13:15",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-27",
+          "heure": "15:35",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-27",
+          "heure": "17:55",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-27",
+          "heure": "20:25",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-28",
+          "heure": "13:15",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-28",
+          "heure": "15:35",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-28",
+          "heure": "17:55",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-28",
+          "heure": "20:25",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-29",
+          "heure": "13:15",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-29",
+          "heure": "15:35",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-29",
+          "heure": "17:55",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-29",
+          "heure": "20:25",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-30",
+          "heure": "13:15",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-30",
+          "heure": "15:35",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-30",
+          "heure": "17:55",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-30",
+          "heure": "20:25",
+          "version": "VF"
+        }
+      ],
+      "source": "comoedia",
+      "cinema": "Le Comoedia",
+      "poster": "https://image.tmdb.org/t/p/w500/3blpQb6lMwX3VW4enxNpkX9po1c.jpg",
+      "imdbRating": 8.583,
+      "cast": "Karin Viard, Laetitia Dosch, Oulaya Amamra"
+    },
+    {
+      "titre": "RUE MÁLAGA",
+      "titreOriginal": null,
+      "annee": 2025,
+      "realisateur": "Maryam Touzani",
+      "duree": 116,
+      "genres": [
+        "Drama",
+        "Romance"
+      ],
+      "synopsis": "Maria Angeles, une Espagnole de 79 ans, vit seule à Tanger, dans le nord du Maroc, où elle profite de sa ville et de son quotidien. Sa vie bascule lorsque sa fille Clara arrive de Madrid pour vendre l’appartement dans lequel elle a toujours vécu. Déterminée à rester dans cette ville qui l'a vue grandir, elle met tout en œuvre pour garder sa maison et récupérer les objets d'une vie. Contre toute attente, elle redécouvre en chemin l’amour et le désir.",
+      "imdbId": "tt32429174",
+      "seances": [
+        {
+          "date": "2026-03-25",
+          "heure": "11:10",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-25",
+          "heure": "13:15",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-25",
+          "heure": "16:00",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-25",
+          "heure": "18:30",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-26",
+          "heure": "13:15",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-26",
+          "heure": "16:00",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-26",
+          "heure": "18:30",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-27",
+          "heure": "13:15",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-27",
+          "heure": "16:00",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-27",
+          "heure": "18:30",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-28",
+          "heure": "13:15",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-28",
+          "heure": "16:00",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-28",
+          "heure": "18:30",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-29",
+          "heure": "11:10",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-29",
+          "heure": "13:15",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-29",
+          "heure": "16:00",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-29",
+          "heure": "18:30",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-30",
+          "heure": "13:15",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-30",
+          "heure": "16:00",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-30",
+          "heure": "18:30",
+          "version": "VOSTFR"
+        }
+      ],
+      "source": "comoedia",
+      "cinema": "Le Comoedia",
+      "poster": "https://image.tmdb.org/t/p/w500/qvfwPBIL4tGoJM2tzOVvrzmRJFd.jpg",
+      "imdbRating": 7.0,
+      "cast": "Carmen Maura, Marta Etura, Ahmed Boulane"
+    },
+    {
+      "titre": "ORWELL: 2+2=5",
+      "titreOriginal": null,
+      "annee": 2025,
+      "realisateur": "Raoul Peck",
+      "duree": 120,
+      "genres": [
+        "Documentary",
+        "Biography",
+        "History"
+      ],
+      "synopsis": "Une plongée dans les derniers mois de la vie d’Orwell et dans son œuvre visionnaire pour explorer les racines des concepts troublants qu’il a révélés au monde dans son chef-d’œuvre dystopique : le double discours, le crime par la pensée, la novlangue, le spectre omniprésent de Big Brother… des vérités sociopolitiques qui résonnent encore plus puissamment aujourd’hui.",
+      "imdbId": "tt27052428",
+      "seances": [
+        {
+          "date": "2026-03-25",
+          "heure": "11:05",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-29",
+          "heure": "11:05",
+          "version": "VOSTFR"
+        }
+      ],
+      "source": "comoedia",
+      "cinema": "Le Comoedia",
+      "poster": "https://image.tmdb.org/t/p/w500/tSDjEaCL8HOTtvkTgKcweeN61b3.jpg",
+      "imdbRating": 7.155,
+      "cast": "Damian Lewis, George Orwell, George W. Bush"
+    },
+    {
+      "titre": "MARTY SUPREME",
+      "titreOriginal": null,
+      "annee": 2025,
+      "realisateur": "Josh Safdie",
+      "duree": 149,
+      "genres": [
+        "Drama",
+        "Sport"
+      ],
+      "synopsis": "Marty Mauser, 23 ans, aspire à devenir le meilleur athlète sur la scène mondiale du tennis de table. Le sport est sous-représenté aux États-Unis, ce qui rend difficile le financement de ses compétitions à l'étranger. Il est toutefois prêt à tout pour arriver à ses fins, y compris nouer des liens avec une ancienne actrice et son riche mari entrepreneur. Son entêtement pose un problème pour les personnes de son entourage, qui font souvent les frais de ses choix cavaliers.",
+      "imdbId": "tt32916440",
+      "seances": [
+        {
+          "date": "2026-03-25",
+          "heure": "20:45",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-26",
+          "heure": "13:15",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-26",
+          "heure": "20:45",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-27",
+          "heure": "13:15",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-27",
+          "heure": "20:45",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-28",
+          "heure": "20:45",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-29",
+          "heure": "20:45",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-30",
+          "heure": "13:15",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-03-30",
+          "heure": "20:45",
+          "version": "VOSTFR"
+        }
+      ],
+      "source": "comoedia",
+      "cinema": "Le Comoedia",
+      "poster": "https://image.tmdb.org/t/p/w500/hjrvtc7UCrnsypfnLJuxx9ODKCi.jpg",
+      "imdbRating": 7.5,
+      "cast": "Timothée Chalamet, Gwyneth Paltrow, Odessa A'zion"
+    },
+    {
+      "titre": "PLANÈTES",
+      "titreOriginal": null,
+      "annee": 2025,
+      "realisateur": "Momoko Seto",
+      "duree": null,
+      "genres": [
+        "Animation",
+        "Adventure"
+      ],
+      "synopsis": "Dendelion, Baraban, Léonto et Taraxa, quatre akènes de pissenlit rescapés d’une succession d’explosions nucléaires qui détruisent la Terre, se trouvent projetés dans le cosmos. Après s’être échoués sur une planète inconnue, ils partent à la quête d’un sol propice à la survie de leur espèce. Mais les éléments, la faune, la flore, le climat, sont autant d’embûches qu’ils devront surmonter.",
+      "imdbId": "tt32284798",
+      "seances": [
+        {
+          "date": "2026-03-25",
+          "heure": "14:00",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-26",
+          "heure": "14:00",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-27",
+          "heure": "14:00",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-28",
+          "heure": "14:00",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-29",
+          "heure": "14:00",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-30",
+          "heure": "14:00",
+          "version": "VF"
+        }
+      ],
+      "source": "comoedia",
+      "cinema": "Le Comoedia",
+      "poster": "https://image.tmdb.org/t/p/w500/4brlVcs4DC2sHw5vhcBLlcb6thB.jpg",
+      "imdbRating": 7.0
+    },
+    {
+      "titre": "JP LA PRINCESSE, L'OGRE ET LA FOURMI",
+      "titreOriginal": null,
+      "annee": null,
+      "realisateur": null,
+      "duree": null,
+      "genres": [],
+      "synopsis": null,
+      "imdbId": null,
+      "seances": [
+        {
+          "date": "2026-03-28",
+          "heure": "10:45",
+          "version": "VF"
+        }
+      ],
+      "source": "comoedia",
+      "cinema": "Le Comoedia"
+    },
+    {
+      "titre": "LE CHANT DES FORÊTS",
+      "titreOriginal": null,
+      "annee": 2025,
+      "realisateur": "Vincent Munier",
+      "duree": 96,
+      "genres": [
+        "Documentary"
+      ],
+      "synopsis": "Un homme marche, sac au dos, bâton à la main, veste lourde et chaude sur les épaules, vers les profondeurs d’une vieille forêt moussue. Ni le vent, ni la brume, ni même la neige ne l’arrêteront dans son élan pour rejoindre son affût, sa planque : un sapin. En se glissant sous ses branches basses, l’homme s’efface et un monde s’éveille. Celui des bêtes. Le vieux sage nous invite à partager des émotions puissantes à ses côtés, celles qu’il a ressenties au cours de milliers d’affuts. Le moment est …",
+      "imdbId": "tt32368068",
+      "seances": [
+        {
+          "date": "2026-03-28",
+          "heure": "11:15",
+          "version": "VF"
+        },
+        {
+          "date": "2026-03-29",
+          "heure": "11:15",
+          "version": "VF"
+        }
+      ],
+      "source": "comoedia",
+      "cinema": "Le Comoedia",
+      "poster": "https://image.tmdb.org/t/p/w500/5rcsd0iGbsQ6DFTI3HclJPJzY9K.jpg",
+      "imdbRating": 8.051,
+      "cast": "Vincent Munier, Michel Munier, Simon Munier"
+    },
     {
       "titre": "La Guerre des prix",
       "slug": "la-guerre-des-prix",
@@ -289,7 +1876,7 @@
       ],
       "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4718/7dcb8416ab4e8fd4ff6eeaed758c6004/s,490,650-q,90-d1612b.jpg",
       "cast": "T. Chalamet, G. Paltrow, O. A’zion",
-      "imdbRating": 7.452
+      "imdbRating": 7.5
     },
     {
       "titre": "Orwell: 2+2=5",
@@ -704,7 +2291,7 @@
       ],
       "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4698/9af5f87b39938fec50f86c32c3d31b69/s,490,650-q,90-885971.jpg",
       "cast": "P. Mescal, J. Buckley, E. Watson",
-      "imdbRating": 7.711
+      "imdbRating": 7.7
     },
     {
       "titre": "Le Chant des forêts",
@@ -758,7 +2345,7 @@
       ],
       "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4447/610dc2fcd83afe3717f771b889b979c2/s,490,650-q,90-8a269a.jpg",
       "cast": "L. DiCaprio, T. Taylor, S. Penn",
-      "imdbRating": 7.4
+      "imdbRating": 7.389
     }
   ]
 }
