@@ -84,11 +84,19 @@ MOIS_FR = {
 
 
 def get_last_wednesday() -> date:
-    """Retourne le dernier mercredi écoulé (ou aujourd'hui si c'est un mercredi)."""
+    """Retourne le mercredi de la semaine courante du programme Lumière.
+
+    Lumière publie le nouveau programme dès le mardi : si on est mardi,
+    on retourne le mercredi *suivant* pour scraper la semaine à venir.
+    """
     today = date.today()
     # isoweekday: lundi=1, mardi=2, mercredi=3, ..., dimanche=7
     days_since_wed = (today.isoweekday() - 3) % 7
-    return today - timedelta(days=days_since_wed)
+    last_wed = today - timedelta(days=days_since_wed)
+    # Le mardi, Lumière a déjà publié la semaine suivante
+    if today.isoweekday() == 2:
+        return last_wed + timedelta(days=7)
+    return last_wed
 
 
 logging.basicConfig(
@@ -1937,6 +1945,8 @@ def main():
                         help="Fichier PDF local Comoedia (pour test, remplace le téléchargement)")
     parser.add_argument("--pdf-url",    default=None,
                         help="URL directe du PDF Comoedia (pour test)")
+    parser.add_argument("--lumiere-week", default=None, metavar="YYYY-MM-DD",
+                        help="Date du mercredi de la semaine à scraper pour Lumière (ex: 2026-03-25)")
     # Rétrocompatibilité : --file était l'ancien chemin HTML
     parser.add_argument("--file",       default=None, help=argparse.SUPPRESS)
     args = parser.parse_args()
@@ -1965,7 +1975,14 @@ def main():
     # 2. Scraping Cinémas Lumière
     lumiere_films: list[dict] = []
     if not args.no_lumiere:
-        lumiere_films = scrape_lumiere()
+        lumiere_week_override: date | None = None
+        if args.lumiere_week:
+            try:
+                lumiere_week_override = date.fromisoformat(args.lumiere_week)
+            except ValueError:
+                log.error(f"--lumiere-week invalide : '{args.lumiere_week}' (attendu YYYY-MM-DD)")
+                sys.exit(1)
+        lumiere_films = scrape_lumiere(week_date=lumiere_week_override)
 
     # 3. Fusion des deux sources
     all_films = comoedia_films + lumiere_films
