@@ -312,15 +312,94 @@ submitBtn.addEventListener('click', async () => {
 
   setStep(2, 'done');
 
-  // Step 3 — In progress (async, ~2-5 min)
+  // Step 3 — Poll GitHub Actions until the run completes
   setStep(3, 'active');
-  showStatus('success',
-    `Import lancé avec succès ! Le workflow GitHub Actions analyse maintenant le PDF.<br>
-    La base de données sera mise à jour dans 2–5 minutes.<br>
+  showStatus('info',
+    `Workflow lancé — analyse du PDF en cours (2–5 min)…<br>
     <a href="https://github.com/${GITHUB_OWNER}/${GITHUB_REPO}/actions" target="_blank"
-       style="color:var(--green);text-decoration:underline;">Suivre l'avancement →</a>`
+       style="color:var(--gold);text-decoration:underline;">Suivre l'avancement →</a>`
   );
+
+  pollWorkflowRun(pat, Date.now()).catch(() => {});
 });
+
+// ── GitHub Actions polling ────────────────────────────────
+function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+async function pollWorkflowRun(pat, dispatchTime) {
+  const ghHeaders = {
+    'Accept': 'application/vnd.github+json',
+    'Authorization': `Bearer ${pat}`,
+    'X-GitHub-Api-Version': '2022-11-28',
+  };
+  const runsUrl =
+    `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/actions/workflows/${GITHUB_WORKFLOW}/runs?event=workflow_dispatch&per_page=5`;
+
+  // Wait for GitHub to register the run
+  await sleep(6000);
+
+  // Find the run ID created at or after dispatchTime
+  let runId = null;
+  for (let attempt = 0; attempt < 12 && !runId; attempt++) {
+    try {
+      const res = await fetch(runsUrl, { headers: ghHeaders });
+      if (res.ok) {
+        const { workflow_runs: runs = [] } = await res.json();
+        const hit = runs.find(r => new Date(r.created_at).getTime() >= dispatchTime - 15000);
+        if (hit) runId = hit.id;
+      }
+    } catch (_) {}
+    if (!runId) await sleep(4000);
+  }
+
+  if (!runId) {
+    // Couldn't locate the run — leave step 3 active with a link
+    showStatus('success',
+      `Workflow déclenché — impossible de suivre automatiquement.<br>
+      <a href="https://github.com/${GITHUB_OWNER}/${GITHUB_REPO}/actions" target="_blank"
+         style="color:var(--green);text-decoration:underline;">Suivre sur GitHub Actions →</a>`
+    );
+    return;
+  }
+
+  const runUrl =
+    `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/actions/runs/${runId}`;
+
+  // Poll every 15 s, up to ~12 min
+  for (let i = 0; i < 48; i++) {
+    await sleep(15000);
+    try {
+      const res = await fetch(runUrl, { headers: ghHeaders });
+      if (!res.ok) continue;
+      const run = await res.json();
+      if (run.status !== 'completed') continue;
+
+      if (run.conclusion === 'success') {
+        setStep(3, 'done');
+        showStatus('success',
+          `Base de données mise à jour avec succès !<br>
+          <a href="index.html" style="color:var(--green);text-decoration:underline;">← Retour au programme</a>`
+        );
+      } else {
+        setStep(3, 'error');
+        showStatus('error',
+          `Le workflow a échoué (${run.conclusion}).<br>
+          <a href="https://github.com/${GITHUB_OWNER}/${GITHUB_REPO}/actions/runs/${runId}" target="_blank"
+             style="color:var(--accent);text-decoration:underline;">Voir les logs →</a>`
+        );
+        submitBtn.disabled = false;
+      }
+      return;
+    } catch (_) {}
+  }
+
+  // Timeout after ~12 min
+  showStatus('info',
+    `Le workflow tourne encore — vérifiez dans quelques minutes.<br>
+    <a href="https://github.com/${GITHUB_OWNER}/${GITHUB_REPO}/actions/runs/${runId}" target="_blank"
+       style="color:var(--gold);text-decoration:underline;">Voir sur GitHub Actions →</a>`
+  );
+}
 
 // ── Helpers ───────────────────────────────────────────────
 function showStatus(type, html) {
