@@ -1,10 +1,248 @@
 {
-  "generated_at": "2026-04-08T09:15:04.752146",
+  "generated_at": "2026-04-14T21:01:03.888099",
   "sources": [
     "https://www.cinema-comoedia.com/programme-semaine/",
     "https://www.cinemas-lumiere.com/calendrier-general.html"
   ],
   "films": [
+    {
+      "titre": "La Corde au cou",
+      "slug": "la-corde-au-cou",
+      "titreOriginal": null,
+      "annee": 2026,
+      "realisateur": "Gus Van Sant",
+      "duree": 105,
+      "genres": [
+        "Biography",
+        "Crime",
+        "Drama"
+      ],
+      "synopsis": "Ceci est l'histoire vraie de Tony Kiritsis, un homme ruiné à cause d'un emprunt. A Indianapolis, le 8 février 1977, il kidnappe le fils du courtier responsable de sa situation. Il réclame 5 millions de dollars et des excuses. La prise d'otage va durer 63 heures, sous les yeux de la télévision locale, puis nationale. L'Amérique se passionne pour cette affaire. Chacun choisit son camp. Tony est-il un criminel, ou simplement une victime qui réclame justice ?",
+      "imdbId": "tt15181326",
+      "source": "lumiere",
+      "cinema": "Lumière Terreaux",
+      "seances": [
+        {
+          "date": "2026-04-15",
+          "heure": "10:20",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F622140/D1776241200/VO/"
+        },
+        {
+          "date": "2026-04-15",
+          "heure": "12:30",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F622140/D1776241200/VO/"
+        },
+        {
+          "date": "2026-04-15",
+          "heure": "14:35",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F622140/D1776241200/VO/"
+        },
+        {
+          "date": "2026-04-15",
+          "heure": "16:40",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F622140/D1776241200/VO/"
+        },
+        {
+          "date": "2026-04-15",
+          "heure": "18:45",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F622140/D1776241200/VO/"
+        },
+        {
+          "date": "2026-04-15",
+          "heure": "20:50",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F622140/D1776241200/VO/"
+        },
+        {
+          "date": "2026-04-16",
+          "heure": "10:20",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F622140/D1776327600/VO/"
+        },
+        {
+          "date": "2026-04-16",
+          "heure": "12:30",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F622140/D1776327600/VO/"
+        },
+        {
+          "date": "2026-04-16",
+          "heure": "14:35",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F622140/D1776327600/VO/"
+        },
+        {
+          "date": "2026-04-16",
+          "heure": "16:40",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F622140/D1776327600/VO/"
+        },
+        {
+          "date": "2026-04-16",
+          "heure": "18:45",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F622140/D1776327600/VO/"
+        },
+        {
+          "date": "2026-04-16",
+          "heure": "20:50",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F622140/D1776327600/VO/"
+        },
+        {
+          "date": "2026-04-17",
+          "heure": "10:20",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F622140/D1776414000/VO/"
+        },
+        {
+          "date": "2026-04-17",
+          "heure": "12:30",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F622140/D1776414000/VO/"
+        },
+        {
+          "date": "2026-04-17",
+          "heure": "14:35",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F622140/D1776414000/VO/"
+        },
+        {
+          "date": "2026-04-17",
+          "heure": "16:40",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F622140/D1776414000/VO/"
+        },
+        {
+          "date": "2026-04-17",
+          "heure": "18:45",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F622140/D1776414000/VO/"
+        },
+        {
+          "date": "2026-04-17",
+          "heure": "20:50",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F622140/D1776414000/VO/"
+        },
+        {
+          "date": "2026-04-18",
+          "heure": "10:20",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F622140/D1776500400/VO/"
+        },
+        {
+          "date": "2026-04-18",
+          "heure": "12:30",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F622140/D1776500400/VO/"
+        },
+        {
+          "date": "2026-04-18",
+          "heure": "14:35",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F622140/D1776500400/VO/"
+        },
+        {
+          "date": "2026-04-18",
+          "heure": "16:40",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F622140/D1776500400/VO/"
+        },
+        {
+          "date": "2026-04-18",
+          "heure": "18:45",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F622140/D1776500400/VO/"
+        },
+        {
+          "date": "2026-04-18",
+          "heure": "20:50",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F622140/D1776500400/VO/"
+        },
+        {
+          "date": "2026-04-19",
+          "heure": "10:20",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F622140/D1776586800/VO/"
+        },
+        {
+          "date": "2026-04-19",
+          "heure": "12:30",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F622140/D1776586800/VO/"
+        },
+        {
+          "date": "2026-04-19",
+          "heure": "14:35",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F622140/D1776586800/VO/"
+        },
+        {
+          "date": "2026-04-19",
+          "heure": "16:40",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F622140/D1776586800/VO/"
+        },
+        {
+          "date": "2026-04-19",
+          "heure": "18:45",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F622140/D1776586800/VO/"
+        },
+        {
+          "date": "2026-04-19",
+          "heure": "20:50",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F622140/D1776586800/VO/"
+        },
+        {
+          "date": "2026-04-20",
+          "heure": "10:20",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F622140/D1776673200/VO/"
+        },
+        {
+          "date": "2026-04-20",
+          "heure": "12:30",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F622140/D1776673200/VO/"
+        },
+        {
+          "date": "2026-04-20",
+          "heure": "14:35",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F622140/D1776673200/VO/"
+        },
+        {
+          "date": "2026-04-20",
+          "heure": "16:40",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F622140/D1776673200/VO/"
+        },
+        {
+          "date": "2026-04-20",
+          "heure": "18:45",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F622140/D1776673200/VO/"
+        },
+        {
+          "date": "2026-04-20",
+          "heure": "20:50",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F622140/D1776673200/VO/"
+        }
+      ],
+      "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4791/4fd3dc8b1b50eaa5de068450ee3e120e/s,490,650-q,90-ab1aaa.jpg",
+      "cast": "B. Skarsgård, D. Montgomery, C. Domingo",
+      "imdbRating": 6.3
+    },
     {
       "titre": "Juste une illusion",
       "slug": "juste-une-illusion",
@@ -21,39 +259,189 @@
       "cinema": "Lumière Terreaux",
       "seances": [
         {
-          "date": "2026-04-10",
-          "heure": "21:00",
+          "date": "2026-04-15",
+          "heure": "10:20",
           "version": "VF",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F618912/D1775847600/VF/"
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F618912/D1776241200/VF/"
+        },
+        {
+          "date": "2026-04-15",
+          "heure": "13:50",
+          "version": "VFST",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F618912/D1776241200/VF/"
+        },
+        {
+          "date": "2026-04-15",
+          "heure": "16:10",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F618912/D1776241200/VF/"
+        },
+        {
+          "date": "2026-04-15",
+          "heure": "18:30",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F618912/D1776241200/VF/"
+        },
+        {
+          "date": "2026-04-15",
+          "heure": "20:50",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F618912/D1776241200/VF/"
+        },
+        {
+          "date": "2026-04-16",
+          "heure": "10:20",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F618912/D1776327600/VF/"
+        },
+        {
+          "date": "2026-04-16",
+          "heure": "13:50",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F618912/D1776327600/VF/"
+        },
+        {
+          "date": "2026-04-16",
+          "heure": "16:10",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F618912/D1776327600/VF/"
+        },
+        {
+          "date": "2026-04-16",
+          "heure": "18:30",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F618912/D1776327600/VF/"
+        },
+        {
+          "date": "2026-04-16",
+          "heure": "20:50",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F618912/D1776327600/VF/"
+        },
+        {
+          "date": "2026-04-17",
+          "heure": "10:20",
+          "version": "VFST",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F618912/D1776414000/VFST/"
+        },
+        {
+          "date": "2026-04-17",
+          "heure": "13:50",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F618912/D1776414000/VFST/"
+        },
+        {
+          "date": "2026-04-17",
+          "heure": "16:10",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F618912/D1776414000/VFST/"
+        },
+        {
+          "date": "2026-04-17",
+          "heure": "18:30",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F618912/D1776414000/VFST/"
+        },
+        {
+          "date": "2026-04-17",
+          "heure": "20:50",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F618912/D1776414000/VFST/"
+        },
+        {
+          "date": "2026-04-18",
+          "heure": "10:20",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F618912/D1776500400/VF/"
+        },
+        {
+          "date": "2026-04-18",
+          "heure": "13:50",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F618912/D1776500400/VF/"
+        },
+        {
+          "date": "2026-04-18",
+          "heure": "16:10",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F618912/D1776500400/VF/"
+        },
+        {
+          "date": "2026-04-18",
+          "heure": "18:30",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F618912/D1776500400/VF/"
+        },
+        {
+          "date": "2026-04-18",
+          "heure": "20:50",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F618912/D1776500400/VF/"
+        },
+        {
+          "date": "2026-04-19",
+          "heure": "10:20",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F618912/D1776586800/VF/"
+        },
+        {
+          "date": "2026-04-19",
+          "heure": "13:50",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F618912/D1776586800/VF/"
+        },
+        {
+          "date": "2026-04-19",
+          "heure": "16:10",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F618912/D1776586800/VF/"
+        },
+        {
+          "date": "2026-04-19",
+          "heure": "18:30",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F618912/D1776586800/VF/"
+        },
+        {
+          "date": "2026-04-19",
+          "heure": "20:50",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F618912/D1776586800/VF/"
+        },
+        {
+          "date": "2026-04-20",
+          "heure": "10:20",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F618912/D1776673200/VF/"
+        },
+        {
+          "date": "2026-04-20",
+          "heure": "13:30",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F618912/D1776673200/VF/"
+        },
+        {
+          "date": "2026-04-20",
+          "heure": "15:50",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F618912/D1776673200/VF/"
+        },
+        {
+          "date": "2026-04-20",
+          "heure": "18:10",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F618912/D1776673200/VF/"
+        },
+        {
+          "date": "2026-04-20",
+          "heure": "20:45",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F618912/D1776673200/VF/"
         }
       ],
       "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4798/cf9effb40e5ae3747fdb68a68289e81a/s,490,650-q,90-28d3fe.jpg",
       "cast": "C. Cottin, L. Garrel, P. Lottin",
-      "imdbRating": 0.0
-    },
-    {
-      "titre": "Nous l'orchestre",
-      "slug": "nous-l-orchestre",
-      "titreOriginal": null,
-      "annee": 2026,
-      "realisateur": "Philippe Béziat",
-      "duree": 90,
-      "genres": [],
-      "synopsis": "Comment jouer ensemble sans se sentir disparaître dans la masse ? Comment cohabiter si longtemps sans que le groupe explose ? Quel rôle joue vraiment le chef d'orchestre ? Pour la première fois, caméras et micros se faufilent parmi les 120 musiciens de l'Orchestre de Paris, sous la baguette de leur jeune chef prodige, Klaus Mäkelä. Un film immersif au coeur de la musique en train de se faire ; au plus près de l'expérience des musiciens, de leurs émotions, de la beauté.",
-      "imdbId": null,
-      "source": "lumiere",
-      "cinema": "Lumière Terreaux",
-      "seances": [
-        {
-          "date": "2026-04-13",
-          "heure": "20:30",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F574712/D1776105000/VF/"
-        }
-      ],
-      "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4792/b0b697a9f50e276e76eb4660fe084869/s,490,650-q,90-fcad00.jpg",
-      "cast": "Klaus Mäkelä",
-      "imdbRating": 0.0
+      "imdbRating": 7.3
     },
     {
       "titre": "Romería",
@@ -73,213 +461,183 @@
       "cinema": "Lumière Terreaux",
       "seances": [
         {
-          "date": "2026-04-08",
+          "date": "2026-04-15",
           "heure": "10:15",
           "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F590378/D1775648700/VO/"
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F590378/D1776240900/VO/"
         },
         {
-          "date": "2026-04-08",
+          "date": "2026-04-15",
           "heure": "13:45",
           "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F590378/D1775648700/VO/"
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F590378/D1776240900/VO/"
         },
         {
-          "date": "2026-04-08",
+          "date": "2026-04-15",
           "heure": "16:05",
           "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F590378/D1775648700/VO/"
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F590378/D1776240900/VO/"
         },
         {
-          "date": "2026-04-08",
+          "date": "2026-04-15",
           "heure": "18:25",
           "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F590378/D1775648700/VO/"
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F590378/D1776240900/VO/"
         },
         {
-          "date": "2026-04-08",
+          "date": "2026-04-15",
           "heure": "20:45",
           "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F590378/D1775648700/VO/"
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F590378/D1776240900/VO/"
         },
         {
-          "date": "2026-04-09",
+          "date": "2026-04-16",
           "heure": "10:15",
           "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F590378/D1775722500/VO/"
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F590378/D1776327300/VO/"
         },
         {
-          "date": "2026-04-09",
+          "date": "2026-04-16",
           "heure": "13:45",
           "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F590378/D1775722500/VO/"
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F590378/D1776327300/VO/"
         },
         {
-          "date": "2026-04-09",
+          "date": "2026-04-16",
           "heure": "16:05",
           "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F590378/D1775722500/VO/"
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F590378/D1776327300/VO/"
         },
         {
-          "date": "2026-04-09",
+          "date": "2026-04-16",
           "heure": "18:25",
           "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F590378/D1775722500/VO/"
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F590378/D1776327300/VO/"
         },
         {
-          "date": "2026-04-09",
+          "date": "2026-04-16",
           "heure": "20:45",
           "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F590378/D1775722500/VO/"
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F590378/D1776327300/VO/"
         },
         {
-          "date": "2026-04-10",
+          "date": "2026-04-17",
           "heure": "10:15",
           "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F590378/D1775808900/VO/"
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F590378/D1776413700/VO/"
         },
         {
-          "date": "2026-04-10",
+          "date": "2026-04-17",
           "heure": "13:45",
           "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F590378/D1775808900/VO/"
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F590378/D1776413700/VO/"
         },
         {
-          "date": "2026-04-10",
+          "date": "2026-04-17",
           "heure": "16:05",
           "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F590378/D1775808900/VO/"
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F590378/D1776413700/VO/"
         },
         {
-          "date": "2026-04-10",
-          "heure": "20:35",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F590378/D1775808900/VO/"
-        },
-        {
-          "date": "2026-04-11",
-          "heure": "10:15",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F590378/D1775895300/VO/"
-        },
-        {
-          "date": "2026-04-11",
-          "heure": "13:45",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F590378/D1775895300/VO/"
-        },
-        {
-          "date": "2026-04-11",
-          "heure": "16:05",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F590378/D1775895300/VO/"
-        },
-        {
-          "date": "2026-04-11",
+          "date": "2026-04-17",
           "heure": "18:25",
           "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F590378/D1775895300/VO/"
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F590378/D1776413700/VO/"
         },
         {
-          "date": "2026-04-11",
+          "date": "2026-04-17",
           "heure": "20:45",
           "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F590378/D1775895300/VO/"
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F590378/D1776413700/VO/"
         },
         {
-          "date": "2026-04-12",
+          "date": "2026-04-18",
           "heure": "10:15",
           "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F590378/D1775981700/VO/"
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F590378/D1776500100/VO/"
         },
         {
-          "date": "2026-04-12",
+          "date": "2026-04-18",
           "heure": "13:45",
           "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F590378/D1775981700/VO/"
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F590378/D1776500100/VO/"
         },
         {
-          "date": "2026-04-12",
+          "date": "2026-04-18",
           "heure": "16:05",
           "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F590378/D1775981700/VO/"
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F590378/D1776500100/VO/"
         },
         {
-          "date": "2026-04-12",
+          "date": "2026-04-18",
           "heure": "18:25",
           "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F590378/D1775981700/VO/"
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F590378/D1776500100/VO/"
         },
         {
-          "date": "2026-04-12",
+          "date": "2026-04-18",
           "heure": "20:45",
           "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F590378/D1775981700/VO/"
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F590378/D1776500100/VO/"
         },
         {
-          "date": "2026-04-13",
+          "date": "2026-04-19",
           "heure": "10:15",
           "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F590378/D1776068100/VO/"
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F590378/D1776586500/VO/"
         },
         {
-          "date": "2026-04-13",
+          "date": "2026-04-19",
           "heure": "13:45",
           "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F590378/D1776068100/VO/"
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F590378/D1776586500/VO/"
         },
         {
-          "date": "2026-04-13",
+          "date": "2026-04-19",
           "heure": "16:05",
           "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F590378/D1776068100/VO/"
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F590378/D1776586500/VO/"
         },
         {
-          "date": "2026-04-13",
+          "date": "2026-04-19",
           "heure": "18:25",
           "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F590378/D1776068100/VO/"
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F590378/D1776586500/VO/"
         },
         {
-          "date": "2026-04-13",
+          "date": "2026-04-19",
           "heure": "20:45",
           "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F590378/D1776068100/VO/"
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F590378/D1776586500/VO/"
         },
         {
-          "date": "2026-04-14",
+          "date": "2026-04-20",
           "heure": "10:15",
           "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F590378/D1776154500/VO/"
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F590378/D1776672900/VO/"
         },
         {
-          "date": "2026-04-14",
+          "date": "2026-04-20",
           "heure": "13:45",
           "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F590378/D1776154500/VO/"
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F590378/D1776672900/VO/"
         },
         {
-          "date": "2026-04-14",
+          "date": "2026-04-20",
           "heure": "16:05",
           "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F590378/D1776154500/VO/"
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F590378/D1776672900/VO/"
         },
         {
-          "date": "2026-04-14",
+          "date": "2026-04-20",
           "heure": "18:25",
           "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F590378/D1776154500/VO/"
-        },
-        {
-          "date": "2026-04-14",
-          "heure": "20:45",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F590378/D1776154500/VO/"
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F590378/D1776672900/VO/"
         }
       ],
       "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4790/7d71d5cb3807d32a852e5725c3c91974/s,490,650-q,90-565458.jpg",
       "cast": "L. Garcia, Mitch, T. Ulloa",
-      "imdbRating": 6.521
+      "imdbRating": 6.5
     },
     {
       "titre": "The Drama",
@@ -298,219 +656,455 @@
       "cinema": "Lumière Terreaux",
       "seances": [
         {
-          "date": "2026-04-08",
+          "date": "2026-04-15",
           "heure": "10:20",
           "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F610196/D1775649600/VO/"
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F610196/D1776241200/VO/"
         },
         {
-          "date": "2026-04-08",
-          "heure": "14:00",
+          "date": "2026-04-15",
+          "heure": "13:40",
           "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F610196/D1775649600/VO/"
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F610196/D1776241200/VO/"
         },
         {
-          "date": "2026-04-08",
-          "heure": "16:10",
+          "date": "2026-04-15",
+          "heure": "16:00",
           "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F610196/D1775649600/VO/"
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F610196/D1776241200/VO/"
         },
         {
-          "date": "2026-04-08",
+          "date": "2026-04-15",
           "heure": "18:20",
           "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F610196/D1775649600/VO/"
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F610196/D1776241200/VO/"
         },
         {
-          "date": "2026-04-08",
-          "heure": "20:30",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F610196/D1775649600/VO/"
-        },
-        {
-          "date": "2026-04-09",
-          "heure": "10:20",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F610196/D1775722800/VO/"
-        },
-        {
-          "date": "2026-04-09",
-          "heure": "14:00",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F610196/D1775722800/VO/"
-        },
-        {
-          "date": "2026-04-09",
-          "heure": "16:10",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F610196/D1775722800/VO/"
-        },
-        {
-          "date": "2026-04-09",
-          "heure": "18:20",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F610196/D1775722800/VO/"
-        },
-        {
-          "date": "2026-04-09",
-          "heure": "20:30",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F610196/D1775722800/VO/"
-        },
-        {
-          "date": "2026-04-10",
-          "heure": "10:20",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F610196/D1775809200/VO/"
-        },
-        {
-          "date": "2026-04-10",
-          "heure": "14:00",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F610196/D1775809200/VO/"
-        },
-        {
-          "date": "2026-04-10",
-          "heure": "16:10",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F610196/D1775809200/VO/"
-        },
-        {
-          "date": "2026-04-10",
-          "heure": "18:25",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F610196/D1775809200/VO/"
-        },
-        {
-          "date": "2026-04-10",
-          "heure": "20:45",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F610196/D1775809200/VO/"
-        },
-        {
-          "date": "2026-04-11",
-          "heure": "10:20",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F610196/D1775895600/VO/"
-        },
-        {
-          "date": "2026-04-11",
-          "heure": "14:00",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F610196/D1775895600/VO/"
-        },
-        {
-          "date": "2026-04-11",
-          "heure": "16:10",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F610196/D1775895600/VO/"
-        },
-        {
-          "date": "2026-04-11",
-          "heure": "18:20",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F610196/D1775895600/VO/"
-        },
-        {
-          "date": "2026-04-11",
-          "heure": "20:30",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F610196/D1775895600/VO/"
-        },
-        {
-          "date": "2026-04-12",
-          "heure": "10:20",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F610196/D1775982000/VO/"
-        },
-        {
-          "date": "2026-04-12",
-          "heure": "14:00",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F610196/D1775982000/VO/"
-        },
-        {
-          "date": "2026-04-12",
-          "heure": "16:10",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F610196/D1775982000/VO/"
-        },
-        {
-          "date": "2026-04-12",
-          "heure": "18:20",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F610196/D1775982000/VO/"
-        },
-        {
-          "date": "2026-04-12",
-          "heure": "20:30",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F610196/D1775982000/VO/"
-        },
-        {
-          "date": "2026-04-13",
-          "heure": "10:20",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F610196/D1776068400/VO/"
-        },
-        {
-          "date": "2026-04-13",
-          "heure": "14:00",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F610196/D1776068400/VO/"
-        },
-        {
-          "date": "2026-04-13",
-          "heure": "16:10",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F610196/D1776068400/VO/"
-        },
-        {
-          "date": "2026-04-13",
-          "heure": "18:20",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F610196/D1776068400/VO/"
-        },
-        {
-          "date": "2026-04-13",
+          "date": "2026-04-15",
           "heure": "20:40",
           "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F610196/D1776068400/VO/"
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F610196/D1776241200/VO/"
         },
         {
-          "date": "2026-04-14",
+          "date": "2026-04-16",
           "heure": "10:20",
           "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F610196/D1776154800/VO/"
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F610196/D1776327600/VO/"
         },
         {
-          "date": "2026-04-14",
-          "heure": "14:00",
+          "date": "2026-04-16",
+          "heure": "13:40",
           "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F610196/D1776154800/VO/"
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F610196/D1776327600/VO/"
         },
         {
-          "date": "2026-04-14",
-          "heure": "16:10",
+          "date": "2026-04-16",
+          "heure": "16:00",
           "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F610196/D1776154800/VO/"
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F610196/D1776327600/VO/"
         },
         {
-          "date": "2026-04-14",
+          "date": "2026-04-16",
           "heure": "18:20",
           "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F610196/D1776154800/VO/"
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F610196/D1776327600/VO/"
         },
         {
-          "date": "2026-04-14",
-          "heure": "20:30",
+          "date": "2026-04-16",
+          "heure": "20:40",
           "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F610196/D1776154800/VO/"
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F610196/D1776327600/VO/"
+        },
+        {
+          "date": "2026-04-17",
+          "heure": "10:20",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F610196/D1776414000/VO/"
+        },
+        {
+          "date": "2026-04-17",
+          "heure": "13:40",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F610196/D1776414000/VO/"
+        },
+        {
+          "date": "2026-04-17",
+          "heure": "16:00",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F610196/D1776414000/VO/"
+        },
+        {
+          "date": "2026-04-17",
+          "heure": "18:20",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F610196/D1776414000/VO/"
+        },
+        {
+          "date": "2026-04-17",
+          "heure": "20:40",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F610196/D1776414000/VO/"
+        },
+        {
+          "date": "2026-04-18",
+          "heure": "10:20",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F610196/D1776500400/VO/"
+        },
+        {
+          "date": "2026-04-18",
+          "heure": "13:40",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F610196/D1776500400/VO/"
+        },
+        {
+          "date": "2026-04-18",
+          "heure": "16:00",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F610196/D1776500400/VO/"
+        },
+        {
+          "date": "2026-04-18",
+          "heure": "18:20",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F610196/D1776500400/VO/"
+        },
+        {
+          "date": "2026-04-18",
+          "heure": "20:40",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F610196/D1776500400/VO/"
+        },
+        {
+          "date": "2026-04-19",
+          "heure": "10:20",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F610196/D1776586800/VO/"
+        },
+        {
+          "date": "2026-04-19",
+          "heure": "13:40",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F610196/D1776586800/VO/"
+        },
+        {
+          "date": "2026-04-19",
+          "heure": "16:00",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F610196/D1776586800/VO/"
+        },
+        {
+          "date": "2026-04-19",
+          "heure": "18:20",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F610196/D1776586800/VO/"
+        },
+        {
+          "date": "2026-04-19",
+          "heure": "20:40",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F610196/D1776586800/VO/"
+        },
+        {
+          "date": "2026-04-20",
+          "heure": "10:20",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F610196/D1776673200/VO/"
+        },
+        {
+          "date": "2026-04-20",
+          "heure": "13:40",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F610196/D1776673200/VO/"
+        },
+        {
+          "date": "2026-04-20",
+          "heure": "16:00",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F610196/D1776673200/VO/"
+        },
+        {
+          "date": "2026-04-20",
+          "heure": "18:20",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F610196/D1776673200/VO/"
+        },
+        {
+          "date": "2026-04-20",
+          "heure": "20:40",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F610196/D1776673200/VO/"
         }
       ],
       "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4814/d8a1392b8ca6606937144df9513994d8/s,490,650-q,90-68f92e.jpg",
       "cast": "Zendaya, R. Pattinson, Y. Gosselin",
-      "imdbRating": 7.0
+      "imdbRating": 7.109
+    },
+    {
+      "titre": "Vivaldi et moi",
+      "slug": "vivaldi-et-moi",
+      "titreOriginal": null,
+      "annee": 2026,
+      "realisateur": "Damiano Michieletto",
+      "duree": 111,
+      "genres": [
+        "Biography",
+        "History",
+        "Music"
+      ],
+      "synopsis": "Au début du XVIIIe siècle, l'Ospedale della Pietà à Venise recueille et forme de jeunes orphelines à la musique. Dissimulées au public, souvent masquées ou derrière une grille, l'orchestre de jeunes filles se produit pour les riches mécènes de l'institution. Cécilia, 20 ans, y excelle en tant que violoniste. Jusqu'au jour où l'arrivée d'un nouveau maître de musique, Antonio Vivaldi, vient bousculer sa vie et celle de l'Ospedale.",
+      "imdbId": "tt33586629",
+      "source": "lumiere",
+      "cinema": "Lumière Terreaux",
+      "seances": [
+        {
+          "date": "2026-04-20",
+          "heure": "20:30",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F624094/D1776709800/VO/"
+        }
+      ],
+      "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4831/0be6712ea95b821a63891ca86b72ee0e/s,490,650-q,90-4177c6.jpg",
+      "cast": "T. Insolia, M. Riondino, F. Sacchi",
+      "imdbRating": 6.8
+    },
+    {
+      "titre": "The Mad Dog Of Europe",
+      "slug": "the-mad-dog-of-europe",
+      "titreOriginal": null,
+      "annee": 2026,
+      "realisateur": "Rubika Shah",
+      "duree": 83,
+      "genres": [],
+      "synopsis": "En 1932, Herman J. Mankiewicz, qui deviendra célèbre 10 ans plus tard pour son scénario de Citizen Kane, écrit The Mad Dog of Europe : un script visionnaire dénonçant la menace hitlérienne. Entre pressions diplomatiques et intérêts économiques, les studios hollywoodiens préfèrent se taire et enterrer le projet. L'histoire de ce film jamais produit semble résonner avec les fractures de plus en plus menaçantes de notre époque, ils vont devoir lutter contre les éléments, tandis que le désespoir et …",
+      "imdbId": null,
+      "source": "lumiere",
+      "cinema": "Lumière Bellecour",
+      "seances": [
+        {
+          "date": "2026-04-15",
+          "heure": "18:30",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F585800/D1776270600/VO/"
+        },
+        {
+          "date": "2026-04-16",
+          "heure": "19:05",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F585800/D1776359100/VO/"
+        },
+        {
+          "date": "2026-04-17",
+          "heure": "16:40",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F585800/D1776436800/VO/"
+        },
+        {
+          "date": "2026-04-18",
+          "heure": "19:05",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F585800/D1776531900/VO/"
+        },
+        {
+          "date": "2026-04-19",
+          "heure": "16:40",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F585800/D1776609600/VO/"
+        },
+        {
+          "date": "2026-04-20",
+          "heure": "19:05",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F585800/D1776704700/VO/"
+        }
+      ],
+      "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4822/fb378584210ab254ef2769d62d4bc688/s,490,650-q,90-b39a9a.jpg",
+      "cast": "B. Mankiewicz, B. Davis",
+      "imdbRating": 0.0
+    },
+    {
+      "titre": "Hayat",
+      "slug": "hayat",
+      "titreOriginal": null,
+      "annee": 2026,
+      "realisateur": "Zeki Demirkubu",
+      "duree": 160,
+      "genres": [
+        "Drama"
+      ],
+      "synopsis": "Contrainte à un mariage arrangé, Hicran s'enfuit de chez elle. Inquiété par sa disparition, son supposé fiancé Riza quitte son village pour Istanbul, à la recherche de celle qu'il n'a pas eu le temps de connaître. Face à la réalité d'un monde masculin qui veut la soumettre, Hicran s'abandonne à son destin qui ne cessera de la surprendre.",
+      "imdbId": "tt20258974",
+      "source": "lumiere",
+      "cinema": "Lumière Bellecour",
+      "seances": [
+        {
+          "date": "2026-04-15",
+          "heure": "13:30",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F607834/D1776252600/VO/"
+        },
+        {
+          "date": "2026-04-15",
+          "heure": "15:35",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F607834/D1776252600/VO/"
+        },
+        {
+          "date": "2026-04-16",
+          "heure": "16:05",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F607834/D1776348300/VO/"
+        },
+        {
+          "date": "2026-04-16",
+          "heure": "21:05",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F607834/D1776348300/VO/"
+        },
+        {
+          "date": "2026-04-17",
+          "heure": "13:40",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F607834/D1776426000/VO/"
+        },
+        {
+          "date": "2026-04-17",
+          "heure": "16:00",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F607834/D1776426000/VO/"
+        },
+        {
+          "date": "2026-04-18",
+          "heure": "16:05",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F607834/D1776521100/VO/"
+        },
+        {
+          "date": "2026-04-18",
+          "heure": "21:05",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F607834/D1776521100/VO/"
+        },
+        {
+          "date": "2026-04-19",
+          "heure": "13:40",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F607834/D1776598800/VO/"
+        },
+        {
+          "date": "2026-04-19",
+          "heure": "16:00",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F607834/D1776598800/VO/"
+        },
+        {
+          "date": "2026-04-20",
+          "heure": "16:05",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F607834/D1776693900/VO/"
+        },
+        {
+          "date": "2026-04-20",
+          "heure": "21:05",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F607834/D1776693900/VO/"
+        }
+      ],
+      "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4832/188921f67712d3e75442cb23178b581c/s,490,650-q,90-3ff280.jpg",
+      "cast": "M. Daner, B. Dakak, C. Davran",
+      "imdbRating": 6.9
+    },
+    {
+      "titre": "Morlaix",
+      "slug": "morlaix",
+      "titreOriginal": null,
+      "annee": 2026,
+      "realisateur": "Jaime Rosales",
+      "duree": 124,
+      "genres": [
+        "Drama"
+      ],
+      "synopsis": "Fragilisée par le récent décès de sa mère, la jeune Gwen trouve du réconfort auprès de sa bande d'amis et de son amoureux, Thomas. Mais l'arrivée de Jean-Luc, étudiant au charme magnétique, la plonge dans une confusion des sentiments. Qui choisir? Un jour, comme pour éclairer son choix, Gwen tombe au cinéma sur un film qui semble inexplicablement lui dévoiler sa propre vie...",
+      "imdbId": "tt34798218",
+      "source": "lumiere",
+      "cinema": "Lumière Bellecour",
+      "seances": [
+        {
+          "date": "2026-04-15",
+          "heure": "18:25",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F588786/D1776270300/VF/"
+        },
+        {
+          "date": "2026-04-15",
+          "heure": "20:55",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F588786/D1776270300/VF/"
+        },
+        {
+          "date": "2026-04-16",
+          "heure": "13:40",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F588786/D1776339600/VF/"
+        },
+        {
+          "date": "2026-04-16",
+          "heure": "16:15",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F588786/D1776339600/VF/"
+        },
+        {
+          "date": "2026-04-17",
+          "heure": "18:15",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F588786/D1776442500/VF/"
+        },
+        {
+          "date": "2026-04-17",
+          "heure": "20:45",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F588786/D1776442500/VF/"
+        },
+        {
+          "date": "2026-04-18",
+          "heure": "13:40",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F588786/D1776512400/VF/"
+        },
+        {
+          "date": "2026-04-18",
+          "heure": "16:15",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F588786/D1776512400/VF/"
+        },
+        {
+          "date": "2026-04-19",
+          "heure": "18:15",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F588786/D1776615300/VF/"
+        },
+        {
+          "date": "2026-04-19",
+          "heure": "20:45",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F588786/D1776615300/VF/"
+        },
+        {
+          "date": "2026-04-20",
+          "heure": "13:40",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F588786/D1776685200/VF/"
+        },
+        {
+          "date": "2026-04-20",
+          "heure": "16:15",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F588786/D1776685200/VF/"
+        }
+      ],
+      "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4833/e37c38238df63e2fe38ced2714b1e4f4/s,490,650-q,90-d2dfc4.jpg",
+      "cast": "A. Audiard, M. Thierry, S. Kircher",
+      "imdbRating": 7.7
     },
     {
       "titre": "Plus fort que moi",
@@ -527,545 +1121,156 @@
       "synopsis": "Dans les années 1980, John Davidson grandit avec le syndrome de Gilles de la Tourette, une pathologie encore largement méconnue. Entre incompréhension, stigmatisation et détermination, son parcours d'abord semé d'embûches se transforme en combat pour être reconnu tel qu'il est, au-delà des préjugés.",
       "imdbId": "tt31514146",
       "source": "lumiere",
-      "cinema": "Lumière Terreaux",
+      "cinema": "Lumière Bellecour",
       "seances": [
         {
-          "date": "2026-04-08",
-          "heure": "10:20",
+          "date": "2026-04-15",
+          "heure": "13:45",
           "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F611780/D1775648400/VO/"
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F611780/D1776253500/VO/"
         },
         {
-          "date": "2026-04-08",
+          "date": "2026-04-15",
+          "heure": "16:05",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F611780/D1776253500/VO/"
+        },
+        {
+          "date": "2026-04-15",
+          "heure": "18:35",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F611780/D1776253500/VO/"
+        },
+        {
+          "date": "2026-04-15",
+          "heure": "20:55",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F611780/D1776253500/VO/"
+        },
+        {
+          "date": "2026-04-16",
           "heure": "13:40",
           "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F611780/D1775648400/VO/"
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F611780/D1776339600/VO/"
         },
         {
-          "date": "2026-04-08",
-          "heure": "16:00",
+          "date": "2026-04-16",
+          "heure": "16:25",
           "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F611780/D1775648400/VO/"
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F611780/D1776339600/VO/"
         },
         {
-          "date": "2026-04-08",
-          "heure": "18:20",
+          "date": "2026-04-16",
+          "heure": "18:40",
           "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F611780/D1775648400/VO/"
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F611780/D1776339600/VO/"
         },
         {
-          "date": "2026-04-08",
-          "heure": "20:40",
+          "date": "2026-04-16",
+          "heure": "20:50",
           "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F611780/D1775648400/VO/"
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F611780/D1776339600/VO/"
         },
         {
-          "date": "2026-04-09",
-          "heure": "10:20",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F611780/D1775722800/VO/"
-        },
-        {
-          "date": "2026-04-09",
+          "date": "2026-04-17",
           "heure": "13:40",
           "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F611780/D1775722800/VO/"
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F611780/D1776426000/VO/"
         },
         {
-          "date": "2026-04-09",
-          "heure": "16:00",
+          "date": "2026-04-17",
+          "heure": "15:50",
           "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F611780/D1775722800/VO/"
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F611780/D1776426000/VO/"
         },
         {
-          "date": "2026-04-09",
-          "heure": "18:20",
+          "date": "2026-04-17",
+          "heure": "18:25",
           "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F611780/D1775722800/VO/"
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F611780/D1776426000/VO/"
         },
         {
-          "date": "2026-04-09",
-          "heure": "20:40",
+          "date": "2026-04-17",
+          "heure": "20:55",
           "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F611780/D1775722800/VO/"
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F611780/D1776426000/VO/"
         },
         {
-          "date": "2026-04-10",
-          "heure": "10:20",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F611780/D1775809200/VO/"
-        },
-        {
-          "date": "2026-04-10",
+          "date": "2026-04-18",
           "heure": "13:40",
           "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F611780/D1775809200/VO/"
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F611780/D1776512400/VO/"
         },
         {
-          "date": "2026-04-10",
-          "heure": "16:00",
+          "date": "2026-04-18",
+          "heure": "16:25",
           "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F611780/D1775809200/VO/"
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F611780/D1776512400/VO/"
         },
         {
-          "date": "2026-04-10",
-          "heure": "18:20",
+          "date": "2026-04-18",
+          "heure": "18:40",
           "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F611780/D1775809200/VO/"
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F611780/D1776512400/VO/"
         },
         {
-          "date": "2026-04-11",
-          "heure": "10:20",
+          "date": "2026-04-18",
+          "heure": "20:50",
           "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F611780/D1775895600/VO/"
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F611780/D1776512400/VO/"
         },
         {
-          "date": "2026-04-11",
+          "date": "2026-04-19",
           "heure": "13:40",
           "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F611780/D1775895600/VO/"
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F611780/D1776598800/VO/"
         },
         {
-          "date": "2026-04-11",
-          "heure": "16:00",
+          "date": "2026-04-19",
+          "heure": "15:50",
           "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F611780/D1775895600/VO/"
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F611780/D1776598800/VO/"
         },
         {
-          "date": "2026-04-11",
-          "heure": "18:20",
+          "date": "2026-04-19",
+          "heure": "18:25",
           "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F611780/D1775895600/VO/"
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F611780/D1776598800/VO/"
         },
         {
-          "date": "2026-04-11",
-          "heure": "20:40",
+          "date": "2026-04-19",
+          "heure": "20:55",
           "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F611780/D1775895600/VO/"
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F611780/D1776598800/VO/"
         },
         {
-          "date": "2026-04-12",
-          "heure": "10:20",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F611780/D1775982000/VO/"
-        },
-        {
-          "date": "2026-04-12",
+          "date": "2026-04-20",
           "heure": "13:40",
           "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F611780/D1775982000/VO/"
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F611780/D1776685200/VO/"
         },
         {
-          "date": "2026-04-12",
-          "heure": "16:00",
+          "date": "2026-04-20",
+          "heure": "16:25",
           "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F611780/D1775982000/VO/"
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F611780/D1776685200/VO/"
         },
         {
-          "date": "2026-04-12",
-          "heure": "18:20",
+          "date": "2026-04-20",
+          "heure": "18:40",
           "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F611780/D1775982000/VO/"
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F611780/D1776685200/VO/"
         },
         {
-          "date": "2026-04-12",
-          "heure": "20:40",
+          "date": "2026-04-20",
+          "heure": "20:50",
           "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F611780/D1775982000/VO/"
-        },
-        {
-          "date": "2026-04-13",
-          "heure": "10:20",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F611780/D1776068400/VO/"
-        },
-        {
-          "date": "2026-04-13",
-          "heure": "13:40",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F611780/D1776068400/VO/"
-        },
-        {
-          "date": "2026-04-13",
-          "heure": "16:00",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F611780/D1776068400/VO/"
-        },
-        {
-          "date": "2026-04-13",
-          "heure": "18:20",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F611780/D1776068400/VO/"
-        },
-        {
-          "date": "2026-04-14",
-          "heure": "10:20",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F611780/D1776154800/VO/"
-        },
-        {
-          "date": "2026-04-14",
-          "heure": "13:40",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F611780/D1776154800/VO/"
-        },
-        {
-          "date": "2026-04-14",
-          "heure": "16:00",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F611780/D1776154800/VO/"
-        },
-        {
-          "date": "2026-04-14",
-          "heure": "18:20",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F611780/D1776154800/VO/"
-        },
-        {
-          "date": "2026-04-14",
-          "heure": "20:40",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F611780/D1776154800/VO/"
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F611780/D1776685200/VO/"
         }
       ],
       "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4813/8fb759142fd32992ed10f00b082d92fd/s,490,650-q,90-2b8308.jpg",
       "cast": "R. Aramayo, M. Peake, P. Mullan",
-      "imdbRating": 8.33
-    },
-    {
-      "titre": "Les Rayons et les Ombres",
-      "slug": "les-rayons-et-les-ombres",
-      "titreOriginal": null,
-      "annee": 2026,
-      "realisateur": "Xavier Giannoli",
-      "duree": 195,
-      "genres": [
-        "Drama",
-        "History"
-      ],
-      "synopsis": "Pendant la Deuxième Guerre mondiale, l'histoire vraie de Jean et Corinne Luchaire, un père et sa fille pris dans l'engrenage de la collaboration.",
-      "imdbId": "tt36187539",
-      "source": "lumiere",
-      "cinema": "Lumière Terreaux",
-      "seances": [
-        {
-          "date": "2026-04-08",
-          "heure": "10:15",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F608638/D1775644800/VF/"
-        },
-        {
-          "date": "2026-04-08",
-          "heure": "12:40",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F608638/D1775644800/VF/"
-        },
-        {
-          "date": "2026-04-08",
-          "heure": "16:20",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F608638/D1775644800/VF/"
-        },
-        {
-          "date": "2026-04-08",
-          "heure": "20:00",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F608638/D1775644800/VF/"
-        },
-        {
-          "date": "2026-04-09",
-          "heure": "10:15",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F608638/D1775722500/VF/"
-        },
-        {
-          "date": "2026-04-09",
-          "heure": "12:40",
-          "version": "VFST",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F608638/D1775722500/VF/"
-        },
-        {
-          "date": "2026-04-09",
-          "heure": "16:20",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F608638/D1775722500/VF/"
-        },
-        {
-          "date": "2026-04-09",
-          "heure": "20:00",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F608638/D1775722500/VF/"
-        },
-        {
-          "date": "2026-04-10",
-          "heure": "10:15",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F608638/D1775808900/VF/"
-        },
-        {
-          "date": "2026-04-10",
-          "heure": "12:40",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F608638/D1775808900/VF/"
-        },
-        {
-          "date": "2026-04-10",
-          "heure": "16:20",
-          "version": "VFST",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F608638/D1775808900/VF/"
-        },
-        {
-          "date": "2026-04-10",
-          "heure": "20:00",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F608638/D1775808900/VF/"
-        },
-        {
-          "date": "2026-04-11",
-          "heure": "10:15",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F608638/D1775895300/VF/"
-        },
-        {
-          "date": "2026-04-11",
-          "heure": "12:40",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F608638/D1775895300/VF/"
-        },
-        {
-          "date": "2026-04-11",
-          "heure": "16:20",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F608638/D1775895300/VF/"
-        },
-        {
-          "date": "2026-04-11",
-          "heure": "20:00",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F608638/D1775895300/VF/"
-        },
-        {
-          "date": "2026-04-12",
-          "heure": "10:15",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F608638/D1775981700/VF/"
-        },
-        {
-          "date": "2026-04-12",
-          "heure": "12:40",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F608638/D1775981700/VF/"
-        },
-        {
-          "date": "2026-04-12",
-          "heure": "16:20",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F608638/D1775981700/VF/"
-        },
-        {
-          "date": "2026-04-12",
-          "heure": "20:00",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F608638/D1775981700/VF/"
-        },
-        {
-          "date": "2026-04-13",
-          "heure": "10:15",
-          "version": "VFST",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F608638/D1776068100/VFST/"
-        },
-        {
-          "date": "2026-04-13",
-          "heure": "12:40",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F608638/D1776068100/VFST/"
-        },
-        {
-          "date": "2026-04-13",
-          "heure": "16:20",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F608638/D1776068100/VFST/"
-        },
-        {
-          "date": "2026-04-13",
-          "heure": "20:00",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F608638/D1776068100/VFST/"
-        },
-        {
-          "date": "2026-04-14",
-          "heure": "10:15",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F608638/D1776154500/VF/"
-        },
-        {
-          "date": "2026-04-14",
-          "heure": "12:40",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F608638/D1776154500/VF/"
-        },
-        {
-          "date": "2026-04-14",
-          "heure": "16:20",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F608638/D1776154500/VF/"
-        },
-        {
-          "date": "2026-04-14",
-          "heure": "20:00",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F608638/D1776154500/VF/"
-        }
-      ],
-      "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4784/c447be57bea5db08d582f557727e6a22/s,490,650-q,90-4a94b7.jpg",
-      "cast": "J. Dujardin, N. Golubeva, A. Diehl",
-      "imdbRating": 7.764
-    },
-    {
-      "titre": "Le Cri des gardes",
-      "slug": "le-cri-des-gardes",
-      "titreOriginal": null,
-      "annee": 2026,
-      "realisateur": "Claire Denis",
-      "duree": 109,
-      "genres": [
-        "Drama"
-      ],
-      "synopsis": "Un vaste chantier de travaux publics en Afrique de l'Ouest. Horn, le patron, et Cal, un jeune ingénieur, partagent une habitation provisoire derrière les doubles grilles de l'enceinte réservée aux blancs. Leone, future épouse de Horn, arrive d'Europe le soir même où un homme qui s'est introduit par effraction surgit derrière les grilles. Il s'appelle Alboury. Il ne quittera pas les lieux tant qu'on ne lui aura pas rendu le corps de son frère, mort sur le chantier.",
-      "imdbId": "tt33837526",
-      "source": "lumiere",
-      "cinema": "Lumière Bellecour",
-      "seances": [
-        {
-          "date": "2026-04-08",
-          "heure": "13:45",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F599284/D1775648700/VO/"
-        },
-        {
-          "date": "2026-04-08",
-          "heure": "18:25",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F599284/D1775648700/VO/"
-        },
-        {
-          "date": "2026-04-08",
-          "heure": "20:40",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F599284/D1775648700/VO/"
-        },
-        {
-          "date": "2026-04-09",
-          "heure": "13:45",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F599284/D1775735100/VO/"
-        },
-        {
-          "date": "2026-04-09",
-          "heure": "16:00",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F599284/D1775735100/VO/"
-        },
-        {
-          "date": "2026-04-09",
-          "heure": "20:40",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F599284/D1775735100/VO/"
-        },
-        {
-          "date": "2026-04-10",
-          "heure": "13:45",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F599284/D1775821500/VO/"
-        },
-        {
-          "date": "2026-04-10",
-          "heure": "18:25",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F599284/D1775821500/VO/"
-        },
-        {
-          "date": "2026-04-10",
-          "heure": "20:40",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F599284/D1775821500/VO/"
-        },
-        {
-          "date": "2026-04-11",
-          "heure": "13:45",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F599284/D1775907900/VO/"
-        },
-        {
-          "date": "2026-04-11",
-          "heure": "16:00",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F599284/D1775907900/VO/"
-        },
-        {
-          "date": "2026-04-11",
-          "heure": "20:40",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F599284/D1775907900/VO/"
-        },
-        {
-          "date": "2026-04-12",
-          "heure": "13:45",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F599284/D1775994300/VO/"
-        },
-        {
-          "date": "2026-04-12",
-          "heure": "18:25",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F599284/D1775994300/VO/"
-        },
-        {
-          "date": "2026-04-12",
-          "heure": "20:40",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F599284/D1775994300/VO/"
-        },
-        {
-          "date": "2026-04-13",
-          "heure": "13:45",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F599284/D1776080700/VO/"
-        },
-        {
-          "date": "2026-04-13",
-          "heure": "16:00",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F599284/D1776080700/VO/"
-        },
-        {
-          "date": "2026-04-13",
-          "heure": "20:40",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F599284/D1776080700/VO/"
-        },
-        {
-          "date": "2026-04-14",
-          "heure": "13:45",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F599284/D1776167100/VO/"
-        },
-        {
-          "date": "2026-04-14",
-          "heure": "18:25",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F599284/D1776167100/VO/"
-        },
-        {
-          "date": "2026-04-14",
-          "heure": "20:40",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F599284/D1776167100/VO/"
-        }
-      ],
-      "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4821/07ac2ba8e8d3388475020725122a5a41/s,490,650-q,90-e4002e.jpg",
-      "cast": "I. de Bankolé, M. Dillon, M. McKenna-Bruce",
-      "imdbRating": 6.0
+      "imdbRating": 8.324
     },
     {
       "titre": "La Femme de",
@@ -1085,147 +1290,81 @@
       "cinema": "Lumière Bellecour",
       "seances": [
         {
-          "date": "2026-04-08",
-          "heure": "16:45",
+          "date": "2026-04-15",
+          "heure": "13:40",
           "version": "VF",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F623354/D1775659500/VF/"
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F623354/D1776253200/VF/"
         },
         {
-          "date": "2026-04-08",
+          "date": "2026-04-15",
+          "heure": "16:30",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F623354/D1776253200/VF/"
+        },
+        {
+          "date": "2026-04-16",
           "heure": "18:45",
           "version": "VF",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F623354/D1775659500/VF/"
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F623354/D1776357900/VF/"
         },
         {
-          "date": "2026-04-08",
-          "heure": "20:45",
+          "date": "2026-04-16",
+          "heure": "21:00",
           "version": "VF",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F623354/D1775659500/VF/"
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F623354/D1776357900/VF/"
         },
         {
-          "date": "2026-04-09",
-          "heure": "13:45",
+          "date": "2026-04-17",
+          "heure": "13:55",
           "version": "VF",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F623354/D1775735100/VF/"
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F623354/D1776426900/VF/"
         },
         {
-          "date": "2026-04-09",
-          "heure": "15:40",
-          "version": "VFST",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F623354/D1775735100/VF/"
+          "date": "2026-04-17",
+          "heure": "19:00",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F623354/D1776426900/VF/"
         },
         {
-          "date": "2026-04-10",
-          "heure": "16:45",
-          "version": "VFST",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F623354/D1775832300/VFST/"
-        },
-        {
-          "date": "2026-04-10",
+          "date": "2026-04-18",
           "heure": "18:45",
           "version": "VF",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F623354/D1775832300/VFST/"
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F623354/D1776530700/VF/"
         },
         {
-          "date": "2026-04-10",
-          "heure": "20:45",
+          "date": "2026-04-18",
+          "heure": "21:00",
           "version": "VF",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F623354/D1775832300/VFST/"
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F623354/D1776530700/VF/"
         },
         {
-          "date": "2026-04-11",
-          "heure": "13:45",
-          "version": "VFST",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F623354/D1775907900/VFST/"
-        },
-        {
-          "date": "2026-04-11",
-          "heure": "15:40",
+          "date": "2026-04-19",
+          "heure": "13:55",
           "version": "VF",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F623354/D1775907900/VFST/"
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F623354/D1776599700/VF/"
         },
         {
-          "date": "2026-04-11",
-          "heure": "20:30",
+          "date": "2026-04-19",
+          "heure": "19:00",
           "version": "VF",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F623354/D1775907900/VFST/"
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F623354/D1776599700/VF/"
         },
         {
-          "date": "2026-04-12",
-          "heure": "16:45",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F623354/D1776005100/VF/"
-        },
-        {
-          "date": "2026-04-12",
+          "date": "2026-04-20",
           "heure": "18:45",
           "version": "VF",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F623354/D1776005100/VF/"
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F623354/D1776703500/VF/"
         },
         {
-          "date": "2026-04-12",
-          "heure": "20:45",
+          "date": "2026-04-20",
+          "heure": "21:00",
           "version": "VF",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F623354/D1776005100/VF/"
-        },
-        {
-          "date": "2026-04-13",
-          "heure": "13:45",
-          "version": "VFST",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F623354/D1776080700/VFST/"
-        },
-        {
-          "date": "2026-04-13",
-          "heure": "15:40",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F623354/D1776080700/VFST/"
-        },
-        {
-          "date": "2026-04-13",
-          "heure": "20:30",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F623354/D1776080700/VFST/"
-        },
-        {
-          "date": "2026-04-14",
-          "heure": "16:45",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F623354/D1776177900/VF/"
-        },
-        {
-          "date": "2026-04-14",
-          "heure": "20:45",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F623354/D1776177900/VF/"
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F623354/D1776703500/VF/"
         }
       ],
       "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4820/4de3841fc2b8b6f2fa29be5ac5c4f964/s,490,650-q,90-e8cb96.jpg",
       "cast": "M. Thierry, E. Caravaca, A. Valois",
-      "imdbRating": 7.186
-    },
-    {
-      "titre": "Ce qu'il reste de nous",
-      "slug": "ce-qu-il-reste-de-nous",
-      "titreOriginal": null,
-      "annee": 2026,
-      "realisateur": "Cherien Dabis",
-      "duree": 145,
-      "genres": [],
-      "synopsis": "De 1948 à nos jours, trois générations d'une famille palestinienne portent les espoirs et les blessures d'un peuple. Une fresque où Histoire et intime se rencontrent.",
-      "imdbId": "tt29344894",
-      "source": "lumiere",
-      "cinema": "Lumière Bellecour",
-      "seances": [
-        {
-          "date": "2026-04-09",
-          "heure": "20:30",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F621174/D1775759400/VO/"
-        }
-      ],
-      "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4777/abbedce650d9fd1b3fe6c2defe9c3518/s,490,650-q,90-e2445d.jpg",
-      "cast": "S. Bakri, C. Dabis, A. Bakri",
-      "imdbRating": 8.0
+      "imdbRating": 7.192
     },
     {
       "titre": "Yellow Letters",
@@ -1243,135 +1382,211 @@
       "cinema": "Lumière Bellecour",
       "seances": [
         {
-          "date": "2026-04-08",
-          "heure": "15:45",
+          "date": "2026-04-15",
+          "heure": "20:50",
           "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F575964/D1775655900/VO/"
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F575964/D1776279000/VO/"
         },
         {
-          "date": "2026-04-08",
-          "heure": "18:15",
+          "date": "2026-04-16",
+          "heure": "13:45",
           "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F575964/D1775655900/VO/"
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F575964/D1776339900/VO/"
         },
         {
-          "date": "2026-04-08",
-          "heure": "20:45",
+          "date": "2026-04-17",
+          "heure": "20:40",
           "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F575964/D1775655900/VO/"
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F575964/D1776451200/VO/"
         },
         {
-          "date": "2026-04-09",
-          "heure": "13:50",
+          "date": "2026-04-18",
+          "heure": "13:45",
           "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F575964/D1775735400/VO/"
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F575964/D1776512700/VO/"
         },
         {
-          "date": "2026-04-09",
-          "heure": "16:20",
+          "date": "2026-04-19",
+          "heure": "20:40",
           "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F575964/D1775735400/VO/"
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F575964/D1776624000/VO/"
         },
         {
-          "date": "2026-04-09",
-          "heure": "20:45",
+          "date": "2026-04-20",
+          "heure": "13:45",
           "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F575964/D1775735400/VO/"
-        },
-        {
-          "date": "2026-04-10",
-          "heure": "15:45",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F575964/D1775828700/VO/"
-        },
-        {
-          "date": "2026-04-10",
-          "heure": "18:15",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F575964/D1775828700/VO/"
-        },
-        {
-          "date": "2026-04-10",
-          "heure": "20:45",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F575964/D1775828700/VO/"
-        },
-        {
-          "date": "2026-04-11",
-          "heure": "13:50",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F575964/D1775908200/VO/"
-        },
-        {
-          "date": "2026-04-11",
-          "heure": "16:20",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F575964/D1775908200/VO/"
-        },
-        {
-          "date": "2026-04-11",
-          "heure": "20:45",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F575964/D1775908200/VO/"
-        },
-        {
-          "date": "2026-04-12",
-          "heure": "15:45",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F575964/D1776001500/VO/"
-        },
-        {
-          "date": "2026-04-12",
-          "heure": "18:15",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F575964/D1776001500/VO/"
-        },
-        {
-          "date": "2026-04-12",
-          "heure": "20:45",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F575964/D1776001500/VO/"
-        },
-        {
-          "date": "2026-04-13",
-          "heure": "13:50",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F575964/D1776081000/VO/"
-        },
-        {
-          "date": "2026-04-13",
-          "heure": "16:20",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F575964/D1776081000/VO/"
-        },
-        {
-          "date": "2026-04-13",
-          "heure": "20:45",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F575964/D1776081000/VO/"
-        },
-        {
-          "date": "2026-04-14",
-          "heure": "15:45",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F575964/D1776174300/VO/"
-        },
-        {
-          "date": "2026-04-14",
-          "heure": "18:15",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F575964/D1776174300/VO/"
-        },
-        {
-          "date": "2026-04-14",
-          "heure": "20:45",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F575964/D1776174300/VO/"
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F575964/D1776685500/VO/"
         }
       ],
       "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4812/99847f650a17daf40f38ca6cd45eb86a/s,490,650-q,90-6d3550.jpg",
       "cast": "Ö. Namal, T. Biçer, L. Cabas",
-      "imdbRating": 7.5
+      "imdbRating": 7.476
+    },
+    {
+      "titre": "Affection affection",
+      "slug": "affection-affection",
+      "titreOriginal": null,
+      "annee": 2026,
+      "realisateur": "Alexia Walther & Maxime Matray",
+      "duree": 101,
+      "genres": [],
+      "synopsis": "Sur la Côte d'Azur, une adolescente disparaît le jour de son anniversaire. Géraldine, employée municipale, s'improvise alors détective. Personne n'a rien vu mais tout le monde a son mot à dire et Géraldine aura du mal à ne pas se laisser submerger par les potins, les théories et les croyances de chacun. Et ce n'est pas le retour inopiné de sa mère qui va lui faciliter la tâche. Une petite ville, c'est bien connu, c'est plein de petits crimes...",
+      "imdbId": "tt37538578",
+      "source": "lumiere",
+      "cinema": "Lumière Fourmi",
+      "seances": [
+        {
+          "date": "2026-04-15",
+          "heure": "21:15",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F628482/D1776280500/VF/"
+        },
+        {
+          "date": "2026-04-16",
+          "heure": "21:00",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F628482/D1776366000/VF/"
+        },
+        {
+          "date": "2026-04-17",
+          "heure": "13:20",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F628482/D1776424800/VF/"
+        },
+        {
+          "date": "2026-04-18",
+          "heure": "18:40",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F628482/D1776530400/VF/"
+        },
+        {
+          "date": "2026-04-19",
+          "heure": "16:25",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F628482/D1776608700/VF/"
+        },
+        {
+          "date": "2026-04-20",
+          "heure": "18:40",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F628482/D1776703200/VF/"
+        }
+      ],
+      "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4834/701e45c57f12f4cf4fc4ab203f5da839/s,490,650-q,90-6ae428.jpg",
+      "cast": "A. Bonitzer, N. Richard, C. Paou",
+      "imdbRating": 0.0
+    },
+    {
+      "titre": "Topsy-Turvy",
+      "slug": "topsy-turvy",
+      "titreOriginal": null,
+      "annee": 2026,
+      "realisateur": "Mike Leigh",
+      "duree": 160,
+      "genres": [
+        "Biography",
+        "Comedy",
+        "Drama"
+      ],
+      "synopsis": "En 1880, Gilbert et Sullivan forment un tandem auquel tout réussit: ce sont les rois de l'opéra comique. Mais le récent échec de \"Princesse Ida\" redistribue les cartes. Découragé, Sullivan souhaite se consacrer désormais à la musique dite sérieuse mais Gilbert et lui sont sous contrat avec le directeur du Savoy Theatre, Richard D'Oyly Carte. Ce dernier leur demande de lui présenter en urgence une nouvelle oeuvre. C'est en visitant une exposition japonaise que Gilbert puise l'inspiration pour écr…",
+      "imdbId": "tt0151568",
+      "source": "lumiere",
+      "cinema": "Lumière Fourmi",
+      "seances": [
+        {
+          "date": "2026-04-15",
+          "heure": "15:45",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F1334/D1776260700/VO/"
+        },
+        {
+          "date": "2026-04-16",
+          "heure": "17:50",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F1334/D1776354600/VO/"
+        },
+        {
+          "date": "2026-04-17",
+          "heure": "15:30",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F1334/D1776432600/VO/"
+        },
+        {
+          "date": "2026-04-18",
+          "heure": "10:20",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F1334/D1776500400/VO/"
+        },
+        {
+          "date": "2026-04-19",
+          "heure": "12:30",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F1334/D1776594600/VO/"
+        },
+        {
+          "date": "2026-04-20",
+          "heure": "16:30",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F1334/D1776695400/VO/"
+        }
+      ],
+      "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4835/b39ad8fac4335b3fd4917848593a1558/s,490,650-q,90-d4ac73.jpg",
+      "cast": "J.Broadbent, A.Corduner, T. Spall",
+      "imdbRating": 6.6
+    },
+    {
+      "titre": "Silent Friend",
+      "slug": "silent-friend",
+      "titreOriginal": null,
+      "annee": 2026,
+      "realisateur": "Ildiko Enyedi",
+      "duree": 147,
+      "genres": [],
+      "synopsis": "Dans un jardin botanique, un arbre veille et observe, témoin patient des siècles. En 1908, il suit Grete, qui lutte pour exister dans un milieu qui l'ignore. Dans les années 70, il voit Hannes s'éveiller à l'amour et au monde des plantes. Aujourd'hui, le vieil arbre parle avec Tony dans son langage secret. Autour de lui, certains se cherchent, d'autres se rencontrent. Lui demeure, ami silencieux, dans un temps plus vaste que le leur.",
+      "imdbId": "tt27811632",
+      "source": "lumiere",
+      "cinema": "Lumière Fourmi",
+      "seances": [
+        {
+          "date": "2026-04-15",
+          "heure": "18:00",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F577122/D1776268800/VO/"
+        },
+        {
+          "date": "2026-04-16",
+          "heure": "10:10",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F577122/D1776327000/VO/"
+        },
+        {
+          "date": "2026-04-17",
+          "heure": "12:50",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F577122/D1776423000/VO/"
+        },
+        {
+          "date": "2026-04-18",
+          "heure": "20:40",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F577122/D1776537600/VO/"
+        },
+        {
+          "date": "2026-04-19",
+          "heure": "10:15",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F577122/D1776586500/VO/"
+        },
+        {
+          "date": "2026-04-20",
+          "heure": "20:35",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F577122/D1776710100/VO/"
+        }
+      ],
+      "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4815/4205010710cd6378d3ec01f929478794/s,490,650-q,90-3ce5d7.jpg",
+      "cast": "T. Leung chiu-wai, L. Seydoux, L. Wedler",
+      "imdbRating": 8.2
     },
     {
       "titre": "Nuestra Tierra",
@@ -1386,638 +1601,160 @@
       "synopsis": "Argentine, 2009. Trois hommes blancs tentent d'expulser les membres de la communauté autochtone Chuschagasta, revendiquant la propriété des terres. Armés, ils tuent le chef de la communauté, Javier Chocobar. Le meurtre est filmé, et en 2018, après neuf ans d'impunité et des siècles d'histoire coloniale, le procès s'ouvre.",
       "imdbId": "tt9859510",
       "source": "lumiere",
-      "cinema": "Lumière Bellecour",
+      "cinema": "Lumière Fourmi",
       "seances": [
         {
-          "date": "2026-04-08",
-          "heure": "16:00",
+          "date": "2026-04-15",
+          "heure": "21:00",
           "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F628747/D1775656800/VO/"
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F628747/D1776279600/VO/"
         },
         {
-          "date": "2026-04-09",
-          "heure": "18:15",
+          "date": "2026-04-16",
+          "heure": "13:15",
           "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F628747/D1775751300/VO/"
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F628747/D1776338100/VO/"
         },
         {
-          "date": "2026-04-10",
-          "heure": "16:00",
+          "date": "2026-04-17",
+          "heure": "20:55",
           "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F628747/D1775829600/VO/"
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F628747/D1776452100/VO/"
         },
         {
-          "date": "2026-04-11",
-          "heure": "18:15",
+          "date": "2026-04-18",
+          "heure": "13:45",
           "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F628747/D1775924100/VO/"
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F628747/D1776512700/VO/"
         },
         {
-          "date": "2026-04-12",
-          "heure": "16:00",
+          "date": "2026-04-19",
+          "heure": "17:40",
           "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F628747/D1776002400/VO/"
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F628747/D1776613200/VO/"
         },
         {
-          "date": "2026-04-13",
-          "heure": "18:15",
+          "date": "2026-04-20",
+          "heure": "14:05",
           "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F628747/D1776096900/VO/"
-        },
-        {
-          "date": "2026-04-14",
-          "heure": "16:00",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F628747/D1776175200/VO/"
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F628747/D1776686700/VO/"
         }
       ],
       "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4781/7ec26787c1e2fbdc52dc6cac5c0e1edd/s,490,650-q,90-79cd8c.jpg",
       "imdbRating": 7.4
     },
     {
-      "titre": "Julian",
-      "slug": "julian",
+      "titre": "Le Cri des gardes",
+      "slug": "le-cri-des-gardes",
       "titreOriginal": null,
       "annee": 2026,
-      "realisateur": "Cato Kusters",
-      "duree": 91,
+      "realisateur": "Claire Denis",
+      "duree": 109,
       "genres": [
         "Drama"
       ],
-      "synopsis": "Fleur et Julian tombent follement amoureuses et décident de se marier dans chaque pays où leur union peut être légalement reconnue. Portées par leur amour et leur engagement, elles s'élancent coeur et âme dans ce projet. Mais après seulement quatre mariages, leur parcours va s'interrompre brusquement...",
-      "imdbId": "tt13597298",
-      "source": "lumiere",
-      "cinema": "Lumière Bellecour",
-      "seances": [
-        {
-          "date": "2026-04-08",
-          "heure": "13:50",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F622386/D1775649000/VF/"
-        },
-        {
-          "date": "2026-04-09",
-          "heure": "18:50",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F622386/D1775753400/VF/"
-        },
-        {
-          "date": "2026-04-10",
-          "heure": "13:50",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F622386/D1775821800/VF/"
-        },
-        {
-          "date": "2026-04-11",
-          "heure": "18:50",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F622386/D1775926200/VF/"
-        },
-        {
-          "date": "2026-04-12",
-          "heure": "13:50",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F622386/D1775994600/VF/"
-        },
-        {
-          "date": "2026-04-13",
-          "heure": "18:50",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F622386/D1776099000/VF/"
-        },
-        {
-          "date": "2026-04-14",
-          "heure": "13:50",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F622386/D1776167400/VF/"
-        }
-      ],
-      "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4723/julian/s,490,650-q,90-e59f90.jpeg",
-      "cast": "N. Meurisse, L. Roothooft",
-      "imdbRating": 7.0
-    },
-    {
-      "titre": "Silent Friend",
-      "slug": "silent-friend",
-      "titreOriginal": null,
-      "annee": 2026,
-      "realisateur": "Ildiko Enyedi",
-      "duree": 147,
-      "genres": [],
-      "synopsis": "Dans un jardin botanique, un arbre veille et observe, témoin patient des siècles. En 1908, il suit Grete, qui lutte pour exister dans un milieu qui l'ignore. Dans les années 70, il voit Hannes s'éveiller à l'amour et au monde des plantes. Aujourd'hui, le vieil arbre parle avec Tony dans son langage secret. Autour de lui, certains se cherchent, d'autres se rencontrent. Lui demeure, ami silencieux, dans un temps plus vaste que le leur.",
-      "imdbId": "tt27811632",
-      "source": "lumiere",
-      "cinema": "Lumière Bellecour",
-      "seances": [
-        {
-          "date": "2026-04-08",
-          "heure": "13:50",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F577122/D1775649000/VO/"
-        },
-        {
-          "date": "2026-04-09",
-          "heure": "17:35",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F577122/D1775748900/VO/"
-        },
-        {
-          "date": "2026-04-10",
-          "heure": "13:50",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F577122/D1775821800/VO/"
-        },
-        {
-          "date": "2026-04-11",
-          "heure": "17:35",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F577122/D1775921700/VO/"
-        },
-        {
-          "date": "2026-04-12",
-          "heure": "13:50",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F577122/D1775994600/VO/"
-        },
-        {
-          "date": "2026-04-13",
-          "heure": "17:35",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F577122/D1776094500/VO/"
-        },
-        {
-          "date": "2026-04-14",
-          "heure": "13:50",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F577122/D1776167400/VO/"
-        }
-      ],
-      "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4815/4205010710cd6378d3ec01f929478794/s,490,650-q,90-3ce5d7.jpg",
-      "cast": "T. Leung chiu-wai, L. Seydoux, L. Wedler",
-      "imdbRating": 8.3
-    },
-    {
-      "titre": "Le quotidien",
-      "slug": "profils-paysans-chapitre-2-le-quotidien",
-      "titreOriginal": null,
-      "annee": 2026,
-      "realisateur": "Raymond Depardon",
-      "duree": 81,
-      "genres": [
-        "Documentary"
-      ],
-      "synopsis": "Dans , deuxième chapitre de la trilogie Profils paysans, nous retrouvons quatre ans plus tard les mêmes agriculteurs. Les fermes se transforment en résidences secondaires, de rares jeunes reprenant des exploitations. Les problèmes de transmission du patrimoine agissent sur la vie de tous les jours. Le Quotidien",
-      "imdbId": "tt0442424",
-      "source": "lumiere",
-      "cinema": "Lumière Bellecour",
-      "seances": [
-        {
-          "date": "2026-04-14",
-          "heure": "18:45",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F19687/D1776185100/VF/"
-        }
-      ],
-      "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4810/le-quotidien/s,490,650-q,90-c52f03.png",
-      "imdbRating": 7.2,
-      "cast": "Marcel Privat, Raymond Privat, Alain Rouvière"
-    },
-    {
-      "titre": "L'Oeuvre invisible",
-      "slug": "l-oeuvre-invisible",
-      "titreOriginal": null,
-      "annee": 2026,
-      "realisateur": "Avril Tembouret & Vladimir Rodionov",
-      "duree": 71,
-      "genres": [],
-      "synopsis": "Alexandre Trannoy. Le nom de ce réalisateur ne vous dit rien ? C'est normal : malgré 30 ans de projets, et de tournages avec Jean Rochefort, Anouk Aimée ou Lino Ventura, Trannoy n'a jamais réussi à terminer le moindre film... Enquête haletante sur un rêveur sublime.",
-      "imdbId": null,
+      "synopsis": "Un vaste chantier de travaux publics en Afrique de l'Ouest. Horn, le patron, et Cal, un jeune ingénieur, partagent une habitation provisoire derrière les doubles grilles de l'enceinte réservée aux blancs. Leone, future épouse de Horn, arrive d'Europe le soir même où un homme qui s'est introduit par effraction surgit derrière les grilles. Il s'appelle Alboury. Il ne quittera pas les lieux tant qu'on ne lui aura pas rendu le corps de son frère, mort sur le chantier.",
+      "imdbId": "tt33837526",
       "source": "lumiere",
       "cinema": "Lumière Fourmi",
       "seances": [
         {
-          "date": "2026-04-08",
-          "heure": "18:55",
+          "date": "2026-04-15",
+          "heure": "20:50",
           "version": "VF",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F631852/D1775667300/VF/"
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F599284/D1776279000/VF/"
         },
         {
-          "date": "2026-04-09",
-          "heure": "13:50",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F631852/D1775735400/VF/"
-        },
-        {
-          "date": "2026-04-10",
-          "heure": "14:10",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F631852/D1775823000/VF/"
-        },
-        {
-          "date": "2026-04-11",
-          "heure": "17:15",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F631852/D1775920500/VF/"
-        },
-        {
-          "date": "2026-04-12",
-          "heure": "14:40",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F631852/D1775997600/VF/"
-        },
-        {
-          "date": "2026-04-13",
-          "heure": "17:20",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F631852/D1776093600/VF/"
-        },
-        {
-          "date": "2026-04-14",
-          "heure": "16:50",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F631852/D1776178200/VF/"
-        }
-      ],
-      "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4818/50344871a9a9ffb1dcde67a1bfb50ee6/s,490,650-q,90-d91a4b.jpg",
-      "cast": "J.  Rochefort, A. Aimée, J. Perrin",
-      "imdbRating": 0.0
-    },
-    {
-      "titre": "Rue Málaga",
-      "slug": "rue-malaga",
-      "titreOriginal": null,
-      "annee": 2025,
-      "realisateur": "Maryam Touzani",
-      "duree": 116,
-      "genres": [
-        "Drama",
-        "Romance"
-      ],
-      "synopsis": "Maria Angeles, une Espagnole de 79 ans, vit seule à Tanger, dans le nord du Maroc, où elle profite de sa ville et de son quotidien. Sa vie bascule lorsque sa fille Clara arrive de Madrid pour vendre l'appartement dans lequel elle a toujours vécu. Déterminée à rester dans cette ville qui l'a vue grandir, elle met tout en oeuvre pour garder sa maison et récupérer les objets d'une vie. Contre toute attente, elle redécouvre en chemin l'amour et le désir.",
-      "imdbId": "tt32429174",
-      "source": "lumiere",
-      "cinema": "Lumière Fourmi",
-      "seances": [
-        {
-          "date": "2026-04-08",
-          "heure": "13:15",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F628750/D1775646900/VO/"
-        },
-        {
-          "date": "2026-04-09",
-          "heure": "16:05",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F628750/D1775743500/VO/"
-        },
-        {
-          "date": "2026-04-10",
-          "heure": "18:25",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F628750/D1775838300/VO/"
-        },
-        {
-          "date": "2026-04-11",
-          "heure": "16:30",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F628750/D1775917800/VO/"
-        },
-        {
-          "date": "2026-04-12",
-          "heure": "18:50",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F628750/D1776012600/VO/"
-        },
-        {
-          "date": "2026-04-13",
-          "heure": "17:50",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F628750/D1776095400/VO/"
-        },
-        {
-          "date": "2026-04-14",
-          "heure": "15:40",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F628750/D1776174000/VO/"
-        }
-      ],
-      "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4747/4f46a55374da1919875e846787fd1289/s,490,650-q,90-2e3f1f.jpg",
-      "cast": "C. Maura, M. Etura, A. Boulane",
-      "imdbRating": 7.167
-    },
-    {
-      "titre": "Une jeunesse indienne",
-      "slug": "une-jeunesse-indienne-homebound",
-      "titreOriginal": null,
-      "annee": 2026,
-      "realisateur": "Neeraj Ghaywan",
-      "duree": 119,
-      "genres": [
-        "Drama"
-      ],
-      "synopsis": "Dans un village du nord de l'Inde, deux amis d'enfance tentent de passer le concours de police d'Etat, un metier qui pourrait leur offrir la dignite qu'ils n'osent esperer. Alors qu'ils touchent du doigt leur reve, le lien precieux qui les unit est menace par leurs desillusions...",
-      "imdbId": "tt26733325",
-      "source": "lumiere",
-      "cinema": "Lumière Fourmi",
-      "seances": [
-        {
-          "date": "2026-04-08",
-          "heure": "13:30",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F626671/D1775647800/VO/"
-        },
-        {
-          "date": "2026-04-09",
-          "heure": "13:45",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F626671/D1775735100/VO/"
-        },
-        {
-          "date": "2026-04-10",
-          "heure": "16:05",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F626671/D1775829900/VO/"
-        },
-        {
-          "date": "2026-04-11",
+          "date": "2026-04-16",
           "heure": "13:00",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F626671/D1775905200/VO/"
-        },
-        {
-          "date": "2026-04-12",
-          "heure": "20:55",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F626671/D1776020100/VO/"
-        },
-        {
-          "date": "2026-04-13",
-          "heure": "16:05",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F626671/D1776089100/VO/"
-        },
-        {
-          "date": "2026-04-14",
-          "heure": "14:00",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F626671/D1776168000/VO/"
-        }
-      ],
-      "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4793/0aaa63f822e3b7b2ffcd14b12e07a33c/s,490,650-q,90-d4f79a.jpg",
-      "cast": "I. Khatter, V. Jethwa, J. Kapoor",
-      "imdbRating": 7.6
-    },
-    {
-      "titre": "Ce qu'il reste de nous",
-      "slug": "ce-qu-il-reste-de-nous",
-      "titreOriginal": null,
-      "annee": 2026,
-      "realisateur": "Cherien Dabis",
-      "duree": 145,
-      "genres": [],
-      "synopsis": "De 1948 à nos jours, trois générations d'une famille palestinienne portent les espoirs et les blessures d'un peuple. Une fresque où Histoire et intime se rencontrent.",
-      "imdbId": "tt29344894",
-      "source": "lumiere",
-      "cinema": "Lumière Fourmi",
-      "seances": [
-        {
-          "date": "2026-04-08",
-          "heure": "17:30",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F621174/D1775662200/VO/"
-        },
-        {
-          "date": "2026-04-09",
-          "heure": "15:00",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F621174/D1775739600/VO/"
-        },
-        {
-          "date": "2026-04-10",
-          "heure": "15:40",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F621174/D1775828400/VO/"
-        },
-        {
-          "date": "2026-04-11",
-          "heure": "17:45",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F621174/D1775922300/VO/"
-        },
-        {
-          "date": "2026-04-12",
-          "heure": "17:55",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F621174/D1776009300/VO/"
-        },
-        {
-          "date": "2026-04-13",
-          "heure": "15:00",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F621174/D1776085200/VO/"
-        },
-        {
-          "date": "2026-04-14",
-          "heure": "18:00",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F621174/D1776182400/VO/"
-        }
-      ],
-      "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4777/abbedce650d9fd1b3fe6c2defe9c3518/s,490,650-q,90-e2445d.jpg",
-      "cast": "S. Bakri, C. Dabis, A. Bakri",
-      "imdbRating": 8.0
-    },
-    {
-      "titre": "Derrière les palmiers",
-      "slug": "derriere-les-palmiers",
-      "titreOriginal": null,
-      "annee": 2026,
-      "realisateur": "Meryem Benm'Barek",
-      "duree": 100,
-      "genres": [
-        "Thriller"
-      ],
-      "synopsis": "A Tanger, Mehdi voit sa relation avec Selma bouleversée lorsqu'il rencontre Marie, une riche Française dont les parents ont acheté une luxueuse villa dans la kasbah. Attiré par sa vie mondaine, il délaisse Selma, feignant d'ignorer que ses choix le rattraperont.",
-      "imdbId": "tt23644354",
-      "source": "lumiere",
-      "cinema": "Lumière Fourmi",
-      "seances": [
-        {
-          "date": "2026-04-08",
-          "heure": "16:25",
-          "version": "VFST",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F615238/D1775658300/VFST/"
-        },
-        {
-          "date": "2026-04-09",
-          "heure": "16:55",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F615238/D1775746500/VO/"
-        },
-        {
-          "date": "2026-04-10",
-          "heure": "16:55",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F615238/D1775832900/VO/"
-        },
-        {
-          "date": "2026-04-11",
-          "heure": "12:40",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F615238/D1775904000/VO/"
-        },
-        {
-          "date": "2026-04-12",
-          "heure": "12:50",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F615238/D1775991000/VO/"
-        },
-        {
-          "date": "2026-04-13",
-          "heure": "13:45",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F615238/D1776080700/VO/"
-        },
-        {
-          "date": "2026-04-14",
-          "heure": "13:40",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F615238/D1776166800/VO/"
-        }
-      ],
-      "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4816/20766787848eeaed1c91bc181d7574ee/s,490,650-q,90-ebf466.jpg",
-      "cast": "S. Giraudeau, D. Ramdi, N. Kounda",
-      "imdbRating": 5.75
-    },
-    {
-      "titre": "Alter Ego",
-      "slug": "alter-ego",
-      "titreOriginal": null,
-      "annee": 2026,
-      "realisateur": "Nicolas Charlet & Bruno Lavaine",
-      "duree": 99,
-      "genres": [],
-      "synopsis": "Alex a un problème : son nouveau voisin est son sosie parfait. Avec des cheveux. Un double en mieux, qui va totalement bouleverser son existence.",
-      "imdbId": "tt35591633",
-      "source": "lumiere",
-      "cinema": "Lumière Fourmi",
-      "seances": [
-        {
-          "date": "2026-04-08",
-          "heure": "20:20",
           "version": "VF",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F362221/D1775672400/VF/"
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F599284/D1776337200/VF/"
         },
         {
-          "date": "2026-04-09",
+          "date": "2026-04-17",
+          "heure": "13:15",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F599284/D1776424500/VF/"
+        },
+        {
+          "date": "2026-04-18",
+          "heure": "16:45",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F599284/D1776523500/VF/"
+        },
+        {
+          "date": "2026-04-19",
           "heure": "21:10",
           "version": "VF",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F362221/D1775761800/VF/"
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F599284/D1776625800/VF/"
         },
         {
-          "date": "2026-04-10",
-          "heure": "20:35",
+          "date": "2026-04-20",
+          "heure": "13:40",
           "version": "VF",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F362221/D1775846100/VF/"
-        },
-        {
-          "date": "2026-04-11",
-          "heure": "20:55",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F362221/D1775933700/VF/"
-        },
-        {
-          "date": "2026-04-12",
-          "heure": "17:00",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F362221/D1776006000/VF/"
-        },
-        {
-          "date": "2026-04-12",
-          "heure": "20:45",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F362221/D1776006000/VF/"
-        },
-        {
-          "date": "2026-04-13",
-          "heure": "20:35",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F362221/D1776105300/VF/"
-        },
-        {
-          "date": "2026-04-14",
-          "heure": "20:45",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F362221/D1776192300/VF/"
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F599284/D1776685200/VF/"
         }
       ],
-      "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4764/a3212f7a3bc901b69704c09de6e30093/s,490,650-q,90-de068a.jpg",
-      "cast": "L. Lafitte,  B. Gardin,  O. Kurylenko",
-      "imdbRating": 6.576
+      "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4821/07ac2ba8e8d3388475020725122a5a41/s,490,650-q,90-e4002e.jpg",
+      "cast": "I. de Bankolé, M. Dillon, M. McKenna-Bruce",
+      "imdbRating": 5.667
     },
     {
-      "titre": "Orwell: 2+2=5",
-      "slug": "orwell-2-2-5",
+      "titre": "Les Rayons et les Ombres",
+      "slug": "les-rayons-et-les-ombres",
       "titreOriginal": null,
       "annee": 2026,
-      "realisateur": "Raoul Peck",
-      "duree": 120,
+      "realisateur": "Xavier Giannoli",
+      "duree": 195,
       "genres": [
-        "Documentary",
-        "Biography",
+        "Drama",
         "History"
       ],
-      "synopsis": "Le film plonge dans les derniers mois de la vie d’Orwell et dans son œuvre visionnaire pour explorer les racines des concepts troublants qu'il a révélés au monde dans son chef-d'œuvre dystopique : le double discours, le crime par la pensée, la novlangue, le spectre omniprésent de Big Brother... des vérités sociopolitiques qui résonnent encore plus puissamment aujourd'hui.",
-      "imdbId": "tt27052428",
+      "synopsis": "Pendant la Deuxième Guerre mondiale, l'histoire vraie de Jean et Corinne Luchaire, un père et sa fille pris dans l'engrenage de la collaboration.",
+      "imdbId": "tt36187539",
       "source": "lumiere",
       "cinema": "Lumière Fourmi",
       "seances": [
         {
-          "date": "2026-04-08",
-          "heure": "14:00",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F585514/D1775649600/VO/"
+          "date": "2026-04-15",
+          "heure": "14:50",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F608638/D1776257400/VF/"
         },
         {
-          "date": "2026-04-09",
-          "heure": "10:20",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F585514/D1775722800/VO/"
+          "date": "2026-04-16",
+          "heure": "17:10",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F608638/D1776352200/VF/"
         },
         {
-          "date": "2026-04-10",
-          "heure": "13:45",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F585514/D1775821500/VO/"
+          "date": "2026-04-17",
+          "heure": "17:15",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F608638/D1776438900/VF/"
         },
         {
-          "date": "2026-04-11",
-          "heure": "15:25",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F585514/D1775913900/VO/"
+          "date": "2026-04-18",
+          "heure": "18:55",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F608638/D1776531300/VF/"
         },
         {
-          "date": "2026-04-12",
-          "heure": "13:15",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F585514/D1775992500/VO/"
+          "date": "2026-04-19",
+          "heure": "15:00",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F608638/D1776603600/VF/"
         },
         {
-          "date": "2026-04-13",
-          "heure": "13:45",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F585514/D1776080700/VO/"
-        },
-        {
-          "date": "2026-04-14",
-          "heure": "16:20",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F585514/D1776176400/VO/"
+          "date": "2026-04-20",
+          "heure": "19:30",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F608638/D1776706200/VF/"
         }
       ],
-      "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4750/0c2bd5a0e4ca0f608888589f81b6a9b2/s,490,650-q,90-882920.jpg",
-      "cast": "Eric Ruf",
-      "imdbRating": 7.161
+      "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4784/c447be57bea5db08d582f557727e6a22/s,490,650-q,90-4a94b7.jpg",
+      "cast": "J. Dujardin, N. Golubeva, A. Diehl",
+      "imdbRating": 7.677
     },
     {
       "titre": "Aucun autre choix",
@@ -2037,615 +1774,33 @@
       "cinema": "Lumière Fourmi",
       "seances": [
         {
-          "date": "2026-04-08",
-          "heure": "20:30",
+          "date": "2026-04-15",
+          "heure": "10:15",
           "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F610668/D1775673000/VO/"
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F610668/D1776240900/VO/"
         },
         {
-          "date": "2026-04-09",
-          "heure": "20:50",
+          "date": "2026-04-18",
+          "heure": "20:25",
           "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F610668/D1775760600/VO/"
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F610668/D1776536700/VO/"
         },
         {
-          "date": "2026-04-10",
-          "heure": "20:50",
+          "date": "2026-04-19",
+          "heure": "20:15",
           "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F610668/D1775847000/VO/"
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F610668/D1776622500/VO/"
         },
         {
-          "date": "2026-04-11",
-          "heure": "20:40",
+          "date": "2026-04-20",
+          "heure": "16:00",
           "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F610668/D1775932800/VO/"
-        },
-        {
-          "date": "2026-04-12",
-          "heure": "16:10",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F610668/D1776003000/VO/"
-        },
-        {
-          "date": "2026-04-13",
-          "heure": "20:45",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F610668/D1776105900/VO/"
-        },
-        {
-          "date": "2026-04-14",
-          "heure": "20:55",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F610668/D1776192900/VO/"
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F610668/D1776693600/VO/"
         }
       ],
       "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4735/a4527664f53d4cdc51dbaf628184aff1/s,490,650-q,90-cf3d47.jpg",
       "cast": "Lee B.-h., Y.-j. Son, S.-w. Cha",
-      "imdbRating": 7.545
-    },
-    {
-      "titre": "Vol au-dessus d'un nid de coucou",
-      "slug": "vol-au-dessus-d-un-nid-de-coucou",
-      "titreOriginal": null,
-      "annee": 1975,
-      "realisateur": "Milos Forman",
-      "duree": 133,
-      "genres": [
-        "Drama"
-      ],
-      "synopsis": "Régulièrement incarcéré pour comportement violent, McMurphy (Jack Nicholson) est orienté par l'administration pénitentiaire vers un hôpital psychiatrique, afin de tester l'efficacité d'un traitement. Il découvre, au-delà de leur folie, des êtres fragiles et attachants, soumis à l'autorité oppressive de l'infirmière Miss Ratched (Louise Fletcher).",
-      "imdbId": "tt0073486",
-      "source": "lumiere",
-      "cinema": "Lumière Fourmi",
-      "seances": [
-        {
-          "date": "2026-04-08",
-          "heure": "20:40",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F50541/D1775673600/VO/"
-        },
-        {
-          "date": "2026-04-09",
-          "heure": "20:30",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F50541/D1775759400/VO/"
-        },
-        {
-          "date": "2026-04-10",
-          "heure": "20:40",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F50541/D1775846400/VO/"
-        },
-        {
-          "date": "2026-04-11",
-          "heure": "20:30",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F50541/D1775932200/VO/"
-        },
-        {
-          "date": "2026-04-12",
-          "heure": "21:05",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F50541/D1776020700/VO/"
-        },
-        {
-          "date": "2026-04-13",
-          "heure": "20:15",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F50541/D1776104100/VO/"
-        },
-        {
-          "date": "2026-04-14",
-          "heure": "18:20",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F50541/D1776183600/VO/"
-        }
-      ],
-      "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4519/vol au dessus d'un nid de coucou/s,490,650-q,90-75aa69.jpeg",
-      "cast": "J. Nicholson, L. Fletcher, W. Sampson",
-      "imdbRating": 8.412
-    },
-    {
-      "titre": "Gros-pois et Petit-point",
-      "slug": "gros-pois-et-petit-point",
-      "titreOriginal": null,
-      "annee": 2011,
-      "realisateur": "Lotta Geffenblad & Uzi Geffenblad",
-      "duree": 43,
-      "genres": [],
-      "synopsis": "Le premier est couvert de pois, tandis que l'autre est parsemé de points. Et ils sont très heureux comme ça. Mais vous n'êtes pas au bout de vos surprises car les aventures de Gros-pois et Petit-point riment avec imagination, observation et expérimentation... Un délice pour les plus petits.",
-      "imdbId": null,
-      "source": "lumiere",
-      "cinema": "Lumière Fourmi",
-      "seances": [
-        {
-          "date": "2026-04-09",
-          "heure": "10:15",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F10320/D1775722500/VF/"
-        },
-        {
-          "date": "2026-04-12",
-          "heure": "10:15",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F10320/D1775981700/VF/"
-        },
-        {
-          "date": "2026-04-14",
-          "heure": "15:45",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F10320/D1776174300/VF/"
-        }
-      ],
-      "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4801/2876751/s,490,650-q,90-18357e.jpg",
-      "imdbRating": 4.0
-    },
-    {
-      "titre": "Planètes",
-      "slug": "planetes",
-      "titreOriginal": null,
-      "annee": 2025,
-      "realisateur": "Momoko Seto",
-      "duree": 75,
-      "genres": [
-        "Animation",
-        "Adventure"
-      ],
-      "synopsis": "Quatre graines de pissenlit rescapées d'explosions nucléaires qui détruisent la Terre, se trouvent projetées dans le cosmos. Après s'être échouées sur une planète inconnue, elles partent à la quête d'un sol propice à la survie de leur espèce.",
-      "imdbId": "tt32284798",
-      "source": "lumiere",
-      "cinema": "Lumière Fourmi",
-      "seances": [
-        {
-          "date": "2026-04-09",
-          "heure": "15:20",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F322243/D1775740800/VF/"
-        },
-        {
-          "date": "2026-04-13",
-          "heure": "15:45",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F322243/D1776087900/VF/"
-        },
-        {
-          "date": "2026-04-14",
-          "heure": "10:30",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F322243/D1776155400/VF/"
-        }
-      ],
-      "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4797/ea8fb95276ef64374d453772434084b5/s,490,650-q,90-42f009.jpg",
-      "imdbRating": 7.0
-    },
-    {
-      "titre": "La Maison des femmes",
-      "slug": "la-maison-des-femmes",
-      "titreOriginal": null,
-      "annee": 2026,
-      "realisateur": "Mélisa Godet",
-      "duree": 110,
-      "genres": [],
-      "synopsis": "À la Maison des femmes, entre soin, écoute et solidarité, une équipe se bat chaque jour pour accompagner les femmes victimes de violences dans leur reconstruction. Dans ce lieu unique, Diane, Manon, Inès, Awa et leurs collègues accueillent, soutiennent, redonnent confiance. Ensemble, avec leurs forces, leurs fragilités, leurs convictions et une énergie inépuisable.",
-      "imdbId": "tt35455708",
-      "source": "lumiere",
-      "cinema": "Lumière Fourmi",
-      "seances": [
-        {
-          "date": "2026-04-08",
-          "heure": "18:25",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F614230/D1775665500/VF/"
-        },
-        {
-          "date": "2026-04-09",
-          "heure": "18:20",
-          "version": "VFST",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F614230/D1775751600/VFST/"
-        },
-        {
-          "date": "2026-04-10",
-          "heure": "18:25",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F614230/D1775838300/VF/"
-        },
-        {
-          "date": "2026-04-11",
-          "heure": "18:45",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F614230/D1775925900/VF/"
-        },
-        {
-          "date": "2026-04-12",
-          "heure": "15:40",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F614230/D1776001200/VF/"
-        },
-        {
-          "date": "2026-04-13",
-          "heure": "18:25",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F614230/D1776097500/VF/"
-        },
-        {
-          "date": "2026-04-14",
-          "heure": "20:35",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F614230/D1776191700/VF/"
-        }
-      ],
-      "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4819/d09ff1ec5ee43c6f7f17d6622d7422d0/s,490,650-q,90-06c9e3.jpg",
-      "cast": "K. Viard, L. Dosch, E. Haidara",
-      "imdbRating": 8.742
-    },
-    {
-      "titre": "Soy Cuba",
-      "slug": "soy-cuba",
-      "titreOriginal": null,
-      "annee": 1964,
-      "realisateur": "Mikhail Kalatozov",
-      "duree": 141,
-      "genres": [
-        "Drama"
-      ],
-      "synopsis": "A Cuba, sous le régime de Batista. Maria, qui vit à La Havane, sombre dans la honte lorsque l'homme qui l'aime apprend comment elle gagne sa vie. Pedro, un vieux paysan, doit quitter ses terres, qui viennent d'être arbitrairement vendues à la firme United Fruit. Un étudiant est le témoin des brutalités de la police à l'égard des opposants. Et un paysan rejoint la guérilla castriste...",
-      "imdbId": "tt0058604",
-      "source": "lumiere",
-      "cinema": "Lumière Fourmi",
-      "seances": [
-        {
-          "date": "2026-04-09",
-          "heure": "18:30",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F2644/D1775752200/VO/"
-        }
-      ],
-      "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4804/5473343/s,490,650-q,90-439425.jpg",
-      "cast": "L. M. Collazo, J. Gallardo, R.Garcia (III)",
-      "imdbRating": 7.8
-    },
-    {
-      "titre": "Le Chant des forêts",
-      "slug": "le-chant-des-forets",
-      "titreOriginal": null,
-      "annee": 2025,
-      "realisateur": "Vincent Munier",
-      "duree": 96,
-      "genres": [
-        "Documentary"
-      ],
-      "synopsis": "Après La Panthère des neiges, Vincent Munier nous invite au cœur des forêts des Vosges. C’est ici qu’il a tout appris grâce à son père Michel, naturaliste, ayant passé sa vie à l’affut dans les bois. Il est l’heure pour eux de transmettre ce savoir à Simon, le fils de Vincent. Trois regards, trois générations, une même fascination pour la vie sauvage. Nous découvrirons avec eux cerfs, oiseaux rares, renards et lynx… et parfois, le battement d’ailes d’un animal légendaire : le Grand Tétras.",
-      "imdbId": "tt32368068",
-      "source": "lumiere",
-      "cinema": "Lumière Fourmi",
-      "seances": [
-        {
-          "date": "2026-04-08",
-          "heure": "10:20",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F606772/D1775660400/VF/"
-        },
-        {
-          "date": "2026-04-08",
-          "heure": "17:00",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F606772/D1775660400/VF/"
-        },
-        {
-          "date": "2026-04-09",
-          "heure": "18:55",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F606772/D1775753700/VF/"
-        },
-        {
-          "date": "2026-04-10",
-          "heure": "18:55",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F606772/D1775840100/VF/"
-        },
-        {
-          "date": "2026-04-11",
-          "heure": "18:45",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F606772/D1775925900/VF/"
-        },
-        {
-          "date": "2026-04-12",
-          "heure": "12:45",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F606772/D1775990700/VF/"
-        },
-        {
-          "date": "2026-04-12",
-          "heure": "19:00",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F606772/D1775990700/VF/"
-        },
-        {
-          "date": "2026-04-13",
-          "heure": "18:50",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F606772/D1776099000/VF/"
-        },
-        {
-          "date": "2026-04-14",
-          "heure": "18:40",
-          "version": "VFST",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F606772/D1776184800/VFST/"
-        }
-      ],
-      "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4614/f5523e15c97af96169bdc93479553602/s,490,650-q,90-811db2.jpg",
-      "cast": "Vincent Munier",
-      "imdbRating": 7.971
-    },
-    {
-      "titre": "Les Nouvelles aventures de Gros-Pois et Petit-point",
-      "slug": "les-nouvelles-aventures-de-gros-pois-et-petit-point",
-      "titreOriginal": null,
-      "annee": 2015,
-      "realisateur": "divers cinéastes",
-      "duree": 43,
-      "genres": [
-        "Animation",
-        "Family"
-      ],
-      "synopsis": "La suite des aventures de Gros-pois et Petit-point.",
-      "imdbId": "tt5336614",
-      "source": "lumiere",
-      "cinema": "Lumière Fourmi",
-      "seances": [
-        {
-          "date": "2026-04-09",
-          "heure": "13:50",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F55925/D1775735400/VF/"
-        },
-        {
-          "date": "2026-04-10",
-          "heure": "10:15",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F55925/D1775808900/VF/"
-        },
-        {
-          "date": "2026-04-13",
-          "heure": "13:50",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F55925/D1776081000/VF/"
-        }
-      ],
-      "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4806/393337/s,490,650-q,90-6b280b.jpg",
-      "imdbRating": 4.3,
-      "cast": "Stina Ekblad"
-    },
-    {
-      "titre": "Hamnet",
-      "slug": "hamnet",
-      "titreOriginal": null,
-      "annee": 2026,
-      "realisateur": "Chloé Zhao",
-      "duree": 125,
-      "genres": [
-        "Biography",
-        "Drama",
-        "History"
-      ],
-      "synopsis": "Angleterre, 1580. Un professeur de latin fauché, fait la connaissance d'Agnes, jeune femme à l'esprit libre. Fascinés l'un par l'autre, ils entament une liaison fougueuse avant de se marier et d'avoir trois enfants. Tandis que Will tente sa chance comme dramaturge à Londres, Agnes assume seule les tâches domestiques. Lorsqu'un drame se produit, le couple, autrefois profondément uni, vacille. Mais c'est de leur épreuve commune que naîtra l'inspiration d'un chef d'oeuvre universel.",
-      "imdbId": "tt14905854",
-      "source": "lumiere",
-      "cinema": "Lumière Fourmi",
-      "seances": [
-        {
-          "date": "2026-04-10",
-          "heure": "10:20",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F576660/D1775809200/VO/"
-        },
-        {
-          "date": "2026-04-11",
-          "heure": "13:00",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F576660/D1775905200/VO/"
-        },
-        {
-          "date": "2026-04-12",
-          "heure": "10:20",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F576660/D1775982000/VO/"
-        },
-        {
-          "date": "2026-04-14",
-          "heure": "10:20",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F576660/D1776154800/VO/"
-        }
-      ],
-      "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4698/9af5f87b39938fec50f86c32c3d31b69/s,490,650-q,90-885971.jpg",
-      "cast": "P. Mescal, J. Buckley, E. Watson",
-      "imdbRating": 7.7
-    },
-    {
-      "titre": "La Princesse, l'ogre et la fourmi",
-      "slug": "la-princesse-l-ogre-et-la-fourmi",
-      "titreOriginal": null,
-      "annee": 2026,
-      "realisateur": "Eduard Nazarov",
-      "duree": 42,
-      "genres": [],
-      "synopsis": "Cinq courts métrages pleins d'humour, où tous les personnages font l'expérience des surprises de la vie, les fourmis comme les ogres, les princesses comme les loups, les chiens comme les hippopotames, et pour qui la solidarité, l'amitié et l'amour l'emporteront !",
-      "imdbId": null,
-      "source": "lumiere",
-      "cinema": "Lumière Fourmi",
-      "seances": [
-        {
-          "date": "2026-04-10",
-          "heure": "10:30",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F633798/D1775809800/VF/"
-        }
-      ],
-      "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4787/d44fc9a919162a0bdf8cc6bfa82ece89/s,490,650-q,90-8c1470.jpg",
-      "imdbRating": 0.0
-    },
-    {
-      "titre": "Le Grand jour du Lièvre",
-      "slug": "le-grand-jour-du-lievre",
-      "titreOriginal": null,
-      "annee": 2022,
-      "realisateur": "Dace Riduze & Maris Brinkmanis",
-      "duree": 48,
-      "genres": [],
-      "synopsis": "Programme de 4 films d'animations en marionnettes par les Studios AB.",
-      "imdbId": null,
-      "source": "lumiere",
-      "cinema": "Lumière Fourmi",
-      "seances": [
-        {
-          "date": "2026-04-11",
-          "heure": "10:15",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F553322/D1775895300/VF/"
-        },
-        {
-          "date": "2026-04-14",
-          "heure": "10:15",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F553322/D1776154500/VF/"
-        }
-      ],
-      "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4200/5092659/s,490,650-q,90-dfaa7c.jpg",
-      "imdbRating": 0.0
-    },
-    {
-      "titre": "Victor comme tout le monde",
-      "slug": "victor-comme-tout-le-monde",
-      "titreOriginal": null,
-      "annee": 2026,
-      "realisateur": "Pascal Bonitzer",
-      "duree": 88,
-      "genres": [
-        "Drama"
-      ],
-      "synopsis": "Habité par Victor Hugo, le comédien Robert Zucchini traîne une douce mélancolie lorsqu'il n'est pas sur scène. Chaque soir, il remplit les salles en transmettant son amour des mots. Jusqu’au jour où réapparaît sa fille, qu’il n’a pas vue grandir…Et si aimer, pour une fois, valait mieux qu’admirer ?",
-      "imdbId": "tt39149806",
-      "source": "lumiere",
-      "cinema": "Lumière Fourmi",
-      "seances": [
-        {
-          "date": "2026-04-11",
-          "heure": "10:20",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F626278/D1775895600/VF/"
-        },
-        {
-          "date": "2026-04-13",
-          "heure": "10:20",
-          "version": "VFST",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F626278/D1776068400/VFST/"
-        }
-      ],
-      "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4633/victor-comme-tout-le-monde (2)/s,490,650-q,90-4dbe01.png",
-      "cast": "F. Luchini, C. Mastroianni, M. Narbonne",
-      "imdbRating": 6.7
-    },
-    {
-      "titre": "Mary et la fleur de la sorcière",
-      "slug": "mary-et-la-fleur-de-la-sorciere",
-      "titreOriginal": null,
-      "annee": 2018,
-      "realisateur": "Hiromasa Yonebayashi",
-      "duree": 103,
-      "genres": [
-        "Animation",
-        "Adventure",
-        "Family"
-      ],
-      "synopsis": "C'est l'été. Mary vient d'emménager chez sa grand-tante dans le village de Manoir Rouge. Dans la forêt voisine, elle découvre une fleur mystérieuse qui ne fleurit qu'une fois tous les 7 ans. On l'appelle la \"fleur de la sorcière\". Pour une nuit seulement, grâce à la fleur, Mary possèdera des pouvoirs magiques et pourra entrer à Endor, l'école la plus renommée dans le monde de la magie, qui s'élève au-dessus du ciel, au-delà des nuages. Le secret de la fleur de la sorcière se révèlera à elle peti…",
-      "imdbId": "tt6336356",
-      "source": "lumiere",
-      "cinema": "Lumière Fourmi",
-      "seances": [
-        {
-          "date": "2026-04-11",
-          "heure": "10:30",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F187774/D1775896200/VF/"
-        }
-      ],
-      "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4763/1636502/s,490,650-q,90-8bcb28.jpg",
-      "imdbRating": 7.135,
-      "cast": "Yuki Amami, Ryunosuke Kamiki, Hana Sugisaki"
-    },
-    {
-      "titre": "La Traversée du temps",
-      "slug": "la-traversee-du-temps",
-      "titreOriginal": null,
-      "annee": 2025,
-      "realisateur": "Mamoru Hosoda",
-      "duree": 98,
-      "genres": [
-        "Animation",
-        "Adventure",
-        "Comedy"
-      ],
-      "synopsis": "Makoto, lycéenne insouciante, découvre qu'elle a le pouvoir de voyager dans le temps. Elle s'amuse d'abord à corriger ses petits tracas du quotidien... jusqu'au jour où ses manipulations bouleversent irrémédiablement la vie de ses amis. Un voyage poignant sur les regrets, les choix et le poids du destin.",
-      "imdbId": "tt0808506",
-      "source": "lumiere",
-      "cinema": "Lumière Fourmi",
-      "seances": [
-        {
-          "date": "2026-04-09",
-          "heure": "10:30",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F4470/D1775723400/VF/"
-        },
-        {
-          "date": "2026-04-12",
-          "heure": "10:30",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F4470/D1775982600/VF/"
-        }
-      ],
-      "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4808/aef18dac92aed9b90807339fd498484f/s,490,650-q,90-11604a.jpg",
-      "imdbRating": 7.779,
-      "cast": "Riisa Naka, Takuya Ishida, Mitsutaka Itakura"
-    },
-    {
-      "titre": "Heidi et le lynx des montagnes",
-      "slug": "heidi-et-le-lynx-des-montagnes",
-      "titreOriginal": null,
-      "annee": 2025,
-      "realisateur": "divers cinéastes",
-      "duree": 79,
-      "genres": [
-        "Animation",
-        "Family"
-      ],
-      "synopsis": "Heidi vit avec son grand-père dans un chalet à la montagne. Mais tout bascule lorsqu'elle trouve un bébé lynx blessé et décide de le soigner. Le jeune animal a désespérément besoin de retrouver sa famille vers les sommets ! À l'insu de son grand-père, Heidi et Peter décident de sauver leur nouveau compagnon. Les choses se compliquent lorsqu'un homme d'affaires cupide, Schnaittinger, veut construire une grande scierie en montagne et pose des pièges aux lynx. Il faut maintenant protéger non seulem…",
-      "imdbId": "tt14260876",
-      "source": "lumiere",
-      "cinema": "Lumière Fourmi",
-      "seances": [
-        {
-          "date": "2026-04-08",
-          "heure": "10:15",
-          "version": "VF"
-        },
-        {
-          "date": "2026-04-11",
-          "heure": "14:50",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F568724/D1775911800/VF/"
-        },
-        {
-          "date": "2026-04-12",
-          "heure": "14:50",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F568724/D1775998200/VF/"
-        }
-      ],
-      "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4803/5c6ff17e2295ffa123d81a565bfdca43/s,490,650-q,90-417cb7.jpg",
-      "imdbRating": 7.5,
-      "cast": "Lilly Graffam, Tom Zahner, Leonardo Lucero"
+      "imdbRating": 7.541
     },
     {
       "titre": "L'Odyssée de Céleste",
@@ -2663,22 +1818,22 @@
       "cinema": "Lumière Fourmi",
       "seances": [
         {
-          "date": "2026-04-08",
-          "heure": "10:30",
+          "date": "2026-04-15",
+          "heure": "15:45",
           "version": "VF",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F623120/D1775637000/VF/"
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F623120/D1776260700/VF/"
         },
         {
-          "date": "2026-04-11",
-          "heure": "15:25",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F623120/D1775913900/VF/"
-        },
-        {
-          "date": "2026-04-13",
+          "date": "2026-04-16",
           "heure": "10:15",
           "version": "VF",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F623120/D1776068100/VF/"
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F623120/D1776327300/VF/"
+        },
+        {
+          "date": "2026-04-18",
+          "heure": "14:50",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F623120/D1776516600/VF/"
         }
       ],
       "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4805/56f5e287f1087fac5f85e7056819d4d4/s,490,650-q,90-870fb6.jpg",
@@ -2698,31 +1853,96 @@
       "cinema": "Lumière Fourmi",
       "seances": [
         {
-          "date": "2026-04-08",
-          "heure": "15:45",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F633737/D1775655900/VF/"
-        },
-        {
-          "date": "2026-04-08",
-          "heure": "15:55",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F633737/D1775655900/VF/"
-        },
-        {
-          "date": "2026-04-10",
-          "heure": "15:45",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F633737/D1775828700/VF/"
-        },
-        {
-          "date": "2026-04-13",
+          "date": "2026-04-16",
           "heure": "10:30",
           "version": "VF",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F633737/D1776069000/VF/"
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F633737/D1776328200/VF/"
+        },
+        {
+          "date": "2026-04-18",
+          "heure": "15:30",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F633737/D1776519000/VF/"
         }
       ],
       "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4802/c3f1c0f0487600d766398e361cb351bd/s,490,650-q,90-6ee844.jpg"
+    },
+    {
+      "titre": "Gros-pois et Petit-point",
+      "slug": "gros-pois-et-petit-point",
+      "titreOriginal": null,
+      "annee": 2011,
+      "realisateur": "Lotta Geffenblad & Uzi Geffenblad",
+      "duree": 43,
+      "genres": [],
+      "synopsis": "Le premier est couvert de pois, tandis que l'autre est parsemé de points. Et ils sont très heureux comme ça. Mais vous n'êtes pas au bout de vos surprises car les aventures de Gros-pois et Petit-point riment avec imagination, observation et expérimentation... Un délice pour les plus petits.",
+      "imdbId": null,
+      "source": "lumiere",
+      "cinema": "Lumière Fourmi",
+      "seances": [
+        {
+          "date": "2026-04-16",
+          "heure": "13:50",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F10320/D1776340200/VF/"
+        }
+      ],
+      "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4801/2876751/s,490,650-q,90-18357e.jpg",
+      "imdbRating": 4.0
+    },
+    {
+      "titre": "Mary et la fleur de la sorcière",
+      "slug": "mary-et-la-fleur-de-la-sorciere",
+      "titreOriginal": null,
+      "annee": 2018,
+      "realisateur": "Hiromasa Yonebayashi",
+      "duree": 103,
+      "genres": [
+        "Animation",
+        "Adventure",
+        "Family"
+      ],
+      "synopsis": "C'est l'été. Mary vient d'emménager chez sa grand-tante dans le village de Manoir Rouge. Dans la forêt voisine, elle découvre une fleur mystérieuse qui ne fleurit qu'une fois tous les 7 ans. On l'appelle la \"fleur de la sorcière\". Pour une nuit seulement, grâce à la fleur, Mary possèdera des pouvoirs magiques et pourra entrer à Endor, l'école la plus renommée dans le monde de la magie, qui s'élève au-dessus du ciel, au-delà des nuages. Le secret de la fleur de la sorcière se révèlera à elle peti…",
+      "imdbId": "tt6336356",
+      "source": "lumiere",
+      "cinema": "Lumière Fourmi",
+      "seances": [
+        {
+          "date": "2026-04-16",
+          "heure": "15:45",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F187774/D1776347100/VF/"
+        }
+      ],
+      "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4763/1636502/s,490,650-q,90-8bcb28.jpg",
+      "imdbRating": 7.135,
+      "cast": "Yuki Amami, Ryunosuke Kamiki, Hana Sugisaki"
+    },
+    {
+      "titre": "Nostalgie de la lumière",
+      "slug": "nostalgie-de-la-lumiere",
+      "titreOriginal": null,
+      "annee": 2010,
+      "realisateur": "Patricio Guzman",
+      "duree": 90,
+      "genres": [
+        "Documentary"
+      ],
+      "synopsis": "Au Chili, à trois mille mètres d'altitude, les astronomes venus du monde entier se rassemblent dans le désert d'Atacama pour observer les étoiles. Car la transparence du ciel est telle qu'elle permet de regarder jusqu'aux confins de l'univers. C'est aussi un lieu où la sécheresse du sol conserve intacts les restes humains : ceux des momies, des explorateurs et des mineurs. Mais aussi, les ossements des prisonniers politiques de la dictature. Tandis que les astronomes scrutent les galaxies les pl…",
+      "imdbId": "tt1556190",
+      "source": "lumiere",
+      "cinema": "Lumière Fourmi",
+      "seances": [
+        {
+          "date": "2026-04-16",
+          "heure": "18:30",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F7104/D1776357000/VO/"
+        }
+      ],
+      "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4807/19518452/s,490,650-q,90-6bd5ba.jpg",
+      "cast": "P . Guzmán , G.Galaz, L. Núñez",
+      "imdbRating": 7.4
     },
     {
       "titre": "Walter Lapin",
@@ -2740,21 +1960,424 @@
       "cinema": "Lumière Fourmi",
       "seances": [
         {
-          "date": "2026-04-10",
-          "heure": "13:50",
+          "date": "2026-04-17",
+          "heure": "10:15",
           "version": "VF",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F626420/D1775821800/VF/"
-        },
-        {
-          "date": "2026-04-14",
-          "heure": "13:50",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F626420/D1776167400/VF/"
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F626420/D1776413700/VF/"
         }
       ],
       "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4799/a2bdae0847360b299016dd772fc85c2b/s,490,650-q,90-e847b4.jpg",
       "imdbRating": 10.0,
       "cast": "Matthew Goode, Kíla Lord Cassidy, Gemma Whelan"
+    },
+    {
+      "titre": "Le Chant des forêts",
+      "slug": "le-chant-des-forets",
+      "titreOriginal": null,
+      "annee": 2025,
+      "realisateur": "Vincent Munier",
+      "duree": 96,
+      "genres": [
+        "Documentary"
+      ],
+      "synopsis": "Après La Panthère des neiges, Vincent Munier nous invite au cœur des forêts des Vosges. C’est ici qu’il a tout appris grâce à son père Michel, naturaliste, ayant passé sa vie à l’affut dans les bois. Il est l’heure pour eux de transmettre ce savoir à Simon, le fils de Vincent. Trois regards, trois générations, une même fascination pour la vie sauvage. Nous découvrirons avec eux cerfs, oiseaux rares, renards et lynx… et parfois, le battement d’ailes d’un animal légendaire : le Grand Tétras.",
+      "imdbId": "tt32368068",
+      "source": "lumiere",
+      "cinema": "Lumière Fourmi",
+      "seances": [
+        {
+          "date": "2026-04-15",
+          "heure": "12:55",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F606772/D1776250500/VF/"
+        },
+        {
+          "date": "2026-04-16",
+          "heure": "15:10",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F606772/D1776345000/VF/"
+        },
+        {
+          "date": "2026-04-17",
+          "heure": "15:20",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F606772/D1776432000/VF/"
+        },
+        {
+          "date": "2026-04-18",
+          "heure": "16:10",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F606772/D1776521400/VF/"
+        },
+        {
+          "date": "2026-04-19",
+          "heure": "13:05",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F606772/D1776596700/VF/"
+        }
+      ],
+      "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4614/f5523e15c97af96169bdc93479553602/s,490,650-q,90-811db2.jpg",
+      "cast": "Vincent Munier",
+      "imdbRating": 7.931
+    },
+    {
+      "titre": "La Traversée du temps",
+      "slug": "la-traversee-du-temps",
+      "titreOriginal": null,
+      "annee": 2025,
+      "realisateur": "Mamoru Hosoda",
+      "duree": 98,
+      "genres": [
+        "Animation",
+        "Adventure",
+        "Comedy"
+      ],
+      "synopsis": "Makoto, lycéenne insouciante, découvre qu'elle a le pouvoir de voyager dans le temps. Elle s'amuse d'abord à corriger ses petits tracas du quotidien... jusqu'au jour où ses manipulations bouleversent irrémédiablement la vie de ses amis. Un voyage poignant sur les regrets, les choix et le poids du destin.",
+      "imdbId": "tt0808506",
+      "source": "lumiere",
+      "cinema": "Lumière Fourmi",
+      "seances": [
+        {
+          "date": "2026-04-17",
+          "heure": "16:00",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F4470/D1776434400/VF/"
+        },
+        {
+          "date": "2026-04-18",
+          "heure": "10:15",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F4470/D1776500100/VF/"
+        }
+      ],
+      "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4808/aef18dac92aed9b90807339fd498484f/s,490,650-q,90-11604a.jpg",
+      "imdbRating": 7.8,
+      "cast": "Riisa Naka, Takuya Ishida, Mitsutaka Itakura"
+    },
+    {
+      "titre": "La Maison des femmes",
+      "slug": "la-maison-des-femmes",
+      "titreOriginal": null,
+      "annee": 2026,
+      "realisateur": "Mélisa Godet",
+      "duree": 110,
+      "genres": [],
+      "synopsis": "À la Maison des femmes, entre soin, écoute et solidarité, une équipe se bat chaque jour pour accompagner les femmes victimes de violences dans leur reconstruction. Dans ce lieu unique, Diane, Manon, Inès, Awa et leurs collègues accueillent, soutiennent, redonnent confiance. Ensemble, avec leurs forces, leurs fragilités, leurs convictions et une énergie inépuisable.",
+      "imdbId": "tt35455708",
+      "source": "lumiere",
+      "cinema": "Lumière Fourmi",
+      "seances": [
+        {
+          "date": "2026-04-15",
+          "heure": "13:35",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F614230/D1776252900/VF/"
+        },
+        {
+          "date": "2026-04-16",
+          "heure": "20:50",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F614230/D1776365400/VF/"
+        },
+        {
+          "date": "2026-04-17",
+          "heure": "10:15",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F614230/D1776413700/VF/"
+        },
+        {
+          "date": "2026-04-17",
+          "heure": "18:30",
+          "version": "VFST",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F614230/D1776413700/VF/"
+        },
+        {
+          "date": "2026-04-18",
+          "heure": "13:15",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F614230/D1776510900/VF/"
+        },
+        {
+          "date": "2026-04-18",
+          "heure": "18:15",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F614230/D1776510900/VF/"
+        },
+        {
+          "date": "2026-04-19",
+          "heure": "15:30",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F614230/D1776605400/VF/"
+        },
+        {
+          "date": "2026-04-19",
+          "heure": "18:40",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F614230/D1776605400/VF/"
+        },
+        {
+          "date": "2026-04-20",
+          "heure": "20:45",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F614230/D1776710700/VF/"
+        }
+      ],
+      "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4819/d09ff1ec5ee43c6f7f17d6622d7422d0/s,490,650-q,90-06c9e3.jpg",
+      "cast": "K. Viard, L. Dosch, E. Haidara",
+      "imdbRating": 8.742
+    },
+    {
+      "titre": "Le Grand jour du Lièvre",
+      "slug": "le-grand-jour-du-lievre",
+      "titreOriginal": null,
+      "annee": 2022,
+      "realisateur": "Dace Riduze & Maris Brinkmanis",
+      "duree": 48,
+      "genres": [],
+      "synopsis": "Programme de 4 films d'animations en marionnettes par les Studios AB.",
+      "imdbId": null,
+      "source": "lumiere",
+      "cinema": "Lumière Fourmi",
+      "seances": [
+        {
+          "date": "2026-04-19",
+          "heure": "10:15",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F553322/D1776586500/VF/"
+        }
+      ],
+      "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4200/5092659/s,490,650-q,90-dfaa7c.jpg",
+      "imdbRating": 0.0
+    },
+    {
+      "titre": "La Princesse, l'ogre et la fourmi",
+      "slug": "la-princesse-l-ogre-et-la-fourmi",
+      "titreOriginal": null,
+      "annee": 2026,
+      "realisateur": "Eduard Nazarov",
+      "duree": 42,
+      "genres": [],
+      "synopsis": "Cinq courts métrages pleins d'humour, où tous les personnages font l'expérience des surprises de la vie, les fourmis comme les ogres, les princesses comme les loups, les chiens comme les hippopotames, et pour qui la solidarité, l'amitié et l'amour l'emporteront !",
+      "imdbId": null,
+      "source": "lumiere",
+      "cinema": "Lumière Fourmi",
+      "seances": [
+        {
+          "date": "2026-04-18",
+          "heure": "10:30",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F633798/D1776501000/VF/"
+        },
+        {
+          "date": "2026-04-19",
+          "heure": "10:30",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F633798/D1776587400/VF/"
+        }
+      ],
+      "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4787/d44fc9a919162a0bdf8cc6bfa82ece89/s,490,650-q,90-8c1470.jpg",
+      "imdbRating": 0.0
+    },
+    {
+      "titre": "Les Nouvelles aventures de Gros-Pois et Petit-point",
+      "slug": "les-nouvelles-aventures-de-gros-pois-et-petit-point",
+      "titreOriginal": null,
+      "annee": 2015,
+      "realisateur": "divers cinéastes",
+      "duree": 43,
+      "genres": [
+        "Animation",
+        "Family"
+      ],
+      "synopsis": "La suite des aventures de Gros-pois et Petit-point.",
+      "imdbId": "tt5336614",
+      "source": "lumiere",
+      "cinema": "Lumière Fourmi",
+      "seances": [
+        {
+          "date": "2026-04-17",
+          "heure": "10:30",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F55925/D1776414600/VF/"
+        },
+        {
+          "date": "2026-04-19",
+          "heure": "14:50",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F55925/D1776603000/VF/"
+        }
+      ],
+      "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4806/393337/s,490,650-q,90-6b280b.jpg",
+      "imdbRating": 4.3,
+      "cast": "Stina Ekblad"
+    },
+    {
+      "titre": "Rue Málaga",
+      "slug": "rue-malaga",
+      "titreOriginal": null,
+      "annee": 2025,
+      "realisateur": "Maryam Touzani",
+      "duree": 116,
+      "genres": [
+        "Drama",
+        "Romance"
+      ],
+      "synopsis": "Maria Angeles, une Espagnole de 79 ans, vit seule à Tanger, dans le nord du Maroc, où elle profite de sa ville et de son quotidien. Sa vie bascule lorsque sa fille Clara arrive de Madrid pour vendre l'appartement dans lequel elle a toujours vécu. Déterminée à rester dans cette ville qui l'a vue grandir, elle met tout en oeuvre pour garder sa maison et récupérer les objets d'une vie. Contre toute attente, elle redécouvre en chemin l'amour et le désir.",
+      "imdbId": "tt32429174",
+      "source": "lumiere",
+      "cinema": "Lumière Fourmi",
+      "seances": [
+        {
+          "date": "2026-04-15",
+          "heure": "10:15",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F628750/D1776240900/VO/"
+        },
+        {
+          "date": "2026-04-15",
+          "heure": "18:45",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F628750/D1776240900/VO/"
+        },
+        {
+          "date": "2026-04-16",
+          "heure": "20:50",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F628750/D1776365400/VO/"
+        },
+        {
+          "date": "2026-04-17",
+          "heure": "20:40",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F628750/D1776451200/VO/"
+        },
+        {
+          "date": "2026-04-18",
+          "heure": "12:30",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F628750/D1776508200/VO/"
+        },
+        {
+          "date": "2026-04-19",
+          "heure": "20:50",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F628750/D1776624600/VO/"
+        },
+        {
+          "date": "2026-04-20",
+          "heure": "13:45",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F628750/D1776685500/VO/"
+        }
+      ],
+      "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4747/4f46a55374da1919875e846787fd1289/s,490,650-q,90-2e3f1f.jpg",
+      "cast": "C. Maura, M. Etura, A. Boulane",
+      "imdbRating": 7.25
+    },
+    {
+      "titre": "Alter Ego",
+      "slug": "alter-ego",
+      "titreOriginal": null,
+      "annee": 2008,
+      "realisateur": "Nicolas Charlet & Bruno Lavaine",
+      "duree": 99,
+      "genres": [
+        "Short",
+        "Romance"
+      ],
+      "synopsis": "Alex a un problème : son nouveau voisin est son sosie parfait. Avec des cheveux. Un double en mieux, qui va totalement bouleverser son existence.",
+      "imdbId": "tt1387316",
+      "source": "lumiere",
+      "cinema": "Lumière Fourmi",
+      "seances": [
+        {
+          "date": "2026-04-15",
+          "heure": "13:45",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F362221/D1776253500/VF/"
+        },
+        {
+          "date": "2026-04-16",
+          "heure": "15:55",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F362221/D1776347700/VF/"
+        },
+        {
+          "date": "2026-04-17",
+          "heure": "18:10",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F362221/D1776442200/VF/"
+        },
+        {
+          "date": "2026-04-18",
+          "heure": "16:40",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F362221/D1776523200/VF/"
+        },
+        {
+          "date": "2026-04-19",
+          "heure": "12:45",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F362221/D1776595500/VF/"
+        },
+        {
+          "date": "2026-04-20",
+          "heure": "18:35",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F362221/D1776702900/VF/"
+        }
+      ],
+      "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4764/a3212f7a3bc901b69704c09de6e30093/s,490,650-q,90-de068a.jpg",
+      "cast": "L. Lafitte,  B. Gardin,  O. Kurylenko",
+      "imdbRating": 7.1
+    },
+    {
+      "titre": "Ce qu'il reste de nous",
+      "slug": "ce-qu-il-reste-de-nous",
+      "titreOriginal": null,
+      "annee": 2026,
+      "realisateur": "Cherien Dabis",
+      "duree": 145,
+      "genres": [],
+      "synopsis": "De 1948 à nos jours, trois générations d'une famille palestinienne portent les espoirs et les blessures d'un peuple. Une fresque où Histoire et intime se rencontrent.",
+      "imdbId": "tt29344894",
+      "source": "lumiere",
+      "cinema": "Lumière Fourmi",
+      "seances": [
+        {
+          "date": "2026-04-15",
+          "heure": "10:30",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F621174/D1776241800/VO/"
+        },
+        {
+          "date": "2026-04-15",
+          "heure": "18:30",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F621174/D1776241800/VO/"
+        },
+        {
+          "date": "2026-04-17",
+          "heure": "20:10",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F621174/D1776449400/VO/"
+        },
+        {
+          "date": "2026-04-19",
+          "heure": "18:25",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F621174/D1776615900/VO/"
+        },
+        {
+          "date": "2026-04-20",
+          "heure": "15:50",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F621174/D1776693000/VO/"
+        }
+      ],
+      "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4777/abbedce650d9fd1b3fe6c2defe9c3518/s,490,650-q,90-e2445d.jpg",
+      "cast": "S. Bakri, C. Dabis, A. Bakri",
+      "imdbRating": 8.0
     }
   ]
 }
