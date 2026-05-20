@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-19T21:25:10.650150",
+  "generated_at": "2026-05-20T04:58:26.508998",
   "sources": [
     "https://www.cinema-comoedia.com/programme-semaine/",
     "https://www.cinemas-lumiere.com/calendrier-general.html"
@@ -12,11 +12,9 @@
       "annee": 2026,
       "realisateur": "Pedro Almodovar",
       "duree": 111,
-      "genres": [
-        "Drama"
-      ],
+      "genres": [],
       "synopsis": "Raul est un cineaste culte en pleine crise creative. Lorsqu'un drame frappe l'une de ses plus proches collaboratrices, il s'en inspire pour ecrire son prochain film. Peu a peu, il imagine Elsa, une realisatrice en pleine ecriture, dont le parcours commence a refleter le sien. Les deux cineastes deviennent les deux facettes d'un meme personnage, dans un jeu de miroirs ou l'impudeur de l'autofiction devoile autant qu'elle detruit. Mais jusqu'ou peut-on aller pour raconter une histoire ?",
-      "imdbId": "tt28088049",
+      "imdbId": null,
       "source": "lumiere",
       "cinema": "Lumière Terreaux",
       "seances": [
@@ -199,11 +197,40 @@
           "heure": "20:50",
           "version": "VOSTFR",
           "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F627924/D1779696900/VO/"
+        },
+        {
+          "date": "2026-05-26",
+          "heure": "10:15",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F627924/D1779783300/VO/"
+        },
+        {
+          "date": "2026-05-26",
+          "heure": "13:20",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F627924/D1779783300/VO/"
+        },
+        {
+          "date": "2026-05-26",
+          "heure": "16:15",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F627924/D1779783300/VO/"
+        },
+        {
+          "date": "2026-05-26",
+          "heure": "18:35",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F627924/D1779783300/VO/"
+        },
+        {
+          "date": "2026-05-26",
+          "heure": "20:50",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F627924/D1779783300/VO/"
         }
       ],
       "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4899/99ee4688f7d7695bf36eff48bf9da890/s,490,650-q,90-0e301a.jpg",
-      "cast": "B. Lennie, L. Sbaraglia, A. Sánchez-Gijón",
-      "imdbRating": 7.2
+      "cast": "B. Lennie, L. Sbaraglia, A. Sánchez-Gijón"
     },
     {
       "titre": "La Vénus électrique",
@@ -214,7 +241,7 @@
       "duree": 122,
       "genres": [],
       "synopsis": "Paris, 1928. Antoine Balestro, jeune peintre en vogue, n'arrive plus à travailler depuis la mort de son épouse et désespère Armand, son galeriste. Un soir d'ivresse, Antoine tente d'entrer en contact avec sa femme par l'intermédiaire d'une voyante. Sans le savoir, il parle en réalité avec Suzanne, une modeste foraine qui s'est glissée dans la roulotte pour y voler de la nourriture. Suzanne se révèle douée pour l'imposture et, rapidement secondée par Armand, elle enchaîne les fausses séances. Peu…",
-      "imdbId": "tt37163509",
+      "imdbId": null,
       "source": "lumiere",
       "cinema": "Lumière Terreaux",
       "seances": [
@@ -397,11 +424,40 @@
           "heure": "20:50",
           "version": "VF",
           "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F623368/D1779697200/VF/"
+        },
+        {
+          "date": "2026-05-26",
+          "heure": "10:20",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F623368/D1779783600/VF/"
+        },
+        {
+          "date": "2026-05-26",
+          "heure": "13:20",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F623368/D1779783600/VF/"
+        },
+        {
+          "date": "2026-05-26",
+          "heure": "16:10",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F623368/D1779783600/VF/"
+        },
+        {
+          "date": "2026-05-26",
+          "heure": "18:25",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F623368/D1779783600/VF/"
+        },
+        {
+          "date": "2026-05-26",
+          "heure": "20:50",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F623368/D1779783600/VF/"
         }
       ],
       "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4858/la venus electrique (1)/s,490,650-q,90-6e8295.jpeg",
-      "cast": "P. Marmaï, A. Demoustier, G. Lellouche",
-      "imdbRating": 7.074
+      "cast": "P. Marmaï, A. Demoustier, G. Lellouche"
     },
     {
       "titre": "L'Être Aimé",
@@ -410,11 +466,9 @@
       "annee": 2026,
       "realisateur": "Rodrigo Sorogoyen",
       "duree": 135,
-      "genres": [
-        "Drama"
-      ],
+      "genres": [],
       "synopsis": "Réalisateur mondialement célèbre, Esteban Martínez revient en Espagne pour tourner son nouveau film. Il en offre le rôle principal à une jeune actrice inconnue, sa fille, qu'il n'a pas vue depuis treize ans. La jeune femme accepte cette formidable opportunité, mais sait qu'à l'occasion de ce tournage, elle va se confronter à un homme qu'elle n'a jamais pu considérer comme un père. Le poids du passé menace de rouvrir leurs blessures.",
-      "imdbId": "tt33451014",
+      "imdbId": null,
       "source": "lumiere",
       "cinema": "Lumière Terreaux",
       "seances": [
@@ -585,11 +639,40 @@
           "heure": "20:55",
           "version": "VOSTFR",
           "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F614278/D1779697200/VO/"
+        },
+        {
+          "date": "2026-05-26",
+          "heure": "10:20",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F614278/D1779783600/VO/"
+        },
+        {
+          "date": "2026-05-26",
+          "heure": "13:40",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F614278/D1779783600/VO/"
+        },
+        {
+          "date": "2026-05-26",
+          "heure": "15:45",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F614278/D1779783600/VO/"
+        },
+        {
+          "date": "2026-05-26",
+          "heure": "18:20",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F614278/D1779783600/VO/"
+        },
+        {
+          "date": "2026-05-26",
+          "heure": "20:55",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F614278/D1779783600/VO/"
         }
       ],
       "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4895/fbce99c777dbeedf8a6d8290cbd25b2a/s,490,650-q,90-d8a4b2.jpg",
-      "cast": "J. Bardem, V. Luengo, R. Arévalo",
-      "imdbRating": 7.313
+      "cast": "J. Bardem, V. Luengo, R. Arévalo"
     },
     {
       "titre": "Histoires parallèles",
@@ -600,7 +683,7 @@
       "duree": 139,
       "genres": [],
       "synopsis": "En quête d'inspiration pour son nouveau roman, Sylvie espionne ses voisins d'en face. Quand elle engage le jeune Adam pour l'aider dans son quotidien, elle ignore que celui-ci va bouleverser sa vie et son travail, jusqu'à ce que la fiction qu'elle avait imaginée dépasse leur réalité à tous.",
-      "imdbId": "tt36646880",
+      "imdbId": null,
       "source": "lumiere",
       "cinema": "Lumière Terreaux",
       "seances": [
@@ -765,11 +848,40 @@
           "heure": "18:10",
           "version": "VF",
           "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F626961/D1779696900/VF/"
+        },
+        {
+          "date": "2026-05-26",
+          "heure": "10:15",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F626961/D1779783300/VF/"
+        },
+        {
+          "date": "2026-05-26",
+          "heure": "13:30",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F626961/D1779783300/VF/"
+        },
+        {
+          "date": "2026-05-26",
+          "heure": "15:30",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F626961/D1779783300/VF/"
+        },
+        {
+          "date": "2026-05-26",
+          "heure": "18:10",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F626961/D1779783300/VF/"
+        },
+        {
+          "date": "2026-05-26",
+          "heure": "20:50",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F626961/D1779783300/VF/"
         }
       ],
       "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4894/f35d2ca86b5d6c0d9b76fc8b07e56cb4/s,490,650-q,90-16db24.jpg",
-      "cast": "I. Huppert, V. Efira, P. Niney",
-      "imdbRating": 5.54
+      "cast": "I. Huppert, V. Efira, P. Niney"
     },
     {
       "titre": "Astérix et Obélix : Mission Cléopâtre",
@@ -778,14 +890,9 @@
       "annee": 2002,
       "realisateur": "Alain Chabat",
       "duree": 112,
-      "genres": [
-        "Documentary",
-        "Adventure",
-        "Comedy",
-        "Family"
-      ],
+      "genres": [],
       "synopsis": "Cléopâtre, la reine d'Égypte, décide, pour défier l'Empereur romain Jules César, de construire en trois mois un palais somptueux en plein désert. Si elle y parvient, celui-ci devra concéder publiquement que le peuple égyptien est le plus grand de tous les peuples. Pour ce faire, Cléopâtre fait appel à Numérobis, un architecte d'avant-garde plein d'énergie. S'il réussit, elle le couvrira d'or. S'il échoue, elle le jettera aux crocodiles. Celui-ci, conscient du défi à relever, cherche de l'aide au…",
-      "imdbId": "tt0363444",
+      "imdbId": null,
       "source": "lumiere",
       "cinema": "Lumière Terreaux",
       "seances": [
@@ -797,8 +904,7 @@
         }
       ],
       "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4761/4953335/s,490,650-q,90-6569c9.jpg",
-      "cast": "G. Depardieu, C. Clavier, J. Debbouze",
-      "imdbRating": 7.25
+      "cast": "G. Depardieu, C. Clavier, J. Debbouze"
     },
     {
       "titre": "L'Affaire Zanetti",
@@ -807,11 +913,9 @@
       "annee": 2026,
       "realisateur": "Leonardo Di Costanzo",
       "duree": 105,
-      "genres": [
-        "Drama"
-      ],
+      "genres": [],
       "synopsis": "Elisa a été condamnée il y a 10 ans pour avoir tué sa soeur aînée sans raison apparente. Elle affirme ne se souvenir que de très peu de choses du crime, comme si un voile de silence s'était posé entre elle et son passé. Mais lorsqu'elle accepte de rencontrer un criminologue et de participer à ses recherches, un dialogue tendu et implacable s'engage. Peu à peu, les souvenirs refont surface...",
-      "imdbId": "tt37660578",
+      "imdbId": null,
       "source": "lumiere",
       "cinema": "Lumière Terreaux",
       "seances": [
@@ -823,8 +927,7 @@
         }
       ],
       "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4724/L'affaire zanetti (1)/s,490,650-q,90-de959e.jpeg",
-      "cast": "R. Zem, B. Ronchi, D. Ribon",
-      "imdbRating": 6.3
+      "cast": "R. Zem, B. Ronchi, D. Ribon"
     },
     {
       "titre": "Vanilla",
@@ -874,11 +977,16 @@
           "heure": "14:10",
           "version": "VOSTFR",
           "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F622938/D1779711000/VO/"
+        },
+        {
+          "date": "2026-05-26",
+          "heure": "20:50",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F622938/D1779821400/VO/"
         }
       ],
       "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4900/8f60c062a24b7d7b6469e81232cb1727/s,490,650-q,90-44c2e9.jpg",
-      "cast": "N. Plasencia, D. Porras, M. Castellá",
-      "imdbRating": 0.0
+      "cast": "N. Plasencia, D. Porras, M. Castellá"
     },
     {
       "titre": "Vivaldi et moi",
@@ -887,13 +995,9 @@
       "annee": 2026,
       "realisateur": "Damiano Michieletto",
       "duree": 111,
-      "genres": [
-        "Biography",
-        "History",
-        "Music"
-      ],
+      "genres": [],
       "synopsis": "Au début du XVIIIe siècle, l'Ospedale della Pietà à Venise recueille et forme de jeunes orphelines à la musique. Dissimulées au public, souvent masquées ou derrière une grille, l'orchestre de jeunes filles se produit pour les riches mécènes de l'institution. Cécilia, 20 ans, y excelle en tant que violoniste. Jusqu'au jour où l'arrivée d'un nouveau maître de musique, Antonio Vivaldi, vient bousculer sa vie et celle de l'Ospedale.",
-      "imdbId": "tt33586629",
+      "imdbId": null,
       "source": "lumiere",
       "cinema": "Lumière Bellecour",
       "seances": [
@@ -1004,11 +1108,28 @@
           "heure": "18:35",
           "version": "VOSTFR",
           "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F624094/D1779710400/VO/"
+        },
+        {
+          "date": "2026-05-26",
+          "heure": "16:10",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F624094/D1779804600/VO/"
+        },
+        {
+          "date": "2026-05-26",
+          "heure": "18:40",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F624094/D1779804600/VO/"
+        },
+        {
+          "date": "2026-05-26",
+          "heure": "21:15",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F624094/D1779804600/VO/"
         }
       ],
       "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4831/0be6712ea95b821a63891ca86b72ee0e/s,490,650-q,90-4177c6.jpg",
-      "cast": "T. Insolia, M. Riondino, F. Sacchi",
-      "imdbRating": 7.058
+      "cast": "T. Insolia, M. Riondino, F. Sacchi"
     },
     {
       "titre": "Nous l'orchestre",
@@ -1019,7 +1140,7 @@
       "duree": 90,
       "genres": [],
       "synopsis": "Comment jouer ensemble sans se sentir disparaître dans la masse ? Comment cohabiter si longtemps sans que le groupe explose ? Quel rôle joue vraiment le chef d'orchestre ? Pour la première fois, caméras et micros se faufilent parmi les 120 musiciens de l'Orchestre de Paris, sous la baguette de leur jeune chef prodige, Klaus Mäkelä. Un film immersif au coeur de la musique en train de se faire ; au plus près de l'expérience des musiciens, de leurs émotions, de la beauté.",
-      "imdbId": "tt39183481",
+      "imdbId": null,
       "source": "lumiere",
       "cinema": "Lumière Bellecour",
       "seances": [
@@ -1094,11 +1215,22 @@
           "heure": "20:50",
           "version": "VF",
           "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F574712/D1779719400/VF/"
+        },
+        {
+          "date": "2026-05-26",
+          "heure": "14:05",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F574712/D1779797100/VF/"
+        },
+        {
+          "date": "2026-05-26",
+          "heure": "18:30",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F574712/D1779797100/VF/"
         }
       ],
       "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4792/b0b697a9f50e276e76eb4660fe084869/s,490,650-q,90-fcad00.jpg",
-      "cast": "Klaus Mäkelä",
-      "imdbRating": 8.25
+      "cast": "Klaus Mäkelä"
     },
     {
       "titre": "Juste une illusion",
@@ -1258,11 +1390,28 @@
           "heure": "20:50",
           "version": "VF",
           "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F618912/D1779710700/VF/"
+        },
+        {
+          "date": "2026-05-26",
+          "heure": "13:50",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F618912/D1779796200/VF/"
+        },
+        {
+          "date": "2026-05-26",
+          "heure": "16:00",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F618912/D1779796200/VF/"
+        },
+        {
+          "date": "2026-05-26",
+          "heure": "20:30",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F618912/D1779796200/VF/"
         }
       ],
       "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4798/cf9effb40e5ae3747fdb68a68289e81a/s,490,650-q,90-28d3fe.jpg",
-      "cast": "C. Cottin, L. Garrel, P. Lottin",
-      "imdbRating": 7.303
+      "cast": "C. Cottin, L. Garrel, P. Lottin"
     },
     {
       "titre": "Mon grand frère et moi",
@@ -1273,7 +1422,7 @@
       "duree": 127,
       "genres": [],
       "synopsis": "Entre Riko et son frère aîné, rien n'a jamais été simple. Même après sa mort, il continue de lui compliquer la vie : une pile de factures, des souvenirs embarrassants... et un fils ! Aux côtés de son ex-belle-soeur, elle traverse ce capharnaüm entre fous rires et confidences, et redécouvre peu à peu un frère plus proche qu'elle ne l'aurait cru.",
-      "imdbId": "tt38504671",
+      "imdbId": null,
       "source": "lumiere",
       "cinema": "Lumière Bellecour",
       "seances": [
@@ -1312,11 +1461,16 @@
           "heure": "20:40",
           "version": "VOSTFR",
           "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F630244/D1779734400/VO/"
+        },
+        {
+          "date": "2026-05-26",
+          "heure": "13:50",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F630244/D1779796200/VO/"
         }
       ],
       "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4873/3af3573f4d7ea057d79487afdd105894/s,490,650-q,90-e9b35b.jpg",
-      "cast": "K. Shibasaki, J. Odagiri, H. Mitsushima",
-      "imdbRating": 7.0
+      "cast": "K. Shibasaki, J. Odagiri, H. Mitsushima"
     },
     {
       "titre": "The World of Love",
@@ -1325,11 +1479,9 @@
       "annee": 2026,
       "realisateur": "Ga Eun Yoon",
       "duree": 119,
-      "genres": [
-        "Drama"
-      ],
+      "genres": [],
       "synopsis": "Joo-in est une lycéenne espiègle et appréciée de tous. Un jour, un camarade de classe lance une pétition que tous les élèves signent, sauf elle. Son monde, en apparence paisible et insouciant, dissimule un passé douloureux auquel Joo-in est alors contrainte de faire face. Mais loin de se laisser enfermer, elle choisit d'avancer et de se réinventer.",
-      "imdbId": "tt37661885",
+      "imdbId": null,
       "source": "lumiere",
       "cinema": "Lumière Bellecour",
       "seances": [
@@ -1368,11 +1520,42 @@
           "heure": "18:20",
           "version": "VOSTFR",
           "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F628800/D1779726000/VO/"
+        },
+        {
+          "date": "2026-05-26",
+          "heure": "16:20",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F628800/D1779805200/VO/"
         }
       ],
       "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4886/24aae1d7eec39d1197e852f02703ecb7/s,490,650-q,90-fa825d.jpg",
-      "cast": "S. Seo, J. Hye-jin, J. Kim",
-      "imdbRating": 7.778
+      "cast": "S. Seo, J. Hye-jin, J. Kim"
+    },
+    {
+      "titre": "Model",
+      "slug": "model",
+      "titreOriginal": null,
+      "annee": 1981,
+      "realisateur": "Frederick Wiseman",
+      "duree": 129,
+      "genres": [
+        "Documentary"
+      ],
+      "synopsis": "1980. New York est la nouvelle capitale de la mode. Des mannequins, hommes et femmes, travaillent sans relâche, de défilés de mode en séances photos, d’entretiens d’agence en publicités pour divers produits – manteaux de fourrure, montres, vêtements de sport, automobiles. Entre scène et coulisses, désir de réussite et marchandisation des corps, ils et elles sont le centre fragile d’un monde d’image, d’argent et de fantasme.",
+      "imdbId": "tt0081169",
+      "source": "lumiere",
+      "cinema": "Lumière Bellecour",
+      "seances": [
+        {
+          "date": "2026-05-26",
+          "heure": "18:45",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F526780/D1779813900/VO/"
+        }
+      ],
+      "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4826/model/s,490,650-q,90-4a7e23.png",
+      "imdbRating": 7.1,
+      "cast": "Apollonia van Ravenstein, Andy Warhol"
     },
     {
       "titre": "Collapse",
@@ -1418,9 +1601,7 @@
           "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F634124/D1779718800/VF/"
         }
       ],
-      "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4887/28bcc85afef364e64faefdce89d16a70/s,490,650-q,90-f1e429.jpg",
-      "imdbRating": 0.0,
-      "cast": "Gabin Berthelot"
+      "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4887/28bcc85afef364e64faefdce89d16a70/s,490,650-q,90-f1e429.jpg"
     },
     {
       "titre": "Cosmos",
@@ -1431,7 +1612,7 @@
       "duree": 150,
       "genres": [],
       "synopsis": "Dans un village oublié du Yucatan, Leon, gardien maya des secrets de la nature et des esprits, va être chassé de ses terres. Son chemin croise celui de Lena, riche femme de lettres récemment arrivée de Mexico. Malgré leurs différences, une connexion profonde se forme entre eux.",
-      "imdbId": "tt26445667",
+      "imdbId": null,
       "source": "lumiere",
       "cinema": "Lumière Fourmi",
       "seances": [
@@ -1470,11 +1651,16 @@
           "heure": "13:50",
           "version": "VOSTFR",
           "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F623884/D1779709800/VO/"
+        },
+        {
+          "date": "2026-05-26",
+          "heure": "16:15",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F623884/D1779804900/VO/"
         }
       ],
       "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4888/a41710bb3ce042bc6d6b8b6e4b64e0f1/s,490,650-q,90-1ac3b9.jpg",
-      "cast": "A. Molina, A. Catzín, M. Treviño",
-      "imdbRating": 8.0
+      "cast": "A. Molina, A. Catzín, M. Treviño"
     },
     {
       "titre": "La Mort aux trousses",
@@ -1483,13 +1669,9 @@
       "annee": 1959,
       "realisateur": "Alfred Hitchcock",
       "duree": 136,
-      "genres": [
-        "Adventure",
-        "Drama",
-        "Mystery"
-      ],
+      "genres": [],
       "synopsis": "Le publiciste Roger Tornhill se retrouve par erreur dans la peau d'un espion. Pris entre une mystérieuse organisation qui cherche à le supprimer et la police qui le poursuit, Tornhill est dans une situation bien inconfortable. Il fuit à travers les Etats-Unis et part à la recherche d'une vérité qui se révèlera très surprenante.",
-      "imdbId": "tt0053125",
+      "imdbId": null,
       "source": "lumiere",
       "cinema": "Lumière Fourmi",
       "seances": [
@@ -1501,8 +1683,7 @@
         }
       ],
       "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4850/affiche/s,490,650-q,90-00bfed.jpg",
-      "cast": "C. Grant, E-M. Saint, J. Mason",
-      "imdbRating": 7.966
+      "cast": "C. Grant, E-M. Saint, J. Mason"
     },
     {
       "titre": "The Drama",
@@ -1568,22 +1749,28 @@
           "heure": "18:00",
           "version": "VOSTFR",
           "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F610196/D1779724800/VO/"
+        },
+        {
+          "date": "2026-05-26",
+          "heure": "18:00",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F610196/D1779811200/VO/"
         }
       ],
       "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4814/d8a1392b8ca6606937144df9513994d8/s,490,650-q,90-68f92e.jpg",
       "cast": "Zendaya, R. Pattinson, Y. Gosselin",
-      "imdbRating": 6.926
+      "imdbRating": 7.5
     },
     {
       "titre": "Élise sous emprise",
       "slug": "elise-sous-emprise",
       "titreOriginal": null,
-      "annee": 2025,
+      "annee": null,
       "realisateur": "Marie Rémond",
       "duree": 86,
       "genres": [],
       "synopsis": "Rien ne va plus dans la vie d'Élise : engluée dans une relation toxique avec Léopold, elle se retrouve propulsée à la tête d'une troupe de théâtre, suite à la mort soudaine du metteur en scène dont elle était l'assistante. Submergée par des crises de panique, Élise vacille. Mais peut-être est-ce dans cette confusion qu'elle parviendra à se libérer de ses emprises et à reprendre le contrôle de sa propre vie ?",
-      "imdbId": "tt35458236",
+      "imdbId": null,
       "source": "lumiere",
       "cinema": "Lumière Fourmi",
       "seances": [
@@ -1622,11 +1809,16 @@
           "heure": "14:00",
           "version": "VF",
           "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F340649/D1779710400/VF/"
+        },
+        {
+          "date": "2026-05-26",
+          "heure": "16:15",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F340649/D1779804900/VF/"
         }
       ],
       "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4891/f2122ff832ed580affc09a0e31b26b76/s,490,650-q,90-c2781b.jpg",
-      "cast": "M. Rémond, J. Garcia, G. Kervern",
-      "imdbRating": 7.0
+      "cast": "M. Rémond, J. Garcia, G. Kervern"
     },
     {
       "titre": "Romería",
@@ -1635,13 +1827,9 @@
       "annee": 2026,
       "realisateur": "Carla Simón",
       "duree": 115,
-      "genres": [
-        "Biography",
-        "Drama",
-        "Romance"
-      ],
+      "genres": [],
       "synopsis": "Afin d'obtenir un document d'état civil pour ses études supérieures, Marina, adoptée depuis l'enfance, doit renouer avec une partie de sa véritable famille. Guidée par le journal intime de sa mère qui ne l'a jamais quittée, elle se rend sur la côte atlantique et rencontre tout un pan de sa famille paternelle qu'elle ne connait pas. L'arrivée de Marina va faire ressurgir le passé. En ravivant le souvenir de ses parents, elle va découvrir les secrets de cette famille, les non-dits et les hontes...",
-      "imdbId": "tt32538648",
+      "imdbId": null,
       "source": "lumiere",
       "cinema": "Lumière Fourmi",
       "seances": [
@@ -1662,11 +1850,16 @@
           "heure": "20:50",
           "version": "VOSTFR",
           "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F590378/D1779648600/VO/"
+        },
+        {
+          "date": "2026-05-26",
+          "heure": "20:40",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F590378/D1779820800/VO/"
         }
       ],
       "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4790/7d71d5cb3807d32a852e5725c3c91974/s,490,650-q,90-565458.jpg",
-      "cast": "L. Garcia, Mitch, T. Ulloa",
-      "imdbRating": 6.579
+      "cast": "L. Garcia, Mitch, T. Ulloa"
     },
     {
       "titre": "Mush-Mush et le petit monde de la forêt",
@@ -1700,8 +1893,7 @@
           "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F374358/D1779628800/VF/"
         }
       ],
-      "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4901/5519795/s,490,650-q,90-9a8a6e.jpg",
-      "imdbRating": 0.0
+      "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4901/5519795/s,490,650-q,90-9a8a6e.jpg"
     },
     {
       "titre": "Compostelle",
@@ -1765,11 +1957,16 @@
           "heure": "20:40",
           "version": "VF",
           "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F621458/D1779710400/VF/"
+        },
+        {
+          "date": "2026-05-26",
+          "heure": "18:10",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F621458/D1779811800/VF/"
         }
       ],
       "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4876/5b3d2c4e0f58bab97b979611615ea321/s,490,650-q,90-635d2d.jpg",
-      "cast": "A. Lamy, J. Le Berre, M. Doutey",
-      "imdbRating": 6.96
+      "cast": "A. Lamy, J. Le Berre, M. Doutey"
     },
     {
       "titre": "Sorda",
@@ -1778,11 +1975,9 @@
       "annee": 2025,
       "realisateur": "Eva Libertad García",
       "duree": 100,
-      "genres": [
-        "Drama"
-      ],
+      "genres": [],
       "synopsis": "Angela est sourde, Hector est entendant. Ils forment un couple épanoui et heureux malgré leur différence. Mais la naissance de leur premier enfant inquiète Angela : saura-t-elle créer un lien avec sa fille ? Comment apprendre à devenir mère dans un monde qui oublie si souvent d'inclure ceux qui n'entendent pas ?",
-      "imdbId": "tt26923797",
+      "imdbId": null,
       "source": "lumiere",
       "cinema": "Lumière Fourmi",
       "seances": [
@@ -1824,8 +2019,7 @@
         }
       ],
       "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4875/ffde10f946a815725bb5cd6e5b47bbe3/s,490,650-q,90-606228.jpg",
-      "cast": "M. Garlo, Á. Cervantes, E. Irureta",
-      "imdbRating": 7.209
+      "cast": "M. Garlo, Á. Cervantes, E. Irureta"
     },
     {
       "titre": "Mi Amor",
@@ -1835,10 +2029,10 @@
       "realisateur": "Guillaume Nicloux",
       "duree": 113,
       "genres": [
-        "Thriller"
+        "Horror"
       ],
       "synopsis": "Romy, accompagnée de son amie Chloé, se rend aux Canaries pour mixer lors d'une soirée techno. Au petit matin, son amie a disparu. Aidée de Vincent, le patron du night-club, Romy se lance à la recherche de Chloé...",
-      "imdbId": "tt35675616",
+      "imdbId": "tt35777282",
       "source": "lumiere",
       "cinema": "Lumière Fourmi",
       "seances": [
@@ -1877,11 +2071,16 @@
           "heure": "20:30",
           "version": "VF",
           "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F624900/D1779733800/VF/"
+        },
+        {
+          "date": "2026-05-26",
+          "heure": "13:50",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F624900/D1779796200/VF/"
         }
       ],
       "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4885/726b2263d68a64fb4af427d30df2e967/s,490,650-q,90-7e0797.jpg",
-      "cast": "P. Klementieff, B. Magimel, F. Mavor",
-      "imdbRating": 5.0
+      "cast": "P. Klementieff, B. Magimel, F. Mavor"
     },
     {
       "titre": "Plus fort que moi",
@@ -1890,12 +2089,9 @@
       "annee": 2026,
       "realisateur": "Kirk Jones (II)",
       "duree": 121,
-      "genres": [
-        "Biography",
-        "Drama"
-      ],
+      "genres": [],
       "synopsis": "Dans les années 1980, John Davidson grandit avec le syndrome de Gilles de la Tourette, une pathologie encore largement méconnue. Entre incompréhension, stigmatisation et détermination, son parcours d'abord semé d'embûches se transforme en combat pour être reconnu tel qu'il est, au-delà des préjugés.",
-      "imdbId": "tt31514146",
+      "imdbId": null,
       "source": "lumiere",
       "cinema": "Lumière Fourmi",
       "seances": [
@@ -1928,11 +2124,16 @@
           "heure": "18:15",
           "version": "VOSTFR",
           "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F611780/D1779725700/VO/"
+        },
+        {
+          "date": "2026-05-26",
+          "heure": "13:50",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F611780/D1779796200/VO/"
         }
       ],
       "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4813/8fb759142fd32992ed10f00b082d92fd/s,490,650-q,90-2b8308.jpg",
-      "cast": "R. Aramayo, M. Peake, P. Mullan",
-      "imdbRating": 8.2
+      "cast": "R. Aramayo, M. Peake, P. Mullan"
     },
     {
       "titre": "Les Rayons et les Ombres",
@@ -1941,7 +2142,10 @@
       "annee": 2026,
       "realisateur": "Xavier Giannoli",
       "duree": 195,
-      "genres": [],
+      "genres": [
+        "Drama",
+        "History"
+      ],
       "synopsis": "Pendant la Deuxième Guerre mondiale, l'histoire vraie de Jean et Corinne Luchaire, un père et sa fille pris dans l'engrenage de la collaboration.",
       "imdbId": "tt36187539",
       "source": "lumiere",
@@ -1982,26 +2186,33 @@
           "heure": "16:45",
           "version": "VF",
           "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F608638/D1779720300/VF/"
+        },
+        {
+          "date": "2026-05-26",
+          "heure": "14:10",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F608638/D1779797400/VF/"
+        },
+        {
+          "date": "2026-05-26",
+          "heure": "19:15",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F608638/D1779797400/VF/"
         }
       ],
       "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4784/c447be57bea5db08d582f557727e6a22/s,490,650-q,90-4a94b7.jpg",
-      "cast": "J. Dujardin, N. Golubeva, A. Diehl",
-      "imdbRating": 7.543
+      "cast": "J. Dujardin, N. Golubeva, A. Diehl"
     },
     {
       "titre": "Projet dernière chance",
       "slug": "projet-derniere-chance",
       "titreOriginal": null,
-      "annee": 2026,
+      "annee": null,
       "realisateur": "Phil Lord & Christopher Miller",
       "duree": 157,
-      "genres": [
-        "Adventure",
-        "Comedy",
-        "Sci-Fi"
-      ],
+      "genres": [],
       "synopsis": "Ryland Grace, professeur de sciences, se réveille seul à bord d'un vaisseau spatial, à des années-lumière de la Terre, sans aucun souvenir de son identité ni des raisons de sa présence à bord. Peu à peu, sa mémoire lui revient, et il comprend l'enjeu de sa mission : résoudre l'énigme de la mystérieuse substance qui cause l'extinction du Soleil. Pour tenter de sauver l'humanité, il va devoir faire appel à ses connaissances scientifiques et à des idées peu conventionnelles ... Mais une amitié inat…",
-      "imdbId": "tt12042730",
+      "imdbId": null,
       "source": "lumiere",
       "cinema": "Lumière Fourmi",
       "seances": [
@@ -2040,11 +2251,16 @@
           "heure": "20:05",
           "version": "VOSTFR",
           "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F344067/D1779732300/VO/"
+        },
+        {
+          "date": "2026-05-26",
+          "heure": "20:05",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F344067/D1779818700/VO/"
         }
       ],
       "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4870/992abd2d7fd54a1c00db5b43aee847d0/s,490,650-q,90-19b61a.jpg",
-      "cast": "R. Gosling, S. Hüller, M. Vayntrub",
-      "imdbRating": 8.597
+      "cast": "R. Gosling, S. Hüller, M. Vayntrub"
     }
   ]
 }
