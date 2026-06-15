@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-15T23:58:37.338235",
+  "generated_at": "2026-06-15T22:06:26.983621",
   "sources": [
     "https://www.cinema-comoedia.com/programme-semaine/",
     "https://www.cinemas-lumiere.com/calendrier-general.html"
@@ -15,7 +15,7 @@
         "Documentary",
         "Music"
       ],
-      "synopsis": "Aging Cuban musicians whose talents had been virtually forgotten following Castro's takeover of Cuba, are brought out of retirement by Ry Cooder, who travelled to Havana in order to bring the musicians together, resulting in trium...",
+      "synopsis": "Bienvenue au club ! Wim Wenders nous offre là un véritable bain de jouvence musical et cinématographique en nous entraînant à La Havane, à la découverte de ces fameux musiciens cubains légendaires, les \"Super Abuelos\" d'environ 90 ans. L'initiateur du projet, c'est le guitariste Ry Cooder (compositeur de Paris Texas, du même Wenders) parti en 1996 à la recherche des vieilles gloires de la musique cubaine. Enthousiasmé par l'aventure, le réalisateur l'accompagne lors d'un second voyage.",
       "imdbId": "tt0186508",
       "seances": [
         {
@@ -26,19 +26,21 @@
       ],
       "source": "comoedia",
       "cinema": "Le Comoedia",
-      "poster": "https://m.media-amazon.com/images/M/MV5BMjZjZGRiNzktMjBmNS00NzUzLWI0NzMtYTYzYWZkNjU4OWE4XkEyXkFqcGc@._V1_SX300.jpg",
-      "imdbRating": 7.6,
-      "cast": "Compay Segundo, Ibrahim Ferrer, Rubén González"
+      "poster": "https://image.tmdb.org/t/p/w500/d3qQPIZjHcxX32tObdOnlQFwi0i.jpg",
+      "imdbRating": 7.513,
+      "cast": "Compay Segundo, Eliades Ochoa, Ry Cooder"
     },
     {
       "titre": "SHANA",
       "titreOriginal": null,
-      "annee": 2026,
-      "realisateur": "Lila Pinell",
+      "annee": 2007,
+      "realisateur": "Takashi Watabe",
       "duree": null,
-      "genres": [],
-      "synopsis": "Shana copes with the daily routine with the support of her tight-knit group of girlfriends. When her grandmother died, she inherited a ring that was supposed to ward off the evil eye.",
-      "imdbId": "tt39172310",
+      "genres": [
+        "Animation"
+      ],
+      "synopsis": "Yūji est un jeune étudiant normal, tout du moins en apparence...\r Un jour en rentrant de l'école, tout s'arrête autour de lui, le temps se fige. Effrayé, il voit des monstres se mettre à dévorer les gens. Il essaie de s'enfuir lorsqu'une jeune fille aux cheveux et au regard de braise arrive de nulle part et tue les monstres.\r Il décide alors de la suivre malgré la réticence de la jeune fille.",
+      "imdbId": "tt0994794",
       "seances": [
         {
           "date": "2026-06-17",
@@ -118,8 +120,9 @@
       ],
       "source": "comoedia",
       "cinema": "Le Comoedia",
-      "poster": "https://m.media-amazon.com/images/M/MV5BMDJjNDE5YTAtMTA1Yy00NTlhLThhMjAtMDhiNDJkNzlkMWI3XkEyXkFqcGc@._V1_QL75_UY562_CR17,0,380,562_.jpg",
-      "cast": "Eva Huault, Noémie Lvovsky, Palachandiran Thyshaant"
+      "poster": "https://image.tmdb.org/t/p/w500/9wA7xCyhIzWy5jR5NPxniU60XcU.jpg",
+      "imdbRating": 7.6,
+      "cast": "Satoshi Hino, Ayako Kawasumi, Junichi Suwabe"
     },
     {
       "titre": "TOY STORY 5",
@@ -132,7 +135,7 @@
         "Adventure",
         "Comedy"
       ],
-      "synopsis": "Woody, Buzz, Jessie and the rest of the gang's jobs are challenged when they're introduced to electronics, a new threat to playtime.",
+      "synopsis": "Buzz, Woody, Jessie et le reste de la bande verront leur travail remis en question lorsqu'ils découvriront que ce qui obsède les enfants d'aujourd'hui s’appelle... l'électronique !",
       "imdbId": "tt29355505",
       "seances": [
         {
@@ -223,7 +226,8 @@
       ],
       "source": "comoedia",
       "cinema": "Le Comoedia",
-      "poster": "https://m.media-amazon.com/images/M/MV5BZTI1YTBiNmEtYWUxZi00YzFkLWIzNjMtMmZjMmY2NzM0ZWMzXkEyXkFqcGc@._V1_QL75_UX380_CR0,0,380,562_.jpg",
+      "poster": "https://image.tmdb.org/t/p/w500/b2bt3UomRX41rHHZmIsSNmXzidU.jpg",
+      "imdbRating": 6.4,
       "cast": "Tom Hanks, Tim Allen, Joan Cusack"
     },
     {
@@ -237,7 +241,7 @@
         "Adventure",
         "Comedy"
       ],
-      "synopsis": "Woody, Buzz, Jessie and the rest of the gang's jobs are challenged when they're introduced to electronics, a new threat to playtime.",
+      "synopsis": "Buzz, Woody, Jessie et le reste de la bande verront leur travail remis en question lorsqu'ils découvriront que ce qui obsède les enfants d'aujourd'hui s’appelle... l'électronique !",
       "imdbId": "tt29355505",
       "seances": [
         {
@@ -268,7 +272,8 @@
       ],
       "source": "comoedia",
       "cinema": "Le Comoedia",
-      "poster": "https://m.media-amazon.com/images/M/MV5BZTI1YTBiNmEtYWUxZi00YzFkLWIzNjMtMmZjMmY2NzM0ZWMzXkEyXkFqcGc@._V1_QL75_UX380_CR0,0,380,562_.jpg",
+      "poster": "https://image.tmdb.org/t/p/w500/b2bt3UomRX41rHHZmIsSNmXzidU.jpg",
+      "imdbRating": 6.4,
       "cast": "Tom Hanks, Tim Allen, Joan Cusack"
     },
     {
@@ -282,7 +287,7 @@
         "Adventure",
         "Comedy"
       ],
-      "synopsis": "A gay influencer's life crumbles when a virus turns Paris's gay men straight. He teams up with a twink to find a rumored cure in the Marais district. A satire on identity, fame, and queer culture.",
+      "synopsis": "Jim, icône sexy de la scène gay parisienne, voit sa vie basculer lorsqu’il contracte l’Hétérose, un étrange virus qui transforme les hommes gays… en hétérosexuels ! Il voit alors tout le monde lui tourner le dos à l’exception de son dernier follower (et premier admirateur), Lucien, un jeune homme qui peine à s’assumer. Ensemble, ils partiront en quête d’un mystérieux remède capable de guérir Jim et d’empêcher l’extinction de l’homosexualité…",
       "imdbId": "tt36955518",
       "seances": [
         {
@@ -398,17 +403,19 @@
       ],
       "source": "comoedia",
       "cinema": "Le Comoedia",
-      "cast": "François Sagat, Jérémy Gillet, Elisabeth Wiener"
+      "poster": "https://image.tmdb.org/t/p/w500/jw8vwfyKOf509Zj1cu27waGFZLB.jpg",
+      "imdbRating": 0.0,
+      "cast": "Alex Ramirès, Jéremy Gillet, Shirley Souagnon"
     },
     {
       "titre": "L'ILLUSION DE YAKUSHIMA",
       "titreOriginal": null,
-      "annee": null,
-      "realisateur": null,
+      "annee": 2025,
+      "realisateur": "Naomi Kawase",
       "duree": null,
       "genres": [],
-      "synopsis": null,
-      "imdbId": null,
+      "synopsis": "Corry, une jeune femme française, est infirmière coordinatrice de transplantation cardiaque pédiatrique. Formée dans les hôpitaux parisiens, elle a été envoyée dans un hôpital au Japon pour améliorer le fonctionnement d’un service de transplantations où les greffes d’organes sont encore largement un sujet tabou. Corry se bat au quotidien pour réussir la greffe d’un jeune patient d’une douzaine d’années, et vit avec Jin, un photographe originaire de l’île de Yakushima à l’extrême sud du Japon.",
+      "imdbId": "tt36364208",
       "seances": [
         {
           "date": "2026-06-17",
@@ -487,7 +494,10 @@
         }
       ],
       "source": "comoedia",
-      "cinema": "Le Comoedia"
+      "cinema": "Le Comoedia",
+      "poster": "https://image.tmdb.org/t/p/w500/gfLacIORfviMYSRLZaCIygHbOZO.jpg",
+      "imdbRating": 8.0,
+      "cast": "Vicky Krieps, Kanichiro, Ojiro Nakamura"
     },
     {
       "titre": "LA BALEINE ET LE MUSICIEN",
@@ -496,7 +506,7 @@
       "realisateur": null,
       "duree": null,
       "genres": [],
-      "synopsis": null,
+      "synopsis": "La rencontre entre Rone et la baleine à bosse. Après avoir découvert que sa musique attire les cétacés, le compositeur, embarque pour un voyage extraordinaire à la rencontre d’une baleine pour qui il crée spécialement une musique. En pleine mer, ils vont entamer un dialogue touchant et inédit. Que répond la baleine ? Est-ce qu’elle chante en retour ?",
       "imdbId": null,
       "seances": [
         {
@@ -526,7 +536,10 @@
         }
       ],
       "source": "comoedia",
-      "cinema": "Le Comoedia"
+      "cinema": "Le Comoedia",
+      "poster": "https://image.tmdb.org/t/p/w500/5cyvHgqULA0Erfm1u32GGz7xaEu.jpg",
+      "imdbRating": 0.0,
+      "cast": "Rone"
     },
     {
       "titre": "DISCLOSURE DAY",
@@ -539,7 +552,7 @@
         "Sci-Fi",
         "Thriller"
       ],
-      "synopsis": "If you found out we weren't alone, if someone showed you, proved it to you, would that frighten you?",
+      "synopsis": "Si vous découvriez que nous ne sommes pas seuls, si quelqu'un vous le montrait, vous le prouvait, cela vous effraierait-il ?",
       "imdbId": "tt15047880",
       "seances": [
         {
@@ -655,20 +668,19 @@
       ],
       "source": "comoedia",
       "cinema": "Le Comoedia",
-      "poster": "https://m.media-amazon.com/images/M/MV5BMTgwNDI1ZjctYWNmMS00MTJhLTg1ZWItMzI1Yjk5NjZkYWFkXkEyXkFqcGc@._V1_QL75_UX380_CR0,20,380,562_.jpg",
-      "cast": "Emily Blunt, Josh O&apos;Connor, Colin Firth"
+      "poster": "https://image.tmdb.org/t/p/w500/8GRMeKaDFnuzXBzqGiDMzCFDnwQ.jpg",
+      "imdbRating": 6.901,
+      "cast": "Emily Blunt, Josh O'Connor, Colin Firth"
     },
     {
       "titre": "LE VERTIGE",
       "titreOriginal": null,
-      "annee": 2026,
-      "realisateur": "Quentin Dupieux",
+      "annee": 1935,
+      "realisateur": "Paul Schiller",
       "duree": 67,
-      "genres": [
-        "Animation"
-      ],
-      "synopsis": "Jacques se rend chez son ami Bruno pour lui annoncer une nouvelle importante : l'humanité toute entière vit dans une simulation...",
-      "imdbId": "tt42575634",
+      "genres": [],
+      "synopsis": "Le Général Makaïloff et sa jeune épouse Natacha ont fui la révolution russe de 1917 et se sont réfugiés à Paris.  La vie de Natacha a connu une tragédie : elle a été contrainte d'épouser le Général, alors qu'il a tué l'homme qu'elle aimait. En France, une nouvelle vie va cependant s'esquisser pour elle.",
+      "imdbId": "tt0158327",
       "seances": [
         {
           "date": "2026-06-17",
@@ -783,19 +795,21 @@
       ],
       "source": "comoedia",
       "cinema": "Le Comoedia",
-      "poster": "https://m.media-amazon.com/images/M/MV5BZjJkM2E4MzItZDZiMS00ZDcxLThiZDMtOWQ2OTNiYjg2NTY3XkEyXkFqcGc@._V1_QL75_UY562_CR21,0,380,562_.jpg",
-      "imdbRating": 7.5,
-      "cast": "Alain Chabat, Jonathan Cohen, Anaïs Demoustier"
+      "poster": "https://image.tmdb.org/t/p/w500/WE8yOmxlK3vNF2Fn02VvHPOcXO.jpg",
+      "imdbRating": 10.0,
+      "cast": "Alice Field, André Burgère, Arletty"
     },
     {
       "titre": "UNE ANNÉE ITALIENNE",
       "titreOriginal": null,
-      "annee": 2026,
+      "annee": 2025,
       "realisateur": "Laura Samani",
       "duree": 102,
-      "genres": [],
-      "synopsis": "Septembre 2007. Fred, jeune Suédoise de dix-sept ans, emménage à Trieste et commence une année de terminale au lycée technique de la ville. Seule fille de sa classe, elle se retrouve au centre de l'attention, en particulier de celle d'un trio inséparable de garçons. Ensemble, ils expérimentent de nouveaux sentiments, confrontent leurs doutes, et soumettent leur amitié à rude épreuve. Cette année du bac les marquera pour toujours.",
-      "imdbId": null,
+      "genres": [
+        "Drama"
+      ],
+      "synopsis": "Septembre 2007, Trieste. Fred, jeune Suédoise de dix-sept ans, arrive en ville et s’inscrit en terminale au lycée technique. Seule fille dans une classe entièrement masculine, elle se retrouve au centre de l’attention d’un trio inséparable.",
+      "imdbId": "tt31778123",
       "seances": [
         {
           "date": "2026-06-17",
@@ -885,8 +899,9 @@
       ],
       "source": "comoedia",
       "cinema": "Le Comoedia",
-      "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4906/e23682f324bb9201bef0499ff4281c1f/s,490,650-q,90-6d5c0a.jpg",
-      "cast": "S. Wendick, G. Covi, P. Giustolisi"
+      "poster": "https://image.tmdb.org/t/p/w500/tD7uncqtSXlflxCY9HcEdtYeg9v.jpg",
+      "imdbRating": 7.1,
+      "cast": "Stella Wendick, Giacomo Covi, Pietro Giustolisi"
     },
     {
       "titre": "THE CHRISTOPHERS",
@@ -898,7 +913,7 @@
         "Comedy",
         "Drama"
       ],
-      "synopsis": "The children of a once famous artist hire a forger to complete some unfinished, long ago abandoned canvases so they'll have an inheritance when he dies.",
+      "synopsis": "Julian Sklar, ancienne figure majeure du pop art londonien devenu misanthrope n’a plus rien peint depuis des décennies. Ses enfants, avides d’héritage, engagent Lori, restauratrice et ex-faussaire, pour se faire passer pour son assistante. Sa mission : finir en secret une série de huit toiles inachevées, les « Christophers », et en tirer une fortune.",
       "imdbId": "tt34966562",
       "seances": [
         {
@@ -954,19 +969,23 @@
       ],
       "source": "comoedia",
       "cinema": "Le Comoedia",
-      "poster": "https://m.media-amazon.com/images/M/MV5BMDY1YjgyOTAtYjRlNS00NmE4LWE2YTgtZDcxNTBhZGVmMGVlXkEyXkFqcGc@._V1_QL75_UX380_CR0,0,380,562_.jpg",
-      "imdbRating": 6.8,
+      "poster": "https://image.tmdb.org/t/p/w500/bZvRuU5OaDd7toBVMuPrsYVl2dN.jpg",
+      "imdbRating": 6.714,
       "cast": "Michaela Coel, Ian McKellen, Jessica Gunning"
     },
     {
       "titre": "LE DERNIER VRAI SAMOURAÏ",
       "titreOriginal": null,
-      "annee": null,
-      "realisateur": null,
+      "annee": 2023,
+      "realisateur": "Jun'ichi Yasuda",
       "duree": null,
-      "genres": [],
-      "synopsis": null,
-      "imdbId": null,
+      "genres": [
+        "Comedy",
+        "Drama",
+        "Fantasy"
+      ],
+      "synopsis": "Un samouraï de l’époque Edo frappé par la foudre se réveille dans le Japon contemporain. Pris à tort pour un figurant, il se retrouve propulsé sur le plateau d’un drame historique. Sa diction archaïque et sa démarche authentique fascinent, jusqu’à faire de lui un cascadeur vedette.",
+      "imdbId": "tt32277931",
       "seances": [
         {
           "date": "2026-06-20",
@@ -980,19 +999,22 @@
         }
       ],
       "source": "comoedia",
-      "cinema": "Le Comoedia"
+      "cinema": "Le Comoedia",
+      "poster": "https://image.tmdb.org/t/p/w500/z5rBx89EKLiInCGWUoCuCEAusx.jpg",
+      "imdbRating": 7.6,
+      "cast": "Makiya Yamaguchi, Norimasa Fuke, Yuno Sakura"
     },
     {
       "titre": "A SECOND LIFE",
       "titreOriginal": null,
-      "annee": 1952,
-      "realisateur": "Parviz Khatibi",
+      "annee": 2025,
+      "realisateur": "Laurent Slama",
       "duree": null,
       "genres": [
-        "Comedy"
+        "Drama"
       ],
-      "synopsis": null,
-      "imdbId": "tt0342856",
+      "synopsis": "Le jour de la cérémonie d’ouverture des Jeux Olympiques de Paris, Elisabeth jongle entre la gestion de locations de courte durée et sa dépression. Pour échapper au chaos de la ville, elle retire souvent ses appareils auditifs et se réfugie dans le silence. Sa rencontre avec Elijah, un Californien insouciant, la déstabilise. Mais en perdant ses appareils en plein cœur des festivités, elle n’a d’autre choix que d’affronter ses peurs et de s’ouvrir aux autres.",
+      "imdbId": "tt36591115",
       "seances": [
         {
           "date": "2026-06-21",
@@ -1002,20 +1024,19 @@
       ],
       "source": "comoedia",
       "cinema": "Le Comoedia",
-      "poster": "https://m.media-amazon.com/images/M/MV5BYjJmZjIwNDQtOGM5OS00Y2QyLTg3ZjUtYzExNWJmMGNiNzExXkEyXkFqcGdeQXVyMzgyNzAyODk@._V1_SX300.jpg",
-      "cast": "Zia AlAbsari, Soodabeh, Zari Vadadian"
+      "poster": "https://image.tmdb.org/t/p/w500/dAFQATYknL9MO1yoywPj3vd4Epm.jpg",
+      "imdbRating": 5.0,
+      "cast": "Agathe Rousselle, Alex Lawther, Suzy Bemba"
     },
     {
       "titre": "EN NOUS",
       "titreOriginal": null,
-      "annee": 2022,
-      "realisateur": "Régis Sauder",
+      "annee": 2025,
+      "realisateur": "Juliette Binoche",
       "duree": 127,
-      "genres": [
-        "Documentary"
-      ],
-      "synopsis": "En 2007, l'actrice française Juliette Binoche et le danseur et chorégraphe britannique Akram Khan décident de se lancer dans une aventure artistique inédite : Akram veut jouer, Juliette souhaite danser. Ensemble, ils vont écrire et créer IN-I, un spectacle qui les poussera à se dépasser. Avec ce premier film en tant que réalisatrice, Juliette Binoche propose au spectateur d'entrer dans l'intimité de la création, révélant les épreuves, les joies, les doutes qui mènent des répétitions au spectacle…",
-      "imdbId": "tt16239932",
+      "genres": [],
+      "synopsis": "En 2007, l’actrice française Juliette Binoche et le danseur et chorégraphe britannique Akram Khan décident de se lancer dans une aventure artistique inédite : Akram veut jouer, Juliette souhaite danser. Ensemble, ils vont écrire et créer IN-I, un spectacle qui les poussera à se dépasser.  Avec ce premier film en tant que réalisatrice, Juliette Binoche propose au spectateur d'entrer dans l’intimité de la création, révélant les épreuves, les joies, les doutes qui mènent des répétitions au spectacl…",
+      "imdbId": "tt37964027",
       "seances": [
         {
           "date": "2026-06-20",
@@ -1025,8 +1046,9 @@
       ],
       "source": "comoedia",
       "cinema": "Le Comoedia",
-      "poster": "https://m.media-amazon.com/images/M/MV5BNDYxYjI4NzAtZjY0ZC00OGU0LTg5NTQtMzA1ZTAyMmMyZDE3XkEyXkFqcGc@._V1_SX300.jpg",
-      "cast": "J. Binoche, A. Khan"
+      "poster": "https://image.tmdb.org/t/p/w500/z9jHEg0tit56FWFeObU3AB9VKeQ.jpg",
+      "imdbRating": 6.0,
+      "cast": "Juliette Binoche, Akram Kahn"
     },
     {
       "titre": "BOUCHRA",
@@ -1038,7 +1060,7 @@
         "Animation",
         "Drama"
       ],
-      "synopsis": "Bouchra, a 35-year-old Moroccan coyote in New York documents her long-distance relationship with her mother in Casablanca, as they explore together the love, pain and secrets that unite them through calls and intimate conversations.",
+      "synopsis": "Bouchra, cinéaste marocaine vivant à New York, est tétanisée par la peur de la page blanche. Un appel de sa mère depuis Casablanca fait resurgir des souvenirs enfouis et l'entraîne dans un voyage à travers les liens familiaux, la filiation et le frémissement de l’amour.",
       "imdbId": "tt36543744",
       "seances": [
         {
@@ -1054,9 +1076,9 @@
       ],
       "source": "comoedia",
       "cinema": "Le Comoedia",
-      "poster": "https://m.media-amazon.com/images/M/MV5BODA5NWU5NzUtYmEyYy00MDJmLWFhNjEtNDM4ODgxMGM2M2I5XkEyXkFqcGc@._V1_QL75_UX380_CR0,0,380,562_.jpg",
-      "imdbRating": 6.6,
-      "cast": "Ariana Faye Allensworth, Fayçal Azizi, Orian Yani Barki"
+      "poster": "https://image.tmdb.org/t/p/w500/c4J9dNIkai5dRP0HWTEq227F4f6.jpg",
+      "imdbRating": 6.0,
+      "cast": "Meriem Bennani, Orian Barki, Fayçal Azizi"
     },
     {
       "titre": "L'OBJET DU DÉLIT",
@@ -1064,9 +1086,11 @@
       "annee": 2026,
       "realisateur": "Agnès Jaoui",
       "duree": 133,
-      "genres": [],
-      "synopsis": "Ce film est présenté en hors-compétition au Festival de Cannes 2026.Dans les coulisses d'une ambitieuse production de l'opéra \"Les Noces de Figaro\", les tensions montent lorsqu'une accusation d'agression sexuelle éclate, mettant en péril la production et forçant chacun à prendre position. Les conflits d'opinion et de génération se font jour, et comme toujours chez Agnès Jaoui, le rire n'est jamais loin du drame.",
-      "imdbId": null,
+      "genres": [
+        "Comedy"
+      ],
+      "synopsis": "Dans les coulisses d’une ambitieuse production de l’opéra « Les Noces de Figaro », les tensions montent lorsqu’une accusation d’agression sexuelle éclate, mettant en péril la production et forçant chacun à prendre position. Les conflits d’opinion et de génération se font jour…",
+      "imdbId": "tt37535559",
       "seances": [
         {
           "date": "2026-06-17",
@@ -1141,20 +1165,21 @@
       ],
       "source": "comoedia",
       "cinema": "Le Comoedia",
-      "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4905/f113b78c6126c1a49a0168d53497267c/s,490,650-q,90-f626c2.jpg",
-      "cast": "D. Auteuil, A. gnès Jaoui, E. Haïdara"
+      "poster": "https://image.tmdb.org/t/p/w500/AdM7jQOEdRZ0DW6nfizLwxhSmVI.jpg",
+      "imdbRating": 6.68,
+      "cast": "Agnès Jaoui, Daniel Auteuil, Eye Haïdara"
     },
     {
       "titre": "AUTOFICTION",
       "titreOriginal": null,
-      "annee": 2020,
-      "realisateur": "Laida Lertxundi",
+      "annee": 2026,
+      "realisateur": "Pedro Almodóvar",
       "duree": 111,
       "genres": [
-        "Short"
+        "Drama"
       ],
-      "synopsis": "Borrowing its title from a literary genre, the film acknowledges the indeterminacy of both fiction and the self. Noir elements are reduced to deadpan gestures under bright California sunlight. Field recordings made in New Zealand ...",
-      "imdbId": "tt13057920",
+      "synopsis": "Raúl est un cinéaste culte en pleine crise créative. Lorsqu’un drame frappe l’une de ses plus proches collaboratrices, il s’en inspire pour écrire son prochain film. Peu à peu, il imagine Elsa, une réalisatrice en pleine écriture, dont le parcours commence à refléter le sien. Les deux cinéastes deviennent les deux facettes d’un même personnage, dans un jeu de miroirs où l’impudeur de l’autofiction dévoile autant qu’elle détruit. Mais jusqu’où peut-on aller pour raconter une histoire ?",
+      "imdbId": "tt28088049",
       "seances": [
         {
           "date": "2026-06-18",
@@ -1169,19 +1194,21 @@
       ],
       "source": "comoedia",
       "cinema": "Le Comoedia",
-      "poster": "https://m.media-amazon.com/images/M/MV5BM2IxN2M2NjMtNzZiNS00ZTE0LWE2NGEtYTgyYWJkYTRkZWU5XkEyXkFqcGdeQXVyMTE5NTM5NTU5._V1_SX300.jpg",
-      "imdbRating": 6.4,
-      "cast": "B. Lennie, L. Sbaraglia, A. Sánchez-Gijón"
+      "poster": "https://image.tmdb.org/t/p/w500/totBmg5uDtbo23XNfj7AQktFPDj.jpg",
+      "imdbRating": 6.506,
+      "cast": "Bárbara Lennie, Leonardo Sbaraglia, Aitana Sánchez-Gijón"
     },
     {
       "titre": "L’ÊTRE AIMÉ",
       "titreOriginal": null,
-      "annee": null,
-      "realisateur": null,
+      "annee": 2025,
+      "realisateur": "Rodrigo Sorogoyen",
       "duree": null,
-      "genres": [],
-      "synopsis": null,
-      "imdbId": null,
+      "genres": [
+        "Drama"
+      ],
+      "synopsis": "Réalisateur mondialement célèbre, Esteban Martínez revient en Espagne pour tourner son nouveau film. Il en offre le rôle principal à une jeune actrice inconnue : sa fille, qu’il n’a pas vue depuis treize ans. La jeune femme accepte cette incroyable opportunité, mais sait qu’à l’occasion de ce tournage, elle va se confronter à un homme qu’elle n’a jamais pu considérer comme un père. Le poids du passé menace de rouvrir leurs blessures.",
+      "imdbId": "tt33451014",
       "seances": [
         {
           "date": "2026-06-17",
@@ -1210,17 +1237,22 @@
         }
       ],
       "source": "comoedia",
-      "cinema": "Le Comoedia"
+      "cinema": "Le Comoedia",
+      "poster": "https://image.tmdb.org/t/p/w500/guyRccNh9py85OYQO7Y7pLblxGQ.jpg",
+      "imdbRating": 7.061,
+      "cast": "Javier Bardem, Victoria Luengo, Melina Matthews"
     },
     {
       "titre": "L’ABANDON",
       "titreOriginal": null,
-      "annee": null,
-      "realisateur": null,
+      "annee": 2026,
+      "realisateur": "Vincent Garenq",
       "duree": null,
-      "genres": [],
-      "synopsis": null,
-      "imdbId": null,
+      "genres": [
+        "Drama"
+      ],
+      "synopsis": "Tout le monde connaît le nom de Samuel Paty, mais peu de gens connaissent réellement son histoire. Le 16 octobre 2020, Samuel Paty, professeur d’Histoire-Géographie, est assassiné (décapité) à la sortie de son collège. À la lumière des enquêtes et des procès, ce film revient sur ses onze derniers jours, et l’engrenage qui a conduit à sa mort tragique.",
+      "imdbId": "tt40435390",
       "seances": [
         {
           "date": "2026-06-17",
@@ -1249,7 +1281,10 @@
         }
       ],
       "source": "comoedia",
-      "cinema": "Le Comoedia"
+      "cinema": "Le Comoedia",
+      "poster": "https://image.tmdb.org/t/p/w500/kfUKP5IgzgLQyQD1MDt99yq9Af0.jpg",
+      "imdbRating": 7.767,
+      "cast": "Antoine Reinartz, Emmanuelle Bercot, Nedjim Bouizzoul"
     },
     {
       "titre": "LA VÉNUS ÉLECTRIQUE",
@@ -1257,9 +1292,12 @@
       "annee": 2026,
       "realisateur": "Pierre Salvadori",
       "duree": 122,
-      "genres": [],
-      "synopsis": "Paris, 1928. Antoine Balestro, jeune peintre en vogue, n'arrive plus à travailler depuis la mort de son épouse et désespère Armand, son galeriste. Un soir d'ivresse, Antoine tente d'entrer en contact avec sa femme par l'intermédiaire d'une voyante. Sans le savoir, il parle en réalité avec Suzanne, une modeste foraine qui s'est glissée dans la roulotte pour y voler de la nourriture. Suzanne se révèle douée pour l'imposture et, rapidement secondée par Armand, elle enchaîne les fausses séances. Peu…",
-      "imdbId": null,
+      "genres": [
+        "Comedy",
+        "Romance"
+      ],
+      "synopsis": "Paris, au début du XXe siècle. Persuadé que sa femme Irène est morte par sa faute, Antoine Balestro, peintre en vogue, n’arrive plus à se remettre au travail et désespère Armand, son galeriste. Un soir, en quête de pardon, Antoine, ivre, tente d’entrer en contact avec Irène par l’intermédiaire d’un médium. Sans le savoir, il parle en réalité avec Suzanne, une modeste saltimbanque, qui ne connaît rien à l’au-delà et s’est faufilée dans la roulotte de la voyante pour voler de la nourriture…",
+      "imdbId": "tt37163509",
       "seances": [
         {
           "date": "2026-06-17",
@@ -1314,8 +1352,9 @@
       ],
       "source": "comoedia",
       "cinema": "Le Comoedia",
-      "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4858/la venus electrique (1)/s,490,650-q,90-6e8295.jpeg",
-      "cast": "P. Marmaï, A. Demoustier, G. Lellouche"
+      "poster": "https://image.tmdb.org/t/p/w500/bpaCAvxvqCNQdoRAjr88MA42YfI.jpg",
+      "imdbRating": 7.2,
+      "cast": "Pio Marmaï, Anaïs Demoustier, Gilles Lellouche"
     },
     {
       "titre": "JUSTE UNE ILLUSION",
@@ -1326,7 +1365,7 @@
       "genres": [
         "Comedy"
       ],
-      "synopsis": "A 12-year-old boy in 1985 suburban Paris navigates life between his distant older brother and quarreling parents while grappling with identity, friendship, love, and understanding why adults seem lost.",
+      "synopsis": "Nous sommes en 1985, Vincent, bientôt 13 ans, vit en banlieue parisienne dans une famille de la classe moyenne, entre un grand frère distant et des parents en conflit permanent. Alors qu’il n’est « déjà plus » un enfant et qu’il n’est « pas encore » un adulte nous allons partager ses questions et ses doutes sur l’identité, l’amitié, la famille, la religion, le désir et les premiers élans amoureux.",
       "imdbId": "tt36842933",
       "seances": [
         {
@@ -1347,8 +1386,9 @@
       ],
       "source": "comoedia",
       "cinema": "Le Comoedia",
-      "poster": "https://m.media-amazon.com/images/M/MV5BODY3ZGIyNDktZDdjMy00MGU2LWI5YWYtZWExOTg0N2YzNTM5XkEyXkFqcGc@._V1_SX300.jpg",
-      "cast": "Camille Cottin, Louis Garrel, Rony Kramer"
+      "poster": "https://image.tmdb.org/t/p/w500/eWPq3wSvJEMakESTXzaBECUNBYr.jpg",
+      "imdbRating": 7.352,
+      "cast": "Louis Garrel, Camille Cottin, Simon Boublil"
     },
     {
       "titre": "NOUVEAUX COPAINS JP À PUFFIN ROCK",
@@ -1378,15 +1418,16 @@
       "titre": "Minotaure",
       "slug": "minotaure",
       "titreOriginal": null,
-      "annee": 2023,
-      "realisateur": "Raphael Lozano",
+      "annee": 2026,
+      "realisateur": "Andrey Zvyagintsev",
       "duree": null,
       "genres": [
-        "Animation",
-        "Short"
+        "Crime",
+        "Drama",
+        "Thriller"
       ],
-      "synopsis": null,
-      "imdbId": "tt30292667",
+      "synopsis": "Russie, 2022. Gleb, chef d’entreprise prospère, vit avec sa femme Galina et leur fils dans une ville de province. Il se retrouve confronté à des problèmes professionnels croissants, dans un monde de plus en plus instable. L’effondrement d’une vie soigneusement construite bascule rapidement dans la violence.",
+      "imdbId": "tt37118301",
       "source": "lumiere",
       "cinema": "Lumière Terreaux",
       "seances": [
@@ -1405,7 +1446,10 @@
           "heure": "20:15",
           "version": "VOSTFR"
         }
-      ]
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/wcxM1Pc8StmtMVTlkk1d62x0VPl.jpg",
+      "imdbRating": 7.6,
+      "cast": "Dmitriy Mazurov, Iris Lebedeva, Varvara Shmykova"
     },
     {
       "titre": "Fjord",
@@ -1443,7 +1487,7 @@
       ],
       "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4917/c886c063dd836e7f3fd78e6f8985f489/s,490,650-q,90-6e1765.jpg",
       "cast": "S. Stan, R. Reinsve, A. Panc",
-      "imdbRating": 7.8
+      "imdbRating": 8.0
     },
     {
       "titre": "Disclosure Day",
@@ -1519,7 +1563,8 @@
         }
       ],
       "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4934/84cee8c8b2bf7843e715a33ebcc4287a/s,490,650-q,90-5623eb.jpg",
-      "cast": "E. Blunt, J. O'Connor, C. Firth"
+      "cast": "E. Blunt, J. O'Connor, C. Firth",
+      "imdbRating": 6.901
     },
     {
       "titre": "The Christophers",
@@ -1578,7 +1623,7 @@
       ],
       "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4936/db7e113032cd490ddb0ab7ea964d97ac/s,490,650-q,90-af43bb.jpg",
       "cast": "I. Mckellen,  M. Coel,  J. Corden",
-      "imdbRating": 6.8
+      "imdbRating": 6.714
     },
     {
       "titre": "Le Vertige",
@@ -1587,11 +1632,9 @@
       "annee": 2026,
       "realisateur": "Quentin Dupieux",
       "duree": 67,
-      "genres": [
-        "Animation"
-      ],
+      "genres": [],
       "synopsis": "Jacques se rend chez son ami Bruno pour lui annoncer une nouvelle importante : l'humanité toute entière vit dans une simulation...",
-      "imdbId": "tt42575634",
+      "imdbId": "tt0158327",
       "source": "lumiere",
       "cinema": "Lumière Terreaux",
       "seances": [
@@ -1642,7 +1685,7 @@
       ],
       "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4935/450bf9211ea195e44999da9e5dbfa51b/s,490,650-q,90-006fbf.jpg",
       "cast": "A. Chabat, J. Cohen, A. Demoustier",
-      "imdbRating": 7.5
+      "imdbRating": 10.0
     },
     {
       "titre": "L'Objet du délit",
@@ -1651,9 +1694,11 @@
       "annee": 2026,
       "realisateur": "Agnès Jaoui",
       "duree": 133,
-      "genres": [],
+      "genres": [
+        "Comedy"
+      ],
       "synopsis": "Ce film est présenté en hors-compétition au Festival de Cannes 2026.Dans les coulisses d'une ambitieuse production de l'opéra \"Les Noces de Figaro\", les tensions montent lorsqu'une accusation d'agression sexuelle éclate, mettant en péril la production et forçant chacun à prendre position. Les conflits d'opinion et de génération se font jour, et comme toujours chez Agnès Jaoui, le rire n'est jamais loin du drame.",
-      "imdbId": null,
+      "imdbId": "tt37535559",
       "source": "lumiere",
       "cinema": "Lumière Terreaux",
       "seances": [
@@ -1697,7 +1742,8 @@
         }
       ],
       "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4905/f113b78c6126c1a49a0168d53497267c/s,490,650-q,90-f626c2.jpg",
-      "cast": "D. Auteuil, A. gnès Jaoui, E. Haïdara"
+      "cast": "D. Auteuil, A. gnès Jaoui, E. Haïdara",
+      "imdbRating": 6.68
     },
     {
       "titre": "Une année italienne",
@@ -1706,9 +1752,11 @@
       "annee": 2026,
       "realisateur": "Laura Samani",
       "duree": 102,
-      "genres": [],
+      "genres": [
+        "Drama"
+      ],
       "synopsis": "Septembre 2007. Fred, jeune Suédoise de dix-sept ans, emménage à Trieste et commence une année de terminale au lycée technique de la ville. Seule fille de sa classe, elle se retrouve au centre de l'attention, en particulier de celle d'un trio inséparable de garçons. Ensemble, ils expérimentent de nouveaux sentiments, confrontent leurs doutes, et soumettent leur amitié à rude épreuve. Cette année du bac les marquera pour toujours.",
-      "imdbId": null,
+      "imdbId": "tt31778123",
       "source": "lumiere",
       "cinema": "Lumière Bellecour",
       "seances": [
@@ -1736,7 +1784,8 @@
         }
       ],
       "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4906/e23682f324bb9201bef0499ff4281c1f/s,490,650-q,90-6d5c0a.jpg",
-      "cast": "S. Wendick, G. Covi, P. Giustolisi"
+      "cast": "S. Wendick, G. Covi, P. Giustolisi",
+      "imdbRating": 7.1
     },
     {
       "titre": "Ghost in the Shell",
@@ -1745,9 +1794,13 @@
       "annee": 2026,
       "realisateur": "Mamoru Oshii",
       "duree": 83,
-      "genres": [],
+      "genres": [
+        "Action",
+        "Crime",
+        "Drama"
+      ],
       "synopsis": "2029, Newport City. Le Major Motoko Kusanagi, femme cyborg ultra-perfectionnée, à la tête de la Section 9, une unité d'élite anti-terroriste, enquête sur un nouveau cyber-virus capable de contrôler les esprits et d'altérer les souvenirs de ses victimes. Le suspect principal, surnommé le « Marionnettiste », à la réputation aussi mystérieuse qu'insaisissable, devient la cible d'une traque intense sur fond de rivalité avec la section 6, à la solde du Ministère des Affaires Etrangères et de son myst…",
-      "imdbId": null,
+      "imdbId": "tt1219827",
       "source": "lumiere",
       "cinema": "Lumière Bellecour",
       "seances": [
@@ -1764,7 +1817,8 @@
         }
       ],
       "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4933/c45409cfc5212060d0fbbf5524af3906/s,490,650-q,90-359a76.jpg",
-      "cast": "T. Torrens, A. Tanaka, D. Beretta"
+      "cast": "T. Torrens, A. Tanaka, D. Beretta",
+      "imdbRating": 6.108
     },
     {
       "titre": "La Vénus électrique",
@@ -1773,9 +1827,12 @@
       "annee": 2026,
       "realisateur": "Pierre Salvadori",
       "duree": 122,
-      "genres": [],
+      "genres": [
+        "Comedy",
+        "Romance"
+      ],
       "synopsis": "Paris, 1928. Antoine Balestro, jeune peintre en vogue, n'arrive plus à travailler depuis la mort de son épouse et désespère Armand, son galeriste. Un soir d'ivresse, Antoine tente d'entrer en contact avec sa femme par l'intermédiaire d'une voyante. Sans le savoir, il parle en réalité avec Suzanne, une modeste foraine qui s'est glissée dans la roulotte pour y voler de la nourriture. Suzanne se révèle douée pour l'imposture et, rapidement secondée par Armand, elle enchaîne les fausses séances. Peu…",
-      "imdbId": null,
+      "imdbId": "tt37163509",
       "source": "lumiere",
       "cinema": "Lumière Bellecour",
       "seances": [
@@ -1803,7 +1860,8 @@
         }
       ],
       "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4858/la venus electrique (1)/s,490,650-q,90-6e8295.jpeg",
-      "cast": "P. Marmaï, A. Demoustier, G. Lellouche"
+      "cast": "P. Marmaï, A. Demoustier, G. Lellouche",
+      "imdbRating": 7.2
     },
     {
       "titre": "Toutes mes soeurs",
@@ -1812,9 +1870,11 @@
       "annee": 2026,
       "realisateur": "Massoud Bakhshi",
       "duree": 78,
-      "genres": [],
+      "genres": [
+        "Documentary"
+      ],
       "synopsis": "Grandir à Téhéran au XXIe siècle... De 2007 à 2025, au sein d'une famille aimante, dix-huit ans dans la vie de trois soeurs, de leur prime enfance à leur quotidien de jeunes femmes en quête de liberté. Élevées dans la tradition, témoins des luttes d'une jeunesse en perpétuel mouvement, quel est leur avenir dans la société iranienne d'aujourd'hui ?",
-      "imdbId": null,
+      "imdbId": "tt38693208",
       "source": "lumiere",
       "cinema": "Lumière Bellecour",
       "seances": [
@@ -1830,7 +1890,9 @@
           "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F632257/D1781611200/VO/"
         }
       ],
-      "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4927/d1d44b29bebdda1627c59b61396687d6/s,490,650-q,90-9a322c.jpg"
+      "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4927/d1d44b29bebdda1627c59b61396687d6/s,490,650-q,90-9a322c.jpg",
+      "imdbRating": 5.0,
+      "cast": "Mahya, Maleka, Zahra"
     },
     {
       "titre": "L'Être Aimé",
@@ -1839,9 +1901,11 @@
       "annee": 2026,
       "realisateur": "Rodrigo Sorogoyen",
       "duree": 135,
-      "genres": [],
+      "genres": [
+        "Drama"
+      ],
       "synopsis": "Réalisateur mondialement célèbre, Esteban Martínez revient en Espagne pour tourner son nouveau film. Il en offre le rôle principal à une jeune actrice inconnue, sa fille, qu'il n'a pas vue depuis treize ans. La jeune femme accepte cette formidable opportunité, mais sait qu'à l'occasion de ce tournage, elle va se confronter à un homme qu'elle n'a jamais pu considérer comme un père. Le poids du passé menace de rouvrir leurs blessures.",
-      "imdbId": null,
+      "imdbId": "tt33451014",
       "source": "lumiere",
       "cinema": "Lumière Bellecour",
       "seances": [
@@ -1863,7 +1927,8 @@
         }
       ],
       "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4895/fbce99c777dbeedf8a6d8290cbd25b2a/s,490,650-q,90-d8a4b2.jpg",
-      "cast": "J. Bardem, V. Luengo, R. Arévalo"
+      "cast": "J. Bardem, V. Luengo, R. Arévalo",
+      "imdbRating": 7.061
     },
     {
       "titre": "L'Affaire Zanetti",
@@ -1872,9 +1937,11 @@
       "annee": 2026,
       "realisateur": "Leonardo Di Costanzo",
       "duree": 105,
-      "genres": [],
+      "genres": [
+        "Drama"
+      ],
       "synopsis": "Elisa a été condamnée il y a 10 ans pour avoir tué sa soeur aînée sans raison apparente. Elle affirme ne se souvenir que de très peu de choses du crime, comme si un voile de silence s'était posé entre elle et son passé. Mais lorsqu'elle accepte de rencontrer un criminologue et de participer à ses recherches, un dialogue tendu et implacable s'engage. Peu à peu, les souvenirs refont surface...",
-      "imdbId": null,
+      "imdbId": "tt37660578",
       "source": "lumiere",
       "cinema": "Lumière Bellecour",
       "seances": [
@@ -1902,7 +1969,8 @@
         }
       ],
       "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4724/L'affaire zanetti (1)/s,490,650-q,90-de959e.jpeg",
-      "cast": "R. Zem, B. Ronchi, D. Ribon"
+      "cast": "R. Zem, B. Ronchi, D. Ribon",
+      "imdbRating": 6.2
     },
     {
       "titre": "Le Garçon qui faisait danser les collines",
@@ -1911,9 +1979,12 @@
       "annee": 2026,
       "realisateur": "Georgi M. Unkovski",
       "duree": 99,
-      "genres": [],
+      "genres": [
+        "Comedy",
+        "Drama"
+      ],
       "synopsis": "Ahmet, 15 ans, grandit au milieu des montagnes de Macédoine, où il garde les moutons de son père tout en prenant soin de son petit frère. Mais lui, ce qui le fait rêver, c'est la musique. Entre les attentes de son entourage et ses envies d'ailleurs, Ahmet pourra-t-il un jour suivre son propre chemin ?",
-      "imdbId": null,
+      "imdbId": "tt34964187",
       "source": "lumiere",
       "cinema": "Lumière Bellecour",
       "seances": [
@@ -1941,7 +2012,8 @@
         }
       ],
       "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4893/1207823987500650b921584917214ab5/s,490,650-q,90-06e6d5.jpeg",
-      "cast": "A. Jakup, A. Agushev, D. Akan Zlatanova"
+      "cast": "A. Jakup, A. Agushev, D. Akan Zlatanova",
+      "imdbRating": 6.862
     },
     {
       "titre": "Janis",
@@ -1950,9 +2022,13 @@
       "annee": 2016,
       "realisateur": "Amy Berg",
       "duree": 99,
-      "genres": [],
+      "genres": [
+        "Documentary",
+        "Biography",
+        "Music"
+      ],
       "synopsis": "Janis Joplin est l'une des artistes les plus impressionnantes et une des plus mythiques chanteuses de rock et de blues de tous les temps. Mais elle était bien plus que cela : au-delà de son personnage de rock-star, de sa voix extraordinaire et de la légende, le documentaire Janis nous dépeint une femme sensible, vulnérable et puissante. C'est l'histoire d'une vie courte, mouvementée et passionnante qui changea la musique pour toujours.",
-      "imdbId": null,
+      "imdbId": "tt3707114",
       "source": "lumiere",
       "cinema": "Lumière Bellecour",
       "seances": [
@@ -1964,7 +2040,8 @@
         }
       ],
       "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4862/Janis film/s,490,650-q,90-9e276e.jpeg",
-      "cast": "J. Joplin, C. Power"
+      "cast": "J. Joplin, C. Power",
+      "imdbRating": 7.281
     },
     {
       "titre": "Plus fort que moi",
@@ -1973,9 +2050,12 @@
       "annee": 2026,
       "realisateur": "Kirk Jones (II)",
       "duree": 121,
-      "genres": [],
+      "genres": [
+        "Biography",
+        "Drama"
+      ],
       "synopsis": "Dans les années 1980, John Davidson grandit avec le syndrome de Gilles de la Tourette, une pathologie encore largement méconnue. Entre incompréhension, stigmatisation et détermination, son parcours d'abord semé d'embûches se transforme en combat pour être reconnu tel qu'il est, au-delà des préjugés.",
-      "imdbId": null,
+      "imdbId": "tt31514146",
       "source": "lumiere",
       "cinema": "Lumière Fourmi",
       "seances": [
@@ -1992,18 +2072,23 @@
         }
       ],
       "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4813/8fb759142fd32992ed10f00b082d92fd/s,490,650-q,90-2b8308.jpg",
-      "cast": "R. Aramayo, M. Peake, P. Mullan"
+      "cast": "R. Aramayo, M. Peake, P. Mullan",
+      "imdbRating": 8.264
     },
     {
       "titre": "Histoires parallèles",
       "slug": "histoires-paralleles",
       "titreOriginal": null,
-      "annee": null,
-      "realisateur": null,
+      "annee": 2026,
+      "realisateur": "Asghar Farhadi",
       "duree": null,
-      "genres": [],
-      "synopsis": null,
-      "imdbId": null,
+      "genres": [
+        "Crime",
+        "Drama",
+        "Mystery"
+      ],
+      "synopsis": "En quête d’inspiration pour son nouveau roman, Sylvie espionne ses voisins dans l’immeuble d’en face. Quand elle engage le jeune Tomek pour l’aider dans son quotidien, elle ignore que celui-ci va bouleverser sa vie et son travail jusqu’à ce que la fiction qu’elle avait imaginée dépasse leur réalité à tous.",
+      "imdbId": "tt36646880",
       "source": "lumiere",
       "cinema": "Lumière Fourmi",
       "seances": [
@@ -2012,7 +2097,10 @@
           "heure": "14:00",
           "version": "VF"
         }
-      ]
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/slUt1jzYxJZzEJWrOZ67DouFwoH.jpg",
+      "imdbRating": 5.648,
+      "cast": "Isabelle Huppert, Virginie Efira, Vincent Cassel"
     },
     {
       "titre": "Compostelle",
@@ -2042,7 +2130,8 @@
         }
       ],
       "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4876/5b3d2c4e0f58bab97b979611615ea321/s,490,650-q,90-635d2d.jpg",
-      "cast": "A. Lamy, J. Le Berre, M. Doutey"
+      "cast": "A. Lamy, J. Le Berre, M. Doutey",
+      "imdbRating": 7.111
     },
     {
       "titre": "Autofiction",
@@ -2052,10 +2141,10 @@
       "realisateur": "Pedro Almodovar",
       "duree": 111,
       "genres": [
-        "Short"
+        "Drama"
       ],
       "synopsis": "Raul est un cineaste culte en pleine crise creative. Lorsqu'un drame frappe l'une de ses plus proches collaboratrices, il s'en inspire pour ecrire son prochain film. Peu a peu, il imagine Elsa, une realisatrice en pleine ecriture, dont le parcours commence a refleter le sien. Les deux cineastes deviennent les deux facettes d'un meme personnage, dans un jeu de miroirs ou l'impudeur de l'autofiction devoile autant qu'elle detruit. Mais jusqu'ou peut-on aller pour raconter une histoire ?",
-      "imdbId": "tt13057920",
+      "imdbId": "tt28088049",
       "source": "lumiere",
       "cinema": "Lumière Fourmi",
       "seances": [
@@ -2073,7 +2162,7 @@
       ],
       "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4899/99ee4688f7d7695bf36eff48bf9da890/s,490,650-q,90-0e301a.jpg",
       "cast": "B. Lennie, L. Sbaraglia, A. Sánchez-Gijón",
-      "imdbRating": 6.4
+      "imdbRating": 6.506
     },
     {
       "titre": "Vivaldi et moi",
@@ -2082,9 +2171,13 @@
       "annee": 2026,
       "realisateur": "Damiano Michieletto",
       "duree": 111,
-      "genres": [],
+      "genres": [
+        "Biography",
+        "History",
+        "Music"
+      ],
       "synopsis": "Au début du XVIIIe siècle, l'Ospedale della Pietà à Venise recueille et forme de jeunes orphelines à la musique. Dissimulées au public, souvent masquées ou derrière une grille, l'orchestre de jeunes filles se produit pour les riches mécènes de l'institution. Cécilia, 20 ans, y excelle en tant que violoniste. Jusqu'au jour où l'arrivée d'un nouveau maître de musique, Antonio Vivaldi, vient bousculer sa vie et celle de l'Ospedale.",
-      "imdbId": null,
+      "imdbId": "tt33586629",
       "source": "lumiere",
       "cinema": "Lumière Fourmi",
       "seances": [
@@ -2101,7 +2194,8 @@
         }
       ],
       "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4831/0be6712ea95b821a63891ca86b72ee0e/s,490,650-q,90-4177c6.jpg",
-      "cast": "T. Insolia, M. Riondino, F. Sacchi"
+      "cast": "T. Insolia, M. Riondino, F. Sacchi",
+      "imdbRating": 7.049
     },
     {
       "titre": "Nous l'orchestre",
@@ -2133,7 +2227,7 @@
       ],
       "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4792/b0b697a9f50e276e76eb4660fe084869/s,490,650-q,90-fcad00.jpg",
       "cast": "Klaus Mäkelä",
-      "imdbRating": 7.2
+      "imdbRating": 7.0
     },
     {
       "titre": "Cocotte",
@@ -2142,9 +2236,11 @@
       "annee": 2026,
       "realisateur": "György Pálfi",
       "duree": 97,
-      "genres": [],
+      "genres": [
+        "Drama"
+      ],
       "synopsis": "À grand pouvoir, grandes responsabilités - mais si l'héroïne était une poule ? Échappée d'un élevage industriel, elle trouve refuge dans la cour d'un restaurant en ruine. Là, elle découvre l'amour, défie la loi du bec et se bat pour protéger ses oeufs. Sa quête, tendre et ironique, résonne avec les combats silencieux et petits arrangements de la vie humaine.",
-      "imdbId": null,
+      "imdbId": "tt29283995",
       "source": "lumiere",
       "cinema": "Lumière Fourmi",
       "seances": [
@@ -2161,7 +2257,8 @@
         }
       ],
       "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4874/979f0b330eccfacb2c2224cff4486819/s,490,650-q,90-4f09f1.jpg",
-      "cast": "M. Diakopanayotou, A. Pandazaras, Y. Kokiasmenos"
+      "cast": "M. Diakopanayotou, A. Pandazaras, Y. Kokiasmenos",
+      "imdbRating": 7.1
     },
     {
       "titre": "Bait",
@@ -2194,7 +2291,7 @@
       ],
       "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4925/abfb0a4e5a21a5f53a2d0e8e7ef1750c/s,490,650-q,90-00813b.jpg",
       "cast": "E. Rowe, S. Shepherd, M. Woodvine",
-      "imdbRating": 5.2
+      "imdbRating": 5.653
     },
     {
       "titre": "En nous",
@@ -2203,11 +2300,9 @@
       "annee": 2026,
       "realisateur": "Juliette Binoche",
       "duree": 127,
-      "genres": [
-        "Documentary"
-      ],
+      "genres": [],
       "synopsis": "En 2007, l'actrice française Juliette Binoche et le danseur et chorégraphe britannique Akram Khan décident de se lancer dans une aventure artistique inédite : Akram veut jouer, Juliette souhaite danser. Ensemble, ils vont écrire et créer IN-I, un spectacle qui les poussera à se dépasser. Avec ce premier film en tant que réalisatrice, Juliette Binoche propose au spectateur d'entrer dans l'intimité de la création, révélant les épreuves, les joies, les doutes qui mènent des répétitions au spectacle…",
-      "imdbId": "tt16239932",
+      "imdbId": "tt37964027",
       "source": "lumiere",
       "cinema": "Lumière Fourmi",
       "seances": [
@@ -2224,7 +2319,8 @@
         }
       ],
       "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4924/55b600d475a57ce375a3f6925018364f/s,490,650-q,90-22aa2e.jpg",
-      "cast": "J. Binoche, A. Khan"
+      "cast": "J. Binoche, A. Khan",
+      "imdbRating": 6.0
     },
     {
       "titre": "The Plague",
@@ -2233,9 +2329,12 @@
       "annee": 2026,
       "realisateur": "Charlie Polinger",
       "duree": 95,
-      "genres": [],
+      "genres": [
+        "Drama",
+        "Thriller"
+      ],
       "synopsis": "Dans un camp d'été, la rumeur d'une peste se propage. Quand Ben refuse d'y croire, les frontières de la réalité se brouillent et un jeu impitoyable se déclenche entre les garçons.",
-      "imdbId": null,
+      "imdbId": "tt32792934",
       "source": "lumiere",
       "cinema": "Lumière Fourmi",
       "seances": [
@@ -2252,7 +2351,8 @@
         }
       ],
       "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4926/7e5820ba8c9a2e9dbe3d8a3329896281/s,490,650-q,90-f8509b.jpg",
-      "cast": "J. Edgerton, E. Blunck, E. Hefferman"
+      "cast": "J. Edgerton, E. Blunck, E. Hefferman",
+      "imdbRating": 6.5
     },
     {
       "titre": "Michael",
@@ -2280,7 +2380,7 @@
       ],
       "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4928/f201af7e5a1b0119af9047725a3f2785/s,490,650-q,90-0361ff.jpeg",
       "cast": "J. Jackson, C. Domingo, N. Long",
-      "imdbRating": 7.7
+      "imdbRating": 8.625
     },
     {
       "titre": "L'Abandon",
@@ -2311,7 +2411,7 @@
       ],
       "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4938/2aff99358841773f126dd22734bbb72b/s,490,650-q,90-609ef9.jpg",
       "cast": "A. Reinartz, E. Bercot, E. Boumali",
-      "imdbRating": 7.7
+      "imdbRating": 7.767
     },
     {
       "titre": "Juste une illusion",
@@ -2341,7 +2441,8 @@
         }
       ],
       "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4798/cf9effb40e5ae3747fdb68a68289e81a/s,490,650-q,90-28d3fe.jpg",
-      "cast": "C. Cottin, L. Garrel, P. Lottin"
+      "cast": "C. Cottin, L. Garrel, P. Lottin",
+      "imdbRating": 7.352
     }
   ]
 }
