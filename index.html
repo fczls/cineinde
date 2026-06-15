@@ -1009,6 +1009,12 @@ async function loadFromSupabase() {
   const { createClient } = supabase;
   const sb = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
+  // Ne récupérer que les séances d'aujourd'hui ou à venir : la table contient
+  // tout l'historique (>5000 lignes) et l'API REST Supabase plafonne à 1000
+  // lignes par défaut — sans ce filtre, les séances récentes sont tronquées.
+  const today = new Date();
+  const todayISO = `${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,'0')}-${String(today.getDate()).padStart(2,'0')}`;
+
   const { data, error } = await sb
     .from('seances')
     .select(`
@@ -1032,7 +1038,9 @@ async function loadFromSupabase() {
         source
       ),
       cinemas (name)
-    `);
+    `)
+    .gte('date', todayISO)
+    .order('date');
 
   if (error || !data?.length) return null;
 
