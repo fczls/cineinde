@@ -10,6 +10,13 @@ Convention de commits : `feat:` / `fix:` = code (listé ici), `chore:` = donnée
 ## [Non publié]
 
 ### Corrigé
+- **Site vide alors que Supabase contient les séances du jour.** La requête
+  frontend (`loadFromSupabase`) récupérait toutes les séances sans filtre de
+  date ni limite. La table contient tout l'historique (>5700 lignes) et l'API
+  REST Supabase plafonne à 1000 lignes : les séances récentes étaient tronquées,
+  ne laissant quasi rien dans la fenêtre d'affichage (aujourd'hui → mardi).
+  Ajout d'un filtre serveur `.gte('date', aujourd'hui).order('date')` →
+  ~312 lignes pertinentes, bien sous le plafond. (`index.html`)
 - **Scraping Comoedia rétabli** (produisait 0 film) après deux changements côté
   cinema-comoedia.com :
   - Migration des PDF hebdomadaires vers un CDN (`cms-assets.webediamovies.pro`)
