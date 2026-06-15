@@ -43,6 +43,9 @@ OUTPUT_DEFAULT   = Path(__file__).parent / "programme.json"
 PDF_STATE_PATH   = Path(__file__).parent / "pdf_state.json"
 
 # Page listant les PDFs hebdomadaires du Comoedia
+# Depuis juin 2026, le PDF est hébergé sur un CDN (cms-assets.webediamovies.pro)
+# et lié depuis la page d'accueil. /programme-semaine/ a disparu (404).
+URL_COMOEDIA_HOME = "https://www.cinema-comoedia.com/"
 URL_PDF_LISTING   = "https://www.cinema-comoedia.com/programme-semaine/"
 URL_COMOEDIA_BASE = "https://www.cinema-comoedia.com"
 
@@ -566,28 +569,42 @@ def save_pdf_state(state: dict) -> None:
 
 # ── Découverte des URLs de PDFs ────────────────
 
+def _extract_pdf_links(html: str) -> list[str]:
+    """Extrait tous les liens .pdf d'un HTML (href ou URL CDN brute), dédupliqués."""
+    matches = re.findall(r'href=["\']([^"\']+\.pdf[^"\']*)["\']', html, re.I)
+    # Filet de sécurité : URLs CDN brutes hors attribut href
+    matches += re.findall(r'https?://[^"\'\s]+\.pdf[^"\'\s]*', html, re.I)
+    seen: set[str] = set()
+    urls: list[str] = []
+    for m in matches:
+        url = m if m.startswith("http") else f"{URL_COMOEDIA_BASE}{m}"
+        if url not in seen:
+            seen.add(url)
+            urls.append(url)
+    return urls
+
+
 def fetch_pdf_urls() -> list[str]:
     """
-    Tente de lire les URLs de PDFs depuis la page de listing.
-    Retombe sur la prédiction si la page est inaccessible ou rendue en JS.
+    Découvre les URLs de PDFs du programme Comoedia.
+
+    Depuis juin 2026 le PDF est hébergé sur un CDN (cms-assets.webediamovies.pro)
+    avec un nom de fichier opaque, lié depuis la page d'accueil. On scanne donc :
+      1. la page d'accueil (source actuelle),
+      2. l'ancienne page de listing /programme-semaine/ (404 désormais),
+      3. à défaut, la prédiction d'URL (ancien schéma self-hosted).
     """
-    try:
-        html = fetch(URL_PDF_LISTING)
-        # Capture any .pdf link on the page (comoedia.com direct or CDN)
-        matches = re.findall(r'href=["\']([^"\']+\.pdf[^"\']*)["\']', html, re.I)
-        seen: set[str] = set()
-        urls: list[str] = []
-        for m in matches:
-            url = m if m.startswith("http") else f"{URL_COMOEDIA_BASE}{m}"
-            if url not in seen:
-                seen.add(url)
-                urls.append(url)
-        if urls:
-            log.info(f"PDFs trouvés sur la page de listing : {len(urls)}")
-            return urls
-        log.warning("Page de listing chargée mais aucun lien PDF détecté — fallback prédiction")
-    except Exception as e:
-        log.warning(f"Page de listing inaccessible ({e}) — fallback prédiction")
+    for label, url in (("page d'accueil", URL_COMOEDIA_HOME),
+                       ("page de listing", URL_PDF_LISTING)):
+        try:
+            urls = _extract_pdf_links(fetch(url))
+            if urls:
+                log.info(f"PDFs trouvés sur {label} : {len(urls)}")
+                return urls
+            log.warning(f"{label} chargée mais aucun lien PDF détecté")
+        except Exception as e:
+            log.warning(f"{label} inaccessible ({e})")
+    log.warning("Aucun PDF découvert — fallback prédiction d'URL")
     return predict_pdf_urls()
 
 
@@ -743,35 +760,52 @@ def parse_comoedia_pdf(
     table: "list[list[str | None]]" = []
 
     with ctx as pdf:
-        if len(pdf.pages) < 2:
-            log.error("Le PDF n'a que %d page(s) — 2 attendues", len(pdf.pages))
+        if not pdf.pages:
+            log.error("PDF vide — aucune page")
             return [], None
 
-        # Chercher la date "Du X au Y mois YYYY" dans la page 1
-        p0_text = pdf.pages[0].extract_text() or ""
-        m = re.search(r"[Dd]u\s+(\d+)\s+au\s+\d+\s+(\w+)\s+(\d{4})", p0_text)
-        if m:
-            mois_n = MOIS_FR.get(m.group(2).lower())
-            if mois_n:
-                try:
-                    week_start = date(int(m.group(3)), mois_n, int(m.group(1)))
-                    log.info(f"Début de semaine lu en page 1 : {week_start}")
-                except ValueError:
-                    pass
-
-        # Extraire le tableau de la page 2
-        p1 = pdf.pages[1]
-        raw_table = p1.extract_table()
-        if raw_table:
-            table = raw_table
-            log.info(f"Tableau extrait (page 2) : {len(table)} lignes")
-        else:
-            log.warning(
-                "extract_table() vide en page 2 — tentative via extract_text()"
+        # L'ordre des pages a changé en juin 2026 (CDN) : on ne se fie plus à
+        # un index fixe. On cherche la date sur n'importe quelle page et le
+        # tableau sur la page dont l'entête contient des noms de jours.
+        # Tolère "du 17 au 23 Juin 2026" et "du Mercredi 17 au Mardi 23 Juin 2026".
+        for page in pdf.pages:
+            txt = page.extract_text() or ""
+            m = re.search(
+                r"[Dd]u\s+(?:\w+\s+)?(\d+)\s+au\s+(?:\w+\s+)?\d+\s+(\w+)\s+(\d{4})",
+                txt,
             )
-            table = _pdf_text_to_rows(p1.extract_text() or "")
+            if m:
+                mois_n = MOIS_FR.get(m.group(2).lower())
+                if mois_n:
+                    try:
+                        week_start = date(int(m.group(3)), mois_n, int(m.group(1)))
+                        log.info(f"Début de semaine lu dans le PDF : {week_start}")
+                        break
+                    except ValueError:
+                        pass
+
+        # Choisir la page dont le tableau contient une ligne d'entête de jours
+        for i, page in enumerate(pdf.pages):
+            raw_table = page.extract_table()
+            if raw_table and _is_day_header_row(raw_table[0]):
+                table = raw_table
+                log.info(f"Tableau extrait (page {i + 1}) : {len(table)} lignes")
+                break
+        else:
+            # Repli : texte brut de la page la plus dense
+            best = max(pdf.pages, key=lambda p: len(p.extract_text() or ""))
+            log.warning(
+                "Aucun tableau avec entête de jours — repli via extract_text()"
+            )
+            table = _pdf_text_to_rows(best.extract_text() or "")
 
     return table, week_start
+
+
+def _is_day_header_row(row: "list[str | None]") -> bool:
+    """Vrai si la ligne contient ≥4 noms de jours (entête du planning)."""
+    joined = " ".join(c or "" for c in row).lower()
+    return sum(1 for day in FR_DAY_NAMES if day in joined) >= 4
 
 
 def _pdf_text_to_rows(text: str) -> "list[list[str | None]]":
