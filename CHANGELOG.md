@@ -9,6 +9,13 @@ Convention de commits : `feat:` / `fix:` = code (listé ici), `chore:` = donnée
 
 ## [Non publié]
 
+### Ajouté
+- **Nettoyage hebdomadaire de Supabase** (`scripts/cleanup_old_seances.py` +
+  workflow `cleanup.yml`). Tous les jeudis 03:00 UTC : suppression des séances
+  antérieures à J−10 puis des films orphelins (sans séance restante). Garde la
+  table légère et sous le plafond de 1000 lignes de l'API REST. Déclenchable
+  manuellement avec `days` et `dry_run`. Réutilise les secrets Supabase existants.
+
 ### Corrigé
 - **Site vide alors que Supabase contient les séances du jour.** La requête
   frontend (`loadFromSupabase`) récupérait toutes les séances sans filtre de

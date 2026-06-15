@@ -1,0 +1,41 @@
+name: Nettoyage hebdomadaire des séances
+
+on:
+  schedule:
+    - cron: '0 3 * * 4'  # Jeudi 03:00 UTC
+  workflow_dispatch:
+    inputs:
+      days:
+        description: 'Jours de conservation (séances plus anciennes supprimées)'
+        required: false
+        default: '10'
+      dry_run:
+        description: 'Simulation sans suppression (true/false)'
+        required: false
+        default: 'false'
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+
+      - name: Installer les dépendances
+        run: pip install -r requirements.txt
+
+      - name: Nettoyer les séances anciennes + films orphelins
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: |
+          DRY=""
+          if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then DRY="--dry-run"; fi
+          DAYS="${{ github.event.inputs.days }}"
+          python3 scripts/cleanup_old_seances.py --days "${DAYS:-10}" $DRY
