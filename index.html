@@ -323,7 +323,7 @@ header{
 
 /* ── COMPACT POSTER TOOLTIP ── */
 #compactPosterTooltip{
-  position:fixed;width:110px;height:165px;border-radius:10px;overflow:hidden;
+  position:fixed;width:193px;height:289px;border-radius:10px;overflow:hidden;
   box-shadow:0 20px 60px rgba(0,0,0,.85),0 0 0 1px rgba(255,255,255,.08);
   pointer-events:none;opacity:0;
   transform:scale(.95) rotate(0deg);
@@ -2006,7 +2006,7 @@ boot();
     // Position: align with the poster slot (middle column)
     const slot = row.querySelector('.compact-poster-slot');
     const rect = slot ? slot.getBoundingClientRect() : row.getBoundingClientRect();
-    const TW = 110, TH = 165;
+    const TW = 193, TH = 289;
     let x = (slot ? rect.left + (rect.width - TW) / 2 : rect.left + rect.width * 0.5 - TW / 2) - 100;
     let y = rect.top + rect.height / 2 - TH / 2;
     x = Math.max(8, Math.min(window.innerWidth - TW - 8, x));
