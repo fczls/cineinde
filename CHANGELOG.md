@@ -9,6 +9,11 @@ Convention de commits : `feat:` / `fix:` = code (listé ici), `chore:` = donnée
 
 ## [Non publié]
 
+### Modifié
+- **Vue liste : aperçu poster au survol agrandi ×1.75** (110×165 → 193×289 px).
+  Taille mise à jour en CSS (`#compactPosterTooltip`) et dans le calcul de
+  positionnement JS (`TW`/`TH`) pour garder le centrage. (`index.html`)
+
 ### Ajouté
 - **Nettoyage hebdomadaire de Supabase** (`scripts/cleanup_old_seances.py` +
   workflow `cleanup.yml`). Tous les jeudis 03:00 UTC : suppression des séances
