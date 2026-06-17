@@ -10,6 +10,16 @@ Convention de commits : `feat:` / `fix:` = code (listé ici), `chore:` = donnée
 ## [Non publié]
 
 ### Modifié
+- **Refonte de la fiche film (desktop + mobile).** (`index.html`)
+  - Panneau ancré au bord droit, largeur `clamp(560px, 46vw, 820px)` (au lieu
+    d'une colonne ~432px centrée avec décalage à droite).
+  - Fermeture au clic sur le fond assombri (backdrop) + touche `Échap` ; sur
+    desktop, bouton fermer flottant centré verticalement, 40px à gauche du panneau.
+  - **Hero = backdrop paysage TMDB** (`backdrop_path`, w1280) net, au lieu de
+    l'affiche floutée ; repli sur l'affiche floutée si absent. Bouton
+    bande-annonce centré dans le hero ; titre + note superposés en bas du hero
+    (desktop) ou sous le hero (mobile, croix en coin).
+  - Liste des séances en chips plus fines.
 - **Vue liste : aperçu poster au survol agrandi ×1.75** (110×165 → 193×289 px).
   Taille mise à jour en CSS (`#compactPosterTooltip`) et dans le calcul de
   positionnement JS (`TW`/`TH`) pour garder le centrage. (`index.html`)
