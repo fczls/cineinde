@@ -25,6 +25,17 @@ Convention de commits : `feat:` / `fix:` = code (listé ici), `chore:` = donnée
   positionnement JS (`TW`/`TH`) pour garder le centrage. (`index.html`)
 
 ### Ajouté
+- **Correction de la casse des titres déjà en base** (`scripts/fix_titles_case.py`).
+  Script one-shot qui réapplique `_titlecase_fr` aux titres stockés dans Supabase
+  (corrige les all-caps Comoedia historiques). Les titres déjà bien casés ne sont
+  pas touchés. Réutilise le `.env` et les secrets Supabase existants. (`b29081c`)
+- **Garde-fou anti-échec silencieux Comoedia** (`scraper.py`). Si 0 séance
+  Comoedia n'est remontée, le job publie quand même Lumière puis se termine en
+  échec (`sys.exit(4)`) pour que la GitHub Action passe au rouge au lieu de
+  publier sans Comoedia sans alerte. (`3cd4698`)
+- **`--pdf-url` force désormais le retraitement** d'un PDF même s'il figure déjà
+  dans `processed_urls` (indispensable au debug et à la reprise manuelle).
+  (`fb88755`)
 - **Nettoyage hebdomadaire de Supabase** (`scripts/cleanup_old_seances.py` +
   workflow `cleanup.yml`). Tous les jeudis 03:00 UTC : suppression des séances
   antérieures à J−10 puis des films orphelins (sans séance restante). Garde la
@@ -32,6 +43,24 @@ Convention de commits : `feat:` / `fix:` = code (listé ici), `chore:` = donnée
   manuellement avec `days` et `dry_run`. Réutilise les secrets Supabase existants.
 
 ### Corrigé
+- **Comoedia de nouveau à 0 séance affichée.** Le cinéma expose deux PDF CDN
+  (nom en hash) répartis sur deux pages, et selon les semaines l'un OU l'autre
+  porte la grille courante (l'autre est parfois en retard d'une semaine) :
+  la page d'accueil portait la semaine en cours, tandis que
+  `/horaires-semaine-complete/` servait encore la semaine précédente (déjà en
+  base, donc filtrée par l'affichage « séances à venir »). `fetch_pdf_urls()`
+  scanne désormais les **deux** pages et **agrège** tous les PDF candidats au
+  lieu de s'arrêter au premier ; la déduplication par semaine (Supabase) garde
+  la semaine nouvelle et ignore celle déjà en base. Les deux URL CDN restées
+  coincées dans `processed_urls` (donc systématiquement sautées) ont été
+  purgées. (`3cd4698`, `fb88755`)
+- **Titres Comoedia en CAPITALES.** Les titres extraits du PDF étaient affichés
+  en tout-capitales. Ajout de `_titlecase_fr` dans `clean_pdf_table` : casse
+  « titre » adaptée au français (mots courts en minuscules, apostrophes et
+  traits d'union gérés — `L'Amour`, `Jean-Pierre`), appliquée uniquement quand
+  le titre est majoritairement en capitales (un titre déjà bien casé, ex. TMDB,
+  n'est pas modifié). Historique corrigé via `scripts/fix_titles_case.py`.
+  (`79f37bb`)
 - **Site vide alors que Supabase contient les séances du jour.** La requête
   frontend (`loadFromSupabase`) récupérait toutes les séances sans filtre de
   date ni limite. La table contient tout l'historique (>5700 lignes) et l'API
