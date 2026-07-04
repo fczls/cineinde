@@ -44,7 +44,13 @@ PDF_STATE_PATH   = Path(__file__).parent / "pdf_state.json"
 
 # Page listant les PDFs hebdomadaires du Comoedia
 # Depuis juin 2026, le PDF est hébergé sur un CDN (cms-assets.webediamovies.pro)
-# et lié depuis la page d'accueil. /programme-semaine/ a disparu (404).
+# avec un nom de fichier opaque (hash), lié depuis plusieurs pages.
+# IMPORTANT : la GRILLE HEBDO (tableau des séances par jour, celle que le
+# parser attend) est liée depuis /horaires-semaine-complete/ sous le libellé
+# « télécharger le programme de la semaine ». La page d'accueil, elle, lie un
+# PDF « programme » DIFFÉRENT (hash distinct) qui ne contient pas la grille —
+# d'où 0 séance si on ne scanne QUE l'accueil. On scanne donc les deux.
+URL_COMOEDIA_HORAIRES = "https://www.cinema-comoedia.com/horaires-semaine-complete/"
 URL_COMOEDIA_HOME = "https://www.cinema-comoedia.com/"
 URL_PDF_LISTING   = "https://www.cinema-comoedia.com/programme-semaine/"
 URL_COMOEDIA_BASE = "https://www.cinema-comoedia.com"
@@ -589,21 +595,41 @@ def fetch_pdf_urls() -> list[str]:
     Découvre les URLs de PDFs du programme Comoedia.
 
     Depuis juin 2026 le PDF est hébergé sur un CDN (cms-assets.webediamovies.pro)
-    avec un nom de fichier opaque, lié depuis la page d'accueil. On scanne donc :
-      1. la page d'accueil (source actuelle),
-      2. l'ancienne page de listing /programme-semaine/ (404 désormais),
-      3. à défaut, la prédiction d'URL (ancien schéma self-hosted).
+    avec un nom de fichier opaque (hash). La GRILLE HEBDO attendue par le parser
+    est liée depuis /horaires-semaine-complete/, PAS depuis la page d'accueil
+    (qui lie un autre PDF sans grille). On scanne donc plusieurs pages et on
+    AGRÈGE tous les PDF trouvés (au lieu de s'arrêter à la première page), pour
+    que le bon fichier figure toujours dans les candidats. Le parser ignore de
+    lui-même un PDF sans entête de jours (0 film → non retenu).
+
+    Ordre de priorité :
+      1. /horaires-semaine-complete/ (grille hebdo — source correcte),
+      2. la page d'accueil (PDF « programme » générique — repli),
+      3. l'ancienne page de listing /programme-semaine/ (404 désormais),
+      4. à défaut, la prédiction d'URL (ancien schéma self-hosted).
     """
-    for label, url in (("page d'accueil", URL_COMOEDIA_HOME),
+    all_urls: list[str] = []
+    seen: set[str] = set()
+    for label, url in (("page horaires semaine", URL_COMOEDIA_HORAIRES),
+                       ("page d'accueil", URL_COMOEDIA_HOME),
                        ("page de listing", URL_PDF_LISTING)):
         try:
             urls = _extract_pdf_links(fetch(url))
-            if urls:
-                log.info(f"PDFs trouvés sur {label} : {len(urls)}")
-                return urls
-            log.warning(f"{label} chargée mais aucun lien PDF détecté")
+            new = [u for u in urls if u not in seen]
+            if new:
+                log.info(f"PDFs trouvés sur {label} : {len(new)}")
+                for u in new:
+                    seen.add(u)
+                    all_urls.append(u)
+            else:
+                log.warning(f"{label} chargée mais aucun nouveau lien PDF détecté")
         except Exception as e:
             log.warning(f"{label} inaccessible ({e})")
+
+    if all_urls:
+        log.info(f"Total PDF candidats découverts : {len(all_urls)}")
+        return all_urls
+
     log.warning("Aucun PDF découvert — fallback prédiction d'URL")
     return predict_pdf_urls()
 
@@ -2000,10 +2026,13 @@ def main():
             pdf_url_override=args.pdf_url,
             dry_run=args.dry_run,
         )
-    if not comoedia_films:
-        log.warning(
-            "Aucun film Comoedia extrait — le PDF est la seule source valide. "
-            "Utilisez --pdf-url ou --pdf-file avec l'URL CDN du programme."
+    comoedia_empty = not comoedia_films
+    if comoedia_empty:
+        log.error(
+            "⚠ Aucun film Comoedia extrait — le PDF est la seule source valide. "
+            "Vérifier /horaires-semaine-complete/ (lien « programme de la semaine ») "
+            "ou passer --pdf-url avec l'URL CDN du programme. "
+            "Le job se terminera en échec pour signaler le problème (voir garde-fou en fin de run)."
         )
 
     # 2. Scraping Cinémas Lumière
@@ -2098,6 +2127,16 @@ def main():
             encoding="utf-8",
         )
         log.info(f"✓ Écrit → {out_path} ({out_path.stat().st_size:,} octets)")
+
+    # Garde-fou : si Comoedia n'a rien remonté, on a tout de même publié Lumière
+    # ci-dessus, mais on termine en échec pour que la GitHub Action passe au rouge
+    # au lieu d'échouer silencieusement (Comoedia absent sans alerte).
+    if comoedia_empty and not args.no_comoedia_pdf and not args.dry_run:
+        log.error(
+            "Échec volontaire : 0 séance Comoedia remontée. "
+            "Lumière a été publié, mais le pipeline Comoedia est cassé — à corriger."
+        )
+        sys.exit(4)
 
     log.info("Terminé.")
 
