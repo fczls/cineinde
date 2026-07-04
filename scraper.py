@@ -965,6 +965,56 @@ def _infer_col_dates(
     return col_dates
 
 
+# Mots courts gardés en minuscules dans un titre (sauf en 1re position)
+_TITLE_MINOR_WORDS = {
+    "le", "la", "les", "un", "une", "des", "de", "du", "d", "à", "au", "aux",
+    "et", "ou", "où", "en", "dans", "sur", "sous", "par", "pour", "avec", "sans",
+    "the", "of", "and", "a", "an", "to", "in", "on", "at", "for", "or",
+}
+
+
+def _titlecase_fr(title: str) -> str:
+    """Normalise un titre ALL CAPS vers une casse « titre » lisible (FR).
+
+    N'agit QUE si le titre est essentiellement en capitales, afin de ne pas
+    abîmer un titre déjà correctement casé. Gère apostrophes (L'AMOUR → L'Amour)
+    et traits d'union (JEAN-PIERRE → Jean-Pierre), et garde les mots courts en
+    minuscules sauf en tête.
+    """
+    letters = [c for c in title if c.isalpha()]
+    if not letters:
+        return title
+    if sum(1 for c in letters if c.isupper()) / len(letters) < 0.8:
+        return title  # déjà casé correctement — on ne touche pas
+
+    def cap_token(tok: str, force: bool) -> str:
+        if not tok:
+            return tok
+        low = tok.lower()
+        if not force and low in _TITLE_MINOR_WORDS:
+            return low
+        return low[:1].upper() + low[1:]
+
+    def cap_word(word: str, is_first: bool) -> str:
+        parts = re.split(r"(['’])", word)  # isole les apostrophes
+        out: list[str] = []
+        first_done = False
+        for p in parts:
+            if p in ("'", "’"):
+                out.append(p)
+                continue
+            segs = p.split("-")  # capitalise chaque segment d'un mot composé
+            new_segs = []
+            for seg in segs:
+                new_segs.append(cap_token(seg, is_first and not first_done))
+                if seg.strip():
+                    first_done = True
+            out.append("-".join(new_segs))
+        return "".join(out)
+
+    return " ".join(cap_word(w, i == 0) for i, w in enumerate(title.split()))
+
+
 def clean_pdf_table(
     rows: "list[list[str | None]]",
     week_start: "date | None",
@@ -1038,6 +1088,7 @@ def clean_pdf_table(
         # Normaliser le titre : retirer les suffixes de catégorie
         titre = re.sub(r"\s+JP\s*$", "", titre, flags=re.I).strip()
         titre = re.sub(r"\s+", " ", titre).strip()
+        titre = _titlecase_fr(titre)  # PDF en capitales → casse « titre » lisible
         if not titre or len(titre) < 2:
             continue
 
