@@ -4,25 +4,17 @@ Toutes les modifications notables du **code** de CinéInde sont consignées ici.
 Les commits automatiques de données (`chore: mise à jour programme …`) ne sont
 pas listés — ils sont quotidiens et n'affectent pas le comportement du projet.
 
-Format inspiré de [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/).
+**Organisation du fichier : chronologie → tag → détails.**
+- **Chronologie** : une section par date (`## AAAA-MM-JJ`), la plus récente en haut.
+- **Tag** : sous chaque date, regrouper les changements par type — `Ajouté`,
+  `Modifié`, `Corrigé`, `Supprimé` (sections omises si vides).
+- **Détails** : sous chaque tag, une puce par changement, avec le fichier ou le
+  commit concerné entre parenthèses.
+
 Convention de commits : `feat:` / `fix:` = code (listé ici), `chore:` = données (ignoré).
+Format inspiré de [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/).
 
-## [Non publié]
-
-### Modifié
-- **Refonte de la fiche film (desktop + mobile).** (`index.html`)
-  - Panneau ancré au bord droit, largeur `clamp(560px, 46vw, 820px)` (au lieu
-    d'une colonne ~432px centrée avec décalage à droite).
-  - Fermeture au clic sur le fond assombri (backdrop) + touche `Échap` ; sur
-    desktop, bouton fermer flottant centré verticalement, 40px à gauche du panneau.
-  - **Hero = backdrop paysage TMDB** (`backdrop_path`, w1280) net, au lieu de
-    l'affiche floutée ; repli sur l'affiche floutée si absent. Bouton
-    bande-annonce centré dans le hero ; titre + note superposés en bas du hero
-    (desktop) ou sous le hero (mobile, croix en coin).
-  - Liste des séances en chips plus fines.
-- **Vue liste : aperçu poster au survol agrandi ×1.75** (110×165 → 193×289 px).
-  Taille mise à jour en CSS (`#compactPosterTooltip`) et dans le calcul de
-  positionnement JS (`TW`/`TH`) pour garder le centrage. (`index.html`)
+## 2026-07-04
 
 ### Ajouté
 - **Correction de la casse des titres déjà en base** (`scripts/fix_titles_case.py`).
@@ -36,11 +28,6 @@ Convention de commits : `feat:` / `fix:` = code (listé ici), `chore:` = donnée
 - **`--pdf-url` force désormais le retraitement** d'un PDF même s'il figure déjà
   dans `processed_urls` (indispensable au debug et à la reprise manuelle).
   (`fb88755`)
-- **Nettoyage hebdomadaire de Supabase** (`scripts/cleanup_old_seances.py` +
-  workflow `cleanup.yml`). Tous les jeudis 03:00 UTC : suppression des séances
-  antérieures à J−10 puis des films orphelins (sans séance restante). Garde la
-  table légère et sous le plafond de 1000 lignes de l'API REST. Déclenchable
-  manuellement avec `days` et `dry_run`. Réutilise les secrets Supabase existants.
 
 ### Corrigé
 - **Comoedia de nouveau à 0 séance affichée.** Le cinéma expose deux PDF CDN
@@ -61,6 +48,32 @@ Convention de commits : `feat:` / `fix:` = code (listé ici), `chore:` = donnée
   le titre est majoritairement en capitales (un titre déjà bien casé, ex. TMDB,
   n'est pas modifié). Historique corrigé via `scripts/fix_titles_case.py`.
   (`79f37bb`)
+
+## 2026-06-30
+
+### Ajouté
+- **Nettoyage hebdomadaire de Supabase** (`scripts/cleanup_old_seances.py` +
+  workflow `cleanup.yml`). Tous les jeudis 03:00 UTC : suppression des séances
+  antérieures à J−10 puis des films orphelins (sans séance restante). Garde la
+  table légère et sous le plafond de 1000 lignes de l'API REST. Déclenchable
+  manuellement avec `days` et `dry_run`. Réutilise les secrets Supabase existants.
+
+### Modifié
+- **Refonte de la fiche film (desktop + mobile).** (`index.html`)
+  - Panneau ancré au bord droit, largeur `clamp(560px, 46vw, 820px)` (au lieu
+    d'une colonne ~432px centrée avec décalage à droite).
+  - Fermeture au clic sur le fond assombri (backdrop) + touche `Échap` ; sur
+    desktop, bouton fermer flottant centré verticalement, 40px à gauche du panneau.
+  - **Hero = backdrop paysage TMDB** (`backdrop_path`, w1280) net, au lieu de
+    l'affiche floutée ; repli sur l'affiche floutée si absent. Bouton
+    bande-annonce centré dans le hero ; titre + note superposés en bas du hero
+    (desktop) ou sous le hero (mobile, croix en coin).
+  - Liste des séances en chips plus fines.
+- **Vue liste : aperçu poster au survol agrandi ×1.75** (110×165 → 193×289 px).
+  Taille mise à jour en CSS (`#compactPosterTooltip`) et dans le calcul de
+  positionnement JS (`TW`/`TH`) pour garder le centrage. (`index.html`)
+
+### Corrigé
 - **Site vide alors que Supabase contient les séances du jour.** La requête
   frontend (`loadFromSupabase`) récupérait toutes les séances sans filtre de
   date ni limite. La table contient tout l'historique (>5700 lignes) et l'API
