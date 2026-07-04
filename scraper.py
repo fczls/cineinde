@@ -595,16 +595,20 @@ def fetch_pdf_urls() -> list[str]:
     Découvre les URLs de PDFs du programme Comoedia.
 
     Depuis juin 2026 le PDF est hébergé sur un CDN (cms-assets.webediamovies.pro)
-    avec un nom de fichier opaque (hash). La GRILLE HEBDO attendue par le parser
-    est liée depuis /horaires-semaine-complete/, PAS depuis la page d'accueil
-    (qui lie un autre PDF sans grille). On scanne donc plusieurs pages et on
-    AGRÈGE tous les PDF trouvés (au lieu de s'arrêter à la première page), pour
-    que le bon fichier figure toujours dans les candidats. Le parser ignore de
-    lui-même un PDF sans entête de jours (0 film → non retenu).
+    avec un nom de fichier opaque (hash). DEUX PDF coexistent, liés depuis deux
+    pages différentes, et selon les semaines l'un OU l'autre porte la grille de
+    la semaine courante (l'autre peut être en retard d'une semaine) :
+      - /horaires-semaine-complete/  → « programme de la semaine »
+      - page d'accueil               → « Télécharger le programme »
+    On ne peut donc pas se fier à une seule page. On scanne les DEUX et on AGRÈGE
+    tous les PDF trouvés (au lieu de s'arrêter à la première page). Chaque PDF est
+    ensuite dédupliqué par semaine via Supabase (check_week_in_supabase) : la
+    semaine déjà en base est ignorée, la semaine nouvelle est insérée. Un PDF sans
+    grille (entête de jours) donne 0 film et n'est pas retenu.
 
-    Ordre de priorité :
-      1. /horaires-semaine-complete/ (grille hebdo — source correcte),
-      2. la page d'accueil (PDF « programme » générique — repli),
+    Ordre de scan :
+      1. /horaires-semaine-complete/,
+      2. la page d'accueil,
       3. l'ancienne page de listing /programme-semaine/ (404 désormais),
       4. à défaut, la prédiction d'URL (ancien schéma self-hosted).
     """
@@ -1241,12 +1245,15 @@ def scrape_comoedia_pdf(
     state = load_pdf_state()
     processed: list[str] = state.setdefault("processed_urls", [])
 
-    urls_to_check = [pdf_url_override] if pdf_url_override else fetch_pdf_urls()
+    # Une URL passée explicitement en --pdf-url est un ordre manuel : on FORCE
+    # son (re)traitement, sans la court-circuiter via la garde « déjà traité ».
+    forced = pdf_url_override is not None
+    urls_to_check = [pdf_url_override] if forced else fetch_pdf_urls()
     all_films: list[dict] = []
 
     for url in urls_to_check:
-        # ── Garde 1 : déjà traité ? ────────────
-        if url in processed:
+        # ── Garde 1 : déjà traité ? (ignorée si URL forcée) ──
+        if url in processed and not forced:
             log.info(f"PDF déjà traité — ignoré : {url}")
             continue
 
