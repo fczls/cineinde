@@ -16,6 +16,17 @@ Format inspiré de [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/).
 
 ## 2026-07-08
 
+### Corrigé
+- **Écriture conditionnelle neutralisée par un champ volatil** (`scraper.py`,
+  `main` + nouveau `_films_sans_volatiles`). Le champ `resa_url` des séances
+  Lumière (lien cotecine) embarque un token horaire que le site régénère à
+  chaque fetch : la comparaison `previous == all_films` voyait donc toujours un
+  changement et réécrivait/committait `programme.json` à chaque run — le
+  bénéfice « runs silencieux » était nul (détecté en run réel : deux runs
+  espacés de ~3 h ne différaient QUE par `resa_url`). La détection de changement
+  ignore désormais les champs volatils (`VOLATILE_SEANCE_FIELDS`) ; le `resa_url`
+  frais reste écrit lors d'une réécriture déclenchée par un vrai changement.
+
 ### Modifié
 - **Cadence du scraper : passage à un run un jour sur deux**
   (`.github/workflows/scraper.yml`). Remplace les deux crons serrés (mardi 20h +

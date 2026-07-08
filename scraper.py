@@ -2072,6 +2072,29 @@ def filter_current_week(films: list[dict]) -> list[dict]:
 # POINT D'ENTRÉE
 # ─────────────────────────────────────────────
 
+# Champs régénérés par la source à chaque fetch (donc différents à chaque run
+# sans que le programme ait changé) : à ignorer pour décider s'il faut réécrire
+# le fichier fallback programme.json. `resa_url` (lien de réservation cotecine
+# Lumière) embarque un token horaire qui tourne à chaque scrape.
+VOLATILE_SEANCE_FIELDS = {"resa_url"}
+
+
+def _films_sans_volatiles(films: list[dict]) -> list[dict]:
+    """Copie des films dont les séances sont dépouillées des champs volatils,
+    pour comparer deux versions du programme sur le seul contenu signifiant."""
+    stable: list[dict] = []
+    for f in films:
+        g = dict(f)
+        seances = g.get("seances")
+        if isinstance(seances, list):
+            g["seances"] = [
+                {k: v for k, v in s.items() if k not in VOLATILE_SEANCE_FIELDS}
+                for s in seances
+            ]
+        stable.append(g)
+    return stable
+
+
 def main():
     parser = argparse.ArgumentParser(description="Scraper programme multi-cinémas Lyon")
     parser.add_argument("--debug",      action="store_true", help="Mode debug verbose")
@@ -2215,9 +2238,14 @@ def main():
                 previous = json.loads(out_path.read_text(encoding="utf-8"))
             except Exception:
                 previous = None
+        # Comparaison sur le contenu SIGNIFIANT uniquement : on ignore les champs
+        # volatils (resa_url = token horaire régénéré à chaque fetch), sinon la
+        # détection conclurait « changé » à chaque run et le fichier serait
+        # réécrit + committé inutilement. Le resa_url frais est tout de même écrit
+        # quand une réécriture a lieu (vrai changement de programme).
         unchanged = (
             previous is not None
-            and previous.get("films") == all_films
+            and _films_sans_volatiles(previous.get("films") or []) == _films_sans_volatiles(all_films)
             and previous.get("sources") == output["sources"]
         )
         if unchanged:
