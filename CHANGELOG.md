@@ -14,6 +14,23 @@ pas listés — ils sont quotidiens et n'affectent pas le comportement du projet
 Convention de commits : `feat:` / `fix:` = code (listé ici), `chore:` = données (ignoré).
 Format inspiré de [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/).
 
+## 2026-07-08
+
+### Corrigé
+- **Faux échec `exit 4` du scraper chaque semaine (garde-fou Comoedia).** Le
+  garde-fou anti-échec silencieux concluait « pipeline Comoedia cassé » dès que
+  0 film était scrapé *pendant ce run*. Or le PDF hebdo n'est publié qu'une fois
+  par semaine mais le cron tourne 2× (mardi 20h + mercredi 1h UTC) : le second
+  run dédupliquait légitimement le PDF déjà traité (« PDF déjà traité — ignoré »)
+  et renvoyait 0 film — déclenchant `sys.exit(4)` à tort. Le garde-fou vérifie
+  désormais le **vrai** critère de santé : la semaine courante a-t-elle des
+  séances Comoedia *en base* (peu importe quel run les a insérées) ? Il ne
+  échoue que si la semaine est réellement absente (site changé, PDF
+  introuvable/illisible). La semaine de référence est celle **en cours** (sans
+  saut au mercredi suivant le mardi), pour ne pas échouer le run anticipé du
+  mardi quand Comoedia n'a pas encore publié la semaine à venir. (`scraper.py`,
+  fonction `main`)
+
 ## 2026-07-04
 
 ### Ajouté
