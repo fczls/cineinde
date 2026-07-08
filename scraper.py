@@ -2250,7 +2250,9 @@ def main():
         _today = date.today()
         wk_start = _today - timedelta(days=(_today.isoweekday() - 3) % 7)
         wk_end = wk_start + timedelta(days=6)
-        comoedia_live = bool(comoedia_films) or check_week_in_supabase(wk_start, wk_end)
+        # NB : on lit via count_week_seances (silencieux) et non check_week_in_supabase,
+        # dont le log « … — ignoré » n'a de sens que dans le chemin de déduplication.
+        comoedia_live = bool(comoedia_films) or (count_week_seances(wk_start, wk_end, slug="comoedia") or 0) > 0
         lumiere_live = (count_week_seances(wk_start, wk_end, exclude_slug="comoedia") or 0) > 0
 
         if comoedia_live:
