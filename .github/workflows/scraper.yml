@@ -1,9 +1,20 @@
-name: Scraper hebdomadaire Multi-Cinémas Lyon
+name: Scraper programme Multi-Cinémas Lyon
 
 on:
   schedule:
-    - cron: '0 1 * * 3'  # Mercredi 01:00 UTC (nouvelle semaine Lumière)
-    - cron: '0 20 * * 2' # Mardi 20:00 UTC (Lumière publie souvent dès le mardi)
+    # Exécution un jour sur deux à 20:00 UTC. Motif :
+    #  - 20:00 UTC couvre la publication du nouveau programme (souvent le mardi
+    #    soir) — pas de régression de fraîcheur vs l'ancien cron « mardi 20:00 ».
+    #  - Tourner un jour sur deux (au lieu de mardi+mercredi seulement) réduit
+    #    fortement l'angle mort de ~6,5 jours : une publication tardive ou une
+    #    correction en milieu de semaine est reprise sous ≤48 h.
+    #  - Le scraper est idempotent (dédup PDF + Supabase) et n'écrit/committe que
+    #    si les données changent, donc les runs « redondants » sont quasi gratuits
+    #    et silencieux. Le garde-fou Comoedia asymétrique ne passe au rouge que
+    #    si Lumière a publié la semaine mais pas Comoedia (vraie panne).
+    # NB : '*/2' porte sur le jour du MOIS → aux bascules de mois l'écart peut
+    # tomber à 1 ou 3 jours. Sans importance ici (couverture ≈ tous les 2 jours).
+    - cron: '0 20 */2 * *'  # un jour sur deux, 20:00 UTC
   workflow_dispatch:
     inputs:
       pdf_url:
