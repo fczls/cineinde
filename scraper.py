@@ -2084,10 +2084,39 @@ def main():
             pdf_url_override=args.pdf_url,
             dry_run=args.dry_run,
         )
-    comoedia_empty = not comoedia_films
-    if comoedia_empty:
+    # Santé du pipeline Comoedia.
+    # Le PDF hebdo n'est publié qu'UNE fois par semaine, mais le scraper tourne
+    # PLUSIEURS fois (cron mardi 20h + mercredi 1h UTC, plus déclenchements
+    # manuels). Une fois le PDF traité, les runs suivants le dédupliquent
+    # légitimement (« PDF déjà traité — ignoré ») et renvoient 0 film : c'est
+    # NORMAL, pas une panne. On ne doit donc PAS conclure « pipeline cassé » sur
+    # la seule base de « 0 film ce run ». Le vrai critère de santé est : la
+    # semaine courante a-t-elle des séances Comoedia en base (peu importe quel
+    # run les a insérées) ? Sinon on générait un faux échec (exit 4) à chaque
+    # deuxième run de la semaine.
+    comoedia_healthy = bool(comoedia_films)
+    if not comoedia_healthy and not args.no_comoedia_pdf and not args.dry_run:
+        # Semaine de référence du garde-fou = mercredi de la semaine EN COURS
+        # (celle qui contient aujourd'hui), SANS le saut au mercredi suivant que
+        # fait get_last_wednesday() le mardi. Motif : le cron du mardi 20h est une
+        # tentative anticipée ; si Comoedia n'a pas encore publié le PDF de la
+        # semaine à venir, exiger cette semaine ferait échouer le run à tort. On
+        # vérifie donc la semaine déjà due (le run du mercredi 1h reste le vrai
+        # point de contrôle et détectera une nouvelle semaine réellement absente).
+        _today = date.today()
+        _wk_start = _today - timedelta(days=(_today.isoweekday() - 3) % 7)
+        _wk_end = _wk_start + timedelta(days=6)
+        comoedia_healthy = check_week_in_supabase(_wk_start, _wk_end)
+        if comoedia_healthy:
+            log.info(
+                "Aucun nouveau film Comoedia ce run, mais la semaine courante "
+                f"({_wk_start} → {_wk_end}) est déjà en base — pipeline sain "
+                "(PDF déjà traité par un run précédent)."
+            )
+    if not comoedia_healthy and not args.no_comoedia_pdf:
         log.error(
-            "⚠ Aucun film Comoedia extrait — le PDF est la seule source valide. "
+            "⚠ Aucun film Comoedia pour la semaine courante (ni ce run, ni en base) "
+            "— le PDF est la seule source valide. "
             "Vérifier /horaires-semaine-complete/ (lien « programme de la semaine ») "
             "ou passer --pdf-url avec l'URL CDN du programme. "
             "Le job se terminera en échec pour signaler le problème (voir garde-fou en fin de run)."
@@ -2186,13 +2215,17 @@ def main():
         )
         log.info(f"✓ Écrit → {out_path} ({out_path.stat().st_size:,} octets)")
 
-    # Garde-fou : si Comoedia n'a rien remonté, on a tout de même publié Lumière
-    # ci-dessus, mais on termine en échec pour que la GitHub Action passe au rouge
-    # au lieu d'échouer silencieusement (Comoedia absent sans alerte).
-    if comoedia_empty and not args.no_comoedia_pdf and not args.dry_run:
+    # Garde-fou : si la semaine courante n'a AUCUNE séance Comoedia (ni scrapée
+    # ce run, ni déjà en base), le pipeline est réellement cassé. On a tout de
+    # même publié Lumière ci-dessus, mais on termine en échec pour que la GitHub
+    # Action passe au rouge au lieu d'échouer silencieusement. À l'inverse, un
+    # run qui déduplique un PDF déjà traité (0 film mais semaine présente en
+    # base) est considéré SAIN et ne déclenche pas le garde-fou.
+    if not comoedia_healthy and not args.no_comoedia_pdf and not args.dry_run:
         log.error(
-            "Échec volontaire : 0 séance Comoedia remontée. "
-            "Lumière a été publié, mais le pipeline Comoedia est cassé — à corriger."
+            "Échec volontaire : pipeline Comoedia cassé — aucune séance pour la "
+            "semaine courante, ni scrapée ce run ni présente en base. "
+            "Lumière a été publié, mais Comoedia doit être corrigé."
         )
         sys.exit(4)
 
