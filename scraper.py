@@ -712,39 +712,62 @@ def parse_week_from_slug(url: str) -> tuple[date, date] | None:
 
 # ── Vérification Supabase ──────────────────────
 
+def count_week_seances(
+    week_start: date,
+    week_end: date,
+    *,
+    slug: str | None = None,
+    exclude_slug: str | None = None,
+) -> int | None:
+    """
+    Compte les séances d'une semaine dans Supabase.
+
+    - slug="comoedia"        → uniquement ce cinéma
+    - exclude_slug="comoedia" → tous SAUF ce cinéma (= les 3 salles Lumière)
+    - ni l'un ni l'autre      → toutes salles confondues
+
+    Retourne None si les credentials sont absents ou en cas d'erreur (état
+    « inconnu » distinct de 0), pour que l'appelant ne conclue pas à tort.
+    """
+    sb_url = os.getenv("SUPABASE_URL")
+    sb_key = os.getenv("SUPABASE_SERVICE_ROLE_KEY")
+    if not sb_url or not sb_key:
+        return None
+    try:
+        from supabase import create_client
+        client = create_client(sb_url, sb_key)
+        q = (
+            client.table("seances")
+            .select("id", count="exact")
+            .gte("date", week_start.isoformat())
+            .lte("date", week_end.isoformat())
+        )
+        target = slug or exclude_slug
+        if target:
+            r = client.table("cinemas").select("id").eq("slug", target).execute()
+            if not r.data:
+                # Cinéma introuvable : filtre sur ce cinéma → 0 ; exclusion → inconnu.
+                return 0 if slug else None
+            cinema_id = r.data[0]["id"]
+            q = q.eq("cinema_id", cinema_id) if slug else q.neq("cinema_id", cinema_id)
+        return q.execute().count or 0
+    except Exception as e:
+        log.warning(f"Vérification Supabase échouée : {e} — on continue quand même")
+        return None
+
+
 def check_week_in_supabase(week_start: date, week_end: date) -> bool:
     """
     Vérifie si la semaine contient déjà des séances Comoedia dans Supabase.
     Retourne False si les credentials sont absents ou en cas d'erreur.
     """
-    sb_url = os.getenv("SUPABASE_URL")
-    sb_key = os.getenv("SUPABASE_SERVICE_ROLE_KEY")
-    if not sb_url or not sb_key:
-        return False
-    try:
-        from supabase import create_client
-        client = create_client(sb_url, sb_key)
-        r = client.table("cinemas").select("id").eq("slug", "comoedia").execute()
-        if not r.data:
-            return False
-        cinema_id = r.data[0]["id"]
-        r2 = (
-            client.table("seances")
-            .select("id", count="exact")
-            .eq("cinema_id", cinema_id)
-            .gte("date", week_start.isoformat())
-            .lte("date", week_end.isoformat())
-            .execute()
+    count = count_week_seances(week_start, week_end, slug="comoedia") or 0
+    if count > 0:
+        log.info(
+            f"Semaine {week_start} déjà dans Supabase "
+            f"({count} séances Comoedia) — ignoré"
         )
-        count = r2.count or 0
-        if count > 0:
-            log.info(
-                f"Semaine {week_start} déjà dans Supabase "
-                f"({count} séances Comoedia) — ignoré"
-            )
-            return True
-    except Exception as e:
-        log.warning(f"Vérification Supabase échouée : {e} — on continue quand même")
+        return True
     return False
 
 
@@ -2084,42 +2107,15 @@ def main():
             pdf_url_override=args.pdf_url,
             dry_run=args.dry_run,
         )
-    # Santé du pipeline Comoedia.
-    # Le PDF hebdo n'est publié qu'UNE fois par semaine, mais le scraper tourne
-    # PLUSIEURS fois (cron mardi 20h + mercredi 1h UTC, plus déclenchements
-    # manuels). Une fois le PDF traité, les runs suivants le dédupliquent
-    # légitimement (« PDF déjà traité — ignoré ») et renvoient 0 film : c'est
-    # NORMAL, pas une panne. On ne doit donc PAS conclure « pipeline cassé » sur
-    # la seule base de « 0 film ce run ». Le vrai critère de santé est : la
-    # semaine courante a-t-elle des séances Comoedia en base (peu importe quel
-    # run les a insérées) ? Sinon on générait un faux échec (exit 4) à chaque
-    # deuxième run de la semaine.
-    comoedia_healthy = bool(comoedia_films)
-    if not comoedia_healthy and not args.no_comoedia_pdf and not args.dry_run:
-        # Semaine de référence du garde-fou = mercredi de la semaine EN COURS
-        # (celle qui contient aujourd'hui), SANS le saut au mercredi suivant que
-        # fait get_last_wednesday() le mardi. Motif : le cron du mardi 20h est une
-        # tentative anticipée ; si Comoedia n'a pas encore publié le PDF de la
-        # semaine à venir, exiger cette semaine ferait échouer le run à tort. On
-        # vérifie donc la semaine déjà due (le run du mercredi 1h reste le vrai
-        # point de contrôle et détectera une nouvelle semaine réellement absente).
-        _today = date.today()
-        _wk_start = _today - timedelta(days=(_today.isoweekday() - 3) % 7)
-        _wk_end = _wk_start + timedelta(days=6)
-        comoedia_healthy = check_week_in_supabase(_wk_start, _wk_end)
-        if comoedia_healthy:
-            log.info(
-                "Aucun nouveau film Comoedia ce run, mais la semaine courante "
-                f"({_wk_start} → {_wk_end}) est déjà en base — pipeline sain "
-                "(PDF déjà traité par un run précédent)."
-            )
-    if not comoedia_healthy and not args.no_comoedia_pdf:
-        log.error(
-            "⚠ Aucun film Comoedia pour la semaine courante (ni ce run, ni en base) "
-            "— le PDF est la seule source valide. "
-            "Vérifier /horaires-semaine-complete/ (lien « programme de la semaine ») "
-            "ou passer --pdf-url avec l'URL CDN du programme. "
-            "Le job se terminera en échec pour signaler le problème (voir garde-fou en fin de run)."
+    # 0 film Comoedia ce run n'est PAS forcément une panne : le PDF hebdo n'est
+    # publié qu'une fois par semaine alors que le scraper tourne un jour sur deux,
+    # donc les runs suivants dédupliquent légitimement (« PDF déjà traité »). La
+    # santé réelle du pipeline (et le garde-fou exit 4) est donc évaluée en FIN
+    # de run — une fois Lumière scrapé et les données upsertées — voir plus bas.
+    if not comoedia_films and not args.no_comoedia_pdf:
+        log.info(
+            "0 film Comoedia scrapé ce run (dédup d'un PDF déjà traité, ou PDF non "
+            "encore publié) — vérification de santé différée en fin de run."
         )
 
     # 2. Scraping Cinémas Lumière
@@ -2197,7 +2193,11 @@ def main():
         all_films = filter_current_week(all_films)
     log.info(f"{len(all_films)} films retenus pour la semaine")
 
-    # 7. Écriture JSON
+    # 7. Écriture JSON — fallback consommé par le front UNIQUEMENT si Supabase
+    #    est indisponible (source principale = Supabase, lu en direct).
+    #    Écriture CONDITIONNELLE : on ne réécrit que si la liste des films change
+    #    réellement. Sinon le champ `generated_at` bouge à chaque run et force un
+    #    commit + un redéploiement Pages à chaque run pour rien.
     output = {
         "generated_at": datetime.now().isoformat(),
         "sources": [URL_PDF_LISTING, URL_LUMIERE_BASE],
@@ -2209,25 +2209,67 @@ def main():
     else:
         out_path = Path(args.output)
         out_path.parent.mkdir(parents=True, exist_ok=True)
-        out_path.write_text(
-            json.dumps(output, ensure_ascii=False, indent=2),
-            encoding="utf-8",
+        previous = None
+        if out_path.exists():
+            try:
+                previous = json.loads(out_path.read_text(encoding="utf-8"))
+            except Exception:
+                previous = None
+        unchanged = (
+            previous is not None
+            and previous.get("films") == all_films
+            and previous.get("sources") == output["sources"]
         )
-        log.info(f"✓ Écrit → {out_path} ({out_path.stat().st_size:,} octets)")
+        if unchanged:
+            log.info(
+                f"programme.json inchangé (hors horodatage) — pas de réécriture "
+                f"({len(all_films)} films)"
+            )
+        else:
+            out_path.write_text(
+                json.dumps(output, ensure_ascii=False, indent=2),
+                encoding="utf-8",
+            )
+            log.info(f"✓ Écrit → {out_path} ({out_path.stat().st_size:,} octets)")
 
-    # Garde-fou : si la semaine courante n'a AUCUNE séance Comoedia (ni scrapée
-    # ce run, ni déjà en base), le pipeline est réellement cassé. On a tout de
-    # même publié Lumière ci-dessus, mais on termine en échec pour que la GitHub
-    # Action passe au rouge au lieu d'échouer silencieusement. À l'inverse, un
-    # run qui déduplique un PDF déjà traité (0 film mais semaine présente en
-    # base) est considéré SAIN et ne déclenche pas le garde-fou.
-    if not comoedia_healthy and not args.no_comoedia_pdf and not args.dry_run:
-        log.error(
-            "Échec volontaire : pipeline Comoedia cassé — aucune séance pour la "
-            "semaine courante, ni scrapée ce run ni présente en base. "
-            "Lumière a été publié, mais Comoedia doit être corrigé."
-        )
-        sys.exit(4)
+    # ── Garde-fou de santé Comoedia (ASYMÉTRIQUE) ──
+    # But : détecter une VRAIE panne Comoedia (site changé, PDF introuvable/
+    # illisible) sans jamais crier au loup quand tout va bien.
+    #
+    # Semaine de référence = mercredi de la semaine EN COURS (celle contenant
+    # aujourd'hui), SANS le saut au mercredi suivant que fait get_last_wednesday()
+    # le mardi : on n'exige jamais Comoedia pour une semaine encore à venir.
+    #
+    # Critère d'échec ASYMÉTRIQUE : on n'échoue QUE si Lumière a publié cette
+    # semaine (preuve qu'elle est bien « en ligne ») ALORS QUE Comoedia y est
+    # absent. Si Lumière non plus n'a rien, c'est que personne n'a encore publié
+    # (non-événement) → pas d'échec. C'est ce qui rend la cadence rapprochée
+    # sûre : aucun faux rouge avant publication. La présence est lue
+    # dans Supabase APRÈS l'upsert (étape 5), donc les données de CE run comptent.
+    if not args.no_comoedia_pdf and not args.dry_run:
+        _today = date.today()
+        wk_start = _today - timedelta(days=(_today.isoweekday() - 3) % 7)
+        wk_end = wk_start + timedelta(days=6)
+        # NB : on lit via count_week_seances (silencieux) et non check_week_in_supabase,
+        # dont le log « … — ignoré » n'a de sens que dans le chemin de déduplication.
+        comoedia_live = bool(comoedia_films) or (count_week_seances(wk_start, wk_end, slug="comoedia") or 0) > 0
+        lumiere_live = (count_week_seances(wk_start, wk_end, exclude_slug="comoedia") or 0) > 0
+
+        if comoedia_live:
+            log.info(f"Pipeline Comoedia sain — semaine {wk_start} présente.")
+        elif not lumiere_live:
+            log.warning(
+                f"Ni Comoedia ni Lumière pour la semaine {wk_start} → {wk_end} "
+                "— programme probablement pas encore publié. Pas d'échec."
+            )
+        else:
+            log.error(
+                f"Échec volontaire : Lumière a publié la semaine {wk_start} → "
+                f"{wk_end}, mais Comoedia y est absent — pipeline Comoedia cassé, "
+                "à corriger. Vérifier /horaires-semaine-complete/ "
+                "(lien « programme de la semaine ») ou passer --pdf-url."
+            )
+            sys.exit(4)
 
     log.info("Terminé.")
 
