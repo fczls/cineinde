@@ -2108,7 +2108,7 @@ def main():
             dry_run=args.dry_run,
         )
     # 0 film Comoedia ce run n'est PAS forcément une panne : le PDF hebdo n'est
-    # publié qu'une fois par semaine alors que le scraper tourne tous les jours,
+    # publié qu'une fois par semaine alors que le scraper tourne un jour sur deux,
     # donc les runs suivants dédupliquent légitimement (« PDF déjà traité »). La
     # santé réelle du pipeline (et le garde-fou exit 4) est donc évaluée en FIN
     # de run — une fois Lumière scrapé et les données upsertées — voir plus bas.
@@ -2197,7 +2197,7 @@ def main():
     #    est indisponible (source principale = Supabase, lu en direct).
     #    Écriture CONDITIONNELLE : on ne réécrit que si la liste des films change
     #    réellement. Sinon le champ `generated_at` bouge à chaque run et force un
-    #    commit + un redéploiement Pages quotidiens pour rien.
+    #    commit + un redéploiement Pages à chaque run pour rien.
     output = {
         "generated_at": datetime.now().isoformat(),
         "sources": [URL_PDF_LISTING, URL_LUMIERE_BASE],
@@ -2243,8 +2243,8 @@ def main():
     # Critère d'échec ASYMÉTRIQUE : on n'échoue QUE si Lumière a publié cette
     # semaine (preuve qu'elle est bien « en ligne ») ALORS QUE Comoedia y est
     # absent. Si Lumière non plus n'a rien, c'est que personne n'a encore publié
-    # (non-événement) → pas d'échec. C'est ce qui rend la cadence quotidienne
-    # sûre : aucun faux rouge le matin avant publication. La présence est lue
+    # (non-événement) → pas d'échec. C'est ce qui rend la cadence rapprochée
+    # sûre : aucun faux rouge avant publication. La présence est lue
     # dans Supabase APRÈS l'upsert (étape 5), donc les données de CE run comptent.
     if not args.no_comoedia_pdf and not args.dry_run:
         _today = date.today()

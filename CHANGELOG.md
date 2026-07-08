@@ -17,28 +17,29 @@ Format inspiré de [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/).
 ## 2026-07-08
 
 ### Modifié
-- **Cadence du scraper : passage à une exécution quotidienne unique**
+- **Cadence du scraper : passage à un run un jour sur deux**
   (`.github/workflows/scraper.yml`). Remplace les deux crons serrés (mardi 20h +
-  mercredi 1h UTC, séparés de 5 h) par un seul `0 20 * * *`. Motif : les deux
+  mercredi 1h UTC, séparés de 5 h) par un seul `0 20 */2 * *`. Motif : les deux
   runs se chevauchaient sur le même créneau de publication puis laissaient un
   **angle mort de ~6,5 jours** — une publication tardive ou une correction en
-  milieu de semaine n'était reprise qu'au mardi suivant. Le run quotidien à
-  20:00 UTC couvre la publication du mardi soir le jour même (pas de régression
-  de fraîcheur) et reprend toute mise à jour sous 24 h. Le frontend lisant
-  Supabase en direct, la fraîcheur = l'instant d'insertion, pas le commit.
+  milieu de semaine n'était reprise qu'au mardi suivant. Le run à 20:00 UTC
+  couvre la publication du mardi soir (pas de régression de fraîcheur) et reprend
+  toute mise à jour sous ≤48 h. Le frontend lisant Supabase en direct, la
+  fraîcheur = l'instant d'insertion, pas le commit. (Le workflow est aussi
+  renommé « Scraper programme » — nom neutre vis-à-vis de la cadence.)
 - **Garde-fou Comoedia rendu asymétrique** (`scraper.py`, fonction `main`). On
   n'échoue (`exit 4`) désormais que si **Lumière a publié la semaine courante
   mais pas Comoedia** — l'asymétrie qui signe une vraie panne du parser Comoedia.
   Si aucune source n'a publié (personne n'a encore mis en ligne), c'est un
-  non-événement → pas d'échec. Indispensable pour que la cadence quotidienne ne
-  parte pas au rouge chaque matin avant publication. La présence est lue dans
+  non-événement → pas d'échec. Indispensable pour que la cadence rapprochée ne
+  parte pas au rouge avant publication. La présence est lue dans
   Supabase après l'upsert du run. Nouveau helper `count_week_seances(...,
   slug=/exclude_slug=)` factorisant le comptage des séances par semaine.
 - **Écriture conditionnelle de `programme.json`** (`scraper.py`, fonction
   `main`). Le fichier n'est réécrit que si la liste des films change réellement.
   Auparavant le champ `generated_at` bougeait à chaque run et forçait un commit
-  + un redéploiement GitHub Pages quotidiens inutiles ; les jours sans nouveauté
-  sont maintenant totalement silencieux.
+  + un redéploiement GitHub Pages à chaque run inutilement ; les runs sans
+  nouveauté sont maintenant totalement silencieux.
 
 ### Corrigé
 - **Faux échec `exit 4` du scraper chaque semaine (garde-fou Comoedia).** Le
