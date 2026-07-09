@@ -23,15 +23,15 @@ Supabase **dédup** le film (une ligne `films` partagée entre salles). À la le
 
 Ajouter/retirer un cinéma touche **4 listes + 1 fonction**, autour de index.html:1267-1296 :
 
-| Structure | Ligne | Rôle |
-|---|---|---|
-| `SHORT_CINEMA` | 1267 | libellés courts |
-| `CINEMA_FILTERS` | 1274 | liste du sélecteur (pills) |
-| `CINEMA_SHORT` | 1281 | libellés du picker mobile |
-| `getCinemaSectionLabel()` | 1289 | **logique binaire** Lumière/Comédia — tout autre cinéma tombe dans « COMÉDIA » ⚠️ |
-| texte « à propos » | 738 | phrase descriptive figée |
+| Structure | Rôle |
+|---|---|
+| `SHORT_CINEMA` | libellés courts (chips des cartes) |
+| `CINEMA_FILTERS` | liste du sélecteur (pills) — le pill « Tous » affiche un compte **dynamique** (`Les N cinémas`) |
+| `CINEMA_SHORT` | libellés du picker mobile |
+| `getCinemaSectionLabel()` | libellé de section — branches Lumière / **Le Zola** / défaut Comédia ⚠️ un nouveau cinéma sans branche tombe dans « COMÉDIA » |
+| texte « à propos » | phrase descriptive figée |
 
-C'est le pendant front de `CINEMA_SLUGS` (scraper.py:1173). Détail du piège Zola : *Challenge — Ajout Cinéma Le Zola* (vault Obsidian).
+C'est le pendant front de `CINEMA_SLUGS` (scraper.py). *(Le Zola ajouté partout le 2026-07-10 — le « piège » historique de la logique binaire de `getCinemaSectionLabel` reste vrai pour tout prochain cinéma.)*
 
 ---
 
