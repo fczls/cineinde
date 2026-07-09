@@ -14,6 +14,29 @@ pas listés — ils sont quotidiens et n'affectent pas le comportement du projet
 Convention de commits : `feat:` / `fix:` = code (listé ici), `chore:` = données (ignoré).
 Format inspiré de [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/).
 
+> ⚠️ **Doc d'architecture** ([`docs/architecture/`](docs/architecture/) — voir [`ARCHITECTURE.md`](ARCHITECTURE.md)) :
+> ne la mettre à jour **que si** un changement touche l'un des **invariants (I1–I8)** ou
+> **contrats (C1–C4)** listés dans le hub. Dans ce cas, mettre à jour la note concernée dans
+> la même PR. Un `fix:` de parsing/sélecteur/casse qui ne touche aucun de ces points ne
+> demande rien. Le CHANGELOG garde la *chronologie* ; l'architecture garde l'*état stable*.
+
+## 2026-07-10
+
+### Ajouté
+- **Doc d'architecture fonctionnelle** (`docs/architecture/` + `ARCHITECTURE.md`).
+  Référence de l'*état stable* du système, organisée en invariants (I1–I8),
+  contrats/liants (C1–C4) et variants : hub `docs/architecture/README.md` + 3
+  spokes (`pipeline.md`, `frontend.md`, `data-infra.md`). Comble le manque d'une
+  vue « comment ça marche maintenant » distincte de la chronologie du CHANGELOG.
+  `ARCHITECTURE.md` (racine) sert de point d'entrée. Rédigée d'abord dans le vault
+  Obsidian puis rapatriée dans le repo pour être versionnée avec le code (relue
+  dans la même PR, pas de dérive entre deux emplacements). La réflexion
+  prospective (explorations, challenges) et le process (`Workflow`) restent dans
+  le vault.
+- **Règle de maintenance de l'architecture** (en tête de ce fichier +
+  `ARCHITECTURE.md`) : mettre à jour `docs/architecture/` seulement quand un
+  changement touche un invariant/contrat listé, pas à chaque entrée CHANGELOG.
+
 ## 2026-07-09
 
 ### Modifié
