@@ -8,10 +8,10 @@ Site programme des cinémas Le Comoedia et Cinémas Lumière (Terreaux, Bellecou
 
 | Composant | Description |
 |-----------|-------------|
-| **Frontend** | `index.html` — charge Supabase (source principale), fallback `programme.json` |
+| **Frontend** | `index.html` — programme (navigation flottante, vues Détaillée/Liste & 1J/7J, onglet événements) ; charge Supabase (source principale), fallback `programme.json` |
 | **Scraper** | `scraper.py` — scrape Comoedia PDF + Lumière, produit `programme.json` et upsert Supabase |
 | **Base de données** | Supabase (PostgreSQL) — source principale du frontend |
-| **CI** | GitHub Actions — scraper hebdomadaire (mercredi 1h UTC) |
+| **CI** | GitHub Actions — scraper un jour sur deux (20h UTC) |
 
 ---
 
@@ -151,7 +151,7 @@ bash setup_cron.ai.sh [chemin_scraper] [chemin_sortie_json]
 
 ## CI (GitHub Actions)
 
-- **Déclenchement** : mercredi 1h00 UTC (`cron: '0 1 * * 3'`) + manuel (`workflow_dispatch`)
+- **Déclenchement** : un jour sur deux à 20h00 UTC (`cron: '0 20 */2 * *'`) + manuel (`workflow_dispatch`)
 - **Actions** : lance le scraper, commit et push `programme.json`
 - **Secrets** : `OMDB_API_KEY`, `TMDB_API_KEY` (optionnels)
 
