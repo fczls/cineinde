@@ -14,6 +14,38 @@ pas listés — ils sont quotidiens et n'affectent pas le comportement du projet
 Convention de commits : `feat:` / `fix:` = code (listé ici), `chore:` = données (ignoré).
 Format inspiré de [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/).
 
+## 2026-07-09
+
+### Modifié
+- **Refonte complète de la navigation (barre flottante style Airbnb).**
+  (`index.html`, #5)
+  - Sélecteur de cinémas en haut : pills scrollables au drag + flèches
+    conditionnelles ; se masque au scroll vers le bas, réapparaît vers le haut.
+  - Barre flottante regroupant Séances/Évènements, le sélecteur de date et le
+    type de vue (Détaillée/Liste). Se **compacte en icônes au scroll** (textes →
+    bobine/étincelles/stack/liste) avec une transition fluide (largeur animée +
+    fade du strip cinémas), et reste fixe en haut, pleine largeur, avec une
+    border-bottom ; le contenu passe dessous.
+  - Sélecteur de date : flèches ‹ › conditionnelles regroupées avec le bouton
+    date dans un conteneur, apparition/disparition **animée** (largeur + fondu).
+    En vue 7J le bouton date reste visible en état **inactif** (ne pilote plus
+    l'affichage) mais reste cliquable — y choisir une date **bascule sur la
+    vue 1J** au bon jour.
+  - Segment 1J/7J : apparition animée via technique grid `0fr` → `1fr` (largeur
+    auto exacte + fondu), sans à-coup du conteneur parent.
+  - Palette de la barre : fond `#262020`, stroke `#33302E`, stroke des éléments
+    actifs `#55473A`.
+  - Titre raccourci en « CinéIndé Lyon » ; vue mobile dédiée (logo court, bouton
+    « Les cinés », burger, toolbar en icônes).
+- **Layout des films en colonne unique centrée** (`index.html`, #5). Le panneau
+  détail ne s'ouvre plus par défaut : il n'apparaît qu'à la sélection d'un film.
+  Bordure des cartes passée en noir + effet **« spotlight » réactif à la souris**
+  au survol (halo `#78695B` diffusé autour du curseur), desktop uniquement.
+
+### Supprimé
+- **Colonne détail « Sélectionnez un film » affichée par défaut** (remplacée par
+  la colonne de films centrée) et **sous-titre de l'en-tête**. (`index.html`, #5)
+
 ## 2026-07-08
 
 ### Corrigé
