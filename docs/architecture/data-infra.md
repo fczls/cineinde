@@ -15,7 +15,8 @@ cinemas (id, name UNIQUE, slug UNIQUE)
    │ cinema_id (FK, ON DELETE CASCADE)
 films (id, titre, titre_original, annee, realisateur, duree,
        genres[], synopsis, imdb_id, poster, imdb_rating, "cast", source,
-       UNIQUE(titre, annee, realisateur))          ← clé de dédup (invariant I1)
+       UNIQUE(titre, annee, realisateur),           ← clé de repli (invariant I1)
+       UNIQUE(imdb_id) WHERE imdb_id IS NOT NULL)   ← clé primaire (003, index partiel)
    ▲
    │ film_id (FK, ON DELETE CASCADE)
 seances (id, film_id, cinema_id, date, heure, version, resa_url,
@@ -26,6 +27,7 @@ seances (id, film_id, cinema_id, date, heure, version, resa_url,
 - **RLS** (invariant I7) : policies `SELECT USING (true)` sur les 3 tables → **lecture publique**. Aucune policy d'écriture → seul le **service-role** (scraper) écrit. Le front (clé anon) ne peut que lire.
 - **Seed** : les 4 cinémas actuels sont insérés `ON CONFLICT DO NOTHING`. Mais l'upsert du scraper crée aussi les cinémas à la volée (`on_conflict="name"`, scraper.py:1213) → **ajouter Le Zola ne nécessite pas de migration**, juste un `entry["cinema"]="Le Zola"`.
 - `002_storage_pdfs.sql` : bucket de stockage pour les PDF Comoedia.
+- `003_dedup_imdb_id.sql` : index unique **partiel** `films_imdb_id_key` sur `imdb_id` (où non nul) → filet de sécurité DB de la dédup par imdb_id (I1). ⚠️ **À appliquer APRÈS** `scripts/merge_duplicate_films.py --apply` (l'index échoue tant que des doublons d'imdb_id subsistent). Genèse : *Exploration — Dédup inter-sources* (vault Obsidian).
 
 ---
 
@@ -55,6 +57,7 @@ Pour chaque film : upsert `cinemas` (par nom) → upsert `films` (clé I1) → u
 | `apply_schema.py` | applique les migrations SQL | one-shot / setup |
 | `migrate_json_to_supabase.py` | import initial `programme.json` → Supabase | one-shot (historique) |
 | `fix_titles_case.py` | ré-applique `_titlecase_fr` aux titres déjà en base (corrige les all-caps Comoedia) | one-shot |
+| `merge_duplicate_films.py` | fusionne les films dédoublés déjà en base par `imdb_id` (réassigne les séances vers la ligne canonique, supprime les surnuméraires) ; **dry-run par défaut**, `--apply` pour exécuter ; garde-fou `--year-tol` | one-shot (à lancer avant la migration 003) |
 | `test_supabase.py` | vérif connexion / creds | debug |
 | `sync_preview.sh` | copie vers `/tmp/cineinde_preview/` (sandbox macOS) | preview locale |
 

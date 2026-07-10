@@ -42,7 +42,7 @@ Notes sœurs : [Pipeline de données](pipeline.md) · [Frontend](frontend.md) ·
 
 | # | Invariant | Où c'est ancré | Casse si… |
 |---|---|---|---|
-| I1 | **Dédup film = clé brute `(titre, annee, realisateur)`** | `films UNIQUE(...)` (001_initial.sql:31) ; `on_conflict` (scraper.py:1251) | deux sources écrivent le même film avec une casse/orthographe différente → doublon |
+| I1 | **Dédup film = `imdb_id` en clé primaire, repli sur `(titre, annee, realisateur)`** — l'imdb_id (identifiant canonique TMDB/OMDb) fusionne les variantes de casse/format/année ; garde-fou `_years_close` : on ne fusionne sur un imdb_id partagé que si les années restent proches (un mauvais match TMDB ne doit pas fusionner deux vrais films). Sans imdb_id → repli sur la clé brute (titre **normalisé** casse/espaces + annee + realisateur), qui préserve les vrais homonymes (ex. *La Chaleur* 1938 vs 2026). | `films_imdb_id_key` index unique partiel (003_dedup_imdb_id.sql) + `films UNIQUE(titre,annee,realisateur)` (001_initial.sql) ; logique d'upsert `upsert_all_to_supabase` (scraper.py) ; garde-fou `_years_close` (scraper.py) | un mauvais match TMDB partage un imdb_id entre deux films distincts → fusion à tort (mitigé par `_years_close`) ; un film sans imdb_id et à casse variable retombe sur le repli |
 | I2 | **Convergence par le vide** : l'enrichissement (TMDB/OMDb) et la propagation inter-sources ne remplissent QUE les champs **vides** — rien n'écrase jamais une valeur existante. Une **nouvelle source** doit donc laisser `annee`/`realisateur` à `None` : sa copie hérite de la valeur du groupe (détail Lumière, PDF Comoedia ou OMDb) et la clé I1 converge. *(Précision 2026-07-10 : Lumière remplit bien ces champs depuis ses pages détail — la règle porte sur le « remplir-si-vide », pas sur « Lumière laisse vide ».)* | `_apply_tmdb_movie`/`_enrich_omdb_fallback` (fill-if-empty) ; propagation (scraper.py `main`, groupes de titres normalisés) ; Zola laisse `annee`/`realisateur` à None (`_zola_extract_film`) | une source remplit ces champs avec sa propre variante (ex. année de sortie FR ≠ année de production) → I1 diverge → doublon |
 | I3 | **Supabase = source primaire, `programme.json` = fallback** | front (index.html:1127+) lit Supabase, retombe sur JSON | — |
 | I4 | **Ordre : upsert AVANT filtrage semaine** | main (scraper.py:2210 puis 2215) | filtrer avant → on n'archiverait que la semaine courante, cleanup casse l'historique |
@@ -74,13 +74,16 @@ Chaque `scrape_X()` **doit** produire des dicts de cette forme, consommés tels 
 ### C2 — La frontière Supabase (contrat scraper → front)
 Le **schéma** (`cinemas`/`films`/`seances`) EST l'interface entre back et front. Subtilité : Supabase **dédup** le film (une ligne `films` partagée) mais le front **re-splitte** par `(film.id, cinema)` à la lecture (index.html:1161) — un même film joué dans 2 salles redevient 2 cartes. Voir [Frontend](frontend.md).
 
+**Regroupement d'affichage aligné sur la dédup back (2026-07-10) :** en vue « Tous les cinémas », le front regroupe les films par `imdbId` quand il existe (repli titre normalisé) — `filmGroupKey` (index.html), utilisé par `getRowsForDate` et `openFilm`. Même axe que la dédup back (I1) : fusionne les variantes de casse, **sépare les vrais homonymes** (2 imdbId ≠ → 2 cartes, ex. *La Chaleur* 1938 vs 2026). Avant, `normalizeTitle` groupait par titre seul → il fusionnait à tort les homonymes.
+
 ### C3 — Duplications à modifier ensemble ⚠️
 Deux savoirs sont codés **en double**, sans garde qui le signale :
 
 | Savoir | Back | Front |
 |---|---|---|
 | Mapping nom cinéma ↔ slug / libellés | `CINEMA_SLUGS` (scraper.py:1173) | `CINEMA_FILTERS`, `SHORT_CINEMA`, `CINEMA_SHORT`, `getCinemaSectionLabel` (index.html:1267-1296) |
-| Normalisation de titre | `_normalize_title_key` (scraper.py:1870) | `normalizeTitle` (index.html:891) |
+| Normalisation de titre | `_normalize_title_key` (scraper.py) | `normalizeTitle` (index.html) |
+| Clé de dédup/regroupement film | `imdb_id` puis `(titre, annee, real)` — upsert (scraper.py) | `filmGroupKey` : `imdbId` puis titre normalisé (index.html) |
 
 Ajouter un cinéma = toucher **les deux colonnes**. (C'est le piège frontend de *Challenge — Ajout Cinéma Le Zola* (vault Obsidian).)
 
@@ -94,6 +97,7 @@ Forme : `{generated_at, sources:[...], films:[<film dict>]}`. Consommé par le f
 | Chantier | Invariants/contrats concernés | Notes |
 |---|---|---|
 | ~~**Le Zola** (nouvelle source)~~ ✅ **intégré 2026-07-10** | C1 respecté, I2 appliqué (annee/realisateur à None), C3 mis à jour, I6 isolé (`exclude_slugs`) | Voir [pipeline.md](pipeline.md) § sources. Genèse : *Challenge — Ajout Cinéma Le Zola* (vault Obsidian) |
+| ~~**Dédup inter-sources par imdb_id**~~ ✅ **traité 2026-07-10** | I1 réécrit (imdb_id primaire + repli), C2/C3 mis à jour, garde-fou `_years_close` | migration 003 + `scripts/merge_duplicate_films.py` (à lancer sur la prod dans cet ordre). Genèse : *Exploration — Dédup inter-sources* (vault Obsidian) |
 | **Événements** (nouvel onglet automatisé) | Nouvelle table `evenements` (Infra), nouveaux parsers (Pipeline), remplace `EVENTS_DATA`/`renderEvents` (Frontend) | Feature *transverse* — touche les 3 spokes. Éval : *Exploration — Événements* (vault Obsidian). **Découverte 2026-07-10 : Le Zola a une page `/events/`** (« Les événements ») — 3e source potentielle, contrairement à ce que disait l'exploration |
 
 **Principe :** avant de toucher une pièce, vérifier ici quels invariants/contrats elle porte — pour ne pas ré-inspecter le code à chaque fois.
