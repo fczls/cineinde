@@ -519,6 +519,7 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
 .d-title{font-family:'Playfair Display',serif;font-size:32px;font-weight:700;line-height:1.12;flex:1;min-width:0;color:#fff;}
 .d-orig{font-family:'Playfair Display',serif;font-style:italic;font-size:15px;color:var(--text-dim);margin-bottom:18px;}
 .d-crew{display:flex;flex-wrap:wrap;gap:20px;margin-bottom:20px;}
+.d-ci-cast{flex-basis:100%;}
 .d-ci .lbl{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);display:block;margin-bottom:3px;}
 .d-ci .val{font-size:16px;color:var(--text);}
 .d-genres{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:20px;}
@@ -2036,7 +2037,7 @@ function renderDetail(film) {
         <div class="d-ci"><span class="lbl">Réalisation</span><span class="val">${film.realisateur ? escHtml(film.realisateur) : '—'}</span></div>
         <div class="d-ci"><span class="lbl">Année</span><span class="val">${film.annee || '—'}</span></div>
         <div class="d-ci"><span class="lbl">Durée</span><span class="val">${film.duree} min</span></div>
-        ${cast ? `<div class="d-ci"><span class="lbl">Avec</span><span class="val">${cast}</span></div>` : ''}
+        ${cast ? `<div class="d-ci d-ci-cast"><span class="lbl">Avec</span><span class="val">${cast}</span></div>` : ''}
       </div>
       <div class="d-genres">${(film.genres||[]).map(g=>`<span class="d-genre">${g}</span>`).join('')}</div>
       <p class="d-synopsis">${synop}</p>
