@@ -43,11 +43,11 @@ Notes sœurs : [Pipeline de données](pipeline.md) · [Frontend](frontend.md) ·
 | # | Invariant | Où c'est ancré | Casse si… |
 |---|---|---|---|
 | I1 | **Dédup film = clé brute `(titre, annee, realisateur)`** | `films UNIQUE(...)` (001_initial.sql:31) ; `on_conflict` (scraper.py:1251) | deux sources écrivent le même film avec une casse/orthographe différente → doublon |
-| I2 | **Convergence par le vide** : une source qui ne connaît pas `annee`/`realisateur` les laisse à `None` ; TMDB fournit la valeur canonique, propagée au groupe de même titre normalisé (remplissage des **vides seulement**) | Lumière (scraper.py:1541-1542) ; propagation (scraper.py:2197-2208) | une source remplit ces champs avec sa propre valeur riche → I1 diverge → doublon (cf. *Challenge — Ajout Cinéma Le Zola* (vault Obsidian)) |
+| I2 | **Convergence par le vide** : l'enrichissement (TMDB/OMDb) et la propagation inter-sources ne remplissent QUE les champs **vides** — rien n'écrase jamais une valeur existante. Une **nouvelle source** doit donc laisser `annee`/`realisateur` à `None` : sa copie hérite de la valeur du groupe (détail Lumière, PDF Comoedia ou OMDb) et la clé I1 converge. *(Précision 2026-07-10 : Lumière remplit bien ces champs depuis ses pages détail — la règle porte sur le « remplir-si-vide », pas sur « Lumière laisse vide ».)* | `_apply_tmdb_movie`/`_enrich_omdb_fallback` (fill-if-empty) ; propagation (scraper.py `main`, groupes de titres normalisés) ; Zola laisse `annee`/`realisateur` à None (`_zola_extract_film`) | une source remplit ces champs avec sa propre variante (ex. année de sortie FR ≠ année de production) → I1 diverge → doublon |
 | I3 | **Supabase = source primaire, `programme.json` = fallback** | front (index.html:1127+) lit Supabase, retombe sur JSON | — |
 | I4 | **Ordre : upsert AVANT filtrage semaine** | main (scraper.py:2210 puis 2215) | filtrer avant → on n'archiverait que la semaine courante, cleanup casse l'historique |
 | I5 | **Écriture JSON conditionnelle, hors champs volatils** (`resa_url` = token horaire) | `_films_sans_volatiles` (scraper.py:2082) ; compare (scraper.py:2246) | inclure `resa_url` → réécriture + commit à chaque run pour rien |
-| I6 | **Garde-fou de santé asymétrique** : échec (`exit 4`) seulement si une autre source a publié la semaine mais pas Comoedia | main (scraper.py:2263-2300) | compter Zola comme « autre source » → faux rouge (cf. *Challenge — Ajout Cinéma Le Zola* (vault Obsidian)) |
+| I6 | **Garde-fou de santé asymétrique** : échec (`exit 4`) seulement si **Lumière** a publié la semaine mais pas Comoedia. **Le Zola est exclu de la preuve « semaine publiée »** (`exclude_slugs=["comoedia","le-zola"]`) : il publie ~15 j en avance, le compter accuserait Comoedia à tort | main (scraper.py, garde-fou de fin de run) ; `count_week_seances(exclude_slugs=…)` | réintégrer Zola dans le comptage → faux rouge dès que Zola seul a des séances |
 | I7 | **RLS : lecture publique, écriture service-role only** | 001_initial.sql:50-57 | le front n'écrit jamais ; seul le scraper (clé service) écrit |
 | I8 | **Table `seances` gardée légère** (< plafond REST 1000) via cleanup J−10 | cleanup_old_seances.py ; front filtre `date >= today` (index.html) | table qui gonfle → séances récentes tronquées à l'affichage |
 
@@ -93,7 +93,7 @@ Forme : `{generated_at, sources:[...], films:[<film dict>]}`. Consommé par le f
 
 | Chantier | Invariants/contrats concernés | Notes |
 |---|---|---|
-| **Le Zola** (nouvelle source) | C1 (film dict), I1+I2 (dédup), C3 (front), I6 (garde-fou à isoler) | *Variant* pur. Checklist : *Challenge — Ajout Cinéma Le Zola* (vault Obsidian) |
-| **Événements** (nouvel onglet automatisé) | Nouvelle table `evenements` (Infra), nouveaux parsers (Pipeline), remplace `EVENTS_DATA`/`renderEvents` (Frontend) | Feature *transverse* — touche les 3 spokes. Éval : *Exploration — Événements* (vault Obsidian) |
+| ~~**Le Zola** (nouvelle source)~~ ✅ **intégré 2026-07-10** | C1 respecté, I2 appliqué (annee/realisateur à None), C3 mis à jour, I6 isolé (`exclude_slugs`) | Voir [pipeline.md](pipeline.md) § sources. Genèse : *Challenge — Ajout Cinéma Le Zola* (vault Obsidian) |
+| **Événements** (nouvel onglet automatisé) | Nouvelle table `evenements` (Infra), nouveaux parsers (Pipeline), remplace `EVENTS_DATA`/`renderEvents` (Frontend) | Feature *transverse* — touche les 3 spokes. Éval : *Exploration — Événements* (vault Obsidian). **Découverte 2026-07-10 : Le Zola a une page `/events/`** (« Les événements ») — 3e source potentielle, contrairement à ce que disait l'exploration |
 
 **Principe :** avant de toucher une pièce, vérifier ici quels invariants/contrats elle porte — pour ne pas ré-inspecter le code à chaque fois.

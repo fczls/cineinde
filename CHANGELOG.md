@@ -23,6 +23,20 @@ Format inspiré de [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/).
 ## 2026-07-10
 
 ### Ajouté
+- **Le Zola (Villeurbanne) — 5e cinéma de la plateforme** (`scraper.py`,
+  `index.html`). Nouveau module `scrape_zola()` : index `/films-a-laffiche/` →
+  fiches `/movies/{slug}/` (WordPress rendu serveur, sélecteurs documentés en
+  tête du module). ~12 films, horaires en carrousel ~15 jours, liens de
+  réservation TicketingCiné par séance (URL stable, pas de token volatil).
+  `annee`/`realisateur` volontairement laissés à `None` pour la convergence de
+  la clé de dédup (invariant I2) — vérifié sur 4 films partagés Zola↔Lumière
+  cette semaine (In Waves, Jim Queen, Disclosure Day, Entroncamento : 1 seule
+  ligne `films` chacun après propagation). Flag `--no-zola`. Frontend : pill,
+  libellés, section « LE ZOLA », texte à-propos.
+- **Garde-fou Comoedia : Zola exclu de la preuve « semaine publiée »**
+  (`count_week_seances` : `exclude_slug` → `exclude_slugs` liste). Le Zola
+  publie ~15 jours en avance : le compter comme « quelqu'un a publié » aurait
+  déclenché des `exit 4` accusant Comoedia à tort (piège B du challenge Zola).
 - **Doc d'architecture fonctionnelle** (`docs/architecture/` + `ARCHITECTURE.md`).
   Référence de l'*état stable* du système, organisée en invariants (I1–I8),
   contrats/liants (C1–C4) et variants : hub `docs/architecture/README.md` + 3

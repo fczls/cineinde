@@ -14,6 +14,7 @@ import json
 import logging
 import argparse
 import sys
+import time
 from datetime import datetime, date, timedelta
 from pathlib import Path
 from urllib.request import urlopen, Request
@@ -33,6 +34,8 @@ except ImportError:
 # cinema-comoedia.com (orthographe officielle) — fallback cinema-comedia.fr
 URL_PROGRAMME    = "https://www.cinema-comoedia.com/programme-accessible/"
 URL_LUMIERE_BASE = "https://www.cinemas-lumiere.com/calendrier-general.html"
+URL_ZOLA_AFFICHE = "https://www.lezola.com/films-a-laffiche/"
+URL_ZOLA_BASE    = "https://www.lezola.com"
 URL_OMDB_BASE    = "https://www.omdbapi.com/"
 URL_TMDB_BASE    = "https://api.themoviedb.org/3/"
 import os
@@ -717,14 +720,14 @@ def count_week_seances(
     week_end: date,
     *,
     slug: str | None = None,
-    exclude_slug: str | None = None,
+    exclude_slugs: "list[str] | None" = None,
 ) -> int | None:
     """
     Compte les séances d'une semaine dans Supabase.
 
-    - slug="comoedia"        → uniquement ce cinéma
-    - exclude_slug="comoedia" → tous SAUF ce cinéma (= les 3 salles Lumière)
-    - ni l'un ni l'autre      → toutes salles confondues
+    - slug="comoedia"                       → uniquement ce cinéma
+    - exclude_slugs=["comoedia", "le-zola"]  → tous SAUF ces cinémas
+    - ni l'un ni l'autre                     → toutes salles confondues
 
     Retourne None si les credentials sont absents ou en cas d'erreur (état
     « inconnu » distinct de 0), pour que l'appelant ne conclue pas à tort.
@@ -742,14 +745,17 @@ def count_week_seances(
             .gte("date", week_start.isoformat())
             .lte("date", week_end.isoformat())
         )
-        target = slug or exclude_slug
-        if target:
-            r = client.table("cinemas").select("id").eq("slug", target).execute()
+        if slug:
+            r = client.table("cinemas").select("id").eq("slug", slug).execute()
             if not r.data:
-                # Cinéma introuvable : filtre sur ce cinéma → 0 ; exclusion → inconnu.
-                return 0 if slug else None
-            cinema_id = r.data[0]["id"]
-            q = q.eq("cinema_id", cinema_id) if slug else q.neq("cinema_id", cinema_id)
+                return 0  # cinéma introuvable : filtre sur ce cinéma → 0
+            q = q.eq("cinema_id", r.data[0]["id"])
+        elif exclude_slugs:
+            r = client.table("cinemas").select("id").in_("slug", exclude_slugs).execute()
+            # Un slug exclu absent de la table n'a par définition aucune séance :
+            # on exclut simplement ceux qui existent.
+            for row in r.data or []:
+                q = q.neq("cinema_id", row["id"])
         return q.execute().count or 0
     except Exception as e:
         log.warning(f"Vérification Supabase échouée : {e} — on continue quand même")
@@ -1175,6 +1181,7 @@ CINEMA_SLUGS = {
     "Lumière Terreaux": "lumiere-terreaux",
     "Lumière Bellecour": "lumiere-bellecour",
     "Lumière Fourmi": "lumiere-fourmi",
+    "Le Zola": "le-zola",
 }
 
 
@@ -1681,6 +1688,226 @@ def scrape_lumiere(week_date: date | None = None) -> list[dict]:
     return films
 
 
+# ─────────────────────────────────────────────
+# SCRAPER LE ZOLA (Villeurbanne)
+# ─────────────────────────────────────────────
+# Structure réelle (inspectée juillet 2026) — WordPress thème maison « zola »,
+# HTML rendu serveur :
+#   Index /films-a-laffiche/ : cartes <a class="well poster" href=".../movies/{slug}/">
+#     avec <img class="well-image"> (affiche) et <h3 class="well__title">.
+#   Fiche /movies/{slug}/ :
+#     <h1 class="movie-sheet__title">Titre</h1>
+#     <p class="movie-sheet__synopsis">…</p>
+#     bloc infos (dans .hide-phone, DUPLIQUÉ dans .show-phone — n'en lire qu'un) :
+#       « Sortie le 17 Juin 2026 », « Genre : A, B », « Durée : 1h42 », « Origine : US »
+#     séances : <div class="movie-sessions-week"> > <div class="movie-sessions-day">
+#       (un bloc par jour, vide si pas de séance ; chaque bloc non vide porte SA date
+#        dans <p class="show-phone"><b>10</b><br> Juil</p> — mois ABRÉGÉ, sans année)
+#       puis paires <div class="mb-3"><b>14h30</b>…<small>VF VI</small></div>
+#                 + <p class="mb-4"><a href="ticketingcine.com/…">Réserver</a></p>
+#       Séance passée : bouton « disabled » avec href vide → resa_url None.
+#   Versions observées : « VF VI », « VO ST », « VF ST,OCAP,VI » (VI=audiodescription,
+#   ST/OCAP=sourds-malentendants) → compacter les espaces puis detect_version().
+#   Billetterie TicketingCiné : URL stable par séance (pas de token horaire,
+#   contrairement au cotecine Lumière).
+#
+# IMPORTANT (dédup inter-cinémas) : on laisse volontairement annee/realisateur à
+# None bien que la fiche les affiche. L'enrichissement et la propagation ne
+# remplissent QUE les champs vides : une copie Zola vide hérite de la valeur du
+# groupe (Lumière/Comoedia/OMDb) et la clé d'upsert (titre, annee, realisateur)
+# converge. La « Sortie le … 2026 » est en outre l'année de sortie FRANÇAISE,
+# pas l'année de production → la renseigner ferait diverger la clé à coup sûr.
+# ─────────────────────────────────────────────
+
+def _zola_parse_mois(label: str) -> int | None:
+    """Mois FR éventuellement abrégé (« Juil », « Sept », « Févr ») → numéro."""
+    s = label.strip().lower().rstrip(".")
+    if not s:
+        return None
+    matches = [n for nom, n in MOIS_FR.items() if nom.startswith(s)]
+    # « jui » seul est ambigu (juin/juillet) → exiger un match unique
+    return matches[0] if len(matches) == 1 else None
+
+
+def _zola_parse_date(jour: int, mois_label: str) -> date | None:
+    """
+    Date d'une séance Zola (« 10 » + « Juil ») — sans année dans le HTML.
+    Année inférée : celle qui place la date au plus près d'aujourd'hui
+    (gère le passage décembre → janvier).
+    """
+    mois = _zola_parse_mois(mois_label)
+    if not mois:
+        return None
+    today = date.today()
+    candidats = []
+    for annee in (today.year - 1, today.year, today.year + 1):
+        try:
+            candidats.append(date(annee, mois, jour))
+        except ValueError:
+            continue
+    if not candidats:
+        return None
+    return min(candidats, key=lambda d: abs((d - today).days))
+
+
+def _zola_extract_seances(day_node: dict) -> list[dict]:
+    """
+    Extrait les séances d'un <div class="movie-sessions-day">.
+    Parcourt les enfants dans l'ordre : la date du jour (p.show-phone), puis
+    des paires horaire (div.mb-3) / lien résa (p.mb-4).
+    """
+    seances: list[dict] = []
+    jour_date: date | None = None
+    pending: dict | None = None
+
+    def _walk(children):
+        nonlocal jour_date, pending
+        for child in children:
+            cls = child["attrs"].get("class", "")
+            if child["tag"] == "p" and "show-phone" in cls:
+                # Jour dans <b>, mois en texte du <p> — l'ordre de restitution
+                # varie (le texte après <br> remonte au parent) → extraction
+                # insensible à l'ordre.
+                txt = text_of(child)
+                m_jour = re.search(r"\b(\d{1,2})\b", txt)
+                m_mois = re.search(r"\b([A-Za-zÀ-ÿ]{3,})\b", txt)
+                if m_jour and m_mois:
+                    jour_date = _zola_parse_date(int(m_jour.group(1)), m_mois.group(1))
+            elif child["tag"] == "div" and "mb-3" in cls:
+                b_nodes = find_nodes(child, tag="b")
+                heure = parse_heure(text_of(b_nodes[0])) if b_nodes else None
+                small_nodes = find_nodes(child, tag="small")
+                version_txt = text_of(small_nodes[0]) if small_nodes else ""
+                # « VO ST » → « VOST », « VF ST,OCAP,VI » → « VFST… »
+                version = detect_version(version_txt.replace(" ", ""))
+                if heure:
+                    pending = {"heure": heure, "version": version, "resa_url": None}
+            elif child["tag"] == "p" and "mb-4" in cls:
+                links = find_nodes(child, tag="a")
+                if pending is not None:
+                    if links:
+                        href = links[0]["attrs"].get("href", "").strip()
+                        a_cls = links[0]["attrs"].get("class", "")
+                        if href and "disabled" not in a_cls:
+                            pending["resa_url"] = href
+                    if jour_date:
+                        pending["date"] = jour_date.isoformat()
+                        seances.append(pending)
+                    pending = None
+            else:
+                _walk(child["children"])
+
+    _walk(day_node["children"])
+    return seances
+
+
+def _zola_extract_film(html: str, slug: str) -> dict | None:
+    """Parse une fiche film /movies/{slug}/ → film dict (ou None si vide)."""
+    root = parse_html(html)
+
+    titres = find_nodes(root, tag="h1", cls="movie-sheet__title")
+    titre = text_of(titres[0]).strip() if titres else None
+    if not titre:
+        log.warning(f"  Zola: titre introuvable pour {slug} — fiche ignorée")
+        return None
+
+    film: dict = {
+        "titre": titre,
+        "slug": slug,
+        "titreOriginal": None,
+        "annee": None,          # volontairement vide — voir bloc de commentaire
+        "realisateur": None,    # idem (convergence de la clé de dédup)
+        "duree": None,
+        "genres": [],
+        "synopsis": None,
+        "imdbId": None,
+        "source": "zola",
+        "cinema": "Le Zola",
+        "seances": [],
+    }
+
+    synops = find_nodes(root, tag="p", cls="movie-sheet__synopsis")
+    if synops:
+        synop = text_of(synops[0]).strip()
+        if synop:
+            film["synopsis"] = synop[:500] + ("…" if len(synop) > 500 else "")
+
+    # Bloc infos « <b>Durée</b> : 1h42<br> » : le texte et les labels <b> sont
+    # entrelacés — l'arbre de SimpleHTMLParser perd cet ordre (le texte libre
+    # s'agrège sur le parent) → regex sur le HTML BRUT.
+    # (Le bloc est dupliqué desktop/mobile : on prend la 1re occurrence.)
+    # NB : le « Genre » affiché par la fiche n'est PAS ingéré — même logique que
+    # annee/realisateur : les genres viennent de l'enrichissement OMDb pour
+    # toutes les sources (vocabulaire uniforme), pas du site.
+    m = re.search(r"<b>\s*Durée\s*</b>\s*:\s*(\d{1,2})h(\d{2})?", html)
+    if m:
+        film["duree"] = int(m.group(1)) * 60 + int(m.group(2) or 0)
+
+    for day_node in find_nodes(root, tag="div", cls="movie-sessions-day"):
+        film["seances"].extend(_zola_extract_seances(day_node))
+
+    film["seances"].sort(key=lambda s: (s["date"], s["heure"]))
+    return film
+
+
+def scrape_zola() -> list[dict]:
+    """
+    Scrape Le Zola : index /films-a-laffiche/ → une fiche par film.
+    Pas de paramètre de semaine côté site (liste roulante ~15 jours) :
+    c'est filter_current_week() qui borne ensuite la fenêtre affichée.
+    """
+    # Le site renvoie parfois (rarement) une page partielle sans les cartes
+    # (variante CDN/hoquet serveur, observé en juillet 2026) → un retry simple.
+    cards: dict[str, dict] = {}
+    for attempt in (1, 2):
+        log.info(f"Fetch Zola → {URL_ZOLA_AFFICHE}" + (" (retry)" if attempt == 2 else ""))
+        try:
+            html = fetch(URL_ZOLA_AFFICHE)
+        except RuntimeError as e:
+            log.error(f"Impossible de télécharger Le Zola : {e}")
+            return []
+        log.info(f"Zola HTML reçu : {len(html):,} caractères")
+
+        root = parse_html(html)
+        # Cartes films : <a class="well poster" href=".../movies/{slug}/">
+        for a in find_nodes(root, tag="a", cls="poster"):
+            href = a["attrs"].get("href", "")
+            m = re.search(r"/movies/([^/?#]+)/?", href)
+            if m:
+                cards.setdefault(m.group(1), a)
+        if cards:
+            break
+        time.sleep(3)
+    if not cards:
+        log.warning("Zola: aucune carte film trouvée sur l'index (après retry)")
+        return []
+    log.info(f"Zola: {len(cards)} films sur l'index")
+
+    films: list[dict] = []
+    for slug, card in cards.items():
+        try:
+            detail_html = fetch(f"{URL_ZOLA_BASE}/movies/{slug}/", timeout=10)
+        except RuntimeError as e:
+            log.warning(f"  Zola détail impossible pour {slug}: {e}")
+            continue
+        film = _zola_extract_film(detail_html, slug)
+        if not film:
+            continue
+        # Affiche depuis la carte de l'index (img.well-image)
+        imgs = find_nodes(card, tag="img")
+        if imgs:
+            src = imgs[0]["attrs"].get("src", "")
+            if src.startswith("http"):
+                film["poster"] = src
+        if film["seances"]:
+            films.append(film)
+        else:
+            log.debug(f"  Zola: {film['titre']} sans séance à venir — ignoré")
+
+    log.info(f"Zola: {len(films)} films avec séances")
+    return films
+
+
 def _extract_film(node: dict) -> dict:
     """Extrait les infos d'un nœud film."""
     film: dict = {
@@ -2103,6 +2330,7 @@ def main():
     parser.add_argument("--no-omdb",    action="store_true", help="Désactiver l'enrichissement OMDb/TMDB")
     parser.add_argument("--no-filter",  action="store_true", help="Ne pas filtrer par semaine (pour test)")
     parser.add_argument("--no-lumiere", action="store_true", help="Désactiver le scraping des Cinémas Lumière")
+    parser.add_argument("--no-zola",    action="store_true", help="Désactiver le scraping du Zola")
     parser.add_argument("--no-comoedia-pdf", action="store_true",
                         help="Désactiver le scraper PDF Comoedia")
     parser.add_argument("--pdf-file",   default=None,
@@ -2153,14 +2381,20 @@ def main():
                 sys.exit(1)
         lumiere_films = scrape_lumiere(week_date=lumiere_week_override)
 
-    # 3. Fusion des deux sources
-    all_films = comoedia_films + lumiere_films
+    # 2bis. Scraping Le Zola
+    zola_films: list[dict] = []
+    if not args.no_zola:
+        zola_films = scrape_zola()
+
+    # 3. Fusion des sources
+    all_films = comoedia_films + lumiere_films + zola_films
     if not all_films:
-        log.error("Aucun film extrait (ni Comoedia ni Lumière).")
+        log.error("Aucun film extrait (ni Comoedia, ni Lumière, ni Zola).")
         sys.exit(2)
     log.info(
         f"{len(all_films)} films au total "
-        f"(Comoedia:{len(comoedia_films)}, Lumière:{len(lumiere_films)})"
+        f"(Comoedia:{len(comoedia_films)}, Lumière:{len(lumiere_films)}, "
+        f"Zola:{len(zola_films)})"
     )
 
     # 4. Enrichissement TMDB/OMDb avec cache inter-cinémas (un seul appel par titre)
@@ -2223,7 +2457,7 @@ def main():
     #    commit + un redéploiement Pages à chaque run pour rien.
     output = {
         "generated_at": datetime.now().isoformat(),
-        "sources": [URL_PDF_LISTING, URL_LUMIERE_BASE],
+        "sources": [URL_PDF_LISTING, URL_LUMIERE_BASE, URL_ZOLA_AFFICHE],
         "films": all_films,
     }
 
@@ -2274,6 +2508,10 @@ def main():
     # (non-événement) → pas d'échec. C'est ce qui rend la cadence rapprochée
     # sûre : aucun faux rouge avant publication. La présence est lue
     # dans Supabase APRÈS l'upsert (étape 5), donc les données de CE run comptent.
+    #
+    # Le Zola est EXCLU de la preuve « semaine publiée » : il publie ~15 jours
+    # en avance (liste roulante), là où Comoedia et Lumière sont hebdomadaires.
+    # Le compter ferait accuser Comoedia à tort dès que Zola seul a des séances.
     if not args.no_comoedia_pdf and not args.dry_run:
         _today = date.today()
         wk_start = _today - timedelta(days=(_today.isoweekday() - 3) % 7)
@@ -2281,7 +2519,7 @@ def main():
         # NB : on lit via count_week_seances (silencieux) et non check_week_in_supabase,
         # dont le log « … — ignoré » n'a de sens que dans le chemin de déduplication.
         comoedia_live = bool(comoedia_films) or (count_week_seances(wk_start, wk_end, slug="comoedia") or 0) > 0
-        lumiere_live = (count_week_seances(wk_start, wk_end, exclude_slug="comoedia") or 0) > 0
+        lumiere_live = (count_week_seances(wk_start, wk_end, exclude_slugs=["comoedia", "le-zola"]) or 0) > 0
 
         if comoedia_live:
             log.info(f"Pipeline Comoedia sain — semaine {wk_start} présente.")
