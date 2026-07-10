@@ -44,8 +44,9 @@ Ordre **significatif** (certains invariants en dépendent) :
 
 ⚠️ **Deux dédups distinctes à ne pas confondre :**
 - `_normalize_title_key` (normalisée) → regroupe pour l'**enrichissement**.
-- `on_conflict="titre,annee,realisateur"` (brute) → dédup l'**upsert Supabase** (I1).
-Elles ne coïncident pas : un groupe enrichi ensemble peut quand même créer 2 lignes `films` si le titre brut diffère.
+- Dédup de l'**upsert Supabase** (I1) : `imdb_id` en clé primaire (garde-fou `_years_close`), repli sur `(titre normalisé, annee, realisateur)`.
+
+Depuis la dédup par imdb_id (2026-07-10), les deux **convergent mieux** : l'enrichissement pose l'`imdb_id`, et l'upsert dédup dessus — deux copies enrichies ensemble ne créent plus 2 lignes `films` même si le titre brut diffère (casse). Restent séparés : les films sans imdb_id (repli) et les vrais homonymes (imdb_id ≠, ou années trop éloignées via `_years_close`). Genèse : *Exploration — Dédup inter-sources* (vault Obsidian).
 
 ---
 

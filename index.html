@@ -890,6 +890,11 @@ const escAttr  = s => s.replace(/"/g,'&quot;').replace(/\\/g,'\\\\');
 const escHtml  = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 // Clé normalisée pour déduplication (même film à Comoedia/Lumière avec variantes de casse)
 const normalizeTitle = t => (t||'').toLowerCase().trim().replace(/\s+/g,' ');
+// Clé de regroupement « Tous les cinémas » : l'imdbId est l'identifiant
+// canonique (aligné sur la dédup back par imdb_id) → il fusionne les variantes
+// de casse ET sépare les vrais homonymes (ex. La Chaleur 1938 vs 2026, imdbId
+// différents). Repli sur le titre normalisé quand l'imdbId manque.
+const filmGroupKey = f => f && f.imdbId ? 'imdb:'+f.imdbId : 'titre:'+normalizeTitle(f && f.titre);
 // Format horaire compact (14:30 → 14h30)
 const formatTimeCompact = h => (h||'').replace(':','h');
 
@@ -1535,8 +1540,8 @@ function getRowsForDate(films, displayDate) {
   if (filtreCinema === 'tous') {
     const merged = {};
     rows.forEach(row => {
-      const key = normalizeTitle(row.titre);
-      if (!key) return;
+      const key = filmGroupKey(row);
+      if (!key || key === 'titre:') return;
       if (!merged[key]) merged[key] = { ...row };
       else {
         const m = merged[key];
@@ -1924,8 +1929,12 @@ function jumpToTomorrow() {
 function openFilm(titre) {
   let film;
   if (filtreCinema === 'tous') {
-    const key = normalizeTitle(titre);
-    const matches = allFilms.filter(f => normalizeTitle(f.titre) === key);
+    // Regrouper par la même clé que getRowsForDate (imdbId si dispo, sinon
+    // titre normalisé) pour ne pas fusionner deux vrais homonymes dans le
+    // détail. On résout d'abord le film cliqué (la carte ne porte que le titre).
+    const clicked = allFilms.find(f => normalizeTitle(f.titre) === normalizeTitle(titre));
+    const gk = clicked ? filmGroupKey(clicked) : 'titre:'+normalizeTitle(titre);
+    const matches = allFilms.filter(f => filmGroupKey(f) === gk);
     if (!matches.length) return;
     film = { ...matches[0], _sd: matches.flatMap(f => f._sd) };
     for (const m of matches) {
