@@ -22,7 +22,34 @@ Format inspiré de [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/).
 
 ## 2026-07-10
 
+### Modifié
+- **Dédup films par `imdb_id` (identifiant canonique TMDB/OMDb), repli sur la
+  clé brute** (`scraper.py`, `upsert_all_to_supabase`). Réécrit l'invariant
+  **I1** : deux sources décrivant le même film avec une casse/orthographe/année
+  différente créaient jusqu'ici des lignes `films` en double (mesuré : 18 titres
+  dédoublés sur ~46, 100 % Comoedia+Lumière). L'`imdb_id` devient la clé de
+  dédup primaire ; repli sur `(titre normalisé, annee, realisateur)` quand
+  l'id manque. Garde-fou `_years_close` : on ne fusionne sur un imdb_id partagé
+  que si les années restent proches (un mauvais match TMDB ne doit pas fusionner
+  deux films distincts). Genèse : *Exploration — Dédup inter-sources* (vault
+  Obsidian). Touche I1, C2, C3 (`docs/architecture/` mis à jour).
+- **Front : regroupement « Tous les cinémas » par `imdbId`** (`index.html`,
+  nouveau `filmGroupKey`, utilisé par `getRowsForDate` et `openFilm`). Aligne
+  l'affichage sur la dédup back : fusionne les variantes de casse mais **sépare
+  les vrais homonymes** (2 imdbId ≠ → 2 cartes, ex. *La Chaleur* 1938 vs 2026).
+  Avant, `normalizeTitle` groupait par titre seul et fusionnait à tort les
+  homonymes (bug d'affichage latent).
+
 ### Ajouté
+- **Migration `003_dedup_imdb_id.sql`** : index unique **partiel**
+  `films_imdb_id_key` sur `imdb_id` (où non nul) — filet de sécurité DB de la
+  dédup I1. ⚠️ À appliquer **après** le script de fusion (l'index échoue tant
+  que des doublons subsistent en base).
+- **Script `scripts/merge_duplicate_films.py`** : fusion one-shot des films déjà
+  dédoublés en base par `imdb_id` (réassigne les séances vers la ligne
+  canonique — la plus complète —, supprime les surnuméraires). **Dry-run par
+  défaut**, `--apply` pour exécuter, garde-fou `--year-tol`. À lancer sur la
+  prod **avant** la migration 003.
 - **Le Zola (Villeurbanne) — 5e cinéma de la plateforme** (`scraper.py`,
   `index.html`). Nouveau module `scrape_zola()` : index `/films-a-laffiche/` →
   fiches `/movies/{slug}/` (WordPress rendu serveur, sélecteurs documentés en

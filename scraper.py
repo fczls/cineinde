@@ -1189,6 +1189,23 @@ def _cinema_slug(name: str) -> str:
     return CINEMA_SLUGS.get(name) or name.lower().replace(" ", "-").replace("è", "e")
 
 
+def _years_close(a, b, tol: int = 1) -> bool:
+    """
+    Garde-fou de la dédup par imdb_id : deux films ne se fusionnent sur un
+    imdb_id partagé que si leurs années restent proches (≤ tol). Objectif :
+    qu'un mauvais match TMDB (même imdb_id attribué par erreur à deux films
+    distincts) ne fusionne pas deux vrais films différents.
+
+    Une année manquante (None / non convertible) ne peut pas *contredire* la
+    fusion → on l'autorise (l'imdb_id reste un signal fort ; le repli sur la
+    clé brute gère de toute façon les cas ambigus).
+    """
+    try:
+        return abs(int(a) - int(b)) <= tol
+    except (TypeError, ValueError):
+        return True
+
+
 def upsert_all_to_supabase(films: list[dict]) -> None:
     """
     Upsert tous les films (Comoedia + Lumière) et leurs séances dans Supabase.
@@ -1213,7 +1230,9 @@ def upsert_all_to_supabase(films: list[dict]) -> None:
         return
 
     cinema_ids: "dict[str, str]" = {}
-    film_ids: "dict[tuple, str]" = {}
+    film_ids: "dict[tuple, str]" = {}          # (titre normalisé, annee, real) → film_id (repli)
+    film_ids_by_imdb: "dict[str, str]" = {}    # imdb_id → film_id (clé primaire, option B)
+    film_years_by_imdb: "dict[str, int]" = {}  # imdb_id → annee canonique (garde-fou)
     seances_count = 0
 
     for entry in films:
@@ -1237,9 +1256,58 @@ def upsert_all_to_supabase(films: list[dict]) -> None:
         titre = entry.get("titre") or ""
         annee = entry.get("annee")
         realisateur = entry.get("realisateur") or ""
-        key = (titre, annee, realisateur)
+        imdb_id = entry.get("imdbId") or None
+        # Clé de repli brute, mais titre normalisé (casse/espaces) = « filet A » :
+        # deux variantes de casse sans imdb_id, même année+réalisateur, ne
+        # créent plus deux lignes. On garde annee+realisateur pour ne PAS
+        # re-fusionner les vrais homonymes (ex. La Chaleur 1938 vs 2026).
+        key = (_normalize_title_key(titre), annee, realisateur)
 
-        if key not in film_ids:
+        film_id = None
+        imdb_blocked = False  # garde-fou années : imdb_id présent mais match refusé
+
+        # ── Dédup primaire par imdb_id (option B) ──────────────────────────
+        # L'imdb_id résout le même film sous ses variantes de casse / format /
+        # année → clé de dédup prioritaire. Garde-fou `_years_close` : ne
+        # fusionner que si les années restent proches, pour qu'un mauvais match
+        # TMDB (imdb_id partagé par erreur) ne fusionne pas deux films
+        # distincts. Cf. exploration « Dédup inter-sources ».
+        if imdb_id and imdb_id in film_ids_by_imdb:
+            if _years_close(annee, film_years_by_imdb.get(imdb_id)):
+                film_id = film_ids_by_imdb[imdb_id]
+            else:
+                imdb_blocked = True
+        elif imdb_id:
+            existing = (
+                client.table("films").select("id,annee")
+                .eq("imdb_id", imdb_id).limit(1).execute()
+            )
+            if existing.data:
+                if _years_close(annee, existing.data[0].get("annee")):
+                    film_id = existing.data[0]["id"]
+                    film_ids_by_imdb[imdb_id] = film_id
+                    film_years_by_imdb[imdb_id] = existing.data[0].get("annee")
+                else:
+                    imdb_blocked = True
+
+        # Garde-fou déclenché : on ne fait pas confiance à cet imdb_id pour ce
+        # film (années trop éloignées → probable mauvais match). On le stocke
+        # SANS imdb_id — sinon on créerait une 2e ligne au même imdb_id, ce que
+        # l'index unique partiel (migration 003) rejette. Le film reste dédup
+        # par la clé de repli.
+        store_imdb = None if imdb_blocked else imdb_id
+        if imdb_blocked:
+            log.warning(
+                f"Dédup imdb_id ignorée (années éloignées) pour « {titre} » "
+                f"({annee}, imdb_id={imdb_id}) — stocké sans imdb_id"
+            )
+
+        # ── Repli : clé brute normalisée (titre, annee, realisateur) ───────
+        if film_id is None:
+            film_id = film_ids.get(key)
+
+        # ── Création si toujours introuvable ───────────────────────────────
+        if film_id is None:
             row = {
                 "titre": titre,
                 "titre_original": entry.get("titreOriginal"),
@@ -1248,7 +1316,7 @@ def upsert_all_to_supabase(films: list[dict]) -> None:
                 "duree": entry.get("duree"),
                 "genres": entry.get("genres") or [],
                 "synopsis": entry.get("synopsis"),
-                "imdb_id": entry.get("imdbId"),
+                "imdb_id": store_imdb,
                 "poster": entry.get("poster"),
                 "imdb_rating": entry.get("imdbRating"),
                 "cast": entry.get("cast"),
@@ -1258,7 +1326,7 @@ def upsert_all_to_supabase(films: list[dict]) -> None:
                 row, on_conflict="titre,annee,realisateur"
             ).execute()
             if r.data:
-                film_ids[key] = r.data[0]["id"]
+                film_id = r.data[0]["id"]
             else:
                 r2 = (
                     client.table("films").select("id")
@@ -1268,9 +1336,15 @@ def upsert_all_to_supabase(films: list[dict]) -> None:
                     .execute()
                 )
                 if r2.data:
-                    film_ids[key] = r2.data[0]["id"]
+                    film_id = r2.data[0]["id"]
 
-        film_id = film_ids.get(key)
+        # Enregistrer le film_id (canonique) dans les deux caches.
+        if film_id:
+            film_ids[key] = film_id
+            if store_imdb:
+                film_ids_by_imdb.setdefault(store_imdb, film_id)
+                film_years_by_imdb.setdefault(store_imdb, annee)
+
         cinema_id = cinema_ids.get(cinema_name)
         if not film_id or not cinema_id:
             continue
@@ -1300,8 +1374,8 @@ def upsert_all_to_supabase(films: list[dict]) -> None:
                 )
 
     log.info(
-        f"Supabase : {len(film_ids)} films, {seances_count} séances upsertés "
-        f"({len(cinema_ids)} cinémas)"
+        f"Supabase : {len(set(film_ids.values()))} films, {seances_count} séances "
+        f"upsertés ({len(cinema_ids)} cinémas)"
     )
 
 
