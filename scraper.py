@@ -1834,14 +1834,14 @@ def _zola_extract_film(html: str, slug: str) -> dict | None:
 
     # Bloc infos « <b>Durée</b> : 1h42<br> » : le texte et les labels <b> sont
     # entrelacés — l'arbre de SimpleHTMLParser perd cet ordre (le texte libre
-    # s'agrège sur le parent) → regex sur le HTML BRUT pour ces deux champs.
+    # s'agrège sur le parent) → regex sur le HTML BRUT.
     # (Le bloc est dupliqué desktop/mobile : on prend la 1re occurrence.)
+    # NB : le « Genre » affiché par la fiche n'est PAS ingéré — même logique que
+    # annee/realisateur : les genres viennent de l'enrichissement OMDb pour
+    # toutes les sources (vocabulaire uniforme), pas du site.
     m = re.search(r"<b>\s*Durée\s*</b>\s*:\s*(\d{1,2})h(\d{2})?", html)
     if m:
         film["duree"] = int(m.group(1)) * 60 + int(m.group(2) or 0)
-    m = re.search(r"<b>\s*Genre\s*</b>\s*:\s*([^<]+)", html)
-    if m:
-        film["genres"] = [g.strip() for g in m.group(1).split(",") if g.strip()]
 
     for day_node in find_nodes(root, tag="div", cls="movie-sessions-day"):
         film["seances"].extend(_zola_extract_seances(day_node))

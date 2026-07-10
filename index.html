@@ -701,7 +701,6 @@ body.detail-open #detailBackdrop{opacity:1;pointer-events:auto;}
             <span id="dayBtnLabel">—</span>
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
           </button>
-          <div class="day-dropdown hidden" id="dayDropdown"></div>
         </div>
         <button type="button" class="day-nav-btn show" id="dayNavNext" onclick="navDay(1)" aria-label="Jour suivant">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
@@ -1494,7 +1493,8 @@ function navDay(delta) {
 document.addEventListener('click', e => {
   const dd = document.getElementById('dayDropdown');
   const wrap = document.querySelector('.day-selector-wrap');
-  if (dd && wrap && !wrap.contains(e.target)) dd.classList.add('hidden');
+  // Le dropdown vit hors de la nav (cf. markup) : tester les deux conteneurs.
+  if (dd && wrap && !wrap.contains(e.target) && !dd.contains(e.target)) dd.classList.add('hidden');
 });
 
 // Bordure spotlight : suit la souris sur la carte survolée (délégation → survit
@@ -2172,6 +2172,9 @@ async function boot() {
 
 boot();
 </script>
+<!-- Hors de la nav : .toolbar-wrap a un transform (animation compact) qui
+     ferait de lui le référentiel du position:fixed → dropdown décalé. -->
+<div class="day-dropdown hidden" id="dayDropdown"></div>
 <div id="compactPosterTooltip">
   <div class="poster-layer" id="compactPosterA"><img src="" alt="" /></div>
   <div class="poster-layer" id="compactPosterB"><img src="" alt="" /></div>
