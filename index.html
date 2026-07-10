@@ -2033,8 +2033,8 @@ function renderDetail(film) {
       </div>
       ${film.titreOriginal && film.titreOriginal !== film.titre ? `<div class="d-orig">${film.titreOriginal}</div>` : ''}
       <div class="d-crew">
-        <div class="d-ci"><span class="lbl">Réalisation</span><span class="val">${film.realisateur}</span></div>
-        <div class="d-ci"><span class="lbl">Année</span><span class="val">${film.annee}</span></div>
+        <div class="d-ci"><span class="lbl">Réalisation</span><span class="val">${film.realisateur ? escHtml(film.realisateur) : '—'}</span></div>
+        <div class="d-ci"><span class="lbl">Année</span><span class="val">${film.annee || '—'}</span></div>
         <div class="d-ci"><span class="lbl">Durée</span><span class="val">${film.duree} min</span></div>
         ${cast ? `<div class="d-ci"><span class="lbl">Avec</span><span class="val">${cast}</span></div>` : ''}
       </div>
