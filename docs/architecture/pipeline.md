@@ -13,7 +13,7 @@ Chaque source a son parser dédié mais produit le **même « film dict »** (co
 |---|---|---|---|---|---|
 | **Comoedia** | `scrape_comoedia_pdf()` (scraper.py:1303) | **PDF** hebdo (magazine 2 colonnes) | 1 PDF = 1 semaine, publié 1×/sem | pauvres (titre en CAPS → `_titlecase_fr`) | 🔴 haute (layout PDF, découverte d'URL CDN) |
 | **Lumière** | `scrape_lumiere()` (scraper.py:1610) | **HTML** rendu serveur, param `?week=YYYY-MM-DD` | semaine explicite (`get_last_wednesday`) | pauvres à la liste, enrichies par page détail | 🟡 moyenne (redesign HTML) |
-| **Le Zola** *(à venir)* | `scrape_zola()` | **HTML** WordPress, liste roulante `/films-a-laffiche/` → `/movies/{slug}/` | pas de param semaine — liste roulante qui déborde la semaine | riches (mais **à laisser vides** pour I2) | 🟡 à confirmer — *Challenge — Ajout Cinéma Le Zola* (vault Obsidian) |
+| **Le Zola** | `scrape_zola()` | **HTML** WordPress, index `/films-a-laffiche/` → fiches `/movies/{slug}/` (sélecteurs documentés en tête du module dans scraper.py) | pas de param semaine — carrousel roulant ~15 jours, borné ensuite par `filter_current_week` | riches, mais `annee`/`realisateur`/`genres` **volontairement non ingérés** (I2 — année de sortie FR ≠ année de production ; genres FR ≠ vocabulaire OMDb anglais des autres films) | 🟡 moyenne (thème WordPress maison) ; résa TicketingCiné **stable** (pas de token volatil, contrairement au cotecine Lumière → rien à ajouter aux champs volatils I5) |
 
 **Point clé (variant piégeux) :** le *modèle de semaine* diffère. Lumière prend une semaine ; le PDF Comoedia EST une semaine ; Zola est une liste roulante coupée après coup par `filter_current_week` (scraper.py:2049). Un `scrape_X()` ne « calque » un autre que sur la *structure* (liste → détail), pas sur le modèle temporel.
 
@@ -25,14 +25,13 @@ Ordre **significatif** (certains invariants en dépendent) :
 
 1. **Scrape Comoedia PDF** (sauf `--no-comoedia-pdf`). 0 film ≠ panne : le PDF hebdo peut être déjà traité (dédup) ou pas encore publié → santé évaluée en fin de run (I6).
 2. **Scrape Lumière** (sauf `--no-lumiere`), override `--lumiere-week`.
-3. **Fusion** `all_films = comoedia + lumiere`. Vide → `exit 2`.
+2bis. **Scrape Le Zola** (sauf `--no-zola`).
+3. **Fusion** `all_films = comoedia + lumiere + zola`. Vide → `exit 2`.
 4. **Enrichissement TMDB/OMDb** (sauf `--no-omdb`) — voir § ci-dessous.
 5. **Upsert Supabase** — **AVANT** le filtrage (invariant I4) : on archive tout l'historique, pas juste la semaine.
 6. **`filter_current_week`** (sauf `--no-filter`) : fenêtre today → J+7.
 7. **Écriture conditionnelle** `programme.json` (invariant I5).
 8. **Garde-fou de santé** (I6).
-
-*(Le futur wiring Zola s'insère en 2bis + fusion en 3 + flag `--no-zola`.)*
 
 ---
 
@@ -56,13 +55,11 @@ But : détecter une **vraie** panne Comoedia sans crier au loup avant publicatio
 
 - Semaine de référence = mercredi de la semaine **en cours** (sans saut au mercredi suivant).
 - `comoedia_live` = des films Comoedia ce run **ou** en base pour la semaine.
-- `lumiere_live` = `count_week_seances(..., exclude_slug="comoedia")` > 0 → « quelqu'un d'autre a publié ».
+- `lumiere_live` = `count_week_seances(..., exclude_slugs=["comoedia", "le-zola"])` > 0 → « Lumière a publié ». **Zola est exclu de cette preuve** : il publie ~15 j en avance, le compter accuserait Comoedia à tort (I6).
 - **Échec `exit 4` uniquement si** `not comoedia_live and lumiere_live` (asymétrie = signe d'une panne du parser Comoedia).
 - Si personne n'a publié → non-événement, pas d'échec (indispensable à la cadence J/2).
 
-Helper : `count_week_seances(week_start, week_end, slug=/exclude_slug=)` (scraper.py:715). `None` = état « inconnu » (pas de creds) distinct de 0.
-
-⚠️ **Limite connue (impact Zola) :** `exclude_slug` ne gère **qu'un seul** slug. Ajouter Zola fait compter ses séances comme `lumiere_live` → faux rouge possible, aggravé car Zola publie en avance. À corriger lors de l'intégration Zola (cf. *Challenge — Ajout Cinéma Le Zola* (vault Obsidian) piège B).
+Helper : `count_week_seances(week_start, week_end, slug=/exclude_slugs=)`. `None` = état « inconnu » (pas de creds) distinct de 0. *(2026-07-10 : `exclude_slug` singulier → `exclude_slugs` liste, précisément pour isoler Zola du signal — le « piège B » du challenge Zola.)*
 
 ---
 
@@ -73,7 +70,7 @@ Helper : `count_week_seances(week_start, week_end, slug=/exclude_slug=)` (scrape
 | `--dry-run` | aucune écriture (ni JSON ni Supabase) ; imprime le JSON |
 | `--no-omdb` | désactive l'enrichissement (tests rapides) |
 | `--no-filter` | ne filtre pas par semaine |
-| `--no-lumiere` / `--no-comoedia-pdf` | désactive une source |
+| `--no-lumiere` / `--no-comoedia-pdf` / `--no-zola` | désactive une source |
 | `--pdf-file` / `--pdf-url` | PDF Comoedia local / URL directe (contourne la découverte CDN) |
 | `--lumiere-week YYYY-MM-DD` | force la semaine Lumière |
 
