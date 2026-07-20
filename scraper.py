@@ -19,6 +19,7 @@ from datetime import datetime, date, timedelta
 from pathlib import Path
 from urllib.request import urlopen, Request
 from urllib.error import URLError, HTTPError
+from urllib.parse import urlparse
 from html.parser import HTMLParser
 
 # Charger .env pour SUPABASE_* et clés API
@@ -1206,6 +1207,25 @@ def _years_close(a, b, tol: int = 1) -> bool:
         return True
 
 
+def _name_tokens(s: str) -> set[str]:
+    """Tokens significatifs (≥ 3 lettres) d'un nom, insensibles à la casse."""
+    return {w for w in re.split(r"\W+", (s or "").lower()) if len(w) >= 3}
+
+
+def _reals_compatible(a: str, b: str) -> bool:
+    """
+    Garde-fou anti-homonyme du repli par titre : deux réalisateurs sont
+    « compatibles » (même film sous une variante d'écriture) s'ils partagent un
+    token significatif, ou si l'un est vide/absent. Ainsi « Wolfgang Becker » ⊂
+    « Wolfgang Becker, Achim von Borries » (compatibles), mais « Jean Boyer » et
+    « Stéphane Demoustier » ne le sont pas (La Chaleur 1938 vs 2026).
+    """
+    ta, tb = _name_tokens(a), _name_tokens(b)
+    if not ta or not tb:
+        return True
+    return bool(ta & tb)
+
+
 def upsert_all_to_supabase(films: list[dict]) -> None:
     """
     Upsert tous les films (Comoedia + Lumière) et leurs séances dans Supabase.
@@ -1234,6 +1254,29 @@ def upsert_all_to_supabase(films: list[dict]) -> None:
     film_ids_by_imdb: "dict[str, str]" = {}    # imdb_id → film_id (clé primaire, option B)
     film_years_by_imdb: "dict[str, int]" = {}  # imdb_id → annee canonique (garde-fou)
     seances_count = 0
+
+    # Index des films déjà en base, par titre normalisé → rattachement robuste
+    # quand l'imdb_id manque (enrichissement intermittent) OU que la clé de repli
+    # brute a dérivé (année 2025↔2026, réalisateur tronqué). Sans lui, un scrape
+    # sans imdb crée une ligne en double et laisse la ligne canonique figée sur
+    # ses vieux liens (cf. « Le Héros de Berlin » : resa_url périmés). Rechargé
+    # une fois par run ; maintenu à jour au fil des upserts.
+    existing_by_title: "dict[str, list[dict]]" = {}
+    try:
+        _all_films = client.table("films").select(
+            "id,titre,annee,realisateur,imdb_id").execute().data or []
+        for _f in _all_films:
+            existing_by_title.setdefault(
+                _normalize_title_key(_f.get("titre") or ""), []).append(_f)
+    except Exception as e:
+        log.warning(f"Préchargement de l'index films échoué : {e} — repli titre inactif")
+
+    def _remember_film(fid, titre, annee, realisateur, imdb):
+        """Maintient l'index titre à jour (nouveaux films / première occurrence)."""
+        lst = existing_by_title.setdefault(_normalize_title_key(titre), [])
+        if not any(o["id"] == fid for o in lst):
+            lst.append({"id": fid, "titre": titre, "annee": annee,
+                        "realisateur": realisateur, "imdb_id": imdb})
 
     for entry in films:
         cinema_name = entry.get("cinema") or "Le Comoedia"
@@ -1306,6 +1349,36 @@ def upsert_all_to_supabase(films: list[dict]) -> None:
         if film_id is None:
             film_id = film_ids.get(key)
 
+        # ── Repli robuste par titre normalisé (index base) ─────────────────
+        # Rattache à une ligne existante du même film même quand l'imdb_id est
+        # absent et que (année, réalisateur) ont dérivé — le cas qui, sinon,
+        # crée un doublon et fige la ligne canonique sur de vieux resa_url.
+        # Garde-fous anti-homonyme : années proches (≤ tol) ET réalisateurs
+        # compatibles (La Chaleur 1938/Boyer vs 2026/Demoustier → écartés).
+        if film_id is None:
+            for cand in existing_by_title.get(_normalize_title_key(titre), []):
+                if not _years_close(annee, cand.get("annee")):
+                    continue
+                if not _reals_compatible(realisateur, cand.get("realisateur") or ""):
+                    continue
+                film_id = cand["id"]
+                # Backfill imdb_id : si le scrape en fournit un et que la ligne
+                # n'en a pas (et qu'aucune autre ligne ne le porte déjà), on le
+                # renseigne pour fiabiliser le matching des prochains runs.
+                if store_imdb and not cand.get("imdb_id") and not any(
+                    o.get("imdb_id") == store_imdb
+                    for lst in existing_by_title.values() for o in lst
+                ):
+                    try:
+                        client.table("films").update(
+                            {"imdb_id": store_imdb}).eq("id", film_id).execute()
+                        cand["imdb_id"] = store_imdb
+                    except Exception as e:
+                        log.warning(f"Backfill imdb_id échoué (« {titre} ») : {e}")
+                log.info(f"Rattaché par titre : « {titre} » ({annee}) → ligne "
+                         f"existante {film_id} (imdb absent/clé dérivée)")
+                break
+
         # ── Création si toujours introuvable ───────────────────────────────
         if film_id is None:
             row = {
@@ -1338,12 +1411,13 @@ def upsert_all_to_supabase(films: list[dict]) -> None:
                 if r2.data:
                     film_id = r2.data[0]["id"]
 
-        # Enregistrer le film_id (canonique) dans les deux caches.
+        # Enregistrer le film_id (canonique) dans les caches + l'index titre.
         if film_id:
             film_ids[key] = film_id
             if store_imdb:
                 film_ids_by_imdb.setdefault(store_imdb, film_id)
                 film_years_by_imdb.setdefault(store_imdb, annee)
+            _remember_film(film_id, titre, annee, realisateur, store_imdb)
 
         cinema_id = cinema_ids.get(cinema_name)
         if not film_id or not cinema_id:
@@ -1541,20 +1615,39 @@ def _lumiere_parse_days_row(row: dict) -> list[date | None]:
     return col_dates
 
 
+def is_valid_resa_url(href: str | None) -> bool:
+    """
+    Allowlist des liens de réservation (condition Sécu ① du doc « Accès
+    billetterie ») : la page n'a pas de CSP posable, l'allowlist EST la seule
+    défense. N'accepte qu'un https vers une billetterie connue — rejette
+    javascript:, data:, http:, et tout hôte tiers (`javascript:…/*cotecine*/`
+    passait l'ancien test de sous-chaîne). Le front re-valide de son côté (②).
+    """
+    if not href or not isinstance(href, str):
+        return False
+    try:
+        p = urlparse(href)
+    except ValueError:
+        return False
+    if p.scheme != "https":
+        return False
+    host = (p.hostname or "").lower()
+    return host.endswith(".cotecine.fr") or host == "www.ticketingcine.com"
+
+
 def _lumiere_parse_schedule_td(td: dict) -> list[dict]:
     """
     Extrait les séances depuis un <td class='schedule'>.
     Chaque <time datetime="YYYY-MM-DD HH:MM:SS" class="session"> → une séance.
-    La version est dans le <div class="version"> imbriqué.
+    La version est dans le <div class="version"> imbriqué, et le lien de
+    réservation cotecine est le <a> imbriqué DANS ce même <time>.
+
+    ⚠️ Chercher le <a> au périmètre du <td> renverrait le PREMIER lien du jour
+    pour toutes les séances → toutes pointent sur la 1re séance (mauvaise heure,
+    et « séance passée » dès que la 1re est jouée). Le lien vit dans le <time>
+    (cf. doc de recherche « Accès billetterie », spike SP1 : 275/275 imbriqués).
     """
     seances: list[dict] = []
-
-    resa_url: str | None = None
-    for link in find_nodes(td, tag="a"):
-        href = link["attrs"].get("href", "")
-        if href and ("cotecine" in href.lower() or "billet" in href.lower() or "reservation" in href.lower()):
-            resa_url = href
-            break
 
     for time_node in find_nodes(td, tag="time"):
         if "session" not in time_node["attrs"].get("class", ""):
@@ -1570,6 +1663,14 @@ def _lumiere_parse_schedule_td(td: dict) -> list[dict]:
 
         version_nodes = find_nodes(time_node, tag="div", cls="version")
         version = detect_version(text_of(version_nodes[0]).strip()) if version_nodes else "VF"
+
+        # Lien propre à CETTE séance : le <a> imbriqué dans son <time>.
+        resa_url: str | None = None
+        for link in find_nodes(time_node, tag="a"):
+            href = link["attrs"].get("href", "")
+            if is_valid_resa_url(href):
+                resa_url = href
+                break
 
         seance: dict = {"date": dt_date.isoformat(), "heure": heure, "version": version}
         if resa_url:
@@ -1862,7 +1963,7 @@ def _zola_extract_seances(day_node: dict) -> list[dict]:
                     if links:
                         href = links[0]["attrs"].get("href", "").strip()
                         a_cls = links[0]["attrs"].get("class", "")
-                        if href and "disabled" not in a_cls:
+                        if "disabled" not in a_cls and is_valid_resa_url(href):
                             pending["resa_url"] = href
                     if jour_date:
                         pending["date"] = jour_date.isoformat()
