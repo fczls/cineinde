@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer">
 <title>Cinémas indépendants Lyon</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400&display=swap" rel="stylesheet">
@@ -339,7 +340,6 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
 .cw-times:last-child,.cw-day-head:last-child,.cw-cinema-spacer:last-child{border-right:none;}
 .cw-times.has-time{color:var(--text-mid);}
 .cw-times .t-past{opacity:.4;}
-.cw-times .t-soon{color:var(--accent);}
 
 @media(max-width:820px){
   .cw-film-label{padding:8px 12px;font-size:12px;}
@@ -402,6 +402,10 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
 
 /* ── FILM CARDS (design maquette) ── */
 .film-list{padding:16px 20px 40px;display:flex;flex-direction:column;gap:16px;}
+/* Séparateur : films sans séance restante aujourd'hui (relégués en bas) */
+.list-divider{display:flex;align-items:center;gap:14px;margin:8px 2px 0;color:var(--text-dim);
+  font-size:11px;letter-spacing:.1em;text-transform:uppercase;}
+.list-divider::before,.list-divider::after{content:'';flex:1;height:1px;background:var(--border,rgba(255,255,255,.08));}
 
 .film-card{
   position:relative;
@@ -468,7 +472,8 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
 }
 .card-time-btn:hover{background:rgba(31,31,31,1);border-color:#4a4a4a;}
 .card-time-btn.past{color:#666;opacity:.5;cursor:default;}
-.card-time-btn.soon{border-color:var(--accent);color:var(--accent);background:rgba(232,96,58,.1);}
+/* état « soon » (rouge) retiré du design system — les séances imminentes
+   s'affichent comme les autres */
 
 /* skeleton */
 .sk-card{border-radius:12px;border:1px solid #3a3a3a;background:#0b0b0b;display:flex;gap:24px;padding:20px;}
@@ -531,11 +536,69 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
 .d-chips{display:flex;flex-wrap:wrap;gap:6px;align-items:center;}
 .d-chip{font-family:'DM Mono',monospace;font-size:12px;padding:4px 10px;border-radius:6px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);color:var(--text);display:flex;align-items:center;gap:6px;}
 .d-chip.past{color:var(--text-dim);opacity:.45;}
-.d-chip.soon{border-color:var(--accent);color:var(--accent);}
 .d-chip .cv{font-size:11px;opacity:.5;letter-spacing:.06em;}
 .d-day-row{display:flex;align-items:center;gap:10px;margin-bottom:6px;flex-wrap:wrap;}
 .d-day-row:last-child{margin-bottom:0;}
 .d-cine-tag{flex-shrink:0;min-width:72px;font-size:11px;font-weight:500;letter-spacing:.07em;text-transform:uppercase;color:var(--text-dim);}
+
+/* ═══════════════════════════════════════════════════════════
+   RÉSERVATION — composants deep-link révélés au survol.
+   Motion (motion/react, chargé en ESM) pilote l'échelle + le fondu des faces
+   via des styles inline sous html.motion-ready ; le fondu CSS ci-dessous ne
+   sert que de repli (lib absente) et pour prefers-reduced-motion.
+   ═══════════════════════════════════════════════════════════ */
+:root{ --resa-line:#595445; --resa-tkt:#CFBFAF; }
+
+/* ── Composant 2 : bouton créneau réservable (cartes film) ──
+   Au survol : l'horaire rétrécit + remonte à la place de la langue ; « Réserver »
+   et le billet apparaissent du bas vers le haut. Ordre final : horaire · Réserver
+   · billet. Éléments en absolu pour orchestrer le morph (Motion pilote y/scale/
+   opacity ; repli CSS :hover sous html:not(.motion-ready)). */
+.card-time-btn.resa{
+  position:relative; text-decoration:none; overflow:hidden;
+  background:radial-gradient(57.81% 57.81% at 50% 73.61%, rgba(102,102,102,0.20) 0%, rgba(0,0,0,0.20) 100%), #191817;
+}
+.card-time-btn.resa > span{ position:absolute; left:0; right:0; text-align:center; line-height:1; }
+.card-time-btn.resa .rz-time{ top:21px; font-family:'DM Mono',monospace; font-size:18px; color:#fff; }
+.card-time-btn.resa .rz-ver{ top:42px; font-family:'DM Sans',sans-serif; font-size:10px; letter-spacing:.05em; color:#848484; }
+.card-time-btn.resa .rz-lbl{ top:29px; font-family:'DM Sans',sans-serif; font-size:9px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:#fff; opacity:0; }
+.card-time-btn.resa .rz-tkt-wrap{ top:40px; display:flex; justify-content:center; opacity:0; transform:translateY(6px); }
+.card-time-btn.resa .rz-tkt{ width:24px; height:20px; }
+.card-time-btn.resa:hover, .card-time-btn.resa:focus-visible{ outline:none; }
+
+/* ── Composant 1 : pastille réservable (fiche « Séances de la semaine ») ── */
+.d-week-head{ display:flex; align-items:baseline; gap:12px 16px; flex-wrap:wrap; justify-content:space-between; margin-bottom:14px; }
+.d-week-head .d-week-lbl{ margin-bottom:0; }
+.d-week-hint{ font-size:11px; color:var(--text-dim); letter-spacing:.02em; display:inline-flex; align-items:center; gap:5px; }
+.d-chip .dc-time{ font-family:inherit; }
+a.d-chip.resa{ text-decoration:none; cursor:pointer; color:var(--text); transition:border-color .18s, background .18s; }
+a.d-chip.resa .dc-swap{ position:relative; display:inline-flex; align-items:center; justify-content:center; min-width:42px; height:20px; }
+a.d-chip.resa .dc-ver{ font-size:11px; opacity:.5; letter-spacing:.06em; }
+a.d-chip.resa .dc-tkt{ position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:24px; height:20px; opacity:0; will-change:opacity; }
+a.d-chip.resa:hover,
+a.d-chip.resa:focus-visible{ outline:none; border-color:#595445;
+  background:linear-gradient(90deg, rgba(0,0,0,0.20) 0%, rgba(201,168,76,0.20) 100%), rgba(255,255,255,0.04); }
+
+/* ── Repli sans Motion (lib non chargée / mouvement réduit) — via :hover CSS ── */
+html:not(.motion-ready) .card-time-btn.resa > span{ transition:transform .22s ease, opacity .2s ease; }
+html:not(.motion-ready) .card-time-btn.resa:hover .rz-time,
+html:not(.motion-ready) .card-time-btn.resa:focus-visible .rz-time{ transform:translateY(-13px) scale(.58); opacity:.5; }
+html:not(.motion-ready) .card-time-btn.resa:hover .rz-ver,
+html:not(.motion-ready) .card-time-btn.resa:focus-visible .rz-ver{ opacity:0; }
+html:not(.motion-ready) .card-time-btn.resa:hover .rz-lbl,
+html:not(.motion-ready) .card-time-btn.resa:focus-visible .rz-lbl{ opacity:1; }
+html:not(.motion-ready) .card-time-btn.resa:hover .rz-tkt-wrap,
+html:not(.motion-ready) .card-time-btn.resa:focus-visible .rz-tkt-wrap{ opacity:1; transform:translateY(0); }
+html:not(.motion-ready) a.d-chip.resa .dc-ver,
+html:not(.motion-ready) a.d-chip.resa .dc-tkt{ transition:opacity .18s ease; }
+html:not(.motion-ready) a.d-chip.resa:hover .dc-ver,
+html:not(.motion-ready) a.d-chip.resa:focus-visible .dc-ver{ opacity:0; }
+html:not(.motion-ready) a.d-chip.resa:hover .dc-tkt,
+html:not(.motion-ready) a.d-chip.resa:focus-visible .dc-tkt{ opacity:1; }
+
+@media (prefers-reduced-motion: reduce){
+  .card-time-btn.resa > span, a.d-chip.resa .dc-ver, a.d-chip.resa .dc-tkt{ transition-duration:1ms !important; }
+}
 
 /* ── EVENTS ── */
 .events-list{padding:16px 20px 40px;display:flex;flex-direction:column;gap:10px;}
@@ -645,6 +708,17 @@ body.detail-open #detailBackdrop{opacity:1;pointer-events:auto;}
 </style>
 </head>
 <body>
+
+<!-- Dégradés partagés du billet de réservation (composant liste) — définis une
+     seule fois pour que tous les boutons y réfèrent sans dupliquer d'ID. -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+  <radialGradient id="tkGradFill" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(23.1189 17.3318) rotate(-169.875) scale(31.6041 44.2457)">
+    <stop stop-color="#CFBFAF"/><stop offset="0.520136" stop-color="#A09080"/>
+  </radialGradient>
+  <linearGradient id="tkGradStroke" x1="10.1593" y1="3.08808" x2="13.8567" y2="16.887" gradientUnits="userSpaceOnUse">
+    <stop stop-color="white"/><stop offset="1" stop-color="#999999" stop-opacity="0"/>
+  </linearGradient>
+</defs></svg>
 
 <div class="nav-shell" id="navShell">
   <div class="header-brand">
@@ -885,9 +959,78 @@ const now      = () => new Date();
 const parseH   = h => { const [hh,mm]=h.split(':').map(Number),d=new Date(); d.setHours(hh,mm,0,0); return d; };
 const isPast   = h => parseH(h) < now();
 const isSoon   = h => { const dt=(parseH(h)-now())/60000; return dt>=0&&dt<=60; };
-const esc      = s => s.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
-const escAttr  = s => s.replace(/"/g,'&quot;').replace(/\\/g,'\\\\');
+const esc      = s => String(s).replace(/\\/g,'\\\\').replace(/'/g,"\\'");
+const escAttr  = s => String(s).replace(/"/g,'&quot;').replace(/\\/g,'\\\\');
 const escHtml  = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+
+// ═══════════════════════════════════════════════════════════
+// RÉSERVATION — deep-link billetterie (cf. doc de recherche « Accès
+// billetterie »). Option A « câbler l'existant » : le front rend resa_url.
+// Rollback = passer ENABLE_RESA_LINKS à false (1 booléen, 1 commit).
+// ═══════════════════════════════════════════════════════════
+const ENABLE_RESA_LINKS = true;
+
+// Condition Sécu ② : re-validation côté front. Le front lit deux sources
+// (Supabase + JSON de repli) et ne doit faire confiance à aucune : il n'y a
+// pas de CSP posable sur GitHub Pages, l'allowlist EST la seule défense.
+// N'accepte qu'un https vers un hôte de billetterie connu ; tout le reste
+// (javascript:, data:, http:, hôte tiers) est rejeté silencieusement.
+function safeResaUrl(u) {
+  if (typeof u !== 'string' || !u) return null;
+  let p;
+  try { p = new URL(u); } catch { return null; }
+  if (p.protocol !== 'https:') return null;
+  const h = p.hostname.toLowerCase();
+  if (/(^|\.)cotecine\.fr$/.test(h) || h === 'www.ticketingcine.com') return p.href;
+  return null;
+}
+
+// Billet (réf. Ticket-detail.svg). Silhouette partagée par les deux composants ;
+// les dégradés (liste) vivent dans un <defs> unique injecté dans le DOM
+// (#tkGradFill / #tkGradStroke) pour éviter des IDs dupliqués sur 30 boutons.
+const _TK_FILL = 'M20.4227 5.51439C20.6057 5.46536 20.7617 5.34564 20.8564 5.18158C20.9511 5.01752 20.9768 4.82256 20.9277 4.63957L20.1883 1.87978C20.0902 1.51381 19.8508 1.20179 19.5226 1.01234C19.1945 0.822905 18.8046 0.771568 18.4386 0.86963L1.87989 5.30653C1.51392 5.40459 1.2019 5.64402 1.01246 5.97214C0.823016 6.30026 0.77168 6.69019 0.869741 7.05616L1.60922 9.81595C1.65826 9.99894 1.77797 10.155 1.94203 10.2497C2.10609 10.3444 2.30106 10.3701 2.48404 10.321C3.033 10.1739 3.6179 10.2509 4.11008 10.5351C4.60226 10.8193 4.9614 11.2873 5.1085 11.8363C5.25559 12.3852 5.17858 12.9701 4.89442 13.4623C4.61026 13.9545 4.14222 14.3136 3.59327 14.4607C3.41028 14.5097 3.25427 14.6295 3.15955 14.7935C3.06483 14.9576 3.03916 15.1525 3.08819 15.3355L3.82767 18.0953C3.92574 18.4613 4.16516 18.7733 4.49328 18.9628C4.8214 19.1522 5.21134 19.2035 5.57731 19.1055L22.136 14.6686C22.502 14.5705 22.814 14.3311 23.0035 14.003C23.1929 13.6748 23.2443 13.2849 23.1462 12.9189L22.4067 10.1591C22.3577 9.97616 22.238 9.82015 22.0739 9.72543C21.9098 9.63071 21.7149 9.60504 21.5319 9.65407C20.9829 9.80116 20.398 9.72416 19.9058 9.44C19.4137 9.15584 19.0545 8.6878 18.9074 8.13884C18.7603 7.58989 18.8373 7.00498 19.1215 6.5128C19.4057 6.02062 19.8737 5.66148 20.4227 5.51439ZM4.63447 15.5867C5.37188 15.2194 5.95963 14.6085 6.29813 13.8574C6.63663 13.1063 6.70507 12.2613 6.49185 11.4656C6.27863 10.6698 5.79686 9.97226 5.12817 9.49107C4.45948 9.00988 3.645 8.77465 2.82273 8.82526L2.24964 6.68642L7.07926 5.39233L10.0372 16.4315L5.20757 17.7256L4.63447 15.5867Z';
+const _TK_STROKE = 'M1.93387 5.50741L18.4923 1.07059C18.8049 0.986825 19.1384 1.03058 19.4187 1.1924C19.699 1.35421 19.9036 1.62115 19.9874 1.93375L20.7269 4.69381C20.7615 4.82331 20.7431 4.96138 20.6761 5.07747C20.609 5.19356 20.4987 5.27856 20.3692 5.31336C19.7669 5.47475 19.2528 5.86878 18.941 6.40882C18.6293 6.94873 18.5449 7.5903 18.7062 8.19248C18.8676 8.79481 19.2616 9.30892 19.8016 9.62071C20.3416 9.93245 20.9839 10.0167 21.5862 9.85529C21.7157 9.8207 21.8538 9.83914 21.9699 9.90616C22.086 9.97327 22.1711 10.0835 22.2058 10.213L22.9453 12.973C23.029 13.2854 22.9849 13.6184 22.8233 13.8985C22.6615 14.1787 22.3945 14.3834 22.0819 14.4671L5.52346 18.904C5.21086 18.9877 4.87736 18.944 4.59709 18.7822C4.31708 18.6204 4.11244 18.3541 4.02867 18.0417L3.28911 15.2817C3.25441 15.1522 3.27301 15.0142 3.33998 14.898C3.40701 14.7819 3.51737 14.6969 3.64681 14.6621C4.2491 14.5008 4.76324 14.1067 5.07503 13.5667C5.38682 13.0267 5.47101 12.3844 5.30961 11.7821C5.14819 11.1799 4.75427 10.6665 4.21441 10.3548C3.67438 10.043 3.03213 9.95882 2.4298 10.1202C2.3003 10.1548 2.16223 10.1364 2.04614 10.0693C1.93005 10.0023 1.84505 9.89196 1.81025 9.76252L1.0707 7.00246C0.986937 6.68986 1.03069 6.35636 1.19251 6.07609C1.35432 5.79582 1.62127 5.59117 1.93387 5.50741ZM2.66611 9.04386L2.83506 9.03297C3.60937 8.98532 4.37727 9.20706 5.00695 9.66018C5.63639 10.1132 6.08984 10.7701 6.29063 11.5192C6.49141 12.2685 6.42743 13.0647 6.1087 13.772C5.78994 14.4792 5.23554 15.0543 4.54114 15.4002L4.38963 15.4761L5.06069 17.9806L10.2922 16.5788L7.22652 5.13767L1.99505 6.53944L2.66611 9.04386Z';
+// Composant 2 (liste) — billet métallique dégradé, tel que l'asset.
+const TICKET_SVG_LIST = '<svg class="rz-tkt" width="24" height="20" viewBox="0 0 24 20" fill="none" aria-hidden="true"><path d="' + _TK_FILL + '" fill="url(#tkGradFill)"/><path d="' + _TK_STROKE + '" stroke="url(#tkGradStroke)" stroke-opacity="0.4" stroke-width="0.416667"/></svg>';
+// Composant 1 (détail) — même silhouette, aplat #CFBFAF, hauteur 20px.
+const TICKET_SVG_DETAIL = '<svg class="dc-tkt" width="24" height="20" viewBox="0 0 24 20" fill="none" aria-hidden="true"><path d="' + _TK_FILL + '" fill="#CFBFAF"/></svg>';
+
+// Composant 2 — bouton créneau des cartes film. Lien valide → <a> réservable
+// (survol : l'horaire se réduit et remonte à la place de la langue, « Réserver »
+// + billet apparaissent du bas vers le haut) ; sinon → bouton informatif qui
+// ouvre la fiche, SANS la fausse promesse « Réserver » (scénario S2).
+function cardSlotHtml(s, cls, ver, film, cinema) {
+  const url = (ENABLE_RESA_LINKS && cls !== 'past') ? safeResaUrl(s.resa_url) : null;
+  const timeH = escHtml(s.h);
+  if (url) {
+    const aria = 'Réserver ' + s.h + (cinema ? ' à ' + cinema : '') + ' — ' + film.titre;
+    return '<a class="card-time-btn resa js-resa ' + cls + '" href="' + escAttr(url) + '" target="_blank" rel="noopener noreferrer" aria-label="' + escAttr(aria) + '" onclick="event.stopPropagation()">'
+      + '<span class="rz-time">' + timeH + '</span>'
+      + '<span class="rz-ver">' + escHtml(ver) + '</span>'
+      + '<span class="rz-lbl">Réserver</span>'
+      + '<span class="rz-tkt-wrap">' + TICKET_SVG_LIST + '</span>'
+      + '</a>';
+  }
+  const aria = s.h + (cinema ? ' · ' + cinema : '') + ' — ' + film.titre;
+  return '<button type="button" class="card-time-btn ' + cls + '" aria-label="' + escAttr(aria) + '" onclick="event.stopPropagation();openFilm(\'' + esc(film.titre) + '\')">' + timeH + '<span class="slot-ver">' + escHtml(ver) + '</span></button>';
+}
+
+// Composant 1 — pastille de la fiche « Séances de la semaine ». Lien valide →
+// <a> réservable (survol : la version bascule en billet) ; sinon → pastille
+// informative (span) inchangée.
+function detailChipHtml(s, past, soon) {
+  const cls = (past ? ' past' : '');
+  const url = (ENABLE_RESA_LINKS && !past) ? safeResaUrl(s.resa_url) : null;
+  const timeH = escHtml(s.h), verH = escHtml(s.v);
+  if (url) {
+    const aria = 'Réserver ' + s.h + (s.cinema ? ' · ' + (SHORT_CINEMA[s.cinema] || s.cinema) : '');
+    return '<a class="d-chip resa js-resa' + cls + '" href="' + escAttr(url) + '" target="_blank" rel="noopener noreferrer" aria-label="' + escAttr(aria) + '">'
+      + '<span class="dc-time">' + timeH + '</span>'
+      + '<span class="dc-swap"><span class="dc-ver">' + verH + '</span>' + TICKET_SVG_DETAIL + '</span>'
+      + '</a>';
+  }
+  return '<div class="d-chip' + cls + '"><span class="dc-time">' + timeH + '</span><span class="cv">' + verH + '</span></div>';
+}
 // Clé normalisée pour déduplication (même film à Comoedia/Lumière avec variantes de casse)
 const normalizeTitle = t => (t||'').toLowerCase().trim().replace(/\s+/g,' ');
 // Clé de regroupement « Tous les cinémas » : l'imdbId est l'identifiant
@@ -1197,9 +1340,14 @@ async function loadFromJson() {
   const res = await fetch('./programme.json');
   if (!res.ok) return null;
   const data = await res.json();
+  // Strip resa_url ici, à la frontière du chargeur de repli : le JSON committé
+  // fige des liens cotecine dont le D{epoch} encode la date → une semaine sans
+  // changement de programme les laisse pointer sur des séances passées
+  // (scénario S3). Ce loader est le seul endroit qui *sait* qu'il sert du
+  // périmé ; le mapper commun, lui, doit rester agnostique de la provenance.
   return (data.films || []).map(f => toFrontendFilm({
     ...f,
-    seances: f.seances || [],
+    seances: (f.seances || []).map(s => ({ ...s, resa_url: null })),
   }));
 }
 
@@ -1257,6 +1405,62 @@ function ensureFilms(films) {
       cinema: f.cinema || 'Le Comoedia',
     })),
   }));
+}
+
+// Supabase peut contenir plusieurs lignes `films` pour un même film (variantes
+// de casse — « Eruption »/« ERUPTION » — ou même titre sans imdb_id qui ont
+// glissé sous la clé de repli casse-sensible). Elles produisent, pour un même
+// (film, cinéma), plusieurs entrées porteuses des mêmes séances → séances
+// dédoublées en vue « tous » (les _day se cumulent) et film en double en vue
+// filtrée. On fusionne ici, à la frontière du chargement, les entrées de même
+// (groupe de film, cinéma), en dédoublonnant les séances (cinéma+date+heure+
+// version). Point unique : corrige cartes ET fiche détail d'un coup.
+function dedupeFilms(films) {
+  const mergeInto = (bag, key, f) => {
+    if (!bag[key]) { bag[key] = { ...f, _sd: [...(f._sd || [])] }; return; }
+    const m = bag[key];
+    m._sd = m._sd.concat(f._sd || []);
+    if (!m.imdbId   && f.imdbId)             m.imdbId    = f.imdbId;
+    if (!m._poster   && f._poster)          m._poster   = f._poster;
+    if (!m._synopsis && f._synopsis)        m._synopsis = f._synopsis;
+    if (!m._cast     && f._cast)            m._cast     = f._cast;
+    if (!m._trailer  && f._trailer)         m._trailer  = f._trailer;
+    if (!m.note      && f.note)             m.note      = f.note;
+    if (!m.genres?.length && f.genres?.length) m.genres = f.genres;
+  };
+
+  // Passe 1 — fusion par (groupe de film, cinéma). filmGroupKey unifie les
+  // variantes de casse via imdb_id (ou le titre normalisé sans imdb).
+  const p1 = {};
+  films.forEach(f => mergeInto(p1, filmGroupKey(f) + ' @ ' + (f.cinema || ''), f));
+
+  // Passe 2 — rattrape les doublons dus à un mauvais appariement imdb_id : deux
+  // lignes du MÊME film au même cinéma avec des imdb_id différents (ex. « La
+  // Dernière séance » de Pan Nalin apparié par erreur au classique de 1971).
+  // On fusionne sur cinéma + titre normalisé + réalisateur (non vide) ; le
+  // réalisateur discrimine les vrais homonymes (les deux « Seule la vie » de
+  // réalisateurs différents restent bien deux films distincts).
+  const p2 = {};
+  let uid = 0;
+  Object.values(p1).forEach(f => {
+    const real = normalizeTitle(f.realisateur || '');
+    const key = real
+      ? 'tr:' + normalizeTitle(f.titre) + '|' + real + ' @ ' + (f.cinema || '')
+      : 'uid:' + (uid++);   // sans réalisateur, pas de fusion à l'aveugle
+    mergeInto(p2, key, f);
+  });
+
+  // Dédoublonnage final des séances (même cinéma + date + heure + version).
+  Object.values(p2).forEach(f => {
+    const seen = new Set();
+    f._sd = f._sd.filter(s => {
+      const k = (s.cinema || '') + '|' + dKey(s.date) + '|' + s.h + '|' + s.v;
+      if (seen.has(k)) return false;
+      seen.add(k);
+      return true;
+    });
+  });
+  return Object.values(p2);
 }
 
 // ═══════════════════════════════════════════════════════════
@@ -1556,7 +1760,22 @@ function getRowsForDate(films, displayDate) {
     });
     rows = Object.values(merged);
   }
-  rows.sort((a,b) => a._day[0].h.localeCompare(b._day[0].h));
+  if (isTod) {
+    // Aujourd'hui : trier par proximité de la PROCHAINE séance (la plus proche
+    // de l'heure courante en haut). Les films dont toutes les séances du jour
+    // sont passées (`_nextUp === null`) sont relégués en bas — le rendu insère
+    // une mention avant eux.
+    rows.forEach(r => { const up = r._day.find(s => !isPast(s.h)); r._nextUp = up ? up.h : null; });
+    rows.sort((a,b) => {
+      const ap = a._nextUp === null, bp = b._nextUp === null;
+      if (ap !== bp) return ap ? 1 : -1;                         // films sans séance restante en bas
+      if (!ap) return a._nextUp.localeCompare(b._nextUp);        // à venir : par prochaine séance
+      return a._day[0].h.localeCompare(b._day[0].h);             // passés : par 1re séance
+    });
+  } else {
+    rows.forEach(r => { r._nextUp = r._day[0].h; });             // jours futurs : tout est à venir
+    rows.sort((a,b) => a._day[0].h.localeCompare(b._day[0].h));
+  }
   return rows;
 }
 
@@ -1615,6 +1834,9 @@ function renderFilmsStandard(films, displayDate, opts) {
       `${rows.length} film${rows.length>1?'s':''} · ${rows.reduce((n,f)=>n+f._day.length,0)} séances`;
   }
 
+  // Séparateur inséré une fois, avant le 1er film sans séance restante ce jour.
+  let pastShown = false;
+  const pastDivider = '<div class="list-divider"><span>Ces films n\'ont plus de séance aujourd\'hui</span></div>';
   const cardsHtml = rows.map(film => {
     const poster   = film._poster || POSTER_FALLBACK;
     const meta     = [(film.genres||[])[0], film.annee, film.duree ? film.duree + 'min' : null].filter(Boolean).join(' · ');
@@ -1634,8 +1856,7 @@ function renderFilmsStandard(films, displayDate, opts) {
           const soon = isTod && isSoon(s.h);
           const past = isTod && isPast(s.h);
           const cls = past ? 'past' : (soon ? 'soon' : '');
-          const aria = 'Réserver ' + s.h + ' ' + cinema + ' — ' + film.titre;
-          return '<button type="button" class="card-time-btn ' + cls + '" aria-label="' + escAttr(aria) + '" onclick="event.stopPropagation();openFilm(\'' + esc(film.titre) + '\')">' + s.h + '<span class="slot-ver">' + s.v + '</span></button>';
+          return cardSlotHtml(s, cls, s.v, film, label);
         }).join('');
         return '<div class="card-slot-row"><div class="card-cinema-chip">' + escHtml(label) + '</div>' + btns + '</div>';
       }).join('');
@@ -1653,14 +1874,13 @@ function renderFilmsStandard(films, displayDate, opts) {
           const soon = isTod && isSoon(s.h);
           const past = isTod && isPast(s.h);
           const cls = past ? 'past' : (soon ? 'soon' : '');
-          const aria = 'Réserver ' + s.h + ' — ' + film.titre;
-          return '<button type="button" class="card-time-btn ' + cls + '" aria-label="' + escAttr(aria) + '" onclick="event.stopPropagation();openFilm(\'' + esc(film.titre) + '\')">' + s.h + '<span class="slot-ver">' + v + '</span></button>';
+          return cardSlotHtml(s, cls, v, film, null);
         }).join('');
         return '<div class="card-slot-row">' + btns + '</div>';
       }).join('');
     }
 
-    return `<div class="film-card fade" data-t="${escAttr(film.titre)}" onclick="openFilm('${esc(film.titre)}')">
+    const card = `<div class="film-card fade" data-t="${escAttr(film.titre)}" onclick="openFilm('${esc(film.titre)}')">
       <div class="card-poster-wrap">
         <img class="card-poster" src="${poster}" alt="Affiche — ${escAttr(film.titre)}" loading="lazy" onerror="this.src='${POSTER_FALLBACK}'" />
       </div>
@@ -1674,6 +1894,8 @@ function renderFilmsStandard(films, displayDate, opts) {
       </div>
       <div class="card-slots">${slotRows}</div>
     </div>`;
+    if (isTod && !pastShown && film._nextUp === null) { pastShown = true; return pastDivider + card; }
+    return card;
   }).join('');
 
   if (append) {
@@ -1768,7 +1990,7 @@ function renderFilmsWeek(films) {
               const soon = isTod && isSoon(s.h);
               const past = isTod && isPast(s.h);
               const cls = past ? 'past' : (soon ? 'soon' : '');
-              return '<button type="button" class="card-time-btn ' + cls + '" onclick="event.stopPropagation();openFilm(\'' + esc(film.titre) + '\')">' + s.h + '<span class="slot-ver">' + s.v + '</span></button>';
+              return cardSlotHtml(s, cls, s.v, film, label);
             }).join('');
             return '<div class="card-slot-row"><div class="card-cinema-chip">' + escHtml(label) + '</div>' + btns + '</div>';
           }).join('');
@@ -1781,7 +2003,7 @@ function renderFilmsWeek(films) {
               const soon = isTod && isSoon(s.h);
               const past = isTod && isPast(s.h);
               const cls = past ? 'past' : (soon ? 'soon' : '');
-              return '<button type="button" class="card-time-btn ' + cls + '" onclick="event.stopPropagation();openFilm(\'' + esc(film.titre) + '\')">' + s.h + '<span class="slot-ver">' + v + '</span></button>';
+              return cardSlotHtml(s, cls, v, film, null);
             }).join('');
             return '<div class="card-slot-row">' + btns + '</div>';
           }).join('');
@@ -2009,14 +2231,14 @@ function renderDetail(film) {
             const short = SHORT_CINEMA[cinema] || cinema;
             const chips = sess.sort((a,b)=>a.h.localeCompare(b.h)).map(s => {
               const past=isTod&&isPast(s.h), soon=isTod&&isSoon(s.h);
-              return `<span class="d-chip${past?' past':''}${soon?' soon':''}">${s.h}<span class="cv">${s.v}</span></span>`;
+              return detailChipHtml(s, past, soon);
             }).join('');
             return `<div class="d-day-row"><span class="d-cine-tag">${short}</span><span class="d-chips">${chips}</span></div>`;
           }).join('');
       } else {
         const chips = seances.sort((a,b)=>a.h.localeCompare(b.h)).map(s => {
           const past=isTod&&isPast(s.h), soon=isTod&&isSoon(s.h);
-          return `<div class="d-chip${past?' past':''}${soon?' soon':''}">${s.h}<span class="cv">${s.v}</span></div>`;
+          return detailChipHtml(s, past, soon);
         }).join('');
         content = `<div class="d-chips">${chips}</div>`;
       }
@@ -2050,7 +2272,10 @@ function renderDetail(film) {
       </div>
       <div class="d-genres">${(film.genres||[]).map(g=>`<span class="d-genre">${g}</span>`).join('')}</div>
       <p class="d-synopsis">${synop}</p>
-      <div class="d-week-lbl">Séances de la semaine</div>
+      <div class="d-week-head">
+        <div class="d-week-lbl">Séances de la semaine</div>
+        ${ENABLE_RESA_LINKS && film._sd.some(s => safeResaUrl(s.resa_url)) ? `<span class="d-week-hint">🎫 Pour réserver une séance, cliquer sur l'horaire</span>` : ''}
+      </div>
       ${weekHtml}
     </div>`;
 }
@@ -2163,7 +2388,7 @@ async function boot() {
   initNavScroll();
   syncNavOffset();
   try {
-    allFilms = ensureFilms(await loadAll());
+    allFilms = dedupeFilms(ensureFilms(await loadAll()));
   } catch(e) {
     console.error('[CinémasLyon] Erreur loadAll:', e);
     allFilms = ensureFilms([]);
@@ -2259,6 +2484,87 @@ boot();
     if (row) hide();
   });
 })();
+</script>
+
+<script type="module">
+// ── Réservation : transition au survol pilotée par Motion ──
+// Motion (ex-framer-motion, paquet « motion ») chargé en ESM depuis jsdelivr —
+// le même CDN qui sert déjà Supabase. Import dynamique : si le CDN tombe,
+// le repli CSS (html:not(.motion-ready)) prend le relais sans casser la page.
+// prefers-reduced-motion : on n'active pas Motion, le repli CSS fond en ~0 ms.
+const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+if (!reduce) {
+  try {
+    const { animate } = await import('https://cdn.jsdelivr.net/npm/motion@12/+esm');
+    document.documentElement.classList.add('motion-ready');
+
+    const SPRING = { type: 'spring', stiffness: 380, damping: 26, mass: 0.7 };
+    const q = (el, sel) => el.querySelector(sel);
+
+    // Composant 1 (pastille) : simple bascule version → billet en fondu.
+    // Composant 2 (bouton carte) : morph chorégraphié — l'horaire rétrécit et
+    // remonte à la place de la langue, « Réserver » + billet montent du bas.
+    const enter = el => {
+      if (el.classList.contains('d-chip')) {
+        animate(el, { scale: 1.04 }, SPRING);
+        const ver = q(el, '.dc-ver'), tkt = q(el, '.dc-tkt');
+        if (ver) animate(ver, { opacity: 0 }, { duration: 0.15, ease: 'easeOut' });
+        if (tkt) animate(tkt, { opacity: 1 }, { duration: 0.24, ease: 'easeOut' });
+        return;
+      }
+      const t = q(el, '.rz-time'), v = q(el, '.rz-ver'),
+            l = q(el, '.rz-lbl'), k = q(el, '.rz-tkt-wrap');
+      if (t) animate(t, { y: -13, scale: 0.58, opacity: 0.5 }, SPRING);
+      if (v) animate(v, { opacity: 0 }, { duration: 0.14, ease: 'easeOut' });
+      if (l) animate(l, { opacity: 1 }, { duration: 0.22, ease: 'easeOut' });
+      if (k) animate(k, { opacity: 1, y: 0 }, SPRING);
+    };
+    const leave = el => {
+      if (el.classList.contains('d-chip')) {
+        animate(el, { scale: 1 }, SPRING);
+        const ver = q(el, '.dc-ver'), tkt = q(el, '.dc-tkt');
+        if (ver) animate(ver, { opacity: 0.5 }, { duration: 0.20, ease: 'easeOut' });  // .5 = opacité de repos de la langue
+        if (tkt) animate(tkt, { opacity: 0 }, { duration: 0.12, ease: 'easeOut' });
+        return;
+      }
+      const t = q(el, '.rz-time'), v = q(el, '.rz-ver'),
+            l = q(el, '.rz-lbl'), k = q(el, '.rz-tkt-wrap');
+      if (t) animate(t, { y: 0, scale: 1, opacity: 1 }, SPRING);
+      if (v) animate(v, { opacity: 1 }, { duration: 0.20, ease: 'easeOut' });
+      if (l) animate(l, { opacity: 0 }, { duration: 0.12, ease: 'easeOut' });
+      if (k) animate(k, { opacity: 0, y: 6 }, SPRING);
+    };
+
+    // Délégation sur document : survit aux re-rendus innerHTML des listes et
+    // de la fiche film (les boutons sont recréés à chaque changement de jour).
+    let active = null;
+    document.addEventListener('pointerover', e => {
+      const el = e.target.closest && e.target.closest('.js-resa');
+      if (!el || el === active) return;
+      if (active) leave(active);
+      active = el; enter(el);
+    });
+    document.addEventListener('pointerout', e => {
+      if (!active) return;
+      const to = e.relatedTarget;
+      if (to && active.contains(to)) return;                       // interne au bouton
+      if (to && to.closest && to.closest('.js-resa') === active) return;
+      leave(active); active = null;
+    });
+    // Clavier : miroir du survol pour l'accessibilité.
+    document.addEventListener('focusin', e => {
+      const el = e.target.closest && e.target.closest('.js-resa');
+      if (!el || el === active) return;
+      if (active) leave(active);
+      active = el; enter(el);
+    });
+    document.addEventListener('focusout', e => {
+      if (active && e.target === active) { leave(active); active = null; }
+    });
+  } catch (e) {
+    console.warn('[CinémasLyon] Motion non chargé — repli CSS actif', e);
+  }
+}
 </script>
 
 </body>
