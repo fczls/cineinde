@@ -1,7 +1,7 @@
 # Architecture — Pipeline de données (scraper.py)
 
 > Fonctionnement interne du scraper : les sources (*variants*), les étapes de `main()`, l'enrichissement, le garde-fou. Les invariants/contrats transverses vivent dans [Vue d'ensemble](README.md).
-> Dernière mise à jour : 2026-07-10
+> Dernière mise à jour : 2026-07-20
 
 ---
 
@@ -12,7 +12,7 @@ Chaque source a son parser dédié mais produit le **même « film dict »** (co
 | Source | Fonction | Format brut | Modèle de semaine | Métadonnées | Fragilité |
 |---|---|---|---|---|---|
 | **Comoedia** | `scrape_comoedia_pdf()` (scraper.py:1303) | **PDF** hebdo (magazine 2 colonnes) | 1 PDF = 1 semaine, publié 1×/sem | pauvres (titre en CAPS → `_titlecase_fr`) | 🔴 haute (layout PDF, découverte d'URL CDN) |
-| **Lumière** | `scrape_lumiere()` (scraper.py:1610) | **HTML** rendu serveur, param `?week=YYYY-MM-DD` | semaine explicite (`get_last_wednesday`) | pauvres à la liste, enrichies par page détail | 🟡 moyenne (redesign HTML) |
+| **Lumière** | `scrape_lumiere()` (scraper.py:1610) | **HTML** rendu serveur, param `?week=YYYY-MM-DD` | semaine explicite (`get_last_wednesday`) | pauvres à la liste, enrichies par page détail | 🟡 moyenne (redesign HTML) ; résa cotecine = deep-link **par séance** — le `<a>` est lu au périmètre du `<time>` (`_lumiere_parse_schedule_td`), **pas** du `<td>`, sinon toutes les séances du jour héritent du lien de la 1re → « séance passée » (bug corrigé 2026-07-20, spike SP1). `resa_url` volatil (token horaire `D{epoch}`, I5), filtré par `is_valid_resa_url` (allowlist, C3) |
 | **Le Zola** | `scrape_zola()` | **HTML** WordPress, index `/films-a-laffiche/` → fiches `/movies/{slug}/` (sélecteurs documentés en tête du module dans scraper.py) | pas de param semaine — carrousel roulant ~15 jours, borné ensuite par `filter_current_week` | riches, mais `annee`/`realisateur`/`genres` **volontairement non ingérés** (I2 — année de sortie FR ≠ année de production ; genres FR ≠ vocabulaire OMDb anglais des autres films) | 🟡 moyenne (thème WordPress maison) ; résa TicketingCiné **stable** (pas de token volatil, contrairement au cotecine Lumière → rien à ajouter aux champs volatils I5) |
 
 **Point clé (variant piégeux) :** le *modèle de semaine* diffère. Lumière prend une semaine ; le PDF Comoedia EST une semaine ; Zola est une liste roulante coupée après coup par `filter_current_week` (scraper.py:2049). Un `scrape_X()` ne « calque » un autre que sur la *structure* (liste → détail), pas sur le modèle temporel.
@@ -44,9 +44,9 @@ Ordre **significatif** (certains invariants en dépendent) :
 
 ⚠️ **Deux dédups distinctes à ne pas confondre :**
 - `_normalize_title_key` (normalisée) → regroupe pour l'**enrichissement**.
-- Dédup de l'**upsert Supabase** (I1) : `imdb_id` en clé primaire (garde-fou `_years_close`), repli sur `(titre normalisé, annee, realisateur)`.
+- Dédup de l'**upsert Supabase** (I1) : `imdb_id` en clé primaire (garde-fou `_years_close`), repli sur `(titre normalisé, annee, realisateur)`, puis — **durcissement 2026-07-20** — rattachement à une ligne existante par **titre normalisé** (index préchargé) quand l'imdb_id manque ou que la clé de repli dérive, garde-fous `_years_close` + `_reals_compatible`.
 
-Depuis la dédup par imdb_id (2026-07-10), les deux **convergent mieux** : l'enrichissement pose l'`imdb_id`, et l'upsert dédup dessus — deux copies enrichies ensemble ne créent plus 2 lignes `films` même si le titre brut diffère (casse). Restent séparés : les films sans imdb_id (repli) et les vrais homonymes (imdb_id ≠, ou années trop éloignées via `_years_close`). Genèse : *Exploration — Dédup inter-sources* (vault Obsidian).
+Depuis la dédup par imdb_id (2026-07-10), les deux **convergent mieux** : l'enrichissement pose l'`imdb_id`, et l'upsert dédup dessus — deux copies enrichies ensemble ne créent plus 2 lignes `films` même si le titre brut diffère (casse). Restent séparés : les vrais homonymes (imdb_id ≠, ou années trop éloignées via `_years_close` / réalisateurs incompatibles). **Pourquoi le durcissement** : l'enrichissement TMDB/OMDb est **intermittent** — un run sans imdb_id retombait sur la clé brute et, si l'année/réalisateur avaient dérivé, créait un doublon en laissant la ligne canonique figée (symptôme : liens de réservation périmés). Genèse : *Exploration — Dédup inter-sources* & *Accès billetterie* (vault Obsidian).
 
 ---
 
