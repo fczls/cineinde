@@ -20,6 +20,67 @@ Format inspiré de [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/).
 > la même PR. Un `fix:` de parsing/sélecteur/casse qui ne touche aucun de ces points ne
 > demande rien. Le CHANGELOG garde la *chronologie* ; l'architecture garde l'*état stable*.
 
+## 2026-07-20
+
+> ⚠️ Cette livraison touche **I1**, **I5** et **C3** — la doc `docs/architecture/`
+> (frontend, pipeline) reste à répercuter (voir *Exploration — Accès billetterie*
+> dans le vault, section « Suite donnée »).
+
+### Ajouté
+- **Réservation deep-link billetterie** (`index.html`, `scraper.py`). Le front
+  rend le lien `resa_url` de chaque séance (option A « câbler l'existant », cf.
+  *Exploration — Accès billetterie*, vault). Deux composants « Réserver » révélés
+  au survol : bouton créneau des cartes (l'horaire se réduit et remonte à la
+  place de la langue, « Réserver » + billet montent du bas — animé avec **Motion**,
+  paquet `motion` chargé en ESM) et pastille de la fiche « Séances de la semaine »
+  (bascule langue → billet). Derrière le flag `ENABLE_RESA_LINKS`. **Sécurité**
+  (seule défense, aucune CSP posable sur GitHub Pages) : allowlist `https` + hôte
+  (`safeResaUrl` au front, `is_valid_resa_url` au scrape — rejette
+  `javascript:`/`data:`/hôtes tiers), `rel="noopener noreferrer"`,
+  `<meta name="referrer" content="no-referrer">`. Touche **I5**, **C3**.
+- **Tri de la liste par proximité de la prochaine séance** + séparateur « Ces
+  films n'ont plus de séance aujourd'hui » (`index.html`, `getRowsForDate`,
+  `renderFilmsStandard`). Le film dont la prochaine séance est la plus proche de
+  l'heure courante remonte en haut ; les films dont toutes les séances du jour
+  sont passées sont relégués sous le séparateur.
+
+### Modifié
+- **Dédoublonnage des films à la frontière du chargement** (`index.html`,
+  `dedupeFilms`). Deux passes : fusion par `(filmGroupKey, cinéma)`, puis
+  rattrapage des mauvais appariements imdb_id par `(cinéma, titre normalisé,
+  réalisateur compatible)`. Corrige les séances dédoublées (vue « tous ») et les
+  films en double (vue filtrée) sans fusionner les homonymes réels (réalisateurs
+  différents : *La Chaleur* 1938/2026, *Le Tombeau des lucioles* 1988/2005…).
+- **Durcissement du matching film à l'upsert** (`scraper.py`,
+  `upsert_all_to_supabase`). Index des films existants par titre normalisé :
+  quand l'imdb_id manque (enrichissement intermittent) ou que la clé de repli
+  brute dérive (année/réalisateur), on se rattache à la ligne existante au lieu
+  d'en créer une nouvelle. Garde-fous anti-homonyme (`_years_close` +
+  `_reals_compatible`) + backfill imdb_id. Empêche la ré-apparition des doublons
+  et des liens de réservation périmés. Touche **I1**.
+- **Repli JSON : strip de `resa_url`** (`index.html`, `loadFromJson`). Le fallback
+  ne sert plus de deep-links figés (dont le `D{epoch}` pourrit avec le temps) —
+  les séances dégradent en bouton informatif. Touche **I5**.
+
+### Corrigé
+- **Parser Lumière : lien de réservation lu au périmètre du `<time>`** et non du
+  `<td>` (`scraper.py`, `_lumiere_parse_schedule_td`). Avant, toutes les séances
+  d'un jour héritaient du lien de la 1re séance → « séance passée » sur les
+  séances suivantes. Spike SP1 : chaque `<a>` cotecine est imbriqué dans son
+  `<time>` (275/275) — le fix retire du code.
+- **Langue restant en blanc après survol** d'une pastille réservable
+  (`index.html`, animation Motion `leave`) : l'opacité de la langue n'était pas
+  restaurée à sa valeur de repos (0.5).
+
+### Supprimé
+- **État « soon » (rouge/orangé)** retiré du design system (`index.html` :
+  `.card-time-btn.soon`, `.d-chip.soon`, `.cw-times .t-soon`). Les séances
+  imminentes s'affichent comme les autres.
+
+_Note données (hors code) : nettoyage one-shot des doublons `films` en base
+Supabase, 112 → 87 lignes (fusion imdb via `scripts/merge_duplicate_films.py`
+puis fusion par titre ; 3 homonymes préservés)._
+
 ## 2026-07-10
 
 ### Modifié
