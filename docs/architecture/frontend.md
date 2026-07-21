@@ -7,12 +7,12 @@
 
 ## Couche de données (Supabase live + fallback)
 
-1. **Lecture Supabase en direct** (index.html:1127+) : requête `seances` avec jointure `films (...)` et `cinemas (name)`, **filtrée `date >= today`** (index.html) — sinon l'historique (>5000 lignes) dépasse le plafond REST 1000 et tronque les séances récentes (invariant I8).
+1. **Lecture Supabase en direct** (`loadFromSupabase()`) : requête `seances` avec jointure `films (...)` et `cinemas (name)`, **filtrée `date >= today`** (index.html) — sinon l'historique (>5000 lignes) dépasse le plafond REST 1000 et tronque les séances récentes (invariant I8).
 2. **Fallback `programme.json`** si Supabase est indisponible / vide (invariant I3). Même forme de « film dict » (contrat C4). Le chargeur `loadFromJson` **strippe `resa_url`** à la frontière (I5) : le repli ne sert jamais de deep-link figé/périmé.
 3. Le front **n'écrit jamais** — RLS lecture seule (invariant I7).
 
 ### Re-split par cinéma (subtilité C2)
-Supabase **dédup** le film (une ligne `films` partagée entre salles). À la lecture, le front **regroupe par `${film.id}-${cinemaName}`** (index.html:1161) → un film joué dans 2 salles redevient **2 entrées d'affichage**, chacune avec ses séances. Le champ `cinema` est donc reconstruit côté front à partir de la jointure `cinemas(name)`.
+Supabase **dédup** le film (une ligne `films` partagée entre salles). À la lecture, le front **regroupe par `${film.id}-${cinemaName}`** (`loadFromSupabase()`) → un film joué dans 2 salles redevient **2 entrées d'affichage**, chacune avec ses séances. Le champ `cinema` est donc reconstruit côté front à partir de la jointure `cinemas(name)`.
 
 ### Dédup d'affichage
 `normalizeTitle` = équivalent front de `_normalize_title_key` (back). ⚠️ **Duplication à maintenir en phase** (contrat C3).
@@ -23,7 +23,7 @@ Supabase **dédup** le film (une ligne `films` partagée entre salles). À la le
 
 ## Cinémas — le savoir codé en dur (⚠️ contrat C3)
 
-Ajouter/retirer un cinéma touche **4 listes + 1 fonction**, autour de index.html:1267-1296 :
+Ajouter/retirer un cinéma touche **4 listes + 1 fonction**, autour de ces symboles dans index.html (`CINEMA_FILTERS`, `SHORT_CINEMA`, `CINEMA_SHORT`, `getCinemaSectionLabel`) :
 
 | Structure | Rôle |
 |---|---|
@@ -39,9 +39,9 @@ C'est le pendant front de `CINEMA_SLUGS` (scraper.py). *(Le Zola ajouté partout
 
 ## Rendu & état
 
-- **État global** (index.html:1262-1265) : `filtreCinema` (`'tous'` | nom), `compactView` (détaillée/liste), `currentTab` (`'seances'` | `'events'`).
-- **Semaine mer→mar** : `getWeekBounds()` (index.html:897) — miroir front de `get_last_wednesday()` back. Le tableau semaine s'affiche today→mardi.
-- **Filtrage cinéma** au rendu : `f.cinema !== filtreCinema` (index.html:1523).
+- **État global** (variables en tête du `<script>`) : `filtreCinema` (`'tous'` | nom), `compactView` (détaillée/liste), `currentTab` (`'seances'` | `'events'`).
+- **Semaine mer→mar** : `getWeekBounds()` — miroir front de `get_last_wednesday()` back. Le tableau semaine s'affiche today→mardi.
+- **Filtrage cinéma** au rendu : `f.cinema !== filtreCinema` (au filtrage du rendu, `renderFilms()`).
 - **Tri de la liste (2026-07-20)** : `getRowsForDate` classe, pour *aujourd'hui*, par **proximité de la prochaine séance** (`_nextUp` = 1re séance non passée) ; les films dont toutes les séances du jour sont passées (`_nextUp === null`) sont relégués en bas, et `renderFilmsStandard` insère un séparateur « Ces films n'ont plus de séance aujourd'hui » avant eux. Jours futurs : tri par 1re séance (tout est à venir).
 
 ---
@@ -61,8 +61,8 @@ Un lien absent (Comoedia, ou séance passée) → bouton **informatif** qui ouvr
 ## Onglet Événements (⚠️ dette — chantier futur)
 
 Aujourd'hui **100 % figé, aucun backend** :
-- `EVENTS_DATA` = tableau en dur (index.html:870), 4 events périmés (reliquat de maquette).
-- `renderEvents()` (index.html:2047) ne fait qu'afficher ce tableau statique.
+- `EVENTS_DATA` = tableau en dur, 4 events périmés (reliquat de maquette).
+- `renderEvents()` ne fait qu'afficher ce tableau statique.
 
 **Cible** (voir *Exploration — Événements* (vault Obsidian)) : nouvelle table Supabase `evenements`, parsers côté scraper, et `renderEvents()` alimenté par requête Supabase + fallback JSON — en réutilisant le même schéma de champs (`titre, jour, mois, heure, lieu, desc, type, color`). C'est une feature **transverse** (Frontend + Pipeline + Infra).
 

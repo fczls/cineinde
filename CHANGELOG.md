@@ -20,6 +20,46 @@ Format inspiré de [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/).
 > la même PR. Un `fix:` de parsing/sélecteur/casse qui ne touche aucun de ces points ne
 > demande rien. Le CHANGELOG garde la *chronologie* ; l'architecture garde l'*état stable*.
 
+## 2026-07-22
+
+> Réintégration d'une **logique de design system** (code-first) + hygiène du dépôt.
+> Le retrait de l'enrichissement TMDB **côté client** ne touche aucun invariant (I1–I8)
+> ni contrat (C1–C4) : l'enrichissement canonique reste **côté serveur** (`scraper.py`,
+> cf. [pipeline](docs/architecture/pipeline.md)). `docs/architecture/` inchangée sur le
+> fond — seules les ancres de ligne ont été fiabilisées.
+
+### Ajouté
+- **Socle documentaire du design system** : `docs/design-system/STRATEGY.md` (stratégie
+  code-first, pont Figma via Tokens Studio sur plan Pro, garde-fous CI/hook) et
+  `AUDIT.md` (refacto priorisé). `design/DSDS.md` : convention de nommage des classes
+  (3 natures — composant / état / variante ; vocabulaire des préfixes ; dette
+  `d-`/`dc-`/`detail-` documentée mais **non renommée**).
+- **Règle d'hygiène des dossiers** (`ARCHITECTURE.md` + README du vault Obsidian) :
+  lisibilité d'un coup d'œil, *règle de trois* avant de créer un sous-dossier.
+- **Regroupement des outils dev** dans `tools/` (`inspect_html.py`, `serve.py`,
+  `setup_cron.ai.sh`), racine allégée de 12 → 8 fichiers (commit `52cddcf`).
+
+### Modifié
+- **Tokenisation & échelles (`index.html`)** :
+  - `:root` consolidé en un seul bloc ; littéraux CSS égaux à un token existant
+    remplacés par `var(--…)` ; remplissage des tickets SVG piloté par `--resa-tkt`
+    (règle CSS, plus d'attribut `fill`). *(iso-visuel)*
+  - **Échelle typo : 19 → 7 tailles** — `10 · 12 · 14 · 16 · 18 · 24 · 38`. *(change le rendu)*
+  - **Rayons : ~10 → 4 valeurs** — `4 · 8 · 12 · 16`, + `999px` unique pour pill **et**
+    cercle (`50%`, `100px`, `40px` unifiés). `--r` = 8px. *(quasi iso ; `2/3→4`, `6/10→8` volontaires)*
+  - **Breakpoints : 5 → 2** — `480` + `820/821` (`400→480`, `600→820`). *(change le rendu tablette)*
+- **Ancres de doc fiabilisées** (`docs/architecture/README.md`, `frontend.md`) :
+  `index.html:NNN` → ancres de symbole (`loadFromSupabase()`…), stables face au futur build.
+
+### Supprimé
+- **Enrichissement TMDB côté client** (`index.html`) : `TMDB_KEY` (ancienne clé
+  **révoquée**), les 2 `fetch` navigateur et la branche TMDB d'`enrichFilm`. Les
+  métadonnées sont déjà produites côté serveur → **aucun changement de rendu** ;
+  supprime une cascade de requêtes 401 à chaque chargement **et** la clé du fichier
+  public. OMDb (clé démo publique) conservé comme filet d'enrichissement.
+- **6 classes CSS mortes** : `.card-actors`, `.card-lang-chip`, `.compact-day-column`,
+  `.ctx`, `.ctx-date`, `.m-back`.
+
 ## 2026-07-21
 
 > Livraison purement présentationnelle : aucun invariant (I1–I8) ni contrat
