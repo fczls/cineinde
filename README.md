@@ -18,26 +18,28 @@ Site programme des cinémas Le Comoedia et Cinémas Lumière (Terreaux, Bellecou
 ## Structure du projet
 
 ```
-comedia/
+cineinde/
 ├── index.html              # Frontend (programme + onglet événements)
 ├── programme.json          # Données scrapées (committées par CI)
+├── pdf_state.json          # État du scraper (committé par CI)
 ├── scraper.py              # Scraper principal (Comoedia + Lumière)
-├── inspect_html.py         # Outil debug pour analyser la structure HTML
-├── setup_cron.ai.sh        # Installation cron local (mercredi 1h)
-├── requirements.txt       # Dépendances Python
+├── requirements.txt        # Dépendances Python
 ├── .env.example            # Template variables d'environnement
 │
 ├── .github/workflows/
 │   └── scraper.yml         # Cron hebdomadaire + workflow_dispatch
 │
-├── scripts/
-│   ├── apply_schema.py     # Applique le schéma SQL sur Supabase
-│   ├── migrate_json_to_supabase.py  # Migration programme.json → Supabase
-│   └── test_supabase.py    # Vérifie données et API Supabase
+├── tools/                  # Outils de dev / debug (hors pipeline)
+│   ├── inspect_html.py     # Debug : analyse la structure HTML
+│   ├── serve.py            # Serveur de dev local
+│   └── setup_cron.ai.sh    # Installation cron local (mercredi 1h)
+│
+├── scripts/                # Scripts ops (schéma, migration, nettoyage…)
+│
+├── docs/                   # architecture/ + design-system/
 │
 └── supabase/
-    └── migrations/
-        └── 001_initial.sql # Schéma : cinemas, films, seances
+    └── migrations/         # Schéma : cinemas, films, seances
 ```
 
 ---
@@ -143,8 +145,8 @@ Le scraper enrichit les films via **OMDb** et **TMDB** (posters, synopsis, notes
 Pour exécuter le scraper chaque mercredi à 1h00 :
 
 ```bash
-bash setup_cron.ai.sh [chemin_scraper] [chemin_sortie_json]
-# Exemple : bash setup_cron.ai.sh /srv/comedia/scraper.py /var/www/comedia/programme.json
+bash tools/setup_cron.ai.sh [chemin_scraper] [chemin_sortie_json]
+# Exemple : bash tools/setup_cron.ai.sh /srv/comedia/scraper.py /var/www/comedia/programme.json
 ```
 
 ---
@@ -162,7 +164,7 @@ bash setup_cron.ai.sh [chemin_scraper] [chemin_sortie_json]
 Si la structure des sites sources change :
 
 ```bash
-python3 inspect_html.py [--url URL] [--file fichier.html]
+python3 tools/inspect_html.py [--url URL] [--file fichier.html]
 ```
 
 Affiche les classes et IDs pertinents pour adapter le scraper.
