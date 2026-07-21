@@ -20,6 +20,66 @@ Format inspiré de [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/).
 > la même PR. Un `fix:` de parsing/sélecteur/casse qui ne touche aucun de ces points ne
 > demande rien. Le CHANGELOG garde la *chronologie* ; l'architecture garde l'*état stable*.
 
+## 2026-07-21
+
+> Livraison purement présentationnelle : aucun invariant (I1–I8) ni contrat
+> (C1–C4) touché — `docs/architecture/` n'a pas à être répercutée.
+
+### Ajouté
+- **Logo SVG + police d'affichage des titres** (`index.html`, `assets/`). Le logo
+  texte `CinéIndé Lyon` cède la place à `assets/logo.svg` (rendu en `<img>`,
+  hauteur 28 px). Il est agrandi à `scale(1.38)` en haut de page et ramené à
+  `scale(1)` à l'état `.scrolled` — animé en **`transform`** et non en `height`,
+  pour rester sur le compositeur ; neutralisé sous `prefers-reduced-motion`.
+  L'échelle étant relative, le mobile hérite du même ratio sans règle dédiée.
+  Les titres de films (`.card-title` en liste, `.d-title` en fiche) passent sur
+  **Riegraf** (`@font-face`, `assets/fonts/Riegraf-Bold.otf`), `'Playfair
+  Display'` conservé en repli dans la pile `font-family`.
+  > ⚠️ **Police en version d'essai (TRIAL)** commitée dans un dépôt **public**
+  > servi par GitHub Pages — licence à acquérir. Sans le fichier, le repli
+  > Playfair Display s'applique sans rien casser.
+
+### Modifié
+- **Header transparent au repos** (`index.html`). Le fond et la bordure basse du
+  `.nav-shell` passent de l'aplat permanent à une opacité nulle par défaut, et
+  n'apparaissent qu'à l'état `.scrolled`, sur la même courbe que le compactage de
+  la toolbar (`.35s cubic-bezier(.33,0,.2,1)`) — fondu et glissement synchronisés.
+- **Cartes films — affiche et rythme vertical** (`index.html`). Affiche agrandie
+  de 10 % (192×288 → 211×317 px ; colonne de grille et skeleton alignés).
+  Espacements du bloc texte repris à **16/8/16/8/16 px** (au-dessus du titre,
+  puis entre titre, métadonnées, réalisateur, acteurs et séances) : `.card-header`
+  passe en `gap:0` et chaque élément porte sa propre marge. La grille de la carte
+  passe en `grid-template-rows:auto 1fr` pour que le surplus de hauteur de
+  l'affiche soit absorbé **sous** les séances — sinon les rangées s'étiraient et
+  gonflaient l'écart acteurs→séances à 19 px.
+- **Tailles de titres** (`index.html`) : −4 px en liste
+  (`clamp(24px,calc(4vw - 4px),36px)` — le `calc` garantit le −4 px sur toute la
+  plage responsive, pas seulement aux bornes) ; +4 px en fiche détail
+  (34→38 px desktop, 32→36 px mobile).
+- **Fiche détail — bloc du jour** (`index.html`) : toutes les polices de `.d-day`
+  +2 px (libellé du jour, tag cinéma, pastilles horaire et langue).
+- **Pastille cinéma active** (`index.html`) : l'effet « verre » (dégradé
+  spéculaire, `backdrop-filter`, triple `box-shadow`, liseré clair) est remplacé
+  par un **aplat uni `#D0A636`**.
+- **Bandeau des cinémas** (`index.html`) : zone réduite de 32 px (`margin:0 16px`).
+- **Indice de réservation** (`index.html`) : l'emoji 🎫 cède la place à l'icône
+  billet vectorielle du design system (`TICKET_SVG_HINT`, 14 px de haut), alignée
+  à gauche du texte.
+
+### Corrigé
+- **Séances tronquées sur mobile** (`index.html`). Les deux lignes du bouton
+  réservable (`.card-time-btn.resa`) sont positionnées en **absolu** avec des
+  `top` calibrés pour la hauteur desktop (64 px) ; sur les 48 px du mobile, la
+  mention de version (`VOSTFR`) débordait et se faisait couper par
+  l'`overflow:hidden`, sans être centrée. Les `top` sont recalés (11 px / 29 px).
+  Sans effet de bord sur l'animation Motion, qui n'anime que `y`/`opacity`.
+
+### Supprimé
+- **Repli `prefers-reduced-transparency`** de la pastille active (`index.html`),
+  sans objet une fois l'effet verre retiré. Le garder aurait servi `var(--gold)`
+  (#c9a84c) — donc une couleur **différente** de `#D0A636` — aux utilisateurs
+  ayant réduit la transparence.
+
 ## 2026-07-20
 
 > ⚠️ Cette livraison touche **I1**, **I5** et **C3** — la doc `docs/architecture/`
