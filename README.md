@@ -57,9 +57,12 @@ cineinde/
 écrasée au prochain build). On édite les sources dans `src/` et `design/`, puis :
 
 ```bash
-python3 build_ui.py          # design/tokens.json → src/tokens.css, puis src/ → index.html
+python3 build_ui.py          # tokens.css + index.html + galerie design.html
 python3 build_ui.py --check  # (CI) échoue si index.html n'est pas à jour avec src/
 ```
+
+`build_ui.py` régénère aussi la **galerie du design system** (`design.html`) : `python3 tools/serve.py`
+puis ouvrir `http://localhost:4173/design.html`.
 
 - **Changer une couleur / taille / rayon** → `design/tokens.json`, puis `python3 build_ui.py`.
 - **Changer un style de composant** → `src/components.css`.

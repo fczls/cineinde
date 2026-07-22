@@ -30,6 +30,9 @@ jobs:
       - name: Vérifier que index.html est à jour avec src/ (design system)
         run: python3 build_ui.py --check
 
+      - name: Vérifier que la galerie design.html est à jour avec tokens.json
+        run: python3 design/build_gallery.py --check
+
       - name: Setup Pages
         uses: actions/configure-pages@v4
 

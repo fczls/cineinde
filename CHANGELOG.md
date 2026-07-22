@@ -46,8 +46,15 @@ Format inspiré de [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/).
   `index.html` devient un **fichier généré** — garde-fous : bandeau « généré »,
   `.gitattributes` (`linguist-generated`), `build_ui.py --check` branché sur le déploiement Pages.
 - **Système d'overlays t-shirt** : `--overlay-*`, `--scrim-*`, `--overlay-gold-*`, mini-ramp
-  neutre `--neutral-*`, `--white`. `docs/design-system/color-mapping.md` (table de mapping) ;
+  neutre `--neutral-*`. `docs/design-system/color-mapping.md` (table de mapping) ;
   docs de revue rangées dans `review tech/`.
+- **Galerie du design system** (`design.html`) : référence vivante des tokens (couleurs par
+  familles, typo, polices, rayons, spacing, breakpoints), valeurs live + notes d'usage.
+  Générée par `design/build_gallery.py` (données inlinées, sans `fetch`), relancée par
+  `build_ui.py`, `--check` en CI.
+- **Règles d'usage des tokens** : une note (`$description`) par token dans `tokens.json`
+  (affichée sur la galerie) + `DSDS.md` §2 « Règles d'usage » (familles couleur, a11y,
+  anti-patterns) et §3 « Contrats de composants » (à venir).
 
 ### Modifié
 - **Tokenisation & échelles (`index.html`)** :
@@ -66,6 +73,11 @@ Format inspiré de [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/).
   d'animation et hairlines `1px` préservées. *(changements visuels délibérés mais imperceptibles)*
 - **`index.html` désormais généré** (ne plus l'éditer à la main) ; `README.md` gagne une
   section « Build du frontend » ; `docs/architecture/frontend.md` corrigé (n'est plus « sans build »).
+- **Clarification des tokens couleur** : `--text-mid`→`--text-2`, `--text-dim`→`--text-3`
+  (rampe de prominence) ; `--resa-tkt`→`--gold-light` (famille Marque) ; `--compact-times`
+  fondu dans `--neutral-hi`. Familles de la galerie réorganisées (Surfaces / Texte / Bordures /
+  Marque / Scrims) ; scrims réduits à `sm/md/xl`.
+- **`tools/serve.py` corrigé** : sert la **racine** du dépôt (servait `tools/` après le déplacement).
 
 ### Supprimé
 - **Enrichissement TMDB côté client** (`index.html`) : `TMDB_KEY` (ancienne clé
@@ -75,6 +87,8 @@ Format inspiré de [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/).
   public. OMDb (clé démo publique) conservé comme filet d'enrichissement.
 - **6 classes CSS mortes** : `.card-actors`, `.card-lang-chip`, `.compact-day-column`,
   `.ctx`, `.ctx-date`, `.m-back`.
+- **Tokens couleur retirés** (avec migration) : `--accent`→`--gold`, `--white`→`--text`,
+  `--scrim-lg`→`--scrim-md`, `--scrim-2xl`→`--scrim-xl`. *(changements visuels délibérés, imperceptibles)*
 
 ## 2026-07-21
 

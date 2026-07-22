@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CinéInde — Design System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400&display=swap" rel="stylesheet">
+
+<!-- Les VALEURS de tokens viennent du vrai pipeline : on lie src/tokens.css (généré
+     depuis design/tokens.json) et on lit les valeurs en direct. La galerie ne redéfinit
+     aucun token — elle n'a que sa propre mise en page. -->
+<link rel="stylesheet" href="src/tokens.css">
+
+<style>
+@font-face{ font-family:'Riegraf'; src:url('assets/fonts/Riegraf-Bold.otf') format('opentype'); font-weight:normal; font-style:normal; font-display:swap; }
+
+/* ── Mise en page de la galerie (spécifique à cette page, n'affecte pas le DS) ──
+   Titres : Riegraf · Tout le reste : Inter · taille plancher 14px. */
+*{ margin:0; padding:0; box-sizing:border-box; }
+body{ background:var(--bg); color:var(--text); font-family:'Inter',sans-serif; font-size:16px; line-height:1.6; -webkit-font-smoothing:antialiased; }
+.wrap{ max-width:1100px; margin:0 auto; padding:48px 24px 96px; }
+code{ font-family:'Inter',sans-serif; }
+
+header h1{ font-family:'Riegraf','Playfair Display',serif; font-weight:normal; font-size:44px; }
+header p{ color:var(--text-3); margin-top:8px; font-size:16px; }
+header code{ color:var(--gold); }
+
+nav{ display:flex; flex-wrap:wrap; gap:8px; margin:28px 0 8px; }
+nav a{ font-size:14px; letter-spacing:.03em; text-transform:uppercase; color:var(--text-2); text-decoration:none; padding:8px 14px; border:1px solid var(--border); border-radius:var(--radius-pill); }
+nav a:hover{ color:var(--text); border-color:var(--border2); }
+
+section{ margin-top:60px; }
+h2{ font-family:'Riegraf','Playfair Display',serif; font-size:32px; font-weight:normal; padding-bottom:12px; border-bottom:1px solid var(--border); }
+h2 small{ font-family:'Inter',sans-serif; font-weight:400; font-size:14px; color:var(--text-3); margin-left:12px; }
+h3{ font-size:14px; letter-spacing:.05em; text-transform:uppercase; color:var(--text-2); margin:32px 0 14px; }
+
+.grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(210px,1fr)); gap:14px; }
+.tok{ border:1px solid var(--border); border-radius:var(--radius-lg); overflow:hidden; background:var(--bg2); }
+.tok .chip{ height:80px; }
+.tok .meta{ padding:12px 14px; }
+.tok .name{ font-size:15px; font-weight:500; color:var(--text); }
+.tok .val{ font-size:14px; color:var(--text-3); margin-top:3px; word-break:break-all; font-variant-numeric:tabular-nums; }
+.usage{ font-size:14px; color:var(--text-2); line-height:1.45; }
+.tok .usage{ margin-top:10px; padding-top:10px; border-top:1px solid var(--border); }
+.radii .usage{ max-width:130px; margin-top:6px; }
+.type-row .usage{ margin-top:4px; }
+
+/* échiquier pour rendre les alphas lisibles */
+.checker{ background-image:linear-gradient(45deg,#333 25%,transparent 25%),linear-gradient(-45deg,#333 25%,transparent 25%),linear-gradient(45deg,transparent 75%,#333 75%),linear-gradient(-45deg,transparent 75%,#333 75%); background-size:16px 16px; background-position:0 0,0 8px,8px -8px,-8px 0; }
+
+.type-row{ display:flex; align-items:baseline; gap:20px; padding:14px 0; border-bottom:1px solid var(--border); }
+.type-row .lbl{ font-size:14px; color:var(--text-3); width:170px; flex-shrink:0; font-variant-numeric:tabular-nums; }
+.type-row .sample{ color:var(--text); }
+
+.radii{ display:flex; flex-wrap:wrap; gap:24px; }
+.radii .r{ text-align:center; }
+.radii .box{ width:88px; height:88px; background:var(--bg3); border:1px solid var(--border2); }
+.radii .lbl{ font-size:14px; color:var(--text-3); margin-top:10px; font-variant-numeric:tabular-nums; }
+
+.spacing .s{ display:flex; align-items:center; gap:20px; padding:8px 0; }
+.spacing .bar{ height:16px; background:var(--gold); border-radius:2px; }
+.spacing .lbl{ font-size:14px; color:var(--text-3); width:200px; font-variant-numeric:tabular-nums; }
+
+.bp{ display:flex; gap:16px; flex-wrap:wrap; }
+.bp .b{ border:1px solid var(--border); border-radius:var(--radius-lg); padding:18px 22px; background:var(--bg2); }
+.bp .b .name{ color:var(--gold); font-size:15px; font-weight:500; }
+.bp .b .val{ color:var(--text); font-size:26px; margin-top:6px; font-variant-numeric:tabular-nums; }
+.bp .b .desc{ color:var(--text-3); font-size:14px; margin-top:6px; }
+
+.fonts{ display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:16px; }
+.fonts .f{ border:1px solid var(--border); border-radius:var(--radius-lg); padding:18px; background:var(--bg2); }
+.fonts .f .big{ font-size:34px; color:var(--text); }
+.fonts .f .lbl{ font-size:14px; color:var(--text-3); margin-top:10px; }
+
+footer{ margin-top:72px; color:var(--text-3); font-size:14px; line-height:1.6; border-top:1px solid var(--border); padding-top:18px; }
+footer code{ color:var(--text-2); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>CinéInde — Design System</h1>
+    <p>Référence vivante des tokens. Valeurs lues en direct depuis <code>src/tokens.css</code> (généré par <code>design/tokens.json</code>). Cette page ne redéfinit aucun token.</p>
+  </header>
+
+  <nav>
+    <a href="#couleurs">Couleurs</a>
+    <a href="#typo">Typographie</a>
+    <a href="#polices">Polices</a>
+    <a href="#rayons">Rayons</a>
+    <a href="#espacements">Espacements</a>
+    <a href="#breakpoints">Points de rupture</a>
+  </nav>
+
+  <section id="couleurs">
+    <h2>Couleurs <small>swatch + valeur calculée en direct</small></h2>
+    <div id="colors"></div>
+  </section>
+
+  <section id="typo">
+    <h2>Typographie <small>échelle 7 pas</small></h2>
+    <div id="typescale"></div>
+  </section>
+
+  <section id="polices">
+    <h2>Polices</h2>
+    <div class="fonts">
+      <div class="f"><div class="big" style="font-family:'Riegraf','Playfair Display',serif">Aa Éé</div><div class="lbl">Riegraf — titres de films · repli : Playfair Display</div></div>
+      <div class="f"><div class="big" style="font-family:'DM Sans',sans-serif">Aa Éé</div><div class="lbl">DM Sans — corps</div></div>
+      <div class="f"><div class="big" style="font-family:'DM Mono',monospace">Aa 09</div><div class="lbl">DM Mono — horaires, data</div></div>
+    </div>
+  </section>
+
+  <section id="rayons">
+    <h2>Rayons</h2>
+    <div class="radii" id="radii"></div>
+  </section>
+
+  <section id="espacements">
+    <h2>Espacements <small>grille 2px — doc-only, imposée par le lint</small></h2>
+    <div class="spacing" id="spacing"></div>
+  </section>
+
+  <section id="breakpoints">
+    <h2>Points de rupture</h2>
+    <div class="bp" id="breakpoints"></div>
+  </section>
+
+  <footer>
+    Valeurs &amp; notes d'usage synchronisées depuis <code>design/tokens.json</code> par <code>design/build_gallery.py</code>
+    (relancé par <code>build_ui.py</code>) — inlinées dans la page, aucun <code>fetch</code>.
+    Seul le regroupement des tokens (l'IA de cette page) reste écrit à la main.
+  </footer>
+</div>
+
+<script id="tokens-data" type="application/json">{"$schema":"https://tr.designtokens.org/format/","$description":"Source de vérité des design tokens CineInde (format DTCG). Généré vers le :root d'index.html par design/build_tokens.py. Ne pas éditer le :root à la main.","color":{"$description":"Nommage sémantique conservé de l'existant. Var CSS générée : --{clé} (ex. color.bg → --bg).","bg":{"$type":"color","$value":"#000000","$description":"Fond principal de l'app (le plus sombre). Fond de page et de la barre au scroll."},"bg2":{"$type":"color","$value":"#191817","$description":"Surface de 1er niveau au-dessus du fond : squelettes, petites cartes, puces."},"bg3":{"$type":"color","$value":"#201f1d","$description":"Surface des contrôles : boutons de toolbar, bouton À propos."},"bg4":{"$type":"color","$value":"#272523","$description":"Surface la plus claire / bordure d'éléments légèrement surélevés."},"border":{"$type":"color","$value":"rgba(255,255,255,.07)","$description":"Bordure et séparateur standard (le plus courant). Traits discrets entre blocs."},"border2":{"$type":"color","$value":"rgba(255,255,255,.13)","$description":"Bordure plus marquée : survol, éléments actifs."},"gold":{"$type":"color","$value":"#c9a84c","$description":"Accent de marque. Texte/icône mis en avant : bouton actif, note, éléments clés. À doser."},"gold-dim":{"$type":"color","$value":"#7a6430","$description":"Or discret : bordures subtiles, états au repos d'éléments dorés."},"text":{"$type":"color","$value":"#f0ebe0","$description":"Texte principal : corps et titres."},"text-2":{"$type":"color","$value":"#a09080","$description":"Texte secondaire : métadonnées, labels."},"text-3":{"$type":"color","$value":"#7a7060","$description":"Texte tertiaire / atténué : mentions, distribution, éléments désactivés."},"green":{"$type":"color","$value":"#4fa06a","$description":"Vert — signal positif (disponibilité, succès). Usage ponctuel."},"compact-red":{"$type":"color","$value":"#e00000","$description":"Rouge de la vue Liste (horaires urgents/complet). Réservé à la vue compacte."},"resa-line":{"$type":"color","$value":"#595445","$description":"Trait/bordure du composant réservation révélé au survol."},"gold-light":{"$type":"color","$value":"#CFBFAF","$description":"Or clair : remplissage du billet de réservation, accents dorés clairs."},"neutral-lo":{"$type":"color","$value":"#3a3a3a","$description":"Gris neutre sombre : bordures de contrôles (bouton créneau), squelettes."},"neutral-mid":{"$type":"color","$value":"#666","$description":"Gris neutre moyen : texte de contrôle secondaire."},"neutral-hi":{"$type":"color","$value":"#848484","$description":"Gris neutre clair : horaires en vue Liste, versions, labels secondaires."},"overlay-sm":{"$type":"color","$value":"rgba(255,255,255,.04)","$description":"Voile blanc très léger : fonds de survol, fills subtils."},"overlay-lg":{"$type":"color","$value":"rgba(255,255,255,.28)","$description":"Voile blanc marqué : bordure/fill accentué."},"scrim-sm":{"$type":"color","$value":"rgba(0,0,0,.25)","$description":"Assombrissement léger : ombre douce, voile discret."},"scrim-md":{"$type":"color","$value":"rgba(0,0,0,.4)","$description":"Assombrissement moyen : ombres portées standard."},"scrim-xl":{"$type":"color","$value":"rgba(0,0,0,.72)","$description":"Assombrissement fort : hero, ombres profondes, text-shadow."},"overlay-gold-sm":{"$type":"color","$value":"rgba(201,168,76,.15)","$description":"Halo doré discret : fond de survol doré."},"overlay-gold-lg":{"$type":"color","$value":"rgba(201,168,76,.5)","$description":"Accent doré transparent : bordure/liseré doré."}},"fontSize":{"$description":"Échelle typo (7 pas). Var CSS générée : --fs-{clé}.","xs":{"$type":"dimension","$value":"10px","$description":"Mentions et labels minuscules (puce langue)."},"sm":{"$type":"dimension","$value":"12px","$description":"Métadonnées, texte secondaire."},"md":{"$type":"dimension","$value":"14px","$description":"Corps de texte par défaut."},"lg":{"$type":"dimension","$value":"16px","$description":"Sous-titres, texte mis en avant."},"xl":{"$type":"dimension","$value":"18px","$description":"Petits titres."},"2xl":{"$type":"dimension","$value":"24px","$description":"Titres de section, gros chiffres (note)."},"3xl":{"$type":"dimension","$value":"38px","$description":"Titre de fiche film (display). Un seul par vue."}},"radius":{"$description":"Échelle de rayons (4 pas + pill). Var CSS générée : --radius-{clé}. pill=999px couvre pills ET cercles (sur un carré, 999px = cercle).","sm":{"$type":"dimension","$value":"4px","$description":"Petits éléments : puces, petits boutons."},"md":{"$type":"dimension","$value":"8px","$description":"Défaut : boutons, cartes standard."},"lg":{"$type":"dimension","$value":"12px","$description":"Cartes et conteneurs."},"xl":{"$type":"dimension","$value":"16px","$description":"Grands conteneurs."},"pill":{"$type":"dimension","$value":"999px","$description":"Pleinement arrondi : pills ET boutons carrés (→ cercle)."}},"breakpoint":{"$description":"Seuils responsive. NON générés en CSS (var() interdit dans @media) — présents ici pour la doc et Figma. md=820 = frontière mobile/desktop (max-width:820 / min-width:821).","sm":{"$type":"dimension","$value":"480px","$description":"Petit mobile : ajustements serrés."},"md":{"$type":"dimension","$value":"820px","$description":"Frontière mobile/desktop (max-width:820 · min-width:821)."}},"spacing":{"$description":"Grille de spacing 2px. NON générée en CSS (littéraux volontaires — value-tokeniser du spacing = alias de littéraux, faible ROI) : présente ici comme RÉFÉRENCE pour le lint P3 (padding/margin/gap doivent tomber sur la grille) et Figma. Pas frappés : positions précises (top: d'animation) et hairlines 1px.","xs":{"$type":"dimension","$value":"4px","$description":"Espacement fin : gaps serrés."},"sm":{"$type":"dimension","$value":"8px","$description":"Petit espacement interne."},"md":{"$type":"dimension","$value":"12px","$description":"Espacement standard."},"lg":{"$type":"dimension","$value":"16px","$description":"Espacement de bloc."},"xl":{"$type":"dimension","$value":"20px","$description":"Padding horizontal de carte, gouttières, marges de bloc — le plus courant des grands pas."},"2xl":{"$type":"dimension","$value":"24px","$description":"Séparation de sections."},"3xl":{"$type":"dimension","$value":"32px","$description":"Grande séparation."},"4xl":{"$type":"dimension","$value":"40px","$description":"Respiration maximale."}}}</script>
+<script>
+const cs = getComputedStyle(document.documentElement);
+const live = name => cs.getPropertyValue(name).trim();
+
+// Groupes couleur (IA de la galerie ; tokens.json est plat)
+const COLOR_GROUPS = {
+  'Surfaces (fonds)': ['bg','bg2','bg3','bg4','overlay-sm'],
+  'Texte':            ['text','text-2','text-3','neutral-mid','neutral-hi'],
+  'Bordures':         ['border','border2','overlay-lg','resa-line','neutral-lo'],
+  'Marque':           ['gold','gold-dim','gold-light','green','compact-red','overlay-gold-sm','overlay-gold-lg'],
+  'Scrims (ombres)':  ['scrim-sm','scrim-md','scrim-xl'],
+};
+const ALPHA = new Set(['border','border2','overlay-sm','overlay-lg','scrim-sm','scrim-md','scrim-xl','overlay-gold-sm','overlay-gold-lg']);
+
+// Données de tokens inlinées par design/build_gallery.py (pas de fetch → marche partout : file://, serveur, prod).
+let t = {};
+try { t = JSON.parse(document.getElementById('tokens-data').textContent); } catch (e) {}
+const desc = (g, k) => { const n = (t[g] || {})[k]; return (n && n.$description) || ''; };
+const usg = (g, k) => '<div class="usage">' + desc(g, k) + '</div>';
+if (!t.color) document.querySelector('.wrap').insertAdjacentHTML('afterbegin',
+  '<p style="color:var(--compact-red);font-size:13px">⚠ Données non inlinées — lance <code>python3 design/build_gallery.py</code> (ou <code>build_ui.py</code>).</p>');
+
+const colorsEl = document.getElementById('colors');
+for (const [group, names] of Object.entries(COLOR_GROUPS)) {
+  const h = document.createElement('h3'); h.textContent = group; colorsEl.appendChild(h);
+  const grid = document.createElement('div'); grid.className = 'grid';
+  for (const n of names) {
+    const v = live('--' + n);
+    const card = document.createElement('div'); card.className = 'tok';
+    const chip = document.createElement('div');
+    chip.className = 'chip' + (ALPHA.has(n) ? ' checker' : '');
+    chip.style.background = 'var(--' + n + ')';
+    const meta = document.createElement('div'); meta.className = 'meta';
+    meta.innerHTML = '<div class="name">--' + n + '</div><div class="val">' + (v || '—') + '</div>' + usg('color', n);
+    card.append(chip, meta); grid.appendChild(card);
+  }
+  colorsEl.appendChild(grid);
+}
+
+// Typo
+const FS = ['xs','sm','md','lg','xl','2xl','3xl'];
+const tsEl = document.getElementById('typescale');
+for (const s of FS) {
+  const v = live('--fs-' + s);
+  const row = document.createElement('div'); row.className = 'type-row';
+  row.innerHTML = '<div class="lbl">--fs-' + s + ' · ' + v + usg('fontSize', s) + '</div>' +
+                  '<div class="sample" style="font-size:var(--fs-' + s + ')">Cinémas indépendants de Lyon</div>';
+  tsEl.appendChild(row);
+}
+
+// Rayons
+const R = ['sm','md','lg','xl','pill'];
+const rEl = document.getElementById('radii');
+for (const s of R) {
+  const v = live('--radius-' + s);
+  const d = document.createElement('div'); d.className = 'r';
+  d.innerHTML = '<div class="box" style="border-radius:var(--radius-' + s + ')"></div>' +
+                '<div class="lbl">--radius-' + s + '<br>' + v + '</div>' + usg('radius', s);
+  rEl.appendChild(d);
+}
+
+// Spacing (doc-only)
+const spEl = document.getElementById('spacing');
+for (const [k, node] of Object.entries(t.spacing || {})) {
+  if (k.startsWith('$')) continue;
+  const row = document.createElement('div'); row.className = 's';
+  row.innerHTML = '<div class="lbl">spacing.' + k + ' · ' + node.$value +
+                  '<div class="usage">' + (node.$description || '') + '</div></div>' +
+                  '<div class="bar" style="width:' + node.$value + '"></div>';
+  spEl.appendChild(row);
+}
+// Breakpoints
+const bpEl = document.getElementById('breakpoints');
+for (const [k, node] of Object.entries(t.breakpoint || {})) {
+  if (k.startsWith('$')) continue;
+  const b = document.createElement('div'); b.className = 'b';
+  b.innerHTML = '<div class="name">breakpoint.' + k + '</div><div class="val">' + node.$value +
+                '</div><div class="desc">' + (node.$description || '') + '</div>';
+  bpEl.appendChild(b);
+}
+</script>
+</body>
+</html>

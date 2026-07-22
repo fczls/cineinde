@@ -161,7 +161,7 @@
           <path d="M20 20h20M20 28h20M20 36h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
         </svg>
         <strong>Sélectionnez un film</strong>
-        <span style="font-size:var(--fs-sm);color:var(--text-dim);line-height:1.7">Synopsis, casting et toutes<br>les séances de la semaine</span>
+        <span style="font-size:var(--fs-sm);color:var(--text-3);line-height:1.7">Synopsis, casting et toutes<br>les séances de la semaine</span>
       </div>
       <div id="detailContent" class="hidden"></div>
     </div>
@@ -255,7 +255,7 @@ const FILMS_DATA = [
 ];
 
 const EVENTS_DATA = [
-  {titre:"Avant-première : Les Graines du Figuier Sauvage",jour:"15",mois:"Mars",heure:"20:30",lieu:"Salle 1",desc:"En présence du réalisateur Mohammad Rasoulof. Palme d'Or Cannes 2024.",type:"Avant-première",color:"var(--accent)"},
+  {titre:"Avant-première : Les Graines du Figuier Sauvage",jour:"15",mois:"Mars",heure:"20:30",lieu:"Salle 1",desc:"En présence du réalisateur Mohammad Rasoulof. Palme d'Or Cannes 2024.",type:"Avant-première",color:"var(--gold)"},
   {titre:"Ciné-débat : Cinéma iranien contemporain",jour:"18",mois:"Mars",heure:"19:00",lieu:"Salle 2",desc:"Projection de « Leila et ses frères » suivie d'un débat universitaire.",type:"Ciné-débat",color:"var(--green)"},
   {titre:"Rétrospective Agnès Varda",jour:"22",mois:"Mars",heure:"14:00",lieu:"Salles 1 & 2",desc:"Cléo de 5 à 7, Sans toit ni loi, Les Plages d'Agnès. Pass journée en caisse.",type:"Rétrospective",color:"var(--gold)"},
   {titre:"Soirée Classique : Vertigo",jour:"29",mois:"Mars",heure:"20:00",lieu:"Grande Salle",desc:"Hitchcock en 4K restauré, présenté par Bertrand Tavernier.",type:"Classique",color:"var(--gold)"},
@@ -1041,7 +1041,7 @@ function renderFilmsStandard(films, displayDate, opts) {
       displayDate.toLocaleDateString('fr-FR', {weekday:'long', day:'numeric', month:'long'});
     document.getElementById('ctxCount').textContent = '0 séance';
     if (!append) {
-      container.innerHTML = `<div style="padding:56px 20px;text-align:center;color:var(--text-dim);font-size:var(--fs-md);font-style:italic;font-family:'Playfair Display',serif">Aucune séance programmée ce jour.</div>`;
+      container.innerHTML = `<div style="padding:56px 20px;text-align:center;color:var(--text-3);font-size:var(--fs-md);font-style:italic;font-family:'Playfair Display',serif">Aucune séance programmée ce jour.</div>`;
       container.classList.remove('hidden');
     }
     return;
@@ -1133,7 +1133,7 @@ function renderCompactList(films, displayDate) {
   const container = document.getElementById('compactList');
 
   if (!rows.length) {
-    container.innerHTML = `<div style="padding:32px 20px;text-align:center;color:var(--text-dim);font-size:var(--fs-md);font-style:italic;font-family:'Playfair Display',serif">Aucune séance programmée ce jour.</div>`;
+    container.innerHTML = `<div style="padding:32px 20px;text-align:center;color:var(--text-3);font-size:var(--fs-md);font-style:italic;font-family:'Playfair Display',serif">Aucune séance programmée ce jour.</div>`;
     container.classList.remove('compact-week','hidden');
     return;
   }
@@ -1190,7 +1190,7 @@ function renderFilmsWeek(films) {
     html += `<div class="week-day-section" id="day-${dKey(d)}">
       <div class="week-day-header${isTod?' today':''}">${dayLabel}</div>`;
     if (!rows.length) {
-      html += `<div style="padding:12px 0;color:var(--text-dim);font-size:var(--fs-sm);font-style:italic">Aucune séance.</div>`;
+      html += `<div style="padding:12px 0;color:var(--text-3);font-size:var(--fs-sm);font-style:italic">Aucune séance.</div>`;
     } else {
       const cardsHtml = rows.map(film => {
         const poster = film._poster || POSTER_FALLBACK;
@@ -1272,7 +1272,7 @@ function renderCompactWeek(films) {
     .concat(Object.keys(cinemaMap).filter(c => !cinemaOrder.includes(c)));
 
   if (!cinemas.length) {
-    container.innerHTML = `<div style="padding:32px 20px;text-align:center;color:var(--text-dim);font-size:var(--fs-md);font-style:italic;font-family:'Playfair Display',serif">Aucune séance cette semaine.</div>`;
+    container.innerHTML = `<div style="padding:32px 20px;text-align:center;color:var(--text-3);font-size:var(--fs-md);font-style:italic;font-family:'Playfair Display',serif">Aucune séance cette semaine.</div>`;
     container.classList.remove('compact-week','hidden');
     return;
   }

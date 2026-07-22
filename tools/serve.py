@@ -4,10 +4,11 @@ import os
 import socketserver
 import sys
 
-# Serve this script's own directory; derived from __file__ (absolute when
-# launched with an absolute path) so os.getcwd() is never called — the
-# preview sandbox can leave the process cwd in a non-readable location.
-DIRECTORY = os.path.dirname(os.path.abspath(__file__))
+# Serve the REPO ROOT (parent of tools/), pas le dossier tools/ lui-même —
+# sinon index.html / design.html / design/tokens.json ne sont pas servis.
+# Dérivé de __file__ pour ne jamais appeler os.getcwd() (cwd parfois non lisible
+# dans le bac à sable de preview).
+DIRECTORY = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PORT = 4173
 
 Handler = functools.partial(http.server.SimpleHTTPRequestHandler, directory=DIRECTORY)

@@ -12,15 +12,12 @@
   --gold: #c9a84c;
   --gold-dim: #7a6430;
   --text: #f0ebe0;
-  --text-dim: #7a7060;
-  --text-mid: #a09080;
-  --accent: #e8603a;
+  --text-2: #a09080;
+  --text-3: #7a7060;
   --green: #4fa06a;
   --compact-red: #e00000;
-  --compact-times: #9b9b9b;
   --resa-line: #595445;
-  --resa-tkt: #CFBFAF;
-  --white: #fff;
+  --gold-light: #CFBFAF;
   --neutral-lo: #3a3a3a;
   --neutral-mid: #666;
   --neutral-hi: #848484;
@@ -28,9 +25,7 @@
   --overlay-lg: rgba(255,255,255,.28);
   --scrim-sm: rgba(0,0,0,.25);
   --scrim-md: rgba(0,0,0,.4);
-  --scrim-lg: rgba(0,0,0,.55);
   --scrim-xl: rgba(0,0,0,.72);
-  --scrim-2xl: rgba(0,0,0,.85);
   --overlay-gold-sm: rgba(201,168,76,.15);
   --overlay-gold-lg: rgba(201,168,76,.5);
   /* Tailles de police */

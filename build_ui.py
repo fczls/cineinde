@@ -20,6 +20,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT / "design"))
 import build_tokens  # noqa: E402
+import build_gallery  # noqa: E402
 
 TEMPLATE = ROOT / "src" / "template.html"
 TOKENS_CSS = ROOT / "src" / "tokens.css"
@@ -51,6 +52,8 @@ def main() -> None:
         return
     INDEX.write_text(result, encoding="utf-8")
     print(f"index.html assemblé depuis src/ ({len(result)} octets).")
+    build_gallery.build()  # garde la galerie design.html synchronisée avec tokens.json
+    print("design.html : galerie synchronisée.")
 
 
 if __name__ == "__main__":

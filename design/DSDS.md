@@ -67,3 +67,38 @@ C'est le principe général de cette dette : *documenter la bonne règle, l'appl
 ### Pourquoi cette section existe
 
 Sans convention écrite, chaque nouveau composant — surtout quand c'est un agent qui l'écrit — invente sa propre logique de nommage. Au bout de quelques itérations, on se retrouve avec `d-`, `dc-` et `detail-` pour la même chose. Cette page est là pour que ça n'arrive plus : elle donne **une** réponse à « comment je nomme ça ? ».
+
+## 2. Règles d'usage des tokens
+
+> **Deux sources, complémentaires.** L'usage *court* de chaque token (« quand l'utiliser ») vit dans `design/tokens.json` (champ `$description`) et s'affiche sur la galerie `design.html` — c'est la source unique, à jour automatiquement. Cette section couvre ce qui **ne tient pas en une ligne** : combinaisons, accessibilité, anti-patterns.
+
+### Couleur
+
+- **Deux familles, à ne pas mélanger.** La palette de marque est **chaude** (`--text-*`, `--gold*`, bruns). Les gris **neutres** ont leur propre rampe (`--neutral-lo/mid/hi`). Un gris neutre ne se remplace pas par un token chaud (décalage de teinte visible), et inversement.
+- **`--gold` se dose.** C'est l'accent de marque : état actif, note, élément clé. Pas de doré décoratif partout — sinon il ne veut plus rien dire. Pour un doré discret au repos → `--gold-dim`.
+- **Scrims vs overlays.** `--scrim-*` (noir) = assombrir : ombres portées, fonds de modale/hero. `--overlay-*` (blanc) = éclaircir légèrement : fills et survols subtils. Ne pas détourner l'un pour l'autre.
+- **Bordures.** `--border` par défaut, `--border2` pour survol/actif. Ne pas réinventer une bordure en `rgba(255,255,255,.X)` brut.
+
+### Accessibilité
+
+- **Hiérarchie de texte = hiérarchie de contraste.** `--text` pour l'essentiel, `--text-2` pour le secondaire, `--text-3` pour l'accessoire. **Ne pas** mettre une information essentielle en `--text-3` sur petit corps (`--fs-xs/sm`) : contraste trop faible.
+- Vérifier le contraste d'un texte doré (`--gold`) sur fond clair avant de l'utiliser hors accent.
+
+### Typographie & rayons
+
+- **Un seul `--fs-3xl` par vue** (taille display, réservée au titre de fiche). Ne pas empiler plusieurs tailles display.
+- **Un composant = un palier de rayon cohérent.** `--radius-pill` uniquement pour du pleinement arrondi (pills, boutons carrés → cercle).
+
+### Espacements
+
+- **Grille 2px, valeurs paires uniquement.** Se caler sur `--sp-*` (documentés dans `tokens.json`). Les impairs (3, 5, 7…) sont des accidents — le lint P3 les refusera. Exceptions assumées : positions précises d'animation et hairlines `1px`.
+
+### Anti-patterns (ce que le lint P3 bloquera)
+
+- ❌ Valeur brute (`#hex`, `rgba()`, `px` de police/rayon/spacing) au lieu d'un `var(--…)` — sauf les one-offs documentés (voir `color-mapping.md`).
+- ❌ Éditer `index.html` ou le bloc `:root` (générés). On édite `src/` / `design/tokens.json` puis `python3 build_ui.py`.
+- ❌ Créer un token pour une valeur utilisée une seule fois — d'abord se demander si un token existant convient (règle des deux).
+
+## 3. Contrats de composants — *à venir*
+
+Prévu au plan (STRATEGY, P2) mais **pas encore rédigé** : le contrat de chaque famille (`card-*`, `d-*`, `compact-*`) — états, variantes, règles d'accessibilité, do/don't. À écrire quand on stabilisera les composants ; la galerie `design.html` en deviendra le rendu de référence.
