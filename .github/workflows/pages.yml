@@ -33,6 +33,9 @@ jobs:
       - name: Vérifier que la galerie design.html est à jour avec tokens.json
         run: python3 design/build_gallery.py --check
 
+      - name: Lint design system (aucune valeur brute hors tokens)
+        run: python3 design/check_tokens.py
+
       - name: Setup Pages
         uses: actions/configure-pages@v4
 

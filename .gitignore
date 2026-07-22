@@ -5,6 +5,7 @@ __pycache__/
 .env
 programme_sample.html
 .venv/
-.claude/
+.claude/*
+!.claude/settings.json
 # fichier de travail avec secret (incident 2026-07)
 Untitled

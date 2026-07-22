@@ -55,6 +55,12 @@ Format inspiré de [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/).
 - **Règles d'usage des tokens** : une note (`$description`) par token dans `tokens.json`
   (affichée sur la galerie) + `DSDS.md` §2 « Règles d'usage » (familles couleur, a11y,
   anti-patterns) et §3 « Contrats de composants » (à venir).
+- **Verrouillage du design system (P3)** : lint `design/check_tokens.py` (refuse couleur brute
+  hors allowlist, px de police/rayon non-`var`, spacing hors grille 2px) — branché en **CI**
+  (déploiement Pages) et en **hook Claude Code `PostToolUse`** (`.claude/settings.json`,
+  `exit 2` → les violations reviennent à l'agent). `CLAUDE.md` : manuel de l'agent (build, règles
+  DS, fichiers générés à ne pas éditer). `.claude/settings.json` désormais versionné
+  (`.gitignore` : `settings.local.json` reste ignoré).
 
 ### Modifié
 - **Tokenisation & échelles (`index.html`)** :
