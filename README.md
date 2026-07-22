@@ -19,7 +19,16 @@ Site programme des cinémas Le Comoedia et Cinémas Lumière (Terreaux, Bellecou
 
 ```
 cineinde/
-├── index.html              # Frontend (programme + onglet événements)
+├── index.html              # Frontend — ⚙️ GÉNÉRÉ par build_ui.py, ne pas éditer à la main
+├── build_ui.py             # Assemble src/ → index.html
+├── src/                    # Sources du frontend (à éditer ici)
+│   ├── template.html       # Squelette : markup + JS + emplacements CSS
+│   ├── components.css      # Styles des composants (édition manuelle)
+│   └── tokens.css          # ⚙️ GÉNÉRÉ depuis design/tokens.json
+├── design/                 # Design system
+│   ├── tokens.json         # Source de vérité des tokens (DTCG)
+│   ├── build_tokens.py     # tokens.json → src/tokens.css
+│   └── DSDS.md             # Conventions (nommage, etc.)
 ├── programme.json          # Données scrapées (committées par CI)
 ├── pdf_state.json          # État du scraper (committé par CI)
 ├── scraper.py              # Scraper principal (Comoedia + Lumière)
@@ -40,6 +49,21 @@ cineinde/
 │
 └── supabase/
     └── migrations/         # Schéma : cinemas, films, seances
+```
+
+## Build du frontend
+
+`index.html` est un **fichier généré** — ne pas l'éditer directement (toute modif serait
+écrasée au prochain build). On édite les sources dans `src/` et `design/`, puis :
+
+```bash
+python3 build_ui.py          # design/tokens.json → src/tokens.css, puis src/ → index.html
+python3 build_ui.py --check  # (CI) échoue si index.html n'est pas à jour avec src/
+```
+
+- **Changer une couleur / taille / rayon** → `design/tokens.json`, puis `python3 build_ui.py`.
+- **Changer un style de composant** → `src/components.css`.
+- **Changer le markup ou le JS** → `src/template.html`.
 ```
 
 ---

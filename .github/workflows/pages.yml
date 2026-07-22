@@ -22,6 +22,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Vérifier que index.html est à jour avec src/ (design system)
+        run: python3 build_ui.py --check
+
       - name: Setup Pages
         uses: actions/configure-pages@v4
 

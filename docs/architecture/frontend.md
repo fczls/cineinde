@@ -1,6 +1,6 @@
 # Architecture — Frontend (index.html)
 
-> Le front est un **mono-fichier** (~120 Ko : markup + CSS + JS inline, pas de build). Sert de tout : chargement des données, dédup d'affichage, filtres, rendu semaine, deep-link réservation. Les invariants/contrats transverses vivent dans [Vue d'ensemble](README.md).
+> Le front est **servi** comme un fichier autonome (`index.html`, ~126 Ko : markup + CSS + JS inline) — mais il est **généré** : depuis 2026-07-22 il est assemblé par `build_ui.py` à partir de `src/` (`template.html` + `components.css` + `tokens.css` généré depuis `design/tokens.json`). **Ne pas éditer `index.html` à la main** — éditer `src/`/`design/` puis `python3 build_ui.py`. Le runtime reste mono-fichier (bon pour GitHub Pages) ; seule la *source* est découpée. Rôle inchangé : chargement des données, dédup d'affichage, filtres, rendu semaine, deep-link réservation. Les invariants/contrats transverses vivent dans [Vue d'ensemble](README.md).
 > Dernière mise à jour : 2026-07-20
 
 ---

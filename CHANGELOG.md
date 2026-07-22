@@ -38,6 +38,16 @@ Format inspiré de [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/).
   lisibilité d'un coup d'œil, *règle de trois* avant de créer un sous-dossier.
 - **Regroupement des outils dev** dans `tools/` (`inspect_html.py`, `serve.py`,
   `setup_cron.ai.sh`), racine allégée de 12 → 8 fichiers (commit `52cddcf`).
+- **Pipeline de tokens code-first** : `design/tokens.json` (source de vérité DTCG :
+  couleurs, échelles typo/rayons, overlays/scrims/neutres, + grille spacing & breakpoints
+  en doc-only), `design/build_tokens.py` (→ `src/tokens.css`), `build_ui.py` (assemble
+  `src/` → `index.html`, mode `--check` pour la CI).
+- **Découpage du frontend en `src/`** : `template.html` + `components.css` + `tokens.css`.
+  `index.html` devient un **fichier généré** — garde-fous : bandeau « généré »,
+  `.gitattributes` (`linguist-generated`), `build_ui.py --check` branché sur le déploiement Pages.
+- **Système d'overlays t-shirt** : `--overlay-*`, `--scrim-*`, `--overlay-gold-*`, mini-ramp
+  neutre `--neutral-*`, `--white`. `docs/design-system/color-mapping.md` (table de mapping) ;
+  docs de revue rangées dans `review tech/`.
 
 ### Modifié
 - **Tokenisation & échelles (`index.html`)** :
@@ -50,6 +60,12 @@ Format inspiré de [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/).
   - **Breakpoints : 5 → 2** — `480` + `820/821` (`400→480`, `600→820`). *(change le rendu tablette)*
 - **Ancres de doc fiabilisées** (`docs/architecture/README.md`, `frontend.md`) :
   `index.html:NNN` → ancres de symbole (`loadFromSupabase()`…), stables face au futur build.
+- **Couverture des tokens** : valeurs d'échelle (font-size, border-radius) passées en
+  `var(--…)` ; couleurs brutes **58 → 11 one-offs** (snapping imperceptible, ≤ .05 alpha) ;
+  spacing de rythme calé sur la grille 2px (impairs `3/5/7/9` → pair) — positions
+  d'animation et hairlines `1px` préservées. *(changements visuels délibérés mais imperceptibles)*
+- **`index.html` désormais généré** (ne plus l'éditer à la main) ; `README.md` gagne une
+  section « Build du frontend » ; `docs/architecture/frontend.md` corrigé (n'est plus « sans build »).
 
 ### Supprimé
 - **Enrichissement TMDB côté client** (`index.html`) : `TMDB_KEY` (ancienne clé

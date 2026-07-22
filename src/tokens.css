@@ -1,0 +1,51 @@
+/* @tokens:start */
+/* ⚙️  GÉNÉRÉ depuis design/tokens.json — ne pas éditer à la main.
+   Régénérer : python3 design/build_tokens.py */
+:root {
+  /* Couleurs */
+  --bg: #000000;
+  --bg2: #191817;
+  --bg3: #201f1d;
+  --bg4: #272523;
+  --border: rgba(255,255,255,.07);
+  --border2: rgba(255,255,255,.13);
+  --gold: #c9a84c;
+  --gold-dim: #7a6430;
+  --text: #f0ebe0;
+  --text-dim: #7a7060;
+  --text-mid: #a09080;
+  --accent: #e8603a;
+  --green: #4fa06a;
+  --compact-red: #e00000;
+  --compact-times: #9b9b9b;
+  --resa-line: #595445;
+  --resa-tkt: #CFBFAF;
+  --white: #fff;
+  --neutral-lo: #3a3a3a;
+  --neutral-mid: #666;
+  --neutral-hi: #848484;
+  --overlay-sm: rgba(255,255,255,.04);
+  --overlay-lg: rgba(255,255,255,.28);
+  --scrim-sm: rgba(0,0,0,.25);
+  --scrim-md: rgba(0,0,0,.4);
+  --scrim-lg: rgba(0,0,0,.55);
+  --scrim-xl: rgba(0,0,0,.72);
+  --scrim-2xl: rgba(0,0,0,.85);
+  --overlay-gold-sm: rgba(201,168,76,.15);
+  --overlay-gold-lg: rgba(201,168,76,.5);
+  /* Tailles de police */
+  --fs-xs: 10px;
+  --fs-sm: 12px;
+  --fs-md: 14px;
+  --fs-lg: 16px;
+  --fs-xl: 18px;
+  --fs-2xl: 24px;
+  --fs-3xl: 38px;
+  /* Rayons */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-pill: 999px;
+}
+/* @tokens:end */
