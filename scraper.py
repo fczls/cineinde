@@ -1421,6 +1421,21 @@ def upsert_all_to_supabase(films: list[dict]) -> None:
                 film_years_by_imdb.setdefault(store_imdb, annee)
             _remember_film(film_id, titre, annee, realisateur, store_imdb)
 
+            # Backfill des métadonnées TMDB sur les lignes DÉJÀ créées : les
+            # colonnes ajoutées après coup (backdrop, trailer) restent NULL sur
+            # l'historique tant qu'on ne remplit qu'à la création. On les met à
+            # jour UNIQUEMENT quand elles sont encore NULL en base (filtre
+            # .is_(col, "null")) → jamais d'écrasement d'une valeur existante,
+            # et no-op une fois remplies. Idem applicable aux nouveaux champs.
+            for col, val in (("backdrop", entry.get("backdrop")),
+                             ("trailer", entry.get("trailer"))):
+                if val:
+                    try:
+                        client.table("films").update({col: val}) \
+                            .eq("id", film_id).is_(col, "null").execute()
+                    except Exception as e:
+                        log.warning(f"Backfill {col} échoué (« {titre} ») : {e}")
+
         cinema_id = cinema_ids.get(cinema_name)
         if not film_id or not cinema_id:
             continue
