@@ -1002,6 +1002,14 @@ _TITLE_MINOR_WORDS = {
     "the", "of", "and", "a", "an", "to", "in", "on", "at", "for", "or",
 }
 
+# Numéros romains courants (suites de films) : à préserver en capitales dans un
+# titre ALL CAPS, sinon _titlecase_fr casse « II » en « Ii ». Volontairement
+# limité aux formes ≥ 2 lettres pour ne pas toucher un « I »/« V »/« X » isolé
+# qui serait une vraie lettre du titre (ex. « Malcolm X »).
+_ROMAN_NUMERALS = {
+    "II", "III", "IV", "VI", "VII", "VIII", "IX", "XI", "XII", "XIII", "XIV", "XV",
+}
+
 
 def _titlecase_fr(title: str) -> str:
     """Normalise un titre ALL CAPS vers une casse « titre » lisible (FR).
@@ -1020,6 +1028,8 @@ def _titlecase_fr(title: str) -> str:
     def cap_token(tok: str, force: bool) -> str:
         if not tok:
             return tok
+        if tok.upper() in _ROMAN_NUMERALS:   # II, III… → garder en capitales
+            return tok.upper()
         low = tok.lower()
         if not force and low in _TITLE_MINOR_WORDS:
             return low
@@ -1115,8 +1125,12 @@ def clean_pdf_table(
             titre = " ".join(cell_lines).strip()
             version_raw = "VF"
 
-        # Normaliser le titre : retirer les suffixes de catégorie
-        titre = re.sub(r"\s+JP\s*$", "", titre, flags=re.I).strip()
+        # Normaliser le titre :
+        # - « JP » / « J P » = marqueur Jeune Public (jamais dans le titre), en
+        #   préfixe, suffixe ou ligne isolée jointe → on le retire partout.
+        # - « * » final = renvoi de note de bas de page.
+        titre = re.sub(r"\bJ\s?P\b\.?", "", titre, flags=re.I)
+        titre = re.sub(r"\s*\*+\s*$", "", titre)
         titre = re.sub(r"\s+", " ", titre).strip()
         titre = _titlecase_fr(titre)  # PDF en capitales → casse « titre » lisible
         if not titre or len(titre) < 2:
@@ -2361,6 +2375,18 @@ def _tmdb_trailer(tmdb_id: int) -> str | None:
     return None
 
 
+def _strip_trailing_footnote(title: str) -> "str | None":
+    """Retire un renvoi de note de bas de page final : « * » ou un chiffre ISOLÉ
+    (un seul chiffre précédé d'une espace, ex. « Memento 1 » → « Memento »). Ne
+    matche pas un vrai numéro collé (« 2049 ») ni multi-chiffres. Retourne None si
+    rien n'est retiré. N'est utilisé qu'en dernier recours par _enrich_tmdb_first,
+    donc les vrais numéros de suite (« Toy Story 5 ») ne sont jamais nettoyés tant
+    que leur recherche directe aboutit."""
+    src = (title or "").strip()
+    cleaned = re.sub(r"\s+[\d*]\s*$", "", src).strip()
+    return cleaned if cleaned and cleaned != src and len(cleaned) >= 2 else None
+
+
 def _enrich_tmdb_first(film: dict, titre: str) -> None:
     """TMDB : find par imdb_id si dispo, sinon search par titre (avec fallback titre FR)."""
     annee = film.get("annee")
@@ -2387,9 +2413,24 @@ def _enrich_tmdb_first(film: dict, titre: str) -> None:
         # Essai 2 : titre français si différent
         if not m and titre_fr and titre_fr != titre:
             m = _tmdb_search(titre_fr, annee)
+        # Essai 3 (aller-retour note de bas de page) : l'entrée PDF porte peut-être
+        # un renvoi de note final (chiffre isolé / « * »), ex. « Memento 1 ». On
+        # réessaie sans ; si ça matche, on adopte le titre propre de TMDB. Sûr pour
+        # les vrais numéros (« Toy Story 5 ») dont la recherche directe a réussi.
+        adopt_clean = False
+        if not m:
+            cleaned = _strip_trailing_footnote(titre) or (
+                _strip_trailing_footnote(titre_fr) if titre_fr else None)
+            if cleaned:
+                m = _tmdb_search(cleaned, annee)
+                adopt_clean = bool(m)
         if m:
             tmdb_id = m.get("id")
             _apply_tmdb_movie(film, m)
+            if adopt_clean and m.get("title"):
+                film["titre"] = m["title"]            # titre propre TMDB, sans la note
+                if m.get("original_title"):
+                    film["titreOriginal"] = m["original_title"]
             # Récupérer imdbId depuis les détails TMDB
             if not film.get("imdbId") and tmdb_id:
                 try:
