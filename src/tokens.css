@@ -25,6 +25,7 @@
   --overlay-lg: rgba(255,255,255,.28);
   --scrim-sm: rgba(0,0,0,.25);
   --scrim-md: rgba(0,0,0,.4);
+  --scrim-lg: rgba(0,0,0,.6);
   --scrim-xl: rgba(0,0,0,.72);
   --overlay-gold-sm: rgba(201,168,76,.15);
   --overlay-gold-lg: rgba(201,168,76,.5);
@@ -41,6 +42,7 @@
   --radius-md: 8px;
   --radius-lg: 12px;
   --radius-xl: 16px;
+  --radius-2xl: 40px;
   --radius-pill: 999px;
 }
 /* @tokens:end */

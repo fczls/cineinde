@@ -11,7 +11,18 @@ import sys
 DIRECTORY = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PORT = 4173
 
-Handler = functools.partial(http.server.SimpleHTTPRequestHandler, directory=DIRECTORY)
+
+class NoCacheHandler(http.server.SimpleHTTPRequestHandler):
+    """Serveur de dev : désactive le cache navigateur pour que chaque rebuild
+    (index.html, tokens.css…) soit vu au simple rechargement, sans hard-refresh."""
+
+    def end_headers(self):
+        self.send_header("Cache-Control", "no-store, must-revalidate")
+        self.send_header("Expires", "0")
+        super().end_headers()
+
+
+Handler = functools.partial(NoCacheHandler, directory=DIRECTORY)
 print(f"Serving {DIRECTORY} on :{PORT}", file=sys.stderr)
 socketserver.TCPServer.allow_reuse_address = True
 with socketserver.TCPServer(("", PORT), Handler) as httpd:

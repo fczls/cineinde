@@ -1391,6 +1391,8 @@ def upsert_all_to_supabase(films: list[dict]) -> None:
                 "synopsis": entry.get("synopsis"),
                 "imdb_id": store_imdb,
                 "poster": entry.get("poster"),
+                "backdrop": entry.get("backdrop"),
+                "trailer": entry.get("trailer"),
                 "imdb_rating": entry.get("imdbRating"),
                 "cast": entry.get("cast"),
                 "source": entry.get("source"),
@@ -2324,6 +2326,26 @@ def _tmdb_search(query: str, annee: int | None) -> dict | None:
     return None
 
 
+def _tmdb_trailer(tmdb_id: int) -> str | None:
+    """URL YouTube de la bande-annonce TMDB : trailer officiel FR en priorité,
+    puis trailer FR, puis EN, puis teaser. None si aucune vidéo YouTube."""
+    for lang in ("fr-FR", "en-US"):
+        url = f"{URL_TMDB_BASE}movie/{tmdb_id}/videos?api_key={TMDB_API_KEY}&language={lang}"
+        try:
+            vids = json.loads(fetch(url, timeout=8)).get("results") or []
+        except Exception:
+            continue
+        yt = [v for v in vids if v.get("site") == "YouTube" and v.get("key")]
+        pick = (
+            next((v for v in yt if v.get("type") == "Trailer" and v.get("official")), None)
+            or next((v for v in yt if v.get("type") == "Trailer"), None)
+            or next((v for v in yt if v.get("type") == "Teaser"), None)
+        )
+        if pick:
+            return f"https://www.youtube.com/watch?v={pick['key']}"
+    return None
+
+
 def _enrich_tmdb_first(film: dict, titre: str) -> None:
     """TMDB : find par imdb_id si dispo, sinon search par titre (avec fallback titre FR)."""
     annee = film.get("annee")
@@ -2385,11 +2407,19 @@ def _enrich_tmdb_first(film: dict, titre: str) -> None:
         except Exception:
             pass
 
+    # E. Bande-annonce (vidéos TMDB : trailer YouTube officiel FR en priorité, puis EN)
+    if tmdb_id and not film.get("trailer"):
+        trailer = _tmdb_trailer(tmdb_id)
+        if trailer:
+            film["trailer"] = trailer
+
 
 def _apply_tmdb_movie(film: dict, m: dict) -> None:
     """Applique les champs d'un objet movie TMDB sur le film (sans écraser l'existant)."""
     if not film.get("poster") and m.get("poster_path"):
         film["poster"] = f"https://image.tmdb.org/t/p/w500{m['poster_path']}"
+    if not film.get("backdrop") and m.get("backdrop_path"):
+        film["backdrop"] = f"https://image.tmdb.org/t/p/w1280{m['backdrop_path']}"
     if not film.get("synopsis"):
         ov = (m.get("overview") or "").strip()
         if ov:
@@ -2593,7 +2623,7 @@ def main():
         # collecter le meilleur champ disponible de n'importe quelle source,
         # puis l'appliquer à toutes les copies (ex: affiche Lumière → copie Comoedia).
         enrich_fields = [
-            "imdbId", "poster", "imdbRating", "cast", "synopsis",
+            "imdbId", "poster", "backdrop", "trailer", "imdbRating", "cast", "synopsis",
             "genres", "realisateur", "annee", "duree", "titreOriginal",
         ]
         title_groups: dict[str, list[dict]] = {}
