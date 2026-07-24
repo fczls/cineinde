@@ -2201,6 +2201,14 @@ function closeDetail() {
   document.querySelectorAll('.film-card, .compact-row, .cw-film-label, .cw-times').forEach(c => c.classList.remove('active'));
 }
 
+// Monte une URL image TMDB en pleine résolution pour l'affichage grand format
+// de la fiche (bloc visuel + hero) : le chemin TMDB encode la taille (/t/p/w500/…),
+// que l'on remplace par /original/. Les vignettes de liste gardent w500 (légères).
+// Les URLs non-TMDB (OMDb/Amazon, scraping salles) ne matchent pas → inchangées.
+function tmdbHiRes(url) {
+  return typeof url === 'string' ? url.replace(/\/t\/p\/w\d+\//, '/t/p/original/') : url;
+}
+
 // Repli du bloc visuel : image distante cassée → fallback local + voile 60%.
 function visualFallback(img) {
   img.onerror = null;
@@ -2268,14 +2276,14 @@ function renderDetail(film) {
   // onerror : si l'image distante casse (backdrop TMDB 404), bascule sur le fallback.
   const visSrc = film._backdrop || poster;
   document.getElementById('detailVisual').innerHTML = visSrc
-    ? `<img class="dv-img" src="${visSrc}" alt="" onerror="visualFallback(this)" />`
+    ? `<img class="dv-img" src="${tmdbHiRes(visSrc)}" alt="" onerror="visualFallback(this)" />`
     : `<img class="dv-img" src="assets/visual-fallback.webp" alt="" /><div class="dv-scrim"></div>`;
   const el = document.getElementById('detailContent');
   el.classList.remove('hidden');
   el.innerHTML = `
     <div class="d-hero fade">
       ${(film._backdrop || poster)
-        ? `<img class="d-back ${film._backdrop ? 'sharp' : 'blurred'}" src="${film._backdrop || poster}" alt="" />`
+        ? `<img class="d-back ${film._backdrop ? 'sharp' : 'blurred'}" src="${tmdbHiRes(film._backdrop || poster)}" alt="" />`
         : `<div class="d-back-ph" style="background:${film.color}"></div>`}
       <div class="d-back-btn"><div class="d-back-btn-circle" onclick="closeDetail()"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 4l8 8M12 4l-8 8" stroke="white" stroke-width="1.75" stroke-linecap="round"/></svg></div></div>
       ${film._trailer ? `<a class="d-trailer-btn" href="${film._trailer}" target="_blank" rel="noopener noreferrer"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M5 3l9 5-9 5V3z" fill="#201f1d"/></svg>Bande-annonce</a>` : ''}
