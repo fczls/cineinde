@@ -1380,6 +1380,49 @@ function jumpToTomorrow() {
 // ═══════════════════════════════════════════════════════════
 // DETAIL PANEL
 // ═══════════════════════════════════════════════════════════
+// ── Transition liste ⇄ fiche : FLIP « élément partagé » ─────────────────────
+// Une seule affiche CLONÉE (position:fixed) voyage de la carte vers le bloc
+// visuel (et inverse), géométrie + rayon animés (8→40). Une seule image visible
+// à la fois → aucune superposition. Desktop uniquement ; dégradation propre
+// (mobile / prefers-reduced-motion / API absente / éléments introuvables).
+function _reducedMotion() { return window.matchMedia('(prefers-reduced-motion: reduce)').matches; }
+function _flipEnabled() {
+  return !_reducedMotion() && window.innerWidth > 820 && typeof Element.prototype.animate === 'function';
+}
+let _openFilmTitre = null;
+
+function _visualMorphSource(titre) {
+  if (!titre) return null;
+  for (const c of document.querySelectorAll('.film-card')) {
+    if (c.dataset.t && normalizeTitle(c.dataset.t) === normalizeTitle(titre))
+      return c.querySelector('.card-poster');
+  }
+  return null;
+}
+
+// Anime une affiche clonée de `from` vers `to` (position, taille, rayon).
+// onDone(clone) est appelé à la fin (le clone n'est PAS retiré automatiquement :
+// l'appelant le retire au bon moment, une fois la vraie image révélée).
+function _flipVisual(from, to, src, onDone) {
+  const clone = document.createElement('img');
+  clone.src = src;
+  clone.setAttribute('aria-hidden', 'true');
+  Object.assign(clone.style, {
+    position: 'fixed', margin: '0', objectFit: 'cover', zIndex: '9999',
+    pointerEvents: 'none', left: from.rect.left + 'px', top: from.rect.top + 'px',
+    width: from.rect.width + 'px', height: from.rect.height + 'px', borderRadius: from.radius,
+  });
+  document.body.appendChild(clone);
+  const kf = (r, radius) => ({
+    left: r.left + 'px', top: r.top + 'px', width: r.width + 'px', height: r.height + 'px', borderRadius: radius,
+  });
+  const anim = clone.animate([kf(from.rect, from.radius), kf(to.rect, to.radius)],
+    { duration: 300, easing: 'cubic-bezier(.4,0,.2,1)', fill: 'forwards' });
+  const done = () => { if (onDone) onDone(clone); else clone.remove(); };
+  anim.onfinish = anim.oncancel = done;
+  return clone;
+}
+
 function openFilm(titre) {
   // Mémoriser la position de la liste avant que .main ne disparaisse (sauf si une
   // fiche est déjà ouverte : on ne veut pas écraser la position réelle par 0).
@@ -1408,33 +1451,83 @@ function openFilm(titre) {
   }
   if (!film) return;
 
-  document.querySelectorAll('.film-card, .compact-row').forEach(c => c.classList.remove('active'));
-  document.querySelectorAll('.film-card, .compact-row').forEach(c => {
-    if (c.dataset.t && normalizeTitle(c.dataset.t) === normalizeTitle(titre)) c.classList.add('active');
+  _openFilmTitre = titre;
+  const applyOpen = () => {
+    document.querySelectorAll('.film-card, .compact-row').forEach(c => c.classList.remove('active'));
+    document.querySelectorAll('.film-card, .compact-row').forEach(c => {
+      if (c.dataset.t && normalizeTitle(c.dataset.t) === normalizeTitle(titre)) c.classList.add('active');
+    });
+    renderDetail(film);
+    if (window.innerWidth <= 820) {
+      const side = document.getElementById('sidePanel');
+      side.classList.add('open');
+      side.scrollTo(0, 0);
+      window.scrollTo(0, 0);
+    }
+  };
+
+  // FLIP : mesurer l'affiche de la carte AVANT de masquer la liste.
+  const cardPoster = _visualMorphSource(titre);
+  if (!_flipEnabled() || !cardPoster) { applyOpen(); return; }
+  const from = {
+    rect: cardPoster.getBoundingClientRect(),
+    radius: getComputedStyle(cardPoster).borderRadius,
+    src: cardPoster.currentSrc || cardPoster.src,
+  };
+
+  applyOpen();   // détail rendu, liste masquée, bloc visuel affiché
+
+  const dvImg = document.querySelector('#detailVisual .dv-img');
+  const container = document.getElementById('detailVisual');
+  if (!dvImg || !from.rect.width) return;
+  const to = { rect: dvImg.getBoundingClientRect(), radius: getComputedStyle(container).borderRadius };
+  if (!to.rect.width) return;
+
+  // Masquer la vraie image du bloc le temps du vol (le clone en carte prend le relais).
+  dvImg.style.opacity = '0';
+  _flipVisual(from, to, from.src, (clone) => {
+    // Révéler la vraie image (pleine résolution) une fois chargée, puis retirer le
+    // clone — qui reste en place sur le bloc entre-temps (pas de trou).
+    const reveal = () => { dvImg.style.opacity = ''; clone.remove(); };
+    if (dvImg.complete && dvImg.naturalWidth) reveal();
+    else { dvImg.onload = reveal; dvImg.onerror = reveal; setTimeout(reveal, 600); }
   });
-
-  renderDetail(film);
-
-  if (window.innerWidth <= 820) {
-    const side = document.getElementById('sidePanel');
-    side.classList.add('open');
-    side.scrollTo(0, 0);
-    window.scrollTo(0, 0);
-  }
 }
 
 function closeDetail() {
-  document.getElementById('detailEmpty').classList.remove('hidden');
-  document.getElementById('detailContent').classList.add('hidden');
-  document.querySelector('.app')?.classList.remove('has-detail');
-  document.body.classList.remove('detail-open');
-  document.getElementById('sidePanel')?.classList.remove('open');
-  document.querySelectorAll('.film-card, .compact-row, .cw-film-label, .cw-times').forEach(c => c.classList.remove('active'));
-  // .main est de nouveau visible → la page redevient haute : on rend à la liste
-  // la position de scroll qu'elle avait avant l'ouverture. On diffère au frame
-  // suivant : au moment synchrone, le reflow de .main n'est pas encore fait et
-  // scrollTo serait clampé à une hauteur trop courte.
-  requestAnimationFrame(() => requestAnimationFrame(() => window.scrollTo(0, _listScrollY)));
+  const applyClose = () => {
+    document.getElementById('detailEmpty').classList.remove('hidden');
+    document.getElementById('detailContent').classList.add('hidden');
+    document.querySelector('.app')?.classList.remove('has-detail');
+    document.body.classList.remove('detail-open');
+    document.getElementById('sidePanel')?.classList.remove('open');
+    document.querySelectorAll('.film-card, .compact-row, .cw-film-label, .cw-times').forEach(c => c.classList.remove('active'));
+    // .main redevient visible : forcer le reflow puis restaurer la position de
+    // scroll de façon SYNCHRONE. La liste ne remonte pas, et la carte reprend sa
+    // place à l'écran → cible correcte du FLIP de fermeture.
+    void document.documentElement.offsetHeight;
+    window.scrollTo(0, _listScrollY);
+  };
+
+  const dvImg = document.querySelector('#detailVisual .dv-img');
+  const container = document.getElementById('detailVisual');
+  if (!_flipEnabled() || !dvImg) { applyClose(); return; }
+  // Mesurer le bloc AVANT de fermer (ensuite il passe en display:none).
+  const from = {
+    rect: dvImg.getBoundingClientRect(),
+    radius: getComputedStyle(container).borderRadius,
+    src: dvImg.currentSrc || dvImg.src,
+  };
+
+  applyClose();   // liste affichée + scroll restauré, détail masqué
+
+  const card = _visualMorphSource(_openFilmTitre);
+  if (!card || !from.rect.width) return;
+  const to = { rect: card.getBoundingClientRect(), radius: getComputedStyle(card).borderRadius };
+  if (!to.rect.width) return;
+
+  card.style.opacity = '0';   // le clone atterrit exactement dessus
+  _flipVisual(from, to, from.src, (clone) => { card.style.opacity = ''; clone.remove(); });
 }
 
 // Monte une URL image TMDB en pleine résolution pour l'affichage grand format
@@ -1510,7 +1603,9 @@ function renderDetail(film) {
   document.body.classList.add('detail-open');
   // Bloc visuel (gauche, desktop) : backdrop/affiche du film, ou fallback + voile 60%.
   // onerror : si l'image distante casse (backdrop TMDB 404), bascule sur le fallback.
-  const visSrc = film._backdrop || poster;
+  // Bloc visuel = l'AFFICHE (même image que la carte de la liste) → le FLIP fait
+  // voyager la même image de la carte vers ce bloc.
+  const visSrc = poster || film._backdrop;
   document.getElementById('detailVisual').innerHTML = visSrc
     ? `<img class="dv-img" src="${tmdbHiRes(visSrc)}" alt="" onerror="visualFallback(this)" />`
     : `<img class="dv-img" src="assets/visual-fallback.webp" alt="" /><div class="dv-scrim"></div>`;
