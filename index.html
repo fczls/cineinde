@@ -1470,6 +1470,10 @@ function dedupeFilms(films) {
 // STATE
 // ═══════════════════════════════════════════════════════════
 let allFilms = [];
+// Position de scroll de la liste, mémorisée à l'ouverture d'une fiche : quand la
+// fiche s'ouvre, .main passe en display:none → la page se réduit à 100vh et le
+// scroll window retombe à 0. On le restaure à la fermeture (closeDetail).
+let _listScrollY = 0;
 let selDate  = (() => { const d=new Date(); d.setHours(0,0,0,0); return d; })();
 let filtreCinema = 'tous';
 let viewMode = 'jour';      // 'jour' (1J) | 'semaine' (7J)
@@ -2153,6 +2157,9 @@ function jumpToTomorrow() {
 // DETAIL PANEL
 // ═══════════════════════════════════════════════════════════
 function openFilm(titre) {
+  // Mémoriser la position de la liste avant que .main ne disparaisse (sauf si une
+  // fiche est déjà ouverte : on ne veut pas écraser la position réelle par 0).
+  if (!document.body.classList.contains('detail-open')) _listScrollY = window.scrollY;
   let film;
   if (filtreCinema === 'tous') {
     // Regrouper par la même clé que getRowsForDate (imdbId si dispo, sinon
@@ -2199,6 +2206,11 @@ function closeDetail() {
   document.body.classList.remove('detail-open');
   document.getElementById('sidePanel')?.classList.remove('open');
   document.querySelectorAll('.film-card, .compact-row, .cw-film-label, .cw-times').forEach(c => c.classList.remove('active'));
+  // .main est de nouveau visible → la page redevient haute : on rend à la liste
+  // la position de scroll qu'elle avait avant l'ouverture. On diffère au frame
+  // suivant : au moment synchrone, le reflow de .main n'est pas encore fait et
+  // scrollTo serait clampé à une hauteur trop courte.
+  requestAnimationFrame(() => requestAnimationFrame(() => window.scrollTo(0, _listScrollY)));
 }
 
 // Monte une URL image TMDB en pleine résolution pour l'affichage grand format
