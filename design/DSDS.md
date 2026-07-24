@@ -99,6 +99,49 @@ Sans convention écrite, chaque nouveau composant — surtout quand c'est un age
 - ❌ Éditer `index.html` ou le bloc `:root` (générés). On édite `src/` / `design/tokens.json` puis `python3 build_ui.py`.
 - ❌ Créer un token pour une valeur utilisée une seule fois — d'abord se demander si un token existant convient (règle des deux).
 
-## 3. Contrats de composants — *à venir*
+## 3. Contrats de composants
 
-Prévu au plan (STRATEGY, P2) mais **pas encore rédigé** : le contrat de chaque famille (`card-*`, `d-*`, `compact-*`) — états, variantes, règles d'accessibilité, do/don't. À écrire quand on stabilisera les composants ; la galerie `design.html` en deviendra le rendu de référence.
+> Un **contrat** décrit ce qu'un composant garantit : son anatomie (parties), ses états, ses variantes, ses règles d'accessibilité, et ses do/don't. Les composants **montrables** sont rendus en vrai dans `design.html` (section Composants) ; les **complexes** (dépendants du contexte de l'app) sont documentés ici mais pas rendus isolés.
+
+### Carte film — `card-`  *(montrable)*
+
+- **Anatomie** : `.film-card` › `.card-poster-wrap`>`.card-poster` · `.card-body`>`.card-header`>(`.card-title`, `.card-meta`, `.card-director`, `.card-cast`) · `.card-slots`>`.card-slot-row`>(`.card-cinema-chip`, boutons créneau).
+- **États** : `.active` (fiche ouverte) ; mise en avant au survol.
+- **A11y** : la carte entière ouvre la fiche (`onclick`). Les créneaux réservables sont des `<a>`/`<button>` internes qui **stoppent la propagation** — sinon un clic sur « Réserver » ouvrirait aussi la fiche.
+- **Do** : un seul titre (`.card-title`, `--fs-3xl`/Riegraf). **Don't** : imbriquer une action cliquable sans `stopPropagation`.
+
+### Bouton créneau — `.card-time-btn`  *(montrable)*
+
+- **Anatomie** : horaire + `.slot-ver` (version : VF/VOSTF).
+- **États** : défaut · `.past` (atténué, non réservable) · `.soon`.
+- **Variante `.resa`** : deep-link billetterie, rendu en `<a>` avec `.rz-time`/`.rz-ver`/`.rz-lbl`/`.rz-tkt-wrap` ; au survol l'horaire se réduit et « Réserver » + billet apparaissent (Motion, repli CSS sous `html:not(.motion-ready)`).
+- **A11y** : variante `.resa` = `<a>` avec `aria-label` « Réserver {heure} — {film} », `target=_blank` + `rel=noopener`. Sinon `<button>` qui ouvre la fiche.
+- **Do** : n'afficher « Réserver » **que** si un lien valide existe (invariant I5 — pas de fausse promesse). **Don't** : un `<a>` sans href réservable.
+
+### Puce cinéma — `.card-cinema-chip`  *(montrable)*
+
+Étiquette de salle devant une rangée de créneaux, en mode « Tous les cinémas ». Décorative (pas d'interaction).
+
+### Pills de filtre — `.c-pill`  *(montrable)*
+
+- **États** : `.active` — **exclusif** (une seule à la fois).
+- **A11y** *(dette à corriger)* : ajouter `aria-pressed`/`aria-current` sur l'actif.
+
+### Ligne liste — `compact-`  *(montrable)*
+
+- **Anatomie** : `.compact-row` › `.compact-title` (CAPITALES) · `.compact-poster-slot` (affiche au survol) · `.compact-times` (horaires condensés).
+- **États** : `.active`. La ligne ouvre la fiche.
+
+### Événement — `ev-`  *(montrable)*
+
+- **Anatomie** : `.ev` › `.ev-date`(`.ev-n`/`.ev-m`) · `.ev-info`(`.ev-type`, `.ev-title`, `.ev-desc`, `.ev-meta`).
+- **Do** : `.ev-type` coloré via un **token** (`--gold` par défaut). **Don't** : couleur brute en style inline.
+
+---
+
+### Composants complexes *(doc-only — pas rendus isolés)*
+
+- **Barre de nav — `.nav-shell`** : `position:fixed`, logo qui rétrécit au scroll (`.scrolled`, animé en `transform`). Dépend du scroll.
+- **Toolbar — `tb-`** : au scroll, textes → icônes, tout réduit à la hauteur du bouton À propos (48px). Dépend du scroll + JS.
+- **Grille semaine — `cw-`** : tableau films × jours ; dédup d'affichage ; deep-link **par séance** (invariant I5/contrat C3). Dépend des données.
+- **Panneau détail — `d-`** : ouvert via `.detail-open` sur `<body>`, backdrop cliquable, ancré à droite (desktop). Contient la pastille réservation (`.d-chip.resa` + `.dc-tkt`) qui morphe au survol. Dépend de l'état global + JS. ⚠️ Rappel §1 : `d-`/`dc-`/`detail-` coexistent — n'étendre que `d-`.

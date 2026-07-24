@@ -20,6 +20,47 @@ Format inspiré de [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/).
 > la même PR. Un `fix:` de parsing/sélecteur/casse qui ne touche aucun de ces points ne
 > demande rien. Le CHANGELOG garde la *chronologie* ; l'architecture garde l'*état stable*.
 
+## 2026-07-25
+
+> Refonte de la **fiche détail desktop** (overlay deux blocs, backdrop + bande-annonce,
+> images HD, transition FLIP) et assainissement du **parsing des titres Comœdia**.
+> Ajout des colonnes `films.backdrop` / `films.trailer` (migration 004) : purement
+> additif, ne touche aucun invariant (I1–I8) ni contrat (C1–C4).
+
+### Ajouté
+- **Fiche détail desktop en overlay plein écran, deux blocs** : visuel (affiche/backdrop) à
+  gauche, détail à droite encadrant le bouton fermer ; coins 40px, liseré `--border`,
+  marges/gaps 16px, responsive 3 phases (510px fixe → fill → 820px centré). Mobile inchangé.
+  (`src/components.css`, `src/template.html`)
+- **Bloc visuel** : backdrop TMDB sinon affiche ; fallback local `assets/visual-fallback.webp`
+  (WebP ~17 Ko) + voile 60% ; `onerror` de secours.
+- **Bouton bande-annonce** (trailer YouTube via TMDB `/videos`).
+- **Transition FLIP liste ⇄ fiche** : l'affiche voyage carte ⇄ bloc visuel (Web Animations
+  API, clone unique, rayon 8→40) ; dégradation propre (mobile / `prefers-reduced-motion`).
+  (commit `6b4212e`)
+- **Tokens** `--radius-2xl` (40px) et `--scrim-lg` (noir 60%). (`design/tokens.json`)
+- **Enrichissement backdrop + bande-annonce côté serveur** : `backdrop_path` (w1280) et
+  trailer YouTube dans `scraper.py` ; colonnes `films.backdrop` / `films.trailer`
+  (`supabase/migrations/004_backdrop_trailer.sql`) + mapping front (`_backdrop` / `_trailer`).
+- **Contrats de composants** rédigés dans `design/DSDS.md` (anatomie, états, variantes, a11y,
+  do/don't par famille `card-` / `d-` / `compact-` / `ev-`).
+- **En-têtes no-cache** sur le serveur de dev (`tools/serve.py`).
+
+### Modifié
+- **Séances de la fiche** : nom du cinéma en colonne fixe à gauche + horaires en grille de
+  chips à largeur fixe (au lieu de passer sous le nom du cinéma). (`src/components.css`)
+- **Images de la fiche en pleine résolution** (`/t/p/original/`) → fin du flou retina/2K ;
+  vignettes de liste inchangées (w500). (commit `3ded7ac`, `src/template.html`)
+- **Scroll de la liste préservé** à l'ouverture / fermeture d'une fiche. (commit `7931134`)
+
+### Corrigé
+- **Titres Comœdia mal parsés** bloquant l'enrichissement TMDB (`scraper.py`, commit `c304955`) :
+  marqueur « JP » (Jeune Public) retiré (préfixe / suffixe / ligne isolée), numéros romains
+  préservés dans `_titlecase_fr` (« II » ne devient plus « Ii »), note « * » finale retirée,
+  aller-retour TMDB pour une note « chiffre isolé » (ex. « Memento 1 » → « Memento »).
+- **Backfill `backdrop` / `trailer`** sur les films déjà en base (l'upsert ne remplissait ces
+  champs qu'à la création). (commit `8028e76`, `scraper.py`)
+
 ## 2026-07-22
 
 > Réintégration d'une **logique de design system** (code-first) + hygiène du dépôt.
