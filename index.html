@@ -2204,7 +2204,7 @@ function closeDetail() {
 // Repli du bloc visuel : image distante cassée → fallback local + voile 60%.
 function visualFallback(img) {
   img.onerror = null;
-  img.src = 'assets/visual-fallback.jpg';
+  img.src = 'assets/visual-fallback.webp';
   if (img.parentNode && !img.parentNode.querySelector('.dv-scrim')) {
     const s = document.createElement('div');
     s.className = 'dv-scrim';
@@ -2269,7 +2269,7 @@ function renderDetail(film) {
   const visSrc = film._backdrop || poster;
   document.getElementById('detailVisual').innerHTML = visSrc
     ? `<img class="dv-img" src="${visSrc}" alt="" onerror="visualFallback(this)" />`
-    : `<img class="dv-img" src="assets/visual-fallback.jpg" alt="" /><div class="dv-scrim"></div>`;
+    : `<img class="dv-img" src="assets/visual-fallback.webp" alt="" /><div class="dv-scrim"></div>`;
   const el = document.getElementById('detailContent');
   el.classList.remove('hidden');
   el.innerHTML = `
