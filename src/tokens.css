@@ -29,6 +29,8 @@
   --scrim-xl: rgba(0,0,0,.72);
   --overlay-gold-sm: rgba(201,168,76,.15);
   --overlay-gold-lg: rgba(201,168,76,.5);
+  /* Familles de caractères */
+  --font-display-italic: 'Riegraf','Playfair Display',serif;
   /* Tailles de police */
   --fs-xs: 10px;
   --fs-sm: 12px;

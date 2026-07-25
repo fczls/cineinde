@@ -6,6 +6,7 @@ Sortie : le bloc :root, délimité par /* @tokens:start */ … /* @tokens:end */
 
 Règles de nommage des variables CSS générées :
     color.*      -> --{clé}         (ex. color.bg    -> --bg)
+    fontFamily.* -> --font-{clé}    (ex. fontFamily.display-italic -> --font-display-italic)
     fontSize.*   -> --fs-{clé}      (ex. fontSize.xs -> --fs-xs)
     radius.*     -> --radius-{clé}  (ex. radius.pill -> --radius-pill)
     breakpoint.* -> non généré (var() interdit dans @media ; doc/Figma uniquement)
@@ -27,9 +28,10 @@ START = "/* @tokens:start */"
 END = "/* @tokens:end */"
 
 # groupe DTCG -> préfixe de variable CSS (None = non généré en CSS)
-CSS_PREFIX = {"color": "", "fontSize": "fs-", "radius": "radius-",
+CSS_PREFIX = {"color": "", "fontFamily": "font-", "fontSize": "fs-", "radius": "radius-",
               "breakpoint": None, "spacing": None}
-GROUP_LABEL = {"color": "Couleurs", "fontSize": "Tailles de police", "radius": "Rayons"}
+GROUP_LABEL = {"color": "Couleurs", "fontFamily": "Familles de caractères",
+               "fontSize": "Tailles de police", "radius": "Rayons"}
 
 
 def _tokens_of(group: dict):

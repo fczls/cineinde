@@ -17,6 +17,11 @@
   src:url('assets/fonts/Riegraf-Bold.otf') format('opentype');
   font-weight:normal;font-style:normal;font-display:swap;
 }
+@font-face{
+  font-family:'Riegraf';
+  src:url('assets/fonts/Riegraf-Italic.otf') format('opentype');
+  font-weight:normal;font-style:italic;font-display:swap;
+}
 /*@@COWORK_TOKENS@@*//*@@COWORK_COMPONENTS@@*/</style>
 </head>
 <body>
@@ -1068,7 +1073,7 @@ function renderFilmsStandard(films, displayDate, opts) {
 
   // Séparateur inséré une fois, avant le 1er film sans séance restante ce jour.
   let pastShown = false;
-  const pastDivider = '<div class="list-divider"><span>Ces films n\'ont plus de séance aujourd\'hui</span></div>';
+  const pastDivider = '<div class="list-divider"><span>Les films suivants n\'ont plus de séance aujourd\'hui</span></div>';
   const cardsHtml = rows.map(film => {
     const poster   = film._poster || POSTER_FALLBACK;
     const meta     = [(film.genres||[])[0], film.annee, film.duree ? film.duree + 'min' : null].filter(Boolean).join(' · ');

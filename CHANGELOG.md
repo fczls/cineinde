@@ -45,8 +45,17 @@ Format inspiré de [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/).
 - **Contrats de composants** rédigés dans `design/DSDS.md` (anatomie, états, variantes, a11y,
   do/don't par famille `card-` / `d-` / `compact-` / `ev-`).
 - **En-têtes no-cache** sur le serveur de dev (`tools/serve.py`).
+- **Groupe de tokens `fontFamily`** (généré en `--font-{clé}`) et premier token
+  `--font-display-italic` (Riegraf italique). Fonte `assets/fonts/Riegraf-Italic.otf` +
+  `@font-face` italique. (`design/tokens.json`, `design/build_tokens.py`, `src/template.html`)
 
 ### Modifié
+- **Séparateur « plus de séance aujourd'hui »** : les deux filets et le label capitales
+  laissent place à une illustration (`assets/noMoreMovie.png`, 390px de haut, opacité 70%)
+  surmontée d'une pilule en Riegraf italique `--fs-lg`, centrée horizontalement et calée à
+  40px du bas du bloc. Libellé « Les films suivants n'ont plus de séance aujourd'hui ».
+  Illustration réduite à 220px sous 820px.
+  (`src/components.css`, `src/template.html`)
 - **Séances de la fiche** : nom du cinéma en colonne fixe à gauche + horaires en grille de
   chips à largeur fixe (au lieu de passer sous le nom du cinéma). (`src/components.css`)
 - **Images de la fiche en pleine résolution** (`/t/p/original/`) → fin du flou retina/2K ;

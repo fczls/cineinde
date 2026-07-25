@@ -87,6 +87,7 @@ Sans convention écrite, chaque nouveau composant — surtout quand c'est un age
 ### Typographie & rayons
 
 - **Un seul `--fs-3xl` par vue** (taille display, réservée au titre de fiche). Ne pas empiler plusieurs tailles display.
+- **Familles (`--font-*`).** `--font-display-italic` = Riegraf italique, voix éditoriale (le séparateur de liste). Toujours accompagné de `font-style:italic` — c'est ce qui déclenche la fonte italique *et* aligne le repli Playfair. Réservé aux respirations narratives : jamais pour de l'UI fonctionnelle.
 - **Un composant = un palier de rayon cohérent.** `--radius-pill` uniquement pour du pleinement arrondi (pills, boutons carrés → cercle).
 
 ### Espacements
