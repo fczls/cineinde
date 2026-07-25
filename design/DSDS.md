@@ -144,4 +144,17 @@ Sans convention écrite, chaque nouveau composant — surtout quand c'est un age
 - **Barre de nav — `.nav-shell`** : `position:fixed`, logo qui rétrécit au scroll (`.scrolled`, animé en `transform`). Dépend du scroll.
 - **Toolbar — `tb-`** : au scroll, textes → icônes, tout réduit à la hauteur du bouton À propos (48px). Dépend du scroll + JS.
 - **Grille semaine — `cw-`** : tableau films × jours ; dédup d'affichage ; deep-link **par séance** (invariant I5/contrat C3). Dépend des données.
-- **Panneau détail — `d-`** : ouvert via `.detail-open` sur `<body>`, backdrop cliquable, ancré à droite (desktop). Contient la pastille réservation (`.d-chip.resa` + `.dc-tkt`) qui morphe au survol. Dépend de l'état global + JS. ⚠️ Rappel §1 : `d-`/`dc-`/`detail-` coexistent — n'étendre que `d-`.
+
+#### Fiche détail — `d-` / `detail-`
+
+Ouverte via `.detail-open` sur `<body>` + `.has-detail` sur `.app`. Dépend de l'état global + JS.
+
+- **Desktop (≥821px) — overlay plein écran, deux blocs.** `.app.has-detail` passe en flex et masque la liste (`.main{display:none}`) et le backdrop. Trois enfants : `.detail-visual` (visuel, gauche) · `#detailClose` (croix, centrée verticalement) · `.side` (détail, droite). Marges et gaps de 16px, hauteur `100vh`, coins `--radius-2xl`, liseré `--border`.
+- **Largeurs (3 phases)** : détail figé à 510px puis élastique puis figé à 820px — `flex:0 0 clamp(510px, (100vw - 112px)/2, 820px)` ; le visuel est en `flex:1` plafonné à 820px, l'ensemble se centrant une fois les deux plafonds atteints. `112` = marges + gaps + largeur du bouton fermer : **le recalculer si l'une de ces valeurs bouge**.
+- **Bloc visuel** : `.detail-visual` › `.dv-img` (affiche, `object-fit:cover`) [+ `.dv-scrim` = voile `--scrim-lg` **uniquement** sur l'image de repli]. Vidé/rempli par `renderDetail()`.
+- **Bloc détail** : `.side` › `.detail-wrap` (scroll interne) › `.d-hero` + `.d-body` (padding 24px). Contient la pastille réservation (`.d-chip.resa` + `.dc-tkt`) qui morphe au survol.
+- **Séances** : `.d-day-row` en grille `100px 1fr` (cinéma en colonne fixe) ; `.d-chips` en grille de chips à **largeur fixe** (140px) qui passent à la ligne. **Don't** : `1fr` sur les chips — elles s'étireraient à la largeur de la colonne.
+- **Mobile (≤820px)** : inchangé — `.side.open` en plein écran, hero en haut, fermeture par `.d-back-btn`, backdrop actif.
+- **Transition liste ⇄ fiche** : l'affiche voyage entre `.card-poster` et `.dv-img` (FLIP — clone `position:fixed` animé via la Web Animations API, géométrie + rayon `--radius-md` → `--radius-2xl`). **Do** : garder la même image des deux côtés (sinon le morph n'a plus de sens). Repli automatique en ouverture instantanée si mobile / `prefers-reduced-motion` / API absente. Le scroll de la liste est mémorisé à l'ouverture et restauré à la fermeture.
+
+⚠️ Rappel §1 : `d-`/`dc-`/`detail-` coexistent — n'étendre que `d-`. **Dette ajoutée en 2026-07-25** (refonte deux blocs) : `.detail-visual` étend `detail-`, et `.dv-img`/`.dv-scrim` introduisent un préfixe `dv-` de plus. À renommer en `d-visual*` lors d'une passe de nettoyage — ne pas prendre ces noms pour modèle.
