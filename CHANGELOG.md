@@ -52,9 +52,10 @@ Format inspiré de [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/).
 ### Modifié
 - **Séparateur « plus de séance aujourd'hui »** : les deux filets et le label capitales
   laissent place à une illustration (`assets/noMoreMovie.png`, 390px de haut, opacité 70%)
-  surmontée d'une pilule en Riegraf italique `--fs-lg`, centrée horizontalement et calée à
+  surmontée d'une pilule en Riegraf italique `--fs-2xl`, centrée horizontalement et calée à
   40px du bas du bloc. Libellé « Les films suivants n'ont plus de séance aujourd'hui ».
-  Illustration réduite à 220px sous 820px.
+  Le bloc est collé aux cartes qui l'encadrent (marges négatives annulant le gap de la
+  liste). Sous 820px : illustration 220px, label `--fs-lg`.
   (`src/components.css`, `src/template.html`)
 - **Séances de la fiche** : nom du cinéma en colonne fixe à gauche + horaires en grille de
   chips à largeur fixe (au lieu de passer sous le nom du cinéma). (`src/components.css`)
