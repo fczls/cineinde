@@ -1,7 +1,7 @@
 # Architecture — Pipeline de données (scraper.py)
 
 > Fonctionnement interne du scraper : les sources (*variants*), les étapes de `main()`, l'enrichissement, le garde-fou. Les invariants/contrats transverses vivent dans [Vue d'ensemble](README.md).
-> Dernière mise à jour : 2026-07-20
+> Dernière mise à jour : 2026-07-25
 
 ---
 
@@ -38,7 +38,9 @@ Ordre **significatif** (certains invariants en dépendent) :
 ## Enrichissement (scraper.py:1875 `enrich_omdb`)
 
 - **TMDB en premier** (`_enrich_tmdb_first`), **OMDb en fallback** pour les champs restants (`_enrich_omdb_fallback`).
-- Complète : `imdbId, poster, imdbRating, genres, synopsis, cast`, et surtout `annee, realisateur, titreOriginal, duree`.
+- Complète : `imdbId, poster, backdrop, trailer, imdbRating, genres, synopsis, cast`, et surtout `annee, realisateur, titreOriginal, duree`.
+  - `backdrop` (visuel paysage `w1280`) vient de l'objet movie TMDB ; `trailer` d'un appel dédié `/movie/{id}/videos` (`_tmdb_trailer` : trailer YouTube officiel FR, puis FR, puis EN, puis teaser). Servent le bloc visuel et le bouton bande-annonce de la fiche.
+  - **Repli « note de bas de page »** (2026-07-25) : si la recherche TMDB échoue, réessai en retirant un renvoi final isolé (`Memento 1` → `Memento`) ; en cas de match, le titre propre de TMDB est adopté. Les vrais numéros de suite (`Toy Story 5`) ne sont jamais nettoyés — leur recherche directe aboutit.
 - **Dédup des appels** : un seul appel par **titre normalisé** (`_normalize_title_key`, scraper.py:1870), cache inter-cinémas (scraper.py:2168).
 - **Propagation bidirectionnelle** (scraper.py:2197-2208) : pour chaque groupe de même titre normalisé, on collecte la meilleure valeur de chaque champ *dans tout le groupe* et on la copie aux membres **dont le champ est vide**. → C'est le moteur de l'invariant I2 : ce qui fait qu'un film Comoedia sans réalisateur hérite du réalisateur canonique TMDB, et donc dédup avec la copie Lumière.
 

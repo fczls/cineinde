@@ -1,7 +1,7 @@
 # Architecture — Données & Infra
 
 > Schéma Supabase, clés de dédup, RLS, workflows CI, scripts de maintenance. Les invariants transverses vivent dans [Vue d'ensemble](README.md).
-> Dernière mise à jour : 2026-07-10
+> Dernière mise à jour : 2026-07-25
 
 ---
 
@@ -14,7 +14,8 @@ cinemas (id, name UNIQUE, slug UNIQUE)
    ▲
    │ cinema_id (FK, ON DELETE CASCADE)
 films (id, titre, titre_original, annee, realisateur, duree,
-       genres[], synopsis, imdb_id, poster, imdb_rating, "cast", source,
+       genres[], synopsis, imdb_id, poster, backdrop, trailer,
+       imdb_rating, "cast", source,
        UNIQUE(titre, annee, realisateur),           ← clé de repli (invariant I1)
        UNIQUE(imdb_id) WHERE imdb_id IS NOT NULL)   ← clé primaire (003, index partiel)
    ▲
@@ -28,6 +29,7 @@ seances (id, film_id, cinema_id, date, heure, version, resa_url,
 - **Seed** : les 4 cinémas actuels sont insérés `ON CONFLICT DO NOTHING`. Mais l'upsert du scraper crée aussi les cinémas à la volée (`on_conflict="name"`, scraper.py:1213) → **ajouter Le Zola ne nécessite pas de migration**, juste un `entry["cinema"]="Le Zola"`.
 - `002_storage_pdfs.sql` : bucket de stockage pour les PDF Comoedia.
 - `003_dedup_imdb_id.sql` : index unique **partiel** `films_imdb_id_key` sur `imdb_id` (où non nul) → filet de sécurité DB de la dédup par imdb_id (I1). ⚠️ **À appliquer APRÈS** `scripts/merge_duplicate_films.py --apply` (l'index échoue tant que des doublons d'imdb_id subsistent). Genèse : *Exploration — Dédup inter-sources* (vault Obsidian).
+- `004_backdrop_trailer.sql` (2026-07-25) : colonnes `films.backdrop` (visuel paysage TMDB) et `films.trailer` (URL YouTube) pour la fiche détail. Purement **additif** — ne touche ni invariant ni clé de dédup. Idempotent (`ADD COLUMN IF NOT EXISTS`), mais **à appliquer avant** le scrape suivant, sinon l'upsert `films` échoue sur des colonnes inconnues.
 
 ---
 
