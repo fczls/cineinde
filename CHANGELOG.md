@@ -20,6 +20,42 @@ Format inspiré de [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/).
 > la même PR. Un `fix:` de parsing/sélecteur/casse qui ne touche aucun de ces points ne
 > demande rien. Le CHANGELOG garde la *chronologie* ; l'architecture garde l'*état stable*.
 
+## 2026-07-26
+
+> Passe visuelle sur la **fiche détail** : la vue mobile adopte la grammaire deux blocs
+> du desktop et son bloc visuel se réduit en barre au scroll, l'indice de réservation
+> devient un vrai composant. Aucun invariant (I1–I8) ni contrat (C1–C4) touché.
+
+### Ajouté
+- **Fiche mobile : le bloc visuel se réduit en barre au scroll** (`.hero-min`). Passé ~48px de
+  scroll dans le bloc contenu, le visuel passe de 200px à 56px et devient une barre pleinement
+  arrondie : la croix se range à gauche, la bande-annonce à droite, toutes deux à 48px de haut.
+  Bascule animée par Motion (ressort), repli CSS si la lib n'est pas chargée ou en
+  `prefers-reduced-motion`. Pas de flou sur l'image en V1. (`src/components.css`,
+  `src/template.html`)
+- **Composant « info réservation » — `.d-resa-info`** : pastille pleine largeur sous le label
+  « Séances de la semaine ». Billet **dégradé** (le même SVG que la vue liste, à la place de
+  l'aplat) dans une pastille de 40px (desktop) / 56px (mobile), billet inchangé à 24×20 ;
+  consigne en `--text-2` suivie de la mention « Ne fonctionne pas sur Comoedia. » en `--text-3`
+  italique, à la suite ou en dessous selon la largeur. Texte à `--fs-md` (14px), padding 4px,
+  `--radius-pill`, liseré `--border2`. (`src/components.css`, `src/template.html`)
+- **Tokens** : `--radius-2xl` = 24px (nouveau pas, blocs de la fiche mobile) et `--overlay-xs`
+  = `rgba(255,255,255,.03)` (liseré interne des pastilles sombres). (`design/tokens.json`)
+
+### Modifié
+- **Fiche détail mobile alignée sur le desktop** : 8px de padding autour du panneau, blocs
+  visuel et contenu en `--radius-2xl` + liseré `--border`, 16px de padding pour le contenu,
+  dégradé noir du visuel supprimé. Le bas du bloc contenu ne sort plus de la vue : le panneau
+  ne scrolle pas, seul le bloc contenu scrolle en interne. (`src/components.css`)
+- **Bouton bande-annonce mobile** : hauteur alignée sur la croix (48px) et 24px de padding
+  latéral. Son centrage passe de `transform` à la propriété `translate`, pour que Motion puisse
+  écrire dans `transform` sans écraser le centrage. (`src/components.css`)
+- **Bloc contenu de la fiche mobile** : `overscroll-behavior:contain` — en butée de scroll, la
+  liste derrière la fiche ne défile plus. (`src/components.css`)
+- **`--radius-2xl` (40px) renommé en `--radius-3xl`** pour libérer le pas 24px ; les deux blocs
+  de la fiche desktop et la transition FLIP suivent. (`design/tokens.json`,
+  `src/components.css`, `design/DSDS.md`)
+
 ## 2026-07-25
 
 > Refonte de la **fiche détail desktop** (overlay deux blocs, backdrop + bande-annonce,

@@ -45,6 +45,7 @@
   --neutral-lo: #3a3a3a;
   --neutral-mid: #666;
   --neutral-hi: #848484;
+  --overlay-xs: rgba(255,255,255,.03);
   --overlay-sm: rgba(255,255,255,.04);
   --overlay-lg: rgba(255,255,255,.28);
   --scrim-sm: rgba(0,0,0,.25);
@@ -68,7 +69,8 @@
   --radius-md: 8px;
   --radius-lg: 12px;
   --radius-xl: 16px;
-  --radius-2xl: 40px;
+  --radius-2xl: 24px;
+  --radius-3xl: 40px;
   --radius-pill: 999px;
 }
 /* @tokens:end */
@@ -583,7 +585,10 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
 .d-score{flex-shrink:0;background:var(--bg3);border:1px solid rgba(135,135,135,.77);border-radius:var(--radius-md);padding:10px 14px;text-align:center;}
 .d-score-num{font-family:'Playfair Display',serif;font-size:var(--fs-2xl);font-weight:700;color:var(--gold);line-height:1;display:block;}
 .d-score-lbl{font-size:var(--fs-xs);color:var(--text-2);letter-spacing:.08em;text-transform:uppercase;}
-.d-trailer-btn{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:3;display:inline-flex;align-items:center;gap:8px;padding:10px 18px;background:var(--text);color:var(--bg3);border-radius:var(--radius-pill);font-size:var(--fs-sm);font-weight:500;text-decoration:none;white-space:nowrap;font-family:'DM Sans',sans-serif;box-shadow:0 6px 24px var(--scrim-md);transition:opacity .2s;}
+/* Centrage par la propriété `translate` (et non `transform`) : Motion écrit dans
+   `transform` pour ranger le bouton à droite quand le visuel se réduit — les deux
+   se composent au lieu de s'écraser. */
+.d-trailer-btn{position:absolute;top:50%;left:50%;translate:-50% -50%;z-index:3;display:inline-flex;align-items:center;gap:8px;padding:10px 18px;background:var(--text);color:var(--bg3);border-radius:var(--radius-pill);font-size:var(--fs-sm);font-weight:500;text-decoration:none;white-space:nowrap;font-family:'DM Sans',sans-serif;box-shadow:0 6px 24px var(--scrim-md);transition:opacity .2s;}
 .d-trailer-btn:hover{opacity:.85;}
 
 .d-body{position:relative;z-index:1;margin-top:0;padding:24px 28px 40px;}
@@ -616,7 +621,7 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
    Tokens --resa-line / --gold-light : définis dans le :root principal (haut du fichier).
    ═══════════════════════════════════════════════════════════ */
 /* Remplissage des billets (SVG injectés en JS) — piloté par token, pas par attribut fill */
-.dc-tkt path, .wh-tkt path{ fill:var(--gold-light); }
+.dc-tkt path{ fill:var(--gold-light); }
 
 /* ── Composant 2 : bouton créneau réservable (cartes film) ──
    Au survol : l'horaire rétrécit + remonte à la place de la langue ; « Réserver »
@@ -636,9 +641,30 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
 .card-time-btn.resa:hover, .card-time-btn.resa:focus-visible{ outline:none; }
 
 /* ── Composant 1 : pastille réservable (fiche « Séances de la semaine ») ── */
-.d-week-head{ display:flex; align-items:baseline; gap:12px 16px; flex-wrap:wrap; justify-content:space-between; margin-bottom:14px; }
+.d-week-head{ display:flex; flex-direction:column; align-items:stretch; gap:12px; margin-bottom:20px; }
 .d-week-head .d-week-lbl{ margin-bottom:0; }
-.d-week-hint{ font-size:var(--fs-sm); color:var(--text-3); letter-spacing:.02em; display:inline-flex; align-items:center; gap:4px; }
+
+/* « Info réservation » — pastille pleine largeur sous le label « Séances de la
+   semaine » : billet dégradé (même SVG que la liste) dans une pastille sombre,
+   puis la consigne (--text-2) suivie de la restriction Comoedia (--text-3), à la
+   suite sur une ligne large, passée en dessous quand la place manque. */
+.d-resa-info{
+  display:flex; align-items:center; gap:12px; padding:4px;
+  border:1px solid var(--border2); border-radius:var(--radius-pill);
+}
+.d-resa-ico{
+  flex:0 0 auto; width:40px; height:40px;
+  display:flex; align-items:center; justify-content:center;
+  border-radius:var(--radius-pill); border:1px solid var(--neutral-lo);
+  background:radial-gradient(57.81% 57.81% at 50% 73.61%, rgba(102,102,102,0.40) 0%, var(--scrim-md) 100%), var(--bg);
+  box-shadow:0 1px 0 0 var(--overlay-xs) inset;
+}
+.d-resa-tkt{ width:24px; height:20px; flex:0 0 auto; }
+.d-resa-txt{
+  display:flex; flex-wrap:wrap; gap:0 6px; min-width:0; padding-right:12px;
+  font-size:var(--fs-md); line-height:1.5; letter-spacing:.02em; color:var(--text-2);
+}
+.d-resa-note{ color:var(--text-3); font-style:italic; }
 .d-chip .dc-time{ font-family:inherit; }
 a.d-chip.resa{ text-decoration:none; cursor:pointer; color:var(--text); transition:border-color .18s, background .18s; }
 a.d-chip.resa .dc-swap{ position:relative; display:inline-flex; align-items:center; justify-content:center; min-width:42px; height:20px; }
@@ -712,7 +738,7 @@ body.detail-open #detailBackdrop{opacity:1;pointer-events:auto;}
   .app.has-detail .detail-visual{
     display:block;position:relative;order:0;
     flex:1 1 0;min-width:0;max-width:820px;
-    border-radius:var(--radius-2xl);border:1px solid var(--border);overflow:hidden;
+    border-radius:var(--radius-3xl);border:1px solid var(--border);overflow:hidden;
   }
 
   /* Bouton fermer : item flex central, aligné verticalement au centre. */
@@ -728,7 +754,7 @@ body.detail-open #detailBackdrop{opacity:1;pointer-events:auto;}
      (gaps) + 48 (bouton fermer). Contenu clippé par le radius, scroll interne. */
   .app.has-detail .side{
     order:2;flex:0 0 clamp(510px, (100vw - 112px)/2, 820px);min-width:0;
-    border-radius:var(--radius-2xl);border:1px solid var(--border);overflow:hidden;
+    border-radius:var(--radius-3xl);border:1px solid var(--border);overflow:hidden;
   }
   .app.has-detail .detail-wrap{position:static;top:auto;height:100%;overflow-y:auto;}
 
@@ -777,8 +803,24 @@ body.detail-open #detailBackdrop{opacity:1;pointer-events:auto;}
   .nav-shell.compact .header-brand,.nav-shell.compact .nav-right{display:none;}
   .nav-shell.compact .toolbar-wrap{grid-column:1/-1;grid-row:1;padding-top:0;}
   .side{display:none;}
-  .side.open{display:block;position:fixed;inset:0;overflow-y:auto;background:var(--bg);z-index:130;}
-  .detail-wrap{position:static;height:auto;}
+  /* Fiche détail mobile — même grammaire que le desktop : deux blocs arrondis et
+     liserés, séparés par une gouttière, dans un cadre de 8px qui ne dépasse jamais
+     la vue. Le panneau ne scrolle pas : le visuel reste en tête et c'est le bloc
+     contenu qui scrolle en interne (chaîne flex + min-height:0 sur chaque maillon). */
+  /* `.app.has-detail .side{display:block}` (règle desktop, spécificité 0,2,1)
+     l'emporterait sur `.side.open` seul → on double le sélecteur. */
+  .side.open, .app.has-detail .side.open{
+    display:flex;flex-direction:column;position:fixed;inset:0;z-index:130;
+    padding:8px;box-sizing:border-box;overflow:hidden;background:var(--bg);
+  }
+  /* `body.detail-open .detail-wrap{height:100vh}` (état desktop) l'emporterait
+     sinon sur `.detail-wrap` seul → même sélecteur ici pour le neutraliser. */
+  .detail-wrap, body.detail-open .detail-wrap{
+    position:static;display:flex;flex-direction:column;
+    flex:1 1 auto;min-height:0;height:auto;overflow:hidden;
+  }
+  #detailContent{display:flex;flex-direction:column;gap:8px;flex:1 1 auto;min-height:0;}
+  #detailContent.hidden{display:none;}
   .film-list,.events-list{padding:12px 12px 32px;}
   /* Cards mobile: narrower poster columns, slots span full width */
   .film-card{grid-template-columns:141px 1fr;column-gap:20px;row-gap:0;padding:16px 20px;}
@@ -800,9 +842,37 @@ body.detail-open #detailBackdrop{opacity:1;pointer-events:auto;}
      mobile, sinon la version (VOSTFR) déborde et se fait couper. */
   .card-time-btn.resa .rz-time{top:11px;font-size:var(--fs-lg);}
   .card-time-btn.resa .rz-ver{top:29px;font-size:var(--fs-xs);}
-  .d-hero{position:relative;height:200px;}
-  .d-body{margin-top:0;}
+  /* --hero-h / --hero-min-h : hauteurs des deux états du bloc visuel. Motion les
+     relit pour animer (cf. template.html) — les garder ici comme source unique. */
+  .d-hero{
+    --hero-h:200px; --hero-min-h:56px;
+    position:relative;height:var(--hero-h);flex:0 0 auto;
+    border-radius:var(--radius-2xl);border:1px solid var(--border);
+  }
+  .d-hero::after{display:none;}   /* pas de dégradé noir : le bloc est autonome */
+  /* Bande-annonce calée sur la croix : même hauteur, 24px de respiration latérale. */
+  .d-trailer-btn{height:48px;padding:0 24px;}
+
+  /* ── Visuel réduit au scroll — `.hero-min` ──
+     Le bloc devient une barre où la croix et la bande-annonce se rangent aux deux
+     extrémités. Motion écrit l'état en inline (hauteur, rayon, transforms) ; les
+     règles ci-dessous ne sont que le repli quand la lib n'est pas chargée, d'où le
+     `html:not(.motion-ready)` — sinon les deux se marcheraient dessus.
+     Le déplacement horizontal de la bande-annonce dépend de la largeur du bloc :
+     hors Motion il se fait d'un coup (ré-ancrage à droite), sans interpolation. */
+  html:not(.motion-ready) .d-hero{transition:height .38s cubic-bezier(.22,1,.36,1),border-radius .38s cubic-bezier(.22,1,.36,1);}
+  html:not(.motion-ready) .d-back-btn{transition:transform .38s cubic-bezier(.22,1,.36,1);}
+  html:not(.motion-ready) .d-hero.hero-min{height:var(--hero-min-h);border-radius:var(--radius-pill);}
+  html:not(.motion-ready) .d-hero.hero-min .d-back-btn{transform:translate(-8px,-9px);}
+  html:not(.motion-ready) .d-hero.hero-min .d-trailer-btn{left:auto;right:4px;translate:0 -50%;}
+  .d-body{
+    margin-top:0;padding:16px;flex:1 1 auto;min-height:0;overflow-y:auto;
+    overscroll-behavior:contain;   /* en butée, ne pas entraîner la liste derrière */
+    border-radius:var(--radius-2xl);border:1px solid var(--border);
+  }
   .d-back-btn{top:12px;left:12px;transform:none;}
+  /* Composant info réservation : pastille d'icône plus généreuse (le billet garde ses 24px). */
+  .d-resa-ico{width:56px;height:56px;}
 }
 
 @media(max-width:820px){
@@ -1110,8 +1180,9 @@ const _TK_STROKE = 'M1.93387 5.50741L18.4923 1.07059C18.8049 0.986825 19.1384 1.
 const TICKET_SVG_LIST = '<svg class="rz-tkt" width="24" height="20" viewBox="0 0 24 20" fill="none" aria-hidden="true"><path d="' + _TK_FILL + '" fill="url(#tkGradFill)"/><path d="' + _TK_STROKE + '" stroke="url(#tkGradStroke)" stroke-opacity="0.4" stroke-width="0.416667"/></svg>';
 // Composant 1 (détail) — même silhouette, aplat #CFBFAF, hauteur 20px.
 const TICKET_SVG_DETAIL = '<svg class="dc-tkt" width="24" height="20" viewBox="0 0 24 20" fill="none" aria-hidden="true"><path d="' + _TK_FILL + '"/></svg>';
-// Indice « cliquer sur l'horaire » — même billet, hauteur 14px (ratio conservé).
-const TICKET_SVG_HINT = '<svg class="wh-tkt" width="16.8" height="14" viewBox="0 0 24 20" fill="none" aria-hidden="true"><path d="' + _TK_FILL + '"/></svg>';
+// Composant « info réservation » (fiche) — billet métallique dégradé, identique
+// à celui de la liste ; c'est la pastille sombre qui l'entoure qui change de taille.
+const TICKET_SVG_HINT = '<svg class="d-resa-tkt" width="24" height="20" viewBox="0 0 24 20" fill="none" aria-hidden="true"><path d="' + _TK_FILL + '" fill="url(#tkGradFill)"/><path d="' + _TK_STROKE + '" stroke="url(#tkGradStroke)" stroke-opacity="0.4" stroke-width="0.416667"/></svg>';
 
 // Composant 2 — bouton créneau des cartes film. Lien valide → <a> réservable
 // (survol : l'horaire se réduit et remonte à la place de la langue, « Réserver »
@@ -2437,7 +2508,7 @@ function renderDetail(film) {
       <p class="d-synopsis">${synop}</p>
       <div class="d-week-head">
         <div class="d-week-lbl">Séances de la semaine</div>
-        ${ENABLE_RESA_LINKS && film._sd.some(s => safeResaUrl(s.resa_url)) ? `<span class="d-week-hint">${TICKET_SVG_HINT}Pour réserver une séance, cliquer sur l'horaire</span>` : ''}
+        ${ENABLE_RESA_LINKS && film._sd.some(s => safeResaUrl(s.resa_url)) ? `<div class="d-resa-info"><span class="d-resa-ico">${TICKET_SVG_HINT}</span><span class="d-resa-txt">Pour réserver une séance, cliquer sur l'horaire<span class="d-resa-note">Ne fonctionne pas sur Comoedia.</span></span></div>` : ''}
       </div>
       ${weekHtml}
     </div>`;
@@ -2656,11 +2727,21 @@ boot();
 // le repli CSS (html:not(.motion-ready)) prend le relais sans casser la page.
 // prefers-reduced-motion : on n'active pas Motion, le repli CSS fond en ~0 ms.
 const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+// `animate` est partagé par les blocs ci-dessous ; il reste null si la lib n'est
+// pas chargée (CDN indisponible) ou si l'utilisateur a demandé moins d'animation,
+// et chaque bloc bascule alors sur son repli CSS.
+let animate = null;
 if (!reduce) {
   try {
-    const { animate } = await import('https://cdn.jsdelivr.net/npm/motion@12/+esm');
+    ({ animate } = await import('https://cdn.jsdelivr.net/npm/motion@12/+esm'));
     document.documentElement.classList.add('motion-ready');
+  } catch (e) {
+    console.warn('[CinémasLyon] Motion non chargé — repli CSS actif', e);
+  }
+}
 
+if (animate) {
+  {
     const SPRING = { type: 'spring', stiffness: 380, damping: 26, mass: 0.7 };
     const q = (el, sel) => el.querySelector(sel);
 
@@ -2724,9 +2805,56 @@ if (!reduce) {
     document.addEventListener('focusout', e => {
       if (active && e.target === active) { leave(active); active = null; }
     });
-  } catch (e) {
-    console.warn('[CinémasLyon] Motion non chargé — repli CSS actif', e);
   }
+}
+
+// ── Fiche mobile : le bloc visuel se réduit en barre au scroll ──
+// Sur mobile, le panneau ne scrolle pas : c'est `.d-body` qui a le scroll interne
+// (cf. DSDS « Fiche détail · Mobile »). D'où l'écoute en capture — `scroll` ne
+// remonte pas, et `.d-body` est recréé à chaque renderDetail().
+// L'état vit dans la classe `.hero-min` (pas dans une variable de module) : une
+// fiche fraîchement rendue repart donc toujours du visuel déplié.
+{
+  const COLLAPSE_AT = 48, EXPAND_AT = 8;
+  const SPRING = { type: 'spring', stiffness: 260, damping: 32, mass: 0.9 };
+  const cssPx = (el, prop) => parseFloat(getComputedStyle(el).getPropertyValue(prop)) || 0;
+
+  const setHeroMin = (hero, on) => {
+    hero.classList.toggle('hero-min', on);
+    if (!animate) return;                       // repli CSS : la classe suffit
+    const back = hero.querySelector('.d-back-btn');
+    const tkt  = hero.querySelector('.d-trailer-btn');
+    const minH = cssPx(hero, '--hero-min-h');
+    animate(hero, {
+      height:       (on ? minH : cssPx(hero, '--hero-h')) + 'px',
+      borderRadius: (on ? minH / 2 : cssPx(hero, '--radius-2xl')) + 'px',
+    }, SPRING);
+    // La croix passe de 12px de marge (visuel déplié) à 4px (barre) ; la
+    // bande-annonce quitte le centre pour se ranger à 4px du bord droit.
+    // y = -9 et non -8 : la croix est calée sur `top:12px` (bord du bloc) alors que
+    // la bande-annonce est centrée sur `top:50%` — 1px de rattrapage pour les aligner.
+    if (back) animate(back, { x: on ? -8 : 0, y: on ? -9 : 0 }, SPRING);
+    if (tkt)  animate(tkt, { x: on ? hero.clientWidth / 2 - tkt.offsetWidth / 2 - 4 : 0 }, SPRING);
+  };
+
+  addEventListener('scroll', e => {
+    const body = e.target;
+    if (!body || !body.classList || !body.classList.contains('d-body')) return;
+    if (!window.matchMedia('(max-width:820px)').matches) return;
+    const hero = document.querySelector('.d-hero');
+    if (!hero) return;
+    const on = hero.classList.contains('hero-min');
+    if (on) {
+      if (body.scrollTop < EXPAND_AT) setHeroMin(hero, false);
+      return;
+    }
+    // Ne pas réduire si les ~144px rendus au contenu suffiraient à faire
+    // disparaître le scroll : le scrollTop serait écrêté sous EXPAND_AT et le
+    // bloc rebondirait entre les deux états.
+    const gain = cssPx(hero, '--hero-h') - cssPx(hero, '--hero-min-h');
+    const room = body.scrollHeight - body.clientHeight;
+    if (body.scrollTop > COLLAPSE_AT && room > gain + COLLAPSE_AT) setHeroMin(hero, true);
+  }, true);
 }
 </script>
 

@@ -7,6 +7,7 @@
 > **One-offs restants (11, assumés — futur allowlist du lint P3)** : dégradés & teintes rares,
 > non tokenisables sans `color-mix` : `rgba(12,11,11,0/.97)` (fond nav), `rgba(17,16,16,0/.32/.4)`,
 > `rgba(120,105,91,0/.30)` (brun en dégradé), `rgba(135,135,135,.77)`, `rgba(102,102,102,.20)`,
+> `rgba(102,102,102,.40)` (même halo radial, variante haute du composant `.d-resa-ico`),
 > `rgba(207,207,207,1)`, `#1c1608`.
 
 ---
