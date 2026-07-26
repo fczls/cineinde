@@ -1,9 +1,14 @@
 #!/usr/bin/env python3
-"""Inline design/tokens.json dans design.html (galerie du design system).
+"""Inline les données du design system dans design.html (galerie).
 
-La galerie lit ses données depuis un bloc <script id="tokens-data"> inliné —
-pas de fetch, donc elle marche partout (file://, n'importe quel serveur, prod).
-Ce script garde ce bloc synchronisé avec tokens.json.
+Deux blocs <script> inlinés, tenus à jour par ce script :
+    #tokens-data           <- design/tokens.json           (vue « Tokens »)
+    #tokens-changelog-data <- design/tokens-changelog.json (vue « Changelog »)
+
+La galerie lit ses données depuis ces blocs — pas de fetch, donc elle marche
+partout (file://, n'importe quel serveur, prod). Le changelog, lui, est dérivé
+de l'historique git par design/build_tokens_changelog.py (à relancer après un
+commit qui touche les tokens).
 
 Usage :
     python3 design/build_gallery.py           # (ré)inline les données
@@ -15,24 +20,35 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-TOKENS = ROOT / "design" / "tokens.json"
 GALLERY = ROOT / "design.html"
+SOURCES = {
+    "tokens-data": ROOT / "design" / "tokens.json",
+    "tokens-changelog-data": ROOT / "design" / "tokens-changelog.json",
+}
 
-PATTERN = re.compile(
-    r'(<script id="tokens-data" type="application/json">)(.*?)(</script>)', re.S
-)
+
+def _pattern(block_id: str) -> re.Pattern:
+    return re.compile(
+        rf'(<script id="{block_id}" type="application/json">)(.*?)(</script>)', re.S
+    )
 
 
-def _payload() -> str:
-    data = json.loads(TOKENS.read_text(encoding="utf-8"))
+def _payload(path) -> str:
+    data = json.loads(path.read_text(encoding="utf-8"))
     # compact, et < échappé pour ne jamais fermer le <script> par accident
     return json.dumps(data, ensure_ascii=False, separators=(",", ":")).replace("<", "\\u003c")
 
 
 def render(html: str) -> str:
-    if not PATTERN.search(html):
-        sys.exit('ERREUR : bloc <script id="tokens-data"> introuvable dans design.html.')
-    return PATTERN.sub(lambda m: m.group(1) + _payload() + m.group(3), html, count=1)
+    for block_id, path in SOURCES.items():
+        pattern = _pattern(block_id)
+        if not pattern.search(html):
+            sys.exit(f'ERREUR : bloc <script id="{block_id}"> introuvable dans design.html.')
+        if not path.exists():
+            sys.exit(f"ERREUR : {path.relative_to(ROOT)} manquant. "
+                     "Lancer : python3 design/build_tokens_changelog.py")
+        html = pattern.sub(lambda m: m.group(1) + _payload(path) + m.group(3), html, count=1)
+    return html
 
 
 def build() -> None:
@@ -44,13 +60,13 @@ def main() -> None:
     new = render(html)
     if "--check" in sys.argv:
         if new != html:
-            sys.exit("ERREUR : design.html n'est pas à jour avec tokens.json. "
+            sys.exit("ERREUR : design.html n'est pas à jour avec les données du DS. "
                      "Lancer : python3 design/build_gallery.py")
-        print("OK : design.html est à jour avec tokens.json.")
+        print("OK : design.html est à jour avec les données du design system.")
         return
     if new != html:
         GALLERY.write_text(new, encoding="utf-8")
-        print("design.html : données de tokens ré-inlinées.")
+        print("design.html : données du design system ré-inlinées.")
     else:
         print("design.html déjà à jour.")
 

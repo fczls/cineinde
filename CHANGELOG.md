@@ -27,6 +27,12 @@ Format inspiré de [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/).
 > devient un vrai composant. Aucun invariant (I1–I8) ni contrat (C1–C4) touché.
 
 ### Ajouté
+- **Galerie : vue « Changelog des tokens »** — bascule Tokens / Changelog en haut de `design.html`
+  (vue partageable via `#changelog`). Une entrée par commit ayant touché les tokens : ajouts,
+  valeurs modifiées (avant → après), notes d'usage modifiées, suppressions. Historique **rétroactif
+  complet** depuis la mise en place du design system (2026-07-22). Données dans
+  `design/tokens-changelog.json`, dérivées de l'historique git par
+  `design/build_tokens_changelog.py` et inlinées par `build_gallery.py`.
 - **Fiche mobile : le bloc visuel se réduit en barre au scroll** (`.hero-min`). Passé ~48px de
   scroll dans le bloc contenu, le visuel passe de 200px à 56px et devient une barre pleinement
   arrondie : la croix se range à gauche, la bande-annonce à droite, toutes deux à 48px de haut.
@@ -55,6 +61,8 @@ Format inspiré de [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/).
 - **`--radius-2xl` (40px) renommé en `--radius-3xl`** pour libérer le pas 24px ; les deux blocs
   de la fiche desktop et la transition FLIP suivent. (`design/tokens.json`,
   `src/components.css`, `design/DSDS.md`)
+- **Galerie — section Rayons pilotée par les données** : elle listait une échelle codée en dur
+  (`sm md lg xl pill`) et manquait déjà `2xl`. Elle suit maintenant `tokens.json`. (`design.html`)
 
 ## 2026-07-25
 

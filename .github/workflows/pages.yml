@@ -30,7 +30,7 @@ jobs:
       - name: Vérifier que index.html est à jour avec src/ (design system)
         run: python3 build_ui.py --check
 
-      - name: Vérifier que la galerie design.html est à jour avec tokens.json
+      - name: Vérifier que la galerie design.html est à jour avec les données du DS
         run: python3 design/build_gallery.py --check
 
       - name: Lint design system (aucune valeur brute hors tokens)

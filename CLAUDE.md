@@ -40,6 +40,18 @@ le lance après chaque édition et renvoie les violations — les corriger avant
 `design.html` = référence vivante des tokens (valeurs + notes d'usage), régénérée par `build_ui.py`.
 Voir via `python3 tools/serve.py` → `http://localhost:4173/design.html`.
 
+Deux vues, via la bascule en haut de page : **Tokens** (l'échelle actuelle) et **Changelog**
+(`#changelog` — l'historique des tokens : ajouts, valeurs et notes d'usage modifiées, suppressions).
+
+Le changelog vient de `design/tokens-changelog.json`, **dérivé de l'historique git** de
+`design/tokens.json` — la CI fait un checkout superficiel, d'où un fichier committé plutôt qu'un
+calcul à la volée. Une entrée ne peut donc être générée qu'une fois le commit écrit : **après avoir
+committé un changement de tokens**, relancer et committer le résultat :
+
+```
+python3 design/build_tokens_changelog.py && python3 build_ui.py
+```
+
 ## Pipeline de données (rappel)
 
 `scraper.py` (Comoedia PDF + Lumière) → Supabase (source) + `programme.json` (fallback). Ne jamais
