@@ -27,6 +27,10 @@ Format inspiré de [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/).
 > devient un vrai composant. Aucun invariant (I1–I8) ni contrat (C1–C4) touché.
 
 ### Ajouté
+- **Hook `pre-push`** (`.githooks/pre-push`) : refuse le push si `design/tokens-changelog.json` est en
+  retard sur l'historique git — la CI ne peut pas le vérifier (checkout superficiel). Neutre sur clone
+  superficiel, sans `python3`, ou sur un push de pure suppression. Activation par clone :
+  `git config core.hooksPath .githooks`. Procédure documentée dans `CLAUDE.md` § « Avant de pousser ».
 - **Galerie : vue « Changelog des tokens »** — bascule Tokens / Changelog en haut de `design.html`
   (vue partageable via `#changelog`). Une entrée par commit ayant touché les tokens : ajouts,
   valeurs modifiées (avant → après), notes d'usage modifiées, suppressions — chaque ligne porte

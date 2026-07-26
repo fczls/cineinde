@@ -23,6 +23,32 @@ src/template.html  ────────────────────�
 
 Fichiers générés à ne pas éditer : `index.html`, `src/tokens.css`, le bloc `:root` (marqueurs `@tokens`).
 
+### Avant de pousser : le changelog des tokens
+
+**Si un commit de la série à pousser touche `design/tokens.json`**, alors avant `git push` :
+
+```
+python3 design/build_tokens_changelog.py && python3 build_ui.py
+```
+
+puis committer `design/tokens-changelog.json` + `design.html` (message : `chore: changelog des tokens`).
+
+L'entrée du changelog porte le sha et le sujet du commit : elle **ne peut être générée qu'une fois ce
+commit écrit**, d'où un commit de suivi plutôt qu'une étape de build. Le script reconstruit tout
+l'historique à chaque passage — un oubli se rattrape intégralement au passage suivant, rien ne se perd.
+Aucune action si le commit ne touche pas `tokens.json`. Détail : § Galerie.
+
+Un hook `pre-push` (`.githooks/pre-push`) refuse le push si le changelog est en retard — c'est le seul
+garde-fou possible, la CI ne pouvant pas le vérifier (checkout superficiel). **`core.hooksPath` est une
+config locale, à poser une fois par clone :**
+
+```
+git config core.hooksPath .githooks
+```
+
+Le hook s'efface de lui-même là où il ne peut pas juger : clone superficiel, `python3` absent, push de
+pure suppression. Contournement ponctuel : `git push --no-verify`.
+
 ## Design system : jamais de valeur brute
 
 Lire `design/DSDS.md` avant d'écrire du CSS. Dans `src/components.css` :
@@ -45,12 +71,8 @@ Deux vues, via la bascule en haut de page : **Tokens** (l'échelle actuelle) et 
 
 Le changelog vient de `design/tokens-changelog.json`, **dérivé de l'historique git** de
 `design/tokens.json` — la CI fait un checkout superficiel, d'où un fichier committé plutôt qu'un
-calcul à la volée. Une entrée ne peut donc être générée qu'une fois le commit écrit : **après avoir
-committé un changement de tokens**, relancer et committer le résultat :
-
-```
-python3 design/build_tokens_changelog.py && python3 build_ui.py
-```
+calcul à la volée. Le script refuse d'ailleurs de tourner sur un clone superficiel, qui produirait
+un historique tronqué. Procédure de mise à jour : § « Avant de pousser » ci-dessus.
 
 ## Pipeline de données (rappel)
 

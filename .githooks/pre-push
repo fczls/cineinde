@@ -1,0 +1,56 @@
+#!/bin/sh
+# Garde-fou : refuse de pousser si le changelog des tokens est en retard sur
+# l'historique git (cf. CLAUDE.md § « Avant de pousser »).
+#
+# L'entrée du changelog porte le sha du commit qui modifie design/tokens.json :
+# elle ne peut être générée qu'une fois ce commit écrit, et rien dans la CI ne
+# peut le vérifier (checkout superficiel). Ce hook est le seul endroit où la
+# dérive se voit avant qu'elle ne parte sur le dépôt distant.
+#
+# Activation (une fois par clone) :
+#     git config core.hooksPath .githooks
+
+set -e
+
+# 1. Push de pure suppression de branche → rien à vérifier.
+has_update=0
+while read -r _local_ref local_sha _remote_ref _remote_sha; do
+	case "$local_sha" in
+		'' | 0000000000000000000000000000000000000000) ;;
+		*) has_update=1 ;;
+	esac
+done
+[ "$has_update" -eq 1 ] || exit 0
+
+# 2. Clone superficiel : l'historique n'est pas reconstructible, on ne juge pas.
+[ "$(git rev-parse --is-shallow-repository)" = "true" ] && exit 0
+
+# 3. Sans python3, on prévient sans bloquer — un hook ne doit pas rendre un
+#    dépôt impossible à pousser sur une machine mal outillée.
+if ! command -v python3 >/dev/null 2>&1; then
+	echo "pre-push : python3 introuvable — changelog des tokens non vérifié." >&2
+	exit 0
+fi
+
+root="$(git rev-parse --show-toplevel)"
+[ -f "$root/design/build_tokens_changelog.py" ] || exit 0
+
+if ! python3 "$root/design/build_tokens_changelog.py" --check >/dev/null 2>&1; then
+	cat >&2 <<'MSG'
+
+✗ pre-push : design/tokens-changelog.json est en retard sur l'historique git.
+
+  Un commit à pousser touche design/tokens.json ; la galerie (design.html,
+  vue Changelog) ne le refléterait pas. Régénérer et committer :
+
+      python3 design/build_tokens_changelog.py && python3 build_ui.py
+      git add design/tokens-changelog.json design.html
+      git commit -m "chore: changelog des tokens"
+
+  Contournement ponctuel : git push --no-verify
+
+MSG
+	exit 1
+fi
+
+exit 0
