@@ -72,8 +72,9 @@ def _diff(before: dict, after: dict) -> list:
                         "var": t["var"], "to": t["value"], "desc": t["desc"]})
     for path in before.keys() - after.keys():
         t = before[path]
+        # desc = dernière note d'usage connue : le token n'existe plus dans `after`.
         changes.append({"kind": "removed", "path": path, "group": t["group"],
-                        "var": t["var"], "from": t["value"]})
+                        "var": t["var"], "from": t["value"], "desc": t["desc"]})
     for path in before.keys() & after.keys():
         b, a = before[path], after[path]
         if b["value"] != a["value"]:

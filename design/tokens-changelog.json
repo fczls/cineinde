@@ -457,56 +457,64 @@
           "path": "color.accent",
           "group": "Couleurs",
           "var": "--accent",
-          "from": "#e8603a"
+          "from": "#e8603a",
+          "desc": ""
         },
         {
           "kind": "removed",
           "path": "color.compact-times",
           "group": "Couleurs",
           "var": "--compact-times",
-          "from": "#9b9b9b"
+          "from": "#9b9b9b",
+          "desc": ""
         },
         {
           "kind": "removed",
           "path": "color.resa-tkt",
           "group": "Couleurs",
           "var": "--resa-tkt",
-          "from": "#CFBFAF"
+          "from": "#CFBFAF",
+          "desc": ""
         },
         {
           "kind": "removed",
           "path": "color.scrim-2xl",
           "group": "Couleurs",
           "var": "--scrim-2xl",
-          "from": "rgba(0,0,0,.85)"
+          "from": "rgba(0,0,0,.85)",
+          "desc": ""
         },
         {
           "kind": "removed",
           "path": "color.scrim-lg",
           "group": "Couleurs",
           "var": "--scrim-lg",
-          "from": "rgba(0,0,0,.55)"
+          "from": "rgba(0,0,0,.55)",
+          "desc": ""
         },
         {
           "kind": "removed",
           "path": "color.text-dim",
           "group": "Couleurs",
           "var": "--text-dim",
-          "from": "#7a7060"
+          "from": "#7a7060",
+          "desc": ""
         },
         {
           "kind": "removed",
           "path": "color.text-mid",
           "group": "Couleurs",
           "var": "--text-mid",
-          "from": "#a09080"
+          "from": "#a09080",
+          "desc": ""
         },
         {
           "kind": "removed",
           "path": "color.white",
           "group": "Couleurs",
           "var": "--white",
-          "from": "#fff"
+          "from": "#fff",
+          "desc": ""
         }
       ]
     },

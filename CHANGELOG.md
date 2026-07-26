@@ -29,8 +29,11 @@ Format inspiré de [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/).
 ### Ajouté
 - **Galerie : vue « Changelog des tokens »** — bascule Tokens / Changelog en haut de `design.html`
   (vue partageable via `#changelog`). Une entrée par commit ayant touché les tokens : ajouts,
-  valeurs modifiées (avant → après), notes d'usage modifiées, suppressions. Historique **rétroactif
-  complet** depuis la mise en place du design system (2026-07-22). Données dans
+  valeurs modifiées (avant → après), notes d'usage modifiées, suppressions — chaque ligne porte
+  la note d'usage du token, comme dans la vue Tokens (pour un token supprimé, la dernière connue ;
+  absente sur les deux entrées de bootstrap, où `tokens.json` n'avait pas encore de
+  `$description`). Historique **rétroactif complet** depuis la mise en place du design system
+  (2026-07-22). Données dans
   `design/tokens-changelog.json`, dérivées de l'historique git par
   `design/build_tokens_changelog.py` et inlinées par `build_gallery.py`.
 - **Fiche mobile : le bloc visuel se réduit en barre au scroll** (`.hero-min`). Passé ~48px de
