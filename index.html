@@ -2904,7 +2904,13 @@ function evChipDates(ev, cinema) {
   const creneaux = (ev.creneaux || [])
     .filter(c => c.date && (!cinema || cinema === 'tous' || c.cinema === cinema))
     .map(c => c.date);
-  const filtre = cinema && cinema !== 'tous';
+  // Sous filtre, l'enveloppe de l'évènement est écartée : elle couvre toutes
+  // les salles. Sauf quand le filtre ne retranche rien (l'évènement n'est joué
+  // que dans cette salle) — sinon un évènement dont la source n'a pas daté le
+  // créneau afficherait « En cours » alors qu'on connaît sa période.
+  const salles = new Set((ev.creneaux || []).map(c => c.cinema).filter(Boolean));
+  const filtre = cinema && cinema !== 'tous'
+              && !(salles.size === 1 && salles.has(cinema));
   const enveloppe = filtre ? [] : [ev.date_debut, ev.date_fin].filter(Boolean);
   const dates = new Set(creneaux);
   const toutes = [...new Set([...creneaux, ...enveloppe])].sort();

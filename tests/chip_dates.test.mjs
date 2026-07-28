@@ -110,6 +110,22 @@ test('filtré sur Comoedia : « 20 »', () => {
   assert.equal(eventDateChip(c.dates, '2026-08', { mode: c.mode }), '20');
 });
 
+test('filtre sur la seule salle de l’évènement : l’enveloppe reste lisible', () => {
+  // Le créneau n'est pas daté (la source ne l'a pas donné) mais la période est
+  // connue : afficher « En cours » ici serait une perte d'information.
+  const retro = {
+    date_debut: '2026-08-12', date_fin: '2026-08-30', precision: 'exact',
+    creneaux: [{ cinema: 'Lumière Bellecour', date: null }],
+  };
+  const c = evChipDates(retro, 'Lumière Bellecour');
+  assert.equal(eventDateChip(c.dates, '2026-08', { mode: c.mode }), '12 → 30');
+});
+
+test('filtre sur une salle parmi plusieurs : l’enveloppe est écartée', () => {
+  const c = evChipDates(inconnue, 'Le Comoedia');
+  assert.deepEqual(c.dates, ['2026-08-20']);
+});
+
 test('un festival dont une seule séance est connue reste une période', () => {
   const fest = {
     date_debut: '2026-07-01', date_fin: '2026-09-01', precision: 'exact',
