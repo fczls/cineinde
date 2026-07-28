@@ -20,6 +20,61 @@ Format inspiré de [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/).
 > la même PR. Un `fix:` de parsing/sélecteur/casse qui ne touche aucun de ces points ne
 > demande rien. Le CHANGELOG garde la *chronologie* ; l'architecture garde l'*état stable*.
 
+## 2026-07-29
+
+> **Onglet Évènements — de la maquette figée à la vraie feature.** Les 4 évènements de
+> mars codés en dur laissent place à un calendrier prospectif (~5 à 9 semaines) alimenté
+> par deux sources, navigable par mois, filtrable par cinéma et par type, avec un niveau
+> de détail qui emmène vers la fiche film. Feature **transverse** : nouveau contrat **C5**
+> (dict événement), **C4 étendu** (clé `evenements` du repli), 4 tables + un bucket.
+> Genèse : *Brief - Onglet Événements* (vault Obsidian, 2026-07-27).
+
+### Ajouté
+- **Modèle de données** (`supabase/migrations/005_evenements.sql`) : `evenements`,
+  `evenement_films`, `evenement_seances`, `evenement_mois` + bucket `affiches`.
+  `evenement_seances` est **dénormalisée** — les scrapers ne ramènent qu'une semaine de
+  séances quand les pages événement annoncent jusqu'à ~9 semaines : une FK vers `seances`
+  serait insatisfiable pour la majorité des dates affichées. L'événement est autoportant,
+  `seance_id`/`film_id` se remplissent au fil des runs. ⚠️ **À appliquer sur Supabase**
+  (`python3 scripts/apply_schema.py 005_evenements.sql`).
+- **Deux parsers d'événements** (`scraper.py`) : Comoedia via le JSON Gatsby de chaque
+  fiche (type étiqueté à la source, liens films `?date=` en clair) et Lumière via
+  `evenement.html` + `rendez-vous.html` (préfixe en gras × section `<h2>` ;
+  `avant-premieres.html` **jamais** ingérée, périmée). Filtrage du passé à l'ingestion.
+- **Dédup inter-sources** `film + type + fenêtre ±14 j` ; titre canonique par priorité de
+  source (Lumière > Comoedia > Zola). **Jointure** avec les séances scrapées pour dater
+  les événements sans date — jamais d'inférence, et pas de fantôme si rien n'est connu.
+- **Résumé du mois** par l'API Claude (Haiku) en segments typés, validés strictement.
+  Secret **`ANTHROPIC_API_KEY` optionnel** ajouté à `scraper.yml` : sans lui, le bloc est
+  simplement absent (pas de phrase de secours).
+- **Onglet niveau 1** (`src/template.html`, `src/components.css`) : résumé multicolore,
+  sélection en éventail (3 profondeurs, CSS pur), liste du mois, sélecteur de mois,
+  filtre par type (desktop), bouton « Mois suivant ».
+- **Niveau 2** : détail d'un évènement dans le panneau existant — pastilles cinéma
+  héritant du filtre, liste des films avec leurs dates et **trois états d'affordance**
+  (« Détails et séances » / « Séance passée » / « Séances non encore annoncées »).
+- **Routing par URL** : `#/seances?…` et `#/evenements?…`, `popstate`, lecture du hash au
+  boot. Le retour navigateur ramène de la fiche film au détail d'évènement puis au niveau 1.
+- **Tests** — première infrastructure de tests du repo, **sans dépendance** :
+  `python3 -m unittest discover -s tests` (34 tests : catégorisation, périodes, dédup,
+  jointure, filtrage, résumé) et `node tests/chip_dates.test.mjs` (22 tests sur les
+  fonctions pures du front, extraites du bloc `@test-block` de `src/template.html`).
+
+### Modifié
+- **`swTab` ne masque plus la barre cinémas** : le filtre cinéma est commun aux deux
+  onglets et persiste au basculement (le filtre type et le mois, eux, se réinitialisent).
+- **`openFilm` ré-affiche `#sidePanel`** — sans ça, une fiche ouverte depuis l'onglet
+  Évènements se rendait dans un conteneur masqué par `swTab('events')`.
+- **« Séances de la semaine » → « Prochaines séances »** (`renderDetail`) : la requête est
+  `.gte('date', todayISO)` sans borne haute, le libellé devenait faux dès le niveau 2.
+- `closeDetail` capture le titre du film fermé avant de remettre l'état à zéro (sinon le
+  FLIP de fermeture perd sa cible), et le FLIP est court-circuité pendant une
+  restauration depuis l'URL (il mesure une carte qui n'existe pas encore).
+- `scripts/apply_schema.py` accepte le nom d'une migration en argument (il ne lisait que
+  `001_initial.sql`).
+- Doc : `docs/architecture/` (C5, C4 étendu, schéma événements, parsers, routing) et
+  `design/DSDS.md` (contrat de composant `ev-` réécrit pour les deux niveaux).
+
 ## 2026-07-26
 
 > Passe visuelle sur la **fiche détail** : la vue mobile adopte la grammaire deux blocs

@@ -1,7 +1,7 @@
 # Architecture — Frontend (index.html)
 
 > Le front est **servi** comme un fichier autonome (`index.html`, ~126 Ko : markup + CSS + JS inline) — mais il est **généré** : depuis 2026-07-22 il est assemblé par `build_ui.py` à partir de `src/` (`template.html` + `components.css` + `tokens.css` généré depuis `design/tokens.json`). **Ne pas éditer `index.html` à la main** — éditer `src/`/`design/` puis `python3 build_ui.py`. Le runtime reste mono-fichier (bon pour GitHub Pages) ; seule la *source* est découpée. Rôle inchangé : chargement des données, dédup d'affichage, filtres, rendu semaine, deep-link réservation. Les invariants/contrats transverses vivent dans [Vue d'ensemble](README.md).
-> Dernière mise à jour : 2026-07-20
+> Dernière mise à jour : 2026-07-29
 
 ---
 
@@ -58,13 +58,51 @@ Un lien absent (Comoedia, ou séance passée) → bouton **informatif** qui ouvr
 
 ---
 
-## Onglet Événements (⚠️ dette — chantier futur)
+## Onglet Événements (2026-07-29)
 
-Aujourd'hui **100 % figé, aucun backend** :
-- `EVENTS_DATA` = tableau en dur, 4 events périmés (reliquat de maquette).
-- `renderEvents()` ne fait qu'afficher ce tableau statique.
+Alimenté par Supabase (`loadEventsFromSupabase`, 4 tables jointes) avec repli sur la clé `evenements` de `programme.json` (contrat C4). `EVENTS_DATA` a disparu.
 
-**Cible** (voir *Exploration — Événements* (vault Obsidian)) : nouvelle table Supabase `evenements`, parsers côté scraper, et `renderEvents()` alimenté par requête Supabase + fallback JSON — en réutilisant le même schéma de champs (`titre, jour, mois, heure, lieu, desc, type, color`). C'est une feature **transverse** (Frontend + Pipeline + Infra).
+**État propre à l'onglet** : `evData`, `evMois` (`YYYY-MM`), `filtreType`, `evSeeds`/`evResumes` (par mois), `evSel`/`evSelIdx` (éventail). ⚠️ **`filtreCinema` est PARTAGÉ** avec l'onglet Séances et persiste au basculement ; le filtre type et le mois se réinitialisent (c'est `swTab` qui le fait). La barre cinémas reste donc visible dans les deux modes — elle était masquée avant.
+
+### Les fonctions pures (là où vivent les règles)
+
+| Fonction | Règle portée |
+|---|---|
+| `eventDateChip(dates, mois, opts)` | Les **six formes** de chip + **règle du mois omis** (le mois ne s'écrit que si la période déborde du mois affiché). `opts.alwaysMonth` pour le niveau 2 (pas de mois affiché), `opts.et` pour « 15 et 24 juillet », `opts.mode` pour la bascule liste/période |
+| `evChipDates(ev, cinema)` | La chip est **dérivée du périmètre, jamais stockée** : filtré sur Comoedia, *L'Inconnue* affiche `20` ; sur Terreaux, `24` ; sans filtre, `20 & 24`. Forme « liste » **seulement si** les créneaux datés (≤ 2) couvrent les bornes annoncées — sinon un festival dont une seule séance est connue s'écrirait « 1 juillet & 1 septembre » |
+| `sortEvents(events, mois)` | Bloc large (couvre tout le mois, ou `saison`/`mois`/`en_cours`) trié par durée décroissante, puis bloc daté par `date_debut` (repli `date_fin`) |
+| `monthsWithEvents(events, …)` | Alimente **les trois** chemins de navigation (flèches, sélecteur, « Mois suivant ») : un mois vide n'est atteignable par aucun |
+| `pickSelection(events, seed, scope)` | Tirage stable (hash FNV-1a de `seed|scope|clé`), paliers 1⇒1, 2–3⇒1, 4–6⇒3, ≥7⇒5, appliqués **au périmètre filtré** — filtrer a posteriori un tirage global donnerait 0, 1 ou 2 cartes au hasard |
+
+Ces fonctions sont délimitées par `// @test-block` dans `src/template.html` et testées par `node tests/chip_dates.test.mjs`, qui extrait le bloc et l'évalue (aucune dépendance npm, la contrainte mono-fichier reste intacte).
+
+**Résumé du mois** : segments typés (`strong`/`mute`/`icon`) produits par le scraper. **Masqué dès qu'un filtre est actif** (il décrit le mois entier) et absent si le scraper n'a rien généré. Les icônes sont une **liste fermée** de SVG inline (`EV_ICONS`), miroir de `EVENT_ICONS` côté scraper — un nom hors liste est ignoré.
+
+**Éventail** : trois niveaux de profondeur en CSS pur (`transform`/`opacity`), décalages et rotations en variables, `prefers-reduced-motion` respecté. Une affiche qui casse retombe sur le visuel local **sans** faire disparaître la carte (le nombre de cartes suit une règle, il ne doit pas dépendre d'un 403).
+
+### Niveau 2 — détail d'un événement
+
+`openEvent(cle)` rend dans le **panneau existant** (`.d-hero` + `.d-body`) : même grammaire deux blocs, même fermeture, même backdrop que la fiche film. Les dates de chaque film viennent des **créneaux** (`evFilmToutesDates`) — Supabase ne renvoie aucune date sur `evenement_films`, les lire là mettrait tous les films en « Séances non encore annoncées ».
+
+Trois états d'affordance (`evFilmEtat`) : « Détails et séances » + `+` (film résolu dans `allFilms`, date à venir) · « Séance passée » · « Séances non encore annoncées » — ce dernier est le **régime normal** au-delà de la semaine scrapée.
+
+⚠️ **Pièges d'intégration** : `swTab('events')` masque `#sidePanel` → `openFilm` et `openEvent` le ré-affichent, sinon le rendu se ferait dans un conteneur caché. `openFilm` reçoit le **titre canonique de `films`** (résolu via `allFilms`), jamais le titre affiché dans l'événement (le Comoedia titre en capitales). Le FLIP ne trouve pas de `.film-card` depuis cet onglet et se dégrade seul — c'est voulu.
+
+---
+
+## Routing par URL (2026-07-29)
+
+L'app n'avait aucun routing ; le parcours a maintenant trois profondeurs (niveau 1 → détail événement → fiche film), donc une URL.
+
+- `serializeState()` → `#/seances?cine=…&vue=…&periode=…&jour=…&film=…` ou `#/evenements?cine=…&type=…&mois=…&ev=…&film=…`.
+- `pushRoute()` est appelé par **tous les mutateurs** (`swTab`, `setCinema`, `setViewMode`, `setCompactView`, `pickDay`, `navDay`, `setEvMois`, `setFiltreType`, `openFilm`, `openEvent`, `closeDetail`).
+- `applyState(hash)` restaure l'état ; écouteur `popstate` + lecture du hash au boot.
+
+⚠️ **La zone de régression n'est pas le volume, c'est l'atterrissage** — deux gardes portées par le drapeau `_restoring` :
+1. **le FLIP est court-circuité** (`_flipEnabled()` renvoie `false`) : il mesure une `.film-card` qui n'existe pas encore au chargement à froid ;
+2. **`_listScrollY` n'est pas écrasé** par le scroll (nul) d'une page en cours de restauration.
+
+`closeDetail` capture le titre du film fermé **avant** de remettre l'état à zéro — sinon le FLIP de fermeture perd sa cible.
 
 ---
 
