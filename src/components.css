@@ -620,18 +620,149 @@ html:not(.motion-ready) a.d-chip.resa:focus-visible .dc-tkt{ opacity:1; }
   .logo img{ transition-duration:1ms !important; }
 }
 
-/* ── EVENTS ── */
-.events-list{padding:16px 20px 40px;display:flex;flex-direction:column;gap:10px;}
-.ev{border-radius:var(--radius-md);border:1px solid var(--border);background:var(--bg2);overflow:hidden;cursor:pointer;transition:border-color .2s,transform .2s;display:grid;grid-template-columns:70px 1fr;}
-.ev:hover{border-color:var(--border2);transform:translateY(-1px);}
-.ev-date{display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--overlay-sm);border-right:1px solid var(--border);padding:16px 0;}
-.ev-n{font-family:'Playfair Display',serif;font-size:var(--fs-2xl);font-weight:700;color:var(--gold);line-height:1;}
-.ev-m{font-size:var(--fs-xs);letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);}
-.ev-info{padding:14px 16px;}
-.ev-type{font-size:var(--fs-xs);letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px;}
-.ev-title{font-family:'Playfair Display',serif;font-size:var(--fs-md);font-weight:700;line-height:1.3;margin-bottom:6px;}
-.ev-desc{font-size:var(--fs-sm);color:var(--text-3);line-height:1.6;margin-bottom:8px;}
-.ev-meta{font-size:var(--fs-sm);color:var(--text-3);display:flex;gap:12px;}
+/* ══ ÉVÈNEMENTS ══════════════════════════════════════════════════════════
+   Le desktop est un CENTRAGE doublé d'un ÉLARGISSEMENT, pas un passage
+   multi-colonnes : la colonne de contenu grandit jusqu'à 820px puis se fige,
+   le chrome (barre cinémas, toolbar) reste pleine largeur. La liste est
+   mono-colonne à toutes les largeurs. */
+.ev-col{max-width:820px;margin:0 auto;padding:24px 20px 48px;}
+
+/* Résumé du mois — segments typés par le modèle : `strong` = mois, types et
+   récurrences ; `mute` = tout le reste. */
+.ev-summary{font-size:var(--fs-xl);line-height:1.7;text-align:left;margin-bottom:32px;}
+.ev-seg-strong{color:var(--text);}
+.ev-seg-mute{color:var(--text-3);}
+.ev-ico{
+  display:inline-flex;vertical-align:-6px;margin:0 6px;
+  width:26px;height:26px;padding:4px;box-sizing:border-box;
+  border-radius:var(--radius-pill);background:var(--text);color:var(--bg);
+}
+
+/* Étiquette de section (« Sélection », « Toute la programmation du mois ») :
+   respiration narrative en italique — voix éditoriale du design system. */
+.ev-label{
+  display:block;width:fit-content;margin:0 auto 24px;padding:10px 22px;
+  border:1px solid var(--border2);border-radius:var(--radius-pill);
+  font-family:var(--font-display-italic);font-style:italic;
+  font-size:var(--fs-md);color:var(--text-2);
+}
+.ev-label-list{margin-top:40px;}
+
+/* ── Éventail de la sélection ──
+   Trois niveaux de profondeur symétriques : le décalage part du centre, la
+   rotation aussi (négative à gauche, positive à droite). */
+.ev-selection{margin-bottom:8px;}
+.ev-fan{
+  --ev-dx1:104px; --ev-dx2:184px; --ev-rot:15deg;
+  position:relative;height:280px;margin-bottom:16px;
+}
+.ev-card{
+  position:absolute;left:50%;bottom:0;padding:0;border:none;background:none;
+  cursor:pointer;line-height:0;transform-origin:50% 92%;
+  border-radius:var(--radius-lg);overflow:hidden;
+  transform:translateX(-50%);
+  transition:transform .38s cubic-bezier(.33,0,.2,1),opacity .38s ease;
+}
+.ev-card img{display:block;object-fit:cover;}
+/* Carte au centre : l'affiche garde son ratio, une seule dimension est fixée. */
+.ev-card[data-niveau="0"]{z-index:2;}
+.ev-card[data-niveau="0"] img{width:170px;height:auto;max-height:264px;}
+.ev-card[data-niveau="0"].is-paysage img{width:auto;height:170px;max-width:302px;}
+/* Cartes latérales : carrées. Le recadrage coupe — on préserve le bloc-titre
+   des affiches portrait (haut) et le centre des paysages. */
+.ev-card[data-niveau="1"],.ev-card[data-niveau="2"]{z-index:1;}
+.ev-card[data-niveau="2"]{z-index:0;opacity:.7;}
+.ev-card[data-niveau="1"] img,.ev-card[data-niveau="2"] img{
+  width:160px;height:160px;object-position:top;
+}
+.ev-card.is-paysage[data-niveau="1"] img,.ev-card.is-paysage[data-niveau="2"] img{object-position:center;}
+.ev-card[data-niveau="1"][data-cote="-1"]{transform:translateX(calc(-50% - var(--ev-dx1))) rotate(calc(-1 * var(--ev-rot)));}
+.ev-card[data-niveau="1"][data-cote="1"]{transform:translateX(calc(-50% + var(--ev-dx1))) rotate(var(--ev-rot));}
+.ev-card[data-niveau="2"][data-cote="-1"]{transform:translateX(calc(-50% - var(--ev-dx2))) rotate(calc(-2 * var(--ev-rot)));}
+.ev-card[data-niveau="2"][data-cote="1"]{transform:translateX(calc(-50% + var(--ev-dx2))) rotate(calc(2 * var(--ev-rot)));}
+.ev-card:focus-visible{outline:2px solid var(--gold);outline-offset:3px;}
+/* Dégradation à une seule carte : ni cartes latérales, ni flèches, ni swipe. */
+.ev-selection.is-solo .ev-arrow{display:none;}
+
+.ev-meta{text-align:center;margin-bottom:20px;}
+.ev-meta-sous{font-family:var(--font-display-italic);font-style:italic;font-size:var(--fs-lg);color:var(--text-2);margin-bottom:6px;}
+.ev-meta-titre{font-family:'Playfair Display',serif;font-weight:700;font-size:var(--fs-2xl);color:var(--text);line-height:1.25;}
+.ev-meta-dates{font-size:var(--fs-sm);color:var(--text-2);margin-top:8px;}
+
+.ev-fan-nav{display:flex;align-items:center;justify-content:center;gap:16px;}
+.ev-arrow{
+  width:44px;height:44px;border-radius:var(--radius-pill);
+  border:1px solid var(--border2);background:transparent;color:var(--text-2);
+  display:flex;align-items:center;justify-content:center;cursor:pointer;
+  transition:color .18s,border-color .18s,background .18s;
+}
+.ev-arrow:hover{color:var(--text);border-color:var(--overlay-lg);}
+.ev-plus{
+  width:56px;height:56px;border-radius:var(--radius-pill);
+  border:1px solid var(--border2);background:var(--bg3);color:var(--text);
+  display:flex;align-items:center;justify-content:center;cursor:pointer;
+  transition:background .18s,border-color .18s,transform .18s;
+}
+.ev-plus:hover{background:var(--bg4);border-color:var(--overlay-lg);transform:scale(1.04);}
+.ev-arrow:focus-visible,.ev-plus:focus-visible,.ev-row:focus-visible{outline:2px solid var(--gold);outline-offset:2px;}
+
+/* ── Liste du mois ──
+   `[chip] [CATÉGORIE · sous-classe] [titre] ——— [+]` : l'étiquette de
+   catégorie se lit AVANT le titre, c'est une information structurante. */
+.ev-list{display:flex;flex-direction:column;}
+.ev-row{
+  position:relative;display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+  padding:10px 44px 10px 0;cursor:pointer;
+  border-bottom:1px solid var(--border);
+}
+.ev-row:last-child{border-bottom:none;}
+.ev-row:hover .ev-plus-sm{background:var(--bg4);color:var(--text);}
+.ev-row:hover .ev-row-titre{color:var(--gold);}
+.ev-chip{
+  flex-shrink:0;padding:4px 12px;border-radius:var(--radius-pill);
+  background:var(--bg3);color:var(--text-2);font-size:var(--fs-sm);white-space:nowrap;
+}
+.ev-cat{font-size:var(--fs-md);color:var(--text-2);white-space:nowrap;}
+.ev-sep-dot{color:var(--text-3);}
+.ev-row-titre{font-size:var(--fs-md);color:var(--text);transition:color .18s;}
+.ev-rule{flex:1 1 24px;min-width:24px;height:1px;background:var(--border);}
+.ev-plus-sm{
+  position:absolute;right:0;top:8px;width:28px;height:28px;
+  background:var(--bg3);color:var(--text-2);border:1px solid var(--border);
+}
+
+.ev-next-wrap{display:flex;justify-content:center;margin-top:40px;}
+.ev-next{
+  width:100%;max-width:320px;padding:16px 24px;border-radius:var(--radius-pill);
+  border:1px solid var(--border);background:var(--bg2);color:var(--text-3);
+  font-family:'DM Sans',sans-serif;font-size:var(--fs-md);cursor:pointer;
+  transition:color .18s,border-color .18s,background .18s;
+}
+.ev-next:hover{color:var(--text);border-color:var(--border2);background:var(--bg3);}
+
+/* Filtre par type : desktop uniquement (cf. maquette mobile). */
+.ev-type-seg .tb-btn{padding:0 14px;letter-spacing:.08em;}
+@media(max-width:820px){
+  .ev-type-seg{display:none!important;}
+  /* Mobile : l'éventail se navigue au swipe et au tap sur une carte latérale
+     — pas de flèches (cf. maquette). */
+  .ev-arrow{display:none;}
+  .ev-col{padding:20px 12px 40px;}
+  .ev-summary{font-size:var(--fs-lg);margin-bottom:24px;}
+  .ev-fan{height:240px;}
+  .ev-meta-titre{font-size:var(--fs-xl);}
+}
+/* Desktop : mêmes rapports, à l'échelle (× 1,5625 — cf. ratios du brief). */
+@media(min-width:821px){
+  .ev-fan{--ev-dx1:162px; --ev-dx2:288px; height:420px;}
+  .ev-card[data-niveau="0"] img{width:266px;max-height:412px;}
+  .ev-card[data-niveau="0"].is-paysage img{height:266px;max-width:472px;}
+  .ev-card[data-niveau="1"] img,.ev-card[data-niveau="2"] img{width:250px;height:250px;}
+  .ev-summary{font-size:var(--fs-2xl);line-height:1.6;}
+}
+@media (prefers-reduced-motion: reduce){
+  .ev-card{transition-duration:1ms;}
+}
 
 /* ── DETAIL OPEN STATE ── */
 body.detail-open .nav-shell{display:none!important;}
@@ -745,7 +876,7 @@ body.detail-open #detailBackdrop{opacity:1;pointer-events:auto;}
   }
   #detailContent{display:flex;flex-direction:column;gap:8px;flex:1 1 auto;min-height:0;}
   #detailContent.hidden{display:none;}
-  .film-list,.events-list{padding:12px 12px 32px;}
+  .film-list{padding:12px 12px 32px;}
   /* Cards mobile: narrower poster columns, slots span full width */
   .film-card{grid-template-columns:141px 1fr;column-gap:20px;row-gap:0;padding:16px 20px;}
   .card-poster-wrap{grid-column:1;grid-row:1/3;}
