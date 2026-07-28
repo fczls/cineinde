@@ -731,6 +731,28 @@ html:not(.motion-ready) a.d-chip.resa:focus-visible .dc-tkt{ opacity:1; }
   background:var(--bg3);color:var(--text-2);border:1px solid var(--border);
 }
 
+/* ── Niveau 2 : détail d'un évènement ──
+   Réutilise la grammaire deux blocs de la fiche film (`.d-hero` + `.d-body`,
+   même fermeture, même backdrop) ; seules les parties propres à l'évènement
+   portent le préfixe `ev-`. */
+.ev-pills{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 20px;}
+.ev-pill{
+  padding:6px 14px;border-radius:var(--radius-pill);
+  border:1px solid var(--border2);color:var(--text-2);font-size:var(--fs-sm);
+}
+.ev-pill-cine{background:var(--text);border-color:var(--text);color:var(--bg);}
+.ev-films{display:flex;flex-direction:column;gap:20px;margin-top:24px;}
+.ev-film{display:grid;grid-template-columns:120px 1fr;gap:16px;align-items:start;}
+.ev-film-visuel{border-radius:var(--radius-md);overflow:hidden;background:var(--bg2);line-height:0;}
+.ev-film-visuel img{width:100%;height:auto;display:block;}
+.ev-film-noaff{display:block;width:100%;padding-top:148%;background:var(--bg3);}
+.ev-film-titre{font-family:'Playfair Display',serif;font-weight:700;font-size:var(--fs-xl);line-height:1.25;}
+.ev-film-dates{font-size:var(--fs-md);color:var(--text-3);margin-top:6px;}
+.ev-film-etat{font-size:var(--fs-md);color:var(--text);margin-top:10px;}
+/* Séance passée / non encore annoncée : information, pas affordance. */
+.ev-film-etat.is-inactif{color:var(--text-3);}
+.ev-film-plus{position:static;margin-top:12px;}
+
 .ev-next-wrap{display:flex;justify-content:center;margin-top:40px;}
 .ev-next{
   width:100%;max-width:320px;padding:16px 24px;border-radius:var(--radius-pill);

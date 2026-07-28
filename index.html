@@ -807,6 +807,28 @@ html:not(.motion-ready) a.d-chip.resa:focus-visible .dc-tkt{ opacity:1; }
   background:var(--bg3);color:var(--text-2);border:1px solid var(--border);
 }
 
+/* ── Niveau 2 : détail d'un évènement ──
+   Réutilise la grammaire deux blocs de la fiche film (`.d-hero` + `.d-body`,
+   même fermeture, même backdrop) ; seules les parties propres à l'évènement
+   portent le préfixe `ev-`. */
+.ev-pills{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 20px;}
+.ev-pill{
+  padding:6px 14px;border-radius:var(--radius-pill);
+  border:1px solid var(--border2);color:var(--text-2);font-size:var(--fs-sm);
+}
+.ev-pill-cine{background:var(--text);border-color:var(--text);color:var(--bg);}
+.ev-films{display:flex;flex-direction:column;gap:20px;margin-top:24px;}
+.ev-film{display:grid;grid-template-columns:120px 1fr;gap:16px;align-items:start;}
+.ev-film-visuel{border-radius:var(--radius-md);overflow:hidden;background:var(--bg2);line-height:0;}
+.ev-film-visuel img{width:100%;height:auto;display:block;}
+.ev-film-noaff{display:block;width:100%;padding-top:148%;background:var(--bg3);}
+.ev-film-titre{font-family:'Playfair Display',serif;font-weight:700;font-size:var(--fs-xl);line-height:1.25;}
+.ev-film-dates{font-size:var(--fs-md);color:var(--text-3);margin-top:6px;}
+.ev-film-etat{font-size:var(--fs-md);color:var(--text);margin-top:10px;}
+/* Séance passée / non encore annoncée : information, pas affordance. */
+.ev-film-etat.is-inactif{color:var(--text-3);}
+.ev-film-plus{position:static;margin-top:12px;}
+
 .ev-next-wrap{display:flex;justify-content:center;margin-top:40px;}
 .ev-next{
   width:100%;max-width:320px;padding:16px 24px;border-radius:var(--radius-pill);
@@ -1819,6 +1841,7 @@ function setViewMode(mode) {
   syncToolbar();
   buildPills(allFilms);
   renderFilms(allFilms);
+  pushRoute();
 }
 
 function setCompactView(compact) {
@@ -1837,6 +1860,7 @@ function setCompactView(compact) {
   syncToolbar();
   buildPills(allFilms);
   renderFilms(allFilms);
+  pushRoute();
 }
 
 // Affiche/masque les groupes de la toolbar selon l'onglet et la vue :
@@ -1957,6 +1981,7 @@ function pickDay(dayKey) {
   updateDayButton();
   buildDayDropdown();
   renderFilms(allFilms);
+  pushRoute();
 }
 
 function toggleDayDropdown() {
@@ -1980,6 +2005,7 @@ function navDay(delta) {
   if (viewMode === 'semaine') { setViewMode('jour'); return; }
   updateDayButton();
   renderFilms(allFilms);
+  pushRoute();
 }
 
 document.addEventListener('click', e => {
@@ -2438,7 +2464,10 @@ function jumpToTomorrow() {
 // (mobile / prefers-reduced-motion / API absente / éléments introuvables).
 function _reducedMotion() { return window.matchMedia('(prefers-reduced-motion: reduce)').matches; }
 function _flipEnabled() {
-  return !_reducedMotion() && window.innerWidth > 820 && typeof Element.prototype.animate === 'function';
+  // ⚠️ Jamais pendant une restauration depuis l'URL : le FLIP mesure une
+  // `.film-card` qui n'existe pas encore au chargement à froid.
+  return !_restoring && !_reducedMotion() && window.innerWidth > 820
+      && typeof Element.prototype.animate === 'function';
 }
 let _openFilmTitre = null;
 
@@ -2476,8 +2505,11 @@ function _flipVisual(from, to, src, onDone) {
 
 function openFilm(titre) {
   // Mémoriser la position de la liste avant que .main ne disparaisse (sauf si une
-  // fiche est déjà ouverte : on ne veut pas écraser la position réelle par 0).
-  if (!document.body.classList.contains('detail-open')) _listScrollY = window.scrollY;
+  // fiche est déjà ouverte : on ne veut pas écraser la position réelle par 0 —
+  // ni pendant une restauration depuis l'URL, où le scroll ne veut rien dire).
+  if (!document.body.classList.contains('detail-open') && !_restoring) _listScrollY = window.scrollY;
+  // Ouverture depuis l'onglet Évènements : le panneau y est masqué par swTab.
+  document.getElementById('sidePanel').classList.remove('hidden');
   let film;
   if (filtreCinema === 'tous') {
     // Regrouper par la même clé que getRowsForDate (imdbId si dispo, sinon
@@ -2503,6 +2535,7 @@ function openFilm(titre) {
   if (!film) return;
 
   _openFilmTitre = titre;
+  pushRoute();
   const applyOpen = () => {
     document.querySelectorAll('.film-card, .compact-row').forEach(c => c.classList.remove('active'));
     document.querySelectorAll('.film-card, .compact-row').forEach(c => {
@@ -2546,6 +2579,9 @@ function openFilm(titre) {
 }
 
 function closeDetail() {
+  // Le FLIP de fermeture vise la carte du film qu'on ferme : retenir son titre
+  // AVANT que applyClose ne remette l'état à zéro.
+  const titreFerme = _openFilmTitre;
   const applyClose = () => {
     document.getElementById('detailEmpty').classList.remove('hidden');
     document.getElementById('detailContent').classList.add('hidden');
@@ -2558,6 +2594,12 @@ function closeDetail() {
     // place à l'écran → cible correcte du FLIP de fermeture.
     void document.documentElement.offsetHeight;
     window.scrollTo(0, _listScrollY);
+    // Le panneau redevient invisible en mode Évènements (il n'y a pas de fiche
+    // « vide » à y montrer), et l'URL retombe au niveau 1.
+    if (currentTab === 'events') document.getElementById('sidePanel').classList.add('hidden');
+    _openEventCle = null;
+    _openFilmTitre = null;
+    pushRoute();
   };
 
   const dvImg = document.querySelector('#detailVisual .dv-img');
@@ -2572,7 +2614,7 @@ function closeDetail() {
 
   applyClose();   // liste affichée + scroll restauré, détail masqué
 
-  const card = _visualMorphSource(_openFilmTitre);
+  const card = _visualMorphSource(titreFerme);
   if (!card || !from.rect.width) return;
   const to = { rect: card.getBoundingClientRect(), radius: getComputedStyle(card).borderRadius };
   if (!to.rect.width) return;
@@ -2685,7 +2727,7 @@ function renderDetail(film) {
       <div class="d-genres">${(film.genres||[]).map(g=>`<span class="d-genre">${g}</span>`).join('')}</div>
       <p class="d-synopsis">${synop}</p>
       <div class="d-week-head">
-        <div class="d-week-lbl">Séances de la semaine</div>
+        <div class="d-week-lbl">Prochaines séances</div>
         ${ENABLE_RESA_LINKS && film._sd.some(s => safeResaUrl(s.resa_url)) ? `<div class="d-resa-info"><span class="d-resa-ico">${TICKET_SVG_HINT}</span><span class="d-resa-txt">Pour réserver une séance, cliquer sur l'horaire<span class="d-resa-note">Ne fonctionne pas sur Comoedia.</span></span></div>` : ''}
       </div>
       ${weekHtml}
@@ -2817,6 +2859,7 @@ async function loadEvents() {
 // ═══════════════════════════════════════════════════════════
 // ÉVÈNEMENTS — fonctions pures (dates, tri, tirage)
 // ═══════════════════════════════════════════════════════════
+// @test-block:start — bloc extrait tel quel par tests/chip_dates.test.mjs
 const evMoisDe   = iso => (iso || '').slice(0, 7);
 const evMoisLabel = m => m ? `${MOIS_NOMS[Number(m.slice(5,7)) - 1]} ${m.slice(0,4)}` : '—';
 const _evJour = (iso, avecMois) => {
@@ -2837,14 +2880,15 @@ function eventDateChip(dates, moisAffiche, opts) {
     return 'En cours';
   }
   const dansLeMois = iso => !avecMoisForce && evMoisDe(iso) === moisAffiche;
+  const et = opts.et ? ' et ' : ' & ';   // « 15 et 24 juillet » au niveau 2
   const a = uniq[0], b = uniq[uniq.length - 1];
   // Liste de dates discrètes (1 ou 2) ; au-delà, on bascule sur la période —
   // le détail perdu est précisément ce que la fiche film révèlera.
   if (opts.mode !== 'periode' && uniq.length <= 2) {
     if (uniq.length === 1) return _evJour(a, !dansLeMois(a));
-    if (dansLeMois(a) && dansLeMois(b)) return `${_evJour(a)} & ${_evJour(b)}`;
-    if (evMoisDe(a) === evMoisDe(b)) return `${_evJour(a)} & ${_evJour(b, true)}`;
-    return `${_evJour(a, true)} & ${_evJour(b, true)}`;
+    if (dansLeMois(a) && dansLeMois(b)) return `${_evJour(a)}${et}${_evJour(b)}`;
+    if (evMoisDe(a) === evMoisDe(b)) return `${_evJour(a)}${et}${_evJour(b, true)}`;
+    return `${_evJour(a, true)}${et}${_evJour(b, true)}`;
   }
   if (a === b) return _evJour(a, !dansLeMois(a));
   if (dansLeMois(a) && dansLeMois(b)) return `${_evJour(a)} → ${_evJour(b)}`;
@@ -2954,6 +2998,7 @@ function pickSelection(events, seed, scope) {
     .map(x => x.ev)
     .sort((a, b) => (a.date_debut || '').localeCompare(b.date_debut || ''));
 }
+// @test-block:end
 
 // Affiche d'un évènement (§6.2) : poster TMDB du film quand l'évènement EST un
 // film, sinon l'affiche maison rapatriée, sinon l'affiche d'un film lié.
@@ -3222,9 +3267,236 @@ document.addEventListener('click', e => {
   if (dd && wrap && !wrap.contains(e.target) && !dd.contains(e.target)) closeMonthDropdown();
 });
 
-// Niveau 2 et routing par URL — implémentés juste après (§9).
-function openEvent(cle) { /* remplacé par le niveau 2 */ }
-function pushRoute() { /* remplacé par le routing */ }
+// ═══════════════════════════════════════════════════════════
+// ÉVÈNEMENTS — niveau 2 (détail)
+// Intention produit à ne pas dépasser : le niveau 2 ajoute du détail pour
+// EMMENER VERS LA FICHE FILM et la réservation. Il ne rejoue pas la fiche —
+// pas d'horaires, pas de bouton de résa, pas de synopsis de film.
+// ═══════════════════════════════════════════════════════════
+let _openEventCle = null;
+
+// Dates d'un film de l'évènement, écrites en toutes lettres. Mêmes formes qu'au
+// niveau 1, à deux réserves près (§9.3) : le mois est TOUJOURS écrit (il n'y a
+// pas de mois affiché ici), et 3 dates ou plus basculent sur la période — le
+// détail perdu est précisément ce que la fiche film va révéler.
+function evFilmDates(dates) {
+  const uniq = [...new Set(dates || [])].sort();
+  if (!uniq.length) return '';
+  return eventDateChip(uniq, null, {
+    alwaysMonth: true, et: true, mode: uniq.length >= 3 ? 'periode' : 'liste',
+  });
+}
+
+// Trois états d'affordance selon ce qui est résolu. Le troisième est le RÉGIME
+// NORMAL au-delà de la semaine scrapée (les scrapers ne ramènent qu'une semaine
+// de séances alors que les évènements courent sur deux mois), pas un cas dégradé.
+// Dates d'un film de l'évènement : ce sont les CRÉNEAUX qui les portent (c'est
+// le modèle : un créneau = une salle, une date, un film). Supabase ne renvoie
+// donc aucune date sur `evenement_films` — les lire là serait un bug silencieux
+// où tous les films tomberaient en « Séances non encore annoncées ».
+// Périmètre : toutes les dates de l'évènement, pas seulement celles du mois
+// d'entrée (§9.3) — d'où l'absence de filtre par mois ici.
+function evFilmToutesDates(ev, f) {
+  const k = normalizeTitle(f.titre);
+  const creneaux = (ev.creneaux || []).filter(c => c.date);
+  let dates = creneaux.filter(c => c.titre_film && normalizeTitle(c.titre_film) === k)
+                      .map(c => c.date);
+  // Évènement mono-film : ses créneaux le concernent, même sans titre_film.
+  if (!dates.length && (ev.films || []).length === 1) dates = creneaux.map(c => c.date);
+  return [...new Set([...(f.dates || []), ...dates])].sort();
+}
+
+function evFilmEtat(f, dates) {
+  dates = dates || f.dates || [];
+  const today = dKey(new Date());
+  const futures = dates.filter(d => d >= today);
+  const connu = allFilms.find(x => normalizeTitle(x.titre) === normalizeTitle(f.titre));
+  if (connu && futures.length) return { label: 'Détails et séances', titre: connu.titre };
+  if (dates.length && !futures.length) return { label: 'Séance passée', titre: null };
+  return { label: 'Séances non encore annoncées', titre: null };
+}
+
+function evFilmAffiche(f) {
+  if (f.affiche) return f.affiche;
+  const connu = allFilms.find(x => normalizeTitle(x.titre) === normalizeTitle(f.titre));
+  return connu?._poster || null;
+}
+
+function openEvent(cle) {
+  const ev = evData.find(e => e.cle === cle);
+  if (!ev) return;
+  if (!document.body.classList.contains('detail-open') && !_restoring) _listScrollY = window.scrollY;
+  _openEventCle = cle;
+  _openFilmTitre = null;
+  renderEventDetail(ev);
+  // ⚠️ swTab('events') masque le panneau détail : sans ce retrait, le niveau 2
+  // se rendrait dans un conteneur caché.
+  document.getElementById('sidePanel').classList.remove('hidden');
+  if (window.innerWidth <= 820) {
+    const side = document.getElementById('sidePanel');
+    side.classList.add('open');
+    side.scrollTo(0, 0);
+    window.scrollTo(0, 0);
+  }
+  pushRoute();
+}
+
+function renderEventDetail(ev) {
+  const affiche = evAffiche(ev);
+  // Pas de nouvel asset : on réutilise l'affiche (recadrée) ou le backdrop du
+  // film. Le recadrage d'une affiche portrait est assumé.
+  document.getElementById('detailVisual').innerHTML = affiche
+    ? `<img class="dv-img" src="${escAttr(tmdbHiRes(affiche))}" alt="" onerror="visualFallback(this)" />`
+    : '<img class="dv-img" src="assets/visual-fallback.webp" alt="" /><div class="dv-scrim"></div>';
+
+  // Pastilles cinéma : salles DISTINCTES des créneaux, héritant du filtre actif
+  // au niveau 1 (un évènement joué dans deux salles en affiche deux ; une seule
+  // sous filtre).
+  const cines = [...new Set((ev.creneaux || []).map(c => c.cinema).filter(Boolean))]
+    .filter(c => filtreCinema === 'tous' || c === filtreCinema);
+  const pills = cines.map(c => `<span class="ev-pill ev-pill-cine">${escHtml(SHORT_CINEMA[c] || c)}</span>`)
+    .concat(`<span class="ev-pill">${escHtml(EV_TYPE_LABEL[ev.type])}</span>`)
+    .concat(ev.forme ? `<span class="ev-pill">${escHtml(EV_FORME_LABEL[ev.forme])}</span>` : [])
+    .join('');
+
+  // Tri par première date croissante ; les films sans date en fin de liste.
+  const films = [...(ev.films || [])]
+    .map(f => ({ ...f, _dates: evFilmToutesDates(ev, f) }))
+    .sort((a, b) => (a._dates[0] || '9999').localeCompare(b._dates[0] || '9999'));
+
+  const filmsHtml = films.map(f => {
+    const etat = evFilmEtat(f, f._dates);
+    const src = evFilmAffiche(f);
+    const dates = evFilmDates(f._dates);
+    return `<div class="ev-film">
+      <div class="ev-film-visuel">${src
+        ? `<img src="${escAttr(src)}" alt="" loading="lazy" onerror="evCardFallback(this)">`
+        : '<span class="ev-film-noaff"></span>'}</div>
+      <div class="ev-film-info">
+        <div class="ev-film-titre">${escHtml(f.titre)}</div>
+        ${dates ? `<div class="ev-film-dates">${escHtml(dates)}</div>` : ''}
+        <div class="ev-film-etat${etat.titre ? '' : ' is-inactif'}">${escHtml(etat.label)}</div>
+        ${etat.titre ? `<button type="button" class="ev-plus ev-plus-sm ev-film-plus"
+            onclick="openFilm('${esc(etat.titre)}')" aria-label="Ouvrir la fiche de ${escAttr(f.titre)}">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg>
+          </button>` : ''}
+      </div>
+    </div>`;
+  }).join('');
+
+  document.getElementById('detailEmpty').classList.add('hidden');
+  document.querySelector('.app').classList.add('has-detail');
+  document.body.classList.add('detail-open');
+  const el = document.getElementById('detailContent');
+  el.classList.remove('hidden');
+  el.innerHTML = `
+    <div class="d-hero fade">
+      ${affiche ? `<img class="d-back sharp" src="${escAttr(tmdbHiRes(affiche))}" alt="" onerror="evCardFallback(this)" />`
+                : '<div class="d-back-ph"></div>'}
+      <div class="d-back-btn"><div class="d-back-btn-circle" onclick="closeDetail()"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 4l8 8M12 4l-8 8" stroke="white" stroke-width="1.75" stroke-linecap="round"/></svg></div></div>
+    </div>
+    <div class="d-body fade">
+      <div class="d-title">${escHtml(ev.titre)}</div>
+      <div class="ev-pills">${pills}</div>
+      ${ev.description ? `<p class="d-synopsis">${escHtml(ev.description)}</p>` : ''}
+      <div class="ev-films">${filmsHtml}</div>
+    </div>`;
+}
+
+// ═══════════════════════════════════════════════════════════
+// ROUTING PAR URL
+// Le parcours a trois profondeurs (niveau 1 → détail évènement → fiche film) :
+// sans URL, le bouton retour quitte le site, on ne peut pas revenir au détail
+// depuis la fiche film, et rien n'est partageable.
+// ═══════════════════════════════════════════════════════════
+let _restoring = false;
+
+function serializeState() {
+  const p = new URLSearchParams();
+  if (filtreCinema !== 'tous') p.set('cine', filtreCinema);
+  if (currentTab === 'events') {
+    if (filtreType !== 'tous') p.set('type', filtreType);
+    if (evMois) p.set('mois', evMois);
+    if (_openEventCle) p.set('ev', _openEventCle);
+  } else {
+    if (compactView) p.set('vue', 'liste');
+    if (viewMode === 'semaine') p.set('periode', '7j');
+    const today = new Date(); today.setHours(0,0,0,0);
+    if (!sameDay(selDate, today)) p.set('jour', dKey(selDate));
+  }
+  if (_openFilmTitre) p.set('film', _openFilmTitre);
+  const q = p.toString();
+  return `#/${currentTab === 'events' ? 'evenements' : 'seances'}${q ? '?' + q : ''}`;
+}
+
+function pushRoute(remplace) {
+  if (_restoring || typeof history === 'undefined') return;
+  const url = serializeState();
+  if (url === location.hash) return;
+  try { history[remplace ? 'replaceState' : 'pushState']({}, '', url); } catch (e) { /* file:// */ }
+}
+
+function applyState(hash) {
+  const m = /^#\/(seances|evenements)(?:\?(.*))?$/.exec(hash || '');
+  if (!m) return false;
+  const onglet = m[1] === 'evenements' ? 'events' : 'seances';
+  const p = new URLSearchParams(m[2] || '');
+
+  _restoring = true;
+  try {
+    const cine = p.get('cine');
+    filtreCinema = (cine && CINEMA_FILTERS.some(c => c.id === cine)) ? cine : 'tous';
+    buildCinemaBar();
+
+    currentTab = onglet;
+    document.getElementById('secSeances').classList.toggle('hidden', onglet !== 'seances');
+    document.getElementById('secEvents').classList.toggle('hidden', onglet !== 'events');
+    document.getElementById('hTabS').classList.toggle('active', onglet === 'seances');
+    document.getElementById('hTabE').classList.toggle('active', onglet === 'events');
+
+    if (onglet === 'events') {
+      const type = p.get('type');
+      filtreType = EV_TYPES.some(t => t.id === type) ? type : 'tous';
+      const mois = p.get('mois');
+      evMois = (mois && evMoisDispos().includes(mois)) ? mois : null;
+      evSelIdx = 0;
+      renderEvents();
+    } else {
+      compactView = p.get('vue') === 'liste';
+      viewMode = p.get('periode') === '7j' ? 'semaine' : 'jour';
+      const jour = p.get('jour');
+      const today = new Date(); today.setHours(0,0,0,0);
+      const d = jour && /^\d{4}-\d{2}-\d{2}$/.test(jour) ? new Date(jour + 'T00:00:00') : today;
+      selDate = d >= today ? d : today;
+      document.getElementById('btnViewJour').classList.toggle('active', viewMode === 'jour');
+      document.getElementById('btnViewSemaine').classList.toggle('active', viewMode === 'semaine');
+      document.getElementById('btnViewStandard').classList.toggle('active', !compactView);
+      document.getElementById('btnViewCompact').classList.toggle('active', compactView);
+      buildPills(allFilms);
+      renderFilms(allFilms);
+    }
+    syncToolbar();
+
+    // Zone d'atterrissage : on ferme d'abord ce qui est ouvert, puis on rouvre
+    // ce que dit l'URL. Tout ça sous `_restoring` — le FLIP mesure une carte qui
+    // n'existe pas encore au chargement, et `_listScrollY` ne doit pas être
+    // écrasé par le scroll (nul) de la page en cours de restauration.
+    const evCle = p.get('ev');
+    const film = p.get('film');
+    if (document.body.classList.contains('detail-open')) closeDetail();
+    _openEventCle = null;
+    _openFilmTitre = null;
+    document.getElementById('sidePanel').classList.toggle('hidden',
+      onglet === 'events' && !evCle && !film);
+    if (evCle && onglet === 'events') openEvent(evCle);
+    if (film) openFilm(film);
+  } finally {
+    _restoring = false;
+  }
+  return true;
+}
+
+window.addEventListener('popstate', () => applyState(location.hash));
 
 // ═══════════════════════════════════════════════════════════
 // TABS
@@ -3347,6 +3619,11 @@ async function boot() {
   syncToolbar();
   buildPills(allFilms);
   renderFilms(allFilms);
+
+  // Lecture du hash au boot : une URL partagée (fiche film ou détail
+  // d'évènement) doit restituer la bonne vue. `applyState` fait tout le travail
+  // sous `_restoring`, ce qui court-circuite le FLIP et protège `_listScrollY`.
+  if (!applyState(location.hash)) pushRoute(true);
 
   document.querySelector('.main').addEventListener('click', function(e) {
     if (!e.target.closest('.film-card, .compact-row, .cw-film-label, .cw-times')) closeDetail();
