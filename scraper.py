@@ -15,12 +15,14 @@ import logging
 import argparse
 import sys
 import time
+import hashlib
 from datetime import datetime, date, timedelta
 from pathlib import Path
 from urllib.request import urlopen, Request
 from urllib.error import URLError, HTTPError
 from urllib.parse import urlparse
 from html.parser import HTMLParser
+from html import unescape as _unescape
 
 # Charger .env pour SUPABASE_* et clés API
 try:
@@ -2114,6 +2116,1337 @@ def scrape_zola() -> list[dict]:
     return films
 
 
+# ═════════════════════════════════════════════════════════════════════════
+# ÉVÉNEMENTS — avant-premières, rencontres, séances spéciales, festivals
+# ═════════════════════════════════════════════════════════════════════════
+# Sources sondées le 2026-07-27 (cf. « Brief - Onglet Événements », vault) :
+#   • Comoedia  /tous-les-evenements  → le TYPE est étiqueté à la source, et
+#     chaque événement expose un JSON Gatsby (/page-data/…/page-data.json)
+#     avec dates, affiche, description HTML et liens films `?date=YYYY-MM-DD`.
+#   • Lumière   evenement.html + rendez-vous.html → pages WYSIWYG : sections
+#     <h2> + lignes de <table>. Pas de champ type : préfixe en gras × section.
+#     ⚠️ avant-premieres.html est PÉRIMÉE (non purgée) — jamais ingérée.
+#
+# Le « dict événement » (contrat C5, miroir du C1 des films) :
+#   {type, forme, titre, description, date_debut, date_fin, precision,
+#    affiche_url, source, source_url,
+#    films:    [{titre, dates:[iso]}],
+#    creneaux: [{cinema, date, heure, titre_film, invite, description, resa_url}]}
+# ═════════════════════════════════════════════════════════════════════════
+
+URL_COMOEDIA_EVENTS = "https://www.cinema-comoedia.com/tous-les-evenements"
+URL_LUMIERE_SITE    = "https://www.cinemas-lumiere.com"
+URL_LUMIERE_EVENTS  = f"{URL_LUMIERE_SITE}/evenement.html"
+URL_LUMIERE_RDV     = f"{URL_LUMIERE_SITE}/rendez-vous.html"
+
+# Priorité de source pour le TITRE CANONIQUE (§9.2). Surtout PAS « le premier
+# récupéré » : main() scrape Comoedia d'abord, donc Comoedia gagnerait toujours
+# et le titre basculerait silencieusement le jour où un scraper échoue.
+EVENT_SOURCE_PRIORITY = {"lumiere": 0, "comoedia": 1, "zola": 2}
+
+# Fenêtre de dédup inter-sources : sans elle, deux avant-premières du même film
+# à trois mois d'écart fusionneraient à tort (cas réel : « Notre salut »).
+EVENT_DEDUP_WINDOW_DAYS = 14
+
+# Types de la source Comoedia → taxonomie interne.
+_COMOEDIA_TYPE_MAP = {
+    "avant-première": ("avant_premiere", None),
+    "avant-premiere": ("avant_premiere", None),
+    "rencontre":      ("rencontre", None),
+    "festival":       ("festival", "festival"),
+    "rétrospective":  ("festival", "retrospective"),
+    "retrospective":  ("festival", "retrospective"),
+    "cycle":          ("festival", "cycle"),
+    "jeune public":   ("festival", "jeune_public"),
+}
+
+# Préfixes en gras des pages Lumière (§3.2) → type primaire.
+_LUMIERE_PREFIX_MAP = [
+    (r"l['’]avant-première du lundi", ("avant_premiere", None)),
+    (r"avant-première",               ("avant_premiere", None)),
+    (r"séance spéciale",              ("seance_speciale", None)),
+    (r"ressortie nationale",          ("seance_speciale", None)),
+    (r"rencontre",                    ("rencontre", None)),
+    (r"cycle\b",                      ("festival", "cycle")),
+    (r"rétrospective",                ("festival", "retrospective")),
+    (r"festival",                     ("festival", "festival")),
+]
+
+# §4.1 — la discriminante est « par + personne nommée » (rencontre) contre
+# « en partenariat avec / dans le cadre de + organisation » (séance spéciale).
+_RENCONTRE_RE = re.compile(
+    r"en\s+présence\s+d|"
+    r"présenté[e]?\s+par\s+\S|"
+    r"suivi[e]?\s+d['’]un\s+échange|"
+    r"animée?\s+par|"
+    r"rencontre\s+avec",
+    re.I,
+)
+_SPECIALE_RE = re.compile(r"en\s+partenariat\s+avec|dans\s+le\s+cadre\s+d", re.I)
+
+_SAISONS_RE = re.compile(r"\bcet\s+été\b|\bcet\s+hiver\b|\bce\s+printemps\b|\bcet\s+automne\b", re.I)
+_EN_COURS_RE = re.compile(r"\bactuellement\b|\ben\s+cours\b", re.I)
+
+_MOIS_ALT = "|".join(MOIS_FR.keys())
+_JOUR_ALT = "|".join(JOURS_FR.keys())
+
+
+def _html_to_text(fragment: str) -> str:
+    """
+    Texte lisible d'un fragment HTML, DANS L'ORDRE du document.
+
+    ⚠️ Ne pas utiliser `text_of()` ici : il concatène le texte d'un nœud AVANT
+    celui de ses enfants, ce qui mélange l'ordre sur les pages Lumière (le
+    titre du film y remonte après le nom du réalisateur) — or toute la
+    classification repose sur « le préfixe en gras précède la date ».
+    """
+    if not fragment:
+        return ""
+    txt = re.sub(r"<(script|style)\b.*?</\1>", " ", fragment, flags=re.S | re.I)
+    txt = re.sub(r"<[^>]+>", " ", txt)
+    txt = _unescape(txt)
+    return re.sub(r"[\s ]+", " ", txt).strip()
+
+
+def _deslugify(slug: str) -> str:
+    """`les-vacances-de-monsieur-hulot` → `Les Vacances De Monsieur Hulot` (repli)."""
+    return re.sub(r"^\d+-", "", slug or "").replace("-", " ").strip().title()
+
+
+def _event_year(mois: int, jour: int, ref: date) -> int:
+    """
+    Année d'une date française sans millésime. On reste sur l'année de
+    référence, sauf si ça place la date dans un passé lointain (> 60 j) : la
+    source parle alors de l'année suivante (« janvier » lu en décembre).
+    """
+    for annee in (ref.year, ref.year + 1):
+        try:
+            d = date(annee, mois, jour)
+        except ValueError:
+            continue
+        if (ref - d).days <= 60:
+            return annee
+    return ref.year
+
+
+def _parse_jour_mois(txt: str, ref: date) -> "date | None":
+    """« mardi 15 septembre 2026 » / « 1er octobre » → date."""
+    m = re.search(
+        rf"(?:(?:{_JOUR_ALT})\s+)?(\d{{1,2}})(?:er)?\s+({_MOIS_ALT})(?:\s+(\d{{4}}))?",
+        txt, re.I,
+    )
+    if not m:
+        return None
+    jour = int(m.group(1))
+    mois = MOIS_FR.get(m.group(2).lower())
+    if not mois:
+        return None
+    annee = int(m.group(3)) if m.group(3) else _event_year(mois, jour, ref)
+    try:
+        return date(annee, mois, jour)
+    except ValueError:
+        return None
+
+
+def parse_event_period(texte: str, ref: "date | None" = None) -> tuple:
+    """
+    (date_debut, date_fin, precision) depuis un texte de source, en ISO.
+
+    Modélise l'imprécision au lieu de la masquer : `precision` ∈ exact | jour |
+    mois | saison | en_cours. Les cas sans date exploitable (« Actuellement »,
+    « Cet été ») sont résolus plus tard par jointure avec les séances (§4.3) —
+    ici on se contente de les qualifier.
+    """
+    ref = ref or date.today()
+    t = re.sub(r"[\s ]+", " ", texte or "")
+
+    # « du 4 juillet au 22 août 2026 » — l'année finale vaut pour les deux bornes.
+    m = re.search(
+        rf"du\s+(\d{{1,2}})(?:er)?\s+({_MOIS_ALT})(?:\s+(\d{{4}}))?\s+au\s+"
+        rf"(\d{{1,2}})(?:er)?\s+({_MOIS_ALT})(?:\s+(\d{{4}}))?",
+        t, re.I,
+    )
+    if m:
+        mois_f = MOIS_FR.get(m.group(5).lower())
+        jour_f = int(m.group(4))
+        an_f = int(m.group(6)) if m.group(6) else _event_year(mois_f, jour_f, ref)
+        mois_d = MOIS_FR.get(m.group(2).lower())
+        jour_d = int(m.group(1))
+        an_d = int(m.group(3)) if m.group(3) else (an_f - 1 if mois_d > mois_f else an_f)
+        try:
+            return (date(an_d, mois_d, jour_d).isoformat(),
+                    date(an_f, mois_f, jour_f).isoformat(), "exact")
+        except (ValueError, TypeError):
+            pass
+
+    # « jusqu'au 31 août 2026 » → fin connue, début ouvert (l'événement a commencé).
+    m = re.search(rf"jusqu['’]au\s+(.{{0,32}}?({_MOIS_ALT})(?:\s+\d{{4}})?)", t, re.I)
+    if m:
+        d = _parse_jour_mois(m.group(1), ref)
+        if d:
+            return (None, d.isoformat(), "exact")
+
+    # « à partir du 12 août », « dès le 29 juillet » → début connu, fin ouverte.
+    m = re.search(rf"(?:à partir du|dès le|dès)\s+(.{{0,32}}?({_MOIS_ALT})(?:\s+\d{{4}})?)", t, re.I)
+    if m:
+        d = _parse_jour_mois(m.group(1), ref)
+        if d:
+            return (d.isoformat(), None, "exact")
+
+    if _EN_COURS_RE.search(t):
+        return (None, None, "en_cours")
+    if _SAISONS_RE.search(t):
+        return (None, None, "saison")
+
+    # Date unitaire — « Mardi 15 septembre à 20h30 ».
+    d = _parse_jour_mois(t, ref)
+    if d:
+        return (d.isoformat(), d.isoformat(), "exact")
+
+    # « en septembre 2026 » — bucket mensuel, suffisant pour trier et grouper.
+    m = re.search(rf"\b({_MOIS_ALT})\s+(\d{{4}})\b", t, re.I)
+    if m:
+        mois = MOIS_FR.get(m.group(1).lower())
+        annee = int(m.group(2))
+        if mois:
+            fin = date(annee + (mois == 12), (mois % 12) + 1, 1) - timedelta(days=1)
+            return (date(annee, mois, 1).isoformat(), fin.isoformat(), "mois")
+
+    return (None, None, "en_cours")
+
+
+def parse_event_time(texte: str) -> "str | None":
+    """« à 20h30 » / « à 20h » → « 20:30 » / « 20:00 »."""
+    m = re.search(r"\b(?:à|a)\s*(\d{1,2})\s*h\s*(\d{2})?\b", texte or "", re.I)
+    if not m:
+        return None
+    return f"{int(m.group(1)):02d}:{m.group(2) or '00'}"
+
+
+def classify_event_type(texte: str, type_source: "str | None" = None,
+                        primaire: "str | None" = None) -> str:
+    """
+    Type d'un événement (§4.1).
+
+    Un type EXPLICITE de la source (avant-première, rencontre, festival) fait
+    foi : « Séance présentée » sur une avant-première Cannes ne doit pas la
+    transformer en rencontre. Le raffinement ne s'applique qu'au type vague
+    « séance spéciale » (ou à l'absence de type).
+
+    `primaire` permet à l'appelant d'imposer le type primaire qu'il a déduit
+    autrement (préfixe en gras × section, côté Lumière).
+    """
+    if primaire is None:
+        primaire, _ = _event_type_forme_from_source(texte, type_source)
+    if primaire in ("avant_premiere", "rencontre", "festival"):
+        return primaire
+    # Rencontre l'emporte sur séance spéciale quand les deux marqueurs
+    # cohabitent : « présentée PAR l'auteur… EN PARTENARIAT AVEC Quais du
+    # Polar » est bien une rencontre (une personne est là).
+    if _RENCONTRE_RE.search(texte or ""):
+        return "rencontre"
+    if _SPECIALE_RE.search(texte or ""):
+        return "seance_speciale"
+    return primaire or "seance_speciale"
+
+
+def classify_event_forme(texte: str, type_: str, forme_source: "str | None" = None) -> "str | None":
+    """
+    Sous-classe d'un festival (§4.2). NULL dès que le type n'est pas festival —
+    c'est la contrainte portée par la base (evenements_forme_chk).
+    """
+    if type_ != "festival":
+        return None
+    if forme_source:
+        return forme_source
+    t = texte or ""
+    if re.search(r"\bcycle\b", t, re.I):
+        return "cycle"
+    if re.search(r"rétrospective|retrospective", t, re.I):
+        return "retrospective"
+    if re.search(r"jeune public|little films|dès \d+ ans", t, re.I):
+        return "jeune_public"
+    return "festival"
+
+
+def _event_type_forme_from_source(texte: str, type_source: "str | None") -> tuple:
+    """(type, forme) issus de l'étiquette de source, sinon du préfixe en gras."""
+    if type_source:
+        key = type_source.strip().lower()
+        if key in _COMOEDIA_TYPE_MAP:
+            return _COMOEDIA_TYPE_MAP[key]
+    for pattern, (t, f) in _LUMIERE_PREFIX_MAP:
+        if re.search(pattern, texte or "", re.I):
+            return (t, f)
+    return (None, None)
+
+
+def _cinema_from_text(texte: str, defaut: "str | None" = None) -> "str | None":
+    """
+    Salle citée dans le texte (« au Lumière Bellecour »). Tolère les coquilles
+    de saisie de la source (« Belleocur » vu le 2026-07-27) en ne cherchant
+    qu'un radical.
+    """
+    t = (texte or "").lower()
+    for radical, nom in (
+        ("terreaux", "Lumière Terreaux"),
+        ("bellec", "Lumière Bellecour"),
+        ("belleoc", "Lumière Bellecour"),
+        ("fourmi", "Lumière Fourmi"),
+        ("comœdia", "Le Comoedia"),
+        ("comoedia", "Le Comoedia"),
+        ("comédia", "Le Comoedia"),
+        ("zola", "Le Zola"),
+    ):
+        if radical in t:
+            return nom
+    return defaut
+
+
+def _new_event(**kw) -> dict:
+    """Dict événement (contrat C5) avec tous ses champs, même vides."""
+    ev = {
+        "type": "seance_speciale", "forme": None, "titre": "", "description": None,
+        "date_debut": None, "date_fin": None, "precision": "exact",
+        "affiche_url": None, "source": None, "source_url": None,
+        "films": [], "creneaux": [],
+    }
+    ev.update(kw)
+    return ev
+
+
+# ── Comoedia ──────────────────────────────────────────────────────────────
+
+def _comoedia_event_films(desc_html: str) -> tuple:
+    """
+    Films et créneaux d'une description Comoedia.
+
+    Les liens `/films/<id>-<slug>/?date=YYYY-MM-DD` donnent le film ET la date
+    en clair — c'est ce qui alimente `evenement_films`/`evenement_seances` sans
+    aucun matching flou. L'heure, elle, vit dans le paragraphe qui précède le
+    lien (« • Dimanche 2 août à 11h00 »), d'où le découpage par <p>.
+    """
+    films: dict = {}
+    slots: list = []
+    for bloc in re.split(r"(?i)<p\b", desc_html or ""):
+        heure = parse_event_time(_html_to_text(bloc))
+        for m in re.finditer(r"<a[^>]+href=\"([^\"]+)\"[^>]*>(.*?)</a>", bloc, re.S | re.I):
+            href, inner = m.group(1), m.group(2)
+            # Le chemin /films/ doit être CELUI DU COMOEDIA : les descriptions
+            # citent aussi des distributeurs (carlottafilms.com/films/…), qui
+            # deviendraient sinon des films de l'événement.
+            if "/films/" not in href:
+                continue
+            if href.startswith("http") and "cinema-comoedia.com" not in href:
+                continue
+            slug_m = re.search(r"/films/([^/?#\"]+)", href)
+            slug = slug_m.group(1) if slug_m else ""
+            titre = _html_to_text(inner) or _deslugify(slug)
+            if not titre:
+                continue
+            key = _normalize_title_key(titre)
+            d_m = re.search(r"[?&]date=(\d{4}-\d{2}-\d{2})", href)
+            d_val = d_m.group(1) if d_m else None
+            entry = films.setdefault(key, {"titre": titre, "dates": []})
+            if d_val and d_val not in entry["dates"]:
+                entry["dates"].append(d_val)
+            if d_val:
+                slots.append({"titre_film": titre, "date": d_val, "heure": heure})
+    return list(films.values()), slots
+
+
+def comoedia_event_from_json(data: dict, source_url: str, ref: "date | None" = None) -> "dict | None":
+    """Un événement Comoedia (JSON Gatsby `page-data`) → dict événement (C5)."""
+    ref = ref or date.today()
+    titre = (data.get("title") or "").strip()
+    if not titre:
+        return None
+
+    desc_html = data.get("description") or ""
+    desc_txt = _html_to_text(desc_html)
+    court = (data.get("shortDescription") or "").strip()
+    texte = f"{court} {desc_txt}"
+
+    type_ = classify_event_type(texte, data.get("type"))
+    _, forme_src = _event_type_forme_from_source(texte, data.get("type"))
+    forme = classify_event_forme(f"{titre} {texte}", type_, forme_src)
+
+    films, slots = _comoedia_event_films(desc_html)
+
+    # Enveloppe des dates : les créneaux font foi quand ils existent, sinon le
+    # JSON (startAt/endAt), sinon le texte.
+    debut = (data.get("startAt") or "")[:10] or None
+    fin = (data.get("endAt") or "")[:10] or None
+    heure = (data.get("startAt") or "")[11:16] or None
+    precision = "exact"
+    if slots:
+        # Enveloppe = UNION du calendrier annoncé et des créneaux datés. Prendre
+        # les seuls créneaux rétrécirait un festival à ses séances documentées
+        # (Little Films Festival : 2 liens datés pour 7 semaines de programmation).
+        dates = sorted(s["date"] for s in slots)
+        debut = min(debut, dates[0]) if debut else dates[0]
+        fin = max(fin, dates[-1]) if fin else dates[-1]
+        precision = "exact"
+    elif debut and not fin:
+        if type_ == "festival":
+            # Une programmation ouverte sans date de fin : la jointure avec les
+            # séances tranchera (§4.3) plutôt que d'inventer une fin.
+            precision = "en_cours"
+        else:
+            fin = debut
+    elif not debut:
+        debut, fin, precision = parse_event_period(texte, ref)
+
+    creneaux = []
+    if slots:
+        for s in slots:
+            creneaux.append({
+                "cinema": "Le Comoedia", "date": s["date"], "heure": s["heure"],
+                "titre_film": s["titre_film"], "invite": None,
+                "description": court or None, "resa_url": None,
+            })
+    elif debut and precision == "exact":
+        creneaux.append({
+            "cinema": "Le Comoedia", "date": debut, "heure": heure,
+            "titre_film": titre if not films else None, "invite": None,
+            "description": court or None, "resa_url": None,
+        })
+
+    if not films and type_ in ("avant_premiere", "rencontre"):
+        # Événement-film sans lien : le titre de l'événement EST le film.
+        films = [{"titre": titre, "dates": [debut] if debut else []}]
+
+    return _new_event(
+        type=type_, forme=forme, titre=titre,
+        description=court or (desc_txt[:600] or None),
+        date_debut=debut, date_fin=fin, precision=precision,
+        affiche_url=data.get("poster") or None,
+        source="comoedia", source_url=source_url,
+        films=films, creneaux=creneaux,
+    )
+
+
+def scrape_comoedia_events(ref: "date | None" = None) -> list:
+    """Événements du Comoedia : page liste (pour les slugs) + JSON de détail."""
+    try:
+        html = fetch(URL_COMOEDIA_EVENTS, timeout=20)
+    except RuntimeError as e:
+        log.warning(f"Comoedia événements : liste inaccessible ({e})")
+        return []
+
+    slugs = sorted(set(re.findall(r"href=\"/events/(\d+-[^\"/]+)/?\"", html)))
+    log.info(f"Comoedia événements : {len(slugs)} fiches à lire")
+
+    events = []
+    for slug in slugs:
+        url = f"{URL_COMOEDIA_BASE}/page-data/events/{slug}/page-data.json"
+        try:
+            data = json.loads(fetch(url, timeout=15))["result"]["data"]["event"]
+        except Exception as e:
+            log.warning(f"  Comoedia événement {slug} illisible : {e}")
+            continue
+        if not data:
+            continue
+        ev = comoedia_event_from_json(
+            data, f"{URL_COMOEDIA_BASE}/events/{slug}/", ref)
+        if ev:
+            events.append(ev)
+        time.sleep(0.2)
+
+    log.info(f"Comoedia : {len(events)} événements extraits")
+    return events
+
+
+# ── Cinémas Lumière ───────────────────────────────────────────────────────
+
+def _lumiere_abs(url: str) -> str:
+    if not url:
+        return ""
+    if url.startswith("http"):
+        return url
+    return f"{URL_LUMIERE_SITE}/{url.lstrip('/')}"
+
+
+def _lumiere_row_films(fragment: str) -> list:
+    """
+    Films liés d'une ligne : liens `film/<slug>.html`, puis — à défaut — les
+    items de liste en italique (« <li><em>Le château de l'araignée</em> (1957)
+    </li> », rétrospective Kurosawa : les titres y sont annoncés SANS lien).
+    """
+    films: dict = {}
+    for m in re.finditer(r"<a[^>]+href=\"([^\"]*film/[^\"]+\.html)\"[^>]*>(.*?)</a>",
+                         fragment, re.S | re.I):
+        inner = _html_to_text(m.group(2))
+        if not inner or "lire la suite" in inner.lower():
+            continue
+        slug_m = re.search(r"film/([^/\"]+)\.html", m.group(1))
+        titre = inner if len(inner) > 1 else _deslugify(slug_m.group(1) if slug_m else "")
+        if not titre:
+            continue
+        films.setdefault(_normalize_title_key(titre), {"titre": titre, "dates": []})
+
+    for m in re.finditer(r"<li\b[^>]*>(.*?)</li>", fragment, re.S | re.I):
+        if "href" in m.group(1):
+            continue                      # déjà pris par la passe « liens »
+        em = re.search(r"<em\b[^>]*>(.*?)</em>", m.group(1), re.S | re.I)
+        if not em:
+            continue
+        titre = re.sub(r"\s*\(\d{4}\)\s*$", "", _html_to_text(em.group(1))).strip()
+        if 1 < len(titre) < 90:
+            films.setdefault(_normalize_title_key(titre), {"titre": titre, "dates": []})
+    return list(films.values())
+
+
+def lumiere_event_from_row(fragment: str, section: str, page_url: str,
+                           ref: "date | None" = None) -> "dict | None":
+    """
+    Une ligne de tableau Lumière → dict événement (C5).
+
+    Les pages Lumière n'ont pas de champ type : on classe par PRÉFIXE EN GRAS
+    (`AVANT-PREMIÈRE`, `SÉANCE SPÉCIALE`, `CYCLE …`) croisé avec la section
+    <h2>, et le lieu se lit dans le texte (« au Lumière Bellecour »).
+    """
+    ref = ref or date.today()
+    texte = _html_to_text(fragment)
+    if len(texte) < 40:
+        return None
+
+    h1_m = re.search(r"<h1\b[^>]*>(.*?)</h1>", fragment, re.S | re.I)
+    titre_bloc = _html_to_text(h1_m.group(1)) if h1_m else None
+
+    # Un cycle est éclaté en une ligne PAR FILM : c'est le nom du cycle (en
+    # capitales) qui les recolle en un seul événement — la fusion se fait plus
+    # loin, sur le titre. On s'arrête au premier mot non capitalisé.
+    cycle_m = re.search(r"CYCLE\s+([A-ZÀ-ÖØ-Þ0-9'’\s-]{3,60})", texte)
+    titre_cycle = None
+    if cycle_m:
+        nom = re.sub(r"\s+", " ", cycle_m.group(1)).strip()
+        # La capture déborde d'une initiale sur le mot suivant (« … 50 - A|ctuellement »).
+        nom = re.sub(r"\s+[A-ZÀ-ÖØ-Þ]$", "", nom).strip(" -–|")
+        titre_cycle = "Cycle " + (nom[:1] + nom[1:].lower() if nom else "")
+
+    # Titre porté par le lien vers la page événement (rétrospective Tati : ni
+    # <h1> ni cycle, le titre est le libellé du lien `evenement/…`). Le premier
+    # de ces liens est l'affiche (contenu = <img>) : on prend le premier qui
+    # porte vraiment du texte.
+    titre_lien = None
+    for inner in re.findall(
+            r"<a[^>]+href=\"[^\"]*evenement/[^\"]+\.html\"[^>]*>(.*?)</a>", fragment, re.S | re.I):
+        cand = _html_to_text(inner)
+        if cand and "lire la suite" not in cand.lower() and 2 < len(cand) < 120:
+            titre_lien = cand
+            break
+
+    films = _lumiere_row_films(fragment)
+    titre = titre_bloc or titre_cycle or titre_lien or (films[0]["titre"] if films else None)
+    if not titre:
+        return None
+    # Le titre de l'événement n'est pas un de ses films (Tati, Kurosawa…).
+    if titre_bloc or titre_cycle or titre_lien:
+        films = [f for f in films if _normalize_title_key(f["titre"]) != _normalize_title_key(titre)]
+
+    section_type = {
+        "SÉANCES SPÉCIALES": ("seance_speciale", None),
+        "FESTIVALS": ("festival", "festival"),
+        "FILMS CLASSIQUES": ("seance_speciale", None),
+    }.get((section or "").strip().upper(), (None, None))
+
+    # Le préfixe en gras ouvre la ligne : le chercher dans TOUT le texte ferait
+    # passer « Little Films Festival … 2 avant-premières exclusives » pour une
+    # avant-première. Hors préfixe, la section <h2> fait foi.
+    prefixe_type, prefixe_forme = _event_type_forme_from_source(texte[:200], None)
+    type_ = classify_event_type(texte, None, primaire=prefixe_type or section_type[0])
+    if re.search(r"rétrospective|festival|\bcycle\b", titre, re.I) and type_ != "rencontre":
+        type_ = "festival"
+    forme = classify_event_forme(f"{titre} {texte}", type_,
+                                 prefixe_forme or (section_type[1] if not prefixe_type else None))
+
+    debut, fin, precision = parse_event_period(texte, ref)
+    heure = parse_event_time(texte)
+    cinema = _cinema_from_text(texte)
+
+    img_m = re.search(r"<img[^>]+src=\"([^\"]+)\"", fragment, re.I)
+    affiche = _lumiere_abs(img_m.group(1)) if img_m else None
+
+    # L'invité vit dans l'italique de la ligne — mais l'italique sert AUSSI aux
+    # titres de films sur ces pages : on ne retient que ce qui décrit vraiment
+    # une présentation de séance.
+    invite = None
+    for em in re.findall(r"<em\b[^>]*>(.*?)</em>", fragment, re.S | re.I):
+        cand = _html_to_text(em)
+        if 15 < len(cand) < 300 and re.search(
+                r"présent|présence|animée?\s+par|échange|partenariat|dans le cadre|suivi",
+                cand, re.I):
+            invite = cand
+            break
+
+    resa_url = None
+    for href in re.findall(r"href=\"([^\"]+)\"", fragment):
+        if is_valid_resa_url(href):
+            resa_url = href
+            break
+
+    ev_link_m = re.search(r"href=\"([^\"]*evenement/[^\"]+\.html)\"", fragment, re.I)
+    source_url = _lumiere_abs(ev_link_m.group(1)) if ev_link_m else page_url
+
+    # Ligne de film simple (pas de titre d'événement propre) : l'événement EST
+    # le film. Un festival/cycle/rétrospective, lui, garde une liste vide tant
+    # que sa page détail n'a pas répondu — surtout pas lui-même comme film.
+    if not films and not (titre_bloc or titre_cycle or titre_lien):
+        films = [{"titre": titre, "dates": []}]
+
+    creneaux = []
+    if cinema:
+        creneaux.append({
+            "cinema": cinema,
+            "date": debut if precision == "exact" and debut == fin else None,
+            "heure": heure,
+            "titre_film": films[0]["titre"] if len(films) == 1 else None,
+            "invite": invite, "description": None, "resa_url": resa_url,
+        })
+
+    return _new_event(
+        type=type_, forme=forme, titre=titre,
+        description=_lumiere_row_description(fragment),
+        date_debut=debut, date_fin=fin, precision=precision,
+        affiche_url=affiche, source="lumiere", source_url=source_url,
+        films=films, creneaux=creneaux,
+    )
+
+
+def _lumiere_row_description(fragment: str) -> "str | None":
+    """
+    Chapô d'une ligne : on saute la ligne de date et la fiche technique
+    (« Espagne | 2025 | 1h40 | VOSTF ») pour garder la vraie description.
+    """
+    for bloc in re.split(r"(?i)</p>", fragment):
+        txt = _html_to_text(bloc)
+        if len(txt) < 60:
+            continue
+        if txt.count("|") >= 2 or re.search(r"lire la suite", txt, re.I):
+            continue
+        # Ligne de date (elle peut être précédée du titre) : ce n'est pas le chapô.
+        if re.search(r"\b(du|jusqu['’]au|dès|à partir du|actuellement)\b", txt[:90], re.I):
+            continue
+        if re.match(rf"^\W*(?:{_JOUR_ALT})\s+\d{{1,2}}", txt, re.I):
+            continue
+        return txt[:600]
+    return None
+
+
+def _lumiere_event_page_films(url: str) -> list:
+    """Films listés sur une page événement Lumière (`evenement/<slug>.html`)."""
+    try:
+        html = fetch(url, timeout=15)
+    except RuntimeError as e:
+        log.warning(f"  Lumière page événement inaccessible ({url}) : {e}")
+        return []
+    body = html[html.find("<body"):] or html
+    return _lumiere_row_films(body)
+
+
+def scrape_lumiere_events(ref: "date | None" = None, suivre_details: bool = True) -> list:
+    """
+    Événements des Cinémas Lumière : `evenement.html` + `rendez-vous.html`.
+
+    ⚠️ `avant-premieres.html` n'est JAMAIS ingérée : page non purgée, contenu
+    périmé de plusieurs semaines (vérifié 2026-07-27).
+    """
+    events = []
+    for page_url in (URL_LUMIERE_EVENTS, URL_LUMIERE_RDV):
+        try:
+            html = fetch(page_url, timeout=20)
+        except RuntimeError as e:
+            log.warning(f"Lumière événements : {page_url} inaccessible ({e})")
+            continue
+        body = html[html.find("<body"):] or html
+
+        # Sections <h2> et lignes <tr> dans l'ordre du document : chaque ligne
+        # hérite de la dernière section rencontrée.
+        marqueurs = [(m.start(), "h2", _html_to_text(m.group(1)))
+                     for m in re.finditer(r"<h2\b[^>]*>(.*?)</h2>", body, re.S | re.I)]
+        marqueurs += [(m.start(), "tr", m.group(0))
+                      for m in re.finditer(r"<tr\b[^>]*>.*?</tr>", body, re.S | re.I)]
+        marqueurs.sort(key=lambda x: x[0])
+
+        section = ""
+        for _, kind, payload in marqueurs:
+            if kind == "h2":
+                section = payload
+                continue
+            ev = lumiere_event_from_row(payload, section, page_url, ref)
+            if ev:
+                events.append(ev)
+
+    # Pages événement dédiées : elles portent la liste complète des films
+    # (rétrospectives, festivals) que la ligne de tableau ne donne pas toujours.
+    if suivre_details:
+        vues = set()
+        for ev in events:
+            url = ev.get("source_url") or ""
+            if "evenement/" not in url or url in vues:
+                continue
+            vues.add(url)
+            extra = _lumiere_event_page_films(url)
+            connus = {_normalize_title_key(f["titre"]) for f in ev["films"]}
+            connus.add(_normalize_title_key(ev["titre"]))   # l'événement n'est pas son propre film
+            for f in extra:
+                key = _normalize_title_key(f["titre"])
+                if key not in connus:
+                    connus.add(key)
+                    ev["films"].append(f)
+            time.sleep(0.2)
+
+    log.info(f"Lumière : {len(events)} événements extraits")
+    return events
+
+
+# ── Fusion inter-sources ──────────────────────────────────────────────────
+
+def _event_film_keys(ev: dict) -> set:
+    return {_normalize_title_key(f["titre"]) for f in ev.get("films", []) if f.get("titre")}
+
+
+def _event_dates(ev: dict) -> list:
+    """Toutes les dates connues d'un événement (enveloppe, créneaux, films)."""
+    dates = {d for d in (ev.get("date_debut"), ev.get("date_fin")) if d}
+    dates |= {c["date"] for c in ev.get("creneaux", []) if c.get("date")}
+    for f in ev.get("films", []):
+        dates |= set(f.get("dates") or [])
+    return sorted(dates)
+
+
+def _events_proches(a: dict, b: dict) -> bool:
+    """
+    Fenêtre temporelle de la clé de dédup (§2). Sans elle, deux avant-premières
+    du même film à trois mois d'écart fusionneraient (cas réel « Notre salut » :
+    Comoedia le 28 août, Lumière le 21 septembre — deux événements distincts).
+    Deux événements sans aucune date (programmations « en cours ») sont
+    considérés comme proches : c'est leur titre qui tranchera.
+    """
+    da, db = _event_dates(a), _event_dates(b)
+    if not da or not db:
+        return True
+    for x in da:
+        for y in db:
+            if abs((date.fromisoformat(x) - date.fromisoformat(y)).days) <= EVENT_DEDUP_WINDOW_DAYS:
+                return True
+    return False
+
+
+def _meme_evenement(a: dict, b: dict) -> bool:
+    if a.get("type") != b.get("type"):
+        return False
+    if not _events_proches(a, b):
+        return False
+    if _normalize_title_key(a["titre"]) == _normalize_title_key(b["titre"]):
+        return True
+    ka, kb = _event_film_keys(a), _event_film_keys(b)
+    if len(ka) == 1 and ka == kb:
+        return True          # même film unique, même type, même fenêtre
+    # Programmation partagée (une rétrospective annoncée par deux salles) — mais
+    # la MÊME forme est exigée : un festival de classiques englobe volontiers
+    # les films d'une rétrospective sans être cette rétrospective (cas réel :
+    # « Plein Soleil sur les Classiques » ⊃ les 6 Tati).
+    return len(ka & kb) >= 2 and a.get("forme") == b.get("forme")
+
+
+_PRECISION_RANG = {"exact": 0, "jour": 1, "mois": 2, "saison": 3, "en_cours": 4}
+
+
+def _fusionne_paire(a: dict, b: dict) -> dict:
+    """
+    Fusionne b dans a. Le titre canonique suit la PRIORITÉ DE SOURCE (§9.2)
+    — surtout pas « le premier récupéré » : main() scrape Comoedia en premier,
+    Comoedia gagnerait donc systématiquement et le titre basculerait le jour où
+    un scraper échoue.
+    """
+    pa = EVENT_SOURCE_PRIORITY.get(a.get("source"), 9)
+    pb = EVENT_SOURCE_PRIORITY.get(b.get("source"), 9)
+    maitre, autre = (a, b) if pa <= pb else (b, a)
+
+    fusion = dict(maitre)
+    fusion["description"] = maitre.get("description") or autre.get("description")
+    fusion["affiche_url"] = maitre.get("affiche_url") or autre.get("affiche_url")
+    fusion["forme"] = maitre.get("forme") or autre.get("forme")
+    # Une rencontre l'emporte : une personne est annoncée quelque part, c'est
+    # l'information la plus forte (l'invité, lui, reste porté par son créneau).
+    if "rencontre" in (a.get("type"), b.get("type")):
+        fusion["type"] = "rencontre"
+        fusion["forme"] = None
+
+    debuts = [x for x in (a.get("date_debut"), b.get("date_debut")) if x]
+    fins = [x for x in (a.get("date_fin"), b.get("date_fin")) if x]
+    fusion["date_debut"] = min(debuts) if debuts else None
+    fusion["date_fin"] = max(fins) if fins else None
+    fusion["precision"] = min((a.get("precision", "en_cours"), b.get("precision", "en_cours")),
+                              key=lambda p: _PRECISION_RANG.get(p, 9))
+
+    films = list(maitre.get("films") or [])
+    connus = {_normalize_title_key(f["titre"]) for f in films}
+    for f in autre.get("films") or []:
+        k = _normalize_title_key(f["titre"])
+        if k in connus:
+            cible = next(x for x in films if _normalize_title_key(x["titre"]) == k)
+            cible["dates"] = sorted(set(cible.get("dates") or []) | set(f.get("dates") or []))
+        else:
+            connus.add(k)
+            films.append(dict(f))
+    fusion["films"] = films
+    fusion["creneaux"] = list(a.get("creneaux") or []) + list(b.get("creneaux") or [])
+    fusion["sources"] = sorted(set(
+        (a.get("sources") or [a.get("source")]) + (b.get("sources") or [b.get("source")])))
+    return fusion
+
+
+def merge_events(events: list) -> list:
+    """Dédup inter-sources : `film + type + fenêtre ±14 j` (§2)."""
+    fusionnes: list = []
+    for ev in events:
+        for i, deja in enumerate(fusionnes):
+            if _meme_evenement(deja, ev):
+                fusionnes[i] = _fusionne_paire(deja, ev)
+                break
+        else:
+            copie = dict(ev)
+            copie["sources"] = [ev.get("source")]
+            fusionnes.append(copie)
+    log.info(f"Événements : {len(events)} bruts → {len(fusionnes)} après dédup")
+    return fusionnes
+
+
+# ── Jointure avec les séances scrapées (§4.3) ─────────────────────────────
+
+def _seances_index(films: list) -> dict:
+    """titre normalisé → séances scrapées (cinéma, date, heure, lien resa)."""
+    idx: dict = {}
+    for f in films:
+        key = _normalize_title_key(f.get("titre") or "")
+        if not key:
+            continue
+        for s in f.get("seances") or []:
+            if not s.get("date"):
+                continue
+            idx.setdefault(key, []).append({
+                "cinema": f.get("cinema"), "date": s["date"],
+                "heure": s.get("heure"), "resa_url": s.get("resa_url"),
+                "titre_film": f.get("titre"),
+            })
+    return idx
+
+
+def resolve_dates_from_seances(events: list, films: list,
+                               today: "date | None" = None) -> list:
+    """
+    Résout les événements sans date par JOINTURE avec les séances déjà scrapées
+    (§4.3) — jamais par inférence. Un événement qu'aucune séance ne peut dater
+    n'est PAS affiché : pas de fantôme.
+    """
+    today = today or date.today()
+    idx = _seances_index(films)
+    gardes = []
+
+    for ev in events:
+        cinemas = {c["cinema"] for c in ev.get("creneaux", []) if c.get("cinema")}
+        borne_haute = ev.get("date_fin")
+        borne_basse = ev.get("date_debut")
+        # Une date unique et exacte est un ordre du programmateur, pas une
+        # enveloppe : ne pas y agréger toutes les séances du film.
+        etendable = not (ev.get("precision") == "exact"
+                         and borne_basse and borne_basse == borne_haute)
+
+        for f in ev.get("films", []):
+            for s in idx.get(_normalize_title_key(f["titre"]), []):
+                if cinemas and s["cinema"] not in cinemas:
+                    continue
+                if s["date"] < today.isoformat():
+                    continue
+                if not etendable:
+                    continue
+                if borne_basse and s["date"] < borne_basse:
+                    continue
+                if borne_haute and s["date"] > borne_haute:
+                    continue
+                if s["date"] not in (f.get("dates") or []):
+                    f.setdefault("dates", []).append(s["date"])
+                # L'identité d'un créneau inclut le FILM : trois films d'un
+                # cycle peuvent partager salle, date et horaire d'affichage.
+                deja = any(c.get("cinema") == s["cinema"] and c.get("date") == s["date"]
+                           and c.get("heure") == s["heure"]
+                           and c.get("titre_film") == s["titre_film"] for c in ev["creneaux"])
+                if not deja:
+                    ev["creneaux"].append({
+                        "cinema": s["cinema"], "date": s["date"], "heure": s["heure"],
+                        "titre_film": s["titre_film"], "invite": None,
+                        "description": None, "resa_url": s["resa_url"],
+                    })
+
+        # Un créneau sans date n'existait que pour porter la salle (et parfois
+        # l'invité) tant qu'aucune séance n'était connue : dès qu'une séance
+        # datée arrive pour cette salle, il fait doublon. On ne le garde que
+        # s'il porte du contenu éditorial (invité / descriptif de séance).
+        salles_datees = {c["cinema"] for c in ev["creneaux"] if c.get("date")}
+        ev["creneaux"] = [c for c in ev["creneaux"]
+                          if c.get("date") or c.get("invite") or c.get("description")
+                          or c.get("cinema") not in salles_datees]
+
+        dates = _event_dates(ev)
+        if dates and (ev.get("precision") != "exact" or not ev.get("date_debut")
+                      or not ev.get("date_fin")):
+            ev["date_debut"] = ev.get("date_debut") or dates[0]
+            ev["date_fin"] = max(dates)
+            ev["precision"] = "exact"
+
+        if not ev.get("date_debut") and not ev.get("date_fin"):
+            log.debug(f"  Événement sans date résoluble — ignoré : {ev['titre']}")
+            continue
+        gardes.append(ev)
+
+    log.info(f"Événements : {len(gardes)}/{len(events)} datés après jointure")
+    return gardes
+
+
+def filter_events_current(events: list, today: "date | None" = None) -> list:
+    """
+    Filtre le passé À L'INGESTION (§3.3) : aucune source ne purge (Comoedia
+    gardait 4 événements écoulés le 2026-07-27, `avant-premieres.html` de
+    Lumière est intégralement périmée).
+    """
+    today = today or date.today()
+    iso = today.isoformat()
+    gardes = []
+    for ev in events:
+        dates = _event_dates(ev)
+        fin = ev.get("date_fin") or (max(dates) if dates else None) or ev.get("date_debut")
+        if fin and fin < iso:
+            continue
+        gardes.append(ev)
+    if len(gardes) != len(events):
+        log.info(f"Événements : {len(events) - len(gardes)} écoulés écartés")
+    return gardes
+
+
+def event_dedup_key(ev: dict) -> str:
+    """
+    Clé stable d'un événement en base (`evenements.cle`) : rend l'upsert
+    idempotent d'un run à l'autre. Bucket MENSUEL plutôt que date exacte —
+    une source qui corrige sa date d'un jour ne doit pas créer une 2e ligne.
+    """
+    films = sorted(_event_film_keys(ev))
+    identite = films[0] if len(films) == 1 else _normalize_title_key(ev["titre"])
+    ancre = ev.get("date_debut") or ev.get("date_fin")
+    return f"{ev['type']}|{identite}|{ancre[:7] if ancre else 'ouvert'}"
+
+
+# ── Résumé du mois (API Claude) ───────────────────────────────────────────
+
+ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY")
+ANTHROPIC_MODEL   = "claude-haiku-4-5-20251001"
+ANTHROPIC_URL     = "https://api.anthropic.com/v1/messages"
+
+# Liste FERMÉE d'icônes : le front ne rend qu'un pictogramme de cette liste
+# (SVG inline). Le modèle ne peut donc pas inventer une icône introuvable.
+EVENT_ICONS = (
+    "movie", "festival", "jeune_public", "musique", "monde",
+    "art", "documentaire", "patrimoine", "rencontre", "frisson",
+)
+
+_RESUME_PROMPT = """Tu rédiges, pour un agrégateur de cinémas indépendants lyonnais, \
+la phrase d'accroche du mois de {mois}.
+
+Programmation du mois :
+{liste}
+
+Réponds UNIQUEMENT par un tableau JSON de segments, sans texte autour. Chaque segment est :
+  {{"t": "<texte>", "s": "strong"|"mute"}}   ou   {{"icon": "<nom>"}}
+
+Règles :
+- `strong` : le mois, les TYPES d'événement, et les récurrences de type (« deux festivals », « 3 avant-premières »).
+- `mute` : tout le reste — liant, noms propres, thématiques.
+- `icon` devant une sous-catégorie (jeune public, cinéma ibérique…) ; si aucune icône ne convient, \
+place-la devant la catégorie. Icônes disponibles : {icones}.
+- Une seule phrase fluide, commençant par « En {mois}, ». Reste synthétique quand le mois est chargé.
+- Les espaces font partie des segments (le rendu concatène sans séparateur).
+
+Exemple de forme :
+[{{"t":"En ","s":"mute"}},{{"t":"Juillet","s":"strong"}},{{"t":", retrouvez ","s":"mute"}},\
+{{"icon":"movie"}},{{"t":"une rétrospective","s":"strong"}},{{"t":" sur Jacques Tati","s":"mute"}}]"""
+
+
+def _valider_segments(data) -> "list | None":
+    """
+    Valide la réponse du modèle. La programmation vient de pages tierces : on ne
+    fait confiance ni au contenu ni à la forme — seules les clés attendues,
+    typées et bornées, passent. Toute anomalie ⇒ None ⇒ pas de bloc résumé
+    (le fallback prévu au brief : on n'invente pas de phrase de secours).
+    """
+    if not isinstance(data, list) or not (0 < len(data) <= 40):
+        return None
+    out = []
+    total = 0
+    for seg in data:
+        if not isinstance(seg, dict):
+            return None
+        if "icon" in seg:
+            if seg["icon"] not in EVENT_ICONS:
+                continue          # icône inconnue : on la laisse tomber, pas le résumé
+            out.append({"icon": seg["icon"]})
+            continue
+        texte, style = seg.get("t"), seg.get("s")
+        if not isinstance(texte, str) or style not in ("strong", "mute"):
+            return None
+        total += len(texte)
+        out.append({"t": texte[:120], "s": style})
+    if not out or total > 400:
+        return None
+    return out
+
+
+def generate_month_summary(events: list, mois: str) -> "list | None":
+    """
+    Résumé du mois en segments typés (§5), via l'API Claude (Haiku).
+
+    Le modèle ne renvoie pas une phrase mais un tableau de segments — c'est ce
+    qui rend le rendu multicolore déterministe côté front. Sans clé API, ou si
+    la réponse ne valide pas, on renvoie None : le bloc est alors ABSENT.
+    """
+    if not ANTHROPIC_API_KEY:
+        log.info(f"ANTHROPIC_API_KEY absente — pas de résumé pour {mois}")
+        return None
+    if not events:
+        return None
+
+    libelle_mois = f"{[k for k, v in MOIS_FR.items() if v == int(mois[5:7])][0]} {mois[:4]}"
+    lignes = []
+    for ev in events[:25]:
+        etiquette = ev.get("forme") or ev.get("type")
+        lignes.append(f"- [{etiquette}] {ev['titre'][:80]}")
+
+    payload = json.dumps({
+        "model": ANTHROPIC_MODEL,
+        "max_tokens": 800,
+        "messages": [{"role": "user", "content": _RESUME_PROMPT.format(
+            mois=libelle_mois, liste="\n".join(lignes), icones=", ".join(EVENT_ICONS))}],
+    }).encode("utf-8")
+
+    req = Request(ANTHROPIC_URL, data=payload, headers={
+        "content-type": "application/json",
+        "x-api-key": ANTHROPIC_API_KEY,
+        "anthropic-version": "2023-06-01",
+    })
+    try:
+        with urlopen(req, timeout=30) as r:
+            rep = json.loads(r.read().decode("utf-8"))
+        texte = "".join(b.get("text", "") for b in rep.get("content", []))
+    except (HTTPError, URLError, ValueError) as e:
+        log.warning(f"Résumé {mois} : appel API échoué ({e}) — bloc omis")
+        return None
+
+    m = re.search(r"\[.*\]", texte, re.S)
+    if not m:
+        log.warning(f"Résumé {mois} : réponse sans tableau JSON — bloc omis")
+        return None
+    try:
+        segments = _valider_segments(json.loads(m.group(0)))
+    except ValueError:
+        segments = None
+    if not segments:
+        log.warning(f"Résumé {mois} : JSON invalide — bloc omis")
+        return None
+    log.info(f"Résumé {mois} : {len(segments)} segments")
+    return segments
+
+
+# ── Affiches : rapatriement dans Supabase Storage ─────────────────────────
+
+def _affiche_path(url: str) -> str:
+    ext = ".jpg"
+    for cand in (".png", ".webp", ".jpeg", ".jpg"):
+        if cand in url.lower():
+            ext = ".jpg" if cand == ".jpeg" else cand
+            break
+    return hashlib.sha1(url.encode("utf-8")).hexdigest()[:16] + ext
+
+
+def _rapatrie_affiche(client, url: str, existants: set) -> "str | None":
+    """
+    Copie une affiche de source dans le bucket `affiches` et renvoie son URL
+    publique. Les CDN des salles renvoient des 403 en hotlink et leurs URLs
+    tournent — on ne peut pas s'y fier pour un affichage durable.
+    """
+    if not url or not url.startswith("http"):
+        return None
+    chemin = _affiche_path(url)
+    base = os.getenv("SUPABASE_URL", "").rstrip("/")
+    public = f"{base}/storage/v1/object/public/affiches/{chemin}"
+    if chemin in existants:
+        return public
+    try:
+        with urlopen(Request(url, headers=HEADERS), timeout=20) as r:
+            data = r.read()
+        if not data or len(data) > 5_000_000:
+            return None
+        mime = "image/png" if chemin.endswith(".png") else (
+            "image/webp" if chemin.endswith(".webp") else "image/jpeg")
+        client.storage.from_("affiches").upload(
+            chemin, data, {"content-type": mime, "upsert": "true"})
+        existants.add(chemin)
+        return public
+    except Exception as e:
+        log.warning(f"Affiche non rapatriée ({url[:70]}) : {e}")
+        return None
+
+
+# ── Upsert Supabase ───────────────────────────────────────────────────────
+
+def _mois_couverts(ev: dict) -> list:
+    """Mois 'YYYY-MM' traversés par un événement (borné à 12 pour les ouverts)."""
+    debut = ev.get("date_debut") or ev.get("date_fin")
+    fin = ev.get("date_fin") or ev.get("date_debut")
+    if not debut:
+        return []
+    d = date.fromisoformat(debut).replace(day=1)
+    f = date.fromisoformat(fin).replace(day=1)
+    mois = []
+    while d <= f and len(mois) < 12:
+        mois.append(d.isoformat()[:7])
+        d = (d + timedelta(days=32)).replace(day=1)
+    return mois
+
+
+def upsert_events_to_supabase(events: list, force_resume: bool = False) -> None:
+    """
+    Upsert des événements, de leurs films et de leurs créneaux.
+
+    Les tables filles sont RÉÉCRITES (delete + insert) : un film retiré de la
+    programmation doit disparaître, ce qu'un simple upsert ne fait pas.
+    `seance_id` / `film_id` sont résolus opportunistement — la plupart resteront
+    NULL au-delà de la semaine scrapée, c'est le régime normal (cf. migration).
+    """
+    sb_url = os.getenv("SUPABASE_URL")
+    sb_key = os.getenv("SUPABASE_SERVICE_ROLE_KEY")
+    if not sb_url or not sb_key:
+        log.info("SUPABASE_* absents — upsert des événements ignoré")
+        return
+    if not events:
+        return
+    try:
+        from supabase import create_client
+        client = create_client(sb_url, sb_key)
+    except Exception as e:
+        log.error(f"Connexion Supabase impossible : {e}")
+        return
+
+    today = date.today().isoformat()
+    cinema_ids: dict = {}
+    try:
+        for c in client.table("cinemas").select("id,name").execute().data or []:
+            cinema_ids[c["name"]] = c["id"]
+    except Exception as e:
+        log.error(f"Lecture des cinémas impossible : {e}")
+        return
+
+    films_par_titre: dict = {}
+    try:
+        for f in client.table("films").select("id,titre,poster").execute().data or []:
+            films_par_titre.setdefault(_normalize_title_key(f["titre"]), f)
+    except Exception as e:
+        log.warning(f"Index films indisponible ({e}) — liens film non résolus")
+
+    seances_idx: dict = {}
+    try:
+        rows = client.table("seances").select(
+            "id,film_id,cinema_id,date,heure").gte("date", today).execute().data or []
+        for s in rows:
+            seances_idx[(s["film_id"], s["cinema_id"], s["date"], (s["heure"] or "")[:5])] = s["id"]
+    except Exception as e:
+        log.warning(f"Index séances indisponible ({e}) — seance_id non résolus")
+
+    affiches_existantes = set()
+    try:
+        for obj in client.storage.from_("affiches").list(
+                options={"limit": 1000}) or []:
+            affiches_existantes.add(obj.get("name"))
+    except Exception as e:
+        log.debug(f"Bucket affiches non listé : {e}")
+
+    n_films = n_creneaux = 0
+    for ev in events:
+        affiche = _rapatrie_affiche(client, ev.get("affiche_url"), affiches_existantes) \
+            or ev.get("affiche_url")
+        row = {
+            "cle": ev["cle"], "type": ev["type"], "forme": ev.get("forme"),
+            "titre": ev["titre"], "description": ev.get("description"),
+            "date_debut": ev.get("date_debut"), "date_fin": ev.get("date_fin"),
+            "precision": ev.get("precision") or "exact",
+            "affiche_url": affiche, "source": ev.get("source"),
+            "source_url": ev.get("source_url"),
+            "updated_at": datetime.now().isoformat(),
+        }
+        try:
+            r = client.table("evenements").upsert(row, on_conflict="cle").execute()
+            ev_id = r.data[0]["id"] if r.data else None
+            if not ev_id:
+                ev_id = client.table("evenements").select("id").eq(
+                    "cle", ev["cle"]).execute().data[0]["id"]
+        except Exception as e:
+            log.warning(f"Événement non upserté (« {ev['titre']} ») : {e}")
+            continue
+        ev["id"] = ev_id
+
+        try:
+            client.table("evenement_films").delete().eq("evenement_id", ev_id).execute()
+            client.table("evenement_seances").delete().eq("evenement_id", ev_id).execute()
+        except Exception as e:
+            log.warning(f"Purge des liens échouée (« {ev['titre']} ») : {e}")
+
+        lignes_films = []
+        for i, f in enumerate(ev.get("films") or []):
+            key = _normalize_title_key(f["titre"])
+            connu = films_par_titre.get(key)
+            lignes_films.append({
+                "evenement_id": ev_id, "film_id": connu["id"] if connu else None,
+                "titre": f["titre"], "titre_key": key,
+                "affiche_url": (connu or {}).get("poster"), "ordre": i,
+            })
+        if lignes_films:
+            try:
+                client.table("evenement_films").insert(lignes_films).execute()
+                n_films += len(lignes_films)
+            except Exception as e:
+                log.warning(f"Films non liés (« {ev['titre']} ») : {e}")
+
+        lignes_creneaux = []
+        vus = set()
+        for c in ev.get("creneaux") or []:
+            cid = cinema_ids.get(c.get("cinema"))
+            if not cid:
+                continue
+            titre_film = c.get("titre_film")
+            fkey = _normalize_title_key(titre_film) if titre_film else None
+            film = films_par_titre.get(fkey) if fkey else None
+            heure = (c.get("heure") or "")[:5] or None
+            signature = (cid, c.get("date"), heure, fkey)
+            if signature in vus:
+                continue
+            vus.add(signature)
+            lignes_creneaux.append({
+                "evenement_id": ev_id, "cinema_id": cid,
+                "date": c.get("date"), "heure": (heure + ":00") if heure else None,
+                "film_id": film["id"] if film else None,
+                "seance_id": seances_idx.get(
+                    (film["id"] if film else None, cid, c.get("date"), heure)),
+                "titre_film": titre_film, "invite": c.get("invite"),
+                "description": c.get("description"),
+                "resa_url": c.get("resa_url") if is_valid_resa_url(c.get("resa_url")) else None,
+            })
+        if lignes_creneaux:
+            try:
+                client.table("evenement_seances").insert(lignes_creneaux).execute()
+                n_creneaux += len(lignes_creneaux)
+            except Exception as e:
+                log.warning(f"Créneaux non insérés (« {ev['titre']} ») : {e}")
+
+    # Données mensuelles : graine de tirage (renouvelée à chaque run, stable
+    # entre deux runs pour tous les visiteurs) + résumé.
+    par_mois: dict = {}
+    for ev in events:
+        for m in _mois_couverts(ev):
+            par_mois.setdefault(m, []).append(ev)
+
+    existants: dict = {}
+    try:
+        for r in client.table("evenement_mois").select(
+                "mois,resume_segments,resume_generated_at").execute().data or []:
+            existants[r["mois"]] = r
+    except Exception as e:
+        log.warning(f"Lecture evenement_mois impossible : {e}")
+
+    for mois, evs_mois in sorted(par_mois.items()):
+        if mois < today[:7]:
+            continue
+        precedent = existants.get(mois) or {}
+        segments = precedent.get("resume_segments")
+        genere = precedent.get("resume_generated_at")
+        frais = False
+        if genere:
+            try:
+                frais = (datetime.now() - datetime.fromisoformat(
+                    genere.replace("Z", "+00:00")).replace(tzinfo=None)).days < 7
+            except ValueError:
+                frais = False
+        if force_resume or not (segments and frais):
+            nouveau = generate_month_summary(evs_mois, mois)
+            if nouveau:
+                segments = nouveau
+                genere = datetime.now().isoformat()
+        try:
+            client.table("evenement_mois").upsert({
+                "mois": mois,
+                "selection_seed": os.urandom(4).hex(),
+                "resume_segments": segments,
+                "resume_generated_at": genere,
+                "updated_at": datetime.now().isoformat(),
+            }, on_conflict="mois").execute()
+        except Exception as e:
+            log.warning(f"Mois {mois} non upserté : {e}")
+
+    log.info(f"Supabase : {len(events)} événements, {n_films} films liés, "
+             f"{n_creneaux} créneaux, {len(par_mois)} mois")
+
+
+# ── Orchestrateur ─────────────────────────────────────────────────────────
+
+def scrape_events(films: list, ref: "date | None" = None,
+                  sans_comoedia: bool = False, sans_lumiere: bool = False) -> list:
+    """
+    Pipeline complet des événements : extraction → fusion → jointure → filtrage.
+    `films` = les films scrapés du run, qui servent à dater les événements sans
+    date et à rattacher les séances (§4.3).
+    """
+    ref = ref or date.today()
+    bruts: list = []
+    if not sans_comoedia:
+        bruts += scrape_comoedia_events(ref)
+    if not sans_lumiere:
+        bruts += scrape_lumiere_events(ref)
+    if not bruts:
+        log.warning("Aucun événement extrait")
+        return []
+
+    events = merge_events(bruts)
+    events = resolve_dates_from_seances(events, films, ref)
+    events = filter_events_current(events, ref)
+
+    vues: dict = {}
+    for ev in events:
+        cle = event_dedup_key(ev)
+        if cle in vues:
+            vues[cle] += 1
+            cle = f"{cle}#{vues[cle]}"
+        else:
+            vues[cle] = 1
+        ev["cle"] = cle
+
+    events.sort(key=lambda e: (e.get("date_debut") or "9999", e["titre"]))
+    return events
+
+
+def events_public(events: list) -> list:
+    """Forme servie au front (Supabase et repli `programme.json` alignés)."""
+    return [{
+        "cle": ev["cle"], "type": ev["type"], "forme": ev.get("forme"),
+        "titre": ev["titre"], "description": ev.get("description"),
+        "date_debut": ev.get("date_debut"), "date_fin": ev.get("date_fin"),
+        "precision": ev.get("precision"), "affiche_url": ev.get("affiche_url"),
+        "films": [{"titre": f["titre"], "dates": sorted(f.get("dates") or [])}
+                  for f in ev.get("films") or []],
+        "creneaux": [{k: c.get(k) for k in
+                      ("cinema", "date", "heure", "titre_film", "invite", "description")}
+                     for c in ev.get("creneaux") or []],
+    } for ev in events]
+
+
 def _extract_film(node: dict) -> dict:
     """Extrait les infos d'un nœud film."""
     film: dict = {
@@ -2592,6 +3925,11 @@ def main():
     parser.add_argument("--no-filter",  action="store_true", help="Ne pas filtrer par semaine (pour test)")
     parser.add_argument("--no-lumiere", action="store_true", help="Désactiver le scraping des Cinémas Lumière")
     parser.add_argument("--no-zola",    action="store_true", help="Désactiver le scraping du Zola")
+    parser.add_argument("--no-events",  action="store_true", help="Désactiver le scraping des événements")
+    parser.add_argument("--events-only", action="store_true",
+                        help="Ne scraper que les événements (films lus depuis programme.json)")
+    parser.add_argument("--force-resume", action="store_true",
+                        help="Régénérer le résumé du mois même s'il est récent")
     parser.add_argument("--no-comoedia-pdf", action="store_true",
                         help="Désactiver le scraper PDF Comoedia")
     parser.add_argument("--pdf-file",   default=None,
@@ -2606,6 +3944,12 @@ def main():
 
     if args.debug:
         logging.getLogger().setLevel(logging.DEBUG)
+
+    # --events-only : on ne re-scrape aucun film ; ceux du dernier programme.json
+    # suffisent à la jointure qui date les événements (§4.3).
+    if args.events_only:
+        args.no_comoedia_pdf = args.no_lumiere = args.no_zola = True
+        args.no_omdb = args.no_filter = True
 
     log.info("═" * 55)
     log.info(f"Multi-Cinémas Lyon Scraper — {datetime.now().strftime('%A %d %B %Y %H:%M')}")
@@ -2649,7 +3993,14 @@ def main():
 
     # 3. Fusion des sources
     all_films = comoedia_films + lumiere_films + zola_films
-    if not all_films:
+    if args.events_only:
+        try:
+            all_films = json.loads(Path(args.output).read_text(encoding="utf-8")).get("films") or []
+            log.info(f"--events-only : {len(all_films)} films relus depuis {args.output}")
+        except Exception as e:
+            log.warning(f"--events-only : programme.json illisible ({e}) — jointure sans séances")
+            all_films = []
+    elif not all_films:
         log.error("Aucun film extrait (ni Comoedia, ni Lumière, ni Zola).")
         sys.exit(2)
     log.info(
@@ -2703,8 +4054,22 @@ def main():
                         film[field] = best[field]
 
     # 5. Upsert tous les films (Comoedia + Lumière) dans Supabase (avant filtrage)
-    if not args.dry_run:
+    if not args.dry_run and not args.events_only:
         upsert_all_to_supabase(all_films)
+
+    # 5bis. Événements — APRÈS l'upsert des films (la jointure des créneaux a
+    # besoin des films/séances du run) et AVANT le filtrage semaine (qui
+    # amputerait les séances servant à dater les événements longs).
+    evenements: list = []
+    if not args.no_events:
+        try:
+            evenements = scrape_events(all_films)
+            if not args.dry_run:
+                upsert_events_to_supabase(evenements, force_resume=args.force_resume)
+        except Exception as e:
+            # Les événements ne doivent jamais faire tomber le pipeline séances.
+            log.error(f"Pipeline événements en échec ({e}) — programme séances inchangé")
+            evenements = []
 
     # 6. Filtrage semaine
     if not args.no_filter:
@@ -2720,6 +4085,10 @@ def main():
         "generated_at": datetime.now().isoformat(),
         "sources": [URL_PDF_LISTING, URL_LUMIERE_BASE, URL_ZOLA_AFFICHE],
         "films": all_films,
+        # Repli des événements (contrat C4 étendu) : sans lui, l'onglet
+        # Événements n'aurait AUCUNE source de secours si Supabase tombe (I3).
+        # Les liens de réservation en sont exclus (I5 : token horaire volatil).
+        "evenements": events_public(evenements),
     }
 
     if args.dry_run:
@@ -2738,10 +4107,15 @@ def main():
         # détection conclurait « changé » à chaque run et le fichier serait
         # réécrit + committé inutilement. Le resa_url frais est tout de même écrit
         # quand une réécriture a lieu (vrai changement de programme).
+        # --no-events (ou pipeline événements en échec) ne doit pas VIDER le
+        # repli : on reconduit les événements du fichier précédent.
+        if args.no_events and previous:
+            output["evenements"] = previous.get("evenements") or []
         unchanged = (
             previous is not None
             and _films_sans_volatiles(previous.get("films") or []) == _films_sans_volatiles(all_films)
             and previous.get("sources") == output["sources"]
+            and (previous.get("evenements") or []) == output["evenements"]
         )
         if unchanged:
             log.info(

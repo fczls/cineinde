@@ -48,6 +48,10 @@ jobs:
           TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          # Résumé du mois de l'onglet Événements. Secret OPTIONNEL : sans lui,
+          # le scraper log un avertissement et le bloc résumé reste absent du
+          # front (fallback prévu) — le reste du pipeline est inchangé.
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: |
           PDF_ARG=""
           if [ -n "${{ github.event.inputs.pdf_url }}" ]; then

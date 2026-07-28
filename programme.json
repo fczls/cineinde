@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-25T20:44:25.035759",
+  "generated_at": "2026-07-29T00:17:06.523294",
   "sources": [
     "https://www.cinema-comoedia.com/programme-semaine/",
     "https://www.cinemas-lumiere.com/calendrier-general.html",
@@ -2067,6 +2067,960 @@
       "imdbRating": 7.6,
       "cast": "Naomi Serrano, Nate Begle, Charles Gonzales",
       "trailer": "https://www.youtube.com/watch?v=CZPEsN45bzM"
+    }
+  ],
+  "evenements": [
+    {
+      "cle": "festival|little films festival|2026-06",
+      "type": "festival",
+      "forme": "jeune_public",
+      "titre": "Little Films Festival",
+      "description": "Au programme cette année, 8 films pour le jeune public seront proposés : 2 avant-premières exclusives et des films de catalogue.",
+      "date_debut": "2026-06-28",
+      "date_fin": "2026-08-31",
+      "precision": "exact",
+      "affiche_url": "https://www.cinemas-lumiere.com/media/little-film-festival-2026-affiche.jpeg",
+      "films": [
+        {
+          "titre": "Les Tourouges et les Toubleus",
+          "dates": []
+        },
+        {
+          "titre": "Le Monde à l'envers",
+          "dates": []
+        },
+        {
+          "titre": "Patouille et Momo, les contes de la forêt",
+          "dates": [
+            "2026-08-09"
+          ]
+        },
+        {
+          "titre": "Non-Non dans l’espace",
+          "dates": []
+        },
+        {
+          "titre": "Le Monde à l’envers",
+          "dates": [
+            "2026-08-02"
+          ]
+        },
+        {
+          "titre": "Un petit air de famille",
+          "dates": []
+        }
+      ],
+      "creneaux": [
+        {
+          "cinema": "Le Comoedia",
+          "date": "2026-08-02",
+          "heure": null,
+          "titre_film": "Le Monde à l’envers",
+          "invite": null,
+          "description": "Le Little Films Festival est de retour pour une huitième édition. Profitez de films jeune public pendant tout l'été !"
+        },
+        {
+          "cinema": "Le Comoedia",
+          "date": "2026-08-09",
+          "heure": null,
+          "titre_film": "Patouille et Momo, les contes de la forêt",
+          "invite": null,
+          "description": "Le Little Films Festival est de retour pour une huitième édition. Profitez de films jeune public pendant tout l'été !"
+        },
+        {
+          "cinema": "Lumière Fourmi",
+          "date": null,
+          "heure": null,
+          "titre_film": null,
+          "invite": null,
+          "description": null
+        }
+      ]
+    },
+    {
+      "cle": "festival|plein soleil sur les classiques|2026-07",
+      "type": "festival",
+      "forme": "festival",
+      "titre": "Plein Soleil sur les Classiques",
+      "description": "Un été pour (re)découvrir sur grand écran les films qui ont fait l'histoire du cinéma !",
+      "date_debut": "2026-07-01",
+      "date_fin": "2026-09-01",
+      "precision": "exact",
+      "affiche_url": "https://cms-assets.webediamovies.pro/production/945/199dcdf2ccfe9698fd70bc9871e4fff7.jpg",
+      "films": [
+        {
+          "titre": "New-York 1997",
+          "dates": []
+        },
+        {
+          "titre": "Kwaïdan",
+          "dates": []
+        },
+        {
+          "titre": "Kill Bill : The Whole Bloody Affair",
+          "dates": []
+        },
+        {
+          "titre": "Jour de fête",
+          "dates": []
+        },
+        {
+          "titre": "Les Vacances de Monsieur Hulot",
+          "dates": []
+        },
+        {
+          "titre": "Mon Oncle",
+          "dates": []
+        },
+        {
+          "titre": "Playtime",
+          "dates": []
+        },
+        {
+          "titre": "Trafic",
+          "dates": []
+        },
+        {
+          "titre": "Parade",
+          "dates": []
+        },
+        {
+          "titre": "Memento",
+          "dates": []
+        },
+        {
+          "titre": "Lawrence d’Arabie",
+          "dates": []
+        },
+        {
+          "titre": "Leaving Las Vegas",
+          "dates": []
+        },
+        {
+          "titre": "Le Cuirassé Potemkine",
+          "dates": []
+        },
+        {
+          "titre": "Wake in Fright",
+          "dates": []
+        },
+        {
+          "titre": "Des jours et des nuits dans la forêt",
+          "dates": []
+        },
+        {
+          "titre": "Venise, la Lune et toi",
+          "dates": []
+        }
+      ],
+      "creneaux": [
+        {
+          "cinema": "Le Comoedia",
+          "date": "2026-07-01",
+          "heure": null,
+          "titre_film": null,
+          "invite": null,
+          "description": "Un été pour (re)découvrir sur grand écran les films qui ont fait l'histoire du cinéma !"
+        }
+      ]
+    },
+    {
+      "cle": "festival|cycle scary fourmi|2026-07",
+      "type": "festival",
+      "forme": "cycle",
+      "titre": "Cycle Scary Fourmi",
+      "description": "Le Lumière Fourmi vous propose une programmation exceptionnelle composée de plusieurs classiques de l’horreur pour vous assurer des frissons tout au long de l’été. Rendez-vous chaque samedi soir à la Fourmi ! Séance présentée",
+      "date_debut": "2026-07-04",
+      "date_fin": "2026-08-22",
+      "precision": "exact",
+      "affiche_url": "https://www.cinemas-lumiere.com/media/cinemas-lumiere/visuels-films/fog-affiche.jpg",
+      "films": [
+        {
+          "titre": "The Thing",
+          "dates": []
+        },
+        {
+          "titre": "La Mouche",
+          "dates": []
+        },
+        {
+          "titre": "Evil Dead 2",
+          "dates": []
+        },
+        {
+          "titre": "House",
+          "dates": []
+        }
+      ],
+      "creneaux": [
+        {
+          "cinema": "Lumière Fourmi",
+          "date": null,
+          "heure": null,
+          "titre_film": null,
+          "invite": "Séance présentée",
+          "description": null
+        }
+      ]
+    },
+    {
+      "cle": "seance_speciale|lawrence d'arabie|2026-07",
+      "type": "seance_speciale",
+      "forme": null,
+      "titre": "Lawrence d'Arabie",
+      "description": "En 1916, le jeune officier britannique T. E. Lawrence est chargé d’enquêter sur les révoltes arabes contre l’occupant turc. Celui qu’on appellera plus tard «Lawrence d’Arabie» se range alors du côté des insurgés et, dans les dunes éternelles du désert, organise une guérilla. Personnage brillant mais controversé, il va mener des batailles aux côtés de ses alliés et changer la face d’un empire.",
+      "date_debut": "2026-07-29",
+      "date_fin": "2026-07-29",
+      "precision": "exact",
+      "affiche_url": "https://www.cinemas-lumiere.com/media/aff_lawrence-d-arabie.jpg",
+      "films": [
+        {
+          "titre": "Lawrence d'Arabie",
+          "dates": []
+        }
+      ],
+      "creneaux": [
+        {
+          "cinema": "Lumière Terreaux",
+          "date": null,
+          "heure": null,
+          "titre_film": "Lawrence d'Arabie",
+          "invite": null,
+          "description": null
+        }
+      ]
+    },
+    {
+      "cle": "seance_speciale|le bon, la brute et le cinglé|2026-07",
+      "type": "seance_speciale",
+      "forme": null,
+      "titre": "Le Bon, la brute et le cinglé",
+      "description": "Mandchourie, années 30. Deux hors la loi et un chasseur de primes sont à la recherche d’une carte au trésor. À travers les dangers d'une région en proie à de multiple conflits — l'armée japonaise, les bandits chinois et les gangsters coréens — ils réalisent que la vraie bataille se livrera entre eux. Un seul homme en sortira vainqueur.",
+      "date_debut": "2026-07-29",
+      "date_fin": "2026-07-29",
+      "precision": "exact",
+      "affiche_url": "https://www.cinemas-lumiere.com/media/le-bon-la-brute-et-le-cingle.jpeg",
+      "films": [
+        {
+          "titre": "Le Bon, la brute et le cinglé",
+          "dates": []
+        }
+      ],
+      "creneaux": [
+        {
+          "cinema": "Lumière Fourmi",
+          "date": null,
+          "heure": null,
+          "titre_film": "Le Bon, la brute et le cinglé",
+          "invite": null,
+          "description": null
+        }
+      ]
+    },
+    {
+      "cle": "avant_premiere|ma t'août première avant-première|2026-08",
+      "type": "avant_premiere",
+      "forme": null,
+      "titre": "Ma T'Août Première Avant-Première",
+      "description": "Chaque dimanche du mois d’août à 11h00, le Comœdia présente un film jeune public en avant-première ! Un grand moment dans la vie d'un petit cinéphile…",
+      "date_debut": "2026-08-02",
+      "date_fin": "2026-08-30",
+      "precision": "exact",
+      "affiche_url": "https://cms-assets.webediamovies.pro/production/945/e5f4c237b91a68ced8135c2bc8099b14.jpg",
+      "films": [
+        {
+          "titre": "Le Monde à l'envers",
+          "dates": [
+            "2026-08-02"
+          ]
+        },
+        {
+          "titre": "Patouille et Momo, les contes de la forêt",
+          "dates": [
+            "2026-08-09"
+          ]
+        },
+        {
+          "titre": "Joyeuse Jungle !",
+          "dates": [
+            "2026-08-16"
+          ]
+        },
+        {
+          "titre": "Chien bleu et autres belles histoires de l'école des loisirs",
+          "dates": [
+            "2026-08-23"
+          ]
+        },
+        {
+          "titre": "Un amour d'épouvantail",
+          "dates": [
+            "2026-08-30"
+          ]
+        }
+      ],
+      "creneaux": [
+        {
+          "cinema": "Le Comoedia",
+          "date": "2026-08-02",
+          "heure": "11:00",
+          "titre_film": "Le Monde à l'envers",
+          "invite": null,
+          "description": "Chaque dimanche du mois d’août à 11h00, le Comœdia présente un film jeune public en avant-première ! Un grand moment dans la vie d'un petit cinéphile…"
+        },
+        {
+          "cinema": "Le Comoedia",
+          "date": "2026-08-09",
+          "heure": "11:00",
+          "titre_film": "Patouille et Momo, les contes de la forêt",
+          "invite": null,
+          "description": "Chaque dimanche du mois d’août à 11h00, le Comœdia présente un film jeune public en avant-première ! Un grand moment dans la vie d'un petit cinéphile…"
+        },
+        {
+          "cinema": "Le Comoedia",
+          "date": "2026-08-16",
+          "heure": "11:00",
+          "titre_film": "Joyeuse Jungle !",
+          "invite": null,
+          "description": "Chaque dimanche du mois d’août à 11h00, le Comœdia présente un film jeune public en avant-première ! Un grand moment dans la vie d'un petit cinéphile…"
+        },
+        {
+          "cinema": "Le Comoedia",
+          "date": "2026-08-23",
+          "heure": "11:00",
+          "titre_film": "Chien bleu et autres belles histoires de l'école des loisirs",
+          "invite": null,
+          "description": "Chaque dimanche du mois d’août à 11h00, le Comœdia présente un film jeune public en avant-première ! Un grand moment dans la vie d'un petit cinéphile…"
+        },
+        {
+          "cinema": "Le Comoedia",
+          "date": "2026-08-30",
+          "heure": "11:00",
+          "titre_film": "Un amour d'épouvantail",
+          "invite": null,
+          "description": "Chaque dimanche du mois d’août à 11h00, le Comœdia présente un film jeune public en avant-première ! Un grand moment dans la vie d'un petit cinéphile…"
+        }
+      ]
+    },
+    {
+      "cle": "avant_premiere|soudain|2026-08",
+      "type": "avant_premiere",
+      "forme": null,
+      "titre": "Soudain",
+      "description": "Directrice d'un établissement pour personnes âgées, Marie-Lou tente d'y instaurer une philosophie de soins innovante basée sur l'écoute et la dignité des résidents, malgré la réticence d'une partie de ses équipes. Sa rencontre avec Mari, une metteuse en scène japonaise qui se bat contre un cancer, va bouleverser sa trajectoire. En nouant une amitié profonde, les deux femmes engagent ensemble un combat pour \"rendre possible l'impossible\".",
+      "date_debut": "2026-08-10",
+      "date_fin": "2026-08-10",
+      "precision": "exact",
+      "affiche_url": "https://www.cinemas-lumiere.com/media/cinemas-lumiere/visuels-films/soudain-affiche.jpg",
+      "films": [
+        {
+          "titre": "Soudain",
+          "dates": []
+        }
+      ],
+      "creneaux": [
+        {
+          "cinema": "Lumière Terreaux",
+          "date": "2026-08-10",
+          "heure": "20:00",
+          "titre_film": "Soudain",
+          "invite": "Séance présentée et précédée d’un verre de l’amitié offert",
+          "description": null
+        }
+      ]
+    },
+    {
+      "cle": "festival|rétrospective akira kurosawa en trois films|2026-08",
+      "type": "festival",
+      "forme": "retrospective",
+      "titre": "Rétrospective Akira Kurosawa en trois films",
+      "description": "Retrouvez trois chefs-d’œuvre d’Akira Kurosawa marqués par le jeu de Toshiro Mifune dans des nouvelles restaurations 4K !",
+      "date_debut": "2026-08-12",
+      "date_fin": "2026-08-12",
+      "precision": "exact",
+      "affiche_url": "https://www.cinemas-lumiere.com/media/cinemas-lumiere/visuels-films/retro-affiche-kurosawa.jpg",
+      "films": [
+        {
+          "titre": "Le château de l'araignée",
+          "dates": []
+        },
+        {
+          "titre": "La forteresse cachée",
+          "dates": []
+        },
+        {
+          "titre": "Sanjuro",
+          "dates": []
+        }
+      ],
+      "creneaux": [
+        {
+          "cinema": "Lumière Bellecour",
+          "date": null,
+          "heure": null,
+          "titre_film": null,
+          "invite": null,
+          "description": null
+        }
+      ]
+    },
+    {
+      "cle": "avant_premiere|fjord|2026-08",
+      "type": "avant_premiere",
+      "forme": null,
+      "titre": "Fjord",
+      "description": "Les Gheorghiu, un couple roumano-norvégien très pieux, s'installent dans un village au bout d'un fjord où ils se lient rapidement d'amitié avec leurs voisins, les Halberg. Les enfants des deux familles deviennent très proches, malgré des éducations différentes. Lorsque le corps enseignant découvre des ecchymoses sur le corps d'Elia, l'aînée des enfants Gheorghiu, la communauté se demande si l'éducation traditionnelle que les enfants Gheorghiu reçoivent de leurs parents pourrait en être la cause.",
+      "date_debut": "2026-08-17",
+      "date_fin": "2026-08-18",
+      "precision": "exact",
+      "affiche_url": "https://www.cinemas-lumiere.com/media/cinemas-lumiere/visuels-films/fjord-affiche-2.jpg",
+      "films": [
+        {
+          "titre": "Fjord",
+          "dates": [
+            "2026-08-18"
+          ]
+        }
+      ],
+      "creneaux": [
+        {
+          "cinema": "Le Comoedia",
+          "date": "2026-08-18",
+          "heure": "20:30",
+          "titre_film": "Fjord",
+          "invite": null,
+          "description": "Découvrez en avant-première le lauréat de la Palme d'Or du Festival de Cannes 2026."
+        },
+        {
+          "cinema": "Lumière Terreaux",
+          "date": "2026-08-17",
+          "heure": "20:30",
+          "titre_film": "Fjord",
+          "invite": "Séance présentée",
+          "description": null
+        }
+      ]
+    },
+    {
+      "cle": "avant_premiere|l'inconnue|2026-08",
+      "type": "avant_premiere",
+      "forme": null,
+      "titre": "L'Inconnue",
+      "description": "A bientôt 40 ans, David Zimmerman est photographe mais personne ne le sait. Alors qu'il ne sort presque jamais de chez lui, des amis le traînent dans une fête insensée. Il y repère une femme dans la foule, ne peut en détacher le regard, la suit... Quelques heures plus tard, David se réveille : il est dans le corps de l'inconnue.",
+      "date_debut": "2026-08-20",
+      "date_fin": "2026-08-24",
+      "precision": "exact",
+      "affiche_url": "https://www.cinemas-lumiere.com/media/l-inconnue.jpeg",
+      "films": [
+        {
+          "titre": "L'Inconnue",
+          "dates": [
+            "2026-08-20"
+          ]
+        }
+      ],
+      "creneaux": [
+        {
+          "cinema": "Le Comoedia",
+          "date": "2026-08-20",
+          "heure": "20:00",
+          "titre_film": "L'Inconnue",
+          "invite": null,
+          "description": "En présence du réalisateur Arthur Harari et du comédien Niels Schneider."
+        },
+        {
+          "cinema": "Lumière Terreaux",
+          "date": "2026-08-24",
+          "heure": "20:30",
+          "titre_film": "L'Inconnue",
+          "invite": "Séance présentée",
+          "description": null
+        }
+      ]
+    },
+    {
+      "cle": "avant_premiere|notre salut|2026-08",
+      "type": "avant_premiere",
+      "forme": null,
+      "titre": "Notre salut",
+      "description": "En présence du réalisateur Emmanuel Marre.",
+      "date_debut": "2026-08-28",
+      "date_fin": "2026-08-28",
+      "precision": "exact",
+      "affiche_url": "https://all.web.img.acsta.net/img/02/c3/02c3e1e7589257736f49747d2864e619.jpg",
+      "films": [
+        {
+          "titre": "Notre salut",
+          "dates": [
+            "2026-08-28"
+          ]
+        }
+      ],
+      "creneaux": [
+        {
+          "cinema": "Le Comoedia",
+          "date": "2026-08-28",
+          "heure": "20:00",
+          "titre_film": "Notre salut",
+          "invite": null,
+          "description": "En présence du réalisateur Emmanuel Marre."
+        }
+      ]
+    },
+    {
+      "cle": "avant_premiere|histoires de la nuit|2026-08",
+      "type": "avant_premiere",
+      "forme": null,
+      "titre": "Histoires de la nuit",
+      "description": "Nora, Thomas et leur fille Ida vivent dans une ferme isolée avec pour seule voisine, Cristina, une peintre italienne. Alors que tout le monde prépare une soirée d'anniversaire surprise pour Nora, trois hommes rôdent autour de la maison et s'invitent à la fête, faisant surgir des secrets bien gardés...",
+      "date_debut": "2026-08-31",
+      "date_fin": "2026-08-31",
+      "precision": "exact",
+      "affiche_url": "https://www.cinemas-lumiere.com/media/cinemas-lumiere/visuels-films/histoires-de-la-nuit-affiche.jpg",
+      "films": [
+        {
+          "titre": "Histoires de la nuit",
+          "dates": []
+        }
+      ],
+      "creneaux": [
+        {
+          "cinema": "Lumière Terreaux",
+          "date": "2026-08-31",
+          "heure": "20:30",
+          "titre_film": "Histoires de la nuit",
+          "invite": "Séance présentée",
+          "description": null
+        }
+      ]
+    },
+    {
+      "cle": "avant_premiere|la vie d'une femme|2026-09",
+      "type": "avant_premiere",
+      "forme": null,
+      "titre": "La Vie d'une femme",
+      "description": "En présence de la réalisatrice Charline Bourgeois-Taquet et de la comédienne Marie-Christine Barrault.",
+      "date_debut": "2026-09-03",
+      "date_fin": "2026-09-03",
+      "precision": "exact",
+      "affiche_url": "https://all.web.img.acsta.net/img/7d/23/7d23702249d6a90ff0883f78a4c58aa3.jpg",
+      "films": [
+        {
+          "titre": "La Vie d'une femme",
+          "dates": [
+            "2026-09-03"
+          ]
+        }
+      ],
+      "creneaux": [
+        {
+          "cinema": "Le Comoedia",
+          "date": "2026-09-03",
+          "heure": "20:30",
+          "titre_film": "La Vie d'une femme",
+          "invite": null,
+          "description": "En présence de la réalisatrice Charline Bourgeois-Taquet et de la comédienne Marie-Christine Barrault."
+        }
+      ]
+    },
+    {
+      "cle": "avant_premiere|si tu penses bien|2026-09",
+      "type": "avant_premiere",
+      "forme": null,
+      "titre": "Si tu penses bien",
+      "description": "En présence de la réalisatrice Géraldine Nakache.",
+      "date_debut": "2026-09-04",
+      "date_fin": "2026-09-04",
+      "precision": "exact",
+      "affiche_url": "https://cms-assets.webediamovies.pro/production/945/ed30673d8db474595f1daba09b50c2aa.jpg",
+      "films": [
+        {
+          "titre": "Si tu penses bien",
+          "dates": [
+            "2026-09-04"
+          ]
+        }
+      ],
+      "creneaux": [
+        {
+          "cinema": "Le Comoedia",
+          "date": "2026-09-04",
+          "heure": "20:30",
+          "titre_film": "Si tu penses bien",
+          "invite": null,
+          "description": "En présence de la réalisatrice Géraldine Nakache."
+        }
+      ]
+    },
+    {
+      "cle": "rencontre|glaciers d'arctique, état des lieux|2026-09",
+      "type": "rencontre",
+      "forme": null,
+      "titre": "Glaciers d'Arctique, état des lieux",
+      "description": "En présence du réalisateur Pierre Dugowson et du glaciologue Léo Decaux.",
+      "date_debut": "2026-09-08",
+      "date_fin": "2026-09-08",
+      "precision": "exact",
+      "affiche_url": "https://cms-assets.webediamovies.pro/production/945/de003c35075df47f5e03d20fc57d3206.jpg",
+      "films": [
+        {
+          "titre": "Glaciers d'Arctique, état des lieux",
+          "dates": [
+            "2026-09-08"
+          ]
+        }
+      ],
+      "creneaux": [
+        {
+          "cinema": "Le Comoedia",
+          "date": "2026-09-08",
+          "heure": "20:30",
+          "titre_film": "Glaciers d'Arctique, état des lieux",
+          "invite": null,
+          "description": "En présence du réalisateur Pierre Dugowson et du glaciologue Léo Decaux."
+        }
+      ]
+    },
+    {
+      "cle": "avant_premiere|mémoire de fille|2026-09",
+      "type": "avant_premiere",
+      "forme": null,
+      "titre": "Mémoire de fille",
+      "description": "En présence de la réalisatrice Judith Godrèche et des comédiennes du film Tess Barthélémy et Maïwène Barthèlemy.",
+      "date_debut": "2026-09-09",
+      "date_fin": "2026-09-09",
+      "precision": "exact",
+      "affiche_url": "https://all.web.img.acsta.net/img/93/f9/93f9a78e1b9619bf4c5609a74b10a858.jpg",
+      "films": [
+        {
+          "titre": "Mémoire de fille",
+          "dates": [
+            "2026-09-09"
+          ]
+        }
+      ],
+      "creneaux": [
+        {
+          "cinema": "Le Comoedia",
+          "date": "2026-09-09",
+          "heure": "20:30",
+          "titre_film": "Mémoire de fille",
+          "invite": null,
+          "description": "En présence de la réalisatrice Judith Godrèche et des comédiennes du film Tess Barthélémy et Maïwène Barthèlemy."
+        }
+      ]
+    },
+    {
+      "cle": "festival|résonance - biennale de lyon d'art contemporain|2026-09",
+      "type": "festival",
+      "forme": "festival",
+      "titre": "Résonance - Biennale de Lyon d'Art contemporain",
+      "description": "Séance en résonance avec la 18e Biennale de Lyon d'Art contemporain. En présence de Catherine Nichols, commissaire de la Biennale 2026.",
+      "date_debut": "2026-09-14",
+      "date_fin": "2026-09-14",
+      "precision": "exact",
+      "affiche_url": "https://cms-assets.webediamovies.pro/production/945/e480fe15b5fa6cd132b816ca6b3cce5b.jpg",
+      "films": [],
+      "creneaux": []
+    },
+    {
+      "cle": "rencontre|sorda|2026-09",
+      "type": "rencontre",
+      "forme": null,
+      "titre": "Sorda",
+      "description": "SÉANCE SPÉCIALE - Mardi 15 septembre à 20h30 au Lumière Bellecour Séance suivie d'un échange dans le cadre du festival On Off",
+      "date_debut": "2026-09-15",
+      "date_fin": "2026-09-15",
+      "precision": "exact",
+      "affiche_url": "https://www.cinemas-lumiere.com/media/sorda.jpeg",
+      "films": [
+        {
+          "titre": "Sorda",
+          "dates": []
+        }
+      ],
+      "creneaux": [
+        {
+          "cinema": "Lumière Bellecour",
+          "date": "2026-09-15",
+          "heure": "20:30",
+          "titre_film": "Sorda",
+          "invite": "Séance suivie d'un échange dans le cadre du festival On Off",
+          "description": null
+        }
+      ]
+    },
+    {
+      "cle": "seance_speciale|teenage sex and death at camp miasma|2026-09",
+      "type": "seance_speciale",
+      "forme": null,
+      "titre": "Teenage Sex and Death at Camp Miasma",
+      "description": "SÉANCE SPÉCIALE - Jeudi 17 septembre à 20h30 au Lumière Terreaux Séance présentée en partenariat avec Écrans Mixtes",
+      "date_debut": "2026-09-17",
+      "date_fin": "2026-09-17",
+      "precision": "exact",
+      "affiche_url": "https://www.cinemas-lumiere.com/media/affiche-teenage.jpg",
+      "films": [
+        {
+          "titre": "Teenage Sex and Death at Camp Miasma",
+          "dates": []
+        }
+      ],
+      "creneaux": [
+        {
+          "cinema": "Lumière Terreaux",
+          "date": "2026-09-17",
+          "heure": "20:30",
+          "titre_film": "Teenage Sex and Death at Camp Miasma",
+          "invite": "Séance présentée en partenariat avec Écrans Mixtes",
+          "description": null
+        }
+      ]
+    },
+    {
+      "cle": "rencontre|akira|2026-09",
+      "type": "rencontre",
+      "forme": null,
+      "titre": "Akira",
+      "description": "Dans Tokyo détruit par l’atome, Tetsuo est un jeune motard en rébellion contre l’ordre établi. Le jour où il croise un enfant au visage de vieillard, son destin bascule…",
+      "date_debut": "2026-09-19",
+      "date_fin": "2026-09-19",
+      "precision": "exact",
+      "affiche_url": "https://www.cinemas-lumiere.com/media/akira.jpeg",
+      "films": [
+        {
+          "titre": "Akira",
+          "dates": []
+        }
+      ],
+      "creneaux": [
+        {
+          "cinema": "Lumière Terreaux",
+          "date": "2026-09-19",
+          "heure": "22:30",
+          "titre_film": "Akira",
+          "invite": "Soirée animée par Hiba Ziane",
+          "description": null
+        }
+      ]
+    },
+    {
+      "cle": "rencontre|cowboy bebop|2026-09",
+      "type": "rencontre",
+      "forme": null,
+      "titre": "Cowboy Bebop",
+      "description": null,
+      "date_debut": "2026-09-19",
+      "date_fin": "2026-09-19",
+      "precision": "exact",
+      "affiche_url": "https://www.cinemas-lumiere.com/media/cowboy-bebop.jpeg",
+      "films": [
+        {
+          "titre": "Cowboy Bebop",
+          "dates": []
+        }
+      ],
+      "creneaux": [
+        {
+          "cinema": "Lumière Terreaux",
+          "date": "2026-09-19",
+          "heure": "20:00",
+          "titre_film": "Cowboy Bebop",
+          "invite": "Soirée animée par Hiba Ziane",
+          "description": null
+        }
+      ]
+    },
+    {
+      "cle": "festival|festival play it again !|2026-09",
+      "type": "festival",
+      "forme": "festival",
+      "titre": "Festival Play It Again !",
+      "description": "Le festival Play It Again ! est de retour pour sa 12e édition. L'occasion de voir ou revoir sur grand écran des classiques du cinéma en copie restaurée.",
+      "date_debut": "2026-09-19",
+      "date_fin": "2026-09-27",
+      "precision": "exact",
+      "affiche_url": "https://cms-assets.webediamovies.pro/production/945/d16754f63c920d96951ec5f8fe195e8f.jpg",
+      "films": [],
+      "creneaux": [
+        {
+          "cinema": "Le Comoedia",
+          "date": "2026-09-19",
+          "heure": null,
+          "titre_film": "Festival Play It Again !",
+          "invite": null,
+          "description": "Le festival Play It Again ! est de retour pour sa 12e édition. L'occasion de voir ou revoir sur grand écran des classiques du cinéma en copie restaurée."
+        }
+      ]
+    },
+    {
+      "cle": "avant_premiere|fini de rire ! l'humour politique au garde-à-vous ?|2026-09",
+      "type": "avant_premiere",
+      "forme": null,
+      "titre": "Fini de rire ! L'humour politique au garde-à-vous ?",
+      "description": "Une enquête OFF INVESTIGATION. Séance en duplex depuis le cinéma l'Écran de Saint-Denis, présentée par sa directrice, Marine Riou, et suivie d'un échange.",
+      "date_debut": "2026-09-19",
+      "date_fin": "2026-09-19",
+      "precision": "exact",
+      "affiche_url": "https://all.web.img.acsta.net/img/1a/c2/1ac265d227f460e8da6dff7f9659346a.jpg",
+      "films": [
+        {
+          "titre": "Fini de rire ! L'humour politique au garde-à-vous ?",
+          "dates": [
+            "2026-09-19"
+          ]
+        }
+      ],
+      "creneaux": [
+        {
+          "cinema": "Le Comoedia",
+          "date": "2026-09-19",
+          "heure": "20:15",
+          "titre_film": "Fini de rire ! L'humour politique au garde-à-vous ?",
+          "invite": null,
+          "description": "Une enquête OFF INVESTIGATION. Séance en duplex depuis le cinéma l'Écran de Saint-Denis, présentée par sa directrice, Marine Riou, et suivie d'un échange."
+        }
+      ]
+    },
+    {
+      "cle": "avant_premiere|notre salut|2026-09",
+      "type": "avant_premiere",
+      "forme": null,
+      "titre": "Notre salut",
+      "description": "Septembre 1940, le régime de Pétain se met en place. Henri Marre, 49 ans, débarque à Vichy sans le sou, sans contact, loin de sa femme et ses enfants. Il voit dans la nouvelle administration l’opportunité de trouver enfin la place qu’il mérite. Dans sa valise, son traité politique édité à compte d’auteur, Notre Salut, où il défend ses convictions patriotiques et ses méthodes d'ingénieur. Son credo : « gagner en efficacité » pour relever la France de la débâcle. Mais peut-être qu’Henri cherche avant tout à fuir sa propre débâcle…",
+      "date_debut": "2026-09-21",
+      "date_fin": "2026-09-21",
+      "precision": "exact",
+      "affiche_url": "https://www.cinemas-lumiere.com/media/notre-salut.jpeg",
+      "films": [
+        {
+          "titre": "Notre salut",
+          "dates": []
+        }
+      ],
+      "creneaux": [
+        {
+          "cinema": "Lumière Terreaux",
+          "date": "2026-09-21",
+          "heure": "20:30",
+          "titre_film": "Notre salut",
+          "invite": "Séance présentée dans le cadre de la Quinzaine du Mouvement Alternative Non Violente.",
+          "description": null
+        }
+      ]
+    },
+    {
+      "cle": "rencontre|the dog stars|2026-09",
+      "type": "rencontre",
+      "forme": null,
+      "titre": "The Dog Stars",
+      "description": "SÉANCE SPÉCIALE - Mercredi 30 septembre à 20h45 au Lumière Terreaux Séance présentée par l'auteur du livre, Peter Heller. En partenariat avec Quais du Polar",
+      "date_debut": "2026-09-30",
+      "date_fin": "2026-09-30",
+      "precision": "exact",
+      "affiche_url": "https://www.cinemas-lumiere.com/media/the-dog-stars.jpeg",
+      "films": [
+        {
+          "titre": "The Dog Stars",
+          "dates": []
+        }
+      ],
+      "creneaux": [
+        {
+          "cinema": "Lumière Terreaux",
+          "date": "2026-09-30",
+          "heure": "20:45",
+          "titre_film": "The Dog Stars",
+          "invite": "Séance présentée par l'auteur du livre, Peter Heller. En partenariat avec Quais du Polar",
+          "description": null
+        }
+      ]
+    },
+    {
+      "cle": "rencontre|la vita va così|2026-10",
+      "type": "rencontre",
+      "forme": null,
+      "titre": "La vita va così",
+      "description": "SÉANCE SPÉCIALE - Jeudi 1er octobre à 20h30 au Lumière Terreaux Séance présentée par le réalisateur Riccardo Milani. Dans le cadre du festival Italissimo à Lyon en partenariat avec Istituto Italiano di Cultura di Lione.",
+      "date_debut": "2026-10-01",
+      "date_fin": "2026-10-01",
+      "precision": "exact",
+      "affiche_url": "https://www.cinemas-lumiere.com/media/la-vita-va-cosi.jpg",
+      "films": [
+        {
+          "titre": "La vita va così",
+          "dates": []
+        }
+      ],
+      "creneaux": [
+        {
+          "cinema": "Lumière Terreaux",
+          "date": "2026-10-01",
+          "heure": "20:30",
+          "titre_film": "La vita va così",
+          "invite": "Séance présentée par le réalisateur Riccardo Milani. Dans le cadre du festival Italissimo à Lyon en partenariat avec Istituto Italiano di Cultura di Lione.",
+          "description": null
+        }
+      ]
+    },
+    {
+      "cle": "festival|reprises acid - cannes 2026|2026-10",
+      "type": "festival",
+      "forme": "festival",
+      "titre": "Reprises ACID - Cannes 2026",
+      "description": "Découvrez la sélection 2026 de l'ACID, présentée en section parallèle au Festival de Cannes.",
+      "date_debut": "2026-10-02",
+      "date_fin": "2026-10-04",
+      "precision": "exact",
+      "affiche_url": "https://cms-assets.webediamovies.pro/production/945/f281fbafafe26a1e570110d80c8d11f7.jpg",
+      "films": [
+        {
+          "titre": "Dans la Gueule de l'Ogre",
+          "dates": []
+        },
+        {
+          "titre": "La Détention",
+          "dates": []
+        },
+        {
+          "titre": "Mauvaise Étoile",
+          "dates": []
+        },
+        {
+          "titre": "Cœur secret",
+          "dates": []
+        },
+        {
+          "titre": "Virages",
+          "dates": []
+        },
+        {
+          "titre": "Promised Spaces",
+          "dates": []
+        },
+        {
+          "titre": "Living Twice, Dying Thrice",
+          "dates": []
+        },
+        {
+          "titre": "Blaise",
+          "dates": []
+        },
+        {
+          "titre": "Barça Zou",
+          "dates": []
+        }
+      ],
+      "creneaux": [
+        {
+          "cinema": "Le Comoedia",
+          "date": "2026-10-02",
+          "heure": null,
+          "titre_film": null,
+          "invite": null,
+          "description": "Découvrez la sélection 2026 de l'ACID, présentée en section parallèle au Festival de Cannes."
+        }
+      ]
     }
   ]
 }
