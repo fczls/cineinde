@@ -880,7 +880,7 @@ html:not(.motion-ready) a.d-chip.resa:focus-visible .dc-tkt{ opacity:1; }
 .ev-type-seg.dragging{cursor:grabbing;}
 .ev-type-seg.dragging .tb-btn{pointer-events:none;}
 @media(max-width:820px){
-  .ev-type-seg{display:none!important;}
+  .ev-type-wrap{display:none!important;}
   /* Mobile : l'éventail se navigue au swipe et au tap sur une carte latérale
      — pas de flèches (cf. maquette). */
   .ev-arrow{display:none;}
@@ -1932,7 +1932,8 @@ function syncToolbar() {
   // Les deux modes n'ont pas le même sélecteur temporel : slider 7 jours côté
   // Séances, sélecteur de mois côté Évènements. Le composant change avec le mode.
   document.getElementById('monthGroup').classList.toggle('hidden', isSeances);
-  document.getElementById('evTypeSeg').classList.toggle('hidden', isSeances);
+  // Le conteneur, pas la barre seule : sinon ses flèches survivent en mode Séances.
+  document.getElementById('evTypeWrap').classList.toggle('hidden', isSeances);
   document.getElementById('rangeWrap').classList.toggle('show', isSeances && compactView);
   // En 7J la date ne guide plus l'affichage : état inactif (mais toujours cliquable)
   document.getElementById('dayBtn').classList.toggle('inactive', viewMode === 'semaine');

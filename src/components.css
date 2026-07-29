@@ -800,7 +800,7 @@ html:not(.motion-ready) a.d-chip.resa:focus-visible .dc-tkt{ opacity:1; }
 .ev-type-seg.dragging{cursor:grabbing;}
 .ev-type-seg.dragging .tb-btn{pointer-events:none;}
 @media(max-width:820px){
-  .ev-type-seg{display:none!important;}
+  .ev-type-wrap{display:none!important;}
   /* Mobile : l'éventail se navigue au swipe et au tap sur une carte latérale
      — pas de flèches (cf. maquette). */
   .ev-arrow{display:none;}
