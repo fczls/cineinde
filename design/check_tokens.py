@@ -54,6 +54,11 @@ def lint(css: str):
         for m in COLOR_RE.finditer(line):
             if m.group(0) not in COLOR_ALLOWLIST:
                 out.append((n, f"couleur brute `{m.group(0)}` → var(--…) (ou allowlister si one-off)"))
+        # « Playfair Display » n'est qu'un REPLI de Riegraf, pas un choix : un
+        # titre qui l'écrit en clair rate la police de marque, en silence.
+        for m in re.finditer(r"'(Playfair Display|Riegraf)'", line):
+            out.append((n, f"famille `{m.group(1)}` écrite en clair → "
+                           "var(--font-display) ou var(--font-display-italic)"))
         for prop, tok in (("font-size", "--fs-*"), ("border-radius", "--radius-*")):
             for m in re.finditer(rf'{prop}:\s*\d+px', line):
                 out.append((n, f"`{m.group(0)}` en px brut → var({tok})"))

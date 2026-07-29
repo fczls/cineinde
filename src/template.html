@@ -138,11 +138,11 @@
            horizontal et flèches conditionnelles, pour ne jamais sortir de
            l'écran ni chevaucher le logo. -->
       <div class="ev-type-wrap" id="evTypeWrap">
-        <button type="button" class="strip-arrow left hidden" id="evTypeArrowL" aria-label="Faire défiler les types à gauche">
+        <button type="button" class="day-nav-btn" id="evTypeArrowL" aria-label="Faire défiler les types à gauche">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
         </button>
         <div class="tb-seg ev-type-seg" role="group" aria-label="Type d'évènement" id="evTypeSeg"></div>
-        <button type="button" class="strip-arrow right hidden" id="evTypeArrowR" aria-label="Faire défiler les types à droite">
+        <button type="button" class="day-nav-btn" id="evTypeArrowR" aria-label="Faire défiler les types à droite">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
         </button>
       </div>
@@ -1964,10 +1964,14 @@ function monthsWithEvents(events, cinema, type, aujourdhui) {
 // reste imprécis), du plus long au plus court ; puis le bloc daté.
 // @test-export:sortEvents
 function sortEvents(events, mois) {
+  // Bloc large = ce qui ENJAMBE le mois affiché (commence avant, finit après).
+  // La précision n'entre plus dans le critère : depuis que la jointure date
+  // tout, `en_cours` couvre aussi des ressorties de quelques jours, qui
+  // remontaient en tête de liste devant des évènements bien plus larges.
   const large = ev => {
-    if (['saison','mois','en_cours'].includes(ev.precision)) return true;
     const d = ev.date_debut, f = ev.date_fin;
-    if (!d || !f) return true;
+    if (!d && !f) return true;
+    if (!d || !f) return false;
     return evMoisDe(d) < mois && evMoisDe(f) > mois;
   };
   const duree = ev => {
@@ -2340,6 +2344,8 @@ function evFilmToutesDates(ev, f) {
   return [...new Set([...(f.dates || []), ...dates])].sort();
 }
 
+const EV_ETAT_AVENIR = 'Détails de séance à venir';
+
 function evFilmEtat(f, dates) {
   dates = dates || f.dates || [];
   const today = dKey(new Date());
@@ -2347,7 +2353,7 @@ function evFilmEtat(f, dates) {
   const connu = allFilms.find(x => normalizeTitle(x.titre) === normalizeTitle(f.titre));
   if (connu && futures.length) return { label: 'Détails et séances', titre: connu.titre };
   if (dates.length && !futures.length) return { label: 'Séance passée', titre: null };
-  return { label: 'Détails de séance à venir', titre: null };
+  return { label: EV_ETAT_AVENIR, titre: null };
 }
 
 function evFilmAffiche(f) {
@@ -2402,35 +2408,44 @@ function renderEventDetail(ev) {
     .map(f => ({ ...f, _dates: evFilmToutesDates(ev, f) }))
     .sort((a, b) => (a._dates[0] || '9999').localeCompare(b._dates[0] || '9999'));
 
-  // Deux sections : ce sur quoi le lecteur peut agir d'abord, le reste ensuite.
-  const programmes = films.filter(f => f._dates.length);
-  const aVenir = films.filter(f => !f._dates.length);
+  // Deux sections, départagées par l'ÉTAT et non par la présence de dates : un
+  // film peut avoir une date annoncée sans que la salle ait publié sa séance
+  // (« Ma T'Août Première » : cinq dimanches datés, aucune séance détaillée).
+  // C'est bien « détails à venir » dans les deux cas, et le titre de section
+  // évite alors de répéter la mention sur chaque ligne.
+  const aVenir = films.filter(f => evFilmEtat(f, f._dates).label === EV_ETAT_AVENIR);
+  const programmes = films.filter(f => evFilmEtat(f, f._dates).label !== EV_ETAT_AVENIR);
 
-  const ligne = f => {
+  const ligne = (f, sousTitreSection) => {
     const etat = evFilmEtat(f, f._dates);
     const src = evFilmAffiche(f);
     const dates = evFilmDates(f._dates);
     // Sans affiche, la ligne se condense au lieu d'aligner un cadre vide.
-    return `<div class="ev-film${src ? '' : ' is-condense'}">
+    // Toute la carte ouvre la fiche quand il y en a une : le « + » n'est plus
+    // qu'une affordance visuelle, comme sur les lignes de la programmation.
+    const ouvre = etat.titre
+      ? ` role="button" tabindex="0" onclick="openFilm('${esc(etat.titre)}')"`
+      + ` onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openFilm('${esc(etat.titre)}')}"`
+      + ` aria-label="Ouvrir la fiche de ${escAttr(f.titre)}"` : '';
+    return `<div class="ev-film${src ? '' : ' is-condense'}${etat.titre ? ' is-ouvrable' : ''}"${ouvre}>
       ${src ? `<div class="ev-film-visuel"><img src="${escAttr(src)}" alt="" loading="lazy" onerror="evCardFallback(this)"></div>` : ''}
       <div class="ev-film-info">
         <div class="ev-film-titre">${escHtml(f.titre)}</div>
         ${dates ? `<div class="ev-film-dates">${escHtml(dates)}</div>` : ''}
         ${etat.titre ? `<div class="ev-film-etat">${escHtml(etat.label)}</div>
-          <button type="button" class="ev-plus ev-plus-sm ev-film-plus"
-            onclick="openFilm('${esc(etat.titre)}')" aria-label="Ouvrir la fiche de ${escAttr(f.titre)}">
+          <span class="ev-plus ev-plus-sm ev-film-plus" aria-hidden="true">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg>
-          </button>`
-        : (dates ? `<div class="ev-film-etat is-inactif">${escHtml(etat.label)}</div>` : '')}
+          </span>`
+        : (sousTitreSection ? '' : `<div class="ev-film-etat is-inactif">${escHtml(etat.label)}</div>`)}
       </div>
     </div>`;
   };
 
   const filmsHtml =
-    (programmes.length ? `<div class="ev-films">${programmes.map(ligne).join('')}</div>` : '')
+    (programmes.length ? `<div class="ev-films">${programmes.map(f => ligne(f, false)).join('')}</div>` : '')
     + (aVenir.length
       ? `<div class="ev-films-head">Détails des séances à venir</div>
-         <div class="ev-films ev-films--condense">${aVenir.map(ligne).join('')}</div>`
+         <div class="ev-films ev-films--condense">${aVenir.map(f => ligne(f, true)).join('')}</div>`
       : '');
 
   document.getElementById('detailEmpty').classList.add('hidden');
@@ -2627,8 +2642,13 @@ function initStrip(stripId, arrLId, arrRId) {
 
   function update() {
     const max = strip.scrollWidth - strip.clientWidth;
-    arrL.classList.toggle('hidden', max <= 4 || strip.scrollLeft <= 4);
-    arrR.classList.toggle('hidden', max <= 4 || strip.scrollLeft >= max - 4);
+    const cacheG = max <= 4 || strip.scrollLeft <= 4;
+    const cacheD = max <= 4 || strip.scrollLeft >= max - 4;
+    // Deux grammaires de flèche coexistent : `.strip-arrow` se masque par
+    // `.hidden`, `.day-nav-btn` s'ouvre en largeur par `.show`. On pilote les
+    // deux, ce qui laisse le choix du composant au markup.
+    arrL.classList.toggle('hidden', cacheG); arrL.classList.toggle('show', !cacheG);
+    arrR.classList.toggle('hidden', cacheD); arrR.classList.toggle('show', !cacheD);
   }
   strip.addEventListener('scroll', update, { passive: true });
   window.addEventListener('resize', update);

@@ -144,6 +144,11 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
      borne à l'espace réellement libre entre les deux (--nav-gutter, mesuré par
      syncNavOffset). Le seul groupe élastique — le filtre par type — absorbe la
      contrainte en défilant sous ses flèches. */
+  /* Étendue, la toolbar occupe sa propre rangée : elle est bornée à la largeur
+     disponible. Compacte, elle partage la rangée du logo et de « À propos » :
+     on retire en plus les deux gouttières. Dans les deux cas c'est le filtre
+     par type — seul groupe élastique — qui absorbe et défile. */
+  .toolbar{max-width:100%;}
   .nav-shell.compact .toolbar{max-width:calc(100% - 2 * var(--nav-gutter, 220px));}
 }
 
@@ -154,7 +159,7 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
   border-radius:var(--radius-xl);padding:32px 32px 28px;position:relative;
   box-shadow:0 24px 80px var(--scrim-xl);
 }
-.about-modal h2{font-family:'Playfair Display',serif;font-size:var(--fs-2xl);font-weight:700;margin-bottom:14px;}
+.about-modal h2{font-family:var(--font-display);font-size:var(--fs-2xl);font-weight:normal;margin-bottom:14px;}
 .about-modal p{font-size:var(--fs-md);line-height:1.8;color:var(--text-2);margin-bottom:10px;}
 .about-close{
   position:absolute;top:14px;right:14px;width:36px;height:36px;border-radius:var(--radius-pill);
@@ -217,7 +222,7 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
 }
 .day-dropdown-item:hover{background:var(--border);color:var(--text);}
 .day-dropdown-item.active{background:var(--gold);color:var(--bg2);}
-.day-dropdown-item .d-num{font-family:'Playfair Display',serif;font-weight:700;min-width:28px;}
+.day-dropdown-item .d-num{font-family:var(--font-display);font-weight:normal;min-width:28px;}
 
 /* ── DROPDOWNS mobiles (cinémas + burger) ── */
 .mv-dropdown{
@@ -445,7 +450,7 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
 /* card body — col 2, row 1 */
 .card-body{grid-column:2;grid-row:1;min-width:0;padding-top:0px;padding-bottom:0px;}
 .card-header{display:flex;flex-direction:column;gap:0;margin-bottom:0;}
-.card-title{font-family:'Riegraf','Playfair Display',serif;font-size:clamp(var(--fs-2xl),calc(4vw - 4px),var(--fs-3xl));font-weight:normal;color:var(--text);line-height:1.15;padding-top:16px;}
+.card-title{font-family:var(--font-display);font-size:clamp(var(--fs-2xl),calc(4vw - 4px),var(--fs-3xl));font-weight:normal;color:var(--text);line-height:1.15;padding-top:16px;}
 .card-meta{font-size:var(--fs-lg);color:rgba(207,207,207,1);margin-top:8px;line-height:1.5;}
 .card-director{font-size:var(--fs-md);color:var(--text-2);margin-top:16px;line-height:1.4;}
 .card-cast{font-size:var(--fs-md);color:var(--text-3);margin-top:8px;line-height:1.4;}
@@ -482,7 +487,7 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
   background:var(--bg2);text-align:center;
 }
 .empty-day-icon{font-size:var(--fs-2xl);margin-bottom:12px;}
-.empty-day-title{font-family:'Playfair Display',serif;font-size:var(--fs-lg);font-style:italic;color:var(--text-2);margin-bottom:6px;}
+.empty-day-title{font-family:var(--font-display-italic);font-size:var(--fs-lg);font-style:italic;color:var(--text-2);margin-bottom:6px;}
 .empty-day-sub{font-size:var(--fs-sm);color:var(--text-3);line-height:1.7;margin-bottom:18px;}
 .empty-day-btn{
   display:inline-flex;align-items:center;gap:8px;
@@ -498,7 +503,7 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
 
 .detail-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:16px;color:var(--text-3);font-size:var(--fs-md);text-align:center;padding:40px;}
 .detail-empty svg{opacity:.1;margin-bottom:4px;}
-.detail-empty strong{font-family:'Playfair Display',serif;font-size:var(--fs-lg);color:var(--text-2);font-weight:400;font-style:italic;}
+.detail-empty strong{font-family:var(--font-display-italic);font-size:var(--fs-lg);color:var(--text-2);font-weight:400;font-style:italic;}
 
 .d-hero{position:relative;height:264px;overflow:hidden;z-index:0;flex-shrink:0;}
 .d-hero::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(17,16,16,.32) 0%,rgba(17,16,16,0) 32%,rgba(17,16,16,.4) 78%,var(--bg) 100%);z-index:1;pointer-events:none;}
@@ -512,7 +517,7 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
 .detail-visual .dv-img{width:100%;height:100%;object-fit:cover;display:block;}
 .detail-visual .dv-scrim{position:absolute;inset:0;background:var(--scrim-lg);pointer-events:none;}
 .d-score{flex-shrink:0;background:var(--bg3);border:1px solid rgba(135,135,135,.77);border-radius:var(--radius-md);padding:10px 14px;text-align:center;}
-.d-score-num{font-family:'Playfair Display',serif;font-size:var(--fs-2xl);font-weight:700;color:var(--gold);line-height:1;display:block;}
+.d-score-num{font-family:var(--font-display);font-size:var(--fs-2xl);font-weight:normal;color:var(--gold);line-height:1;display:block;}
 .d-score-lbl{font-size:var(--fs-xs);color:var(--text-2);letter-spacing:.08em;text-transform:uppercase;}
 /* Centrage par la propriété `translate` (et non `transform`) : Motion écrit dans
    `transform` pour ranger le bouton à droite quand le visuel se réduit — les deux
@@ -522,8 +527,8 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
 
 .d-body{position:relative;z-index:1;margin-top:0;padding:24px 28px 40px;}
 .d-title-row{display:flex;align-items:flex-end;gap:16px;margin-bottom:24px;}
-.d-title{font-family:'Riegraf','Playfair Display',serif;font-size:var(--fs-3xl);font-weight:normal;line-height:1.12;flex:1;min-width:0;color:var(--text);}
-.d-orig{font-family:'Playfair Display',serif;font-style:italic;font-size:var(--fs-lg);color:var(--text-3);margin-bottom:18px;}
+.d-title{font-family:var(--font-display);font-size:var(--fs-3xl);font-weight:normal;line-height:1.12;flex:1;min-width:0;color:var(--text);}
+.d-orig{font-family:var(--font-display-italic);font-style:italic;font-size:var(--fs-lg);color:var(--text-3);margin-bottom:18px;}
 .d-crew{display:flex;flex-wrap:wrap;gap:20px;margin-bottom:20px;}
 .d-ci-cast{flex-basis:100%;}
 .d-ci .lbl{font-size:var(--fs-sm);letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);display:block;margin-bottom:4px;}
@@ -634,7 +639,7 @@ html:not(.motion-ready) a.d-chip.resa:focus-visible .dc-tkt{ opacity:1; }
 
 /* Résumé du mois — segments typés par le modèle : `strong` = mois, types et
    récurrences ; `mute` = tout le reste. */
-.ev-summary{font-size:var(--fs-xl);line-height:1.7;text-align:left;margin-bottom:32px;}
+.ev-summary{font-size:var(--fs-xl);line-height:1.7;text-align:left;margin-bottom:64px;}
 .ev-seg-strong{color:var(--text);}
 .ev-seg-mute{color:var(--text-3);}
 .ev-ico{
@@ -651,7 +656,7 @@ html:not(.motion-ready) a.d-chip.resa:focus-visible .dc-tkt{ opacity:1; }
   font-family:var(--font-display-italic);font-style:italic;
   font-size:var(--fs-md);color:var(--text-2);
 }
-.ev-label-list{margin-top:40px;}
+.ev-label-list{margin-top:80px;}
 
 /* ── Éventail de la sélection ──
    Trois niveaux de profondeur symétriques : le décalage part du centre, la
@@ -693,7 +698,7 @@ html:not(.motion-ready) a.d-chip.resa:focus-visible .dc-tkt{ opacity:1; }
 
 .ev-meta{text-align:center;margin-bottom:20px;}
 .ev-meta-sous{font-family:var(--font-display-italic);font-style:italic;font-size:var(--fs-lg);color:var(--text-2);margin-bottom:6px;}
-.ev-meta-titre{font-family:'Playfair Display',serif;font-weight:700;font-size:var(--fs-2xl);color:var(--text);line-height:1.25;}
+.ev-meta-titre{font-family:var(--font-display);font-weight:normal;font-size:var(--fs-2xl);color:var(--text);line-height:1.25;}
 .ev-meta-dates{font-size:var(--fs-sm);color:var(--text-2);margin-top:8px;}
 
 .ev-fan-nav{display:flex;align-items:center;justify-content:center;gap:16px;}
@@ -705,12 +710,12 @@ html:not(.motion-ready) a.d-chip.resa:focus-visible .dc-tkt{ opacity:1; }
 }
 .ev-arrow:hover{color:var(--text);border-color:var(--overlay-lg);}
 .ev-plus{
-  width:48px;height:48px;border-radius:var(--radius-pill);
-  border:1px solid var(--border2);background:var(--bg3);color:var(--text);
+  width:96px;height:96px;border-radius:var(--radius-pill);
+  border:none;background:var(--bg3);color:var(--text);
   display:flex;align-items:center;justify-content:center;cursor:pointer;
   transition:background .18s,border-color .18s,transform .18s;
 }
-.ev-plus:hover{background:var(--bg4);border-color:var(--overlay-lg);transform:scale(1.04);}
+.ev-plus:hover{background:var(--bg4);transform:scale(1.04);}
 .ev-arrow:focus-visible,.ev-plus:focus-visible,.ev-row:focus-visible{outline:2px solid var(--gold);outline-offset:2px;}
 
 /* ── Liste du mois ──
@@ -735,7 +740,7 @@ html:not(.motion-ready) a.d-chip.resa:focus-visible .dc-tkt{ opacity:1; }
 .ev-rule{flex:1 1 24px;min-width:24px;height:1px;background:var(--border);}
 .ev-plus-sm{
   position:absolute;right:0;top:8px;width:32px;height:32px;
-  background:var(--bg3);color:var(--text-2);border:1px solid var(--border);
+  background:var(--bg3);color:var(--text-2);border:none;
 }
 
 /* ── Niveau 2 : détail d'un évènement ──
@@ -754,20 +759,27 @@ html:not(.motion-ready) a.d-chip.resa:focus-visible .dc-tkt{ opacity:1; }
 .ev-film-visuel img{width:100%;height:auto;display:block;}
 /* Sans affiche, la ligne se condense : un cadre vide ne dit rien et casse le rythme. */
 .ev-film.is-condense{grid-template-columns:1fr;gap:0;}
+/* La carte entière ouvre la fiche ; le « + » n'est plus qu'une affordance. */
+.ev-film.is-ouvrable{cursor:pointer;border-radius:var(--radius-md);transition:background .18s;}
+.ev-film.is-ouvrable:hover{background:var(--overlay-sm);}
+.ev-film.is-ouvrable:hover .ev-film-titre{color:var(--gold);}
+.ev-film.is-ouvrable:hover .ev-plus-sm{background:var(--bg4);color:var(--text);}
+.ev-film.is-ouvrable:focus-visible{outline:2px solid var(--gold);outline-offset:2px;}
+.ev-film-titre{transition:color .18s;}
 .ev-films--condense{gap:10px;}
 .ev-films-head{
   margin-top:32px;padding-bottom:8px;border-bottom:1px solid var(--border);
   font-size:var(--fs-sm);letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);
 }
 .ev-films--condense .ev-film-titre{font-size:var(--fs-lg);}
-.ev-film-titre{font-family:'Playfair Display',serif;font-weight:700;font-size:var(--fs-xl);line-height:1.25;}
+.ev-film-titre{font-family:var(--font-display);font-weight:normal;font-size:var(--fs-xl);line-height:1.25;}
 .ev-film-dates{font-size:var(--fs-md);color:var(--text-3);margin-top:6px;}
 .ev-film-etat{font-size:var(--fs-md);color:var(--text);margin-top:10px;}
 /* Séance passée / non encore annoncée : information, pas affordance. */
 .ev-film-etat.is-inactif{color:var(--text-3);}
 .ev-film-plus{position:static;margin-top:12px;}
 
-.ev-next-wrap{display:flex;justify-content:center;margin-top:40px;}
+.ev-next-wrap{display:flex;justify-content:center;margin-top:80px;}
 .ev-next{
   width:100%;max-width:320px;padding:16px 24px;border-radius:var(--radius-pill);
   border:1px solid var(--border);background:var(--bg2);color:var(--text-3);
@@ -793,7 +805,7 @@ html:not(.motion-ready) a.d-chip.resa:focus-visible .dc-tkt{ opacity:1; }
      — pas de flèches (cf. maquette). */
   .ev-arrow{display:none;}
   .ev-col{padding:20px 12px 40px;}
-  .ev-summary{font-size:var(--fs-lg);margin-bottom:24px;}
+  .ev-summary{font-size:var(--fs-lg);margin-bottom:48px;}
   .ev-fan{height:240px;}
   .ev-meta-titre{font-size:var(--fs-xl);}
 }

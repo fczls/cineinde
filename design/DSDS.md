@@ -87,7 +87,11 @@ Sans convention écrite, chaque nouveau composant — surtout quand c'est un age
 ### Typographie & rayons
 
 - **Un seul `--fs-3xl` par vue** (taille display, réservée au titre de fiche). Ne pas empiler plusieurs tailles display.
-- **Familles (`--font-*`).** `--font-display-italic` = Riegraf italique, voix éditoriale (le séparateur de liste). Toujours accompagné de `font-style:italic` — c'est ce qui déclenche la fonte italique *et* aligne le repli Playfair. Réservé aux respirations narratives : jamais pour de l'UI fonctionnelle.
+- **Familles (`--font-*`) — la police d'affichage ne s'écrit jamais en clair.**
+  - `--font-display` = **Riegraf romain**, pour **tous les titres sans exception** (fiche film, évènement, section, modale).
+  - `--font-display-italic` = Riegraf italique, voix éditoriale (étiquettes de section, mentions). Toujours accompagné de `font-style:italic` — c'est ce qui déclenche la fonte italique *et* aligne le repli.
+  - ⚠️ **« Playfair Display » est un REPLI de chargement, pas un choix typographique.** Un titre qui l'écrit en dur rate la police de marque, en silence et pour toujours. Le lint refuse désormais toute famille littérale (`'Playfair Display'`, `'Riegraf'`).
+  - ⚠️ **Riegraf n'a qu'une graisse.** Poser `font-weight:normal` : un `700` déclenche un gras synthétique par-dessus une fonte déjà grasse (et c'est ce qui faisait retomber certains titres sur le repli).
 - **Un composant = un palier de rayon cohérent.** `--radius-pill` uniquement pour du pleinement arrondi (pills, boutons carrés → cercle).
 
 ### Espacements
