@@ -2116,6 +2116,45 @@ def scrape_zola() -> list[dict]:
     return films
 
 
+def scrape_lumiere_multi(depart: "date | None" = None, semaines: int = 8) -> list:
+    """
+    Scrape Lumière sur N semaines consécutives et fusionne par (titre, salle).
+
+    ⚠️ Contrairement à ce que laissait craindre l'invariant I8, une semaine
+    future ne contient PAS un programme complet : les salles ne publient leur
+    grille qu'une semaine à l'avance. Mesuré le 2026-07-29 : 34 films pour la
+    semaine courante, puis 2 à 3 par semaine — et ce sont exactement les séances
+    d'ÉVÉNEMENTS déjà annoncées (avant-premières du lundi, cycles, rétrospectives).
+    C'est ce qui fait passer un film d'événement de « détails à venir » à une
+    vraie fiche, pour une douzaine de lignes en base.
+    """
+    depart = depart or get_last_wednesday()
+    fusion: dict = {}
+    for n in range(max(1, semaines)):
+        semaine = depart + timedelta(days=7 * n)
+        try:
+            films = scrape_lumiere(week_date=semaine)
+        except RuntimeError as e:
+            log.warning(f"Lumière semaine {semaine} inaccessible : {e}")
+            continue
+        for f in films:
+            cle = (_normalize_title_key(f.get("titre") or ""), f.get("cinema"))
+            if cle not in fusion:
+                fusion[cle] = f
+                continue
+            # Même film, même salle, semaine suivante : on ajoute ses séances.
+            connues = {(s["date"], s["heure"]) for s in fusion[cle]["seances"]}
+            for s in f["seances"]:
+                if (s["date"], s["heure"]) not in connues:
+                    fusion[cle]["seances"].append(s)
+            fusion[cle]["seances"].sort(key=lambda x: (x["date"], x["heure"]))
+        if n:
+            log.info(f"  Lumière +{n} sem ({semaine}) : {len(films)} films annoncés")
+    total = sum(len(f["seances"]) for f in fusion.values())
+    log.info(f"Lumière: {len(fusion)} films, {total} séances sur {semaines} semaine(s)")
+    return list(fusion.values())
+
+
 # ═════════════════════════════════════════════════════════════════════════
 # ÉVÉNEMENTS — avant-premières, rencontres, séances spéciales, festivals
 # ═════════════════════════════════════════════════════════════════════════
@@ -2421,6 +2460,34 @@ def _new_event(**kw) -> dict:
 
 # ── Comoedia ──────────────────────────────────────────────────────────────
 
+_COMOEDIA_FILM_CACHE: dict = {}
+
+
+def comoedia_film_meta(slug: str) -> dict:
+    """
+    Titre canonique et affiche d'un film Comoedia, depuis sa page-data.
+
+    Le slug vient du lien posé par la fiche événement elle-même : l'affiche est
+    donc CERTAINE, sans appariement flou (contrairement à une recherche par
+    titre). C'est ce qui donne une affiche aux films dont la semaine n'est pas
+    encore programmée — la majorité, au-delà de la semaine courante.
+    """
+    if slug in _COMOEDIA_FILM_CACHE:
+        return _COMOEDIA_FILM_CACHE[slug]
+    meta: dict = {}
+    try:
+        raw = fetch(f"{URL_COMOEDIA_BASE}/page-data/films/{slug}/page-data.json", timeout=15)
+        film = json.loads(raw)["result"]["data"].get("movie") or {}
+        if film.get("title"):
+            meta["titre"] = film["title"].strip()
+        if film.get("poster"):
+            meta["affiche"] = film["poster"]
+    except Exception as e:
+        log.debug(f"  Comoedia film {slug} illisible : {e}")
+    _COMOEDIA_FILM_CACHE[slug] = meta
+    return meta
+
+
 def _comoedia_event_films(desc_html: str) -> tuple:
     """
     Films et créneaux d'une description Comoedia.
@@ -2445,13 +2512,17 @@ def _comoedia_event_films(desc_html: str) -> tuple:
                 continue
             slug_m = re.search(r"/films/([^/?#\"]+)", href)
             slug = slug_m.group(1) if slug_m else ""
-            titre = _html_to_text(inner) or _deslugify(slug)
+            # La page du film donne le titre canonique et l'affiche ; le libellé
+            # du lien n'est qu'un repli (le Comoedia titre parfois en capitales).
+            meta = comoedia_film_meta(slug) if slug else {}
+            titre = meta.get("titre") or _html_to_text(inner) or _deslugify(slug)
             if not titre:
                 continue
             key = _normalize_title_key(titre)
             d_m = re.search(r"[?&]date=(\d{4}-\d{2}-\d{2})", href)
             d_val = d_m.group(1) if d_m else None
-            entry = films.setdefault(key, {"titre": titre, "dates": []})
+            entry = films.setdefault(key, {"titre": titre, "dates": [],
+                                           "affiche": meta.get("affiche")})
             if d_val and d_val not in entry["dates"]:
                 entry["dates"].append(d_val)
             if d_val:
@@ -2893,6 +2964,7 @@ def _fusionne_paire(a: dict, b: dict) -> dict:
         if k in connus:
             cible = next(x for x in films if _normalize_title_key(x["titre"]) == k)
             cible["dates"] = sorted(set(cible.get("dates") or []) | set(f.get("dates") or []))
+            cible["affiche"] = cible.get("affiche") or f.get("affiche")
         else:
             connus.add(k)
             films.append(dict(f))
@@ -3322,7 +3394,10 @@ def upsert_events_to_supabase(events: list, force_resume: bool = False) -> None:
             lignes_films.append({
                 "evenement_id": ev_id, "film_id": connu["id"] if connu else None,
                 "titre": f["titre"], "titre_key": key,
-                "affiche_url": (connu or {}).get("poster"), "ordre": i,
+                # Poster TMDB si le film est en base, sinon l'affiche donnée par
+                # la source de l'événement (certaine : le lien vient de la fiche).
+                "affiche_url": (connu or {}).get("poster") or f.get("affiche"),
+                "ordre": i,
             })
         if lignes_films:
             try:
@@ -3454,7 +3529,8 @@ def events_public(events: list) -> list:
         "titre": ev["titre"], "description": ev.get("description"),
         "date_debut": ev.get("date_debut"), "date_fin": ev.get("date_fin"),
         "precision": ev.get("precision"), "affiche_url": ev.get("affiche_url"),
-        "films": [{"titre": f["titre"], "dates": sorted(f.get("dates") or [])}
+        "films": [{"titre": f["titre"], "dates": sorted(f.get("dates") or []),
+                   "affiche": f.get("affiche")}
                   for f in ev.get("films") or []],
         "creneaux": [{k: c.get(k) for k in
                       ("cinema", "date", "heure", "titre_film", "invite", "description")}
@@ -3649,8 +3725,17 @@ def _extract_seance(node: dict, version_defaut: str) -> dict | None:
 
 
 def _normalize_title_key(titre: str) -> str:
-    """Clé normalisée pour regrouper les variantes (ex. Le son / Le Son des souvenirs)."""
-    return re.sub(r"\s+", " ", (titre or "").strip().lower())
+    """
+    Clé normalisée pour regrouper les variantes (ex. Le son / Le Son des souvenirs).
+
+    ⚠️ L'apostrophe typographique est ramenée à l'apostrophe droite : les sources
+    mélangent les deux d'une page à l'autre (« Le Monde à l’envers » sur la page
+    événement, « Le monde à l'envers » sur la fiche film), et sans ça le même
+    film compte pour deux — pas de rapprochement, donc pas d'affiche ni de lien
+    vers la fiche. Miroir front : `normalizeTitle` (contrat C3).
+    """
+    t = (titre or "").strip().lower().replace("’", "'").replace("ʼ", "'")
+    return re.sub(r"\s+", " ", t)
 
 
 def enrich_omdb(films: list[dict]) -> list[dict]:
@@ -3953,6 +4038,9 @@ def main():
                         help="URL directe du PDF Comoedia (pour test)")
     parser.add_argument("--lumiere-week", default=None, metavar="YYYY-MM-DD",
                         help="Date du mercredi de la semaine à scraper pour Lumière (ex: 2026-03-25)")
+    parser.add_argument("--lumiere-weeks", type=int, default=8, metavar="N",
+                        help="Nombre de semaines Lumière à scraper d'affilée (défaut 8) — "
+                             "les semaines futures ne portent que les séances déjà annoncées")
     # Rétrocompatibilité : --file était l'ancien chemin HTML
     parser.add_argument("--file",       default=None, help=argparse.SUPPRESS)
     args = parser.parse_args()
@@ -3999,7 +4087,9 @@ def main():
             except ValueError:
                 log.error(f"--lumiere-week invalide : '{args.lumiere_week}' (attendu YYYY-MM-DD)")
                 sys.exit(1)
-        lumiere_films = scrape_lumiere(week_date=lumiere_week_override)
+        lumiere_films = scrape_lumiere_multi(
+            depart=lumiere_week_override,
+            semaines=1 if lumiere_week_override else max(1, args.lumiere_weeks))
 
     # 2bis. Scraping Le Zola
     zola_films: list[dict] = []

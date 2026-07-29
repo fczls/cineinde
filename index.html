@@ -826,7 +826,14 @@ html:not(.motion-ready) a.d-chip.resa:focus-visible .dc-tkt{ opacity:1; }
 .ev-film{display:grid;grid-template-columns:120px 1fr;gap:16px;align-items:start;}
 .ev-film-visuel{border-radius:var(--radius-md);overflow:hidden;background:var(--bg2);line-height:0;}
 .ev-film-visuel img{width:100%;height:auto;display:block;}
-.ev-film-noaff{display:block;width:100%;padding-top:148%;background:var(--bg3);}
+/* Sans affiche, la ligne se condense : un cadre vide ne dit rien et casse le rythme. */
+.ev-film.is-condense{grid-template-columns:1fr;gap:0;}
+.ev-films--condense{gap:10px;}
+.ev-films-head{
+  margin-top:32px;padding-bottom:8px;border-bottom:1px solid var(--border);
+  font-size:var(--fs-sm);letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);
+}
+.ev-films--condense .ev-film-titre{font-size:var(--fs-lg);}
 .ev-film-titre{font-family:'Playfair Display',serif;font-weight:700;font-size:var(--fs-xl);line-height:1.25;}
 .ev-film-dates{font-size:var(--fs-md);color:var(--text-3);margin-top:6px;}
 .ev-film-etat{font-size:var(--fs-md);color:var(--text);margin-top:10px;}
@@ -1436,7 +1443,11 @@ function detailChipHtml(s, past, soon) {
   return '<div class="d-chip' + cls + '"><span class="dc-time">' + timeH + '</span><span class="cv">' + verH + '</span></div>';
 }
 // Clé normalisée pour déduplication (même film à Comoedia/Lumière avec variantes de casse)
-const normalizeTitle = t => (t||'').toLowerCase().trim().replace(/\s+/g,' ');
+// ⚠️ Miroir de `_normalize_title_key` (back) — contrat C3, à garder en phase.
+// L'apostrophe typographique est ramenée à l'apostrophe droite : les sources
+// mélangent les deux d'une page à l'autre, et sans ça le même film compte pour
+// deux (ni affiche, ni lien vers la fiche).
+const normalizeTitle = t => (t||'').toLowerCase().trim().replace(/[’ʼ]/g,"'").replace(/\s+/g,' ');
 // Clé de regroupement « Tous les cinémas » : l'imdbId est l'identifiant
 // canonique (aligné sur la dédup back par imdb_id) → il fusionne les variantes
 // de casse ET sépare les vrais homonymes (ex. La Chaleur 1938 vs 2026, imdbId
@@ -3432,25 +3443,36 @@ function renderEventDetail(ev) {
     .map(f => ({ ...f, _dates: evFilmToutesDates(ev, f) }))
     .sort((a, b) => (a._dates[0] || '9999').localeCompare(b._dates[0] || '9999'));
 
-  const filmsHtml = films.map(f => {
+  // Deux sections : ce sur quoi le lecteur peut agir d'abord, le reste ensuite.
+  const programmes = films.filter(f => f._dates.length);
+  const aVenir = films.filter(f => !f._dates.length);
+
+  const ligne = f => {
     const etat = evFilmEtat(f, f._dates);
     const src = evFilmAffiche(f);
     const dates = evFilmDates(f._dates);
-    return `<div class="ev-film">
-      <div class="ev-film-visuel">${src
-        ? `<img src="${escAttr(src)}" alt="" loading="lazy" onerror="evCardFallback(this)">`
-        : '<span class="ev-film-noaff"></span>'}</div>
+    // Sans affiche, la ligne se condense au lieu d'aligner un cadre vide.
+    return `<div class="ev-film${src ? '' : ' is-condense'}">
+      ${src ? `<div class="ev-film-visuel"><img src="${escAttr(src)}" alt="" loading="lazy" onerror="evCardFallback(this)"></div>` : ''}
       <div class="ev-film-info">
         <div class="ev-film-titre">${escHtml(f.titre)}</div>
         ${dates ? `<div class="ev-film-dates">${escHtml(dates)}</div>` : ''}
-        <div class="ev-film-etat${etat.titre ? '' : ' is-inactif'}">${escHtml(etat.label)}</div>
-        ${etat.titre ? `<button type="button" class="ev-plus ev-plus-sm ev-film-plus"
+        ${etat.titre ? `<div class="ev-film-etat">${escHtml(etat.label)}</div>
+          <button type="button" class="ev-plus ev-plus-sm ev-film-plus"
             onclick="openFilm('${esc(etat.titre)}')" aria-label="Ouvrir la fiche de ${escAttr(f.titre)}">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg>
-          </button>` : ''}
+          </button>`
+        : (dates ? `<div class="ev-film-etat is-inactif">${escHtml(etat.label)}</div>` : '')}
       </div>
     </div>`;
-  }).join('');
+  };
+
+  const filmsHtml =
+    (programmes.length ? `<div class="ev-films">${programmes.map(ligne).join('')}</div>` : '')
+    + (aVenir.length
+      ? `<div class="ev-films-head">Détails des séances à venir</div>
+         <div class="ev-films ev-films--condense">${aVenir.map(ligne).join('')}</div>`
+      : '');
 
   document.getElementById('detailEmpty').classList.add('hidden');
   document.querySelector('.app').classList.add('has-detail');
@@ -3467,7 +3489,7 @@ function renderEventDetail(ev) {
       <div class="d-title">${escHtml(ev.titre)}</div>
       <div class="ev-pills">${pills}</div>
       ${ev.description ? `<p class="d-synopsis">${escHtml(ev.description)}</p>` : ''}
-      <div class="ev-films">${filmsHtml}</div>
+      ${filmsHtml}
     </div>`;
 }
 

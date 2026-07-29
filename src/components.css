@@ -750,7 +750,14 @@ html:not(.motion-ready) a.d-chip.resa:focus-visible .dc-tkt{ opacity:1; }
 .ev-film{display:grid;grid-template-columns:120px 1fr;gap:16px;align-items:start;}
 .ev-film-visuel{border-radius:var(--radius-md);overflow:hidden;background:var(--bg2);line-height:0;}
 .ev-film-visuel img{width:100%;height:auto;display:block;}
-.ev-film-noaff{display:block;width:100%;padding-top:148%;background:var(--bg3);}
+/* Sans affiche, la ligne se condense : un cadre vide ne dit rien et casse le rythme. */
+.ev-film.is-condense{grid-template-columns:1fr;gap:0;}
+.ev-films--condense{gap:10px;}
+.ev-films-head{
+  margin-top:32px;padding-bottom:8px;border-bottom:1px solid var(--border);
+  font-size:var(--fs-sm);letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);
+}
+.ev-films--condense .ev-film-titre{font-size:var(--fs-lg);}
 .ev-film-titre{font-family:'Playfair Display',serif;font-weight:700;font-size:var(--fs-xl);line-height:1.25;}
 .ev-film-dates{font-size:var(--fs-md);color:var(--text-3);margin-top:6px;}
 .ev-film-etat{font-size:var(--fs-md);color:var(--text);margin-top:10px;}

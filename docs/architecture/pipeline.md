@@ -39,6 +39,14 @@ Règles portées par des fonctions pures (toutes testées, `tests/test_events.py
 
 Étapes dans `main()` : **5bis**, après l'upsert des films (la jointure a besoin des films du run) et **avant** le filtrage semaine (qui amputerait les séances servant à dater les événements longs). Tout le bloc est enveloppé dans un `try` : le pipeline événements ne doit jamais faire tomber le pipeline séances. Drapeaux : `--no-events`, `--events-only` (relit `programme.json` pour la jointure), `--force-resume`.
 
+### Horizon Lumière : 8 semaines (2026-07-29)
+
+`scrape_lumiere_multi()` enchaîne `scrape_lumiere()` sur N semaines (défaut 8, `--lumiere-weeks`) et fusionne par (titre, salle).
+
+⚠️ **Contrairement à ce que laissait craindre I8, le volume ne suit pas.** Les salles ne publient leur grille qu'une semaine à l'avance : mesuré le 2026-07-29, 34 films pour la semaine courante puis **2 à 5 par semaine**, et ce sont exactement les séances d'**événements** déjà annoncées (avant-premières du lundi, cycles, rétrospectives). Bilan : +18 séances en base pour 8 semaines d'horizon — le plafond REST de 1000 lignes n'est pas approché.
+
+Effet direct sur le niveau 2 des événements : un film annoncé entre dans `films`, donc récupère son poster TMDB **et** une fiche ouvrable. Mesuré sur le même run : films d'événement avec affiche 14 → **61 sur 74**, créneaux rattachés à une séance réelle 1 → **46**.
+
 **Point clé (variant piégeux) :** le *modèle de semaine* diffère. Lumière prend une semaine ; le PDF Comoedia EST une semaine ; Zola est une liste roulante coupée après coup par `filter_current_week` (scraper.py:2049). Un `scrape_X()` ne « calque » un autre que sur la *structure* (liste → détail), pas sur le modèle temporel.
 
 ---
