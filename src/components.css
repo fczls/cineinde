@@ -630,7 +630,7 @@ html:not(.motion-ready) a.d-chip.resa:focus-visible .dc-tkt{ opacity:1; }
    multi-colonnes : la colonne de contenu grandit jusqu'à 820px puis se fige,
    le chrome (barre cinémas, toolbar) reste pleine largeur. La liste est
    mono-colonne à toutes les largeurs. */
-.ev-col{max-width:820px;margin:0 auto;padding:24px 20px 48px;}
+.ev-col{max-width:var(--breakpoint-md);margin:0 auto;padding:24px 20px 48px;}
 
 /* Résumé du mois — segments typés par le modèle : `strong` = mois, types et
    récurrences ; `mute` = tout le reste. */
@@ -678,9 +678,11 @@ html:not(.motion-ready) a.d-chip.resa:focus-visible .dc-tkt{ opacity:1; }
 .ev-card[data-niveau="1"],.ev-card[data-niveau="2"]{z-index:1;}
 .ev-card[data-niveau="2"]{z-index:0;opacity:.7;}
 .ev-card[data-niveau="1"] img,.ev-card[data-niveau="2"] img{
-  width:160px;height:160px;object-position:top;
+  width:160px;height:auto;max-height:248px;object-position:top;
 }
-.ev-card.is-paysage[data-niveau="1"] img,.ev-card.is-paysage[data-niveau="2"] img{object-position:center;}
+.ev-card.is-paysage[data-niveau="1"] img,.ev-card.is-paysage[data-niveau="2"] img{
+  width:auto;height:160px;max-width:284px;object-position:center;
+}
 .ev-card[data-niveau="1"][data-cote="-1"]{transform:translateX(calc(-50% - var(--ev-dx1))) rotate(calc(-1 * var(--ev-rot)));}
 .ev-card[data-niveau="1"][data-cote="1"]{transform:translateX(calc(-50% + var(--ev-dx1))) rotate(var(--ev-rot));}
 .ev-card[data-niveau="2"][data-cote="-1"]{transform:translateX(calc(-50% - var(--ev-dx2))) rotate(calc(-2 * var(--ev-rot)));}
@@ -800,7 +802,8 @@ html:not(.motion-ready) a.d-chip.resa:focus-visible .dc-tkt{ opacity:1; }
   .ev-fan{--ev-dx1:162px; --ev-dx2:288px; height:420px;}
   .ev-card[data-niveau="0"] img{width:266px;max-height:412px;}
   .ev-card[data-niveau="0"].is-paysage img{height:266px;max-width:472px;}
-  .ev-card[data-niveau="1"] img,.ev-card[data-niveau="2"] img{width:250px;height:250px;}
+  .ev-card[data-niveau="1"] img,.ev-card[data-niveau="2"] img{width:250px;max-height:388px;}
+  .ev-card.is-paysage[data-niveau="1"] img,.ev-card.is-paysage[data-niveau="2"] img{height:250px;max-width:444px;}
   .ev-summary{font-size:var(--fs-2xl);line-height:1.6;}
 }
 @media (prefers-reduced-motion: reduce){
