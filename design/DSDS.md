@@ -86,7 +86,7 @@ Sans convention écrite, chaque nouveau composant — surtout quand c'est un age
 
 ### Typographie & rayons
 
-- **Un seul `--fs-3xl` par vue** (taille display, réservée au titre de fiche). Ne pas empiler plusieurs tailles display.
+- **`--fs-3xl` = la taille du titre dominant**, un rôle par vue : le titre de la fiche film, ou celui de l'évènement mis en avant dans la sélection. Ne pas empiler deux tailles display dans un même bloc. *(La formulation précédente le réservait au titre de fiche — l'onglet Évènements a un titre dominant qui n'est pas une fiche.)*
 - **Familles (`--font-*`) — la police d'affichage ne s'écrit jamais en clair.**
   - `--font-display` = **Riegraf romain**, pour **tous les titres sans exception** (fiche film, évènement, section, modale).
   - `--font-display-italic` = Riegraf italique, voix éditoriale (étiquettes de section, mentions). Toujours accompagné de `font-style:italic` — c'est ce qui déclenche la fonte italique *et* aligne le repli.
