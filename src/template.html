@@ -137,11 +137,11 @@
            Même mécanique que la barre cinémas : largeur élastique, défilement
            horizontal et flèches conditionnelles, pour ne jamais sortir de
            l'écran ni chevaucher le logo. -->
-      <div class="ev-type-wrap" id="evTypeWrap">
+      <div class="tb-date ev-type-wrap" id="evTypeWrap">
         <button type="button" class="day-nav-btn" id="evTypeArrowL" aria-label="Faire défiler les types à gauche">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
         </button>
-        <div class="tb-seg ev-type-seg" role="group" aria-label="Type d'évènement" id="evTypeSeg"></div>
+        <div class="ev-type-seg" role="group" aria-label="Type d'évènement" id="evTypeSeg"></div>
         <button type="button" class="day-nav-btn" id="evTypeArrowR" aria-label="Faire défiler les types à droite">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
         </button>
@@ -875,6 +875,9 @@ function syncToolbar() {
   // Le conteneur, pas la barre seule : sinon ses flèches survivent en mode Séances.
   document.getElementById('evTypeWrap').classList.toggle('hidden', isSeances);
   document.getElementById('rangeWrap').classList.toggle('show', isSeances && compactView);
+  // Re-mesure APRÈS le changement de visibilité : un conteneur masqué mesure 0,
+  // et les flèches resteraient cachées au chargement.
+  if (window._updateTypeArrows) window._updateTypeArrows();
   // En 7J la date ne guide plus l'affichage : état inactif (mais toujours cliquable)
   document.getElementById('dayBtn').classList.toggle('inactive', viewMode === 'semaine');
 }
@@ -2684,6 +2687,12 @@ async function boot() {
   initNavScroll();
   syncNavOffset();
   initEvFanSwipe();
+  // Les largeurs de texte changent quand les polices arrivent : re-mesurer les
+  // barres défilantes, sinon leurs flèches restent sur un calcul périmé.
+  if (document.fonts?.ready) document.fonts.ready.then(() => {
+    if (window._updateStripArrows) window._updateStripArrows();
+    if (window._updateTypeArrows) window._updateTypeArrows();
+  });
   try {
     allFilms = dedupeFilms(ensureFilms(await loadAll()));
   } catch(e) {

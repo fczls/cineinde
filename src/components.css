@@ -792,15 +792,21 @@ html:not(.motion-ready) a.d-chip.resa:focus-visible .dc-tkt{ opacity:1; }
    Barre élastique sur le modèle de la barre cinémas — c'est le seul groupe de
    la toolbar autorisé à rétrécir, les autres gardent leur largeur. */
 .ev-type-seg .tb-btn{padding:0 14px;letter-spacing:.08em;}
-.ev-type-wrap{position:relative;display:flex;align-items:center;flex:1 1 auto;min-width:0;}
+/* La pastille noire est portée par le conteneur (classe `.tb-date`) : flèches
+   et liste vivent DANS la même bulle, comme au sélecteur de date. */
+.ev-type-wrap{flex:1 1 auto;min-width:0;}
 /* `flex-shrink:1` écrase celui de `.tb-seg` (0) : sans ça la barre garde sa
    largeur naturelle et déborde de la toolbar au lieu de défiler. */
-.ev-type-seg{overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none;min-width:0;flex-shrink:1;}
+/* Reprend la mise en rangée de `.tb-seg` sans son fond ni son rayon : c'est le
+   conteneur qui porte la bulle, la liste n'est plus qu'une piste défilante. */
+.ev-type-seg{
+  display:flex;align-items:center;gap:2px;
+  overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none;min-width:0;flex-shrink:1;
+}
 .ev-type-seg::-webkit-scrollbar{display:none;}
 .ev-type-seg.dragging{cursor:grabbing;}
 .ev-type-seg.dragging .tb-btn{pointer-events:none;}
-#evTypeArrowL,#evTypeArrowR{background:var(--bg);}
-#evTypeArrowL:hover,#evTypeArrowR:hover{background:var(--overlay-sm);}
+/* Fond hérité de la bulle : pas de second aplat à poser ici. */
 @media(max-width:820px){
   .ev-type-wrap{display:none!important;}
   /* Mobile : l'éventail se navigue au swipe et au tap sur une carte latérale

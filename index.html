@@ -872,15 +872,21 @@ html:not(.motion-ready) a.d-chip.resa:focus-visible .dc-tkt{ opacity:1; }
    Barre élastique sur le modèle de la barre cinémas — c'est le seul groupe de
    la toolbar autorisé à rétrécir, les autres gardent leur largeur. */
 .ev-type-seg .tb-btn{padding:0 14px;letter-spacing:.08em;}
-.ev-type-wrap{position:relative;display:flex;align-items:center;flex:1 1 auto;min-width:0;}
+/* La pastille noire est portée par le conteneur (classe `.tb-date`) : flèches
+   et liste vivent DANS la même bulle, comme au sélecteur de date. */
+.ev-type-wrap{flex:1 1 auto;min-width:0;}
 /* `flex-shrink:1` écrase celui de `.tb-seg` (0) : sans ça la barre garde sa
    largeur naturelle et déborde de la toolbar au lieu de défiler. */
-.ev-type-seg{overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none;min-width:0;flex-shrink:1;}
+/* Reprend la mise en rangée de `.tb-seg` sans son fond ni son rayon : c'est le
+   conteneur qui porte la bulle, la liste n'est plus qu'une piste défilante. */
+.ev-type-seg{
+  display:flex;align-items:center;gap:2px;
+  overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none;min-width:0;flex-shrink:1;
+}
 .ev-type-seg::-webkit-scrollbar{display:none;}
 .ev-type-seg.dragging{cursor:grabbing;}
 .ev-type-seg.dragging .tb-btn{pointer-events:none;}
-#evTypeArrowL,#evTypeArrowR{background:var(--bg);}
-#evTypeArrowL:hover,#evTypeArrowR:hover{background:var(--overlay-sm);}
+/* Fond hérité de la bulle : pas de second aplat à poser ici. */
 @media(max-width:820px){
   .ev-type-wrap{display:none!important;}
   /* Mobile : l'éventail se navigue au swipe et au tap sur une carte latérale
@@ -1199,11 +1205,11 @@ body.detail-open #detailBackdrop{opacity:1;pointer-events:auto;}
            Même mécanique que la barre cinémas : largeur élastique, défilement
            horizontal et flèches conditionnelles, pour ne jamais sortir de
            l'écran ni chevaucher le logo. -->
-      <div class="ev-type-wrap" id="evTypeWrap">
+      <div class="tb-date ev-type-wrap" id="evTypeWrap">
         <button type="button" class="day-nav-btn" id="evTypeArrowL" aria-label="Faire défiler les types à gauche">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
         </button>
-        <div class="tb-seg ev-type-seg" role="group" aria-label="Type d'évènement" id="evTypeSeg"></div>
+        <div class="ev-type-seg" role="group" aria-label="Type d'évènement" id="evTypeSeg"></div>
         <button type="button" class="day-nav-btn" id="evTypeArrowR" aria-label="Faire défiler les types à droite">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
         </button>
@@ -1937,6 +1943,9 @@ function syncToolbar() {
   // Le conteneur, pas la barre seule : sinon ses flèches survivent en mode Séances.
   document.getElementById('evTypeWrap').classList.toggle('hidden', isSeances);
   document.getElementById('rangeWrap').classList.toggle('show', isSeances && compactView);
+  // Re-mesure APRÈS le changement de visibilité : un conteneur masqué mesure 0,
+  // et les flèches resteraient cachées au chargement.
+  if (window._updateTypeArrows) window._updateTypeArrows();
   // En 7J la date ne guide plus l'affichage : état inactif (mais toujours cliquable)
   document.getElementById('dayBtn').classList.toggle('inactive', viewMode === 'semaine');
 }
@@ -3746,6 +3755,12 @@ async function boot() {
   initNavScroll();
   syncNavOffset();
   initEvFanSwipe();
+  // Les largeurs de texte changent quand les polices arrivent : re-mesurer les
+  // barres défilantes, sinon leurs flèches restent sur un calcul périmé.
+  if (document.fonts?.ready) document.fonts.ready.then(() => {
+    if (window._updateStripArrows) window._updateStripArrows();
+    if (window._updateTypeArrows) window._updateTypeArrows();
+  });
   try {
     allFilms = dedupeFilms(ensureFilms(await loadAll()));
   } catch(e) {
