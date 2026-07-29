@@ -2901,6 +2901,17 @@ function eventDateChip(dates, moisAffiche, opts) {
 // « 20 », pas « 20 & 24 ») — elle n'est jamais stockée.
 // @test-export:evChipDates
 function evChipDates(ev, cinema) {
+  // Ce que la source n'a pas annoncé ne s'invente pas. `en_cours` = début connu
+  // au mieux, fin inconnue : on montre la date de début tant qu'elle est à
+  // venir (« 12 »), et « En cours » une fois l'évènement commencé — surtout pas
+  // une période reconstruite depuis la semaine scrapée, qui glisserait.
+  if (ev.precision === 'en_cours' || ev.precision === 'saison') {
+    const today = dKey(new Date());
+    if (ev.precision === 'en_cours' && ev.date_debut && ev.date_debut > today) {
+      return { dates: [ev.date_debut], mode: 'liste' };
+    }
+    return { dates: [], mode: 'liste' };
+  }
   const creneaux = (ev.creneaux || [])
     .filter(c => c.date && (!cinema || cinema === 'tous' || c.cinema === cinema))
     .map(c => c.date);
@@ -2968,7 +2979,9 @@ function sortEvents(events, mois) {
     return evMoisDe(d) < mois && evMoisDe(f) > mois;
   };
   const duree = ev => {
-    if (!ev.date_debut || !ev.date_fin) return 1e9;
+    // Durée inconnue ⇒ 0 : un évènement dont on ignore l'étendue ne doit pas
+    // coiffer un festival de deux mois en tête de liste.
+    if (!ev.date_debut || !ev.date_fin) return 0;
     return (new Date(ev.date_fin) - new Date(ev.date_debut)) / 86400000;
   };
   return [...events].sort((a, b) => {
@@ -3103,8 +3116,14 @@ function evCardFallback(img) {
 
 function evFanApply() {
   const cartes = document.querySelectorAll('#evFan .ev-card');
+  const n = cartes.length;
   cartes.forEach((c, i) => {
-    const d = i - evSelIdx;
+    // Décalage CIRCULAIRE (chemin le plus court) : avec 5 cartes, les 5 restent
+    // toujours visibles et symétriques, les deux extrêmes au fond à 70 %. Une
+    // fenêtre glissante en escamotait deux dès qu'on atteignait un bord.
+    let d = i - evSelIdx;
+    if (d > n / 2) d -= n;
+    if (d < -n / 2) d += n;
     const niveau = Math.min(Math.abs(d), 2);
     c.classList.toggle('hidden', Math.abs(d) > 2);
     c.dataset.niveau = niveau;
@@ -3133,8 +3152,9 @@ function evPeriodeLongue(ev, chip) {
 }
 
 function evFanStep(delta) {
-  if (evSel.length < 2) return;
-  evSelIdx = Math.max(0, Math.min(evSel.length - 1, evSelIdx + delta));
+  const n = evSel.length;
+  if (n < 2) return;
+  evSelIdx = ((evSelIdx + delta) % n + n) % n;   // l'éventail tourne, il ne bute pas
   evFanApply();
 }
 function evFanFocus(i) {
@@ -3631,7 +3651,15 @@ async function boot() {
   // sous `_restoring`, ce qui court-circuite le FLIP et protège `_listScrollY`.
   if (!applyState(location.hash)) pushRoute(true);
 
+  // Cliquer à côté ferme la fiche film. Deux gardes indispensables :
+  // — ne rien faire si rien n'est ouvert, sinon chaque clic dans la page
+  //   rejouerait `closeDetail` et restaurerait un `_listScrollY` périmé (le
+  //   scroll sautait à chaque clic dans l'onglet Évènements) ;
+  // — ignorer l'onglet Évènements, qui gère ses propres ouvertures : le clic
+  //   qui ouvre le niveau 2 remonte jusqu'ici et le refermait dans la foulée.
   document.querySelector('.main').addEventListener('click', function(e) {
+    if (!document.body.classList.contains('detail-open')) return;
+    if (e.target.closest('#secEvents')) return;
     if (!e.target.closest('.film-card, .compact-row, .cw-film-label, .cw-times')) closeDetail();
   });
 }

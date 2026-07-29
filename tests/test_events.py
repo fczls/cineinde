@@ -86,10 +86,19 @@ class TestPeriodes(unittest.TestCase):
             S.parse_event_period("Jusqu'au 31 août 2026 au Lumière Fourmi", self.REF),
             (None, "2026-08-31", "exact"))
 
-    def test_a_partir_du(self):
+    def test_a_partir_du_est_en_cours(self):
+        """Début annoncé, fin inconnue : surtout pas `exact`.
+
+        Une fin déduite des séances scrapées glisserait de semaine en semaine
+        (« 29 juillet → 4 août », puis « 5 → 11 août »…). `en_cours` est le
+        marqueur que le front lit pour n'afficher que ce qui est su.
+        """
         self.assertEqual(
             S.parse_event_period("À partir du 12 août au Lumière Bellecour", self.REF),
-            ("2026-08-12", None, "exact"))
+            ("2026-08-12", None, "en_cours"))
+        self.assertEqual(
+            S.parse_event_period("RESSORTIE NATIONALE - Dès le 29 juillet", self.REF),
+            ("2026-07-29", None, "en_cours"))
 
     def test_date_unitaire(self):
         self.assertEqual(
@@ -304,8 +313,12 @@ class TestJointure(unittest.TestCase):
         self.assertEqual(len(ev["films"]), 3)
         self.assertTrue(all(f["dates"] for f in ev["films"]))
         self.assertEqual((ev["date_debut"], ev["date_fin"]), ("2026-08-01", "2026-08-04"))
-        self.assertEqual(ev["precision"], "exact")
         self.assertEqual(len([c for c in ev["creneaux"] if c["date"]]), 6)
+        # La jointure complète les dates (tri, mois couverts, filtrage) mais ne
+        # promeut PAS la précision : ces bornes sont celles de la semaine
+        # scrapée, pas celles annoncées par la salle. Le front affichera donc
+        # « En cours », et non une période qui bougerait chaque semaine.
+        self.assertEqual(ev["precision"], "en_cours")
 
     def test_sans_seance_connue_l_evenement_disparait(self):
         """Pas de fantôme : un événement indatable n'est pas affiché."""

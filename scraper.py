@@ -2286,12 +2286,16 @@ def parse_event_period(texte: str, ref: "date | None" = None) -> tuple:
         if d:
             return (None, d.isoformat(), "exact")
 
-    # « à partir du 12 août », « dès le 29 juillet » → début connu, fin ouverte.
+    # « à partir du 12 août », « dès le 29 juillet » → début connu, fin OUVERTE.
+    # `en_cours` et non `exact` : la source n'annonce pas de fin. Une fin déduite
+    # des séances scrapées glisserait de semaine en semaine (une ressortie
+    # afficherait « 29 juillet → 4 août », puis « 5 → 11 août »…) — c'est le
+    # marqueur que le front lit pour n'afficher que ce qui est réellement su.
     m = re.search(rf"(?:à partir du|dès le|dès)\s+(.{{0,32}}?({_MOIS_ALT})(?:\s+\d{{4}})?)", t, re.I)
     if m:
         d = _parse_jour_mois(m.group(1), ref)
         if d:
-            return (d.isoformat(), None, "exact")
+            return (d.isoformat(), None, "en_cours")
 
     if _EN_COURS_RE.search(t):
         return (None, None, "en_cours")
@@ -2990,12 +2994,15 @@ def resolve_dates_from_seances(events: list, films: list,
                           if c.get("date") or c.get("invite") or c.get("description")
                           or c.get("cinema") not in salles_datees]
 
+        # La jointure COMPLÈTE les dates manquantes (tri, mois couverts,
+        # filtrage du passé) mais ne touche JAMAIS à `precision` : celle-ci dit
+        # ce que la SOURCE a annoncé. Promouvoir en « exact » une enveloppe
+        # déduite d'une semaine de séances ferait afficher une période fausse et
+        # mouvante là où « En cours » est la seule information vraie.
         dates = _event_dates(ev)
-        if dates and (ev.get("precision") != "exact" or not ev.get("date_debut")
-                      or not ev.get("date_fin")):
+        if dates:
             ev["date_debut"] = ev.get("date_debut") or dates[0]
-            ev["date_fin"] = max(dates)
-            ev["precision"] = "exact"
+            ev["date_fin"] = ev.get("date_fin") or max(dates)
 
         if not ev.get("date_debut") and not ev.get("date_fin"):
             log.debug(f"  Événement sans date résoluble — ignoré : {ev['titre']}")
@@ -3066,6 +3073,10 @@ Règles :
 - `icon` devant une sous-catégorie (jeune public, cinéma ibérique…) ; si aucune icône ne convient, \
 place-la devant la catégorie. Icônes disponibles : {icones}.
 - Une seule phrase fluide, commençant par « En {mois}, ». Reste synthétique quand le mois est chargé.
+- ⚠️ JAMAIS de première personne ni d'appropriation des salles : pas de « nos cinémas », \
+« nos salles », « chez nous », « nous vous proposons ». Le site AGRÈGE une programmation, il ne \
+l'organise pas et n'appartient à aucune salle ni à aucun réseau. Écrire « les cinémas indépendants \
+lyonnais », « à l'affiche », ou tourner la phrase sans sujet possessif.
 - Les espaces font partie des segments (le rendu concatène sans séparateur).
 
 Exemple de forme :

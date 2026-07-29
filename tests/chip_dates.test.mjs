@@ -23,6 +23,9 @@ const deps = {
   MOIS_NOMS: ['janvier','février','mars','avril','mai','juin',
               'juillet','août','septembre','octobre','novembre','décembre'],
   evAffiche: () => true,   // éligibilité « a une affiche » — vraie dans les tests
+  // Date du jour figée : les règles qui comparent à « aujourd'hui » (chip
+  // `en_cours`) doivent être testables sans dépendre du calendrier.
+  dKey: () => '2026-08-15',
 };
 const api = new Function(...Object.keys(deps),
   `${bloc}\n return { eventDateChip, evChipDates, sortEvents, monthsWithEvents, pickSelection };`
@@ -124,6 +127,38 @@ test('filtre sur la seule salle de l’évènement : l’enveloppe reste lisible
 test('filtre sur une salle parmi plusieurs : l’enveloppe est écartée', () => {
   const c = evChipDates(inconnue, 'Le Comoedia');
   assert.deepEqual(c.dates, ['2026-08-20']);
+});
+
+// Ce que la source n'a pas annoncé ne s'invente pas : une fin déduite de la
+// semaine scrapée glisserait de semaine en semaine.
+test('en_cours à venir → la date de début, seule information sûre', () => {
+  const ressortie = {
+    precision: 'en_cours', date_debut: '2026-08-19', date_fin: '2026-08-25',
+    creneaux: [{ cinema: 'Lumière Bellecour', date: '2026-08-19' },
+               { cinema: 'Lumière Bellecour', date: '2026-08-25' }],
+  };
+  const c = evChipDates(ressortie, 'tous');
+  assert.equal(eventDateChip(c.dates, '2026-08', { mode: c.mode, precision: 'en_cours' }), '19');
+});
+
+test('en_cours déjà commencé → « En cours », jamais une période reconstruite', () => {
+  const ressortie = {
+    precision: 'en_cours', date_debut: '2026-07-29', date_fin: '2026-08-04',
+    creneaux: [{ cinema: 'Lumière Terreaux', date: '2026-08-01' }],
+  };
+  const c = evChipDates(ressortie, 'tous');
+  assert.equal(eventDateChip(c.dates, '2026-08', { mode: c.mode, precision: 'en_cours' }),
+               'En cours');
+});
+
+test('saison → « Cet été », même si la jointure a rempli des dates', () => {
+  const retro = {
+    precision: 'saison', date_debut: '2026-07-15', date_fin: '2026-08-12',
+    creneaux: [{ cinema: 'Lumière Bellecour', date: '2026-08-01' }],
+  };
+  const c = evChipDates(retro, 'tous');
+  assert.equal(eventDateChip(c.dates, '2026-08', { mode: c.mode, precision: 'saison' }),
+               'Cet été');
 });
 
 test('un festival dont une seule séance est connue reste une période', () => {
