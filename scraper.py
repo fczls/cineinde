@@ -3077,6 +3077,8 @@ place-la devant la catégorie. Icônes disponibles : {icones}.
 « nos salles », « chez nous », « nous vous proposons ». Le site AGRÈGE une programmation, il ne \
 l'organise pas et n'appartient à aucune salle ni à aucun réseau. Écrire « les cinémas indépendants \
 lyonnais », « à l'affiche », ou tourner la phrase sans sujet possessif.
+- Français irréprochable : accords en genre et en nombre, énumérations cohérentes. La phrase est \
+publiée telle quelle, sans relecture humaine.
 - Les espaces font partie des segments (le rendu concatène sans séparateur).
 
 Exemple de forme :
