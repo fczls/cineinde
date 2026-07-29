@@ -129,26 +129,27 @@ test('filtre sur une salle parmi plusieurs : l’enveloppe est écartée', () =>
   assert.deepEqual(c.dates, ['2026-08-20']);
 });
 
-// Ce que la source n'a pas annoncé ne s'invente pas : une fin déduite de la
-// semaine scrapée glisserait de semaine en semaine.
-test('en_cours à venir → la date de début, seule information sûre', () => {
+// « En cours » ne cadre rien pour le lecteur : même sans fin annoncée par la
+// source, la chip doit porter les dates réellement connues.
+test('en_cours à dates connues → ces dates, jamais « En cours »', () => {
   const ressortie = {
     precision: 'en_cours', date_debut: '2026-08-19', date_fin: '2026-08-25',
     creneaux: [{ cinema: 'Lumière Bellecour', date: '2026-08-19' },
                { cinema: 'Lumière Bellecour', date: '2026-08-25' }],
   };
   const c = evChipDates(ressortie, 'tous');
-  assert.equal(eventDateChip(c.dates, '2026-08', { mode: c.mode, precision: 'en_cours' }), '19');
+  assert.equal(eventDateChip(c.dates, '2026-08', { mode: c.mode, precision: 'en_cours' }),
+               '19 & 25');
 });
 
-test('en_cours déjà commencé → « En cours », jamais une période reconstruite', () => {
+test('en_cours sur plusieurs séances → la période connue', () => {
   const ressortie = {
     precision: 'en_cours', date_debut: '2026-07-29', date_fin: '2026-08-04',
     creneaux: [{ cinema: 'Lumière Terreaux', date: '2026-08-01' }],
   };
   const c = evChipDates(ressortie, 'tous');
   assert.equal(eventDateChip(c.dates, '2026-08', { mode: c.mode, precision: 'en_cours' }),
-               'En cours');
+               '29 juillet → 4 août');
 });
 
 test('saison → « Cet été », même si la jointure a rempli des dates', () => {

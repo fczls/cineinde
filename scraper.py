@@ -3073,10 +3073,12 @@ Règles :
 - `icon` devant une sous-catégorie (jeune public, cinéma ibérique…) ; si aucune icône ne convient, \
 place-la devant la catégorie. Icônes disponibles : {icones}.
 - Une seule phrase fluide, commençant par « En {mois}, ». Reste synthétique quand le mois est chargé.
+- S'adresser au lecteur avec un VERBE D'ACTION à la 2e personne du pluriel : « retrouvez », \
+« découvrez », « (re)voyez », « plongez dans »… juste après le mois. C'est court et direct.
 - ⚠️ JAMAIS de première personne ni d'appropriation des salles : pas de « nos cinémas », \
 « nos salles », « chez nous », « nous vous proposons ». Le site AGRÈGE une programmation, il ne \
-l'organise pas et n'appartient à aucune salle ni à aucun réseau. Écrire « les cinémas indépendants \
-lyonnais », « à l'affiche », ou tourner la phrase sans sujet possessif.
+l'organise pas et n'appartient à aucune salle ni à aucun réseau. Ne pas nommer le collectif de \
+salles non plus (« les cinémas indépendants lyonnais » est trop long) : le verbe d'action suffit.
 - Français irréprochable : accords en genre et en nombre, énumérations cohérentes. La phrase est \
 publiée telle quelle, sans relecture humaine.
 - Les espaces font partie des segments (le rendu concatène sans séparateur).

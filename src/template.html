@@ -133,8 +133,19 @@
       </div>
 
       <!-- Filtre par type — desktop uniquement (la maquette mobile ne l'expose
-           pas ; le filtre cinéma, lui, reste accessible via « Les cinés »). -->
-      <div class="tb-seg ev-type-seg" role="group" aria-label="Type d'évènement" id="evTypeSeg"></div>
+           pas ; le filtre cinéma, lui, reste accessible via « Les cinés »).
+           Même mécanique que la barre cinémas : largeur élastique, défilement
+           horizontal et flèches conditionnelles, pour ne jamais sortir de
+           l'écran ni chevaucher le logo. -->
+      <div class="ev-type-wrap" id="evTypeWrap">
+        <button type="button" class="strip-arrow left hidden" id="evTypeArrowL" aria-label="Faire défiler les types à gauche">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <div class="tb-seg ev-type-seg" role="group" aria-label="Type d'évènement" id="evTypeSeg"></div>
+        <button type="button" class="strip-arrow right hidden" id="evTypeArrowR" aria-label="Faire défiler les types à droite">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+      </div>
     </div>
   </div>
 </div>
@@ -179,13 +190,15 @@
           <div class="ev-fan" id="evFan"></div>
           <div class="ev-meta" id="evMeta"></div>
           <div class="ev-fan-nav" id="evFanNav">
-            <button type="button" class="ev-arrow" id="evFanPrev" onclick="evFanStep(-1)" aria-label="Évènement précédent">
+            <button type="button" class="ev-arrow" id="evFanPrev" onclick="evFanStep(1)" aria-label="Évènement précédent">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M15 18l-6-6 6-6"/></svg>
             </button>
             <button type="button" class="ev-plus" id="evFanOpen" aria-label="Voir le détail de l'évènement">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg>
             </button>
-            <button type="button" class="ev-arrow" id="evFanNext" onclick="evFanStep(1)" aria-label="Évènement suivant">
+            <!-- Sens de défilement : la flèche droite fait glisser l'éventail
+                 vers la DROITE (elle amène la carte de gauche au centre). -->
+            <button type="button" class="ev-arrow" id="evFanNext" onclick="evFanStep(-1)" aria-label="Évènement suivant">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 18l6-6-6-6"/></svg>
             </button>
           </div>
@@ -1881,17 +1894,12 @@ function eventDateChip(dates, moisAffiche, opts) {
 // « 20 », pas « 20 & 24 ») — elle n'est jamais stockée.
 // @test-export:evChipDates
 function evChipDates(ev, cinema) {
-  // Ce que la source n'a pas annoncé ne s'invente pas. `en_cours` = début connu
-  // au mieux, fin inconnue : on montre la date de début tant qu'elle est à
-  // venir (« 12 »), et « En cours » une fois l'évènement commencé — surtout pas
-  // une période reconstruite depuis la semaine scrapée, qui glisserait.
-  if (ev.precision === 'en_cours' || ev.precision === 'saison') {
-    const today = dKey(new Date());
-    if (ev.precision === 'en_cours' && ev.date_debut && ev.date_debut > today) {
-      return { dates: [ev.date_debut], mode: 'liste' };
-    }
-    return { dates: [], mode: 'liste' };
-  }
+  // « En cours » ne cadre rien pour le lecteur : un évènement doit toujours
+  // porter des dates, une période ou un mois. Même sans fin annoncée par la
+  // source, on affiche donc la période RÉELLEMENT connue (les séances déjà
+  // programmées) plutôt qu'une mention floue. Seule `saison` garde son libellé,
+  // qui est déjà un cadrage (« Cet été »).
+  if (ev.precision === 'saison') return { dates: [], mode: 'liste' };
   const creneaux = (ev.creneaux || [])
     .filter(c => c.date && (!cinema || cinema === 'tous' || c.cinema === cinema))
     .map(c => c.date);
@@ -2233,6 +2241,7 @@ function buildEvTypeSeg() {
   el.innerHTML = EV_TYPES.map(t =>
     `<button type="button" class="tb-btn${filtreType === t.id ? ' active' : ''}" onclick="setFiltreType('${t.id}')">${escHtml(t.label)}</button>`
   ).join('');
+  if (window._updateTypeArrows) window._updateTypeArrows();
 }
 
 function setFiltreType(type) {
@@ -2299,7 +2308,7 @@ function evFilmDates(dates) {
 // Dates d'un film de l'évènement : ce sont les CRÉNEAUX qui les portent (c'est
 // le modèle : un créneau = une salle, une date, un film). Supabase ne renvoie
 // donc aucune date sur `evenement_films` — les lire là serait un bug silencieux
-// où tous les films tomberaient en « Séances non encore annoncées ».
+// où tous les films tomberaient en « Détails de séance à venir ».
 // Périmètre : toutes les dates de l'évènement, pas seulement celles du mois
 // d'entrée (§9.3) — d'où l'absence de filtre par mois ici.
 function evFilmToutesDates(ev, f) {
@@ -2309,6 +2318,21 @@ function evFilmToutesDates(ev, f) {
                       .map(c => c.date);
   // Évènement mono-film : ses créneaux le concernent, même sans titre_film.
   if (!dates.length && (ev.films || []).length === 1) dates = creneaux.map(c => c.date);
+  // Dernier recours : le film est à l'affiche quelque part et on le sait — le
+  // taire serait absurde. La jointure du scraper, elle, se restreint aux salles
+  // de l'évènement : un festival du Comoedia qui programme un classique joué au
+  // Fourmi n'en récupère donc aucune date. Le lecteur, lui, veut savoir qu'il
+  // passe, et la fiche film lui dira dans quelle salle.
+  if (!dates.length) {
+    const today = dKey(new Date());
+    for (const connu of allFilms) {
+      if (normalizeTitle(connu.titre) !== k) continue;
+      for (const s of connu._sd || []) {
+        const d = dKey(s.date);
+        if (d >= today) dates.push(d);
+      }
+    }
+  }
   return [...new Set([...(f.dates || []), ...dates])].sort();
 }
 
@@ -2319,7 +2343,7 @@ function evFilmEtat(f, dates) {
   const connu = allFilms.find(x => normalizeTitle(x.titre) === normalizeTitle(f.titre));
   if (connu && futures.length) return { label: 'Détails et séances', titre: connu.titre };
   if (dates.length && !futures.length) return { label: 'Séance passée', titre: null };
-  return { label: 'Séances non encore annoncées', titre: null };
+  return { label: 'Détails de séance à venir', titre: null };
 }
 
 function evFilmAffiche(f) {
@@ -2360,9 +2384,13 @@ function renderEventDetail(ev) {
   // sous filtre).
   const cines = [...new Set((ev.creneaux || []).map(c => c.cinema).filter(Boolean))]
     .filter(c => filtreCinema === 'tous' || c === filtreCinema);
+  // La forme n'est affichée que si elle APPORTE quelque chose : `festival` sur
+  // un festival répéterait le type (« Festival · Festival »).
+  const formeLbl = ev.forme ? EV_FORME_LABEL[ev.forme] : null;
+  const typeLbl = EV_TYPE_LABEL[ev.type];
   const pills = cines.map(c => `<span class="ev-pill ev-pill-cine">${escHtml(SHORT_CINEMA[c] || c)}</span>`)
-    .concat(`<span class="ev-pill">${escHtml(EV_TYPE_LABEL[ev.type])}</span>`)
-    .concat(ev.forme ? `<span class="ev-pill">${escHtml(EV_FORME_LABEL[ev.forme])}</span>` : [])
+    .concat(`<span class="ev-pill">${escHtml(typeLbl)}</span>`)
+    .concat(formeLbl && formeLbl !== typeLbl ? `<span class="ev-pill">${escHtml(formeLbl)}</span>` : [])
     .join('');
 
   // Tri par première date croissante ; les films sans date en fin de liste.
@@ -2537,6 +2565,14 @@ function syncNavOffset() {
   const wasCompact = shell.classList.contains('compact');
   shell.classList.remove('compact');
   document.body.style.paddingTop = shell.offsetHeight + 'px';
+  // Gouttière = la plus large des deux extrémités du bandeau (logo / boutons).
+  // En mode compact la toolbar remonte sur leur rangée : sans cette borne, elle
+  // passerait dessous. Mesurée hors compact, donc au pire cas (logo agrandi).
+  const brand = shell.querySelector('.header-brand');
+  const droite = shell.querySelector('.nav-right');
+  const gouttiere = Math.max(brand ? brand.getBoundingClientRect().width : 0,
+                             droite ? droite.getBoundingClientRect().width : 0);
+  shell.style.setProperty('--nav-gutter', Math.ceil(gouttiere + 24) + 'px');
   if (wasCompact) shell.classList.add('compact');
 }
 
@@ -2561,17 +2597,24 @@ function initNavScroll() {
 
 // ── NAV : strip cinémas — drag horizontal + flèches conditionnelles ──
 function initCinemaStrip() {
-  const strip = document.getElementById('cinemaBar');
-  const arrL = document.getElementById('stripArrowL');
-  const arrR = document.getElementById('stripArrowR');
-  if (!strip || !arrL || !arrR) return;
+  window._updateStripArrows = initStrip('cinemaBar', 'stripArrowL', 'stripArrowR');
+  // Filtre par type : même composant, mêmes flèches, mêmes paramètres.
+  window._updateTypeArrows = initStrip('evTypeSeg', 'evTypeArrowL', 'evTypeArrowR');
+}
+
+// Barre horizontale élastique : défilement, flèches conditionnelles (masquées
+// quand tout tient ou qu'on est en butée) et drag à la souris.
+function initStrip(stripId, arrLId, arrRId) {
+  const strip = document.getElementById(stripId);
+  const arrL = document.getElementById(arrLId);
+  const arrR = document.getElementById(arrRId);
+  if (!strip || !arrL || !arrR) return () => {};
 
   function update() {
     const max = strip.scrollWidth - strip.clientWidth;
     arrL.classList.toggle('hidden', max <= 4 || strip.scrollLeft <= 4);
     arrR.classList.toggle('hidden', max <= 4 || strip.scrollLeft >= max - 4);
   }
-  window._updateStripArrows = update;
   strip.addEventListener('scroll', update, { passive: true });
   window.addEventListener('resize', update);
   arrL.addEventListener('click', () => strip.scrollBy({ left: -280, behavior: 'smooth' }));
@@ -2595,6 +2638,7 @@ function initCinemaStrip() {
     setTimeout(() => strip.classList.remove('dragging'), 0);
   });
   update();
+  return update;
 }
 
 async function boot() {
