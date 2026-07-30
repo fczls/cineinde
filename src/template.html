@@ -2102,7 +2102,13 @@ function renderEvSelection(events) {
 }
 
 function evCardOrient(img) {
-  if (img.naturalWidth > img.naturalHeight) img.closest('.ev-card').classList.add('is-paysage');
+  const carte = img.closest('.ev-card');
+  if (!carte) return;
+  if (img.naturalWidth > img.naturalHeight) carte.classList.add('is-paysage');
+  // Le morphing ne s'arme qu'APRÈS le premier calibrage : sinon la carte
+  // animerait sa mise au bon gabarit à l'arrivée de l'image, ce qui se verrait
+  // comme un sursaut au chargement.
+  carte.classList.add('is-pret');
 }
 
 // Les affiches de source vivent sur des CDN qui refusent le hotlink (403) et
@@ -2112,6 +2118,7 @@ function evCardOrient(img) {
 function evCardFallback(img) {
   img.onerror = null;
   img.src = 'assets/visual-fallback.webp';
+  img.closest('.ev-card')?.classList.add('is-pret');
 }
 
 function evFanApply() {

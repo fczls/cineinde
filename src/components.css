@@ -674,6 +674,21 @@ html:not(.motion-ready) a.d-chip.resa:focus-visible .dc-tkt{ opacity:1; }
   transition:transform .38s cubic-bezier(.33,0,.2,1),opacity .38s ease;
 }
 .ev-card img{display:block;object-fit:cover;}
+/* Morphing entre gabarits — une carte qui passe du côté au centre change de
+   forme (carré → horizontal, vertical → vertical plus grand) au lieu de sauter.
+   ⚠️ On anime ici width/height, ce que la règle de perf du projet déconseille :
+   l'exception se tient parce que les cartes sont `position:absolute` dans un
+   conteneur de hauteur fixe — la mise en page du document n'est jamais
+   recalculée, seul le sous-arbre de la carte l'est (5 nœuds). Un FLIP en
+   `transform:scale` aurait déformé l'image et faussé le recadrage `cover`
+   pendant tout le vol : c'est précisément ce qu'on veut éviter ici, puisque
+   c'est le CADRE qui doit changer de forme, pas l'image.
+   `object-position` suit, pour que le recadrage glisse au lieu de sauter. */
+.ev-card.is-pret img{
+  transition:width .38s cubic-bezier(.33,0,.2,1),
+             height .38s cubic-bezier(.33,0,.2,1),
+             object-position .38s cubic-bezier(.33,0,.2,1);
+}
 /* TROIS GABARITS, et trois seulement. Chaque affiche est recadrée dans l'un
    d'eux (`object-fit:cover`) au lieu d'imposer le ratio de sa source — sinon
    chaque salle dicte sa géométrie et l'éventail part en éventail (une affiche
@@ -840,7 +855,7 @@ html:not(.motion-ready) a.d-chip.resa:focus-visible .dc-tkt{ opacity:1; }
   .ev-summary{font-size:var(--fs-2xl);line-height:1.6;}
 }
 @media (prefers-reduced-motion: reduce){
-  .ev-card{transition-duration:1ms;}
+  .ev-card,.ev-card.is-pret img{transition-duration:1ms;}
 }
 
 /* ── DETAIL OPEN STATE ── */
