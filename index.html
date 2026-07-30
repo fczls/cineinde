@@ -754,19 +754,30 @@ html:not(.motion-ready) a.d-chip.resa:focus-visible .dc-tkt{ opacity:1; }
   transition:transform .38s cubic-bezier(.33,0,.2,1),opacity .38s ease;
 }
 .ev-card img{display:block;object-fit:cover;}
-/* Carte au centre : l'affiche garde son ratio, une seule dimension est fixée. */
+/* TROIS GABARITS, et trois seulement. Chaque affiche est recadrée dans l'un
+   d'eux (`object-fit:cover`) au lieu d'imposer le ratio de sa source — sinon
+   chaque salle dicte sa géométrie et l'éventail part en éventail (une affiche
+   au format inhabituel, comme Lawrence d'Arabie, détonnait aussitôt).
+     • VERTICAL (2:3)   — toute affiche portrait
+     • HORIZONTAL (16:9) — une affiche paysage AU CENTRE, où elle a la place
+     • CARRÉ            — une affiche paysage SUR LES CÔTÉS
+   Le recadrage coupe : on préserve le bloc-titre des portraits (haut) et le
+   centre des paysages. */
+.ev-fan{
+  --gab-v:170px;  --gab-v-h:254px;    /* vertical, au centre */
+  --gab-h:302px;  --gab-h-h:170px;    /* horizontal, au centre */
+  --gab-cote:160px; --gab-cote-h:240px; /* vertical réduit, sur les côtés */
+}
 .ev-card[data-niveau="0"]{z-index:2;}
-.ev-card[data-niveau="0"] img{width:170px;height:auto;max-height:264px;}
-.ev-card[data-niveau="0"].is-paysage img{width:auto;height:170px;max-width:302px;}
-/* Cartes latérales : carrées. Le recadrage coupe — on préserve le bloc-titre
-   des affiches portrait (haut) et le centre des paysages. */
+.ev-card[data-niveau="0"] img{width:var(--gab-v);height:var(--gab-v-h);object-position:top;}
+.ev-card[data-niveau="0"].is-paysage img{width:var(--gab-h);height:var(--gab-h-h);object-position:center;}
 .ev-card[data-niveau="1"],.ev-card[data-niveau="2"]{z-index:1;}
 .ev-card[data-niveau="2"]{z-index:0;opacity:.7;}
 .ev-card[data-niveau="1"] img,.ev-card[data-niveau="2"] img{
-  width:160px;height:auto;max-height:248px;object-position:top;
+  width:var(--gab-cote);height:var(--gab-cote-h);object-position:top;
 }
 .ev-card.is-paysage[data-niveau="1"] img,.ev-card.is-paysage[data-niveau="2"] img{
-  width:auto;height:160px;max-width:284px;object-position:center;
+  width:var(--gab-cote);height:var(--gab-cote);object-position:center;
 }
 .ev-card[data-niveau="1"][data-cote="-1"]{transform:translateX(calc(-50% - var(--ev-dx1))) rotate(calc(-1 * var(--ev-rot)));}
 .ev-card[data-niveau="1"][data-cote="1"]{transform:translateX(calc(-50% + var(--ev-dx1))) rotate(var(--ev-rot));}
@@ -900,10 +911,12 @@ html:not(.motion-ready) a.d-chip.resa:focus-visible .dc-tkt{ opacity:1; }
 /* Desktop : mêmes rapports, à l'échelle (× 1,5625 — cf. ratios du brief). */
 @media(min-width:821px){
   .ev-fan{--ev-dx1:162px; --ev-dx2:288px; height:420px;}
-  .ev-card[data-niveau="0"] img{width:266px;max-height:412px;}
-  .ev-card[data-niveau="0"].is-paysage img{height:266px;max-width:472px;}
-  .ev-card[data-niveau="1"] img,.ev-card[data-niveau="2"] img{width:250px;max-height:388px;}
-  .ev-card.is-paysage[data-niveau="1"] img,.ev-card.is-paysage[data-niveau="2"] img{height:250px;max-width:444px;}
+  /* Mêmes trois gabarits, à l'échelle du desktop (× 1,5625). */
+  .ev-fan{
+    --gab-v:266px;  --gab-v-h:398px;
+    --gab-h:472px;  --gab-h-h:266px;
+    --gab-cote:250px; --gab-cote-h:374px;
+  }
   .ev-summary{font-size:var(--fs-2xl);line-height:1.6;}
 }
 @media (prefers-reduced-motion: reduce){
