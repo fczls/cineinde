@@ -721,6 +721,8 @@ html:not(.motion-ready) a.d-chip.resa:focus-visible .dc-tkt{ opacity:1; }
    récurrences ; `mute` = tout le reste. */
 .ev-summary{font-size:var(--fs-xl);line-height:1.7;text-align:left;margin-bottom:96px;}
 .ev-seg-strong{color:var(--text);}
+/* Icône + premier mot : insécables (cf. evResumeHtml). */
+.ev-seg-lie{white-space:nowrap;}
 .ev-seg-mute{color:var(--text-3);}
 .ev-ico{
   display:inline-flex;vertical-align:-6px;margin:0 6px;
@@ -3156,11 +3158,7 @@ function renderEvents() {
   const resume = !filtreActif ? evResumes[evMois] : null;
   const elResume = document.getElementById('evSummary');
   elResume.classList.toggle('hidden', !resume);
-  if (resume) {
-    elResume.innerHTML = resume.map(seg => seg.icon
-      ? evIcon(seg.icon)
-      : `<span class="ev-seg-${seg.s === 'strong' ? 'strong' : 'mute'}">${escHtml(seg.t)}</span>`).join('');
-  }
+  if (resume) elResume.innerHTML = evResumeHtml(resume);
 
   renderEvSelection(events);
   renderEvList(events);
@@ -3170,6 +3168,26 @@ function renderEvents() {
   btn.classList.toggle('hidden', !suivant);
   if (suivant) btn.textContent = 'Mois suivant';
   document.getElementById('evListLabel').classList.toggle('hidden', !events.length);
+}
+
+// Rend les segments typés du résumé. Une icône est SOUDÉE au premier mot qui la
+// suit : seule en bout de ligne, séparée de ce qu'elle annonce, elle ne veut
+// plus rien dire. Le reste du segment se coupe normalement.
+function evResumeHtml(segments) {
+  const classe = seg => `ev-seg-${seg.s === 'strong' ? 'strong' : 'mute'}`;
+  let html = '';
+  for (let i = 0; i < segments.length; i++) {
+    const seg = segments[i];
+    if (!seg.icon) { html += `<span class="${classe(seg)}">${escHtml(seg.t || '')}</span>`; continue; }
+    const suite = segments[i + 1];
+    if (!suite || !suite.t) { html += evIcon(seg.icon); continue; }
+    const m = /^(\s*\S+)([\s\S]*)$/.exec(suite.t);
+    if (!m) { html += evIcon(seg.icon); continue; }
+    html += `<span class="ev-seg-lie">${evIcon(seg.icon)}<span class="${classe(suite)}">${escHtml(m[1])}</span></span>`;
+    if (m[2]) html += `<span class="${classe(suite)}">${escHtml(m[2])}</span>`;
+    i++;   // le segment de texte a été consommé avec l'icône
+  }
+  return html;
 }
 
 function renderEvSelection(events) {

@@ -641,6 +641,8 @@ html:not(.motion-ready) a.d-chip.resa:focus-visible .dc-tkt{ opacity:1; }
    récurrences ; `mute` = tout le reste. */
 .ev-summary{font-size:var(--fs-xl);line-height:1.7;text-align:left;margin-bottom:96px;}
 .ev-seg-strong{color:var(--text);}
+/* Icône + premier mot : insécables (cf. evResumeHtml). */
+.ev-seg-lie{white-space:nowrap;}
 .ev-seg-mute{color:var(--text-3);}
 .ev-ico{
   display:inline-flex;vertical-align:-6px;margin:0 6px;

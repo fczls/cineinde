@@ -3139,11 +3139,19 @@ Programmation du mois :
 Réponds UNIQUEMENT par un tableau JSON de segments, sans texte autour. Chaque segment est :
   {{"t": "<texte>", "s": "strong"|"mute"}}   ou   {{"icon": "<nom>"}}
 
-Règles :
-- `strong` : le mois, les TYPES d'événement, et les récurrences de type (« deux festivals », « 3 avant-premières »).
-- `mute` : tout le reste — liant, noms propres, thématiques.
-- `icon` devant une sous-catégorie (jeune public, cinéma ibérique…) ; si aucune icône ne convient, \
-place-la devant la catégorie. Icônes disponibles : {icones}.
+Règles du BLANC (`strong`) — c'est ce qui structure la lecture :
+- JAMAIS un seul mot isolé en blanc : toujours un groupe d'au moins deux mots.
+- Le mois ET son année ouvrent la phrase en blanc (« août 2026 »).
+- Autant que possible un COMPTEUR suivi de ce qu'il compte, l'ensemble en blanc : « un festival », \
+« deux avant-premières », « trois rencontres ». Le compteur ne va jamais sans son nom, ni l'inverse.
+- Un « focus » thématique en blanc est possible et bienvenu quand il est parlant — mais SANS son \
+article : dans « des classiques au soleil », « des » reste en gris et « classiques au soleil » passe \
+en blanc. Un focus est toujours précédé d'une icône.
+- Tout le reste est `mute` : liant, articles, prépositions, noms propres.
+
+Autres règles :
+- `icon` devant une sous-catégorie (jeune public, cinéma ibérique…) ou devant un focus ; si aucune \
+icône ne convient, place-la devant la catégorie. Jamais deux icônes de suite. Icônes : {icones}.
 - Une seule phrase fluide, commençant par « En {mois}, ». Reste synthétique quand le mois est chargé.
 - S'adresser au lecteur avec un VERBE D'ACTION à la 2e personne du pluriel : « retrouvez », \
 « découvrez », « (re)voyez », « plongez dans »… juste après le mois. C'est court et direct.
@@ -3154,6 +3162,7 @@ salles non plus (« les cinémas indépendants lyonnais » est trop long) : le v
 - Français irréprochable : accords en genre et en nombre, énumérations cohérentes. La phrase est \
 publiée telle quelle, sans relecture humaine.
 - Les espaces font partie des segments (le rendu concatène sans séparateur).
+{concordance}
 
 Exemple de forme :
 [{{"t":"En ","s":"mute"}},{{"t":"Juillet","s":"strong"}},{{"t":", retrouvez ","s":"mute"}},\
@@ -3189,7 +3198,22 @@ def _valider_segments(data) -> "list | None":
     return out
 
 
-def generate_month_summary(events: list, mois: str) -> "list | None":
+def _phrase_concordance(deja_en_avant: "set | None") -> str:
+    """
+    Consigne de CONCORDANCE : un évènement mis en blanc un mois doit l'être les
+    autres. Sans ça, chaque mois est rédigé isolément et « Little Films
+    Festival » ressort en blanc en juillet, en gris en août — le lecteur qui
+    parcourt les mois y verrait une hiérarchie qui n'existe pas.
+    """
+    if not deja_en_avant:
+        return ""
+    liste = ", ".join(f"« {t} »" for t in sorted(deja_en_avant)[:12])
+    return ("- CONCORDANCE : ces mises en avant ont déjà été employées pour d'autres mois — "
+            f"si l'évènement revient ce mois-ci, garde-lui le même traitement en blanc : {liste}.")
+
+
+def generate_month_summary(events: list, mois: str,
+                           deja_en_avant: "set | None" = None) -> "list | None":
     """
     Résumé du mois en segments typés (§5), via l'API Claude (Haiku).
 
@@ -3213,7 +3237,8 @@ def generate_month_summary(events: list, mois: str) -> "list | None":
         "model": ANTHROPIC_MODEL,
         "max_tokens": 800,
         "messages": [{"role": "user", "content": _RESUME_PROMPT.format(
-            mois=libelle_mois, liste="\n".join(lignes), icones=", ".join(EVENT_ICONS))}],
+            mois=libelle_mois, liste="\n".join(lignes), icones=", ".join(EVENT_ICONS),
+            concordance=_phrase_concordance(deja_en_avant))}],
     }).encode("utf-8")
 
     req = Request(ANTHROPIC_URL, data=payload, headers={
@@ -3240,6 +3265,11 @@ def generate_month_summary(events: list, mois: str) -> "list | None":
     if not segments:
         log.warning(f"Résumé {mois} : JSON invalide — bloc omis")
         return None
+    isoles = [x["t"].strip() for x in segments
+              if x.get("s") == "strong" and len(x["t"].split()) < 2]
+    if isoles:
+        log.warning(f"Résumé {mois} : blanc d'un seul mot ({', '.join(isoles)}) — "
+                    "toléré, mais la consigne demande un groupe d'au moins deux mots")
     log.info(f"Résumé {mois} : {len(segments)} segments")
     return segments
 
@@ -3452,6 +3482,14 @@ def upsert_events_to_supabase(events: list, force_resume: bool = False) -> None:
     except Exception as e:
         log.warning(f"Lecture evenement_mois impossible : {e}")
 
+    # Les mois sont traités DANS L'ORDRE : chaque résumé enrichit l'ensemble des
+    # mises en avant déjà employées, que le suivant doit reprendre (concordance).
+    deja_en_avant: set = set()
+    for m in existants.values():
+        for seg in m.get("resume_segments") or []:
+            if seg.get("s") == "strong" and seg.get("t"):
+                deja_en_avant.add(seg["t"].strip())
+
     for mois, evs_mois in sorted(par_mois.items()):
         if mois < today[:7]:
             continue
@@ -3466,10 +3504,13 @@ def upsert_events_to_supabase(events: list, force_resume: bool = False) -> None:
             except ValueError:
                 frais = False
         if force_resume or not (segments and frais):
-            nouveau = generate_month_summary(evs_mois, mois)
+            nouveau = generate_month_summary(evs_mois, mois, deja_en_avant)
             if nouveau:
                 segments = nouveau
                 genere = datetime.now().isoformat()
+        for seg in segments or []:
+            if seg.get("s") == "strong" and seg.get("t"):
+                deja_en_avant.add(seg["t"].strip())
         try:
             client.table("evenement_mois").upsert({
                 "mois": mois,
