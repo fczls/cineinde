@@ -31,6 +31,7 @@
   --overlay-gold-sm: rgba(201,168,76,.15);
   --overlay-gold-lg: rgba(201,168,76,.5);
   /* Familles de caractères */
+  --font-display: 'Riegraf','Playfair Display',serif;
   --font-display-italic: 'Riegraf','Playfair Display',serif;
   /* Tailles de police */
   --fs-xs: 10px;
@@ -48,5 +49,8 @@
   --radius-2xl: 24px;
   --radius-3xl: 40px;
   --radius-pill: 999px;
+  /* Seuils responsive (hors @media) */
+  --breakpoint-sm: 480px;
+  --breakpoint-md: 820px;
 }
 /* @tokens:end */

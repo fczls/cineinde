@@ -86,8 +86,12 @@ Sans convention écrite, chaque nouveau composant — surtout quand c'est un age
 
 ### Typographie & rayons
 
-- **Un seul `--fs-3xl` par vue** (taille display, réservée au titre de fiche). Ne pas empiler plusieurs tailles display.
-- **Familles (`--font-*`).** `--font-display-italic` = Riegraf italique, voix éditoriale (le séparateur de liste). Toujours accompagné de `font-style:italic` — c'est ce qui déclenche la fonte italique *et* aligne le repli Playfair. Réservé aux respirations narratives : jamais pour de l'UI fonctionnelle.
+- **`--fs-3xl` = la taille du titre dominant**, un rôle par vue : le titre de la fiche film, ou celui de l'évènement mis en avant dans la sélection. Ne pas empiler deux tailles display dans un même bloc. *(La formulation précédente le réservait au titre de fiche — l'onglet Évènements a un titre dominant qui n'est pas une fiche.)*
+- **Familles (`--font-*`) — la police d'affichage ne s'écrit jamais en clair.**
+  - `--font-display` = **Riegraf romain**, pour **tous les titres sans exception** (fiche film, évènement, section, modale).
+  - `--font-display-italic` = Riegraf italique, voix éditoriale (étiquettes de section, mentions). Toujours accompagné de `font-style:italic` — c'est ce qui déclenche la fonte italique *et* aligne le repli.
+  - ⚠️ **« Playfair Display » est un REPLI de chargement, pas un choix typographique.** Un titre qui l'écrit en dur rate la police de marque, en silence et pour toujours. Le lint refuse désormais toute famille littérale (`'Playfair Display'`, `'Riegraf'`).
+  - ⚠️ **Riegraf n'a qu'une graisse.** Poser `font-weight:normal` : un `700` déclenche un gras synthétique par-dessus une fonte déjà grasse (et c'est ce qui faisait retomber certains titres sur le repli).
 - **Un composant = un palier de rayon cohérent.** `--radius-pill` uniquement pour du pleinement arrondi (pills, boutons carrés → cercle).
 
 ### Espacements
@@ -135,8 +139,17 @@ Sans convention écrite, chaque nouveau composant — surtout quand c'est un age
 
 ### Événement — `ev-`  *(montrable)*
 
-- **Anatomie** : `.ev` › `.ev-date`(`.ev-n`/`.ev-m`) · `.ev-info`(`.ev-type`, `.ev-title`, `.ev-desc`, `.ev-meta`).
-- **Do** : `.ev-type` coloré via un **token** (`--gold` par défaut). **Don't** : couleur brute en style inline.
+Le préfixe couvre **tout l'onglet Évènements**, des deux niveaux. Réécrit le 2026-07-29 (l'ancienne carte `.ev` à colonne de date a disparu avec les données figées).
+
+- **Colonne de contenu** : `.ev-col`, `max-width:820px`, centrée. Le desktop est un **centrage doublé d'un élargissement**, pas un passage multi-colonnes : le chrome (barre cinémas, toolbar) reste pleine largeur et la liste reste **mono-colonne à toutes les largeurs**.
+- **Résumé — `.ev-summary`** : segments `.ev-seg-strong` (`--text`) / `.ev-seg-mute` (`--text-3`) et pastilles `.ev-ico` (cercle `--text`, glyphe `--bg`). **Do** : n'accepter qu'une icône de la liste fermée `EV_ICONS`. **Don't** : styler un segment autrement que par ces deux classes — le rendu multicolore doit rester déterministe.
+- **Étiquette de section — `.ev-label`** (« Sélection », « Toute la programmation du mois ») : pill en `--font-display-italic` + `font-style:italic`, la voix éditoriale du système. Réservée aux respirations narratives.
+- **Éventail — `.ev-fan` › `.ev-card`** : trois niveaux de profondeur (`data-niveau` 0/1/2, `data-cote` -1/0/1), décalages et rotation en variables (`--ev-dx1`, `--ev-dx2`, `--ev-rot`), opacité 70 % au niveau 2. Affiche centrale : une seule dimension fixée (le ratio est préservé) ; cartes latérales **carrées** en `object-fit:cover`, `object-position:top` sur les portraits (préserve le bloc-titre de l'affiche), `center` sur les paysages.
+  **Do** : n'animer que `transform`/`opacity`, et respecter `prefers-reduced-motion`. **Don't** : masquer une carte dont l'image casse — le **nombre** de cartes suit une règle produit, il ne doit pas dépendre d'un 403 (repli sur le visuel local).
+  **État `.is-solo`** (un seul évènement éligible) : ni cartes latérales, ni flèches, ni swipe.
+- **Ligne de liste — `.ev-row`** : `[.ev-chip] [.ev-cat] [.ev-sep-dot] [.ev-row-titre] [.ev-rule] [.ev-plus-sm]`. L'étiquette de catégorie se lit **avant** le titre : c'est une information structurante, lue à chaque item. Le `+` est en absolu à droite pour rester sur la première ligne quand le titre passe à la ligne (mobile).
+- **Niveau 2** : réutilise la grammaire deux blocs de la fiche (`.d-hero` + `.d-body`) ; seules les parties propres portent `ev-` — `.ev-pills` (`.ev-pill-cine` en aplat `--text`, puis type et forme en contour), `.ev-films` › `.ev-film`. **Do** : `.ev-film-etat.is-inactif` (`--text-3`) pour « Séance passée » / « Séances non encore annoncées » — une information, pas une affordance. **Don't** : afficher un `+` sans destination.
+- **A11y** : `:focus-visible` doré sur les cartes, flèches et `+` ; flèches ‹ › au clavier quand l'éventail a le focus.
 
 ---
 

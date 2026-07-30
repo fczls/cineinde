@@ -1,7 +1,7 @@
 # Architecture — Données & Infra
 
 > Schéma Supabase, clés de dédup, RLS, workflows CI, scripts de maintenance. Les invariants transverses vivent dans [Vue d'ensemble](README.md).
-> Dernière mise à jour : 2026-07-25
+> Dernière mise à jour : 2026-07-29
 
 ---
 
@@ -30,6 +30,38 @@ seances (id, film_id, cinema_id, date, heure, version, resa_url,
 - `002_storage_pdfs.sql` : bucket de stockage pour les PDF Comoedia.
 - `003_dedup_imdb_id.sql` : index unique **partiel** `films_imdb_id_key` sur `imdb_id` (où non nul) → filet de sécurité DB de la dédup par imdb_id (I1). ⚠️ **À appliquer APRÈS** `scripts/merge_duplicate_films.py --apply` (l'index échoue tant que des doublons d'imdb_id subsistent). Genèse : *Exploration — Dédup inter-sources* (vault Obsidian).
 - `004_backdrop_trailer.sql` (2026-07-25) : colonnes `films.backdrop` (visuel paysage TMDB) et `films.trailer` (URL YouTube) pour la fiche détail. Purement **additif** — ne touche ni invariant ni clé de dédup. Idempotent (`ADD COLUMN IF NOT EXISTS`), mais **à appliquer avant** le scrape suivant, sinon l'upsert `films` échoue sur des colonnes inconnues.
+- `005_evenements.sql` (2026-07-29) : le modèle de l'onglet Événements — voir § dédié ci-dessous.
+
+---
+
+## Schéma Événements (`005_evenements.sql`)
+
+```
+evenements (id, cle UNIQUE, type, forme, titre, description,
+            date_debut, date_fin, "precision", affiche_url, source, source_url)
+   ▲                                   ▲
+   │ evenement_id                      │ evenement_id
+evenement_films (film_id NULLABLE →films, titre, titre_key, affiche_url, ordre,
+                 UNIQUE(evenement_id, titre_key))
+evenement_seances (cinema_id →cinemas, date, heure,
+                   seance_id NULLABLE →seances, film_id NULLABLE →films,
+                   titre_film, invite, description, resa_url,
+                   UNIQUE NULLS NOT DISTINCT (evenement_id, cinema_id, date, heure, titre_film))
+
+evenement_mois (mois PK 'YYYY-MM', selection_seed, resume_segments jsonb, resume_generated_at)
+```
+
+⚠️ **`evenement_seances` est dénormalisée, et ce n'est pas un raccourci.** Les scrapers ne ramènent qu'**une semaine** de séances (Lumière `?week=`, PDF hebdo Comoedia) alors que les pages événement annoncent jusqu'à ~9 semaines : une FK obligatoire vers `seances` serait insatisfiable pour la majorité des dates affichées — et un film sans séance de la semaine n'existe même pas dans `films` (les films naissent des séances). L'événement est donc **autoportant** : il porte ses propres dates, et `seance_id`/`film_id` se remplissent **opportunistement**, run après run.
+
+Trois conséquences à ne pas défaire :
+- `evenement_films.titre` existe **parce que** `film_id` peut rester NULL : sans lui, un film hors semaine scrapée serait invisible au niveau 2, alors que l'interface lui réserve l'état « Séances non encore annoncées » (le régime normal pour septembre-octobre).
+- `NULLS NOT DISTINCT` sur la clé des créneaux : sans ça, deux créneaux sans date (fréquent) ne dédupliqueraient jamais et l'upsert empilerait des doublons à chaque run.
+- `evenements.cle` (clé de dédup `type|identité|mois`, cf. `event_dedup_key`) rend l'upsert **idempotent** entre deux runs. Bucket mensuel volontaire : une source qui corrige sa date d'un jour ne doit pas créer une 2e ligne.
+- Contrainte `forme` : renseignée **uniquement** quand `type = 'festival'`, NULL sinon (`evenements_forme_chk`).
+
+**Bucket `affiches`** (public read, écriture service-role) : les affiches maison des festivals vivent sur des CDN qui refusent le hotlink (403) et dont les URLs tournent → `_rapatrie_affiche()` les copie au premier run et sert l'URL publique Supabase. Même motif que `002_storage_pdfs.sql`, **sans** l'upload anonyme.
+
+**Application** : `python3 scripts/apply_schema.py 005_evenements.sql` (nécessite `DATABASE_URL` dans `.env`), ou copier-coller dans l'éditeur SQL Supabase. Tant que la migration n'est pas appliquée, le scraper log des avertissements et le front sert le repli `programme.json` — rien ne casse.
 
 ---
 
@@ -43,7 +75,7 @@ Pour chaque film : upsert `cinemas` (par nom) → upsert `films` (clé I1) → u
 
 | Workflow | Cron | Rôle | Notes |
 |---|---|---|---|
-| **scraper.yml** | `0 20 */2 * *` (un jour sur deux, 20h UTC) | run scraper → commit `chore: mise à jour programme` sur `main` | Cadence J/2 choisie pour reprendre toute maj sous ≤48h sans angle mort (CHANGELOG 2026-07-08). Secrets : OMDB/TMDB/SUPABASE. Peut `exit 4` (garde-fou I6). |
+| **scraper.yml** | `0 20 */2 * *` (un jour sur deux, 20h UTC) | run scraper → commit `chore: mise à jour programme` sur `main` | Cadence J/2 choisie pour reprendre toute maj sous ≤48h sans angle mort (CHANGELOG 2026-07-08). Secrets : OMDB/TMDB/SUPABASE + **ANTHROPIC_API_KEY (optionnel**, résumé du mois de l'onglet Événements : absent ⇒ warning et bloc absent, rien d'autre ne change). Peut `exit 4` (garde-fou I6). |
 | **cleanup.yml** | `0 3 * * 4` (jeudi 3h UTC) | purge séances anciennes + films orphelins | `scripts/cleanup_old_seances.py --days 10`. Garde la table sous le plafond REST (invariant I8). Dispatch manuel avec `dry_run`. |
 | **pages.yml** | sur push `main` | déploie `index.html` sur GitHub Pages | Pages ne déploie que `main` → pas d'URL de preview PR (cf. *Workflow* (vault Obsidian)) |
 

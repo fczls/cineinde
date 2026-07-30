@@ -18,6 +18,8 @@ Le « pourquoi » de l'évolution du projet est bien documenté mais **chronolog
 
 Notes sœurs : [Pipeline de données](pipeline.md) · [Frontend](frontend.md) · [Données & Infra](data-infra.md).
 
+*Dernière révision : 2026-07-29 (onglet Événements — contrat C5, C4 étendu).*
+
 ---
 
 ## Carte du système & flux de données
@@ -91,7 +93,31 @@ Ajouter un cinéma = toucher **les deux colonnes**. (C'est le piège frontend de
 > **Allowlist billetterie (2026-07-20)** — dédup *voulue* : aucune CSP n'est posable sur GitHub Pages, l'allowlist EST la seule défense contre un `href` tiers/`javascript:` injecté. Le front **re-valide** (`safeResaUrl`) ce que le back a déjà filtré (`is_valid_resa_url`) car il lit **deux** sources (Supabase + JSON) et ne doit faire confiance à aucune. Élargir un hôte = toucher **les deux**. Genèse : *Exploration — Accès billetterie* (vault Obsidian).
 
 ### C4 — Le contrat `programme.json` (fallback)
-Forme : `{generated_at, sources:[...], films:[<film dict>]}`. Consommé par le front uniquement si Supabase est indisponible. Le `cinema` y est au **niveau film** (pas séance).
+Forme : `{generated_at, sources:[...], films:[<film dict>], evenements:[<événement public>]}`. Consommé par le front uniquement si Supabase est indisponible. Le `cinema` y est au **niveau film** (pas séance).
+
+**Clé `evenements` (2026-07-29)** — sans elle, le nouvel onglet n'aurait *aucune* source de secours et I3 ne tiendrait plus pour lui. Produite par `events_public()` (scraper.py) ; les `resa_url` en sont **exclus** (I5 : token horaire volatil). Le front lit indifféremment cette forme ou celle de Supabase.
+
+### C5 — Le « dict événement » (contrat scraper → upsert, miroir de C1)
+Chaque `scrape_*_events()` **doit** produire des dicts de cette forme, consommés tels quels par `merge_events` → `resolve_dates_from_seances` → `upsert_events_to_supabase` :
+
+```python
+{
+  "type": str,          # avant_premiere | rencontre | seance_speciale | festival
+  "forme": str|None,    # festival | cycle | retrospective | jeune_public — UNIQUEMENT si type=festival
+  "titre": str, "description": str|None,
+  "date_debut": "YYYY-MM-DD"|None, "date_fin": "YYYY-MM-DD"|None,
+  "precision": str,     # exact | jour | mois | saison | en_cours
+  "affiche_url": str|None, "source": str, "source_url": str,
+  "films":    [ {"titre": str, "dates": ["YYYY-MM-DD"]} ],
+  "creneaux": [ {"cinema": str, "date": str|None, "heure": str|None,
+                 "titre_film": str|None, "invite": str|None,
+                 "description": str|None, "resa_url": str|None} ],
+}
+```
+
+⚠️ **Le descriptif et l'invité vivent sur le CRÉNEAU, jamais sur l'événement** : un même événement joué dans deux salles a deux textes différents (« en présence du réalisateur » vs « séance présentée »), les fusionner en écraserait un.
+
+⚠️ **`date_debut`/`date_fin` sont une ENVELOPPE.** Quand les créneaux divergent, elle ne doit jamais être affichée seule — chaque ligne de salle porte sa propre période (c'est ce que fait `evChipDates` côté front).
 
 ---
 
@@ -102,6 +128,8 @@ Forme : `{generated_at, sources:[...], films:[<film dict>]}`. Consommé par le f
 | ~~**Le Zola** (nouvelle source)~~ ✅ **intégré 2026-07-10** | C1 respecté, I2 appliqué (annee/realisateur à None), C3 mis à jour, I6 isolé (`exclude_slugs`) | Voir [pipeline.md](pipeline.md) § sources. Genèse : *Challenge — Ajout Cinéma Le Zola* (vault Obsidian) |
 | ~~**Dédup inter-sources par imdb_id**~~ ✅ **traité 2026-07-10** | I1 réécrit (imdb_id primaire + repli), C2/C3 mis à jour, garde-fou `_years_close` | migration 003 + `scripts/merge_duplicate_films.py` (à lancer sur la prod dans cet ordre). Genèse : *Exploration — Dédup inter-sources* (vault Obsidian) |
 | ~~**Billetterie deep-link (`resa_url` rendu au front)**~~ ✅ **traité 2026-07-20** | I5 étendu (rendu front + strip au repli JSON), I1 durci (rattachement par titre), C3 (allowlist dupliquée front/back) | Option A « câbler l'existant » : parser Lumière lit le `<a>` au **périmètre du `<time>`** (fin du bug « séance passée »), allowlist sécu, flag `ENABLE_RESA_LINKS`. Nettoyage one-shot des doublons `films` (112→87). Genèse : *Exploration — Accès billetterie* (vault Obsidian) |
-| **Événements** (nouvel onglet automatisé) | Nouvelle table `evenements` (Infra), nouveaux parsers (Pipeline), remplace `EVENTS_DATA`/`renderEvents` (Frontend) | Feature *transverse* — touche les 3 spokes. Éval : *Exploration — Événements* (vault Obsidian). **Découverte 2026-07-10 : Le Zola a une page `/events/`** (« Les événements ») — 3e source potentielle, contrairement à ce que disait l'exploration |
+| ~~**Événements** (nouvel onglet automatisé)~~ ✅ **traité 2026-07-29** | Nouveau contrat **C5** (dict événement), **C4 étendu** (clé `evenements` du repli), 4 tables + bucket (Infra), 2 parsers (Pipeline), onglet réécrit + routing par URL (Frontend) | Feature *transverse* — a touché les 3 spokes. Genèse : *Exploration — Événements* puis *Brief - Onglet Événements* (vault Obsidian). **Le Zola reste hors périmètre** (source non sondée) : le filtre « Le Zola » donne un périmètre vide, cas prévu |
+| **Le Zola côté événements** | C5 (un `scrape_zola_events()` de plus), C3 inchangé | Deux gisements connus : `/events/<slug>/` **et** des pages dédiées hors-`/events/` pour les grosses manifestations (un scraper qui ne tape que `/events/` rate les festivals). Le type est dans le slug |
+| ~~**Horizon de scraping des séances**~~ ✅ **traité 2026-07-29** | I8 — vérifié, non menacé | Lumière est scrapé sur **8 semaines** (`scrape_lumiere_multi`). La crainte du plafond ne se matérialise pas : une semaine future ne porte pas un programme complet mais seulement les séances d'événements déjà annoncées (2 à 5 films/semaine, +18 lignes au total). Détail et mesures : [Pipeline](pipeline.md) |
 
 **Principe :** avant de toucher une pièce, vérifier ici quels invariants/contrats elle porte — pour ne pas ré-inspecter le code à chaque fois.

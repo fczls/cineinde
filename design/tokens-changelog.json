@@ -2,6 +2,29 @@
   "$description": "Historique des design tokens, dérivé de l'historique git de design/tokens.json par design/build_tokens_changelog.py. Ne pas éditer à la main.",
   "entries": [
     {
+      "date": "2026-07-29",
+      "commit": "3bb3158",
+      "summary": "fix(evenements): typo de marque, ordre de liste, sections, et retours d'interface",
+      "changes": [
+        {
+          "kind": "added",
+          "path": "fontFamily.display",
+          "group": "Familles",
+          "var": "--font-display",
+          "to": "'Riegraf','Playfair Display',serif",
+          "desc": "Riegraf romain — TOUS les titres (fiche film, évènement, section). Playfair Display n'est qu'un repli de chargement. À poser avec font-weight:normal : Riegraf n'a qu'une graisse, un 700 déclencherait un gras synthétique."
+        },
+        {
+          "kind": "note",
+          "path": "fontFamily.display-italic",
+          "group": "Familles",
+          "var": "--font-display-italic",
+          "to": "'Riegraf','Playfair Display',serif",
+          "desc": "Riegraf italique — voix éditoriale : séparateurs, mentions et étiquettes de section. À poser avec font-style:italic (le repli Playfair suit alors le même style)."
+        }
+      ]
+    },
+    {
       "date": "2026-07-26",
       "commit": "57ae614",
       "summary": "feat(fiche): fiche mobile deux blocs + composant info réservation",

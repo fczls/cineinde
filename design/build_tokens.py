@@ -9,7 +9,8 @@ Règles de nommage des variables CSS générées :
     fontFamily.* -> --font-{clé}    (ex. fontFamily.display-italic -> --font-display-italic)
     fontSize.*   -> --fs-{clé}      (ex. fontSize.xs -> --fs-xs)
     radius.*     -> --radius-{clé}  (ex. radius.pill -> --radius-pill)
-    breakpoint.* -> non généré (var() interdit dans @media ; doc/Figma uniquement)
+    breakpoint.* -> --breakpoint-{clé} (utilisable en max-width/width ; ⚠️ PAS dans
+                    @media, où var() est interdit par CSS — y écrire le littéral)
 
 Usage :
     python3 design/build_tokens.py           # (ré)écrit src/tokens.css
@@ -29,9 +30,10 @@ END = "/* @tokens:end */"
 
 # groupe DTCG -> préfixe de variable CSS (None = non généré en CSS)
 CSS_PREFIX = {"color": "", "fontFamily": "font-", "fontSize": "fs-", "radius": "radius-",
-              "breakpoint": None, "spacing": None}
+              "breakpoint": "breakpoint-", "spacing": None}
 GROUP_LABEL = {"color": "Couleurs", "fontFamily": "Familles de caractères",
-               "fontSize": "Tailles de police", "radius": "Rayons"}
+               "fontSize": "Tailles de police", "radius": "Rayons",
+               "breakpoint": "Seuils responsive (hors @media)"}
 
 
 def _tokens_of(group: dict):

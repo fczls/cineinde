@@ -1,7 +1,7 @@
 # Architecture — Pipeline de données (scraper.py)
 
 > Fonctionnement interne du scraper : les sources (*variants*), les étapes de `main()`, l'enrichissement, le garde-fou. Les invariants/contrats transverses vivent dans [Vue d'ensemble](README.md).
-> Dernière mise à jour : 2026-07-25
+> Dernière mise à jour : 2026-07-29
 
 ---
 
@@ -14,6 +14,38 @@ Chaque source a son parser dédié mais produit le **même « film dict »** (co
 | **Comoedia** | `scrape_comoedia_pdf()` (scraper.py:1303) | **PDF** hebdo (magazine 2 colonnes) | 1 PDF = 1 semaine, publié 1×/sem | pauvres (titre en CAPS → `_titlecase_fr`) | 🔴 haute (layout PDF, découverte d'URL CDN) |
 | **Lumière** | `scrape_lumiere()` (scraper.py:1610) | **HTML** rendu serveur, param `?week=YYYY-MM-DD` | semaine explicite (`get_last_wednesday`) | pauvres à la liste, enrichies par page détail | 🟡 moyenne (redesign HTML) ; résa cotecine = deep-link **par séance** — le `<a>` est lu au périmètre du `<time>` (`_lumiere_parse_schedule_td`), **pas** du `<td>`, sinon toutes les séances du jour héritent du lien de la 1re → « séance passée » (bug corrigé 2026-07-20, spike SP1). `resa_url` volatil (token horaire `D{epoch}`, I5), filtré par `is_valid_resa_url` (allowlist, C3) |
 | **Le Zola** | `scrape_zola()` | **HTML** WordPress, index `/films-a-laffiche/` → fiches `/movies/{slug}/` (sélecteurs documentés en tête du module dans scraper.py) | pas de param semaine — carrousel roulant ~15 jours, borné ensuite par `filter_current_week` | riches, mais `annee`/`realisateur`/`genres` **volontairement non ingérés** (I2 — année de sortie FR ≠ année de production ; genres FR ≠ vocabulaire OMDb anglais des autres films) | 🟡 moyenne (thème WordPress maison) ; résa TicketingCiné **stable** (pas de token volatil, contrairement au cotecine Lumière → rien à ajouter aux champs volatils I5) |
+
+### Les 2 sources d'événements (2026-07-29)
+
+Pipeline **distinct** de celui des films : il produit le « dict événement » (contrat **C5**), pas le « film dict ».
+
+| Source | Fonction | Format brut | Type d'événement | Fragilité |
+|---|---|---|---|---|
+| **Comoedia** | `scrape_comoedia_events()` | page liste `/tous-les-evenements` (pour les slugs) puis le **JSON Gatsby** `/page-data/events/<slug>/page-data.json` de chaque fiche | **étiqueté à la source** (`Avant-première`, `Festival`, `Rétrospective`, `Rencontre`) → mapping direct, aucune inférence | 🟢 faible — le JSON porte dates, affiche, description HTML et **liens films `?date=YYYY-MM-DD`** (film ET date en clair, aucun matching flou) |
+| **Lumière** | `scrape_lumiere_events()` | `evenement.html` (sections `<h2>`) + `rendez-vous.html`, pages WYSIWYG | **aucun champ type** : préfixe en gras (`AVANT-PREMIÈRE`, `SÉANCE SPÉCIALE`, `CYCLE …`) × section `<h2>` | 🟡 moyenne — pages éditées à la main (une coquille de salle vue le 2026-07-27, d'où le mapping par radical dans `_cinema_from_text`) |
+
+⚠️ **`avant-premieres.html` (Lumière) n'est JAMAIS ingérée** : page non purgée, contenu périmé de plusieurs semaines.
+
+⚠️ **Le préfixe se cherche dans les 200 premiers caractères**, pas dans tout le texte : « Little Films Festival … 2 avant-premières exclusives » passerait sinon pour une avant-première.
+
+Règles portées par des fonctions pures (toutes testées, `tests/test_events.py`) :
+
+- `classify_event_type` — `par` + personne nommée ⇒ `rencontre` ; `en partenariat avec` / `dans le cadre de` ⇒ `seance_speciale`. Un type **explicite** de la source (avant-première, rencontre, festival) fait foi : « Séance présentée » seul sur une AVP Cannes ne la transforme pas en rencontre. Quand les deux marqueurs cohabitent, **rencontre l'emporte** (une personne est là).
+- `parse_event_period` — modélise l'imprécision (`exact` / `jour` / `mois` / `saison` / `en_cours`) au lieu de la masquer.
+- `merge_events` — dédup `film + type + fenêtre ±14 j`. **Sans la fenêtre**, deux avant-premières du même film à trois mois d'écart fusionneraient (*Notre salut*). Une programmation partagée (rétrospective annoncée par deux salles) ne fusionne que **à forme égale** : un festival de classiques englobe volontiers les films d'une rétrospective sans être cette rétrospective. Titre canonique par **priorité de source** (Lumière > Comoedia > Zola), surtout pas « le premier récupéré ».
+- `resolve_dates_from_seances` — les événements sans date se résolvent par **jointure** avec les séances scrapées, jamais par inférence. Une date unique et exacte n'est pas étendue (un ordre du programmateur, pas une enveloppe). **Aucune séance connue ⇒ l'événement n'est pas ingéré** : pas de fantôme.
+- `filter_events_current` — filtrage du passé **à l'ingestion** : aucune source ne purge.
+- `generate_month_summary` — résumé mensuel via l'API Claude (Haiku), **segments typés** validés strictement (clés, styles et icônes d'une liste fermée). Sans `ANTHROPIC_API_KEY` ou en cas de réponse non conforme : `None` ⇒ pas de bloc côté front, **pas de phrase de secours**.
+
+Étapes dans `main()` : **5bis**, après l'upsert des films (la jointure a besoin des films du run) et **avant** le filtrage semaine (qui amputerait les séances servant à dater les événements longs). Tout le bloc est enveloppé dans un `try` : le pipeline événements ne doit jamais faire tomber le pipeline séances. Drapeaux : `--no-events`, `--events-only` (relit `programme.json` pour la jointure), `--force-resume`.
+
+### Horizon Lumière : 8 semaines (2026-07-29)
+
+`scrape_lumiere_multi()` enchaîne `scrape_lumiere()` sur N semaines (défaut 8, `--lumiere-weeks`) et fusionne par (titre, salle).
+
+⚠️ **Contrairement à ce que laissait craindre I8, le volume ne suit pas.** Les salles ne publient leur grille qu'une semaine à l'avance : mesuré le 2026-07-29, 34 films pour la semaine courante puis **2 à 5 par semaine**, et ce sont exactement les séances d'**événements** déjà annoncées (avant-premières du lundi, cycles, rétrospectives). Bilan : +18 séances en base pour 8 semaines d'horizon — le plafond REST de 1000 lignes n'est pas approché.
+
+Effet direct sur le niveau 2 des événements : un film annoncé entre dans `films`, donc récupère son poster TMDB **et** une fiche ouvrable. Mesuré sur le même run : films d'événement avec affiche 14 → **61 sur 74**, créneaux rattachés à une séance réelle 1 → **46**.
 
 **Point clé (variant piégeux) :** le *modèle de semaine* diffère. Lumière prend une semaine ; le PDF Comoedia EST une semaine ; Zola est une liste roulante coupée après coup par `filter_current_week` (scraper.py:2049). Un `scrape_X()` ne « calque » un autre que sur la *structure* (liste → détail), pas sur le modèle temporel.
 

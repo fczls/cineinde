@@ -45,9 +45,20 @@ def _strip_comments(css: str) -> str:
 def lint(css: str):
     out = []
     for n, line in enumerate(_strip_comments(css).splitlines(), 1):
+        # Piège CSS : `var()` n'est pas évalué dans une media query — la règle
+        # entière est ignorée, en silence. Les seuils sont générés en variables
+        # pour servir de LARGEUR (colonne de contenu), pas de condition.
+        if "@media" in line and "var(--breakpoint" in line:
+            out.append((n, "`var(--breakpoint-*)` dans un @media : CSS ne l'évalue pas "
+                           "(règle ignorée en silence) → écrire le littéral"))
         for m in COLOR_RE.finditer(line):
             if m.group(0) not in COLOR_ALLOWLIST:
                 out.append((n, f"couleur brute `{m.group(0)}` → var(--…) (ou allowlister si one-off)"))
+        # « Playfair Display » n'est qu'un REPLI de Riegraf, pas un choix : un
+        # titre qui l'écrit en clair rate la police de marque, en silence.
+        for m in re.finditer(r"'(Playfair Display|Riegraf)'", line):
+            out.append((n, f"famille `{m.group(1)}` écrite en clair → "
+                           "var(--font-display) ou var(--font-display-italic)"))
         for prop, tok in (("font-size", "--fs-*"), ("border-radius", "--radius-*")):
             for m in re.finditer(rf'{prop}:\s*\d+px', line):
                 out.append((n, f"`{m.group(0)}` en px brut → var({tok})"))

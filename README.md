@@ -8,8 +8,8 @@ Site programme des cinémas Le Comoedia et Cinémas Lumière (Terreaux, Bellecou
 
 | Composant | Description |
 |-----------|-------------|
-| **Frontend** | `index.html` — programme (navigation flottante, vues Détaillée/Liste & 1J/7J, onglet événements) ; charge Supabase (source principale), fallback `programme.json` |
-| **Scraper** | `scraper.py` — scrape Comoedia PDF + Lumière, produit `programme.json` et upsert Supabase |
+| **Frontend** | `index.html` — programme (navigation flottante, vues Détaillée/Liste & 1J/7J) et **onglet Évènements** (résumé du mois, sélection, programmation mensuelle, détail) ; routing par URL ; charge Supabase (source principale), fallback `programme.json` |
+| **Scraper** | `scraper.py` — scrape Comoedia PDF + Lumière + Zola (séances) et Comoedia + Lumière (évènements), produit `programme.json` et upsert Supabase |
 | **Base de données** | Supabase (PostgreSQL) — source principale du frontend |
 | **CI** | GitHub Actions — scraper un jour sur deux (20h UTC) |
 
@@ -32,6 +32,9 @@ cineinde/
 ├── programme.json          # Données scrapées (committées par CI)
 ├── pdf_state.json          # État du scraper (committé par CI)
 ├── scraper.py              # Scraper principal (Comoedia + Lumière)
+├── tests/                  # Tests (stdlib unittest + node, aucune dépendance)
+│   ├── test_events.py      # Pipeline évènements : catégorisation, dédup, jointure
+│   └── chip_dates.test.mjs # Fonctions pures du front (chip de date, tri, tirage)
 ├── requirements.txt        # Dépendances Python
 ├── .env.example            # Template variables d'environnement
 │
@@ -105,8 +108,16 @@ Pour activer Supabase : renseigner `SUPABASE_URL` et `SUPABASE_ANON_KEY` dans la
 
 ### Sources
 
-- **Le Comoedia** : `https://www.cinema-comoedia.com/programme-accessible/` (Gatsby)
+**Séances**
+
+- **Le Comoedia** : PDF hebdomadaire (`/horaires-semaine-complete/`)
 - **Cinémas Lumière** : `https://www.cinemas-lumiere.com/calendrier-general.html`
+- **Le Zola** : `https://www.lezola.com/films-a-laffiche/`
+
+**Évènements**
+
+- **Le Comoedia** : `https://www.cinema-comoedia.com/tous-les-evenements` (+ le JSON de chaque fiche)
+- **Cinémas Lumière** : `evenement.html` et `rendez-vous.html` (⚠️ jamais `avant-premieres.html`, périmée)
 
 ### Options
 
@@ -119,10 +130,28 @@ Pour activer Supabase : renseigner `SUPABASE_URL` et `SUPABASE_ANON_KEY` dans la
 | `--no-lumiere` | Ne pas scraper les Cinémas Lumière |
 | `--no-filter` | Ne pas filtrer par semaine (pour tests) |
 | `--file PATH` | Utiliser un fichier HTML local (Comoedia) |
+| `--no-zola` | Ne pas scraper Le Zola |
+| `--no-events` | Ne pas scraper les évènements |
+| `--events-only` | Ne scraper QUE les évènements (films relus depuis `programme.json`) |
+| `--force-resume` | Régénérer le résumé du mois même s'il est récent |
 
 ### Enrichissement
 
 Le scraper enrichit les films via **OMDb** et **TMDB** (posters, synopsis, notes). Optionnel : sans clés API, les champs restent vides.
+
+Le **résumé du mois** de l'onglet Évènements est produit par l'API Claude (`ANTHROPIC_API_KEY`, optionnel) : sans clé, le bloc est simplement absent du site.
+
+---
+
+## Tests
+
+Aucune dépendance à installer — stdlib Python et node.
+
+```bash
+python3 -m unittest discover -s tests   # pipeline évènements (catégorisation, dédup, jointure)
+node tests/chip_dates.test.mjs          # fonctions pures du front (chip de date, tri, tirage)
+python3 design/check_tokens.py          # lint du design system
+```
 
 ---
 
