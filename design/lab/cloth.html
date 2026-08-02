@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Labo — dépliage tissu · CinéInde</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400,500&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════════════════════════════
+   LABO — page de développement, non linté par check_tokens.py (qui ne couvre
+   que src/components.css). Les valeurs brutes sont donc assumées ici : ce
+   n'est pas un composant de production, c'est un banc de réglage.
+   Les gabarits de l'éventail sont en revanche COPIÉS À L'IDENTIQUE de
+   components.css (§ Éventail de la sélection) — sans quoi les réglages
+   trouvés ici ne vaudraient rien en prod.
+   ═══════════════════════════════════════════════════════════════════════════ */
+:root{
+  --bg:#0c0b0b; --bg2:#141312; --bg3:#1c1a19; --bg4:#262421;
+  --texte:#eceae4; --texte2:#a8a49c; --texte3:#6f6b64;
+  --trait:#2a2724; --accent:#7c5cff; --pouce:#d6d2c4;
+  --radius-lg:16px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{
+  background:var(--bg);color:var(--texte);
+  font-family:'DM Sans',system-ui,sans-serif;font-size:14px;
+  display:grid;grid-template-columns:1fr 380px;min-height:100vh;
+}
+@media(max-width:1000px){ body{grid-template-columns:1fr;} }
+
+/* ── Scène ────────────────────────────────────────────────────────────── */
+.scene{
+  position:relative;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:32px;padding:40px 24px;
+  background:radial-gradient(120% 90% at 50% 30%, #171512 0%, var(--bg) 70%);
+}
+.scene-tag{
+  position:absolute;top:20px;left:24px;
+  font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--texte3);
+}
+.fps{position:absolute;top:20px;right:24px;font-family:'DM Mono',monospace;font-size:11px;color:var(--texte3);}
+
+/* Éventail — géométrie reprise de components.css (.ev-fan / .ev-card) */
+.fan{
+  --dx1:104px; --dx2:184px; --rot:15deg; --dy2:20px;
+  --gab-v:170px;  --gab-v-h:254px;
+  --gab-cote:160px; --gab-cote-h:240px;
+  --gab-c1:calc(var(--gab-cote)*.9);  --gab-c1-h:calc(var(--gab-cote-h)*.9);
+  --gab-c2:calc(var(--gab-cote)*.81); --gab-c2-h:calc(var(--gab-cote-h)*.81);
+  position:relative;height:280px;width:100%;max-width:640px;
+}
+.carte{
+  position:absolute;left:50%;bottom:0;line-height:0;
+  transform-origin:50% 92%;border-radius:var(--radius-lg);overflow:hidden;
+  transform:translateX(-50%);
+}
+.carte img{display:block;object-fit:cover;width:var(--gab-c1);height:var(--gab-c1-h);object-position:top;}
+/* Mode « toutes les affiches » : le tissu remplace l'<img>, qui reste en place
+   en `visibility:hidden` — c'est lui qui donne sa taille à la carte, donc le
+   retirer déplacerait tout l'éventail. `overflow:visible` laisse le pli sortir. */
+.carte .tissu{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:none;}
+.fan.tous .carte{overflow:visible;}
+.fan.tous .carte > img{visibility:hidden;}
+.fan.tous .carte .tissu{display:block;}
+.carte[data-niveau="1"][data-cote="-1"]{transform:translateX(calc(-50% - var(--dx1))) rotate(calc(-1*var(--rot)));}
+.carte[data-niveau="1"][data-cote="1"]{transform:translateX(calc(-50% + var(--dx1))) rotate(var(--rot));}
+.carte[data-niveau="2"]{opacity:.7;z-index:0;}
+.carte[data-niveau="2"] img{width:var(--gab-c2);height:var(--gab-c2-h);}
+.carte[data-niveau="2"][data-cote="-1"]{transform:translateX(calc(-50% - var(--dx2))) translateY(var(--dy2)) rotate(calc(-2*var(--rot)));}
+.carte[data-niveau="2"][data-cote="1"]{transform:translateX(calc(-50% + var(--dx2))) translateY(var(--dy2)) rotate(calc(2*var(--rot)));}
+
+/* Centre : le canvas déborde le gabarit pour laisser sortir le pli. */
+.centre{
+  position:absolute;left:50%;bottom:0;transform:translateX(-50%);
+  z-index:2;pointer-events:none;
+}
+.centre canvas{display:block;}
+/* Repère du cadre réel de la carte, pour juger le débordement. */
+.cadre{
+  position:absolute;left:50%;bottom:0;transform:translateX(-50%);
+  width:var(--gab-v);height:var(--gab-v-h);
+  border:1px dashed rgba(255,255,255,.16);border-radius:var(--radius-lg);
+  z-index:3;pointer-events:none;opacity:0;transition:opacity .2s;
+}
+.fan.repere .cadre{opacity:1;}
+
+.meta{text-align:center;}
+.meta-sous{font-style:italic;font-size:15px;color:var(--texte2);margin-bottom:6px;}
+.meta-titre{font-size:26px;line-height:1.25;}
+
+/* ── Panneau ──────────────────────────────────────────────────────────── */
+.panneau{
+  background:var(--bg2);border-left:1px solid var(--trait);
+  /* Pas de padding-haut : il laisserait la barre collante se caler 20px plus
+     bas, et le contenu défilerait dans la fente. Le retrait est porté par le
+     titre, qui lui défile. */
+  padding:0 18px 60px;overflow-y:auto;max-height:100vh;
+}
+.panneau h1{
+  font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--texte2);margin:20px 0 4px;
+}
+.panneau .sous{font-size:12px;color:var(--texte3);margin-bottom:20px;line-height:1.5;}
+
+.groupe{margin-bottom:22px;}
+.groupe > h2{
+  font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--texte3);
+  padding-bottom:8px;margin-bottom:12px;border-bottom:1px solid var(--trait);
+}
+
+/* ── Potard — la commande demandée : rail sombre, crans en points,
+      pouce clair, dernier cran accentué. ────────────────────────────────── */
+.pot{margin-bottom:14px;}
+.pot-tete{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px;gap:8px;}
+.pot-min,.pot-max{font-size:12.5px;color:var(--texte2);white-space:nowrap;}
+.pot-max{text-align:right;}
+.pot-val{
+  font-family:'DM Mono',monospace;font-size:11px;color:var(--texte3);
+  position:absolute;left:50%;transform:translateX(-50%);
+}
+.pot-tete{position:relative;}
+.pot-rail{
+  position:relative;height:40px;border-radius:12px;
+  background:var(--bg3);border:1px solid var(--trait);
+  cursor:pointer;touch-action:none;user-select:none;
+}
+.pot-rail:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
+.pot-cran{
+  position:absolute;top:50%;width:5px;height:5px;border-radius:50%;
+  background:#4a4640;transform:translate(-50%,-50%);pointer-events:none;
+}
+.pot-cran.fin{background:var(--accent);}
+.pot-pouce{
+  position:absolute;top:50%;width:26px;height:30px;border-radius:8px;
+  background:var(--pouce);transform:translate(-50%,-50%);
+  pointer-events:none;transition:left .12s cubic-bezier(.33,0,.2,1);
+  box-shadow:0 2px 6px rgba(0,0,0,.4);
+}
+.pot-rail.saisi .pot-pouce{transition:none;}
+
+/* ── Boutons & divers ─────────────────────────────────────────────────── */
+.rangee{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;}
+/* Commandes de scène — collées en haut du panneau : le réglage se juge en
+   rejouant, or les potards utiles sont souvent tout en bas de la colonne.
+   Les marges négatives font saigner le fond jusqu'aux bords du panneau, sinon
+   le contenu défilerait visiblement dans les gouttières de 18px. */
+.barre-actions{
+  position:sticky;top:0;z-index:20;
+  margin:0 -18px 12px;padding:12px 18px;
+  background:var(--bg2);border-bottom:1px solid var(--trait);
+}
+button.b{
+  flex:1;min-width:0;font-family:'DM Sans',sans-serif;font-size:12.5px;font-weight:500;
+  padding:10px 12px;border-radius:10px;border:1px solid var(--trait);
+  background:var(--bg3);color:var(--texte);cursor:pointer;transition:background .15s,border-color .15s;
+}
+button.b:hover{background:var(--bg4);border-color:#3a3733;}
+button.b.actif{background:var(--pouce);color:#17150f;border-color:var(--pouce);}
+button.b.primaire{background:var(--accent);border-color:var(--accent);color:#fff;}
+.vignettes{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px;}
+.vignettes img{
+  width:38px;height:57px;object-fit:cover;border-radius:6px;cursor:pointer;
+  border:2px solid transparent;opacity:.5;transition:opacity .15s,border-color .15s;
+}
+.vignettes img.actif{opacity:1;border-color:var(--pouce);}
+textarea{
+  width:100%;height:120px;background:var(--bg);color:var(--texte2);
+  border:1px solid var(--trait);border-radius:10px;padding:10px;
+  font-family:'DM Mono',monospace;font-size:11px;line-height:1.5;resize:vertical;
+}
+.note{font-size:11.5px;color:var(--texte3);line-height:1.5;margin-top:8px;}
+
+/* ── Éditeur de Bézier ────────────────────────────────────────────────── */
+.bez{background:var(--bg3);border:1px solid var(--trait);border-radius:12px;padding:10px;}
+.bez svg{display:block;width:100%;height:auto;touch-action:none;cursor:crosshair;}
+.bez .zone{fill:rgba(255,255,255,.02);}
+.bez .repere{stroke:var(--trait);stroke-width:1;}
+.bez .repere.plein{stroke:#3a3733;}
+.bez .lien{stroke:var(--texte3);stroke-width:1.5;stroke-dasharray:3 3;}
+.bez .courbe{fill:none;stroke:var(--pouce);stroke-width:2.5;stroke-linecap:round;}
+.bez .poignee{fill:var(--accent);stroke:#fff;stroke-width:1.5;cursor:grab;}
+.bez .poignee:active{cursor:grabbing;}
+.bez .ancre{fill:var(--texte3);}
+.bez-val{
+  font-family:'DM Mono',monospace;font-size:10.5px;color:var(--texte2);
+  text-align:center;margin-top:8px;word-break:break-all;
+}
+.err{color:#e0796a;font-size:12px;margin-top:8px;line-height:1.5;}
+</style>
+</head>
+<body>
+
+<div class="scene">
+  <div class="scene-tag">Labo · dépliage tissu · éventail évènements</div>
+  <div class="fps" id="fps"></div>
+
+  <div class="fan" id="fan">
+    <div class="carte" data-niveau="2" data-cote="-1"><img alt=""><canvas class="tissu"></canvas></div>
+    <div class="carte" data-niveau="2" data-cote="1"><img alt=""><canvas class="tissu"></canvas></div>
+    <div class="carte" data-niveau="1" data-cote="-1"><img alt=""><canvas class="tissu"></canvas></div>
+    <div class="carte" data-niveau="1" data-cote="1"><img alt=""><canvas class="tissu"></canvas></div>
+    <div class="cadre"></div>
+    <div class="centre" id="centre"><canvas id="cv"></canvas></div>
+  </div>
+
+  <div class="meta">
+    <div class="meta-sous">Rétrospective</div>
+    <div class="meta-titre" id="titre">Dépliage — carte centrale</div>
+  </div>
+  <div class="err" id="err"></div>
+</div>
+
+<div class="panneau">
+  <h1>Réglages</h1>
+  <p class="sous">Le pli se règle ici, puis s'exporte en JSON.
+    Le module rendu est <code>src/cloth.js</code> — le même qu'en production.</p>
+
+  <div class="rangee barre-actions">
+    <button class="b primaire" id="rejouer">Rejouer</button>
+    <button class="b" id="boucler">Boucle</button>
+    <button class="b" id="repere">Cadre</button>
+  </div>
+
+  <div class="groupe">
+    <h2>Portée de l'effet</h2>
+    <div class="rangee" id="portee"></div>
+    <p class="note" id="porteeNote"></p>
+  </div>
+
+  <div class="groupe">
+    <h2>Affiche</h2>
+    <div class="vignettes" id="vignettes"></div>
+    <p class="note">Le gabarit est imposé par l'éventail — portrait 2:3, format
+      unique : l'affiche y est <em>recadrée</em> (cover, calé en haut), jamais
+      déformée, y compris quand la source est en paysage.</p>
+  </div>
+
+  <div class="groupe">
+    <h2>Progression (scrub)</h2>
+    <div id="g-scrub"></div>
+    <p class="note">Fige l'animation pour juger une pose précise — c'est là que
+      se voient les défauts qu'un dépliage à pleine vitesse cache.</p>
+  </div>
+
+  <div class="groupe">
+    <h2>Temps</h2>
+    <div id="g-temps"></div>
+    <div class="bez" id="bezier"></div>
+    <div class="bez-val" id="bezierVal"></div>
+    <div class="rangee" id="easings"></div>
+    <p class="note">Poignées glissables. Au-dessus de la ligne du haut, la courbe
+      <strong>dépasse</strong> : le tissu traverse l'état à plat, se replie à
+      l'envers, puis revient — c'est le rebond. En dessous de la ligne du bas,
+      elle <strong>anticipe</strong> : le tissu retient son pli avant de partir.</p>
+  </div>
+
+  <div class="groupe"><h2>Géométrie du pli</h2><div id="g-geo"></div></div>
+  <div class="groupe"><h2>Lumière</h2><div id="g-lum"></div></div>
+  <div class="groupe"><h2>Iridescence</h2><div id="g-iri"></div></div>
+  <div class="groupe"><h2>Matière &amp; rendu</h2><div id="g-mat"></div></div>
+  <div class="groupe">
+    <h2>Cartes latérales</h2>
+    <div id="g-cotes"></div>
+    <p class="note">« Étagement » creuse la profondeur <em>par carte</em> : chaque rang
+      part d'un Z différent selon son niveau dans l'éventail. N'agit qu'en mode
+      « Toutes les affiches ». « Durée » et « Monte » ne pilotent que le fondu CSS,
+      donc uniquement en mode « Centre seul ».</p>
+  </div>
+
+  <div class="groupe">
+    <h2>Comparaison A / B</h2>
+    <div class="rangee">
+      <button class="b" id="memA">Mémoriser A</button>
+      <button class="b" id="memB">Mémoriser B</button>
+    </div>
+    <div class="rangee">
+      <button class="b" id="voirA">Voir A</button>
+      <button class="b" id="voirB">Voir B</button>
+    </div>
+  </div>
+
+  <div class="groupe">
+    <h2>Preset</h2>
+    <div class="rangee">
+      <button class="b" id="copier">Copier</button>
+      <button class="b" id="appliquer">Appliquer</button>
+      <button class="b" id="defauts">Défauts</button>
+    </div>
+    <textarea id="json" spellcheck="false"></textarea>
+    <p class="note">Ce JSON est le livrable du labo : il se colle tel quel dans
+      <code>design/cloth-preset.json</code> à l'intégration.</p>
+  </div>
+</div>
+
+<script type="module">
+import { creerCloth, CLOTH_DEFAUTS, COURBES, GABARITS, bezier } from '../../src/cloth.js';
+
+// ── Affiches de test ───────────────────────────────────────────────────────
+// Uniquement des origines qui servent `Access-Control-Allow-Origin` : une
+// affiche sans CORS ne peut PAS devenir une texture. `cinemas-lumiere.com`,
+// qui sert 17 des 28 affiches d'évènements, en est justement dépourvu — d'où
+// l'étape de rapatriement prévue à l'intégration.
+const AFFICHES = [
+  'https://all.web.img.acsta.net/pictures/23/06/27/16/09/1673570.jpg',
+  'https://all.web.img.acsta.net/pictures/24/02/08/15/26/2913149.jpg',
+  'https://all.web.img.acsta.net/pictures/19/06/28/12/11/5522147.jpg',
+  'https://cms-assets.webediamovies.pro/production/945/199dcdf2ccfe9698fd70bc9871e4fff7.jpg',
+  'https://all.web.img.acsta.net/pictures/18/10/15/17/05/4135981.jpg',
+  '../../assets/visual-fallback.webp',
+];
+
+// ── Potard segmenté ────────────────────────────────────────────────────────
+// Crans discrets plutôt qu'une course continue : un réglage se retrouve, se
+// note et se rejoue. Maj enfoncée = course fine (10× plus de crans).
+function potard({ parent, min, max, crans = 11, valeur, labelMin, labelMax, unite = '', onChange }) {
+  const wrap = document.createElement('div');
+  wrap.className = 'pot';
+  wrap.innerHTML = `
+    <div class="pot-tete">
+      <span class="pot-min"></span>
+      <span class="pot-val"></span>
+      <span class="pot-max"></span>
+    </div>
+    <div class="pot-rail" tabindex="0" role="slider"><div class="pot-pouce"></div></div>`;
+  wrap.querySelector('.pot-min').textContent = labelMin;
+  wrap.querySelector('.pot-max').textContent = labelMax;
+  parent.appendChild(wrap);
+
+  const rail  = wrap.querySelector('.pot-rail');
+  const pouce = wrap.querySelector('.pot-pouce');
+  const val   = wrap.querySelector('.pot-val');
+  const MARGE = 18;   // demi-largeur du pouce + respiration
+
+  for (let i = 0; i < crans; i++) {
+    const d = document.createElement('div');
+    d.className = 'pot-cran' + (i === crans - 1 ? ' fin' : '');
+    d.style.left = `calc(${MARGE}px + ${(i / (crans - 1)).toFixed(4)} * (100% - ${MARGE * 2}px))`;
+    rail.appendChild(d);
+  }
+
+  let v = valeur;
+  const pas = (max - min) / (crans - 1);
+
+  function rendre() {
+    const f = (v - min) / (max - min);
+    pouce.style.left = `calc(${MARGE}px + ${Math.min(1, Math.max(0, f)).toFixed(4)} * (100% - ${MARGE * 2}px))`;
+    const dec = Math.abs(max - min) >= 100 ? 0 : (Math.abs(max - min) >= 10 ? 1 : 2);
+    val.textContent = v.toFixed(dec) + unite;
+    rail.setAttribute('aria-valuenow', String(v));
+  }
+
+  function poser(nv, fin) {
+    const clamp = Math.min(max, Math.max(min, nv));
+    const q = fin ? clamp : Math.round((clamp - min) / pas) * pas + min;
+    v = Math.min(max, Math.max(min, q));
+    rendre();
+    onChange(v);
+  }
+
+  function depuisX(clientX, fin) {
+    const r = rail.getBoundingClientRect();
+    const f = (clientX - r.left - MARGE) / (r.width - MARGE * 2);
+    poser(min + f * (max - min), fin);
+  }
+
+  rail.addEventListener('pointerdown', e => {
+    rail.setPointerCapture(e.pointerId);
+    rail.classList.add('saisi');
+    depuisX(e.clientX, e.shiftKey);
+  });
+  rail.addEventListener('pointermove', e => {
+    if (!rail.hasPointerCapture(e.pointerId)) return;
+    depuisX(e.clientX, e.shiftKey);
+  });
+  rail.addEventListener('pointerup', e => {
+    rail.releasePointerCapture(e.pointerId);
+    rail.classList.remove('saisi');
+  });
+  rail.addEventListener('keydown', e => {
+    const d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+    if (!d) return;
+    e.preventDefault();
+    poser(v + d * pas * (e.shiftKey ? 0.1 : 1), e.shiftKey);
+  });
+
+  rendre();
+  return { poser: nv => { v = nv; rendre(); }, valeur: () => v };
+}
+
+// ── Éditeur de Bézier ──────────────────────────────────────────────────────
+// L'axe Y déborde volontairement de [0,1] : c'est HORS de cette plage que
+// vivent l'anticipation et le rebond, donc les y doivent y être atteignables
+// à la souris. L'axe X, lui, reste borné — le temps ne recule pas.
+function editeurBezier({ parent, valeur, onChange }) {
+  const W = 300, H = 260, M = 26;          // marges pour le débord en Y
+  const YMIN = -0.55, YMAX = 1.55;
+  const NS = 'http://www.w3.org/2000/svg';
+
+  const px = x => M + x * W;
+  const py = y => M + H * (YMAX - y) / (YMAX - YMIN);
+  const ix = sx => (sx - M) / W;                                   // inverse X
+  const iy = sy => YMAX - (sy - M) / H * (YMAX - YMIN);            // inverse Y
+
+  const svg = document.createElementNS(NS, 'svg');
+  svg.setAttribute('viewBox', `0 0 ${W + M * 2} ${H + M * 2}`);
+  const el = (t, a) => { const n = document.createElementNS(NS, t);
+    for (const k in a) n.setAttribute(k, a[k]); svg.appendChild(n); return n; };
+
+  el('rect', { class: 'zone', x: M, y: py(1), width: W, height: py(0) - py(1) });
+  el('line', { class: 'repere plein', x1: M, y1: py(0), x2: M + W, y2: py(0) });
+  el('line', { class: 'repere plein', x1: M, y1: py(1), x2: M + W, y2: py(1) });
+  el('line', { class: 'repere', x1: M, y1: py(YMAX), x2: M, y2: py(YMIN) });
+  el('line', { class: 'repere', x1: M + W, y1: py(YMAX), x2: M + W, y2: py(YMIN) });
+
+  const lien1  = el('line', { class: 'lien' });
+  const lien2  = el('line', { class: 'lien' });
+  const trace  = el('path', { class: 'courbe' });
+  el('circle', { class: 'ancre', cx: px(0), cy: py(0), r: 3.5 });
+  el('circle', { class: 'ancre', cx: px(1), cy: py(1), r: 3.5 });
+  const p1 = el('circle', { class: 'poignee', r: 8 });
+  const p2 = el('circle', { class: 'poignee', r: 8 });
+
+  parent.appendChild(svg);
+  let v = [...valeur];
+
+  function rendre() {
+    const [x1, y1, x2, y2] = v;
+    p1.setAttribute('cx', px(x1)); p1.setAttribute('cy', py(y1));
+    p2.setAttribute('cx', px(x2)); p2.setAttribute('cy', py(y2));
+    lien1.setAttribute('x1', px(0)); lien1.setAttribute('y1', py(0));
+    lien1.setAttribute('x2', px(x1)); lien1.setAttribute('y2', py(y1));
+    lien2.setAttribute('x1', px(1)); lien2.setAttribute('y1', py(1));
+    lien2.setAttribute('x2', px(x2)); lien2.setAttribute('y2', py(y2));
+    // Tracé paramétrique : on suit la Bézier en s, pas en t — c'est sa vraie
+    // forme, y compris là où elle sort de la boîte.
+    let d = '';
+    for (let i = 0; i <= 60; i++) {
+      const s = i / 60;
+      const u = 1 - s;
+      const bx = 3 * u * u * s * x1 + 3 * u * s * s * x2 + s * s * s;
+      const by = 3 * u * u * s * y1 + 3 * u * s * s * y2 + s * s * s;
+      d += (i ? 'L' : 'M') + px(bx).toFixed(1) + ' ' + py(by).toFixed(1) + ' ';
+    }
+    trace.setAttribute('d', d);
+  }
+
+  // Un drapeau local plutôt que le seul `hasPointerCapture` : la capture peut
+  // échouer (événement synthétique, pointeur exotique) et le glisser deviendrait
+  // alors silencieusement inopérant. Le déplacement est écouté sur le SVG, ce
+  // qui couvre les deux cas — avec capture les événements y remontent, sans
+  // capture ils y arrivent directement.
+  let saisi = -1;
+  function placer(e) {
+    if (saisi < 0) return;
+    const r = svg.getBoundingClientRect();
+    const sx = (e.clientX - r.left) / r.width  * (W + M * 2);
+    const sy = (e.clientY - r.top)  / r.height * (H + M * 2);
+    v[saisi]     = Math.min(1, Math.max(0, ix(sx)));
+    v[saisi + 1] = Math.min(YMAX, Math.max(YMIN, iy(sy)));
+    rendre(); onChange([...v]);
+  }
+  function saisir(poignee, idx) {
+    poignee.addEventListener('pointerdown', e => {
+      saisi = idx;
+      try { poignee.setPointerCapture(e.pointerId); } catch (_) {}
+      e.preventDefault();
+      placer(e);
+    });
+  }
+  saisir(p1, 0); saisir(p2, 2);
+  svg.addEventListener('pointermove', placer);
+  const relacher = () => { saisi = -1; };
+  svg.addEventListener('pointerup', relacher);
+  svg.addEventListener('pointercancel', relacher);
+  window.addEventListener('pointerup', relacher);
+
+  rendre();
+  return { poser: nv => { v = [...nv]; rendre(); }, valeur: () => [...v] };
+}
+
+// ── État ───────────────────────────────────────────────────────────────────
+// Les cartes latérales ne sont pas dans le shader : simple fade + translation,
+// comme convenu. Leurs réglages vivent donc à côté du preset du pli.
+// `etagementZ` est une orchestration de LABO, pas un paramètre du shader : il
+// décale le Z de chaque carte selon son niveau de profondeur dans l'éventail
+// (0 = centre, 1 et 2 = rangs latéraux), et se répercute sur `profondeurZ`.
+const COTES_DEFAUTS = { coteDuree: 700, coteRetard: 120, coteDecalage: 90, coteMontee: 18, etagementZ: -0.15 };
+
+let P = { ...CLOTH_DEFAUTS };
+let C = { ...COTES_DEFAUTS };
+// L'easing est désormais un quadruplet de Bézier, pas un nom : les courbes
+// nommées ne sont que des points de départ posés sous les poignées.
+let easing = [...COURBES.sortie];
+let idxAffiche = 0;
+let boucle = false;
+let mode = 'centre';        // 'centre' = tissu au centre seul | 'tous' = les 5
+const potards = {};
+
+const cv     = document.getElementById('cv');
+const centre = document.getElementById('centre');
+const fan    = document.getElementById('fan');
+const err    = document.getElementById('err');
+
+const cloth = creerCloth(cv, P);
+if (!cloth) {
+  err.textContent = 'WebGL2 indisponible sur ce navigateur — le labo ne peut pas tourner.';
+}
+
+// Le canvas déborde le gabarit central du facteur `debordement`.
+// Un seul format dans l'éventail : le PORTRAIT. Une affiche paysage y est
+// recadrée, elle n'impose plus sa géométrie (le gabarit horizontal a été retiré).
+function dimensionnerCanvas() {
+  const { l: L, h: H } = GABARITS.vertical;
+  P.ratioCadre = L / H;
+  cloth?.regler({ ratioCadre: P.ratioCadre });
+  fan.style.setProperty('--gab-v', L + 'px');
+  fan.style.setProperty('--gab-v-h', H + 'px');
+  const k = P.debordement;
+  centre.style.width  = cv.style.width  = Math.round(L * k) + 'px';
+  centre.style.height = cv.style.height = Math.round(H * k) + 'px';
+  // Le débordement s'étale autour du gabarit, qui reste calé en bas.
+  centre.style.bottom = Math.round(-(H * (k - 1)) / 2) + 'px';
+  cloth?.redessiner();
+  dimensionnerLateraux();
+}
+
+// ── Renderers latéraux ─────────────────────────────────────────────────────
+// Créés SEULEMENT au premier passage en mode « toutes ». Un contexte WebGL est
+// une ressource rare (les navigateurs en plafonnent le nombre autour de 8-16) :
+// pas question d'en immobiliser cinq quand le mode par défaut n'en demande qu'un.
+const lateraux = [];   // { cloth, carte, canvas, rang }
+
+function creerLateraux() {
+  if (lateraux.length) return true;
+  document.querySelectorAll('.carte').forEach(carte => {
+    const canvas = carte.querySelector('.tissu');
+    const img    = carte.querySelector('img');
+    const niveau = +carte.dataset.niveau, cote = +carte.dataset.cote;
+    const c = creerCloth(canvas, { ...P });
+    if (!c) return;
+    lateraux.push({ cloth: c, carte, canvas, img, rang: (niveau - 1) * 2 + (cote > 0 ? 1 : 0) });
+  });
+  if (lateraux.length < 4) {
+    err.textContent = 'Contextes WebGL insuffisants : ' + lateraux.length + '/4 cartes latérales.';
+    return false;
+  }
+  return true;
+}
+
+// Chaque carte a son propre gabarit (c1 = ×.9, c2 = ×.81) : on le lit sur
+// l'<img>, seule source de vérité pour la taille réelle rendue par le CSS.
+function dimensionnerLateraux() {
+  for (const L of lateraux) {
+    const cs = getComputedStyle(L.img);
+    const l = parseFloat(cs.width), h = parseFloat(cs.height);
+    if (!l || !h) continue;
+    L.cloth.regler({ ...P, ratioCadre: l / h });
+    const k = P.debordement;
+    L.canvas.style.width  = Math.round(l * k) + 'px';
+    L.canvas.style.height = Math.round(h * k) + 'px';
+    L.cloth.redessiner();
+  }
+  appliquerEtagement();
+}
+
+// Le Z est le SEUL paramètre qui diffère d'une carte à l'autre. Toute
+// propagation d'un réglage commun l'écrase — on le recalcule donc juste après.
+function appliquerEtagement() {
+  cloth?.regler({ profondeurZ: P.profondeurZ });
+  for (const L of lateraux) {
+    L.cloth.regler({ profondeurZ: P.profondeurZ + C.etagementZ * (+L.carte.dataset.niveau) });
+  }
+}
+
+function chargerAffiches() {
+  const src = AFFICHES[idxAffiche];
+  err.textContent = '';
+  cloth?.charger(src)
+    .then(() => { dimensionnerCanvas(); rejouer(); })
+    .catch(e => {
+      err.textContent = 'Affiche non chargée (CORS ou 404) : ' + e.message;
+    });
+  // Cartes latérales : on décale la liste pour ne pas répéter la même image.
+  document.querySelectorAll('.carte img').forEach((img, i) => {
+    img.src = AFFICHES[(idxAffiche + i + 1) % AFFICHES.length];
+  });
+  for (const L of lateraux) {
+    const i = [...document.querySelectorAll('.carte')].indexOf(L.carte);
+    L.cloth.charger(AFFICHES[(idxAffiche + i + 1) % AFFICHES.length])
+      .then(dimensionnerLateraux)
+      .catch(() => {});
+  }
+}
+
+// ── Cartes latérales : fade + translation, sans WebGL ──────────────────────
+// La transformation de repos vient des règles CSS (.carte[data-niveau][data-cote]).
+// On la mémorise UNE fois : la relire après coup renverrait la matrice inline
+// (translateY compris), et chaque rejeu décalerait un peu plus les cartes.
+const reposCache = new WeakMap();
+function transformRepos(c) {
+  if (!reposCache.has(c)) {
+    c.style.transform = '';
+    reposCache.set(c, getComputedStyle(c).transform);
+  }
+  return reposCache.get(c);
+}
+
+function animerCotes() {
+  document.querySelectorAll('.carte').forEach(c => {
+    const niveau = +c.dataset.niveau;
+    const cote   = +c.dataset.cote;
+    const rang   = (niveau - 1) * 2 + (cote > 0 ? 1 : 0);
+    const base   = transformRepos(c);
+    const retard = C.coteRetard + rang * C.coteDecalage;
+
+    c.style.transition = 'none';
+    c.style.opacity = '0';
+    // Translation d'appoint : la carte monte à sa place depuis le bas.
+    c.style.transform = `${base} translateY(${C.coteMontee}px)`;
+    // Reflet forcé plutôt qu'un double requestAnimationFrame : synchrone, donc
+    // l'état de départ est enregistré même quand l'onglet ne compose pas.
+    void c.offsetWidth;
+    c.style.transition =
+      `opacity ${C.coteDuree}ms ease ${retard}ms,` +
+      `transform ${C.coteDuree}ms cubic-bezier(.33,0,.2,1) ${retard}ms`;
+    c.style.opacity = niveau === 2 ? '0.7' : '1';
+    c.style.transform = base;
+  });
+}
+
+function rejouer() {
+  if (mode === 'tous' && lateraux.length) {
+    // Toutes les affiches en tissu : plus de fondu CSS, le shader porte seul
+    // l'apparition. Le décalage entre cartes réutilise `coteDecalage`.
+    document.querySelectorAll('.carte').forEach(c => {
+      c.style.transition = 'none';
+      c.style.transform = transformRepos(c);
+      c.style.opacity = c.dataset.niveau === '2' ? '0.7' : '1';
+    });
+    appliquerEtagement();
+    for (const L of lateraux) {
+      L.cloth.regler({ retard: C.coteRetard + L.rang * C.coteDecalage });
+      L.cloth.jouer(easing);
+    }
+  } else {
+    animerCotes();
+  }
+  cloth?.jouer(easing, () => { if (boucle) setTimeout(rejouer, 400); });
+}
+
+// ── Construction du panneau ────────────────────────────────────────────────
+function lier(cible, cle, opts) {
+  potards[cle] = potard({
+    parent: document.getElementById(cible),
+    valeur: (cle in C ? C : P)[cle],
+    onChange: v => {
+      if (cle in C) { C[cle] = v; }
+      else {
+        P[cle] = v;
+        cloth?.regler({ [cle]: v });
+        // Clé par clé, jamais P entier : chaque latérale garde SON ratioCadre.
+        for (const L of lateraux) L.cloth.regler({ [cle]: v });
+      }
+      appliquerEtagement();
+      if (cle === 'debordement') dimensionnerCanvas();
+      majJson();
+    },
+    ...opts,
+  });
+}
+
+// Scrub — pilote la progression à la main.
+potard({
+  parent: document.getElementById('g-scrub'),
+  // Va jusqu'à 1.4 : au-delà de 1 c'est la zone de rebond, il faut pouvoir s'y
+  // arrêter pour la juger. 1.00 reste un cran exact (pas de 0.05).
+  min: 0, max: 1.4, crans: 29, valeur: 1,
+  labelMin: 'Replié', labelMax: 'Dépassement',
+  onChange: v => { cloth?.figer(v); for (const L of lateraux) L.cloth.figer(v); },
+});
+
+lier('g-temps', 'duree',       { min: 300, max: 4000, crans: 16, labelMin: 'Rapide',      labelMax: 'Lent', unite: 'ms' });
+lier('g-temps', 'ampliRebond', { min: 0,   max: 6,    crans: 13, labelMin: 'Rebond ignoré', labelMax: 'Rebond marqué' });
+
+lier('g-geo', 'nbPlis',       { min: 1,   max: 9,    crans: 17, labelMin: 'Peu de plis', labelMax: 'Beaucoup' });
+lier('g-geo', 'amplitude',    { min: 0,   max: 1.2,  crans: 13, labelMin: 'Plat',        labelMax: 'Profond' });
+lier('g-geo', 'desordre',     { min: 0,   max: 1,    crans: 11, labelMin: 'Régulier',    labelMax: 'Organique' });
+lier('g-geo', 'derive',       { min: 0,   max: 2,    crans: 11, labelMin: 'Plis figés',  labelMax: 'Plis qui glissent' });
+lier('g-geo', 'arete',        { min: 0,   max: 1,    crans: 11, labelMin: 'Ondulé',      labelMax: 'Arête franche' });
+lier('g-geo', 'angle',        { min: -90, max: 90,   crans: 13, labelMin: '↙ Oblique',   labelMax: 'Oblique ↘', unite: '°' });
+lier('g-geo', 'balayage',     { min: 0,   max: 2,    crans: 11, labelMin: 'Ensemble',    labelMax: 'En vague' });
+lier('g-geo', 'traineBord',   { min: 0,   max: 1.5,  crans: 11, labelMin: 'Bords calés', labelMax: 'Bords à la traîne' });
+lier('g-geo', 'chute',        { min: 0,   max: 0.3,  crans: 13, labelMin: 'Sur place',   labelMax: 'Vient de haut' });
+lier('g-geo', 'approche',     { min: 0,   max: 0.3,  crans: 13, labelMin: 'Sur place',   labelMax: 'Vient de près' });
+lier('g-geo', 'profondeurZ',  { min: -0.8, max: 0.8, crans: 17, labelMin: 'Arrive au fond', labelMax: 'Arrive en avant' });
+lier('g-geo', 'retrait',      { min: 0,   max: 2,    crans: 11, labelMin: 'Emprise figée', labelMax: 'Se rétracte fort' });
+lier('g-geo', 'nbRides',      { min: 0,   max: 6,    crans: 13, labelMin: 'Sans rides',  labelMax: 'Froissé' });
+lier('g-geo', 'amplitudeRides',{min: 0,   max: 1,    crans: 11, labelMin: 'Lisse',       labelMax: 'Marqué' });
+lier('g-geo', 'perspective',  { min: 0,   max: 0.8,  crans: 11, labelMin: 'Plat',        labelMax: 'Fuyant' });
+lier('g-geo', 'rotation',     { min: -30, max: 30,   crans: 13, labelMin: 'Penché ↺',    labelMax: 'Penché ↻', unite: '°' });
+lier('g-geo', 'debordement',  { min: 1,   max: 1.8,  crans: 9,  labelMin: 'Dans le cadre', labelMax: 'Déborde' });
+
+lier('g-lum', 'lumiereX',     { min: -1.5, max: 1.5, crans: 13, labelMin: 'Lumière ←',  labelMax: 'Lumière →' });
+lier('g-lum', 'lumiereY',     { min: -1.5, max: 1.5, crans: 13, labelMin: 'Lumière ↓',  labelMax: 'Lumière ↑' });
+lier('g-lum', 'ombre',        { min: 0,   max: 1.2,  crans: 13, labelMin: 'Sans relief', labelMax: 'Très marqué' });
+lier('g-lum', 'eclat',        { min: 0,   max: 1.2,  crans: 13, labelMin: 'Mat',         labelMax: 'Brillant' });
+lier('g-lum', 'translucide',  { min: 0,   max: 1,    crans: 11, labelMin: 'Opaque',      labelMax: 'Diaphane' });
+
+lier('g-iri', 'iriIntensite', { min: 0,   max: 1.5,  crans: 16, labelMin: 'Aucune',      labelMax: 'Saturée' });
+lier('g-iri', 'iriFresnel',   { min: 0.5, max: 6,    crans: 12, labelMin: 'Partout',     labelMax: 'Sur les crêtes' });
+lier('g-iri', 'iriEchelle',   { min: 0.2, max: 4,    crans: 13, labelMin: 'Spectre large', labelMax: 'Spectre serré' });
+lier('g-iri', 'iriDecalage',  { min: 0,   max: 1,    crans: 11, labelMin: 'Teinte ↺',    labelMax: 'Teinte ↻' });
+lier('g-iri', 'iriVitesse',   { min: 0,   max: 2,    crans: 11, labelMin: 'Figée',       labelMax: 'Dérive vite' });
+lier('g-iri', 'iriRepos',     { min: 0,   max: 0.5,  crans: 11, labelMin: 'S\'éteint',   labelMax: 'Voile permanent' });
+
+lier('g-mat', 'grain',        { min: 0,   max: 0.2,  crans: 11, labelMin: 'Lisse',       labelMax: 'Grainé' });
+lier('g-mat', 'voile',        { min: 0,   max: 0.9,  crans: 13, labelMin: 'Plein en vol', labelMax: 'Diaphane en vol' });
+lier('g-mat', 'opacite',      { min: 0,   max: 1,    crans: 11, labelMin: 'Transparent', labelMax: 'Opaque' });
+lier('g-mat', 'rayon',        { min: 0,   max: 0.2,  crans: 11, labelMin: 'Angles vifs', labelMax: 'Très arrondi' });
+lier('g-mat', 'subdivisions', { min: 8,   max: 128,  crans: 16, labelMin: 'Grossier',    labelMax: 'Fin' });
+
+lier('g-cotes', 'coteDuree',    { min: 200, max: 2000, crans: 11, labelMin: 'Rapide',    labelMax: 'Lent', unite: 'ms' });
+lier('g-cotes', 'coteRetard',   { min: 0,   max: 1200, crans: 13, labelMin: 'Immédiat',  labelMax: 'Tardif', unite: 'ms' });
+lier('g-cotes', 'coteDecalage', { min: 0,   max: 400,  crans: 11, labelMin: 'Ensemble',  labelMax: 'En cascade', unite: 'ms' });
+lier('g-cotes', 'coteMontee',   { min: 0,   max: 60,   crans: 13, labelMin: 'Sur place', labelMax: 'Monte', unite: 'px' });
+lier('g-cotes', 'etagementZ',   { min: -0.5, max: 0.5, crans: 11, labelMin: 'Latérales au fond', labelMax: 'Latérales en avant' });
+
+// Éditeur de courbe + presets
+const bezVal = document.getElementById('bezierVal');
+function majBezier(v) {
+  const f = n => (Math.round(n * 1000) / 1000).toFixed(3).replace(/0+$/, '').replace(/\.$/, '');
+  const depasse = v[1] > 1 || v[3] > 1, anticipe = v[1] < 0 || v[3] < 0;
+  bezVal.innerHTML = `cubic-bezier(${v.map(f).join(', ')})`
+    + (depasse ? ' <span style="color:var(--accent)">· rebond</span>' : '')
+    + (anticipe ? ' <span style="color:var(--accent)">· anticipation</span>' : '');
+}
+const edBezier = editeurBezier({
+  parent: document.getElementById('bezier'),
+  valeur: easing,
+  onChange: v => { easing = v; majBezier(v); majJson(); },
+});
+majBezier(easing);
+
+const boxE = document.getElementById('easings');
+Object.keys(COURBES).forEach(nom => {
+  const b = document.createElement('button');
+  b.className = 'b';
+  b.textContent = nom;
+  b.onclick = () => {
+    easing = [...COURBES[nom]];
+    edBezier.poser(easing); majBezier(easing); majJson();
+    rejouer();
+  };
+  boxE.appendChild(b);
+});
+
+// Portée — tissu sur la seule carte centrale, ou sur les cinq.
+const boxP = document.getElementById('portee');
+const noteP = document.getElementById('porteeNote');
+function majNotePortee() {
+  noteP.innerHTML = mode === 'centre'
+    ? 'Un seul contexte WebGL. Les 4 latérales arrivent en fondu + montée '
+    + '(réglages « Cartes latérales »).'
+    : '<strong>5 contextes WebGL.</strong> Le fondu CSS est désactivé — le shader '
+    + 'porte seul l\'apparition. Le décalage entre cartes reprend « En cascade ».';
+}
+[['centre', 'Centre seul'], ['tous', 'Toutes les affiches']].forEach(([cle, lbl]) => {
+  const b = document.createElement('button');
+  b.className = 'b' + (cle === mode ? ' actif' : '');
+  b.textContent = lbl;
+  b.onclick = () => {
+    if (cle === 'tous' && !creerLateraux()) return;   // contextes indisponibles
+    mode = cle;
+    [...boxP.children].forEach(c => c.classList.toggle('actif', c === b));
+    fan.classList.toggle('tous', mode === 'tous');
+    if (mode === 'tous') { chargerAffiches(); dimensionnerLateraux(); }
+    majNotePortee();
+    rejouer();
+  };
+  boxP.appendChild(b);
+});
+majNotePortee();
+
+// Vignettes
+const boxV = document.getElementById('vignettes');
+AFFICHES.forEach((src, i) => {
+  const im = document.createElement('img');
+  im.src = src;
+  im.className = i === 0 ? 'actif' : '';
+  im.onclick = () => {
+    idxAffiche = i;
+    [...boxV.children].forEach(c => c.classList.toggle('actif', c === im));
+    chargerAffiches();
+  };
+  boxV.appendChild(im);
+});
+
+// ── Preset ─────────────────────────────────────────────────────────────────
+const zone = document.getElementById('json');
+function majJson() {
+  zone.value = JSON.stringify({ easing, ...P, ...C }, null, 2);
+}
+function appliquer(obj) {
+  // `easing` accepte le quadruplet, ou un nom de courbe pour les vieux presets.
+  if (Array.isArray(obj.easing) && obj.easing.length === 4) easing = [...obj.easing];
+  else if (typeof obj.easing === 'string' && COURBES[obj.easing]) easing = [...COURBES[obj.easing]];
+  for (const [k, v] of Object.entries(obj)) {
+    if (k in P) P[k] = v;
+    if (k in C) C[k] = v;
+    potards[k]?.poser(v);
+  }
+  cloth?.regler(P);
+  dimensionnerCanvas();
+  edBezier.poser(easing);
+  majBezier(easing);
+  majJson();
+  rejouer();
+}
+
+document.getElementById('copier').onclick = () => {
+  navigator.clipboard.writeText(zone.value);
+  const b = document.getElementById('copier');
+  b.textContent = 'Copié ✓';
+  setTimeout(() => (b.textContent = 'Copier'), 1200);
+};
+document.getElementById('appliquer').onclick = () => {
+  try { appliquer(JSON.parse(zone.value)); err.textContent = ''; }
+  catch (e) { err.textContent = 'JSON invalide : ' + e.message; }
+};
+document.getElementById('defauts').onclick = () => appliquer({ ...CLOTH_DEFAUTS, ...COTES_DEFAUTS, easing: 'sortie' });
+
+// A / B
+let A = null, B = null;
+document.getElementById('memA').onclick = () => { A = { easing, ...P, ...C }; document.getElementById('memA').textContent = 'A ✓'; };
+document.getElementById('memB').onclick = () => { B = { easing, ...P, ...C }; document.getElementById('memB').textContent = 'B ✓'; };
+document.getElementById('voirA').onclick = () => A && appliquer(A);
+document.getElementById('voirB').onclick = () => B && appliquer(B);
+
+// Commandes de scène
+document.getElementById('rejouer').onclick = rejouer;
+document.getElementById('boucler').onclick = e => {
+  boucle = !boucle;
+  e.target.classList.toggle('actif', boucle);
+  if (boucle) rejouer();
+};
+document.getElementById('repere').onclick = e => {
+  fan.classList.toggle('repere');
+  e.target.classList.toggle('actif', fan.classList.contains('repere'));
+};
+document.addEventListener('keydown', e => {
+  if (e.key === ' ' && e.target === document.body) { e.preventDefault(); rejouer(); }
+});
+
+// Compteur d'images — le seul indicateur de perf qui compte pendant le réglage.
+let img = 0, t0 = performance.now();
+(function tick() {
+  img++;
+  const t = performance.now();
+  if (t - t0 > 500) {
+    document.getElementById('fps').textContent = Math.round((img * 1000) / (t - t0)) + ' fps';
+    img = 0; t0 = t;
+  }
+  requestAnimationFrame(tick);
+})();
+
+// Exposé pour bidouiller depuis la console du navigateur — c'est un labo.
+//   __lab.cloth.figer(.4)   → fige le dépliage à 40 %
+//   __lab.cloth.regler({nbPlis:6})
+window.__lab = {
+  cloth, lateraux, rejouer, appliquer,
+  get P() { return P; }, get C() { return C; }, get mode() { return mode; },
+  // Fige les 5 d'un coup — pratique pour comparer une pose entre les cartes.
+  figerTout(p) { cloth?.figer(p); for (const L of lateraux) L.cloth.figer(p); },
+};
+
+dimensionnerCanvas();
+chargerAffiches();
+majJson();
+</script>
+</body>
+</html>

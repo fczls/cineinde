@@ -279,6 +279,48 @@ class TestDedup(unittest.TestCase):
         self.assertNotEqual(S.event_dedup_key(a), S.event_dedup_key(b))
         self.assertEqual(S.event_dedup_key(a), "avant_premiere|notre salut|2026-08")
 
+    def test_cle_ne_glisse_pas_quand_le_debut_est_rogne(self):
+        """Un événement long dont le début est rogné garde la MÊME clé.
+
+        C'est le cas qui créait une 2e ligne tous les mois : la source
+        n'annonce plus que la partie à venir, `date_debut` avance, et une clé
+        ancrée sur le mois de début change en franchissant un 1er du mois.
+        """
+        avant = {"type": "festival", "titre": "Cycle Scary Fourmi",
+                 "films": [{"titre": "The Thing"}, {"titre": "La Mouche"}],
+                 "date_debut": "2026-07-04", "date_fin": "2026-08-22"}
+        apres = dict(avant, date_debut="2026-08-01")   # début rogné au run suivant
+        self.assertEqual(S.event_dedup_key(avant), S.event_dedup_key(apres))
+        self.assertTrue(S.event_dedup_key(avant).endswith("|2026-08"))
+
+    def test_cle_ne_bascule_pas_quand_un_film_se_rattache(self):
+        """Un film rattaché plus tard ne doit pas changer la clé.
+
+        C'est le cas « Biennale » : une 1re ligne est créée alors qu'aucun film
+        n'est encore rattaché (identité = titre de l'événement), puis un run
+        suivant en rattache un — l'identité basculait sur le titre du FILM et
+        une 2e ligne naissait. merge_events ne peut rien y faire : il ne
+        déduplique qu'au sein d'un run, jamais contre ce qui est déjà en base.
+        """
+        sans = {"type": "festival", "titre": "Résonance - Biennale de Lyon",
+                "films": [], "date_debut": "2026-09-14", "date_fin": "2026-09-14"}
+        avec = dict(sans, films=[{"titre": "Les Glaneurs et la glaneuse"}])
+        self.assertEqual(S.event_dedup_key(sans), S.event_dedup_key(avec))
+
+    def test_cle_suit_le_titre_pas_le_film(self):
+        """Deux événements distincts autour du même film restent distincts."""
+        a = {"type": "festival", "titre": "Cycle Kurosawa", "films": [{"titre": "Ran"}],
+             "date_debut": "2026-09-01", "date_fin": "2026-09-30"}
+        b = dict(a, titre="Nuit du cinéma japonais")
+        self.assertNotEqual(S.event_dedup_key(a), S.event_dedup_key(b))
+
+    def test_cle_distingue_toujours_deux_editions(self):
+        """Deux éditions qui se terminent des mois différents restent distinctes."""
+        a = {"type": "festival", "titre": "Play It Again !", "films": [],
+             "date_debut": "2026-09-01", "date_fin": "2026-09-07"}
+        b = dict(a, date_debut="2027-09-01", date_fin="2027-09-07")
+        self.assertNotEqual(S.event_dedup_key(a), S.event_dedup_key(b))
+
 
 # ─────────────────────────────────────────────────────────────────────────
 # §4.3 — Jointure avec les séances : dater sans jamais inférer

@@ -1,5 +1,14 @@
 *{margin:0;padding:0;box-sizing:border-box;}
-body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:var(--fs-md);line-height:1.5;min-height:100vh;-webkit-font-smoothing:antialiased;text-wrap:balance;}
+/* `overflow-x:clip` et non `hidden` : `hidden` ferait de body un conteneur de
+   défilement et forcerait l'autre axe à `auto`, ce qui casserait `position:sticky`
+   et le scroll de la page. `clip` coupe sans rien de tout ça, et laisse
+   `overflow-y` visible.
+   Nécessaire depuis l'apparition « tissu » : le canvas d'une carte déborde son
+   gabarit (facteur `debordement`) et `.main` lève son clip horizontal sur
+   l'onglet Évènements pour laisser l'éventail s'étendre — les cartes
+   d'extrémité sortaient donc de la fenêtre et y ouvraient une barre de
+   défilement. Elles doivent être coupées au bord, pas déplacer la page. */
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:var(--fs-md);line-height:1.5;min-height:100vh;-webkit-font-smoothing:antialiased;text-wrap:balance;overflow-x:clip;}
 
 /* ── NAV SHELL (header + barre flottante, style Airbnb) ── */
 .nav-shell{
@@ -101,6 +110,9 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
   transition:color .18s,border-color .18s,background .18s;white-space:nowrap;
 }
 .tb-btn:hover{color:var(--text);}
+/* Désactivé : visible, à sa place, mais sans affordance — ni survol, ni curseur
+   de clic (cf. evTypeVide pour la règle produit). */
+.tb-btn:disabled,.tb-btn:disabled:hover{color:var(--neutral-lo);cursor:default;}
 .tb-btn.active{color:var(--gold);border-color:var(--gold-dim);background:var(--bg3);}
 .tb-btn .tb-ico{display:none;flex-shrink:0;}
 .tb-date-btn{border-color:var(--gold-dim);background:var(--bg3);color:var(--gold);gap:10px;transition:color .18s,background .18s,border-color .18s;}
@@ -659,6 +671,17 @@ html:not(.motion-ready) a.d-chip.resa:focus-visible .dc-tkt{ opacity:1; }
   font-size:var(--fs-md);color:var(--text-2);
 }
 .ev-label-list{margin-top:112px;}
+/* La pastille de la SÉLECTION descend franchement, et l'éventail remonte par-
+   dessus : en arrivant, l'animation vient la recouvrir au lieu de s'afficher en
+   dessous. La pastille n'est donc pas un titre posé au-dessus d'un bloc, c'est
+   le repère que l'éventail vient effacer quand il atteint le centre de l'écran. */
+/* Les cartes sont calées EN BAS d'une boîte de hauteur fixe : selon le gabarit
+   du centre (paysage 170u, portrait 254u), le haut de la boîte garde 153px ou
+   22px de vide. Le retrait est donc calé sur le cas le MOINS couvrant — le
+   paysage ; le portrait, plus haut, recouvre davantage sans jamais atteindre le
+   résumé (marge de la pastille = 210px, débord portrait ≈ 150px). */
+.ev-selection .ev-label{margin-top:210px;}
+.ev-selection .ev-fan{margin-top:-240px;z-index:1;}
 
 /* ── Éventail de la sélection ──
    Trois niveaux de profondeur symétriques : le décalage part du centre, la
@@ -666,12 +689,15 @@ html:not(.motion-ready) a.d-chip.resa:focus-visible .dc-tkt{ opacity:1; }
 .ev-selection{margin-bottom:8px;}
 .ev-fan{
   --ev-dx1:104px; --ev-dx2:184px; --ev-rot:15deg;
+  /* Les cartes sont alignées par le bas ; le rang d'extrémité s'en décroche de
+     20px, ce qui creuse la courbe de l'éventail au lieu de la laisser plate. */
+  --ev-dy2:20px;
   position:relative;height:280px;margin-bottom:16px;
 }
 .ev-card{
   position:absolute;left:50%;bottom:0;padding:0;border:none;background:none;
   cursor:pointer;line-height:0;transform-origin:50% 92%;
-  border-radius:var(--radius-lg);overflow:hidden;
+  border-radius:var(--radius-md);overflow:hidden;
   transform:translateX(-50%);
   transition:transform .38s cubic-bezier(.33,0,.2,1),opacity .38s ease;
 }
@@ -691,36 +717,65 @@ html:not(.motion-ready) a.d-chip.resa:focus-visible .dc-tkt{ opacity:1; }
              height .38s cubic-bezier(.33,0,.2,1),
              object-position .38s cubic-bezier(.33,0,.2,1);
 }
-/* TROIS GABARITS, et trois seulement. Chaque affiche est recadrée dans l'un
-   d'eux (`object-fit:cover`) au lieu d'imposer le ratio de sa source — sinon
-   chaque salle dicte sa géométrie et l'éventail part en éventail (une affiche
-   au format inhabituel, comme Lawrence d'Arabie, détonnait aussitôt).
-     • VERTICAL (2:3)   — toute affiche portrait
-     • HORIZONTAL (16:9) — une affiche paysage AU CENTRE, où elle a la place
-     • CARRÉ            — une affiche paysage SUR LES CÔTÉS
-   Le recadrage coupe : on préserve le bloc-titre des portraits (haut) et le
-   centre des paysages. */
+/* UN SEUL FORMAT : le PORTRAIT (2:3). Toute affiche y est recadrée
+   (`object-fit:cover`) au lieu d'imposer le ratio de sa source — sinon chaque
+   salle dicte sa géométrie et l'éventail part en éventail (une affiche au format
+   inhabituel, comme Lawrence d'Arabie, détonnait aussitôt).
+   Une affiche paysage remplit donc un cadre portrait : le recadrage coupe les
+   côtés. Le gabarit horizontal a été retiré — il abaissait la carte centrale et
+   déséquilibrait l'éventail, pour un cas qui reste minoritaire.
+   Le recadrage est calé en HAUT : c'est là que vit le bloc-titre de l'affiche.
+     • VERTICAL (2:3)  — au centre
+     • VERTICAL RÉDUIT — sur les côtés, en deux rangs */
 .ev-fan{
   --gab-v:170px;  --gab-v-h:254px;    /* vertical, au centre */
-  --gab-h:302px;  --gab-h-h:170px;    /* horizontal, au centre */
   --gab-cote:160px; --gab-cote-h:240px; /* vertical réduit, sur les côtés */
+  /* Les deux rangs latéraux ne sont pas au même plan : le premier rang perd 10 %
+     sur le gabarit de côté, le second 10 % de plus (× .81). La profondeur se lit
+     alors à la TAILLE autant qu'à l'opacité — un seul gabarit latéral aplatissait
+     les deux rangs sur le même plan. */
+  --gab-c1:calc(var(--gab-cote) * .9);   --gab-c1-h:calc(var(--gab-cote-h) * .9);
+  --gab-c2:calc(var(--gab-cote) * .81);  --gab-c2-h:calc(var(--gab-cote-h) * .81);
 }
 .ev-card[data-niveau="0"]{z-index:2;}
 .ev-card[data-niveau="0"] img{width:var(--gab-v);height:var(--gab-v-h);object-position:top;}
-.ev-card[data-niveau="0"].is-paysage img{width:var(--gab-h);height:var(--gab-h-h);object-position:center;}
 .ev-card[data-niveau="1"],.ev-card[data-niveau="2"]{z-index:1;}
 .ev-card[data-niveau="2"]{z-index:0;opacity:.7;}
-.ev-card[data-niveau="1"] img,.ev-card[data-niveau="2"] img{
-  width:var(--gab-cote);height:var(--gab-cote-h);object-position:top;
-}
-.ev-card.is-paysage[data-niveau="1"] img,.ev-card.is-paysage[data-niveau="2"] img{
-  width:var(--gab-cote);height:var(--gab-cote);object-position:center;
-}
+.ev-card[data-niveau="1"] img{width:var(--gab-c1);height:var(--gab-c1-h);object-position:top;}
+.ev-card[data-niveau="2"] img{width:var(--gab-c2);height:var(--gab-c2-h);object-position:top;}
 .ev-card[data-niveau="1"][data-cote="-1"]{transform:translateX(calc(-50% - var(--ev-dx1))) rotate(calc(-1 * var(--ev-rot)));}
 .ev-card[data-niveau="1"][data-cote="1"]{transform:translateX(calc(-50% + var(--ev-dx1))) rotate(var(--ev-rot));}
-.ev-card[data-niveau="2"][data-cote="-1"]{transform:translateX(calc(-50% - var(--ev-dx2))) rotate(calc(-2 * var(--ev-rot)));}
-.ev-card[data-niveau="2"][data-cote="1"]{transform:translateX(calc(-50% + var(--ev-dx2))) rotate(calc(2 * var(--ev-rot)));}
+/* `translateY` est posé AVANT `rotate` dans la liste : les transformations
+   s'appliquent de droite à gauche, la carte est donc tournée puis descendue —
+   le décalage reste vertical, il ne suit pas l'inclinaison de la carte. */
+.ev-card[data-niveau="2"][data-cote="-1"]{transform:translateX(calc(-50% - var(--ev-dx2))) translateY(var(--ev-dy2)) rotate(calc(-2 * var(--ev-rot)));}
+.ev-card[data-niveau="2"][data-cote="1"]{transform:translateX(calc(-50% + var(--ev-dx2))) translateY(var(--ev-dy2)) rotate(calc(2 * var(--ev-rot)));}
 .ev-card:focus-visible{outline:2px solid var(--gold);outline-offset:3px;}
+
+/* ── Apparition « tissu » ──
+   Canvas WebGL superposé à CHAQUE carte de l'éventail, le temps que l'affiche
+   se déplie. Il vit DANS la carte (et non dans `.ev-fan`) pour hériter de sa
+   translation et de sa rotation — sinon les cartes latérales, décalées et
+   inclinées, verraient leur pli rester au centre, à plat.
+   Hors flux et sans interaction : la carte dessous garde le clic, le focus et
+   l'accessibilité — l'effet ne fait que rejouer son arrivée.
+   Le module (src/cloth.js) est le MÊME qu'au labo de réglage
+   (design/lab/cloth.html) — un seul endroit où le pli existe.
+   Repli : sans WebGL2, sans CORS sur l'affiche, ou en mouvement réduit, aucun
+   canvas n'est créé et la carte arrive en simple fondu. */
+.ev-tissu{
+  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  z-index:1;pointer-events:none;display:block;
+}
+/* Le canvas déborde le gabarit (le pli sort du cadre) : le temps du vol, la
+   carte cesse de rogner. L'affiche s'efface, le canvas la redessine — elle
+   garde sa place dans la boîte, c'est elle qui donne son gabarit à la carte. */
+.ev-card.tissu-en-cours{overflow:visible;}
+.ev-card.tissu-en-cours img{opacity:0;}
+/* Éventail escamoté tant qu'il n'a pas atteint le centre de l'écran : jouer
+   l'apparition hors champ la gaspillerait. Levé par l'IntersectionObserver, et
+   jamais posé sous `prefers-reduced-motion`. */
+.ev-fan.ev-attente .ev-card{opacity:0;}
 /* Dégradation à une seule carte : ni cartes latérales, ni flèches, ni swipe. */
 .ev-selection.is-solo .ev-arrow{display:none;}
 
@@ -847,15 +902,45 @@ html:not(.motion-ready) a.d-chip.resa:focus-visible .dc-tkt{ opacity:1; }
 }
 /* Desktop : mêmes rapports, à l'échelle (× 1,5625 — cf. ratios du brief). */
 @media(min-width:821px){
-  .ev-fan{--ev-dx1:162px; --ev-dx2:288px; height:420px;}
-  /* Mêmes trois gabarits, à l'échelle du desktop (× 1,5625). */
+  /* Mêmes rapports qu'en mobile, à l'échelle — mais l'échelle est ÉLASTIQUE.
+     Un facteur figé à 1,5625 sortait l'éventail de la fenêtre entre 821px et
+     ~1060px : les deux affiches d'extrémité passaient sous le bord et se
+     faisaient recadrer net. Le facteur suit donc la fenêtre jusqu'au ratio de
+     référence, puis se fige.
+       demi-envergure d'une carte d'extrémité ≈ 330px × k  (décalage + rotation
+       autour de 50%/92% + demi-boîte englobante) → k ≤ 100vw / 680 garde
+       l'éventail dans la fenêtre, quelle que soit sa largeur. */
+  /* `--ev-u` EST ce facteur, porté par une longueur (1,5625px au repos) que
+     chaque cote multiplie par son gabarit mobile — une seule molette à tourner.
+     Il monte par PALIERS, pas en continu : une expression en vw serait plus
+     lisse, mais Chrome ne réinvalide pas une custom property contenant du vw
+     quand la fenêtre change — les affiches restaient figées à leur taille
+     précédente jusqu'au rechargement. Les media queries, elles, se réévaluent.
+     Chaque palier respecte u ≤ largeur / 680, la contrainte ci-dessus. */
   .ev-fan{
-    --gab-v:266px;  --gab-v-h:398px;
-    --gab-h:472px;  --gab-h-h:266px;
-    --gab-cote:250px; --gab-cote-h:374px;
+    --ev-u:1.2px;
+    --ev-dx1:calc(104 * var(--ev-u));
+    --ev-dx2:calc(184 * var(--ev-u));
+    height:calc(268 * var(--ev-u));
+    --gab-v:calc(170 * var(--ev-u));    --gab-v-h:calc(254 * var(--ev-u));
+    --gab-cote:calc(160 * var(--ev-u)); --gab-cote-h:calc(240 * var(--ev-u));
   }
   .ev-summary{font-size:var(--fs-2xl);line-height:1.6;}
+  /* Second recadrage, celui-là invisible dans la feuille de l'onglet : `.main`
+     clippe à l'horizontale (garde-fou anti-scroll de la liste de films) et
+     `.app` plafonne à 1000px — l'éventail, lui, a besoin d'un peu plus. On lève
+     le garde-fou sur le seul onglet Évènements ; l'échelle élastique ci-dessus
+     répond de la fenêtre. En mobile le clip RESTE : les cartes d'extrémité y
+     débordent volontairement et doivent être coupées au bord de l'écran. */
+  .main:has(#secEvents:not(.hidden)){overflow-x:visible;}
 }
+@media(min-width:900px){ .ev-fan{--ev-u:1.32px;} }
+@media(min-width:980px){ .ev-fan{--ev-u:1.44px;} }
+/* Palier de référence : au-delà, l'éventail ne grandit plus (× 1,5625). */
+@media(min-width:1062px){ .ev-fan{--ev-u:1.5625px;} }
+/* Resynchronisation d'échelle (cf. evFanResync) : le temps du recalcul, aucune
+   carte ne morphe — c'est un changement de fenêtre, pas un geste de l'utilisateur. */
+.ev-fan.no-morph .ev-card,.ev-fan.no-morph .ev-card img{transition:none;}
 @media (prefers-reduced-motion: reduce){
   .ev-card,.ev-card.is-pret img{transition-duration:1ms;}
 }

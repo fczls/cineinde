@@ -3111,9 +3111,21 @@ def event_dedup_key(ev: dict) -> str:
     idempotent d'un run à l'autre. Bucket MENSUEL plutôt que date exacte —
     une source qui corrige sa date d'un jour ne doit pas créer une 2e ligne.
     """
-    films = sorted(_event_film_keys(ev))
-    identite = films[0] if len(films) == 1 else _normalize_title_key(ev["titre"])
-    ancre = ev.get("date_debut") or ev.get("date_fin")
+    # Identité = le TITRE, toujours. Elle valait auparavant le titre du film
+    # quand il y en avait exactement un — or la liste des films GROSSIT d'un run
+    # à l'autre (une source finit par rattacher un film à un événement qui n'en
+    # portait aucun). L'identité basculait alors du titre de l'événement à celui
+    # du film, la clé changeait, et une 2e ligne naissait à côté de la première.
+    # Rapprocher deux sources qui nomment différemment un même film reste le rôle
+    # de `merge_events`, qui s'exécute AVANT — et dont le titre canonique suit la
+    # priorité de source, donc ne dépend pas de quel scraper a réussi ce jour-là.
+    identite = _normalize_title_key(ev["titre"])
+    # Ancre sur le mois de FIN, pas de début. `filter_events_current` rogne le
+    # début à aujourd'hui : un événement long qui franchit un 1er du mois voit
+    # donc son mois d'ancrage glisser, la clé change et une 2e ligne naît à
+    # côté de la première — mécaniquement, tous les mois. La date de fin, elle,
+    # ne bouge pas avec le calendrier.
+    ancre = ev.get("date_fin") or ev.get("date_debut")
     return f"{ev['type']}|{identite}|{ancre[:7] if ancre else 'ouvert'}"
 
 
@@ -3314,6 +3326,70 @@ def _rapatrie_affiche(client, url: str, existants: set) -> "str | None":
         return None
 
 
+def _liste_affiches(client) -> set:
+    """Noms de fichiers déjà présents dans le bucket, pour ne rien recopier."""
+    noms = set()
+    try:
+        for obj in client.storage.from_("affiches").list(
+                options={"limit": 1000}) or []:
+            noms.add(obj.get("name"))
+    except Exception as e:
+        log.debug(f"Bucket affiches non listé : {e}")
+    return noms
+
+
+def rapatrie_affiches_films(films: list) -> None:
+    """
+    Recopie les affiches de FILMS dans le bucket `affiches` et réécrit
+    `film["poster"]` avec l'URL Supabase.
+
+    Deux raisons, la seconde étant devenue bloquante :
+      1. les CDN des salles refusent le hotlink (403) et leurs URLs tournent ;
+      2. `cinemas-lumiere.com` ne sert AUCUN en-tête `Access-Control-Allow-Origin`.
+         Une image cross-origin sans cet en-tête ne peut pas devenir une texture
+         WebGL — elle désactive donc l'apparition « tissu » de l'onglet
+         Évènements, qui passe par `evAffiche()` → poster du film.
+
+    Idempotent : le nom de fichier est le hash de l'URL source, donc les runs
+    suivants sautent ce qui est déjà là. Une affiche qui échoue GARDE son URL
+    d'origine — on ne perd jamais un visuel pour un problème de copie.
+    Sans identifiants Supabase, la fonction ne fait rien (repli inchangé).
+    """
+    sb_url = os.getenv("SUPABASE_URL")
+    sb_key = os.getenv("SUPABASE_SERVICE_ROLE_KEY")
+    if not sb_url or not sb_key or not films:
+        return
+    try:
+        from supabase import create_client
+        client = create_client(sb_url, sb_key)
+    except Exception as e:
+        log.warning(f"Rapatriement des affiches ignoré (Supabase indisponible) : {e}")
+        return
+
+    existants = _liste_affiches(client)
+    deja = f"{sb_url.rstrip('/')}/storage/v1/object/public/affiches/"
+    n_copiees = n_gardees = 0
+    # Cache par URL source : le même film revient sur plusieurs cinémas et
+    # plusieurs séances, inutile de retélécharger la même affiche.
+    vues: dict = {}
+
+    for film in films:
+        src = film.get("poster")
+        if not src or not src.startswith("http") or src.startswith(deja):
+            continue
+        if src not in vues:
+            vues[src] = _rapatrie_affiche(client, src, existants)
+        cible = vues[src]
+        if cible:
+            film["poster"] = cible
+            n_copiees += 1
+        else:
+            n_gardees += 1
+
+    log.info(f"Affiches de films : {n_copiees} rapatriées, "
+             f"{n_gardees} laissées à la source ({len(vues)} URLs distinctes)")
+
+
 # ── Upsert Supabase ───────────────────────────────────────────────────────
 
 def _mois_couverts(ev: dict) -> list:
@@ -3421,6 +3497,15 @@ def upsert_events_to_supabase(events: list, force_resume: bool = False) -> None:
         for i, f in enumerate(ev.get("films") or []):
             key = _normalize_title_key(f["titre"])
             connu = films_par_titre.get(key)
+            # Affiche du film lié : rapatriée elle aussi. C'est le dernier
+            # chemin par lequel `evAffiche()` peut renvoyer une URL sans en-tête
+            # CORS — donc une affiche que le shader ne saurait pas texturer.
+            # La mutation retombe dans `events_public()`, appelé après : le repli
+            # programme.json reçoit la même URL que Supabase.
+            if f.get("affiche"):
+                copie = _rapatrie_affiche(client, f["affiche"], affiches_existantes)
+                if copie:
+                    f["affiche"] = copie
             lignes_films.append({
                 "evenement_id": ev_id, "film_id": connu["id"] if connu else None,
                 "titre": f["titre"], "titre_key": key,
@@ -4198,6 +4283,13 @@ def main():
                 for field in enrich_fields:
                     if best.get(field) and not film.get(field):
                         film[field] = best[field]
+
+    # 4bis. Affiches de films rapatriées AVANT l'upsert, en mutant `all_films` :
+    # Supabase (juste dessous) et le repli programme.json (écrit plus bas) lisent
+    # ainsi la même URL. Les faire diverger donnerait un site qui marche sur une
+    # source et pas sur l'autre.
+    if not args.dry_run and not args.events_only:
+        rapatrie_affiches_films(all_films)
 
     # 5. Upsert tous les films (Comoedia + Lumière) dans Supabase (avant filtrage)
     if not args.dry_run and not args.events_only:
