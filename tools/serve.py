@@ -9,7 +9,10 @@ import sys
 # Dérivé de __file__ pour ne jamais appeler os.getcwd() (cwd parfois non lisible
 # dans le bac à sable de preview).
 DIRECTORY = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-PORT = 4173
+# 4173 par défaut (l'adresse documentée dans CLAUDE.md), mais $PORT l'emporte :
+# un port en dur empêche l'outillage de preview de replier sur un autre port
+# quand 4173 est déjà pris par un serveur laissé tourner.
+PORT = int(os.environ.get("PORT") or 4173)
 
 
 class NoCacheHandler(http.server.SimpleHTTPRequestHandler):

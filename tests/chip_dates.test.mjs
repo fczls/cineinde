@@ -26,12 +26,16 @@ const deps = {
   // Date du jour figée : les règles qui comparent à « aujourd'hui » (chip
   // `en_cours`) doivent être testables sans dépendre du calendrier.
   dKey: () => '2026-08-15',
+  // Normalisation de titre — version simplifiée suffisante ici : la dédup ne
+  // demande qu'une comparaison insensible à la casse et aux accents.
+  normalizeTitle: t => (t || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+                                .toLowerCase().replace(/\s+/g, ' ').trim(),
 };
 const api = new Function(...Object.keys(deps),
-  `${bloc}\n return { eventDateChip, evChipDates, sortEvents, monthsWithEvents, pickSelection };`
+  `${bloc}\n return { eventDateChip, evChipDates, sortEvents, monthsWithEvents, pickSelection, dedupeEvents };`
 )(...Object.values(deps));
 
-const { eventDateChip, evChipDates, sortEvents, monthsWithEvents, pickSelection } = api;
+const { eventDateChip, evChipDates, sortEvents, monthsWithEvents, pickSelection, dedupeEvents } = api;
 
 let vert = 0;
 const test = (nom, fn) => {
@@ -245,6 +249,65 @@ test('changer de graine change le tirage', () => {
 test('le nombre suit le périmètre filtré, pas un tirage global', () => {
   // 5 éligibles dans le périmètre ⇒ 3 cartes, quoi qu'il arrive hors périmètre.
   assert.equal(pickSelection(faux(5), 'graine', 'Le Comoedia|tous|2026-08').length, 3);
+});
+
+// ── Déduplication des évènements ──────────────────────────────────────────
+// Régression : Supabase porte plusieurs lignes pour un même évènement, la clé
+// d'idempotence du scraper s'ancrant sur le mois de DÉBUT (qui glisse quand un
+// évènement long traverse un mois) ou sur une identité qui change selon que la
+// ligne porte 0 ou 1 film.
+const ev = (o) => Object.assign(
+  { type: 'festival', titre: 'X', date_debut: null, date_fin: null, films: [], creneaux: [] }, o);
+
+test('fusionne deux lignes du même cycle dont le début a glissé', () => {
+  const out = dedupeEvents([
+    ev({ titre: 'Cycle Scary Fourmi', date_debut: '2026-07-04', date_fin: '2026-08-22',
+         films: [{ titre: 'The Thing' }], creneaux: [{ cinema: 'F', date: '2026-08-02', heure: '20:00' }] }),
+    ev({ titre: 'Cycle Scary Fourmi', date_debut: '2026-08-01', date_fin: '2026-08-22',
+         films: [{ titre: 'La Mouche' }], creneaux: [{ cinema: 'F', date: '2026-08-09', heure: '20:00' }] }),
+  ]);
+  assert.equal(out.length, 1);
+  assert.equal(out[0].date_debut, '2026-07-04', 'garde le début le plus tôt');
+  assert.equal(out[0].date_fin, '2026-08-22');
+  assert.equal(out[0].films.length, 2, 'réunit les films des deux lignes');
+  assert.equal(out[0].creneaux.length, 2, 'réunit les créneaux des deux lignes');
+});
+
+test('la ligne vide est absorbée par celle qui porte le contenu', () => {
+  const out = dedupeEvents([
+    ev({ titre: 'Résonance - Biennale', date_debut: '2026-09-14', date_fin: '2026-09-14' }),
+    ev({ titre: 'Résonance - Biennale', date_debut: '2026-09-14', date_fin: '2026-09-14',
+         films: [{ titre: 'Les Glaneurs' }], creneaux: [{ cinema: 'C', date: '2026-09-14', heure: '19:00' }] }),
+  ]);
+  assert.equal(out.length, 1);
+  assert.equal(out[0].films.length, 1);
+  assert.equal(out[0].creneaux.length, 1);
+});
+
+test('ne fusionne pas deux éditions aux périodes disjointes', () => {
+  const out = dedupeEvents([
+    ev({ titre: 'Festival Play It Again !', date_debut: '2026-09-01', date_fin: '2026-09-07' }),
+    ev({ titre: 'Festival Play It Again !', date_debut: '2027-09-01', date_fin: '2027-09-07' }),
+  ]);
+  assert.equal(out.length, 2, 'deux éditions annuelles restent distinctes');
+});
+
+test('ne fusionne pas deux types différents au même titre', () => {
+  const out = dedupeEvents([
+    ev({ type: 'festival', titre: 'Akira', date_debut: '2026-09-10', date_fin: '2026-09-10' }),
+    ev({ type: 'avant-premiere', titre: 'Akira', date_debut: '2026-09-10', date_fin: '2026-09-10' }),
+  ]);
+  assert.equal(out.length, 2);
+});
+
+test('les créneaux identiques ne sont pas dupliqués par la fusion', () => {
+  const c = { cinema: 'F', date: '2026-08-02', heure: '20:00', titre_film: 'The Thing' };
+  const out = dedupeEvents([
+    ev({ titre: 'Cycle', date_debut: '2026-08-01', date_fin: '2026-08-30', creneaux: [c] }),
+    ev({ titre: 'Cycle', date_debut: '2026-08-01', date_fin: '2026-08-30', creneaux: [{ ...c }] }),
+  ]);
+  assert.equal(out.length, 1);
+  assert.equal(out[0].creneaux.length, 1, 'même signature = un seul créneau');
 });
 
 console.log(`\n${vert} tests OK`);

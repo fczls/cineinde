@@ -79,7 +79,16 @@
 }
 /* @tokens:end */
 *{margin:0;padding:0;box-sizing:border-box;}
-body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:var(--fs-md);line-height:1.5;min-height:100vh;-webkit-font-smoothing:antialiased;text-wrap:balance;}
+/* `overflow-x:clip` et non `hidden` : `hidden` ferait de body un conteneur de
+   défilement et forcerait l'autre axe à `auto`, ce qui casserait `position:sticky`
+   et le scroll de la page. `clip` coupe sans rien de tout ça, et laisse
+   `overflow-y` visible.
+   Nécessaire depuis l'apparition « tissu » : le canvas d'une carte déborde son
+   gabarit (facteur `debordement`) et `.main` lève son clip horizontal sur
+   l'onglet Évènements pour laisser l'éventail s'étendre — les cartes
+   d'extrémité sortaient donc de la fenêtre et y ouvraient une barre de
+   défilement. Elles doivent être coupées au bord, pas déplacer la page. */
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:var(--fs-md);line-height:1.5;min-height:100vh;-webkit-font-smoothing:antialiased;text-wrap:balance;overflow-x:clip;}
 
 /* ── NAV SHELL (header + barre flottante, style Airbnb) ── */
 .nav-shell{
@@ -181,6 +190,9 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;fon
   transition:color .18s,border-color .18s,background .18s;white-space:nowrap;
 }
 .tb-btn:hover{color:var(--text);}
+/* Désactivé : visible, à sa place, mais sans affordance — ni survol, ni curseur
+   de clic (cf. evTypeVide pour la règle produit). */
+.tb-btn:disabled,.tb-btn:disabled:hover{color:var(--neutral-lo);cursor:default;}
 .tb-btn.active{color:var(--gold);border-color:var(--gold-dim);background:var(--bg3);}
 .tb-btn .tb-ico{display:none;flex-shrink:0;}
 .tb-date-btn{border-color:var(--gold-dim);background:var(--bg3);color:var(--gold);gap:10px;transition:color .18s,background .18s,border-color .18s;}
@@ -739,6 +751,17 @@ html:not(.motion-ready) a.d-chip.resa:focus-visible .dc-tkt{ opacity:1; }
   font-size:var(--fs-md);color:var(--text-2);
 }
 .ev-label-list{margin-top:112px;}
+/* La pastille de la SÉLECTION descend franchement, et l'éventail remonte par-
+   dessus : en arrivant, l'animation vient la recouvrir au lieu de s'afficher en
+   dessous. La pastille n'est donc pas un titre posé au-dessus d'un bloc, c'est
+   le repère que l'éventail vient effacer quand il atteint le centre de l'écran. */
+/* Les cartes sont calées EN BAS d'une boîte de hauteur fixe : selon le gabarit
+   du centre (paysage 170u, portrait 254u), le haut de la boîte garde 153px ou
+   22px de vide. Le retrait est donc calé sur le cas le MOINS couvrant — le
+   paysage ; le portrait, plus haut, recouvre davantage sans jamais atteindre le
+   résumé (marge de la pastille = 210px, débord portrait ≈ 150px). */
+.ev-selection .ev-label{margin-top:210px;}
+.ev-selection .ev-fan{margin-top:-240px;z-index:1;}
 
 /* ── Éventail de la sélection ──
    Trois niveaux de profondeur symétriques : le décalage part du centre, la
@@ -746,12 +769,15 @@ html:not(.motion-ready) a.d-chip.resa:focus-visible .dc-tkt{ opacity:1; }
 .ev-selection{margin-bottom:8px;}
 .ev-fan{
   --ev-dx1:104px; --ev-dx2:184px; --ev-rot:15deg;
+  /* Les cartes sont alignées par le bas ; le rang d'extrémité s'en décroche de
+     20px, ce qui creuse la courbe de l'éventail au lieu de la laisser plate. */
+  --ev-dy2:20px;
   position:relative;height:280px;margin-bottom:16px;
 }
 .ev-card{
   position:absolute;left:50%;bottom:0;padding:0;border:none;background:none;
   cursor:pointer;line-height:0;transform-origin:50% 92%;
-  border-radius:var(--radius-lg);overflow:hidden;
+  border-radius:var(--radius-md);overflow:hidden;
   transform:translateX(-50%);
   transition:transform .38s cubic-bezier(.33,0,.2,1),opacity .38s ease;
 }
@@ -771,36 +797,65 @@ html:not(.motion-ready) a.d-chip.resa:focus-visible .dc-tkt{ opacity:1; }
              height .38s cubic-bezier(.33,0,.2,1),
              object-position .38s cubic-bezier(.33,0,.2,1);
 }
-/* TROIS GABARITS, et trois seulement. Chaque affiche est recadrée dans l'un
-   d'eux (`object-fit:cover`) au lieu d'imposer le ratio de sa source — sinon
-   chaque salle dicte sa géométrie et l'éventail part en éventail (une affiche
-   au format inhabituel, comme Lawrence d'Arabie, détonnait aussitôt).
-     • VERTICAL (2:3)   — toute affiche portrait
-     • HORIZONTAL (16:9) — une affiche paysage AU CENTRE, où elle a la place
-     • CARRÉ            — une affiche paysage SUR LES CÔTÉS
-   Le recadrage coupe : on préserve le bloc-titre des portraits (haut) et le
-   centre des paysages. */
+/* UN SEUL FORMAT : le PORTRAIT (2:3). Toute affiche y est recadrée
+   (`object-fit:cover`) au lieu d'imposer le ratio de sa source — sinon chaque
+   salle dicte sa géométrie et l'éventail part en éventail (une affiche au format
+   inhabituel, comme Lawrence d'Arabie, détonnait aussitôt).
+   Une affiche paysage remplit donc un cadre portrait : le recadrage coupe les
+   côtés. Le gabarit horizontal a été retiré — il abaissait la carte centrale et
+   déséquilibrait l'éventail, pour un cas qui reste minoritaire.
+   Le recadrage est calé en HAUT : c'est là que vit le bloc-titre de l'affiche.
+     • VERTICAL (2:3)  — au centre
+     • VERTICAL RÉDUIT — sur les côtés, en deux rangs */
 .ev-fan{
   --gab-v:170px;  --gab-v-h:254px;    /* vertical, au centre */
-  --gab-h:302px;  --gab-h-h:170px;    /* horizontal, au centre */
   --gab-cote:160px; --gab-cote-h:240px; /* vertical réduit, sur les côtés */
+  /* Les deux rangs latéraux ne sont pas au même plan : le premier rang perd 10 %
+     sur le gabarit de côté, le second 10 % de plus (× .81). La profondeur se lit
+     alors à la TAILLE autant qu'à l'opacité — un seul gabarit latéral aplatissait
+     les deux rangs sur le même plan. */
+  --gab-c1:calc(var(--gab-cote) * .9);   --gab-c1-h:calc(var(--gab-cote-h) * .9);
+  --gab-c2:calc(var(--gab-cote) * .81);  --gab-c2-h:calc(var(--gab-cote-h) * .81);
 }
 .ev-card[data-niveau="0"]{z-index:2;}
 .ev-card[data-niveau="0"] img{width:var(--gab-v);height:var(--gab-v-h);object-position:top;}
-.ev-card[data-niveau="0"].is-paysage img{width:var(--gab-h);height:var(--gab-h-h);object-position:center;}
 .ev-card[data-niveau="1"],.ev-card[data-niveau="2"]{z-index:1;}
 .ev-card[data-niveau="2"]{z-index:0;opacity:.7;}
-.ev-card[data-niveau="1"] img,.ev-card[data-niveau="2"] img{
-  width:var(--gab-cote);height:var(--gab-cote-h);object-position:top;
-}
-.ev-card.is-paysage[data-niveau="1"] img,.ev-card.is-paysage[data-niveau="2"] img{
-  width:var(--gab-cote);height:var(--gab-cote);object-position:center;
-}
+.ev-card[data-niveau="1"] img{width:var(--gab-c1);height:var(--gab-c1-h);object-position:top;}
+.ev-card[data-niveau="2"] img{width:var(--gab-c2);height:var(--gab-c2-h);object-position:top;}
 .ev-card[data-niveau="1"][data-cote="-1"]{transform:translateX(calc(-50% - var(--ev-dx1))) rotate(calc(-1 * var(--ev-rot)));}
 .ev-card[data-niveau="1"][data-cote="1"]{transform:translateX(calc(-50% + var(--ev-dx1))) rotate(var(--ev-rot));}
-.ev-card[data-niveau="2"][data-cote="-1"]{transform:translateX(calc(-50% - var(--ev-dx2))) rotate(calc(-2 * var(--ev-rot)));}
-.ev-card[data-niveau="2"][data-cote="1"]{transform:translateX(calc(-50% + var(--ev-dx2))) rotate(calc(2 * var(--ev-rot)));}
+/* `translateY` est posé AVANT `rotate` dans la liste : les transformations
+   s'appliquent de droite à gauche, la carte est donc tournée puis descendue —
+   le décalage reste vertical, il ne suit pas l'inclinaison de la carte. */
+.ev-card[data-niveau="2"][data-cote="-1"]{transform:translateX(calc(-50% - var(--ev-dx2))) translateY(var(--ev-dy2)) rotate(calc(-2 * var(--ev-rot)));}
+.ev-card[data-niveau="2"][data-cote="1"]{transform:translateX(calc(-50% + var(--ev-dx2))) translateY(var(--ev-dy2)) rotate(calc(2 * var(--ev-rot)));}
 .ev-card:focus-visible{outline:2px solid var(--gold);outline-offset:3px;}
+
+/* ── Apparition « tissu » ──
+   Canvas WebGL superposé à CHAQUE carte de l'éventail, le temps que l'affiche
+   se déplie. Il vit DANS la carte (et non dans `.ev-fan`) pour hériter de sa
+   translation et de sa rotation — sinon les cartes latérales, décalées et
+   inclinées, verraient leur pli rester au centre, à plat.
+   Hors flux et sans interaction : la carte dessous garde le clic, le focus et
+   l'accessibilité — l'effet ne fait que rejouer son arrivée.
+   Le module (src/cloth.js) est le MÊME qu'au labo de réglage
+   (design/lab/cloth.html) — un seul endroit où le pli existe.
+   Repli : sans WebGL2, sans CORS sur l'affiche, ou en mouvement réduit, aucun
+   canvas n'est créé et la carte arrive en simple fondu. */
+.ev-tissu{
+  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  z-index:1;pointer-events:none;display:block;
+}
+/* Le canvas déborde le gabarit (le pli sort du cadre) : le temps du vol, la
+   carte cesse de rogner. L'affiche s'efface, le canvas la redessine — elle
+   garde sa place dans la boîte, c'est elle qui donne son gabarit à la carte. */
+.ev-card.tissu-en-cours{overflow:visible;}
+.ev-card.tissu-en-cours img{opacity:0;}
+/* Éventail escamoté tant qu'il n'a pas atteint le centre de l'écran : jouer
+   l'apparition hors champ la gaspillerait. Levé par l'IntersectionObserver, et
+   jamais posé sous `prefers-reduced-motion`. */
+.ev-fan.ev-attente .ev-card{opacity:0;}
 /* Dégradation à une seule carte : ni cartes latérales, ni flèches, ni swipe. */
 .ev-selection.is-solo .ev-arrow{display:none;}
 
@@ -927,15 +982,45 @@ html:not(.motion-ready) a.d-chip.resa:focus-visible .dc-tkt{ opacity:1; }
 }
 /* Desktop : mêmes rapports, à l'échelle (× 1,5625 — cf. ratios du brief). */
 @media(min-width:821px){
-  .ev-fan{--ev-dx1:162px; --ev-dx2:288px; height:420px;}
-  /* Mêmes trois gabarits, à l'échelle du desktop (× 1,5625). */
+  /* Mêmes rapports qu'en mobile, à l'échelle — mais l'échelle est ÉLASTIQUE.
+     Un facteur figé à 1,5625 sortait l'éventail de la fenêtre entre 821px et
+     ~1060px : les deux affiches d'extrémité passaient sous le bord et se
+     faisaient recadrer net. Le facteur suit donc la fenêtre jusqu'au ratio de
+     référence, puis se fige.
+       demi-envergure d'une carte d'extrémité ≈ 330px × k  (décalage + rotation
+       autour de 50%/92% + demi-boîte englobante) → k ≤ 100vw / 680 garde
+       l'éventail dans la fenêtre, quelle que soit sa largeur. */
+  /* `--ev-u` EST ce facteur, porté par une longueur (1,5625px au repos) que
+     chaque cote multiplie par son gabarit mobile — une seule molette à tourner.
+     Il monte par PALIERS, pas en continu : une expression en vw serait plus
+     lisse, mais Chrome ne réinvalide pas une custom property contenant du vw
+     quand la fenêtre change — les affiches restaient figées à leur taille
+     précédente jusqu'au rechargement. Les media queries, elles, se réévaluent.
+     Chaque palier respecte u ≤ largeur / 680, la contrainte ci-dessus. */
   .ev-fan{
-    --gab-v:266px;  --gab-v-h:398px;
-    --gab-h:472px;  --gab-h-h:266px;
-    --gab-cote:250px; --gab-cote-h:374px;
+    --ev-u:1.2px;
+    --ev-dx1:calc(104 * var(--ev-u));
+    --ev-dx2:calc(184 * var(--ev-u));
+    height:calc(268 * var(--ev-u));
+    --gab-v:calc(170 * var(--ev-u));    --gab-v-h:calc(254 * var(--ev-u));
+    --gab-cote:calc(160 * var(--ev-u)); --gab-cote-h:calc(240 * var(--ev-u));
   }
   .ev-summary{font-size:var(--fs-2xl);line-height:1.6;}
+  /* Second recadrage, celui-là invisible dans la feuille de l'onglet : `.main`
+     clippe à l'horizontale (garde-fou anti-scroll de la liste de films) et
+     `.app` plafonne à 1000px — l'éventail, lui, a besoin d'un peu plus. On lève
+     le garde-fou sur le seul onglet Évènements ; l'échelle élastique ci-dessus
+     répond de la fenêtre. En mobile le clip RESTE : les cartes d'extrémité y
+     débordent volontairement et doivent être coupées au bord de l'écran. */
+  .main:has(#secEvents:not(.hidden)){overflow-x:visible;}
 }
+@media(min-width:900px){ .ev-fan{--ev-u:1.32px;} }
+@media(min-width:980px){ .ev-fan{--ev-u:1.44px;} }
+/* Palier de référence : au-delà, l'éventail ne grandit plus (× 1,5625). */
+@media(min-width:1062px){ .ev-fan{--ev-u:1.5625px;} }
+/* Resynchronisation d'échelle (cf. evFanResync) : le temps du recalcul, aucune
+   carte ne morphe — c'est un changement de fenêtre, pas un geste de l'utilisateur. */
+.ev-fan.no-morph .ev-card,.ev-fan.no-morph .ev-card img{transition:none;}
 @media (prefers-reduced-motion: reduce){
   .ev-card,.ev-card.is-pret img{transition-duration:1ms;}
 }
@@ -2961,6 +3046,9 @@ async function loadEvents() {
 // @test-block:start — bloc extrait tel quel par tests/chip_dates.test.mjs
 const evMoisDe   = iso => (iso || '').slice(0, 7);
 const evMoisLabel = m => m ? `${MOIS_NOMS[Number(m.slice(5,7)) - 1]} ${m.slice(0,4)}` : '—';
+// MOIS_NOMS est en minuscules parce qu'il s'écrit au fil du texte (« du 3 au 8
+// juillet ») ; en tête d'une entrée de liste, le mois prend la majuscule.
+const evMoisLabelCap = m => { const s = evMoisLabel(m); return s.charAt(0).toUpperCase() + s.slice(1); };
 const _evJour = (iso, avecMois) => {
   const j = Number(iso.slice(8,10)), m = Number(iso.slice(5,7));
   return avecMois ? `${j} ${MOIS_NOMS[m-1]}` : String(j);
@@ -3115,11 +3203,76 @@ function pickSelection(events, seed, scope) {
     .map(x => x.ev)
     .sort((a, b) => (a.date_debut || '').localeCompare(b.date_debut || ''));
 }
+// ── Déduplication des évènements ──────────────────────────────────────────
+// Supabase peut porter PLUSIEURS lignes pour un même évènement. Deux causes,
+// toutes deux dans la clé d'idempotence du scraper (`event_dedup_key`) :
+//   • elle s'ancre sur le MOIS DE DÉBUT — or celui-ci glisse dès qu'un
+//     évènement long traverse un changement de mois (la source rogne le début
+//     à aujourd'hui). Une 2e ligne naît, la 1re reste. C'est mécanique et ça
+//     se répète chaque mois ;
+//   • l'identité vaut le titre du FILM quand il y en a exactement un, sinon
+//     celui de l'évènement — deux lignes du même évènement divergent donc si
+//     l'une porte un film et l'autre non.
+// Corriger le scraper n'effacerait pas les lignes déjà écrites : on fusionne
+// donc à la LECTURE. Fusionner plutôt qu'écarter — chaque ligne peut détenir
+// des films ou des créneaux que l'autre n'a pas.
+function _evPeriodesSeChevauchent(a, b) {
+  const d1 = a.date_debut || a.date_fin, f1 = a.date_fin || a.date_debut;
+  const d2 = b.date_debut || b.date_fin, f2 = b.date_fin || b.date_debut;
+  if (!d1 || !d2) return true;      // sans date, rien ne permet de les séparer
+  return d1 <= f2 && d2 <= f1;
+}
+
+function _evFusionner(cible, autre) {
+  // Période élargie : les deux lignes décrivent le même évènement vu de deux
+  // runs, celle qui commence le plus tôt et finit le plus tard fait foi.
+  const debuts = [cible.date_debut, autre.date_debut].filter(Boolean).sort();
+  const fins   = [cible.date_fin,   autre.date_fin].filter(Boolean).sort();
+  if (debuts.length) cible.date_debut = debuts[0];
+  if (fins.length)   cible.date_fin   = fins[fins.length - 1];
+
+  for (const k of ['description', 'affiche_url', 'forme', 'precision', 'source', 'source_url']) {
+    if (!cible[k] && autre[k]) cible[k] = autre[k];
+  }
+
+  const vusF = new Set((cible.films || []).map(f => normalizeTitle(f.titre || '')));
+  for (const f of autre.films || []) {
+    const k = normalizeTitle(f.titre || '');
+    if (k && !vusF.has(k)) { vusF.add(k); (cible.films = cible.films || []).push(f); }
+  }
+
+  const sig = c => `${c.cinema}|${c.date}|${(c.heure || '').slice(0, 5)}|${normalizeTitle(c.titre_film || '')}`;
+  const vusC = new Set((cible.creneaux || []).map(sig));
+  for (const c of autre.creneaux || []) {
+    if (!vusC.has(sig(c))) { vusC.add(sig(c)); (cible.creneaux = cible.creneaux || []).push(c); }
+  }
+}
+
+function dedupeEvents(events) {
+  const groupes = new Map();
+  for (const ev of events || []) {
+    // Même type ET même titre : deux évènements distincts ne partagent pas les
+    // deux. Le chevauchement de période tranche ensuite les éditions annuelles
+    // d'un même rendez-vous, qui doivent rester séparées.
+    const cle = `${ev.type}|${normalizeTitle(ev.titre || '')}`;
+    const lot = groupes.get(cle);
+    if (!lot) { groupes.set(cle, [ev]); continue; }
+    const jumeau = lot.find(x => _evPeriodesSeChevauchent(x, ev));
+    if (jumeau) _evFusionner(jumeau, ev);
+    else lot.push(ev);
+  }
+  return [...groupes.values()].flat();
+}
+
 // @test-block:end
 
 // Affiche d'un évènement (§6.2) : poster TMDB du film quand l'évènement EST un
 // film, sinon l'affiche maison rapatriée, sinon l'affiche d'un film lié.
 function evAffiche(ev) {
+  // Choix déjà arbitré par evSubstituerAffiche() : on s'y tient. Sans cette
+  // mémoire, le moindre re-rendu de l'éventail (changement de filtre, retour
+  // d'onglet) réécrirait le src et perdrait la variante texturable.
+  if (ev._afficheOk) return ev._afficheOk;
   const films = ev.films || [];
   if (films.length === 1) {
     const connu = allFilms.find(f => normalizeTitle(f.titre) === normalizeTitle(films[0].titre));
@@ -3135,13 +3288,98 @@ function evAffiche(ev) {
   return null;
 }
 
+// Toutes les affiches possibles pour un évènement, du plus au moins souhaitable.
+// Le PREMIER élément est exactement ce que renvoie evAffiche() : l'ordre de
+// préférence éditorial ne change pas, on se contente de savoir quoi essayer
+// ensuite si la première n'est pas exploitable.
+function evAffichesCandidates(ev) {
+  const films = ev.films || [];
+  const out = [];
+  const pousse = u => { if (u && !out.includes(u)) out.push(u); };
+  if (films.length === 1) {
+    const connu = allFilms.find(f => normalizeTitle(f.titre) === normalizeTitle(films[0].titre));
+    pousse(connu?._poster);
+    pousse(films[0].affiche);
+  }
+  pousse(ev.affiche_url);
+  for (const f of films) {
+    pousse(f.affiche);
+    const connu = allFilms.find(x => normalizeTitle(x.titre) === normalizeTitle(f.titre));
+    pousse(connu?._poster);
+  }
+  return out;
+}
+
+// Une même affiche existe souvent sous DEUX URLs : celle du CDN de la salle, et
+// la copie rapatriée dans Supabase. La première est privilégiée à l'affichage,
+// mais elle n'a pas toujours d'en-tête CORS — auquel cas le pli ne peut pas
+// jouer, alors qu'une variante utilisable est là.
+// On substitue donc la source de l'<img> AVANT de dévoiler l'éventail : le
+// visuel reste celui de l'évènement, seule l'origine change, et le tissu
+// texture exactement ce que l'utilisateur verra à l'arrivée.
+// Rien à faire côté données : c'est un filet, pas un remplacement du
+// rapatriement côté scraper (qui reste la solution de fond).
+async function evSubstituerAffiche(carte) {
+  const ev = evSel[+carte.dataset.i];
+  const img = carte.querySelector('img');
+  if (!ev || !img) return;
+  const actuelle = img.currentSrc || img.src;
+  if (!actuelle) return;
+  if (await evSondeTexture(actuelle)) { ev._afficheOk = actuelle; return; }
+  for (const alt of evAffichesCandidates(ev)) {
+    if (alt === actuelle) continue;
+    if (await evSondeTexture(alt)) { ev._afficheOk = alt; img.src = alt; return; }
+  }
+  // Aucune variante exploitable : la carte arrivera en fondu, comme prévu.
+}
+
 const evSousClasse = ev => ev.forme ? EV_FORME_LABEL[ev.forme] : EV_TYPE_LABEL[ev.type];
 
 // ═══════════════════════════════════════════════════════════
 // ÉVÈNEMENTS — rendu
 // ═══════════════════════════════════════════════════════════
-function evScopeEvents() {
-  return evData.filter(ev => evEnScope(ev, filtreCinema, filtreType) && evDansLeMois(ev, evMois));
+function evScopeEvents(mois = evMois) {
+  return evData.filter(ev => evEnScope(ev, filtreCinema, filtreType) && evDansLeMois(ev, mois));
+}
+
+// ── Préchargement des mois voisins ────────────────────────────────────────
+// Changer de mois doit être instantané. On résout les affiches des mois
+// adjacents dès que le mois courant est posé : la sonde est la MÊME que celle
+// de la substitution, donc la passe fait deux choses d'un coup — elle met les
+// images en cache navigateur, et elle tranche déjà quelle variante est
+// texturable (`_afficheOk`). En arrivant sur le mois, il ne reste rien à
+// décider ni à télécharger.
+// Mémorisé par (mois + périmètre) : la sélection dépend des filtres, changer de
+// salle ou de type redonne d'autres évènements.
+const _evMoisPrecharges = new Set();
+
+async function evPrechargerMois(mois) {
+  if (!mois) return;
+  const cle = `${mois}|${filtreCinema}|${filtreType}`;
+  if (_evMoisPrecharges.has(cle)) return;
+  _evMoisPrecharges.add(cle);
+
+  const sel = pickSelection(evScopeEvents(mois), evSeeds[mois] || mois,
+                            `${filtreCinema}|${filtreType}|${mois}`);
+  for (const ev of sel) {
+    if (ev._afficheOk) continue;               // déjà tranché
+    for (const cand of evAffichesCandidates(ev)) {
+      if (await evSondeTexture(cand)) { ev._afficheOk = cand; break; }
+    }
+  }
+}
+
+function evPrechargerMoisVoisins() {
+  const dispos = evMoisDispos();
+  const i = dispos.indexOf(evMois);
+  if (i < 0) return;
+  const voisins = [dispos[i - 1], dispos[i + 1]].filter(Boolean);
+  if (!voisins.length) return;
+  // En temps mort : le mois AFFICHÉ passe avant ses voisins, ses propres
+  // affiches et son pli ne doivent pas attendre derrière un préchargement.
+  const lancer = () => voisins.forEach(evPrechargerMois);
+  if (window.requestIdleCallback) requestIdleCallback(lancer, { timeout: 3000 });
+  else setTimeout(lancer, 600);
 }
 
 function renderEvents() {
@@ -3190,10 +3428,43 @@ function evResumeHtml(segments) {
   return html;
 }
 
+// ── Bac à sable : éventail forcé à 5 cartes ───────────────────────────────
+// `index.html?tissu-demo` complète la sélection avec des affiches de test, pour
+// éprouver la configuration à 5 cartes — elle ne se présente pas tous les mois,
+// et sans elle on ne voit jamais les deux rangs latéraux à l'œuvre.
+// Les affiches choisies sont servies avec un en-tête CORS : sans ça elles
+// retomberaient sur le fondu et le test ne montrerait rien.
+// Sans le paramètre, la fonction rend la sélection telle quelle — aucun effet
+// en production, rien n'est écrit ni envoyé.
+const TISSU_DEMO_AFFICHES = [
+  'https://all.web.img.acsta.net/pictures/23/06/27/16/09/1673570.jpg',
+  'https://all.web.img.acsta.net/pictures/19/06/28/12/11/5522147.jpg',
+];
+
+function evTissuDemo(sel) {
+  if (!sel.length) return sel;
+  try {
+    if (!new URLSearchParams(location.search).has('tissu-demo')) return sel;
+  } catch (_) { return sel; }
+  const out = [...sel];
+  for (let i = 0; out.length < 5; i++) {
+    // CLONE d'un évènement réel, dont on ne change que la clé, le titre et
+    // l'affiche : dates, chips et période restent valides, donc aucune des
+    // fonctions d'affichage n'a de cas particulier à connaître.
+    // `films: []` force evAffiche à retomber sur `affiche_url` — sinon
+    // l'affiche du film cloné reprendrait le dessus.
+    out.push({ ...sel[i % sel.length], films: [],
+               cle: '__tissu-demo-' + i,
+               titre: 'Affiche de test ' + (i + 1),
+               affiche_url: TISSU_DEMO_AFFICHES[i % TISSU_DEMO_AFFICHES.length] });
+  }
+  return out;
+}
+
 function renderEvSelection(events) {
   const bloc = document.getElementById('evSelection');
   const seed = evSeeds[evMois] || evMois;
-  evSel = pickSelection(events, seed, `${filtreCinema}|${filtreType}|${evMois}`);
+  evSel = evTissuDemo(pickSelection(events, seed, `${filtreCinema}|${filtreType}|${evMois}`));
   // Périmètre vide (une salle sans aucun évènement éligible) ⇒ pas de bloc
   // sélection, la liste suit directement. Ni carte fantôme, ni message d'erreur.
   bloc.classList.toggle('hidden', !evSel.length);
@@ -3201,6 +3472,12 @@ function renderEvSelection(events) {
   // Éventail centré à l'ouverture : la carte du milieu est le highlight, les
   // autres se déploient de part et d'autre (la navigation, elle, ne re-rend pas).
   evSelIdx = Math.floor((evSel.length - 1) / 2);
+  // Nouvelle sélection : le centre redevient un choix automatique, donc
+  // soumis à la règle « une affiche exploitable au centre ».
+  _evNavManuelle = false;
+  _evApparitionLancee = false;
+  _evChoixPromesse = null;
+  _evAffichesPretes = null;
 
   document.getElementById('evFan').innerHTML = evSel.map((ev, i) => {
     const src = evAffiche(ev);
@@ -3213,16 +3490,116 @@ function renderEvSelection(events) {
   // Dégradation à une seule carte : ni cartes latérales, ni flèches, ni swipe.
   bloc.classList.toggle('is-solo', evSel.length === 1);
   evFanApply();
+  // L'apparition est une ARRIVÉE (la sélection se montre), pas une navigation —
+  // d'où l'armement ici et non dans evFanApply. Elle ne se JOUE toutefois que
+  // lorsque l'éventail atteint le centre de l'écran.
+  evPreparerApparition();
+  // Le mois courant est posé : on prend de l'avance sur ses voisins.
+  evPrechargerMoisVoisins();
 }
 
 function evCardOrient(img) {
   const carte = img.closest('.ev-card');
   if (!carte) return;
-  if (img.naturalWidth > img.naturalHeight) carte.classList.add('is-paysage');
   // Le morphing ne s'arme qu'APRÈS le premier calibrage : sinon la carte
   // animerait sa mise au bon gabarit à l'arrivée de l'image, ce qui se verrait
   // comme un sursaut au chargement.
   carte.classList.add('is-pret');
+  evCentrerAfficheExploitable();
+}
+
+// ── Une affiche exploitable au centre ─────────────────────────────────────
+// C'est la carte CENTRALE qui porte le dépliage : y placer une affiche que le
+// shader ne peut pas texturer revient à désactiver l'effet. Une image
+// cross-origin sans en-tête CORS est dans ce cas — `cinemas-lumiere.com`
+// n'en sert pas.
+// Le test n'est possible qu'une fois l'image chargée, donc pas au moment où
+// renderEvSelection choisit le centre : d'où cette correction à la volée. Elle
+// est invisible, l'éventail étant encore escamoté en attendant le premier scroll.
+let _evNavManuelle = false;
+
+const _evOrientationConnue = carte => {
+  const im = carte.querySelector('img');
+  return !!(im && im.naturalWidth);
+};
+
+// Sonde CORS : une affiche cross-origin sans en-tête `Access-Control-Allow-Origin`
+// ne peut pas devenir une texture. On le vérifie en la rechargeant avec
+// `crossOrigin` — exactement la requête que fera le module, donc sonder le
+// centre ne coûte rien de plus. Mémorisé par URL.
+const _evSondes = new Map();
+function evSondeTexture(src) {
+  if (!src) return Promise.resolve(false);
+  if (!_evSondes.has(src)) {
+    _evSondes.set(src, new Promise(res => {
+      const im = new Image();
+      im.crossOrigin = 'anonymous';
+      im.onload  = () => res(true);
+      im.onerror = () => res(false);
+      setTimeout(() => res(false), 5000);
+      im.src = src;
+    }));
+  }
+  return _evSondes.get(src);
+}
+
+const _evSrcDe = carte => {
+  const im = carte.querySelector('img');
+  return im && (im.currentSrc || im.src);
+};
+
+// Le centrage sonde le réseau, il est donc ASYNCHRONE — et il se termine par un
+// evFanApply, qui remet l'éventail à plat et détruit le tissu. Laisser une
+// décision aboutir après le lancement de l'apparition tuait l'animation une fois
+// sur deux, selon l'instant du scroll. D'où deux verrous : l'apparition attend
+// la décision en cours, et une fois lancée le centre est figé.
+let _evChoixEnCours = false, _evChoixPromesse = null, _evApparitionLancee = false;
+
+// Enveloppe SYNCHRONE : elle pose le verrou et publie la promesse avant le
+// moindre `await`, sinon deux chargements d'image rapprochés lanceraient deux
+// décisions concurrentes.
+function evCentrerAfficheExploitable() {
+  // ⚠️ UNIQUEMENT tant que l'éventail est escamoté, c'est-à-dire quand
+  // l'apparition est encore à jouer. Le décalage appelle evFanApply, qui fait
+  // TOURNER l'éventail : hors de cet instant, ça se voit exactement comme une
+  // flèche pressée toute seule — c'est ce qui se produisait à chaque changement
+  // de mois. Et sans pli à jouer, recentrer ne sert à rien.
+  const fan = document.getElementById('evFan');
+  if (!fan || !fan.classList.contains('ev-attente')) return;
+  // Dès que l'utilisateur a navigué, son choix prime — même sur une affiche que
+  // le pli ne saura pas texturer. Et une fois l'apparition lancée, le centre
+  // ne bouge plus (le décalage détruirait le tissu naissant).
+  if (_evApparitionLancee || _evNavManuelle || _evChoixEnCours) return;
+  _evChoixEnCours = true;
+  _evChoixPromesse = _evChoisirCentre().finally(() => { _evChoixEnCours = false; });
+}
+
+async function _evChoisirCentre() {
+  const n = evSel.length;
+  if (n < 2) return;
+  const cartes = [...document.querySelectorAll('#evFan .ev-card')];
+  const parIndex = i => cartes.find(c => +c.dataset.i === i);
+
+  const centre = parIndex(evSelIdx);
+  if (!centre || !_evOrientationConnue(centre)) return;
+  if (await evSondeTexture(_evSrcDe(centre))) return;   // le centre convient
+
+  // Décalage le plus court, en alternant droite puis gauche pour ne pas
+  // systématiquement pencher du même côté.
+  const candidats = [];
+  for (let d = 1; d <= Math.floor(n / 2); d++)
+    for (const s of [1, -1]) candidats.push(((evSelIdx + d * s) % n + n) % n);
+
+  for (const i of candidats) {
+    const c = parIndex(i);
+    if (!c || !_evOrientationConnue(c)) continue;
+    if (await evSondeTexture(_evSrcDe(c))) {
+      if (i !== evSelIdx && !_evNavManuelle) { evSelIdx = i; evFanApply(); }
+      return;
+    }
+  }
+  // Aucune affiche exploitable (ou aucune encore chargée) : on garde le centre
+  // courant. Un chargement ultérieur relancera la recherche.
 }
 
 // Les affiches de source vivent sur des CDN qui refusent le hotlink (403) et
@@ -3235,9 +3612,397 @@ function evCardFallback(img) {
   img.closest('.ev-card')?.classList.add('is-pret');
 }
 
+// ═══════════════════════════════════════════════════════════
+// APPARITION « TISSU » — affiche centrale de l'éventail
+// ═══════════════════════════════════════════════════════════
+// L'affiche du centre se déplie comme une étoffe qui se dépose (shader WebGL2),
+// les latérales gardent leur apparition CSS. Le module vit dans `src/cloth.js`
+// et se charge en import DYNAMIQUE — le même fichier que le labo de réglage
+// (design/lab/cloth.html), donc un seul endroit où le pli existe. GitHub Pages
+// publie tout le dépôt (`path: .`), le fichier est donc servi tel quel.
+//
+// L'effet est un BONUS, jamais une condition d'affichage : il s'efface sans
+// bruit si WebGL2 manque, si l'import échoue, si l'utilisateur a demandé moins
+// de mouvement, ou si l'affiche ne s'accompagne pas d'en-tête CORS — cas
+// fréquent, les affiches de `cinemas-lumiere.com` n'en ont pas et une image
+// cross-origin sans partage ne peut pas devenir une texture.
+
+// Réglages issus du labo (design/lab/cloth.html → « Copier »). Les clés absentes
+// gardent leur défaut module. ⚠️ `ratioCadre` n'a rien à faire ici : il se
+// calcule par carte depuis le gabarit RENDU — l'échelle de l'éventail est
+// élastique (--ev-u) et les rangs latéraux sont réduits, le figer casserait le
+// cadrage dès le premier palier de largeur.
+const TISSU_PRESET = {
+  duree: 2767, retard: 0, ampliRebond: 0,
+  angle: -90, nbPlis: 2, amplitude: 0.2, arete: 0.1,
+  desordre: 0.9, derive: 1.2, nbRides: 1, amplitudeRides: 0.26,
+  retrait: 0.6, balayage: 0, traineBord: 0.3,
+  chute: 0.175, approche: 0.2, profondeurZ: 0.6,
+  perspective: 0.72, rotation: 5, debordement: 1.8,
+  lumiereX: -0.45, lumiereY: 0.7, ombre: 0.3, eclat: 0.16, translucide: 0.22,
+  iriIntensite: 0.42, iriFresnel: 2.6, iriEchelle: 1.35,
+  iriDecalage: 0.1, iriVitesse: 0.25, iriRepos: 0.03,
+  grain: 0.03, voile: 0.9, opacite: 1, subdivisions: 64, rayon: 0.094,
+};
+// Courbe d'accélération, en cubic-bezier (cf. éditeur du labo).
+const TISSU_COURBE = [0.3474, 0.4262, 0.2031, 0.9741];
+// Cadence des cartes LATÉRALES : `retard` + `decalage` × rang. Sert au pli
+// comme au fondu de repli, pour que les deux chemins aient le même tempo.
+// `duree` et `montee` ne concernent que le fondu.
+const TISSU_COTES = { duree: 920, retard: 1400, decalage: 0, montee: 10 };
+// Étagement en profondeur : chaque rang part d'un Z différent, les cartes du
+// fond arrivent de plus loin. Négatif = en retrait.
+const TISSU_ETAGEMENT_Z = -0.4;
+
+// ── Second réglage : la NAVIGATION entre mois ─────────────────────────────
+// Arriver sur le site et changer de mois ne sont pas le même geste. Le premier
+// est un accueil — il peut prendre son temps et de la profondeur. Le second est
+// un déplacement : plus plat (`profondeurZ` nul, `debordement` réduit), plus
+// sobre (`derive` et `desordre` bas, aucune arête) et surtout des latérales qui
+// suivent presque aussitôt (120 ms contre 1400).
+const TISSU_PRESET_MOIS = {
+  duree: 2400, retard: 0, ampliRebond: 0,
+  angle: -90, nbPlis: 1.5, amplitude: 0.3, arete: 0,
+  desordre: 0.1, derive: 0.2, nbRides: 2.4, amplitudeRides: 0.26,
+  retrait: 1, balayage: 1.2, traineBord: 0.55,
+  chute: 0.05, approche: 0.06, profondeurZ: 0,
+  perspective: 0.32, rotation: 5, debordement: 1.28,
+  lumiereX: -0.45, lumiereY: 0.7, ombre: 0.3, eclat: 0.16, translucide: 0.22,
+  iriIntensite: 0.42, iriFresnel: 2.6, iriEchelle: 1.35,
+  iriDecalage: 0.1, iriVitesse: 0.25, iriRepos: 0.03,
+  grain: 0.03, voile: 0.9, opacite: 1, subdivisions: 64, rayon: 0.094,
+};
+const TISSU_COURBE_MOIS = [0.291, 0.2388, 0.2864, 0.9742];
+const TISSU_COTES_MOIS = { duree: 700, retard: 120, decalage: 90, montee: 18 };
+const TISSU_ETAGEMENT_Z_MOIS = -0.15;
+
+// Le mois d'ARRIVÉE garde le réglage d'accueil ; tout autre mois est atteint
+// par navigation. `rayon` est écarté des deux presets : il est lu sur la carte
+// (cf. plus bas), sans quoi les coins du pli et ceux du cadre divergeraient.
+function _tissuReglages() {
+  return (evMois === _evMoisAccueil)
+    ? { preset: TISSU_PRESET,      courbe: TISSU_COURBE,      cotes: TISSU_COTES,      zRang: TISSU_ETAGEMENT_Z }
+    : { preset: TISSU_PRESET_MOIS, courbe: TISSU_COURBE_MOIS, cotes: TISSU_COTES_MOIS, zRang: TISSU_ETAGEMENT_Z_MOIS };
+}
+
+let _tissuMod = null;
+// Un renderer par carte : l'éventail en compte cinq au plus, sous le plafond de
+// contextes WebGL des navigateurs (~8 à 16). Les cartes dont l'affiche n'est pas
+// texturable n'en consomment aucun — elles retombent sur le fondu.
+let _tissus = [];
+// Génération : chaque appel invalide le précédent. Sans ce jeton, une
+// continuation asynchrone partie sur un éventail déjà re-rendu viendrait
+// accrocher son canvas à une carte qui n'existe plus.
+let _tissuGen = 0;
+
+function _tissuUtilisable() {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return false;
+  try { return !!document.createElement('canvas').getContext('webgl2'); }
+  catch (_) { return false; }
+}
+
+// ⚠️ L'ORDRE compte. `detruire()` appelle `loseContext()`, et un canvas au
+// contexte perdu se peint VIDE : le détruire avant de le retirer laissait une
+// image blanche à la place de l'affiche, le temps d'une frame. On rend donc
+// l'affiche d'abord, on détache le canvas ensuite, et on ne libère le contexte
+// qu'une fois l'élément hors du document — plus rien ne peut le peindre.
+function _tissuLacher(t) {
+  t.carte.classList.remove('tissu-en-cours');
+  t.canvas.remove();
+  t.cloth.detruire();
+}
+
+function _tissuNettoyer() {
+  for (const t of _tissus) _tissuLacher(t);
+  _tissus = [];
+  // Toujours redonner l'affiche, quel que soit le chemin de sortie : une carte
+  // laissée en `tissu-en-cours` resterait vide à l'écran.
+  document.querySelectorAll('.ev-card.tissu-en-cours')
+          .forEach(c => c.classList.remove('tissu-en-cours'));
+}
+
+// Attend qu'une image soit mesurable — c'est elle qui donne le gabarit.
+function _tissuAttendreImage(img) {
+  if (img.complete && img.naturalWidth) return Promise.resolve();
+  return new Promise(res => {
+    img.addEventListener('load', res, { once: true });
+    img.addEventListener('error', res, { once: true });
+    setTimeout(res, 1500);
+  });
+}
+
+/**
+ * Monte le pli sur toutes les cartes visibles de l'éventail et le joue.
+ * Renvoie la liste des cartes effectivement prises en charge — l'appelant fait
+ * arriver les autres en fondu.
+ */
+async function evTissuApparition() {
+  const gen = ++_tissuGen;
+  _tissuNettoyer();
+  if (!_tissuUtilisable()) return [];
+
+  const fan = document.getElementById('evFan');
+  if (!fan) return [];
+  const cartes = [...fan.querySelectorAll('.ev-card')]
+    .filter(c => !c.classList.contains('hidden'));
+  if (!cartes.length) return [];
+
+  await Promise.all(cartes.map(c => _tissuAttendreImage(c.querySelector('img'))));
+  if (gen !== _tissuGen) return [];
+
+  try {
+    _tissuMod = _tissuMod || await import('./src/cloth.js');
+  } catch (e) {
+    console.warn('[CinémasLyon] module tissu non chargé — affiches normales', e);
+    return [];
+  }
+  if (gen !== _tissuGen) return [];
+
+  const { preset, courbe, cotes, zRang } = _tissuReglages();
+  const base = { ..._tissuMod.CLOTH_DEFAUTS, ...preset };
+  const k = base.debordement;
+  const prises = [];
+  const montages = [];
+
+  for (const carte of cartes) {
+    const img = carte.querySelector('img');
+    if (!img || !img.naturalWidth) continue;
+    const cs = getComputedStyle(img);
+    const l = parseFloat(cs.width), h = parseFloat(cs.height);
+    if (!l || !h) continue;
+
+    const niveau = +carte.dataset.niveau || 0;
+    const rang = _evRangCarte(carte);
+
+    const canvas = document.createElement('canvas');
+    canvas.className = 'ev-tissu';
+    canvas.setAttribute('aria-hidden', 'true');
+    canvas.style.width  = Math.round(l * k) + 'px';
+    canvas.style.height = Math.round(h * k) + 'px';
+    carte.appendChild(canvas);
+
+    // `ratioCadre` vient du gabarit RENDU de CETTE carte : les rangs latéraux
+    // sont réduits (× .9 puis × .81) et l'échelle de l'éventail est élastique.
+    // `profondeurZ` s'étage par niveau — les rangs du fond arrivent de plus loin.
+    // Le rayon du pli est LU sur la carte plutôt que réglé à part : les deux
+    // divergeaient (12px en CSS, l'équivalent de 16px dans le shader), et le
+    // coin sautait à la fin du vol. `rayon` étant une fraction du petit côté,
+    // il se recalcule pour chaque gabarit et suit l'échelle élastique.
+    const rayonPx = parseFloat(getComputedStyle(carte).borderTopLeftRadius) || 0;
+
+    const cloth = _tissuMod.creerCloth(canvas, {
+      ...base,
+      ratioCadre: l / h,
+      rayon: rayonPx / Math.min(l, h),
+      retard: niveau === 0 ? 0 : cotes.retard + rang * cotes.decalage,
+      profondeurZ: base.profondeurZ + zRang * niveau,
+    });
+    if (!cloth) { canvas.remove(); continue; }   // plafond de contextes atteint
+
+    montages.push({ carte, canvas, cloth, src: img.currentSrc || img.src });
+  }
+
+  // Textures EN PARALLÈLE. Les charger l'une après l'autre additionnait les
+  // requêtes, et l'éventail restait masqué pendant toute la somme — 441 ms
+  // mesurés à cache chaud, bien davantage au premier affichage.
+  const chargees = await Promise.all(
+    montages.map(m => m.cloth.charger(m.src).then(() => true, () => false)));
+  if (gen !== _tissuGen) {
+    montages.forEach(m => { m.cloth.detruire(); m.canvas.remove(); });
+    return [];
+  }
+
+  montages.forEach((m, i) => {
+    if (!chargees[i]) {                 // affiche sans CORS : repli muet
+      m.cloth.detruire(); m.canvas.remove();
+      return;
+    }
+    _tissus.push(m);
+    prises.push(m.carte);
+  });
+
+  // Chaque carte se libère à la fin de SON vol : les retards diffèrent, attendre
+  // la dernière garderait les premières en `overflow:visible` pour rien.
+  for (const t of _tissus) {
+    t.carte.classList.add('tissu-en-cours');
+    t.cloth.jouer(courbe, () => {
+      if (gen !== _tissuGen) return;
+      _tissuLacher(t);
+      _tissus = _tissus.filter(x => x !== t);
+    });
+  }
+  return prises;
+}
+
+// ── Entrée des cartes latérales — fondu + montée ──────────────────────────
+// La transformation de repos vient des règles CSS (data-niveau / data-cote).
+// Elle est lue AVANT toute écriture inline : les cartes viennent d'être créées,
+// la valeur calculée est donc bien celle du CSS et non une matrice déjà
+// augmentée du translateY — sinon chaque rejeu décalerait un peu plus.
+function _evFondu(carte, rang) {
+  const niveau = +carte.dataset.niveau;
+  // Même cadence que le pli du mois courant : une carte en repli ne doit pas
+  // arriver sur un autre tempo que ses voisines.
+  const { cotes } = _tissuReglages();
+  const retard = cotes.retard + rang * cotes.decalage;
+  const repos  = getComputedStyle(carte).transform;
+
+  carte.style.transition = 'none';
+  carte.style.opacity = '0';
+  carte.style.transform = `${repos} translateY(${cotes.montee}px)`;
+  void carte.offsetWidth;                 // reflow synchrone : départ enregistré
+  carte.style.transition =
+    `opacity ${cotes.duree}ms ease ${retard}ms,` +
+    `transform ${cotes.duree}ms cubic-bezier(.33,0,.2,1) ${retard}ms`;
+  carte.style.opacity = niveau === 2 ? '0.7' : '1';
+  carte.style.transform = repos;
+
+  // Rendre la carte au CSS une fois posée : un inline qui survit ferait mentir
+  // le niveau de profondeur au prochain evFanApply (une carte passée au rang 2
+  // resterait à l'opacité du centre).
+  const fin = () => {
+    carte.style.transition = ''; carte.style.opacity = ''; carte.style.transform = '';
+  };
+  carte.addEventListener('transitionend', fin, { once: true });
+  setTimeout(fin, retard + cotes.duree + 200);
+}
+
+function _evRangCarte(c) {
+  const niveau = +c.dataset.niveau || 0;
+  return niveau === 0 ? 0 : (niveau - 1) * 2 + (+c.dataset.cote > 0 ? 1 : 0);
+}
+
+// ── Déclenchement au scroll ───────────────────────────────────────────────
+// Deux conditions cumulées : l'utilisateur a défilé AU MOINS UNE FOIS, et
+// l'éventail est dans la bande centrale de la fenêtre. Le premier scroll est
+// mémorisé pour la session : une fois le geste fait, changer de mois ou de
+// filtre rejoue l'apparition sans redemander de défiler.
+let _evObs = null, _evSecours = 0, _evScrollEcoute = null;
+// Substitution des affiches non texturables, lancée pendant l'escamotage.
+let _evAffichesPretes = null;
+let _evScrollVu = false;
+// L'apparition est un ACCUEIL, pas une transition : elle se joue une seule fois
+// par session, et seulement sur le mois d'ARRIVÉE. Naviguer vers un mois à venir
+// montre les affiches déjà posées ; y revenir ne les rejoue pas.
+// Mois d'arrivée plutôt que mois calendaire : `evMois` retombe sur le premier
+// mois disponible quand le mois en cours n'a aucun évènement (cf. plus haut).
+// Un test littéral sur la date du jour perdrait alors l'animation en silence.
+// Dans le cas normal les deux coïncident.
+let _evApparitionFaite = false, _evMoisAccueil = null;
+
+async function evJouerApparition() {
+  const fan = document.getElementById('evFan');
+  if (!fan || !fan.classList.contains('ev-attente')) return;   // déjà joué
+  // Verrouiller AVANT d'attendre : aucune nouvelle décision de centrage ne doit
+  // démarrer pendant qu'on laisse aboutir celle déjà en vol.
+  _evApparitionLancee = true;
+  // Seul l'accueil se verrouille : les autres mois se rejouent à chaque visite.
+  if (evMois === _evMoisAccueil) _evApparitionFaite = true;
+  // La substitution d'abord : elle peut changer la source d'une <img>, donc
+  // le centre à retenir. La laisser aboutir après coup texturerait l'ancienne.
+  if (_evAffichesPretes) { try { await _evAffichesPretes; } catch (_) {} }
+  if (_evChoixPromesse) { try { await _evChoixPromesse; } catch (_) {} }
+  if (!fan.classList.contains('ev-attente')) return;
+  fan.classList.remove('ev-attente');
+
+  // Les cartes restent masquées le temps de savoir lesquelles le pli peut
+  // porter : les révéler d'emblée montrerait l'affiche nette une fraction de
+  // seconde avant que le tissu ne la reprenne.
+  const cartes = [...fan.querySelectorAll('.ev-card')];
+  cartes.forEach(c => { c.style.opacity = '0'; });
+
+  const prises = await evTissuApparition();
+  cartes.forEach(c => {
+    // Le pli porte l'entrée : on rend la carte au CSS (l'image, elle, reste
+    // masquée par `tissu-en-cours` tant que le canvas dessine).
+    if (prises.includes(c)) c.style.opacity = '';
+    // Repli — pas de WebGL, pas de CORS, ou plafond de contextes atteint :
+    // fondu + montée, au même tempo. Une affiche ne reste jamais invisible.
+    else _evFondu(c, _evRangCarte(c));
+  });
+}
+
+function _evDesarmer() {
+  if (_evObs) { _evObs.disconnect(); _evObs = null; }
+  if (_evScrollEcoute) { removeEventListener('scroll', _evScrollEcoute); _evScrollEcoute = null; }
+  clearTimeout(_evSecours);
+}
+
+function evPreparerApparition() {
+  const fan = document.getElementById('evFan');
+  if (!fan) return;
+  _evDesarmer();
+  // Trois cas où l'éventail se montre d'emblée, sans escamotage :
+  //   • mouvement réduit ;
+  //   • apparition déjà jouée dans la session — on ne rejoue pas un accueil ;
+  //   • mois autre que celui d'arrivée — on y vient par navigation, les
+  //     affiches doivent déjà être là.
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (_evMoisAccueil === null) _evMoisAccueil = evMois;
+  // L'ACCUEIL ne se joue qu'une fois ; la NAVIGATION se rejoue à chaque mois,
+  // avec son propre réglage (cf. _tissuReglages).
+  const accueil = evMois === _evMoisAccueil;
+  if (accueil && _evApparitionFaite) return;
+
+  fan.classList.add('ev-attente');
+
+  // Pendant qu'on attend le scroll, on sonde TOUTES les affiches en mode
+  // `crossOrigin` et on substitue celles qui ne passent pas. Deux effets d'une
+  // même passe :
+  //   • les cartes dont l'affiche n'avait pas de CORS récupèrent le pli ;
+  //   • les sondes sont exactement les requêtes que fera `charger()`, donc
+  //     tout tombe en cache — le montage coûtait ~1,7 s à froid sans ça.
+  _evAffichesPretes = Promise.all(
+    [...fan.querySelectorAll('.ev-card')].map(c => evSubstituerAffiche(c)));
+
+  // Navigation : inutile de redemander un scroll, l'utilisateur regarde déjà
+  // l'éventail — il vient d'en changer. On part dès que les affiches sont
+  // résolues (préchargées pour les mois voisins, donc immédiat en pratique).
+  if (!accueil) {
+    _evAffichesPretes.then(evJouerApparition, evJouerApparition);
+    return;
+  }
+
+  let dansLaBande = false;
+
+  const tenter = () => {
+    if (!dansLaBande || !_evScrollVu) return;
+    _evDesarmer();
+    evJouerApparition();
+  };
+
+  // Bande CENTRALE de la fenêtre (moitié du milieu) : l'apparition attend que
+  // l'éventail y soit vraiment, pas qu'il pointe en bas de l'écran.
+  _evObs = new IntersectionObserver(entrees => {
+    dansLaBande = entrees.some(e => e.isIntersecting);
+    tenter();
+  }, { rootMargin: '-25% 0px -25% 0px', threshold: 0 });
+  _evObs.observe(fan);
+
+  _evScrollEcoute = () => { _evScrollVu = true; tenter(); };
+  addEventListener('scroll', _evScrollEcoute, { passive: true });
+
+  // Garde-fou, pour un cas et un seul : une page qui NE PEUT PAS défiler. Y
+  // exiger un scroll rendrait les cartes invisibles à jamais. On lève alors la
+  // condition — mais on la vérifie tard, la hauteur du document bougeant encore
+  // pendant que les affiches se chargent.
+  _evSecours = setTimeout(() => {
+    if (document.documentElement.scrollHeight <= window.innerHeight + 4) {
+      _evScrollVu = true;
+      tenter();
+    }
+  }, 1500);
+}
+
 function evFanApply() {
+  // Naviguer dans l'éventail change la carte du centre : le tissu en cours ne
+  // porterait plus sur la bonne affiche, on l'interrompt.
+  _tissuGen++; _tissuNettoyer();
   const cartes = document.querySelectorAll('#evFan .ev-card');
   const n = cartes.length;
+  // Naviguer redistribue les data-niveau : un inline d'entrée encore posé
+  // figerait l'opacité et la transformation de l'ancien rang.
+  cartes.forEach(c => { c.style.transition = ''; c.style.opacity = ''; c.style.transform = ''; });
   cartes.forEach((c, i) => {
     // Décalage CIRCULAIRE (chemin le plus court) : avec 5 cartes, les 5 restent
     // toujours visibles et symétriques, les deux extrêmes au fond à 70 %. Une
@@ -3262,6 +4027,32 @@ function evFanApply() {
   document.getElementById('evFanOpen').onclick = () => openEvent(ev.cle);
 }
 
+// L'échelle de l'éventail change par paliers de largeur (--ev-u, cf. CSS). Or
+// une propriété TRANSITIONNÉE dont la valeur vient d'un `var()` ne se recale pas
+// quand la custom property change : la valeur spécifiée (« var(--gab-v) ») reste
+// la même chaîne, le moteur ne voit aucun changement et garde la taille d'avant.
+// Les cartes restaient donc au gabarit du palier précédent jusqu'au rechargement
+// — sans clip pour le cacher, un débordement horizontal apparaissait.
+// Retirer puis rendre `data-niveau` fait vraiment changer la règle qui matche,
+// donc la valeur spécifiée : la taille se recale. `no-morph` évite que ce
+// recalcul se joue en animation — redimensionner n'est pas naviguer.
+function evFanResync() {
+  const fan = document.getElementById('evFan');
+  if (!fan || !fan.querySelector('.ev-card')) return;
+  // L'échelle de l'éventail change par paliers (--ev-u) : le canvas du tissu a
+  // été dimensionné pour l'ancien gabarit, il ne vaut plus rien.
+  _tissuGen++; _tissuNettoyer();
+  fan.classList.add('no-morph');
+  fan.querySelectorAll('.ev-card').forEach(c => {
+    const n = c.dataset.niveau;
+    delete c.dataset.niveau;
+    void c.offsetWidth;
+    c.dataset.niveau = n;
+  });
+  void fan.offsetWidth;
+  fan.classList.remove('no-morph');
+}
+
 // Sous l'affiche, la période s'écrit en toutes lettres (« Du 28 juin au 31 août »)
 // là où la chip de liste doit rester compacte.
 function evPeriodeLongue(ev, chip) {
@@ -3275,11 +4066,13 @@ function evPeriodeLongue(ev, chip) {
 function evFanStep(delta) {
   const n = evSel.length;
   if (n < 2) return;
+  _evNavManuelle = true;              // le choix de l'utilisateur prime désormais
   evSelIdx = ((evSelIdx + delta) % n + n) % n;   // l'éventail tourne, il ne bute pas
   evFanApply();
 }
 function evFanFocus(i) {
   if (i === evSelIdx) { openEvent(evSel[i].cle); return; }
+  _evNavManuelle = true;
   evSelIdx = i;
   evFanApply();
 }
@@ -3347,7 +4140,7 @@ function buildMonthDropdown() {
   if (!el) return;
   el.innerHTML = evMoisDispos().map(m => `
     <div class="day-dropdown-item${m === evMois ? ' active' : ''}" onclick="setEvMois('${m}');closeMonthDropdown()">
-      <span class="d-num">${m.slice(5,7)}</span><span>${evMoisLabel(m)}</span>
+      <span>${evMoisLabelCap(m)}</span>
     </div>`).join('') || '<div class="day-dropdown-item">Aucun mois à venir</div>';
 }
 
@@ -3368,12 +4161,27 @@ function closeMonthDropdown() {
   document.getElementById('monthBtn')?.setAttribute('aria-expanded', 'false');
 }
 
+// Une catégorie sans évènement dans le mois affiché reste À SA PLACE mais devient
+// inatteignable — la liste ne se réordonne ni ne se raccourcit d'un mois à
+// l'autre, elle reste un repère stable ; seule la disponibilité change. C'est la
+// même règle que les mois vides (cf. updateMonthButton), à ceci près que le mois
+// vide, lui, disparaît : une flèche de navigation n'est pas un repère.
+// Le périmètre compte le filtre cinéma : la catégorie doit annoncer ce que le
+// clic donnerait vraiment, salle sélectionnée comprise.
+function evTypeVide(type) {
+  if (type === 'tous' || type === filtreType) return false; // cf. plus bas
+  return !evData.some(ev => evEnScope(ev, filtreCinema, type) && evDansLeMois(ev, evMois));
+}
+
 function buildEvTypeSeg() {
   const el = document.getElementById('evTypeSeg');
   if (!el) return;
-  el.innerHTML = EV_TYPES.map(t =>
-    `<button type="button" class="tb-btn${filtreType === t.id ? ' active' : ''}" onclick="setFiltreType('${t.id}')">${escHtml(t.label)}</button>`
-  ).join('');
+  // La catégorie ACTIVE n'est jamais désactivée : un filtre en cours doit rester
+  // lisible dans la barre, même si un changement de salle vient de le vider.
+  el.innerHTML = EV_TYPES.map(t => {
+    const vide = evTypeVide(t.id);
+    return `<button type="button" class="tb-btn${filtreType === t.id ? ' active' : ''}"${vide ? ' disabled' : ''} onclick="setFiltreType('${t.id}')">${escHtml(t.label)}</button>`;
+  }).join('');
   if (window._updateTypeArrows) window._updateTypeArrows();
 }
 
@@ -3748,6 +4556,7 @@ function initNavScroll() {
     else if (accum < -24) shell.classList.remove('compact');
   }, { passive: true });
   window.addEventListener('resize', syncNavOffset);
+  window.addEventListener('resize', () => requestAnimationFrame(evFanResync));
 }
 
 // ── NAV : strip cinémas — drag horizontal + flèches conditionnelles ──
@@ -3823,7 +4632,7 @@ async function boot() {
   // Les évènements se chargent APRÈS les films : le niveau 1 comme le niveau 2
   // s'appuient sur `allFilms` (affiche TMDB, résolution des séances).
   try {
-    evData = await loadEvents();
+    evData = dedupeEvents(await loadEvents());
   } catch(e) {
     console.error('[CinémasLyon] Erreur loadEvents:', e);
     evData = [];
