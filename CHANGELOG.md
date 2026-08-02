@@ -38,7 +38,24 @@ Format inspiré de [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/).
   - **Textures chargées en parallèle et préchauffées** pendant l'escamotage : le montage passe de ~441 ms (chargements en série) à ~165 ms, cartes masquées d'autant moins longtemps.
   - **Jouée une seule fois, au mois d'arrivée** : changer de mois montre les affiches déjà posées, y revenir ne les rejoue pas. Calée sur le mois d'arrivée et non sur la date du jour — `evMois` retombe sur le premier mois disponible quand le mois en cours est vide.
 
+### Ajouté
+
+- **Corrections manuelles de titres** (`data/corrections-films.csv`, `scraper.py`) : un tableur éditable à la main pour les cas qu'aucune règle générique ne peut trancher — un numéro de salle collé au titre par le PDF du Comoedia (« Memento 2 »), un nom de cycle capté comme un film (« Tati au Cinéma ! 2 »).
+  - Colonnes : `cinema` (vide = toutes), `titre_source` (tel que scrapé), `titre` (corrigé, vide = inchangé), `imdb_id` (vide = l'association se refait), `ignorer`, `note`.
+  - Appliquées **avant l'enrichissement** : corriger le titre suffit donc à relancer la recherche TMDB/OMDb. `titreOriginal` est neutralisé au passage, sans quoi la requête repartirait sur le libellé fautif.
+  - Appariement replié sur la casse **et les accents** : le fichier est saisi à la main, exiger « Cinéma » plutôt que « Cinema » ferait échouer la règle en silence.
+  - Une règle qui ne correspond plus à rien est **signalée en warning** — sinon le tableur accumule des lignes mortes que personne n'ose retirer.
+  - Fichier absent ou illisible ⇒ sans effet : une correction manquante ne doit jamais faire tomber le pipeline. 10 tests (`tests/test_corrections.py`).
+
 ### Corrigé
+
+- **Doublons de films dans la liste des séances** (`src/template.html`) : la clé d'upsert des films est `(titre, annee, realisateur)` — quand l'enrichissement résout un candidat différent d'un run à l'autre, une ligne de plus est créée et les séances se rattachent à chacune. D'où « Noise » en triple, « L'Odyssée » de Nolan doublée d'une comédie de 2002, « Eruption » 2026 doublée d'un film de 1977…
+  - **Le critère de fusion est le partage de SÉANCES**, plus le réalisateur : ce dernier est précisément le champ que l'enrichissement fait varier, il ne pouvait pas servir de juge. Deux vrais homonymes ne passent jamais dans la même salle au même horaire — ils restent donc distincts, ce que la règle précédente cherchait déjà à préserver, par un moyen moins sûr.
+  - **La ligne la plus récente mène la fusion** : quand l'enrichissement hésite entre homonymes, la salle programme la sortie de l'année, pas celle de 1977. Un vrai classique n'a qu'une ligne, la règle ne le concerne jamais. Vérifié : la ligne retenue est la bonne dans les six cas signalés.
+  - **Titre canonique** (`titreCanon`) neutralisant ponctuation et chiffres romains : « La Bataille de Gaulle - partie 1 » et « Partie I » faisaient deux items dans la liste tous cinémas. Les parties restent distinctes (I→1, II→2).
+  - **Numéro de salle collé au titre** par le PDF du Comoedia (« Lawrence d'Arabie 2 ») : rapproché de la ligne sans le chiffre — mais seulement si elle existe dans la même salle **et** partage une séance, « Evil Dead 2 » étant un vrai titre.
+  - **Réconciliation des imdb_id** : une salle qui l'a et une autre qui ne l'a pas produisaient deux clés pour le même film. Propagé quand le titre canonique ne porte qu'un seul identifiant — deux identifiants concurrents signalent un appariement douteux, on ne décide alors rien.
+  - Résultat : 79 → 70 films, 56 items dans la liste, **aucun doublon résiduel**.
 
 - **Scroll horizontal pendant l'apparition** (`src/components.css`) : le canvas d'une carte déborde son gabarit et `.main` lève son clip horizontal sur l'onglet Évènements — les cartes d'extrémité sortaient donc de la fenêtre et y ouvraient une barre de défilement. `overflow-x:clip` sur `body` (et non `hidden`, qui ferait de `body` un conteneur de défilement et casserait `position:sticky`). Vérifié à 880 et 1000px : aucun débordement, au repos comme en plein vol.
 - **Rectangle blanc en fin d'animation** (`src/template.html`) : `_tissuLacher()` détruisait le contexte WebGL **avant** de retirer le canvas du DOM. Un canvas au contexte perdu se peint vide — d'où une image blanche à la place de l'affiche, le temps d'une frame. L'affiche est désormais rendue d'abord, le canvas détaché ensuite, le contexte libéré en dernier, quand plus rien ne peut le peindre.

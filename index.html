@@ -1594,7 +1594,22 @@ const normalizeTitle = t => (t||'').toLowerCase().trim().replace(/[’ʼ]/g,"'")
 // canonique (aligné sur la dédup back par imdb_id) → il fusionne les variantes
 // de casse ET sépare les vrais homonymes (ex. La Chaleur 1938 vs 2026, imdbId
 // différents). Repli sur le titre normalisé quand l'imdbId manque.
-const filmGroupKey = f => f && f.imdbId ? 'imdb:'+f.imdbId : 'titre:'+normalizeTitle(f && f.titre);
+// Titre CANONIQUE pour le regroupement : au-delà de la casse et des accents,
+// il neutralise ce qui varie d'une source à l'autre sans changer le film —
+// ponctuation (« - », « : », apostrophes droites ou typographiques) et chiffres
+// romains. Sans ça « La Bataille de Gaulle - partie 1 : L'Âge de Fer » (Lumière)
+// et « La Bataille de Gaulle Partie I : L'Âge de Fer » (Comoedia) faisaient deux
+// lignes dans la liste tous cinémas. Les parties restent distinctes : I→1, II→2.
+const _ROMAINS = { i: '1', ii: '2', iii: '3', iv: '4', v: '5' };
+function titreCanon(t) {
+  return normalizeTitle(t || '')
+    .replace(/[’'`\-:,!?.]/g, ' ')
+    .split(/\s+/)
+    .map(m => _ROMAINS[m] || m)
+    .filter(Boolean)
+    .join(' ');
+}
+const filmGroupKey = f => f && f.imdbId ? 'imdb:'+f.imdbId : 'titre:'+titreCanon(f && f.titre);
 // Format horaire compact (14:30 → 14h30)
 const formatTimeCompact = h => (h||'').replace(':','h');
 
@@ -1882,6 +1897,14 @@ function ensureFilms(films) {
 // filtrée. On fusionne ici, à la frontière du chargement, les entrées de même
 // (groupe de film, cinéma), en dédoublonnant les séances (cinéma+date+heure+
 // version). Point unique : corrige cartes ET fiche détail d'un coup.
+// Deux lignes partagent-elles au moins une séance ? Signature (salle, jour,
+// heure) : c'est l'identité que le scraper produit, avant tout enrichissement.
+const _seanceCle = s => (s.cinema || '') + '|' + dKey(s.date) + '|' + s.h;
+function _partagentUneSeance(a, b) {
+  const vues = new Set((a._sd || []).map(_seanceCle));
+  return (b._sd || []).some(s => vues.has(_seanceCle(s)));
+}
+
 function dedupeFilms(films) {
   const mergeInto = (bag, key, f) => {
     if (!bag[key]) { bag[key] = { ...f, _sd: [...(f._sd || [])] }; return; }
@@ -1897,6 +1920,25 @@ function dedupeFilms(films) {
     if (!m.genres?.length && f.genres?.length) m.genres = f.genres;
   };
 
+  // Passe 0 — réconciliation des imdb_id. `filmGroupKey` bascule sur le titre
+  // quand l'imdb_id manque : une salle qui l'a et une autre qui ne l'a pas
+  // produisent donc deux clés différentes pour le MÊME film, et deux lignes
+  // dans la liste tous cinémas (« Sous le ciel de Kyoto »).
+  // On ne propage que si le titre canonique ne porte qu'UN seul identifiant :
+  // deux imdb_id concurrents signalent un appariement douteux, pas un film à
+  // recoller — mieux vaut alors ne rien décider.
+  const imdbParTitre = {};
+  films.forEach(f => {
+    if (!f.imdbId) return;
+    const k = titreCanon(f.titre);
+    (imdbParTitre[k] = imdbParTitre[k] || new Set()).add(f.imdbId);
+  });
+  films.forEach(f => {
+    if (f.imdbId) return;
+    const lot = imdbParTitre[titreCanon(f.titre)];
+    if (lot && lot.size === 1) f.imdbId = [...lot][0];
+  });
+
   // Passe 1 — fusion par (groupe de film, cinéma). filmGroupKey unifie les
   // variantes de casse via imdb_id (ou le titre normalisé sans imdb).
   const p1 = {};
@@ -1908,14 +1950,58 @@ function dedupeFilms(films) {
   // On fusionne sur cinéma + titre normalisé + réalisateur (non vide) ; le
   // réalisateur discrimine les vrais homonymes (les deux « Seule la vie » de
   // réalisateurs différents restent bien deux films distincts).
+  // Passe 2 — un même film scrapé existe parfois en PLUSIEURS lignes : la clé
+  // d'upsert des films est (titre, annee, realisateur), or l'enrichissement
+  // résout parfois un candidat différent d'un run à l'autre. Une année ou un
+  // réalisateur qui change crée donc une ligne de plus, et les séances se
+  // rattachent à chacune — d'où N entrées de même titre, même salle, portant
+  // EXACTEMENT les mêmes séances (« Noise » en triple, « L'Odyssée » de Nolan
+  // doublée d'une comédie de 2002…).
+  // C'est le partage de SÉANCES qui tranche, pas le réalisateur : ce dernier est
+  // précisément le champ que l'enrichissement fait varier, il ne peut pas servir
+  // de juge. Deux vrais homonymes, eux, ne passent jamais dans la même salle au
+  // même horaire — ils restent donc bien distincts.
   const p2 = {};
   let uid = 0;
+  const lots = {};
   Object.values(p1).forEach(f => {
-    const real = normalizeTitle(f.realisateur || '');
-    const key = real
-      ? 'tr:' + normalizeTitle(f.titre) + '|' + real + ' @ ' + (f.cinema || '')
-      : 'uid:' + (uid++);   // sans réalisateur, pas de fusion à l'aveugle
-    mergeInto(p2, key, f);
+    const k = normalizeTitle(f.titre) + ' @ ' + (f.cinema || '');
+    (lots[k] = lots[k] || []).push(f);
+  });
+  Object.values(lots).forEach(lot => {
+    // Le plus RÉCENT mène la fusion : quand l'enrichissement hésite entre
+    // homonymes, la salle programme la sortie de l'année, pas celle de 1977.
+    // Un vrai classique n'a qu'une ligne, la règle ne le concerne jamais.
+    lot.sort((a, b) => (b.annee || 0) - (a.annee || 0));
+    const groupes = [];
+    lot.forEach(f => {
+      const cible = groupes.find(g => _partagentUneSeance(g[0], f));
+      if (cible) cible.push(f); else groupes.push([f]);
+    });
+    groupes.forEach(g => {
+      const id = 'lot:' + (uid++);
+      g.forEach(f => mergeInto(p2, id, f));
+    });
+  });
+
+  // Passe 3 — numéro de SALLE capté dans le titre. Le PDF du Comoedia colle
+  // parfois la salle au titre (« Lawrence d'Arabie 2 », « Le Monde à L'Envers 1 »)
+  // et le film apparaît alors deux fois, avec et sans le chiffre.
+  // On ne se fie pas au seul motif « titre + chiffre » — « Evil Dead 2 » est un
+  // vrai titre. Le rapprochement n'a lieu que si une ligne du MÊME titre sans le
+  // chiffre existe dans la même salle ET partage une séance : deux films
+  // différents ne peuvent pas occuper le même créneau.
+  const parCanon = {};
+  Object.values(p2).forEach(f => {
+    parCanon[titreCanon(f.titre) + ' @ ' + (f.cinema || '')] = f;
+  });
+  Object.entries(p2).forEach(([id, f]) => {
+    const m = titreCanon(f.titre).match(/^(.+?) ([1-9]\d?)$/);
+    if (!m) return;
+    const base = parCanon[m[1] + ' @ ' + (f.cinema || '')];
+    if (!base || base === f || !_partagentUneSeance(base, f)) return;
+    mergeInto(p2, Object.keys(p2).find(k => p2[k] === base), f);
+    delete p2[id];
   });
 
   // Dédoublonnage final des séances (même cinéma + date + heure + version).
@@ -3631,36 +3717,12 @@ function evCardFallback(img) {
 // gardent leur défaut module. ⚠️ `ratioCadre` n'a rien à faire ici : il se
 // calcule par carte depuis le gabarit RENDU — l'échelle de l'éventail est
 // élastique (--ev-u) et les rangs latéraux sont réduits, le figer casserait le
-// cadrage dès le premier palier de largeur.
+// cadrage dès le premier palier de largeur. `rayon` non plus : il est lu sur la
+// carte, sinon les coins du pli et ceux du cadre divergent.
+// UN SEUL réglage : l'accueil et la navigation entre mois partagent désormais
+// la même animation, et ne diffèrent plus que par leur déclenchement (premier
+// scroll et une seule fois pour l'accueil, immédiat et à chaque mois sinon).
 const TISSU_PRESET = {
-  duree: 2767, retard: 0, ampliRebond: 0,
-  angle: -90, nbPlis: 2, amplitude: 0.2, arete: 0.1,
-  desordre: 0.9, derive: 1.2, nbRides: 1, amplitudeRides: 0.26,
-  retrait: 0.6, balayage: 0, traineBord: 0.3,
-  chute: 0.175, approche: 0.2, profondeurZ: 0.6,
-  perspective: 0.72, rotation: 5, debordement: 1.8,
-  lumiereX: -0.45, lumiereY: 0.7, ombre: 0.3, eclat: 0.16, translucide: 0.22,
-  iriIntensite: 0.42, iriFresnel: 2.6, iriEchelle: 1.35,
-  iriDecalage: 0.1, iriVitesse: 0.25, iriRepos: 0.03,
-  grain: 0.03, voile: 0.9, opacite: 1, subdivisions: 64, rayon: 0.094,
-};
-// Courbe d'accélération, en cubic-bezier (cf. éditeur du labo).
-const TISSU_COURBE = [0.3474, 0.4262, 0.2031, 0.9741];
-// Cadence des cartes LATÉRALES : `retard` + `decalage` × rang. Sert au pli
-// comme au fondu de repli, pour que les deux chemins aient le même tempo.
-// `duree` et `montee` ne concernent que le fondu.
-const TISSU_COTES = { duree: 920, retard: 1400, decalage: 0, montee: 10 };
-// Étagement en profondeur : chaque rang part d'un Z différent, les cartes du
-// fond arrivent de plus loin. Négatif = en retrait.
-const TISSU_ETAGEMENT_Z = -0.4;
-
-// ── Second réglage : la NAVIGATION entre mois ─────────────────────────────
-// Arriver sur le site et changer de mois ne sont pas le même geste. Le premier
-// est un accueil — il peut prendre son temps et de la profondeur. Le second est
-// un déplacement : plus plat (`profondeurZ` nul, `debordement` réduit), plus
-// sobre (`derive` et `desordre` bas, aucune arête) et surtout des latérales qui
-// suivent presque aussitôt (120 ms contre 1400).
-const TISSU_PRESET_MOIS = {
   duree: 2400, retard: 0, ampliRebond: 0,
   angle: -90, nbPlis: 1.5, amplitude: 0.3, arete: 0,
   desordre: 0.1, derive: 0.2, nbRides: 2.4, amplitudeRides: 0.26,
@@ -3672,17 +3734,19 @@ const TISSU_PRESET_MOIS = {
   iriDecalage: 0.1, iriVitesse: 0.25, iriRepos: 0.03,
   grain: 0.03, voile: 0.9, opacite: 1, subdivisions: 64, rayon: 0.094,
 };
-const TISSU_COURBE_MOIS = [0.291, 0.2388, 0.2864, 0.9742];
-const TISSU_COTES_MOIS = { duree: 700, retard: 120, decalage: 90, montee: 18 };
-const TISSU_ETAGEMENT_Z_MOIS = -0.15;
+// Courbe d'accélération, en cubic-bezier (cf. éditeur du labo).
+const TISSU_COURBE = [0.291, 0.2388, 0.2864, 0.9742];
+// Cadence des cartes LATÉRALES : `retard` + `decalage` × rang. Sert au pli
+// comme au fondu de repli, pour que les deux chemins aient le même tempo.
+// `duree` et `montee` ne concernent que le fondu.
+const TISSU_COTES = { duree: 700, retard: 120, decalage: 90, montee: 18 };
+// Étagement en profondeur : chaque rang part d'un Z différent, les cartes du
+// fond arrivent de plus loin. Négatif = en retrait.
+const TISSU_ETAGEMENT_Z = -0.15;
 
-// Le mois d'ARRIVÉE garde le réglage d'accueil ; tout autre mois est atteint
-// par navigation. `rayon` est écarté des deux presets : il est lu sur la carte
-// (cf. plus bas), sans quoi les coins du pli et ceux du cadre divergeraient.
 function _tissuReglages() {
-  return (evMois === _evMoisAccueil)
-    ? { preset: TISSU_PRESET,      courbe: TISSU_COURBE,      cotes: TISSU_COTES,      zRang: TISSU_ETAGEMENT_Z }
-    : { preset: TISSU_PRESET_MOIS, courbe: TISSU_COURBE_MOIS, cotes: TISSU_COTES_MOIS, zRang: TISSU_ETAGEMENT_Z_MOIS };
+  return { preset: TISSU_PRESET, courbe: TISSU_COURBE,
+           cotes: TISSU_COTES, zRang: TISSU_ETAGEMENT_Z };
 }
 
 let _tissuMod = null;
