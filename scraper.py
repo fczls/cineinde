@@ -15,6 +15,8 @@ import logging
 import argparse
 import sys
 import time
+import csv
+import unicodedata
 import hashlib
 from datetime import datetime, date, timedelta
 from pathlib import Path
@@ -3864,6 +3866,115 @@ def _normalize_title_key(titre: str) -> str:
     return re.sub(r"\s+", " ", t)
 
 
+# ── Corrections manuelles de titres ───────────────────────────────────────
+
+CORRECTIONS_PATH = Path(__file__).parent / "data" / "corrections-films.csv"
+
+
+def _cle_correction(titre: str) -> str:
+    """
+    Clé d'appariement du tableur — plus tolérante que `_normalize_title_key` :
+    elle replie AUSSI les accents. Le fichier est saisi à la main, souvent en
+    recopiant un titre lu à l'écran ; exiger « Cinéma » plutôt que « Cinema »
+    ferait échouer la règle en silence. Rien à voir avec le regroupement des
+    films, qui doit rester strict — ici on ne compare qu'à une consigne écrite
+    par un humain.
+    """
+    base = _normalize_title_key(titre)
+    return unicodedata.normalize("NFD", base).encode("ascii", "ignore").decode()
+
+
+def charge_corrections(chemin: "Path | None" = None) -> list:
+    """
+    Lit `data/corrections-films.csv` — un tableur éditable à la main.
+
+    Colonnes : cinema, titre_source, titre, imdb_id, ignorer, note
+      • `cinema`       : limite la règle à une salle (vide = toutes) ;
+      • `titre_source` : le titre TEL QUE SCRAPÉ, comparé sans casse ni accent ;
+      • `titre`        : le titre corrigé (vide = inchangé) ;
+      • `imdb_id`      : force un identifiant (vide = l'association se refait
+                         d'elle-même à partir du titre corrigé) ;
+      • `ignorer`      : « oui » retire l'entrée — pour ce qui n'est pas un film
+                         (nom de cycle capté par le PDF, par exemple) ;
+      • `note`         : pourquoi, pour le prochain lecteur.
+
+    Fichier absent ou illisible ⇒ liste vide : une correction manquante ne doit
+    jamais faire tomber le pipeline.
+    """
+    chemin = chemin or CORRECTIONS_PATH
+    if not chemin.exists():
+        return []
+    try:
+        with open(chemin, encoding="utf-8", newline="") as fh:
+            lignes = [r for r in csv.DictReader(fh)]
+    except Exception as e:
+        log.warning(f"Corrections de titres illisibles ({e}) — ignorées")
+        return []
+    regles = []
+    for r in lignes:
+        src = (r.get("titre_source") or "").strip()
+        if not src:
+            continue
+        regles.append({
+            "cinema": (r.get("cinema") or "").strip(),
+            "cle": _cle_correction(src),
+            "titre": (r.get("titre") or "").strip(),
+            "imdb_id": (r.get("imdb_id") or "").strip(),
+            "ignorer": (r.get("ignorer") or "").strip().lower() in ("oui", "yes", "true", "1", "x"),
+            "source": src,
+        })
+    return regles
+
+
+def applique_corrections(films: list, regles: "list | None" = None) -> list:
+    """
+    Applique les corrections AVANT l'enrichissement : un titre corrigé est donc
+    celui sur lequel TMDB/OMDb feront leur recherche — c'est tout l'intérêt,
+    corriger le titre suffit à relancer l'association.
+
+    Renvoie la liste filtrée (les entrées marquées `ignorer` disparaissent).
+    Signale les règles qui ne correspondent à rien : une correction devenue
+    caduque, parce que la source a changé de libellé, doit se voir — sinon le
+    tableur accumule des lignes mortes que personne n'ose retirer.
+    """
+    regles = charge_corrections() if regles is None else regles
+    if not regles:
+        return films
+
+    utilisees = set()
+    sortie, n_titres, n_imdb, n_retires = [], 0, 0, 0
+    for film in films:
+        cle = _cle_correction(film.get("titre") or "")
+        salle = film.get("cinema") or ""
+        regle = next((r for r in regles
+                      if r["cle"] == cle and (not r["cinema"] or r["cinema"] == salle)), None)
+        if not regle:
+            sortie.append(film)
+            continue
+        utilisees.add(regle["source"])
+        if regle["ignorer"]:
+            n_retires += 1
+            continue
+        if regle["titre"]:
+            film["titre"] = regle["titre"]
+            # `titreOriginal` sert de clé de recherche à l'enrichissement : le
+            # laisser tel quel relancerait la requête sur le titre fautif.
+            film["titreOriginal"] = None
+            n_titres += 1
+        if regle["imdb_id"]:
+            film["imdbId"] = regle["imdb_id"]
+            n_imdb += 1
+        sortie.append(film)
+
+    inutiles = [r["source"] for r in regles if r["source"] not in utilisees]
+    log.info(f"Corrections de titres : {n_titres} titre(s), {n_imdb} imdb_id, "
+             f"{n_retires} entrée(s) retirée(s)")
+    if inutiles:
+        log.warning("Corrections sans effet (la source a-t-elle changé de libellé ?) : "
+                    + ", ".join(inutiles))
+    return sortie
+
+
 def enrich_omdb(films: list[dict]) -> list[dict]:
     """
     TMDB en première source, OMDb en fallback.
@@ -4239,6 +4350,10 @@ def main():
         f"(Comoedia:{len(comoedia_films)}, Lumière:{len(lumiere_films)}, "
         f"Zola:{len(zola_films)})"
     )
+
+    # 3bis. Corrections manuelles (data/corrections-films.csv) — AVANT
+    # l'enrichissement, pour que TMDB/OMDb cherchent sur le titre corrigé.
+    all_films = applique_corrections(all_films)
 
     # 4. Enrichissement TMDB/OMDb avec cache inter-cinémas (un seul appel par titre)
     if not args.no_omdb:
