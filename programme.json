@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-05T21:02:14.401375",
+  "generated_at": "2026-08-07T20:35:00.217984",
   "sources": [
     "https://www.cinema-comoedia.com/programme-semaine/",
     "https://www.cinemas-lumiere.com/calendrier-general.html",
@@ -48,38 +48,14 @@
       "cinema": "Lumière Terreaux",
       "seances": [
         {
-          "date": "2026-08-05",
+          "date": "2026-08-07",
           "heure": "12:40",
           "version": "VOSTFR"
         },
         {
-          "date": "2026-08-05",
+          "date": "2026-08-07",
           "heure": "18:15",
           "version": "VOSTFR"
-        },
-        {
-          "date": "2026-08-06",
-          "heure": "16:20",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F626773/D1786026000/VO/"
-        },
-        {
-          "date": "2026-08-06",
-          "heure": "20:40",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F626773/D1786041600/VO/"
-        },
-        {
-          "date": "2026-08-07",
-          "heure": "12:40",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F626773/D1786099200/VO/"
-        },
-        {
-          "date": "2026-08-07",
-          "heure": "18:15",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F626773/D1786119300/VO/"
         },
         {
           "date": "2026-08-08",
@@ -145,7 +121,7 @@
       "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/335eab34901d2865.jpg",
       "cast": "K. Kurosaki, K. Endô, H. Igawa",
       "backdrop": "https://image.tmdb.org/t/p/w1280/lIq0JaqCyjsl643hoT8yZWSDXJt.jpg",
-      "imdbRating": 1.0,
+      "imdbRating": 3.5,
       "trailer": "https://www.youtube.com/watch?v=0Z2P1qbvSRc"
     },
     {
@@ -164,90 +140,29 @@
       "cinema": "Lumière Terreaux",
       "seances": [
         {
-          "date": "2026-08-05",
+          "date": "2026-08-07",
           "heure": "12:40",
           "version": "VF"
         },
         {
-          "date": "2026-08-05",
+          "date": "2026-08-07",
           "heure": "14:15",
           "version": "VF"
         },
         {
-          "date": "2026-08-05",
+          "date": "2026-08-07",
           "heure": "15:50",
           "version": "VF"
         },
         {
-          "date": "2026-08-05",
+          "date": "2026-08-07",
           "heure": "19:20",
           "version": "VF"
         },
         {
-          "date": "2026-08-05",
-          "heure": "20:55",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F633174/D1785956100/VF/"
-        },
-        {
-          "date": "2026-08-06",
-          "heure": "12:40",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F633174/D1786012800/VF/"
-        },
-        {
-          "date": "2026-08-06",
-          "heure": "14:15",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F633174/D1786018500/VF/"
-        },
-        {
-          "date": "2026-08-06",
-          "heure": "15:50",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F633174/D1786024200/VF/"
-        },
-        {
-          "date": "2026-08-06",
-          "heure": "19:20",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F633174/D1786036800/VF/"
-        },
-        {
-          "date": "2026-08-06",
-          "heure": "20:55",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F633174/D1786042500/VF/"
-        },
-        {
-          "date": "2026-08-07",
-          "heure": "12:40",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F633174/D1786099200/VF/"
-        },
-        {
-          "date": "2026-08-07",
-          "heure": "14:15",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F633174/D1786104900/VF/"
-        },
-        {
-          "date": "2026-08-07",
-          "heure": "15:50",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F633174/D1786110600/VF/"
-        },
-        {
-          "date": "2026-08-07",
-          "heure": "19:20",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F633174/D1786123200/VF/"
-        },
-        {
           "date": "2026-08-07",
           "heure": "20:55",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F633174/D1786128900/VF/"
+          "version": "VF"
         },
         {
           "date": "2026-08-08",
@@ -379,7 +294,7 @@
       "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/4d705138a28f3cfd.jpg",
       "cast": "P. Clément,  L. Stocker,  J . Frison",
       "backdrop": "https://image.tmdb.org/t/p/w1280/5ikboX1fj7GVjVpgcdkR4E6j16A.jpg",
-      "imdbRating": 6.935,
+      "imdbRating": 6.94,
       "trailer": "https://www.youtube.com/watch?v=nDWeG1U-Hug"
     },
     {
@@ -396,21 +311,9 @@
       "cinema": "Lumière Terreaux",
       "seances": [
         {
-          "date": "2026-08-05",
-          "heure": "13:10",
-          "version": "VF"
-        },
-        {
-          "date": "2026-08-06",
-          "heure": "20:00",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F378032/D1786039200/VF/"
-        },
-        {
           "date": "2026-08-07",
           "heure": "13:10",
-          "version": "VFST",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F378032/D1786101000/VFST/"
+          "version": "VFST"
         },
         {
           "date": "2026-08-08",
@@ -464,73 +367,24 @@
       "cinema": "Lumière Terreaux",
       "seances": [
         {
-          "date": "2026-08-05",
+          "date": "2026-08-07",
           "heure": "13:10",
           "version": "VOSTFR"
         },
         {
-          "date": "2026-08-05",
+          "date": "2026-08-07",
           "heure": "16:30",
           "version": "VOSTFR"
         },
         {
-          "date": "2026-08-05",
+          "date": "2026-08-07",
           "heure": "17:25",
           "version": "VOSTFR"
         },
         {
-          "date": "2026-08-05",
-          "heure": "20:40",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F615318/D1785955200/VO/"
-        },
-        {
-          "date": "2026-08-06",
-          "heure": "13:10",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F615318/D1786014600/VO/"
-        },
-        {
-          "date": "2026-08-06",
-          "heure": "16:30",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F615318/D1786026600/VO/"
-        },
-        {
-          "date": "2026-08-06",
-          "heure": "17:25",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F615318/D1786029900/VO/"
-        },
-        {
-          "date": "2026-08-06",
-          "heure": "20:40",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F615318/D1786041600/VO/"
-        },
-        {
-          "date": "2026-08-07",
-          "heure": "13:10",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F615318/D1786101000/VO/"
-        },
-        {
-          "date": "2026-08-07",
-          "heure": "16:30",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F615318/D1786113000/VO/"
-        },
-        {
-          "date": "2026-08-07",
-          "heure": "17:25",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F615318/D1786116300/VO/"
-        },
-        {
           "date": "2026-08-07",
           "heure": "20:40",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F615318/D1786128000/VO/"
+          "version": "VOSTFR"
         },
         {
           "date": "2026-08-08",
@@ -665,21 +519,9 @@
       "cinema": "Lumière Terreaux",
       "seances": [
         {
-          "date": "2026-08-05",
-          "heure": "14:55",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-08-06",
-          "heure": "14:55",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F42978/D1786020900/VO/"
-        },
-        {
           "date": "2026-08-07",
           "heure": "14:55",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F42978/D1786107300/VO/"
+          "version": "VOSTFR"
         },
         {
           "date": "2026-08-08",
@@ -730,39 +572,14 @@
       "cinema": "Lumière Terreaux",
       "seances": [
         {
-          "date": "2026-08-05",
+          "date": "2026-08-07",
           "heure": "16:15",
           "version": "VOSTFR"
         },
         {
-          "date": "2026-08-05",
-          "heure": "20:40",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F608104/D1785955200/VO/"
-        },
-        {
-          "date": "2026-08-06",
-          "heure": "12:50",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F608104/D1786013400/VO/"
-        },
-        {
-          "date": "2026-08-06",
-          "heure": "18:40",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F608104/D1786034400/VO/"
-        },
-        {
-          "date": "2026-08-07",
-          "heure": "16:15",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F608104/D1786112100/VO/"
-        },
-        {
           "date": "2026-08-07",
           "heure": "20:40",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F608104/D1786128000/VO/"
+          "version": "VOSTFR"
         },
         {
           "date": "2026-08-08",
@@ -810,7 +627,7 @@
       "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/f00f7eb0195e6a47.jpg",
       "cast": "O.Wilde, C. Hoffman, C. XCX",
       "backdrop": "https://image.tmdb.org/t/p/w1280/rcBpmEIdSTMnt5Rn4BQeHF4SIL5.jpg",
-      "imdbRating": 6.077,
+      "imdbRating": 6.071,
       "trailer": "https://www.youtube.com/watch?v=LKtRMqPs7KU"
     },
     {
@@ -827,21 +644,9 @@
       "cinema": "Lumière Terreaux",
       "seances": [
         {
-          "date": "2026-08-05",
-          "heure": "20:00",
-          "version": "VF"
-        },
-        {
-          "date": "2026-08-06",
-          "heure": "13:10",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F378034/D1786014600/VF/"
-        },
-        {
           "date": "2026-08-07",
           "heure": "20:00",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F378034/D1786125600/VF/"
+          "version": "VF"
         },
         {
           "date": "2026-08-08",
@@ -895,38 +700,14 @@
       "cinema": "Lumière Bellecour",
       "seances": [
         {
-          "date": "2026-08-05",
+          "date": "2026-08-07",
           "heure": "16:10",
           "version": "VOSTFR"
         },
         {
-          "date": "2026-08-05",
+          "date": "2026-08-07",
           "heure": "18:35",
           "version": "VOSTFR"
-        },
-        {
-          "date": "2026-08-06",
-          "heure": "18:00",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F628799/D1786032000/VO/"
-        },
-        {
-          "date": "2026-08-06",
-          "heure": "20:30",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F628799/D1786041000/VO/"
-        },
-        {
-          "date": "2026-08-07",
-          "heure": "16:10",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F628799/D1786111800/VO/"
-        },
-        {
-          "date": "2026-08-07",
-          "heure": "18:35",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F628799/D1786120500/VO/"
         },
         {
           "date": "2026-08-08",
@@ -999,21 +780,9 @@
       "cinema": "Lumière Bellecour",
       "seances": [
         {
-          "date": "2026-08-05",
-          "heure": "13:40",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-08-06",
-          "heure": "15:30",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F616860/D1786023000/VO/"
-        },
-        {
           "date": "2026-08-07",
           "heure": "13:40",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F616860/D1786102800/VO/"
+          "version": "VOSTFR"
         },
         {
           "date": "2026-08-08",
@@ -1064,38 +833,14 @@
       "cinema": "Lumière Bellecour",
       "seances": [
         {
-          "date": "2026-08-05",
+          "date": "2026-08-07",
           "heure": "13:40",
           "version": "VF"
         },
         {
-          "date": "2026-08-05",
+          "date": "2026-08-07",
           "heure": "18:50",
           "version": "VF"
-        },
-        {
-          "date": "2026-08-06",
-          "heure": "16:00",
-          "version": "VFST",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F624852/D1786024800/VFST/"
-        },
-        {
-          "date": "2026-08-06",
-          "heure": "18:00",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F624852/D1786032000/VF/"
-        },
-        {
-          "date": "2026-08-07",
-          "heure": "13:40",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F624852/D1786102800/VF/"
-        },
-        {
-          "date": "2026-08-07",
-          "heure": "18:50",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F624852/D1786121400/VF/"
         },
         {
           "date": "2026-08-08",
@@ -1167,56 +912,19 @@
       "cinema": "Lumière Bellecour",
       "seances": [
         {
-          "date": "2026-08-05",
+          "date": "2026-08-07",
           "heure": "14:00",
           "version": "VOSTFR"
         },
         {
-          "date": "2026-08-05",
+          "date": "2026-08-07",
           "heure": "18:40",
           "version": "VOSTFR"
         },
         {
-          "date": "2026-08-05",
-          "heure": "21:00",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F630150/D1785956400/VO/"
-        },
-        {
-          "date": "2026-08-06",
-          "heure": "13:40",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F630150/D1786016400/VO/"
-        },
-        {
-          "date": "2026-08-06",
-          "heure": "16:30",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F630150/D1786026600/VO/"
-        },
-        {
-          "date": "2026-08-06",
-          "heure": "20:55",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F630150/D1786042500/VO/"
-        },
-        {
-          "date": "2026-08-07",
-          "heure": "14:00",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F630150/D1786104000/VO/"
-        },
-        {
-          "date": "2026-08-07",
-          "heure": "18:40",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F630150/D1786120800/VO/"
-        },
-        {
           "date": "2026-08-07",
           "heure": "21:00",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F630150/D1786129200/VO/"
+          "version": "VOSTFR"
         },
         {
           "date": "2026-08-08",
@@ -1315,21 +1023,9 @@
       "cinema": "Lumière Bellecour",
       "seances": [
         {
-          "date": "2026-08-05",
-          "heure": "15:30",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-08-06",
-          "heure": "20:00",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F50057/D1786039200/VO/"
-        },
-        {
           "date": "2026-08-07",
           "heure": "15:30",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F50057/D1786109400/VO/"
+          "version": "VOSTFR"
         },
         {
           "date": "2026-08-08",
@@ -1380,39 +1076,14 @@
       "cinema": "Lumière Bellecour",
       "seances": [
         {
-          "date": "2026-08-05",
+          "date": "2026-08-07",
           "heure": "16:00",
           "version": "VOSTFR"
         },
         {
-          "date": "2026-08-05",
-          "heure": "20:35",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F578708/D1785954900/VO/"
-        },
-        {
-          "date": "2026-08-06",
-          "heure": "14:00",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F578708/D1786017600/VO/"
-        },
-        {
-          "date": "2026-08-06",
-          "heure": "18:25",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F578708/D1786033500/VO/"
-        },
-        {
-          "date": "2026-08-07",
-          "heure": "16:00",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F578708/D1786111200/VO/"
-        },
-        {
           "date": "2026-08-07",
           "heure": "20:35",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F578708/D1786127700/VO/"
+          "version": "VOSTFR"
         },
         {
           "date": "2026-08-08",
@@ -1466,7 +1137,7 @@
       "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/b378e22457581cb7.jpg",
       "cast": "M. Mikkelsen, N. Lie Kaas, L. Brygmann",
       "backdrop": "https://image.tmdb.org/t/p/w1280/zo1SfeASCrbHFaXJN9y1RW7uU2m.jpg",
-      "imdbRating": 7.3,
+      "imdbRating": 7.262,
       "trailer": "https://www.youtube.com/watch?v=YdFbqryfdxg"
     },
     {
@@ -1485,22 +1156,9 @@
       "cinema": "Lumière Bellecour",
       "seances": [
         {
-          "date": "2026-08-05",
-          "heure": "20:40",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F622416/D1785955200/VO/"
-        },
-        {
-          "date": "2026-08-06",
-          "heure": "14:10",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F622416/D1786018200/VO/"
-        },
-        {
           "date": "2026-08-07",
           "heure": "20:40",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F622416/D1786128000/VO/"
+          "version": "VOSTFR"
         },
         {
           "date": "2026-08-08",
@@ -1530,7 +1188,7 @@
       "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/4034a06dd5ffb7fb.jpg",
       "cast": "J. Magaro, M. B. Wright, W. Solis",
       "backdrop": "https://image.tmdb.org/t/p/w1280/rf8V9z28gJre58U9ObHN3NJph4A.jpg",
-      "imdbRating": 6.839,
+      "imdbRating": 6.8,
       "trailer": "https://www.youtube.com/watch?v=M2OTVoxpetU"
     },
     {
@@ -1549,21 +1207,9 @@
       "cinema": "Lumière Fourmi",
       "seances": [
         {
-          "date": "2026-08-05",
-          "heure": "14:30",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-08-06",
-          "heure": "20:50",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F562668/D1786042200/VO/"
-        },
-        {
           "date": "2026-08-07",
           "heure": "14:30",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F562668/D1786105800/VO/"
+          "version": "VOSTFR"
         },
         {
           "date": "2026-08-09",
@@ -1603,21 +1249,9 @@
       "cinema": "Lumière Fourmi",
       "seances": [
         {
-          "date": "2026-08-05",
-          "heure": "14:30",
-          "version": "VF"
-        },
-        {
-          "date": "2026-08-06",
-          "heure": "14:30",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F281545/D1786019400/VF/"
-        },
-        {
           "date": "2026-08-07",
           "heure": "14:30",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F281545/D1786105800/VF/"
+          "version": "VF"
         },
         {
           "date": "2026-08-08",
@@ -1667,15 +1301,9 @@
       "cinema": "Lumière Fourmi",
       "seances": [
         {
-          "date": "2026-08-05",
-          "heure": "14:40",
-          "version": "VF"
-        },
-        {
           "date": "2026-08-07",
           "heure": "14:40",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F573784/D1786106400/VF/"
+          "version": "VF"
         },
         {
           "date": "2026-08-09",
@@ -1697,43 +1325,31 @@
       "trailer": "https://www.youtube.com/watch?v=R7xZRSgmqw4"
     },
     {
-      "titre": "Mon oncle",
-      "slug": "mon-oncle",
+      "titre": "Trafic",
+      "slug": "trafic",
       "titreOriginal": null,
-      "annee": 1958,
+      "annee": 1971,
       "realisateur": "Jacques Tati",
-      "duree": 116,
+      "duree": null,
       "genres": [
         "Comedy"
       ],
-      "synopsis": "Le petit Gérard aime passer du temps avec son oncle, M. Hulot, un personnage rêveur et bohème qui habite un quartier populaire et joyeux de la banlieue parisienne. Ses parents,M. et Mme Arpel, résident quant à eux dans une villa moderne et luxueuse, où ils mènent une existence monotone et aseptisée. Un jour que Gérard rentre d'une énième virée avec son oncle, M. Arpel prend la décision d'éloigner son fils de M. Hulot. Il tente alors de lui trouver un travail dans son usine de plastique, tandis q…",
-      "imdbId": "tt0050706",
+      "synopsis": "Dessinateur chez Altra, une petite entreprise parisienne en pleine expansion, monsieur Hulot a inventé une voiture de camping révolutionnaire, équipée d'une tente et de multiples gadgets. Ses employeurs tiennent absolument à présenter cette merveille d'ingéniosité au Salon de l'automobile qui se tiendra bientôt à Amsterdam. Après avoir chargé le prototype sur un camion, monsieur Hulot prend la direction des Pays-Bas, accompagné d'une attachée de presse. Dès la sortie de Paris, le convoi s'engage…",
+      "imdbId": "tt0069400",
       "source": "lumiere",
       "cinema": "Lumière Fourmi",
       "seances": [
         {
-          "date": "2026-08-05",
+          "date": "2026-08-07",
           "heure": "15:35",
           "version": "VF"
-        },
-        {
-          "date": "2026-08-08",
-          "heure": "15:35",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F44923/D1786196100/VF/"
-        },
-        {
-          "date": "2026-08-11",
-          "heure": "15:35",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F44923/D1786455300/VF/"
         }
       ],
-      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/101e21b3be08d816.jpg",
-      "cast": "J. Tati, J.P. Zola, A. Becourt",
-      "backdrop": "https://image.tmdb.org/t/p/w1280/3yYNJeR6JynSE3Y1AfVIJQ6g3UX.jpg",
-      "imdbRating": 7.429,
-      "trailer": "https://www.youtube.com/watch?v=hRjtIg1NM84"
+      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/ef36d4679cf56c1b.jpg",
+      "backdrop": "https://image.tmdb.org/t/p/w1280/bRb9uhqaXm82Ioi6WUGLABikUCw.jpg",
+      "imdbRating": 7.1,
+      "cast": "Jacques Tati, Tony Knepper, Maria Kimberly",
+      "trailer": "https://www.youtube.com/watch?v=-S2hRXV41S0"
     },
     {
       "titre": "Enamorada",
@@ -1753,21 +1369,9 @@
       "cinema": "Lumière Fourmi",
       "seances": [
         {
-          "date": "2026-08-05",
-          "heure": "16:25",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-08-06",
-          "heure": "16:05",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F37107/D1786025100/VO/"
-        },
-        {
           "date": "2026-08-07",
           "heure": "16:25",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F37107/D1786112700/VO/"
+          "version": "VOSTFR"
         },
         {
           "date": "2026-08-08",
@@ -1815,21 +1419,9 @@
       "cinema": "Lumière Fourmi",
       "seances": [
         {
-          "date": "2026-08-05",
-          "heure": "16:45",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-08-06",
-          "heure": "18:25",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F635974/D1786033500/VO/"
-        },
-        {
           "date": "2026-08-07",
           "heure": "16:45",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F635974/D1786113900/VO/"
+          "version": "VOSTFR"
         },
         {
           "date": "2026-08-09",
@@ -1873,21 +1465,9 @@
       "cinema": "Lumière Fourmi",
       "seances": [
         {
-          "date": "2026-08-05",
-          "heure": "17:45",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-08-06",
-          "heure": "20:30",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F562752/D1786041000/VO/"
-        },
-        {
           "date": "2026-08-07",
           "heure": "17:30",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F562752/D1786116600/VO/"
+          "version": "VOSTFR"
         },
         {
           "date": "2026-08-08",
@@ -1921,43 +1501,37 @@
       "trailer": "https://www.youtube.com/watch?v=tkEUlZeK7Gs"
     },
     {
-      "titre": "Parade",
-      "slug": "parade",
+      "titre": "Les Vacances de Monsieur Hulot",
+      "slug": "les-vacances-de-monsieur-hulot",
       "titreOriginal": null,
-      "annee": 1974,
+      "annee": 1953,
       "realisateur": "Jacques Tati",
-      "duree": 84,
+      "duree": 88,
       "genres": [
-        "Comedy",
-        "Family"
+        "Comedy"
       ],
-      "synopsis": "L'histoire d'une grande fête au cours de laquelle Jacques Tati organise une rencontre entre spectateurs, artistes, clowns, enfants et lui-même.Tout au long du film, adultes et jeunes forment une seule masse enthousiaste et unie par le spectacle.Dès le début, une petite fille et un petit garçon symbolisent, en un seul regard échangé, lajoie d'être ensemble. Le public participe directement au spectacle qui tient à la fois dumusic-hall et du cirque, et Jacques Tati, en Monsieur Loyal, dirige et ani…",
-      "imdbId": "tt0071968",
+      "synopsis": "Les vacances, tout le monde le sait, ne sont pas faites pour s'amuser. Tout le monde le sait, sauf Monsieur Hulot qui, pipe en l'air et silhouette en éventail, prend la vie comme elle vient, bouleversant scandaleusement au volant de sa vieille voiture Salmson pétaradante la quiétude estivale des vacanciers qui s'installent avec leurs habitudes de citadins dans cette petite station balnéaire de la côte atlantique. Il promène dans l'ennui balnéaire, le plaisir émerveillé des châteaux de sable. Et,…",
+      "imdbId": "tt0046487",
       "source": "lumiere",
       "cinema": "Lumière Fourmi",
       "seances": [
         {
-          "date": "2026-08-05",
+          "date": "2026-08-07",
           "heure": "18:25",
           "version": "VF"
         },
         {
-          "date": "2026-08-08",
-          "heure": "14:30",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F34829/D1786192200/VF/"
-        },
-        {
-          "date": "2026-08-11",
+          "date": "2026-08-09",
           "heure": "18:25",
           "version": "VF",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F34829/D1786465500/VF/"
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F4882/D1786292700/VF/"
         }
       ],
-      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/044bf1f047a76a4f.jpg",
-      "cast": "J. Tati, P. Bramma, M. Brabo",
-      "backdrop": "https://image.tmdb.org/t/p/w1280/cMDKT5bRD0X4ZMHQHfH2iZFbIi6.jpg",
-      "imdbRating": 5.8
+      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/a328cefc18f65bf9.jpg",
+      "cast": "J. Tati, N. Pascaud, M. Rolla",
+      "backdrop": "https://image.tmdb.org/t/p/w1280/dK6s1EMpMcUwBHpiYVMBiTdgdvy.jpg",
+      "imdbRating": 6.9,
+      "trailer": "https://www.youtube.com/watch?v=OgjoFx-47Is"
     },
     {
       "titre": "In Waves",
@@ -1977,21 +1551,9 @@
       "cinema": "Lumière Fourmi",
       "seances": [
         {
-          "date": "2026-08-05",
-          "heure": "19:00",
-          "version": "VF"
-        },
-        {
-          "date": "2026-08-06",
-          "heure": "16:30",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F376520/D1786026600/VF/"
-        },
-        {
           "date": "2026-08-07",
           "heure": "19:00",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F376520/D1786122000/VF/"
+          "version": "VF"
         },
         {
           "date": "2026-08-08",
@@ -2042,22 +1604,9 @@
       "cinema": "Lumière Fourmi",
       "seances": [
         {
-          "date": "2026-08-05",
-          "heure": "20:15",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F603010/D1785953700/VO/"
-        },
-        {
-          "date": "2026-08-06",
-          "heure": "18:05",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F603010/D1786032300/VO/"
-        },
-        {
           "date": "2026-08-07",
           "heure": "20:15",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F603010/D1786126500/VO/"
+          "version": "VOSTFR"
         },
         {
           "date": "2026-08-09",
@@ -2081,7 +1630,7 @@
       "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/a1f15255a446a4cd.jpg",
       "cast": "E. Blunt, J. O'Connor, C. Firth",
       "backdrop": "https://image.tmdb.org/t/p/w1280/flxau5Iu7bChQHsESqvGZ3FQRaI.jpg",
-      "imdbRating": 7.426,
+      "imdbRating": 7.429,
       "trailer": "https://www.youtube.com/watch?v=h_-SiP-6J54"
     },
     {
@@ -2102,22 +1651,9 @@
       "cinema": "Lumière Fourmi",
       "seances": [
         {
-          "date": "2026-08-05",
-          "heure": "20:50",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F5400/D1785955800/VO/"
-        },
-        {
-          "date": "2026-08-06",
-          "heure": "18:00",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F5400/D1786032000/VO/"
-        },
-        {
           "date": "2026-08-07",
           "heure": "20:35",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F5400/D1786127700/VO/"
+          "version": "VOSTFR"
         },
         {
           "date": "2026-08-08",
@@ -2168,22 +1704,9 @@
       "cinema": "Lumière Fourmi",
       "seances": [
         {
-          "date": "2026-08-05",
-          "heure": "20:50",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F584420/D1785955800/VF/"
-        },
-        {
-          "date": "2026-08-06",
-          "heure": "20:50",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F584420/D1786042200/VF/"
-        },
-        {
           "date": "2026-08-07",
           "heure": "20:50",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F584420/D1786128600/VF/"
+          "version": "VF"
         },
         {
           "date": "2026-08-08",
@@ -2213,48 +1736,42 @@
       "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/3ed2c3f046c6f40a.jpg",
       "cast": "A. Ramires, J. Gillet, S. Souagnon",
       "backdrop": "https://image.tmdb.org/t/p/w1280/vQw05sfFEVCVpysDAU5C8NU1gMO.jpg",
-      "imdbRating": 7.9,
+      "imdbRating": 7.933,
       "trailer": "https://www.youtube.com/watch?v=eJyZKYim5kQ"
     },
     {
-      "titre": "Jour de fête",
-      "slug": "jour-de-fete",
+      "titre": "Parade",
+      "slug": "parade",
       "titreOriginal": null,
-      "annee": 1949,
+      "annee": 1974,
       "realisateur": "Jacques Tati",
-      "duree": 76,
+      "duree": 84,
       "genres": [
-        "Comedy"
+        "Comedy",
+        "Family"
       ],
-      "synopsis": "Des forains s'installent dans un calme village. Parmi les attractions se trouve un cinéma ambulant où le facteur découvre un film documentaire sur ses collègues américains. Il décide alors de se lancer dans une tournée à \"l'américaine\".",
-      "imdbId": "tt0040497",
+      "synopsis": "L'histoire d'une grande fête au cours de laquelle Jacques Tati organise une rencontre entre spectateurs, artistes, clowns, enfants et lui-même.Tout au long du film, adultes et jeunes forment une seule masse enthousiaste et unie par le spectacle.Dès le début, une petite fille et un petit garçon symbolisent, en un seul regard échangé, lajoie d'être ensemble. Le public participe directement au spectacle qui tient à la fois dumusic-hall et du cirque, et Jacques Tati, en Monsieur Loyal, dirige et ani…",
+      "imdbId": "tt0071968",
       "source": "lumiere",
       "cinema": "Lumière Fourmi",
       "seances": [
         {
-          "date": "2026-08-06",
+          "date": "2026-08-08",
           "heure": "14:30",
           "version": "VF",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F42133/D1786019400/VF/"
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F34829/D1786192200/VF/"
         },
         {
-          "date": "2026-08-09",
-          "heure": "15:35",
+          "date": "2026-08-11",
+          "heure": "18:25",
           "version": "VF",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F42133/D1786282500/VF/"
-        },
-        {
-          "date": "2026-08-10",
-          "heure": "14:30",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F42133/D1786365000/VF/"
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F34829/D1786465500/VF/"
         }
       ],
-      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/b016db46747751ec.jpg",
-      "cast": "J. Tati, G. Decomble, P. Frankeur",
-      "backdrop": "https://image.tmdb.org/t/p/w1280/qUtJCQgGl02aH5pPbxEU4kMGuZL.jpg",
-      "imdbRating": 7.1,
-      "trailer": "https://www.youtube.com/watch?v=6MocOt8xBjo"
+      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/044bf1f047a76a4f.jpg",
+      "cast": "J. Tati, P. Bramma, M. Brabo",
+      "backdrop": "https://image.tmdb.org/t/p/w1280/cMDKT5bRD0X4ZMHQHfH2iZFbIi6.jpg",
+      "imdbRating": 5.8
     },
     {
       "titre": "Parvana",
@@ -2274,12 +1791,6 @@
       "cinema": "Lumière Fourmi",
       "seances": [
         {
-          "date": "2026-08-06",
-          "heure": "14:30",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F157574/D1786019400/VF/"
-        },
-        {
           "date": "2026-08-08",
           "heure": "14:30",
           "version": "VF",
@@ -2295,104 +1806,42 @@
       "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/b36fc41314ee7dd1.jpg",
       "cast": "G. Farahani, S. Chaudry, S. Bhatia",
       "backdrop": "https://image.tmdb.org/t/p/w1280/fRtQdiESAdt9rjXCvZhvkmprvac.jpg",
-      "imdbRating": 7.85,
+      "imdbRating": 7.851,
       "trailer": "https://www.youtube.com/watch?v=I0aNEh60XX8"
     },
     {
-      "titre": "Playtime",
-      "slug": "playtime",
+      "titre": "Mon oncle",
+      "slug": "mon-oncle",
       "titreOriginal": null,
-      "annee": 1967,
+      "annee": 1958,
       "realisateur": "Jacques Tati",
-      "duree": 124,
+      "duree": 116,
       "genres": [
         "Comedy"
       ],
-      "synopsis": "Des touristes américaines ont opté pour une formule de voyage grâce à laquelle elles visitent une capitale par jour. Mais arrivées à Orly, elles se rendent compte que l'aéroport est identique à tous ceux qu'elles ont déjà fréquentés. En se rendant à Paris, elles constatent également que le décor est le même que celui des autres capitales...",
-      "imdbId": "tt0062136",
+      "synopsis": "Le petit Gérard aime passer du temps avec son oncle, M. Hulot, un personnage rêveur et bohème qui habite un quartier populaire et joyeux de la banlieue parisienne. Ses parents,M. et Mme Arpel, résident quant à eux dans une villa moderne et luxueuse, où ils mènent une existence monotone et aseptisée. Un jour que Gérard rentre d'une énième virée avec son oncle, M. Arpel prend la décision d'éloigner son fils de M. Hulot. Il tente alors de lui trouver un travail dans son usine de plastique, tandis q…",
+      "imdbId": "tt0050706",
       "source": "lumiere",
       "cinema": "Lumière Fourmi",
       "seances": [
         {
-          "date": "2026-08-06",
+          "date": "2026-08-08",
           "heure": "15:35",
           "version": "VF",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F51450/D1786023300/VF/"
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F44923/D1786196100/VF/"
         },
         {
-          "date": "2026-08-10",
+          "date": "2026-08-11",
           "heure": "15:35",
           "version": "VF",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F51450/D1786368900/VF/"
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F44923/D1786455300/VF/"
         }
       ],
-      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/d3714a117ee1f8d7.jpg",
-      "cast": "J. Tati, B. Kearns, B. Dennek",
-      "backdrop": "https://image.tmdb.org/t/p/w1280/pKX8G6IN8ZCRvKeHh6ctqoHZl0K.jpg",
-      "imdbRating": 7.688,
-      "trailer": "https://www.youtube.com/watch?v=xLUz37fDJtE"
-    },
-    {
-      "titre": "Trafic",
-      "slug": "trafic",
-      "titreOriginal": null,
-      "annee": 1953,
-      "realisateur": "Jacques Tati",
-      "duree": 92,
-      "genres": [
-        "Comedy"
-      ],
-      "synopsis": "Monsieur Hulot, dessinateur d'un camping-car expérimental, accompagne celui-ci sur les autoroutes de France et de Belgique en direction du salon de l'automobile d'Amsterdam où le modèle doit être exposé. Mais entre les nombreuses pannes, les problèmes mécaniques, la fouille à la douane, l'accident, la route est longue et semée d'embûches, qui mettent en péril la réussite commerciale de l'opération, menaçant Hulot et son camping car de ne pas arriver à temps pour l'ouverture du salon...",
-      "imdbId": "tt0069400",
-      "source": "lumiere",
-      "cinema": "Lumière Fourmi",
-      "seances": [
-        {
-          "date": "2026-08-07",
-          "heure": "15:35",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F45227/D1786109700/VF/"
-        }
-      ],
-      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/d34938957e91ae53.jpg",
-      "cast": "J. Tati, N. Pascaud, M. Rolla",
-      "backdrop": "https://image.tmdb.org/t/p/w1280/bRb9uhqaXm82Ioi6WUGLABikUCw.jpg",
-      "imdbRating": 7.1,
-      "trailer": "https://www.youtube.com/watch?v=-S2hRXV41S0"
-    },
-    {
-      "titre": "Les Vacances de Monsieur Hulot",
-      "slug": "les-vacances-de-monsieur-hulot",
-      "titreOriginal": null,
-      "annee": 1953,
-      "realisateur": "Jacques Tati",
-      "duree": 88,
-      "genres": [
-        "Comedy"
-      ],
-      "synopsis": "Les vacances, tout le monde le sait, ne sont pas faites pour s'amuser. Tout le monde le sait, sauf Monsieur Hulot qui, pipe en l'air et silhouette en éventail, prend la vie comme elle vient, bouleversant scandaleusement au volant de sa vieille voiture Salmson pétaradante la quiétude estivale des vacanciers qui s'installent avec leurs habitudes de citadins dans cette petite station balnéaire de la côte atlantique. Il promène dans l'ennui balnéaire, le plaisir émerveillé des châteaux de sable. Et,…",
-      "imdbId": "tt0046487",
-      "source": "lumiere",
-      "cinema": "Lumière Fourmi",
-      "seances": [
-        {
-          "date": "2026-08-07",
-          "heure": "18:25",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F4882/D1786119900/VF/"
-        },
-        {
-          "date": "2026-08-09",
-          "heure": "18:25",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F4882/D1786292700/VF/"
-        }
-      ],
-      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/a328cefc18f65bf9.jpg",
-      "cast": "J. Tati, N. Pascaud, M. Rolla",
-      "backdrop": "https://image.tmdb.org/t/p/w1280/dK6s1EMpMcUwBHpiYVMBiTdgdvy.jpg",
-      "imdbRating": 6.944,
-      "trailer": "https://www.youtube.com/watch?v=OgjoFx-47Is"
+      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/101e21b3be08d816.jpg",
+      "cast": "J. Tati, J.P. Zola, A. Becourt",
+      "backdrop": "https://image.tmdb.org/t/p/w1280/3yYNJeR6JynSE3Y1AfVIJQ6g3UX.jpg",
+      "imdbRating": 7.4,
+      "trailer": "https://www.youtube.com/watch?v=hRjtIg1NM84"
     },
     {
       "titre": "Kill Bill: The Whole Bloody Affair",
@@ -2421,7 +1870,7 @@
       "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/97879c0393db115f.jpg",
       "cast": "U. Thurman, D. Carradine, L. Liu",
       "backdrop": "https://image.tmdb.org/t/p/w1280/gxSWwZyYPA50f5T2IJzFX4NzxAG.jpg",
-      "imdbRating": 8.109,
+      "imdbRating": 8.112,
       "trailer": "https://www.youtube.com/watch?v=lriK0sOEgCg"
     },
     {
@@ -2451,8 +1900,93 @@
       "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/84ecbadbb78afabf.jpg",
       "cast": "J. Goldblum, G. Davis, J. Getz",
       "backdrop": "https://image.tmdb.org/t/p/w1280/aQwxkvskonfPByfj5PTriJuyFXr.jpg",
-      "imdbRating": 7.44,
+      "imdbRating": 7.4,
       "trailer": "https://www.youtube.com/watch?v=nrVIDwqYBlI"
+    },
+    {
+      "titre": "Jour de fête",
+      "slug": "jour-de-fete",
+      "titreOriginal": null,
+      "annee": 1949,
+      "realisateur": "Jacques Tati",
+      "duree": 76,
+      "genres": [
+        "Comedy"
+      ],
+      "synopsis": "Des forains s'installent dans un calme village. Parmi les attractions se trouve un cinéma ambulant où le facteur découvre un film documentaire sur ses collègues américains. Il décide alors de se lancer dans une tournée à \"l'américaine\".",
+      "imdbId": "tt0040497",
+      "source": "lumiere",
+      "cinema": "Lumière Fourmi",
+      "seances": [
+        {
+          "date": "2026-08-09",
+          "heure": "15:35",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F42133/D1786282500/VF/"
+        },
+        {
+          "date": "2026-08-10",
+          "heure": "14:30",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F42133/D1786365000/VF/"
+        }
+      ],
+      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/b016db46747751ec.jpg",
+      "cast": "J. Tati, G. Decomble, P. Frankeur",
+      "backdrop": "https://image.tmdb.org/t/p/w1280/qUtJCQgGl02aH5pPbxEU4kMGuZL.jpg",
+      "imdbRating": 7.1,
+      "trailer": "https://www.youtube.com/watch?v=6MocOt8xBjo"
+    },
+    {
+      "titre": "Playtime",
+      "slug": "playtime",
+      "titreOriginal": null,
+      "annee": 1967,
+      "realisateur": "Jacques Tati",
+      "duree": 124,
+      "genres": [
+        "Comedy"
+      ],
+      "synopsis": "Des touristes américaines ont opté pour une formule de voyage grâce à laquelle elles visitent une capitale par jour. Mais arrivées à Orly, elles se rendent compte que l'aéroport est identique à tous ceux qu'elles ont déjà fréquentés. En se rendant à Paris, elles constatent également que le décor est le même que celui des autres capitales...",
+      "imdbId": "tt0062136",
+      "source": "lumiere",
+      "cinema": "Lumière Fourmi",
+      "seances": [
+        {
+          "date": "2026-08-10",
+          "heure": "15:35",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F51450/D1786368900/VF/"
+        }
+      ],
+      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/d3714a117ee1f8d7.jpg",
+      "cast": "J. Tati, B. Kearns, B. Dennek",
+      "backdrop": "https://image.tmdb.org/t/p/w1280/pKX8G6IN8ZCRvKeHh6ctqoHZl0K.jpg",
+      "imdbRating": 7.689,
+      "trailer": "https://www.youtube.com/watch?v=xLUz37fDJtE"
+    },
+    {
+      "titre": "Le Monde à l'envers",
+      "slug": "le-monde-a-l-envers",
+      "titreOriginal": null,
+      "annee": 2026,
+      "realisateur": "divers cinéastes",
+      "duree": 45,
+      "genres": [],
+      "synopsis": "Plongez dans un univers où la différence devient poésie à travers six récits touchants. De Rémi, le souriceau vivant la tête en bas, à Sacha et son parcours inclusif à l'école, de Lina qui s'envole avec un pull, à Lily qui fait éternuer la lune... Ce programme explore avec tendresse les perceptions singulières de l'enfance. Entre tricot de nuages, cités sous-marines et métamorphoses fantastiques du quotidien, ces films nous invitent à voir le monde avec les yeux de ceux et celles qui rêvent et v…",
+      "imdbId": null,
+      "source": "lumiere",
+      "cinema": "Lumière Fourmi",
+      "seances": [
+        {
+          "date": "2026-08-12",
+          "heure": "15:45",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F636561/D1786542300/VF/"
+        }
+      ],
+      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/0d3d1148c6f06cd9.jpg",
+      "imdbRating": 0.0
     }
   ],
   "evenements": [
@@ -2470,8 +2004,6 @@
         {
           "titre": "Un petit air de famille",
           "dates": [
-            "2026-08-05",
-            "2026-08-06",
             "2026-08-07",
             "2026-08-08",
             "2026-08-09",
@@ -2524,22 +2056,6 @@
           "titre_film": "Patouille et Momo, les contes de la forêt",
           "invite": null,
           "description": "Le Little Films Festival est de retour pour une huitième édition. Profitez de films jeune public pendant tout l'été !"
-        },
-        {
-          "cinema": "Lumière Fourmi",
-          "date": "2026-08-05",
-          "heure": "14:30",
-          "titre_film": "Un petit air de famille",
-          "invite": null,
-          "description": null
-        },
-        {
-          "cinema": "Lumière Fourmi",
-          "date": "2026-08-06",
-          "heure": "14:30",
-          "titre_film": "Un petit air de famille",
-          "invite": null,
-          "description": null
         },
         {
           "cinema": "Lumière Fourmi",
@@ -2711,183 +2227,6 @@
       ]
     },
     {
-      "cle": "festival|rétrospective intégrale jacques tati|2026-08",
-      "type": "festival",
-      "forme": "retrospective",
-      "titre": "Rétrospective intégrale Jacques Tati",
-      "description": "Cet été, six films pour retrouver l'œuvre intemporelle du génie de la comédie et du burlesque dans de somptueuses versions restaurées !",
-      "date_debut": "2026-07-15",
-      "date_fin": "2026-08-11",
-      "precision": "en_cours",
-      "affiche_url": "https://www.cinemas-lumiere.com/media/affiche-tati.jpg",
-      "films": [
-        {
-          "titre": "Jour de fête",
-          "dates": [
-            "2026-08-06",
-            "2026-08-09",
-            "2026-08-10"
-          ],
-          "affiche": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/5ea124bbe6003dbd.jpg"
-        },
-        {
-          "titre": "Les Vacances de Monsieur Hulot",
-          "dates": [
-            "2026-08-07",
-            "2026-08-09"
-          ],
-          "affiche": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/bd1d7b5a97e73d3f.jpg"
-        },
-        {
-          "titre": "Mon Oncle",
-          "dates": [
-            "2026-08-05",
-            "2026-08-08",
-            "2026-08-11"
-          ],
-          "affiche": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/954896353e533ea1.jpg"
-        },
-        {
-          "titre": "Playtime",
-          "dates": [
-            "2026-08-06",
-            "2026-08-10"
-          ],
-          "affiche": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/cd3fcc582201c3c5.jpg"
-        },
-        {
-          "titre": "Trafic",
-          "dates": [
-            "2026-08-07"
-          ],
-          "affiche": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/de8c5c02fb26a6ef.jpg"
-        },
-        {
-          "titre": "Parade",
-          "dates": [
-            "2026-08-05",
-            "2026-08-08",
-            "2026-08-11"
-          ],
-          "affiche": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/87d0df5d80891c57.jpg"
-        }
-      ],
-      "creneaux": [
-        {
-          "cinema": "Lumière Fourmi",
-          "date": "2026-08-06",
-          "heure": "14:30",
-          "titre_film": "Jour de fête",
-          "invite": null,
-          "description": null
-        },
-        {
-          "cinema": "Lumière Fourmi",
-          "date": "2026-08-09",
-          "heure": "15:35",
-          "titre_film": "Jour de fête",
-          "invite": null,
-          "description": null
-        },
-        {
-          "cinema": "Lumière Fourmi",
-          "date": "2026-08-10",
-          "heure": "14:30",
-          "titre_film": "Jour de fête",
-          "invite": null,
-          "description": null
-        },
-        {
-          "cinema": "Lumière Fourmi",
-          "date": "2026-08-07",
-          "heure": "18:25",
-          "titre_film": "Les Vacances de Monsieur Hulot",
-          "invite": null,
-          "description": null
-        },
-        {
-          "cinema": "Lumière Fourmi",
-          "date": "2026-08-09",
-          "heure": "18:25",
-          "titre_film": "Les Vacances de Monsieur Hulot",
-          "invite": null,
-          "description": null
-        },
-        {
-          "cinema": "Lumière Fourmi",
-          "date": "2026-08-05",
-          "heure": "15:35",
-          "titre_film": "Mon oncle",
-          "invite": null,
-          "description": null
-        },
-        {
-          "cinema": "Lumière Fourmi",
-          "date": "2026-08-08",
-          "heure": "15:35",
-          "titre_film": "Mon oncle",
-          "invite": null,
-          "description": null
-        },
-        {
-          "cinema": "Lumière Fourmi",
-          "date": "2026-08-11",
-          "heure": "15:35",
-          "titre_film": "Mon oncle",
-          "invite": null,
-          "description": null
-        },
-        {
-          "cinema": "Lumière Fourmi",
-          "date": "2026-08-06",
-          "heure": "15:35",
-          "titre_film": "Playtime",
-          "invite": null,
-          "description": null
-        },
-        {
-          "cinema": "Lumière Fourmi",
-          "date": "2026-08-10",
-          "heure": "15:35",
-          "titre_film": "Playtime",
-          "invite": null,
-          "description": null
-        },
-        {
-          "cinema": "Lumière Fourmi",
-          "date": "2026-08-07",
-          "heure": "15:35",
-          "titre_film": "Trafic",
-          "invite": null,
-          "description": null
-        },
-        {
-          "cinema": "Lumière Fourmi",
-          "date": "2026-08-05",
-          "heure": "18:25",
-          "titre_film": "Parade",
-          "invite": null,
-          "description": null
-        },
-        {
-          "cinema": "Lumière Fourmi",
-          "date": "2026-08-08",
-          "heure": "14:30",
-          "titre_film": "Parade",
-          "invite": null,
-          "description": null
-        },
-        {
-          "cinema": "Lumière Fourmi",
-          "date": "2026-08-11",
-          "heure": "18:25",
-          "titre_film": "Parade",
-          "invite": null,
-          "description": null
-        }
-      ]
-    },
-    {
       "cle": "avant_premiere|ma t'août première avant-première|2026-08",
       "type": "avant_premiere",
       "forme": null,
@@ -2983,7 +2322,7 @@
       "forme": null,
       "titre": "Enamorada",
       "description": "Achat conseillé des places à l’avance, aux accueils ou en ligne",
-      "date_debut": "2026-08-05",
+      "date_debut": "2026-08-07",
       "date_fin": "2026-08-11",
       "precision": "en_cours",
       "affiche_url": "https://www.cinemas-lumiere.com/media/enamorada.jpeg",
@@ -2991,8 +2330,6 @@
         {
           "titre": "Enamorada",
           "dates": [
-            "2026-08-05",
-            "2026-08-06",
             "2026-08-07",
             "2026-08-08",
             "2026-08-09",
@@ -3003,22 +2340,6 @@
         }
       ],
       "creneaux": [
-        {
-          "cinema": "Lumière Fourmi",
-          "date": "2026-08-05",
-          "heure": "16:25",
-          "titre_film": "Enamorada",
-          "invite": null,
-          "description": null
-        },
-        {
-          "cinema": "Lumière Fourmi",
-          "date": "2026-08-06",
-          "heure": "16:05",
-          "titre_film": "Enamorada",
-          "invite": null,
-          "description": null
-        },
         {
           "cinema": "Lumière Fourmi",
           "date": "2026-08-07",
@@ -3067,7 +2388,7 @@
       "forme": null,
       "titre": "Lawrence d'Arabie",
       "description": "En 1916, le jeune officier britannique T. E. Lawrence est chargé d’enquêter sur les révoltes arabes contre l’occupant turc. Celui qu’on appellera plus tard «Lawrence d’Arabie» se range alors du côté des insurgés et, dans les dunes éternelles du désert, organise une guérilla. Personnage brillant mais controversé, il va mener des batailles aux côtés de ses alliés et changer la face d’un empire.",
-      "date_debut": "2026-08-05",
+      "date_debut": "2026-08-07",
       "date_fin": "2026-08-11",
       "precision": "en_cours",
       "affiche_url": "https://www.cinemas-lumiere.com/media/aff_lawrence-d-arabie.jpg",
@@ -3075,8 +2396,6 @@
         {
           "titre": "Lawrence d'Arabie",
           "dates": [
-            "2026-08-05",
-            "2026-08-06",
             "2026-08-07",
             "2026-08-08",
             "2026-08-09",
@@ -3087,22 +2406,6 @@
         }
       ],
       "creneaux": [
-        {
-          "cinema": "Lumière Terreaux",
-          "date": "2026-08-05",
-          "heure": "14:55",
-          "titre_film": "Lawrence d'Arabie",
-          "invite": null,
-          "description": null
-        },
-        {
-          "cinema": "Lumière Terreaux",
-          "date": "2026-08-06",
-          "heure": "14:55",
-          "titre_film": "Lawrence d'Arabie",
-          "invite": null,
-          "description": null
-        },
         {
           "cinema": "Lumière Terreaux",
           "date": "2026-08-07",
@@ -3151,7 +2454,7 @@
       "forme": null,
       "titre": "Le Bon, la Brute et le Truand",
       "description": "Dans une Guerre de Sécession qui ensanglante l’Amérique, trois bandits assurent leur pain quotidien au bout de leurs carabines. Cependant vient un jour où ils entrevoient la possibilité de s’emparer d’une énorme somme d’argent et n’hésitent pas à revêtir l’uniforme pour s’emparer du trésor convoité.",
-      "date_debut": "2026-08-05",
+      "date_debut": "2026-08-07",
       "date_fin": "2026-08-11",
       "precision": "en_cours",
       "affiche_url": "https://www.cinemas-lumiere.com/media/cinemas-lumiere/visuels-films/le-bon-la-brute-et-le-truand-affiche.jpg",
@@ -3159,8 +2462,6 @@
         {
           "titre": "Le Bon, la Brute et le Truand",
           "dates": [
-            "2026-08-05",
-            "2026-08-06",
             "2026-08-07",
             "2026-08-08",
             "2026-08-09",
@@ -3171,22 +2472,6 @@
         }
       ],
       "creneaux": [
-        {
-          "cinema": "Lumière Bellecour",
-          "date": "2026-08-05",
-          "heure": "15:30",
-          "titre_film": "Le Bon, la Brute et le Truand",
-          "invite": null,
-          "description": null
-        },
-        {
-          "cinema": "Lumière Bellecour",
-          "date": "2026-08-06",
-          "heure": "20:00",
-          "titre_film": "Le Bon, la Brute et le Truand",
-          "invite": null,
-          "description": null
-        },
         {
           "cinema": "Lumière Bellecour",
           "date": "2026-08-07",
@@ -3235,7 +2520,7 @@
       "forme": null,
       "titre": "Le Bon, la brute et le cinglé",
       "description": "Mandchourie, années 30. Deux hors la loi et un chasseur de primes sont à la recherche d’une carte au trésor. À travers les dangers d'une région en proie à de multiple conflits — l'armée japonaise, les bandits chinois et les gangsters coréens — ils réalisent que la vraie bataille se livrera entre eux. Un seul homme en sortira vainqueur.",
-      "date_debut": "2026-08-05",
+      "date_debut": "2026-08-07",
       "date_fin": "2026-08-11",
       "precision": "en_cours",
       "affiche_url": "https://www.cinemas-lumiere.com/media/le-bon-la-brute-et-le-cingle.jpeg",
@@ -3243,8 +2528,6 @@
         {
           "titre": "Le Bon, la brute et le cinglé",
           "dates": [
-            "2026-08-05",
-            "2026-08-06",
             "2026-08-07",
             "2026-08-08",
             "2026-08-09",
@@ -3255,22 +2538,6 @@
         }
       ],
       "creneaux": [
-        {
-          "cinema": "Lumière Fourmi",
-          "date": "2026-08-05",
-          "heure": "20:50",
-          "titre_film": "Le Bon, la brute et le cinglé",
-          "invite": null,
-          "description": null
-        },
-        {
-          "cinema": "Lumière Fourmi",
-          "date": "2026-08-06",
-          "heure": "18:00",
-          "titre_film": "Le Bon, la brute et le cinglé",
-          "invite": null,
-          "description": null
-        },
         {
           "cinema": "Lumière Fourmi",
           "date": "2026-08-07",
@@ -3308,6 +2575,147 @@
           "date": "2026-08-11",
           "heure": "20:50",
           "titre_film": "Le Bon, la brute et le cinglé",
+          "invite": null,
+          "description": null
+        }
+      ]
+    },
+    {
+      "cle": "festival|rétrospective intégrale jacques tati|2026-08",
+      "type": "festival",
+      "forme": "retrospective",
+      "titre": "Rétrospective intégrale Jacques Tati",
+      "description": null,
+      "date_debut": "2026-08-07",
+      "date_fin": "2026-08-11",
+      "precision": "en_cours",
+      "affiche_url": "https://www.cinemas-lumiere.com/media/affiche-tati.jpg",
+      "films": [
+        {
+          "titre": "Jour de fête",
+          "dates": [
+            "2026-08-09",
+            "2026-08-10"
+          ],
+          "affiche": null
+        },
+        {
+          "titre": "Les Vacances de Monsieur Hulot",
+          "dates": [
+            "2026-08-07",
+            "2026-08-09"
+          ],
+          "affiche": null
+        },
+        {
+          "titre": "Mon Oncle",
+          "dates": [
+            "2026-08-08",
+            "2026-08-11"
+          ],
+          "affiche": null
+        },
+        {
+          "titre": "Playtime",
+          "dates": [
+            "2026-08-10"
+          ],
+          "affiche": null
+        },
+        {
+          "titre": "Trafic",
+          "dates": [
+            "2026-08-07"
+          ],
+          "affiche": null
+        },
+        {
+          "titre": "Parade",
+          "dates": [
+            "2026-08-08",
+            "2026-08-11"
+          ],
+          "affiche": null
+        }
+      ],
+      "creneaux": [
+        {
+          "cinema": "Lumière Fourmi",
+          "date": "2026-08-09",
+          "heure": "15:35",
+          "titre_film": "Jour de fête",
+          "invite": null,
+          "description": null
+        },
+        {
+          "cinema": "Lumière Fourmi",
+          "date": "2026-08-10",
+          "heure": "14:30",
+          "titre_film": "Jour de fête",
+          "invite": null,
+          "description": null
+        },
+        {
+          "cinema": "Lumière Fourmi",
+          "date": "2026-08-07",
+          "heure": "18:25",
+          "titre_film": "Les Vacances de Monsieur Hulot",
+          "invite": null,
+          "description": null
+        },
+        {
+          "cinema": "Lumière Fourmi",
+          "date": "2026-08-09",
+          "heure": "18:25",
+          "titre_film": "Les Vacances de Monsieur Hulot",
+          "invite": null,
+          "description": null
+        },
+        {
+          "cinema": "Lumière Fourmi",
+          "date": "2026-08-08",
+          "heure": "15:35",
+          "titre_film": "Mon oncle",
+          "invite": null,
+          "description": null
+        },
+        {
+          "cinema": "Lumière Fourmi",
+          "date": "2026-08-11",
+          "heure": "15:35",
+          "titre_film": "Mon oncle",
+          "invite": null,
+          "description": null
+        },
+        {
+          "cinema": "Lumière Fourmi",
+          "date": "2026-08-10",
+          "heure": "15:35",
+          "titre_film": "Playtime",
+          "invite": null,
+          "description": null
+        },
+        {
+          "cinema": "Lumière Fourmi",
+          "date": "2026-08-07",
+          "heure": "15:35",
+          "titre_film": "Trafic",
+          "invite": null,
+          "description": null
+        },
+        {
+          "cinema": "Lumière Fourmi",
+          "date": "2026-08-08",
+          "heure": "14:30",
+          "titre_film": "Parade",
+          "invite": null,
+          "description": null
+        },
+        {
+          "cinema": "Lumière Fourmi",
+          "date": "2026-08-11",
+          "heure": "18:25",
+          "titre_film": "Parade",
           "invite": null,
           "description": null
         }
