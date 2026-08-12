@@ -20,6 +20,24 @@ Format inspiré de [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/).
 > la même PR. Un `fix:` de parsing/sélecteur/casse qui ne touche aucun de ces points ne
 > demande rien. Le CHANGELOG garde la *chronologie* ; l'architecture garde l'*état stable*.
 
+## 2026-08-12
+
+### Ajouté
+
+- **L'écran d'arrivée en production** (`src/intro.js`, `src/components.css`, `src/template.html`) : le prototype « la fenêtre » (`design/lab/arrivee.html`, PR #17) devient l'intro du site. Il annonce la semaine programmée, fait défiler trois nouveautés dans une fenêtre fixe (1,2 s de pose, 0,4 s de transition — 4,4 s en tout), puis **s'efface par le pli WebGL** de `cloth.js` en découvrant le site réel.
+  - **L'écran occupe le chargement au lieu de s'y ajouter.** Le module tourne en parallèle de `boot()` : quand le pli part, la liste des films est rendue depuis longtemps derrière. C'est le seul intérêt défendable d'un écran qui retient.
+  - **Le voile est écrit dans le HTML, pas créé en JS**, et la décision de jouer se prend en synchrone juste en dessous : le créer plus tard laisserait voir un éclair de squelettes.
+  - **Quatre raisons de se taire** : écran déjà vu dans la session, arrivée par lien profond *ciblé* (`#/seances` nu ne compte pas — c'est l'état que le site s'écrit à lui-même au boot), `prefers-reduced-motion`, `?intro=0`. `?intro=1` le force. Semaine sans nouveauté → l'écran se saute.
+  - **La durée est DÉRIVÉE de la séquence**, jamais réglée à part : sinon un changement de tempo laisse l'écran immobile sur la fin ou coupe une affiche. Moins de trois nouveautés → on en montre autant qu'il y en a, plutôt que de répéter une affiche (une transition entre deux images identiques n'est qu'un scintillement).
+  - **Filet à 2,6 s** : passé ce délai sans données, l'écran s'efface sans rien avoir montré. Une intro qui attend le réseau n'est plus une intro.
+  - **Le pli de sortie rasterise l'écran à la main** sur un contexte 2D (ni html2canvas ni `<foreignObject>`, qui ne sérialise pas les images distantes). Deux pièges tenus : le dégradé de la ligne de dates est **relu** sur `background-image` (un texte peint par `background-clip:text` a une couleur de remplissage transparente — recopiée telle quelle, la ligne s'effacerait au moment du pli), et chaque affiche est rechargée en mode anonyme (une image affichée sans `crossOrigin` teinte le canvas *même si* le serveur envoie les en-têtes).
+  - **Nouveautés de la semaine** : `src/intro.js` pagine `seances` sur deux colonnes pour dater la *première* séance de chaque film — le chargeur du site, filtré `date >= today`, ne peut pas le dire. Exception à I8 documentée dans [Frontend](docs/architecture/frontend.md).
+  - **Le flottement de la bande passe de `margin-left` à `translate`** : `transform` est déjà écrit par le JS, les deux longhands se composent, et on ne relance plus la mise en page à chacun des 7 crans.
+
+### Modifié
+
+- **`assets/texture-abstraite-claire-1` : PNG → WebP** — 2 130 Ko → 43 Ko (×50), RMSE 1,1/255 sur une texture lisse où le PNG n'avait rien à défendre. L'écart maximal est de 10/255. Le visuel était sur le chemin critique de la page d'accueil.
+
 ## 2026-07-31
 
 ### Ajouté

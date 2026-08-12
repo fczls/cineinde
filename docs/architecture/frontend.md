@@ -1,7 +1,7 @@
 # Architecture — Frontend (index.html)
 
 > Le front est **servi** comme un fichier autonome (`index.html`, ~126 Ko : markup + CSS + JS inline) — mais il est **généré** : depuis 2026-07-22 il est assemblé par `build_ui.py` à partir de `src/` (`template.html` + `components.css` + `tokens.css` généré depuis `design/tokens.json`). **Ne pas éditer `index.html` à la main** — éditer `src/`/`design/` puis `python3 build_ui.py`. Le runtime reste mono-fichier (bon pour GitHub Pages) ; seule la *source* est découpée. Rôle inchangé : chargement des données, dédup d'affichage, filtres, rendu semaine, deep-link réservation. Les invariants/contrats transverses vivent dans [Vue d'ensemble](README.md).
-> Dernière mise à jour : 2026-07-29
+> Dernière mise à jour : 2026-08-12
 
 ---
 
@@ -10,6 +10,12 @@
 1. **Lecture Supabase en direct** (`loadFromSupabase()`) : requête `seances` avec jointure `films (...)` et `cinemas (name)`, **filtrée `date >= today`** (index.html) — sinon l'historique (>5000 lignes) dépasse le plafond REST 1000 et tronque les séances récentes (invariant I8).
 2. **Fallback `programme.json`** si Supabase est indisponible / vide (invariant I3). Même forme de « film dict » (contrat C4). Le chargeur `loadFromJson` **strippe `resa_url`** à la frontière (I5) : le repli ne sert jamais de deep-link figé/périmé.
 3. Le front **n'écrit jamais** — RLS lecture seule (invariant I7).
+
+### L'écran d'arrivée : la seule lecture qui ignore `date >= today`
+
+`src/intro.js` (chargé en import dynamique par `index.html`) a besoin des **nouveautés de la semaine**, c'est-à-dire des films dont la *première séance jamais enregistrée* tombe entre le mercredi et le mardi courants. Le chargeur principal ne peut pas le dire : filtré `date >= today`, il ne voit rien de ce qui a commencé avant aujourd'hui. L'intro **pagine donc `seances` en entier**, mais sur **deux colonnes seulement** (`film_id,date,heure`) et par pages de 1 000 — ~1 500 lignes, 2 requêtes, ~300 ms. Elle ne contredit pas I8 : le plafond REST est franchi *par pagination explicite*, pas subi, et la requête est assez maigre pour que le volume ne pèse pas. Le jour où il pèsera, une fonction SQL `nouveautes()` rendra le même résultat en un appel.
+
+Le coût réseau ne s'ajoute pas au chargement : la requête part **en parallèle** de `boot()` et l'écran dure plus longtemps qu'elle. Filet : passé 2,6 s sans données, l'écran s'efface sans rien avoir montré.
 
 ### Re-split par cinéma (subtilité C2)
 Supabase **dédup** le film (une ligne `films` partagée entre salles). À la lecture, le front **regroupe par `${film.id}-${cinemaName}`** (`loadFromSupabase()`) → un film joué dans 2 salles redevient **2 entrées d'affichage**, chacune avec ses séances. Le champ `cinema` est donc reconstruit côté front à partir de la jointure `cinemas(name)`.

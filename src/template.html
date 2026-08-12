@@ -26,6 +26,44 @@
 </head>
 <body>
 
+<!-- ══ ÉCRAN D'ARRIVÉE ══════════════════════════════════════════════════════
+     Le voile est écrit dans le HTML, pas créé en JS : il doit être PEINT avant
+     tout le reste, sinon on voit un éclair de squelettes avant qu'il se pose.
+     La décision de jouer ou non se prend juste en dessous, en SYNCHRONE — un
+     script différé laisserait le même éclair, à l'envers.
+     Le remplissage et la séquence vivent dans `src/intro.js`, chargé en import
+     dynamique par le script principal (qui seul détient le client Supabase).
+     Poignées d'URL : `?intro=1` force l'écran, `?intro=0` le saute. -->
+<div class="intro-ecran" id="introEcran" aria-hidden="true"></div>
+<script>
+(function () {
+  var el = document.getElementById('introEcran');
+  var p = new URLSearchParams(location.search);
+  var force = p.get('intro') === '1';
+  var vue = false;
+  try { vue = sessionStorage.getItem('intro-vue') === '1'; } catch (_) {}
+  // Quatre raisons de ne pas jouer, toutes légitimes :
+  // — l'écran a déjà été vu dans cette session : il annonce la semaine une fois,
+  //   pas à chaque retour sur l'onglet ;
+  // — l'arrivée se fait par lien profond : on vient chercher une chose précise,
+  //   pas se faire présenter le programme. ⚠️ `#/seances` nu ne compte PAS :
+  //   c'est l'état par défaut que le site s'écrit à lui-même au boot, et une URL
+  //   copiée le porte presque toujours. Seuls un onglet autre, un filtre ou une
+  //   fiche ouverte (donc une query) marquent une vraie intention ;
+  // — mouvement réduit demandé — toute la séquence EST du mouvement, et la
+  //   dégrader en écran fixe reviendrait à faire patienter devant une image ;
+  // — `?intro=0`, pour la mise au point.
+  var cible = location.hash !== '' && location.hash !== '#/seances';
+  var refus = vue || cible
+           || matchMedia('(prefers-reduced-motion: reduce)').matches
+           || p.get('intro') === '0';
+  if (refus && !force) { el.remove(); return; }
+  try { sessionStorage.setItem('intro-vue', '1'); } catch (_) {}
+  document.documentElement.classList.add('intro-on');
+  window.__introArme = true;
+})();
+</script>
+
 <!-- Dégradés partagés du billet de réservation (composant liste) — définis une
      seule fois pour que tous les boutons y réfèrent sans dupliquer d'ID. -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
@@ -3542,6 +3580,23 @@ async function boot() {
     if (e.target.closest('#secEvents')) return;
     if (!e.target.closest('.film-card, .compact-row, .cw-film-label, .cw-times')) closeDetail();
   });
+}
+
+// L'écran d'arrivée, s'il a été armé par l'amorce en tête de <body>. Import
+// DYNAMIQUE : le module ne pèse sur personne quand l'écran ne joue pas, et un
+// échec de chargement ne doit surtout pas empêcher le site de démarrer.
+// Il tourne EN PARALLÈLE de `boot()` — c'est tout l'intérêt de l'écran : il
+// occupe le temps de chargement au lieu de s'y ajouter.
+if (window.__introArme) {
+  import('./src/intro.js')
+    .then(m => m.lancerIntro({
+      client: window.supabase, url: SUPABASE_URL, cle: SUPABASE_ANON_KEY,
+    }))
+    .catch(e => {
+      console.warn('[CinémasLyon] écran d\'arrivée non chargé —', e?.message || e);
+      document.documentElement.classList.remove('intro-on');
+      document.getElementById('introEcran')?.remove();
+    });
 }
 
 boot();
