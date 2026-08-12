@@ -1,0 +1,1343 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Labo — l'arrivée sur le site · CinéInde</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════════════════════════════
+   LABO — L'ARRIVÉE SUR LE SITE
+   Banc d'essai des trois partis pris d'écran d'accueil. Comme design/lab/cloth.html,
+   cette page N'EST PAS de la production : elle n'est pas lintée par check_tokens.py
+   (qui ne couvre que src/components.css) et les valeurs brutes y sont assumées.
+   Les couleurs sont néanmoins COPIÉES de design/tokens.json — un prototype qui
+   ne ressemble pas au site ne prouve rien.
+
+   Deux modes :
+   — sans paramètre  → le banc (onglets, bascule desktop/mobile, panneau données) ;
+   — ?solo=1|2|3     → le prototype seul, plein cadre, chargé dans une <iframe> par
+                       le banc. C'est l'iframe qui donne de VRAIES media queries et
+                       de VRAIES unités de viewport en 375 px de large — un simple
+                       conteneur redimensionné mentirait sur le rendu mobile.
+
+   Le shader vient de ../../src/cloth.js : exactement le module de production.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Police d'affichage du site (version d'essai — licence à acquérir avant prod) */
+@font-face{
+  font-family:'Riegraf';
+  src:url('../../assets/fonts/Riegraf-Bold.otf') format('opentype');
+  font-weight:normal;font-style:normal;font-display:swap;
+}
+
+:root{
+  /* ── Copié de design/tokens.json ── */
+  --bg:#000000; --bg2:#191817; --bg3:#201f1d; --bg4:#272523;
+  --border:rgba(255,255,255,.07); --border2:rgba(255,255,255,.13);
+  --gold:#c9a84c; --gold-dim:#7a6430; --gold-light:#CFBFAF;
+  --text:#f0ebe0; --text-2:#a09080; --text-3:#7a7060;
+  --radius-lg:12px; --radius-xl:16px; --radius-pill:999px;
+  --display:'Riegraf','Playfair Display',serif;
+  /* ── Propre au banc ── */
+  --banc-bg:#0c0b0b; --banc-trait:#2a2724; --banc-accent:#7c5cff;
+}
+
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{height:100%;}
+body{
+  background:var(--bg);color:var(--text);
+  font-family:'DM Sans',system-ui,sans-serif;font-size:14px;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   LE BANC
+   ═══════════════════════════════════════════════════════════════════════════ */
+body.banc{background:var(--banc-bg);display:flex;flex-direction:column;overflow:hidden;}
+
+/* Les commandes du banc sont dimensionnées ×1,75 : on les manipule en regardant
+   le prototype, pas la barre — mieux vaut des cibles franches. */
+.banc-tete{
+  flex:0 0 auto;display:flex;align-items:center;gap:34px;flex-wrap:wrap;
+  padding:24px 38px;border-bottom:1px solid var(--banc-trait);background:#0f0e0d;
+}
+.banc-titre{
+  font-family:'DM Mono',monospace;font-size:14px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--text-3);white-space:nowrap;
+}
+.seg{display:flex;gap:4px;background:#191817;border:1px solid var(--banc-trait);
+  border-radius:var(--radius-pill);padding:6px;}
+.seg button{
+  appearance:none;border:0;background:transparent;color:var(--text-2);
+  font:inherit;font-size:14px;letter-spacing:.04em;padding:12px 24px;
+  border-radius:var(--radius-pill);cursor:pointer;white-space:nowrap;
+  transition:background .15s,color .15s;
+}
+.seg button:hover{color:var(--text);}
+.seg button.on{background:var(--bg4);color:var(--gold);box-shadow:inset 0 0 0 1px var(--gold-dim);}
+.b{
+  appearance:none;border:1px solid var(--banc-trait);background:#191817;color:var(--text-2);
+  font:inherit;font-size:14px;padding:14px 24px;border-radius:var(--radius-pill);cursor:pointer;
+  transition:background .15s,color .15s;
+}
+.b:hover{background:var(--bg4);color:var(--text);}
+.bascule{display:flex;align-items:center;gap:12px;font-size:14px;color:var(--text-2);cursor:pointer;user-select:none;}
+.bascule input{accent-color:var(--banc-accent);cursor:pointer;width:24px;height:24px;}
+
+.banc-corps{flex:1 1 auto;display:flex;min-height:0;}
+
+.scene{
+  flex:1 1 auto;display:flex;align-items:center;justify-content:center;
+  padding:26px;min-width:0;position:relative;
+  background:radial-gradient(120% 90% at 50% 20%, #141211 0%, var(--banc-bg) 70%);
+}
+.cadre{
+  position:relative;background:#000;border-radius:10px;overflow:hidden;
+  box-shadow:0 30px 90px rgba(0,0,0,.7), 0 0 0 1px var(--banc-trait);
+  transform-origin:center center;
+}
+.cadre iframe{display:block;border:0;width:100%;height:100%;}
+.cadre-note{
+  position:absolute;left:0;right:0;bottom:-30px;text-align:center;
+  font-family:'DM Mono',monospace;font-size:14px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--text-3);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   SOCLE COMMUN AUX TROIS PROTOTYPES (mode solo)
+   ═══════════════════════════════════════════════════════════════════════════ */
+body.solo{overflow:hidden;background:var(--bg);}
+#solo{position:relative;width:100%;height:100%;overflow:hidden;}
+
+/* ── Le site derrière : décor de fond, pas l'objet du test ─────────────────
+   Juste assez fidèle (barre de pastilles dorée, grille d'affiches, Riegraf)
+   pour juger ce que l'arrivée révèle — le vrai front n'est pas embarqué. */
+.site{position:absolute;inset:0;overflow-y:auto;background:var(--bg);}
+.site-nav{
+  position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:10px;
+  padding:12px 18px;background:linear-gradient(var(--bg) 70%,transparent);
+}
+.site-logo{font-family:var(--display);font-size:19px;letter-spacing:.01em;color:var(--text);flex:0 0 auto;}
+.pastilles{display:flex;gap:8px;overflow:hidden;flex:1 1 auto;}
+.pastille{
+  padding:9px 16px;border-radius:var(--radius-pill);border:1px solid var(--border);
+  background:var(--bg2);color:var(--text-2);font-size:11px;letter-spacing:.08em;
+  text-transform:uppercase;white-space:nowrap;
+}
+.pastille.on{background:var(--gold);color:#1a1508;border-color:var(--gold);font-weight:500;}
+.grille{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(148px,1fr));
+  gap:22px 18px;padding:18px;
+}
+.grille .fc img{
+  width:100%;aspect-ratio:2/3;object-fit:cover;border-radius:var(--radius-lg);
+  background:var(--bg3);display:block;
+}
+.grille .fc b{display:block;font-family:var(--display);font-size:15px;font-weight:400;
+  margin-top:9px;line-height:1.25;}
+.grille .fc span{display:block;font-size:11px;color:var(--text-3);margin-top:3px;}
+
+/* ── Une affiche pliable ──────────────────────────────────────────────────
+   Le canvas déborde le cadre (le pli sort de l'emprise), l'<img> reste en
+   place pour donner le gabarit — la retirer déplacerait la composition. */
+.aff{position:relative;line-height:0;border-radius:var(--radius-lg);}
+.aff>img{
+  display:block;width:100%;height:100%;object-fit:cover;object-position:center top;
+  border-radius:inherit;background:var(--bg3);
+}
+.aff>canvas{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);pointer-events:none;}
+.aff.plie{overflow:visible;}
+.aff.plie>img{visibility:hidden;}
+
+/* ── Vignette : une affiche posée dans une composition ──────────────────── */
+.vign{position:absolute;z-index:2;cursor:pointer;transition:filter .3s,opacity .3s;}
+.vign .aff{border-radius:var(--radius-lg);box-shadow:0 24px 60px rgba(0,0,0,.6);}
+.vign:hover{filter:brightness(1.12);}
+.vign .lgd{
+  position:absolute;left:50%;top:calc(100% + 13px);transform:translateX(-50%);
+  width:118%;text-align:center;line-height:1.3;
+  opacity:0;transition:opacity .45s;pointer-events:none;
+}
+.vign.pose .lgd{opacity:1;}
+/* Titre et date sur deux lignes : en flux inline elles se collent, et la
+   légende devient une bouillie sous l'affiche. */
+.lgd b{display:block;font-family:var(--display);font-size:14px;font-weight:400;color:var(--text);}
+.lgd span{display:block;font-family:'DM Mono',monospace;font-size:10px;
+  letter-spacing:.08em;color:var(--gold);margin-top:4px;}
+/* Le fondu, chemin de repli quand l'affiche n'est pas texturable. */
+.vign.fondu .aff{animation:vign-fondu .8s cubic-bezier(.33,0,.2,1) forwards;}
+@keyframes vign-fondu{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:none;}}
+
+/* ── Voile de sortie commun ─────────────────────────────────────────────── */
+.rideau{
+  position:absolute;inset:0;z-index:10;
+  background:radial-gradient(120% 80% at 50% 42%, #16130e 0%, #000 62%);
+  transition:opacity .62s cubic-bezier(.4,0,.2,1), transform .62s cubic-bezier(.4,0,.2,1);
+}
+.rideau.parti{opacity:0;transform:translateY(-3.5%) scale(1.03);pointer-events:none;}
+
+.echap{
+  position:absolute;left:50%;bottom:22px;transform:translateX(-50%);
+  font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--text-3);z-index:12;
+  opacity:0;transition:opacity .5s;pointer-events:none;
+}
+.echap.vu{opacity:1;}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ① LA FENÊTRE — les affiches défilent dans un cadre, comme dans un couloir
+   ═══════════════════════════════════════════════════════════════════════════
+   Les deux formats partagent désormais LA MÊME mécanique : une bande verticale
+   dans une fenêtre fixe. Seule la fenêtre change — plein cadre en mobile,
+   moitié droite arrondie en desktop. C'est ce retour à un cadre fixe qui rend
+   le mode « tissu » de nouveau jouable en desktop : le shader a besoin d'un
+   rectangle qui ne bouge pas, la frise horizontale n'en était pas un.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Le fond desktop ──────────────────────────────────────────────────────
+   Moitié gauche, pleine hauteur. Rien d'autre : pas de rotation, pas de
+   décalage, pas de voile par-dessus. `cover` recadre au centre. */
+.fn-fond{position:absolute;left:0;top:0;bottom:0;width:50%;z-index:0;
+  overflow:hidden;background:#0B0B0B;}
+.fn-fond img{
+  width:100%;height:100%;
+  object-fit:cover;object-position:50% 50%;display:block;
+}
+
+/* ── La colonne de gauche ───────────────────────────────────────────────── */
+.fn-logo{position:absolute;left:6.5%;top:12%;width:176px;z-index:3;
+  opacity:0;animation:fn-entre .8s ease .1s forwards;}
+/* Le dégradé traverse les DEUX lignes d'un seul tenant : la boîte du dégradé
+   est l'élément entier, pas chaque fragment. `color` reste déclarée en repli —
+   elle ressort telle quelle si `background-clip:text` n'est pas géré, et c'est
+   aussi elle que lit la capture du pli de sortie. */
+.fn-ligne{
+  position:absolute;left:21.7%;top:45%;z-index:3;
+  font-size:17px;letter-spacing:.055em;text-transform:uppercase;line-height:1.75;
+  color:var(--text-2);opacity:0;animation:fn-entre .8s ease .25s forwards;
+  background:linear-gradient(98deg, #EBE0C1 5.02%, #A09080 56.45%);
+  background-clip:text;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+/* `-webkit-text-fill-color` s'hérite et l'emporte sur `color` : le gras ne se
+   distingue donc plus par la couleur, seulement par la graisse. */
+.fn-ligne b{font-weight:500;color:var(--text);}
+.fn-bas{
+  position:absolute;left:15.2%;top:66%;z-index:3;
+  display:flex;align-items:center;gap:46px;
+  opacity:0;animation:fn-entre .8s ease .4s forwards;
+}
+.fn-nb{font-size:15px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);
+  white-space:nowrap;}
+.fn-nb b{font-weight:400;color:var(--text-2);}
+
+/* ── Le filet : temps restant avant que l'intro se retire ────────────────
+   Il ne mesure pas un chargement — les données sont là depuis longtemps — il
+   mesure ce qu'il reste à regarder. C'est la contrepartie honnête d'un écran
+   qui retient : on montre toujours la sortie. */
+.fn-filet{position:relative;width:120px;height:1px;background:var(--border2);overflow:hidden;}
+.fn-filet i{display:block;height:100%;width:0;background:var(--gold-light);}
+
+/* ── La fenêtre desktop : moitié droite, marges de 16 px, rayon 40 px ───── */
+.fn-cadre{
+  position:absolute;right:16px;top:16px;bottom:16px;width:calc(50% - 16px);
+  z-index:2;overflow:hidden;border-radius:40px;background:var(--bg2);
+}
+
+/* ── La bande, commune aux deux formats ─────────────────────────────────── */
+.fn-bobine{
+  position:absolute;left:0;top:0;
+  display:flex;flex-direction:column;gap:var(--interimage,16px);
+  will-change:transform;
+}
+/* Chaque photogramme porte son propre rayon : au passage de l'interimage on
+   voit deux cartes arrondies séparées par le noir, et non une bande continue
+   découpée par le cadre. */
+.fn-photo{position:relative;flex:0 0 100%;overflow:hidden;border-radius:40px;}
+.fn-photo img{width:100%;height:100%;object-fit:cover;display:block;}
+
+/* Battement d'obturateur — la lampe ne délivre pas la même lumière d'un
+   photogramme à l'autre quand l'entraînement n'est plus synchrone. */
+.fn-lampe{position:absolute;inset:0;z-index:3;background:#000;opacity:0;pointer-events:none;}
+.saccade .fn-lampe{animation:fn-battement var(--t-saccade) steps(7,end);}
+@keyframes fn-battement{
+  0%{opacity:0;} 14%{opacity:.55;} 28%{opacity:.05;} 42%{opacity:.42;}
+  57%{opacity:.02;} 71%{opacity:.3;} 85%{opacity:0;} 100%{opacity:0;}
+}
+/* Flottement dans le couloir : le film n'est jamais parfaitement calé. */
+.saccade .fn-bobine{animation:fn-flottement var(--t-saccade) steps(7,end);}
+@keyframes fn-flottement{
+  0%,100%{margin-left:0;} 20%{margin-left:-2px;} 45%{margin-left:3px;}
+  70%{margin-left:-1px;} 90%{margin-left:2px;}
+}
+
+/* ── Régime « vibration » ────────────────────────────────────────────────
+   Les photogrammes ne défilent plus : ils sont EMPILÉS au même endroit et
+   c'est l'opacité qui passe de l'un à l'autre, d'un coup, pendant que les deux
+   tremblent ensemble. Le tremblement est le même que le flottement ci-dessus —
+   même amplitudes, même découpage en 7 crans — mais porté par `transform`, le
+   seul canal qui ne relance pas la mise en page à chaque cran. */
+.vib .fn-bobine{animation:none;transform:none !important;}
+.vib .fn-photo{position:absolute;inset:0;opacity:0;}
+.vib .fn-photo.on{opacity:1;}
+.vib .fn-photo.tremble{animation:fn-tremblement var(--t-saccade) steps(7,end);}
+@keyframes fn-tremblement{
+  0%,100%{transform:translateX(0);} 20%{transform:translateX(-2px);}
+  45%{transform:translateX(3px);} 70%{transform:translateX(-1px);}
+  90%{transform:translateX(2px);}
+}
+
+@keyframes fn-entre{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:none;}}
+
+/* ── Mode « tissu » : le canvas occupe la fenêtre ───────────────────────── */
+.fn-cadre canvas, .fn-slot canvas{
+  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  z-index:2;pointer-events:none;
+}
+.plie .fn-bobine{visibility:hidden;}
+
+/* ── Mobile : la fenêtre est l'écran entier ─────────────────────────────── */
+/* ⚠️ `right:auto` ici mettait la fenêtre à 0 de large : en absolu sans droite
+   ni largeur, la boîte se réduit à son contenu — et son contenu est la bobine,
+   elle-même en absolu. Chacun attendait la largeur de l'autre. */
+.fn-slot{position:absolute;inset:0;z-index:1;overflow:hidden;background:var(--bg2);}
+/* ⚠️ Voile fixe, affiches à luminance très variable : réglé sur la plus CLAIRE
+   (« Un Petit Air de Famille », ciel plein cadre), pas sur la moyenne — sinon
+   le texte devient illisible une semaine sur trois. */
+.fn-voile{position:absolute;inset:0;z-index:2;background:rgba(0,0,0,.82);pointer-events:none;}
+.fn-txt{position:absolute;inset:0;z-index:3;}
+@media(max-width:520px){
+  .fn-logo{left:26px;top:21%;width:150px;}
+  .fn-ligne{left:auto;right:26px;top:52%;text-align:right;font-size:15px;}
+  .fn-bas{left:29%;top:72%;display:block;}
+  .fn-nb{font-size:14px;}
+  /* L'affiche EST l'écran en mobile : un rayon de 40 px y poserait des coins
+     noirs contre les bords de l'appareil. À dire si tu le veux quand même. */
+  .fn-photo{border-radius:0;}
+  /* Le filet se cale en pied d'écran. Il est SORTI du bloc « n sorties » côté
+     markup : dedans, ses 52 % se calculaient sur la largeur du libellé (85 px)
+     et non sur celle du cadre. */
+  .fn-filet{position:absolute;left:50%;bottom:7%;transform:translateX(-50%);width:52%;}
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ② LE RIDEAU
+   ═══════════════════════════════════════════════════════════════════════════ */
+.rd-scene{position:absolute;inset:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:clamp(18px,4vh,44px);z-index:3;}
+.rd-typo{text-align:center;will-change:transform,opacity;}
+.rd-chiffres{
+  font-family:var(--display);font-weight:400;line-height:.92;
+  font-size:clamp(64px,13vw,168px);color:var(--text);letter-spacing:-.02em;
+  display:flex;align-items:center;justify-content:center;gap:.18em;
+}
+.rd-chiffres span{color:var(--gold-dim);font-size:.42em;}
+.rd-mois{
+  font-family:'DM Mono',monospace;font-size:clamp(11px,1.5vw,14px);
+  letter-spacing:.42em;text-transform:uppercase;color:var(--text-2);margin-top:16px;
+}
+.rd-nb{margin-top:14px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);}
+
+.rd-bande{
+  position:relative;width:100%;height:clamp(160px,26vh,260px);
+  display:flex;align-items:center;justify-content:center;
+  will-change:transform;
+}
+.rd-piste{display:flex;align-items:center;gap:clamp(14px,2vw,30px);will-change:transform;}
+.rd-piste .vign{position:relative;flex:0 0 auto;}
+/* Sur mobile la bande est une matière, pas une liste : quatre légendes côte à
+   côte se chevauchent et se replient sur trois lignes chacune. */
+@media(max-width:520px){ .rd-piste .lgd{display:none;} }
+
+.rd-tirette{
+  position:absolute;left:50%;bottom:clamp(18px,4vh,40px);transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:9px;z-index:4;
+  font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.24em;
+  text-transform:uppercase;color:var(--text-3);
+  opacity:0;transition:opacity .6s;pointer-events:none;
+}
+.rd-tirette.vu{opacity:1;}
+.rd-tirette svg{animation:rd-flotte 1.9s ease-in-out infinite;}
+@keyframes rd-flotte{0%,100%{transform:translateY(0);opacity:.5;}50%{transform:translateY(-6px);opacity:1;}}
+.rd-jauge{
+  position:absolute;left:0;right:0;bottom:0;height:2px;background:rgba(255,255,255,.06);z-index:5;
+}
+.rd-jauge i{display:block;height:100%;width:0;background:var(--gold);transition:width .08s linear;}
+
+</style>
+</head>
+<body>
+
+<div id="racine"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script type="module">
+import { creerCloth, CLOTH_DEFAUTS, bezier } from '../../src/cloth.js';
+
+// ═══════════════════════════════════════════════════════════════════════════
+// CONFIG — clés publiques, identiques à celles du front (anon = lecture seule).
+// ═══════════════════════════════════════════════════════════════════════════
+const SB_URL = 'https://aaquwublsnfvpklxwxzz.supabase.co';
+const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFhcXV3dWJsc25mdnBrbHh3eHp6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMwMjcwNDEsImV4cCI6MjA4ODYwMzA0MX0.PPb9-tnEapTnEZ7Ayv--Qk7KDyKPhW5UL6E6_u1qXI8';
+
+const params  = new URLSearchParams(location.search);
+const SOLO    = params.get('solo');                 // '1' | '2' | '3' | null
+const REDUIT  = params.get('rm') === '1';           // simule prefers-reduced-motion
+// Le banc peut suspendre la sortie automatique : on regarde une composition
+// pendant qu'elle est à l'écran, ce qui est impossible si elle dure 4 s.
+const TENIR   = params.get('hold') === '1';
+const VOLUME  = +params.get('n') || 0;              // 0 = le compte réel
+// Le mode « tissu » reste atteignable par l'URL (`&mode=tissu`) — il n'a plus
+// de bascule dans le banc, la saccade étant le parti retenu.
+const MODE    = params.get('mode') || 'saccade';    // 'tissu' | 'saccade'
+// Deux façons de passer d'une affiche à l'autre, à comparer depuis le banc :
+//   'defilement' — la bande coulisse, un photogramme chasse l'autre ;
+//   'vibration'  — les deux affiches tremblent sur place et l'opacité bascule.
+const TRANS   = params.get('tr') === 'vibration' ? 'vibration' : 'defilement';
+const MOBILE  = matchMedia('(max-width:520px)').matches;
+
+// ═══════════════════════════════════════════════════════════════════════════
+// LE PRESET DE PLI DE L'ARRIVÉE
+// Part du réglage de production (TISSU_PRESET, src/template.html) et l'ouvre :
+// l'affiche est ici plus grande et seule à l'écran, elle supporte un pli plus
+// profond et plus lent que dans l'éventail, où cinq cartes se chevauchent.
+// À l'intégration, ce bloc se copie dans design/cloth-preset.json.
+// ═══════════════════════════════════════════════════════════════════════════
+const PRESET_ARRIVEE = {
+  duree: 2600, retard: 0, ampliRebond: 0,
+  angle: -90, nbPlis: 1.5, amplitude: 0.34, arete: 0,
+  desordre: 0.16, derive: 0.28, nbRides: 2.4, amplitudeRides: 0.26,
+  retrait: 1, balayage: 1.2, traineBord: 0.6,
+  chute: 0.08, approche: 0.06, profondeurZ: 0,
+  perspective: 0.32, rotation: 6, debordement: 1.28,
+  lumiereX: -0.45, lumiereY: 0.7, ombre: 0.3, eclat: 0.18, translucide: 0.22,
+  iriIntensite: 0.46, iriFresnel: 2.6, iriEchelle: 1.35,
+  iriDecalage: 0.1, iriVitesse: 0.25, iriRepos: 0.03,
+  grain: 0.03, voile: 0.9, opacite: 1, subdivisions: 64,
+};
+const COURBE_ARRIVEE = [0.291, 0.2388, 0.2864, 0.9742];   // idem production
+const DECALAGE       = 150;   // ms entre deux affiches d'une même cascade
+// Plafond de contextes WebGL. Mesuré au labo : 12 affiches en réclament 12, et
+// Chrome desktop en a concédé 11 — au-dessus du budget sûr. Les navigateurs
+// mobiles plafonnent bien plus bas (~8), et un contexte perdu se repeint VIDE.
+// Au-delà de ce seuil, les affiches en trop arrivent en fondu : personne ne
+// remarque qu'une septième vignette ne s'est pas dépliée, tout le monde
+// remarque un trou blanc.
+const PLAFOND_PLI    = 6;
+
+// ═══════════════════════════════════════════════════════════════════════════
+// DONNÉES — « nouveauté » = première séance JAMAIS enregistrée par le système,
+// tombant dans la semaine courante (mer→mar).
+//
+// ⚠️ Le front de production ne peut PAS calculer ça : il ne charge que
+// `date >= today` (invariant I8). Le labo se le permet en paginant toute la
+// table `seances` — 1 497 lignes, 2 requêtes, ~300 ms mesurés. Viable
+// aujourd'hui, mais ça grossit : en prod, une fonction SQL `nouveautes()`
+// rend le même résultat en un appel et sans plafond.
+// ═══════════════════════════════════════════════════════════════════════════
+const iso = d => `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+
+function bornesSemaine(ref = new Date()) {
+  const d = new Date(ref); d.setHours(0,0,0,0);
+  const dow = d.getDay();                       // 0 = dimanche, 3 = mercredi
+  const debut = new Date(d); debut.setDate(d.getDate() - (dow >= 3 ? dow - 3 : dow + 4));
+  const fin = new Date(debut); fin.setDate(debut.getDate() + 6);
+  return { debut, fin };
+}
+
+const normaliser = t => (t || '').toLowerCase()
+  .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+  .replace(/[^a-z0-9]+/g, ' ').trim();
+
+// Une affiche n'est texturable que si son origine sert `Access-Control-Allow-Origin`.
+// Les affiches rapatriées dans Supabase Storage (70 sur 76 aujourd'hui) et celles
+// de TMDB le font ; `cinemas-lumiere.com` non — d'où le repli en fondu.
+const texturable = url => /supabase\.co\/storage|image\.tmdb\.org/.test(url || '');
+
+async function charger() {
+  const cache = sessionStorage.getItem('labo-arrivee');
+  if (cache) {
+    const c = JSON.parse(cache);
+    if (c.jour === iso(new Date())) return c.data;
+  }
+
+  const sb = window.supabase.createClient(SB_URL, SB_KEY);
+
+  // Toute la table, par pages de 1 000 (plafond REST). Deux colonnes seulement.
+  let seances = [], from = 0;
+  for (;;) {
+    const { data, error } = await sb.from('seances')
+      .select('film_id,date,heure,cinema_id').order('date').range(from, from + 999);
+    if (error) throw error;
+    seances = seances.concat(data);
+    if (data.length < 1000) break;
+    from += 1000;
+  }
+  const [{ data: films }, { data: salles }] = await Promise.all([
+    sb.from('films').select('id,titre,annee,realisateur,poster').limit(1000),
+    sb.from('cinemas').select('id,name'),
+  ]);
+  const nomSalle = Object.fromEntries(salles.map(c => [c.id, c.name]));
+
+  // Première séance jamais vue, par film.
+  const premiere = {};
+  for (const s of seances) {
+    const p = premiere[s.film_id];
+    if (!p || s.date < p.date || (s.date === p.date && s.heure < p.heure)) {
+      premiere[s.film_id] = { date: s.date, heure: s.heure, salle: nomSalle[s.cinema_id] };
+    }
+  }
+
+  const { debut, fin } = bornesSemaine();
+  const d0 = iso(debut), d1 = iso(fin);
+
+  const vus = new Set();
+  const nouveautes = films
+    .map(f => ({ ...f, premiere: premiere[f.id] }))
+    .filter(f => f.premiere && f.premiere.date >= d0 && f.premiere.date <= d1)
+    // Doublons de la table `films` (variantes de casse) — le front a `dedupeFilms`,
+    // le labo se contente de la clé de titre normalisé.
+    .filter(f => { const k = normaliser(f.titre); if (vus.has(k)) return false; vus.add(k); return true; })
+    .sort((a, b) => (a.premiere.date + a.premiere.heure).localeCompare(b.premiere.date + b.premiere.heure));
+
+  // Décor de fond : des films à l'affiche, affiche disponible.
+  const catalogue = films.filter(f => f.poster && premiere[f.id]).slice(0, 18);
+
+  const data = { debut: d0, fin: d1, nouveautes, catalogue };
+  sessionStorage.setItem('labo-arrivee', JSON.stringify({ jour: iso(new Date()), data }));
+  return data;
+}
+
+// ── Simulateur de volume ───────────────────────────────────────────────────
+// Le nombre de nouveautés varie d'une semaine à l'autre, et la base ne garde
+// que 10 jours d'historique : impossible de l'observer sur plusieurs mois.
+// On force donc le compte pour éprouver les extrêmes — une seule nouveauté
+// (la constellation à cinq n'a plus de sens) comme une semaine de festival.
+function forcerVolume(data, n) {
+  if (!n) return data;
+  const source = data.nouveautes.length ? data.nouveautes : data.catalogue;
+  const liste = [];
+  for (let i = 0; i < n; i++) {
+    const f = source[i % source.length];
+    liste.push(i < source.length ? f : { ...f, titre: f.titre + ' (' + (1 + (i / source.length | 0)) + ')' });
+  }
+  return { ...data, nouveautes: liste };
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// PLOMBERIE DU PLI — un montage par affiche, calqué sur evTissuApparition()
+// ═══════════════════════════════════════════════════════════════════════════
+const webglOk = (() => {
+  if (REDUIT || matchMedia('(prefers-reduced-motion: reduce)').matches) return false;
+  try { return !!document.createElement('canvas').getContext('webgl2'); } catch { return false; }
+})();
+
+let vivants = [];   // { carte, canvas, cloth }
+
+function lacher(t) {
+  t.carte.classList.remove('plie');
+  t.canvas.remove();
+  t.cloth.detruire();               // ⚠️ après le retrait : un contexte perdu peint du vide
+}
+function toutLacher() { vivants.forEach(lacher); vivants = []; }
+
+/**
+ * Monte le pli sur des cartes `.aff` déjà dimensionnées.
+ * Renvoie les cartes prises en charge — les autres arrivent en fondu.
+ */
+async function monterPli(cartes, { retardBase = 0, decalage = DECALAGE, figerA = null } = {}) {
+  if (!webglOk) return [];
+  const base = { ...CLOTH_DEFAUTS, ...PRESET_ARRIVEE };
+  const k = base.debordement;
+  const montages = [];
+
+  cartes.slice(0, PLAFOND_PLI).forEach((carte, i) => {
+    const img = carte.querySelector('img');
+    if (!img || !img.naturalWidth) return;
+    const cs = getComputedStyle(img);
+    const l = parseFloat(cs.width), h = parseFloat(cs.height);
+    if (!l || !h) return;
+
+    const canvas = document.createElement('canvas');
+    canvas.setAttribute('aria-hidden', 'true');
+    canvas.style.width  = Math.round(l * k) + 'px';
+    canvas.style.height = Math.round(h * k) + 'px';
+    carte.appendChild(canvas);
+
+    // Ratio et rayon LUS sur la carte rendue : les gabarits diffèrent d'une
+    // position à l'autre, les figer ferait diverger le pli et le cadre.
+    const rayonPx = parseFloat(getComputedStyle(carte).borderTopLeftRadius) || 0;
+    const cloth = creerCloth(canvas, {
+      ...base,
+      ratioCadre: l / h,
+      rayon: rayonPx / Math.min(l, h),
+      retard: retardBase + i * decalage,
+    });
+    if (!cloth) { canvas.remove(); return; }     // plafond de contextes atteint
+    montages.push({ carte, canvas, cloth, src: img.currentSrc || img.src });
+  });
+
+  // Textures en parallèle : les enchaîner additionnerait les latences.
+  const ok = await Promise.all(montages.map(m => m.cloth.charger(m.src).then(() => true, () => false)));
+
+  const prises = [];
+  montages.forEach((m, i) => {
+    if (!ok[i]) { m.cloth.detruire(); m.canvas.remove(); return; }  // pas de CORS : repli muet
+    vivants.push(m);
+    prises.push(m.carte);
+    m.carte.classList.add('plie');
+  });
+
+  if (figerA !== null) {
+    vivants.forEach(t => t.cloth.figer(figerA));    // mode scrub : c'est le geste qui joue
+  } else {
+    vivants.forEach(t => t.cloth.jouer(COURBE_ARRIVEE, () => {
+      t.carte.parentElement?.classList.add('pose');
+      lacher(t);
+      vivants = vivants.filter(x => x !== t);
+    }));
+  }
+  return prises;
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// FABRIQUES DE MARKUP
+// ═══════════════════════════════════════════════════════════════════════════
+const AFFICHE_REPLI = '../../assets/visual-fallback.webp';
+const jourCourt = d => new Date(d + 'T12:00:00')
+  .toLocaleDateString('fr-FR', { weekday: 'short', day: 'numeric' });
+const jourLong = d => new Date(d + 'T12:00:00')
+  .toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' });
+
+function carteAffiche(f, largeur) {
+  const el = document.createElement('div');
+  el.className = 'vign';
+  el.innerHTML = `
+    <div class="aff" style="width:${largeur}px;height:${Math.round(largeur * 1.47)}px">
+      <img alt="" />
+    </div>
+    <div class="lgd"><b>${f.titre}</b><span>${f.premiere ? jourCourt(f.premiere.date) + ' · ' + (f.premiere.salle || '') : ''}</span></div>`;
+  const img = el.querySelector('img');
+  img.onerror = () => { img.onerror = null; img.src = AFFICHE_REPLI; };
+  img.src = f.poster || AFFICHE_REPLI;
+  return el;
+}
+
+function siteDeFond(data) {
+  const el = document.createElement('div');
+  el.className = 'site';
+  el.innerHTML = `
+    <div class="site-nav">
+      <div class="site-logo">CinéIndé</div>
+      <div class="pastilles">
+        <div class="pastille on">Les 5 cinémas</div>
+        <div class="pastille">Le Comoedia</div>
+        <div class="pastille">Lumière Terreaux</div>
+        <div class="pastille">Lumière Bellecour</div>
+      </div>
+    </div>
+    <div class="grille"></div>`;
+  const g = el.querySelector('.grille');
+  data.catalogue.forEach(f => {
+    const c = document.createElement('div');
+    c.className = 'fc';
+    c.innerHTML = `<img alt="" loading="lazy"><b>${f.titre}</b><span>${f.realisateur || ''}</span>`;
+    const img = c.querySelector('img');
+    img.onerror = () => { img.onerror = null; img.src = AFFICHE_REPLI; };
+    img.src = f.poster || AFFICHE_REPLI;
+    g.appendChild(c);
+  });
+  return el;
+}
+
+// Attend que les <img> soient mesurables : c'est l'image qui donne le gabarit.
+const attendre = el => Promise.all([...el.querySelectorAll('img')].map(img =>
+  img.complete && img.naturalWidth ? null : new Promise(res => {
+    img.addEventListener('load', res, { once: true });
+    img.addEventListener('error', res, { once: true });
+    setTimeout(res, 2000);
+  })));
+
+// ═══════════════════════════════════════════════════════════════════════════
+// SORTIE EN TISSU — plier l'écran d'arrivée TOUT ENTIER
+// ═══════════════════════════════════════════════════════════════════════════
+// `cloth.charger()` ne prend qu'une URL : pour plier l'écran entier il faut
+// d'abord le rasteriser. Pas de html2canvas (30 Ko pour un seul appel, et le
+// mono-fichier de prod n'accepte pas de dépendance), pas de <foreignObject>
+// (il ne sérialise pas les images distantes, or l'écran n'est QUE des images).
+// On recompose donc la scène à la main sur un contexte 2D. C'est une
+// approximation assumée : le pli écrase le détail dès la première frame.
+//
+// ⚠️ Deux pièges de teinture. (1) Une image affichée sans `crossOrigin` teinte
+// le canvas MÊME si le serveur envoie les en-têtes CORS — c'est le mode de la
+// requête qui compte, pas la réponse ; on recharge donc chaque affiche via une
+// seconde Image en mode anonyme (le cache la sert, c'est gratuit). (2) Une
+// affiche d'origine non partageuse ne peut pas l'être : on lui substitue le
+// visuel local, seulement dans la capture — l'écran, lui, garde la vraie.
+
+// Préréglage fourni par le labo de pli (design/lab/cloth.html) — repris
+// verbatim. Seul `ratioCadre` est recalculé : c'est une donnée géométrique de
+// l'écran, pas un choix de rendu, et le figer déformerait le pli.
+const PRESET_SORTIE = {
+  duree: 2400, retard: 0, ampliRebond: 0,
+  angle: -90, nbPlis: 1.5, amplitude: 0.3, arete: 0,
+  desordre: 0.1, derive: 0.2, nbRides: 2.4, amplitudeRides: 0.26,
+  retrait: 1, balayage: 1.2, traineBord: 0.55,
+  chute: 0.05, approche: 0.06, profondeurZ: 0,
+  perspective: 0.32, rotation: 5, debordement: 1.28,
+  lumiereX: -0.45, lumiereY: 0.7, ombre: 0.3, eclat: 0.16, translucide: 0.22,
+  iriIntensite: 0.42, iriFresnel: 2.6, iriEchelle: 1.35,
+  iriDecalage: 0.1, iriVitesse: 0.25, iriRepos: 0.03,
+  // `rayon` à 0 : la sortie emporte l'écran ENTIER, qui est rectangulaire —
+  // un arrondi y rognerait les quatre coins de la page.
+  grain: 0.03, voile: 0.9, opacite: 1, subdivisions: 64, rayon: 0,
+};
+const COURBE_SORTIE = [0.291, 0.2388, 0.2864, 0.9742];
+
+/** object-fit:cover sur un contexte 2D. */
+function couvrir(g, img, x, y, w, h, px = .5, py = .5) {
+  const ri = img.naturalWidth / img.naturalHeight, rb = w / h;
+  let sw = img.naturalWidth, sh = img.naturalHeight;
+  if (ri > rb) sw = sh * rb; else sh = sw / rb;
+  g.drawImage(img, (img.naturalWidth - sw) * px, (img.naturalHeight - sh) * py, sw, sh, x, y, w, h);
+}
+
+const chargerCORS = src => new Promise(res => {
+  const im = new Image();
+  im.crossOrigin = 'anonymous';
+  im.onload = () => res(im);
+  im.onerror = () => res(null);
+  im.src = src;
+});
+
+async function capturerIntro(rideau) {
+  const W = rideau.clientWidth, H = rideau.clientHeight;
+  if (!W || !H) return null;
+  const dpr = Math.min(window.devicePixelRatio || 1, 2);
+  const cv = document.createElement('canvas');
+  cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+  const g = cv.getContext('2d');
+  g.scale(dpr, dpr);
+  g.fillStyle = '#0B0B0B'; g.fillRect(0, 0, W, H);
+
+  const base = rideau.getBoundingClientRect();
+  const boite = el => { const r = el.getBoundingClientRect();
+                        return { x: r.left - base.left, y: r.top - base.top, w: r.width, h: r.height }; };
+
+  // ── Le fond ────────────────────────────────────────────────────────────
+  const fond = rideau.querySelector('.fn-fond img');
+  if (fond) {
+    const im = await chargerCORS(fond.currentSrc || fond.src);
+    // La boîte est MESURÉE sur le rendu plutôt que recalculée : la capture suit
+    // le CSS sans le réinterpréter. Plus de rotation ni de voile à rejouer.
+    const b = boite(fond);
+    if (im) couvrir(g, im, b.x, b.y, b.w, b.h, .5, .5);
+  }
+
+  // ── Les affiches ───────────────────────────────────────────────────────
+  const photos = [...rideau.querySelectorAll('.fn-photo')];
+  const sources = photos.map(ph => {
+    const im = ph.querySelector('img');
+    const src = im.currentSrc || im.src;
+    return texturable(src) ? src : AFFICHE_REPLI;   // origine muette → visuel local
+  });
+  const images = await Promise.all(sources.map(chargerCORS));
+  const rayon = parseFloat(getComputedStyle(photos[0] || rideau).borderTopLeftRadius) || 0;
+
+  photos.forEach((ph, k) => {
+    const im = images[k]; if (!im) return;
+    // En régime « vibration » les photogrammes sont EMPILÉS : ils occupent tous
+    // la même boîte et seul le visible porte une opacité. Sans ce filtre, la
+    // capture les peindrait tous et c'est le dernier du DOM qu'on verrait
+    // partir dans le pli — pas celui qui était à l'écran.
+    if (getComputedStyle(ph).opacity === '0') return;
+    const b = boite(ph);
+    if (b.x > W || b.x + b.w < 0 || b.y > H || b.y + b.h < 0) return;   // hors cadre
+    g.save();
+    g.beginPath();
+    if (g.roundRect) g.roundRect(b.x, b.y, b.w, b.h, rayon); else g.rect(b.x, b.y, b.w, b.h);
+    g.clip();
+    couvrir(g, im, b.x, b.y, b.w, b.h);
+    g.restore();
+  });
+
+  // ── Le voile mobile, par-dessus l'affiche et sous le texte ─────────────
+  const voile = rideau.querySelector('.fn-voile');
+  if (voile && getComputedStyle(voile).opacity !== '0') {
+    g.fillStyle = getComputedStyle(voile).backgroundColor;
+    g.fillRect(0, 0, W, H);
+  }
+
+  // ── Le logo et les textes ──────────────────────────────────────────────
+  const logo = rideau.querySelector('.fn-logo');
+  if (logo) {
+    const im = await chargerCORS(logo.currentSrc || logo.src);
+    const b = boite(logo);
+    if (im) g.drawImage(im, b.x, b.y, b.w, b.h);
+  }
+
+  // ⚠️ Un nœud de texte à la fois, positionné par un Range — pas
+  // `el.textContent`. Ces libellés mélangent deux styles (« SEMAINE » tranche
+  // sur la date, le compte sur le reste) : lire le texte d'un bloc recolle les
+  // fragments sans leur espacement (« AU MARDI 11 AOÛT13 NOUVEAUTÉS ») et perd
+  // les couleurs. Le Range donne la position ET le style réels de chaque bout.
+  const noeudsTexte = racine => {
+    const out = [];
+    (function parcourir(n) {
+      if (n.nodeType === 3) { if (n.textContent.trim()) out.push(n); return; }
+      n.childNodes.forEach(parcourir);
+    })(racine);
+    return out;
+  };
+
+  // Un texte peint par `background-clip:text` a une couleur de remplissage
+  // TRANSPARENTE : recopiée telle quelle, la ligne s'effacerait au moment du
+  // pli. On rejoue donc le dégradé sur le canvas, en le RELISANT sur l'élément
+  // — `background-image` est déjà résolu par le navigateur, il n'y a pas de
+  // seconde écriture des couleurs qui pourrait diverger du CSS.
+  const degradeTexte = (el, b) => {
+    const cs = getComputedStyle(el);
+    if (cs.webkitTextFillColor && !/rgba\(0, 0, 0, 0\)/.test(cs.webkitTextFillColor)) return null;
+    const fond = cs.backgroundImage;
+    if (!fond || fond === 'none') return null;
+    const angle = (parseFloat((fond.match(/(-?[\d.]+)deg/) || [])[1]) || 180) * Math.PI / 180;
+    const arrets = [...fond.matchAll(/(rgba?\([^)]+\))\s*([\d.]+)%/g)];
+    if (arrets.length < 2) return null;
+    // Repère CSS : 0deg pointe vers le HAUT, l'angle tourne dans le sens des
+    // aiguilles. La longueur de la ligne est la projection de la boîte dessus.
+    const dx = Math.sin(angle), dy = -Math.cos(angle);
+    const L = Math.abs(b.w * dx) + Math.abs(b.h * dy);
+    const cx = b.x + b.w / 2, cy = b.y + b.h / 2;
+    const grad = g.createLinearGradient(cx - dx * L / 2, cy - dy * L / 2,
+                                        cx + dx * L / 2, cy + dy * L / 2);
+    arrets.forEach(([, couleur, pos]) => grad.addColorStop(
+      Math.min(1, Math.max(0, parseFloat(pos) / 100)), couleur));
+    return grad;
+  };
+
+  for (const el of rideau.querySelectorAll('.fn-ligne, .fn-nb')) {
+    const degrade = degradeTexte(el, boite(el));
+    for (const noeud of noeudsTexte(el)) {
+      const cs = getComputedStyle(noeud.parentElement);
+      const rg = document.createRange(); rg.selectNodeContents(noeud);
+      const r = rg.getBoundingClientRect();
+      if (!r.width) continue;
+      g.font = `${cs.fontWeight} ${cs.fontSize} ${cs.fontFamily}`;
+      if ('letterSpacing' in g) g.letterSpacing = cs.letterSpacing;
+      g.fillStyle = degrade || cs.color;
+      g.textAlign = 'left';
+      g.textBaseline = 'middle';
+      const texte = cs.textTransform === 'uppercase'
+        ? noeud.textContent.toUpperCase() : noeud.textContent;
+      // Pas de `trim()` : le Range mesure l'espace de tête, le retirer collerait
+      // le fragment au précédent (« 13SORTIES »).
+      g.fillText(texte, r.left - base.left, r.top - base.top + r.height / 2);
+    }
+  }
+
+  // ── Le filet ───────────────────────────────────────────────────────────
+  const filet = rideau.querySelector('.fn-filet');
+  if (filet) {
+    const b = boite(filet), rempli = boite(filet.querySelector('i'));
+    g.fillStyle = 'rgba(255,255,255,.13)'; g.fillRect(b.x, b.y, b.w, Math.max(1, b.h));
+    g.fillStyle = '#CFBFAF'; g.fillRect(b.x, b.y, rempli.w, Math.max(1, b.h));
+  }
+
+  try { return cv.toDataURL('image/jpeg', 0.92); }
+  catch (e) { console.warn('[labo] capture teintée — sortie en fondu', e); return null; }
+}
+
+/**
+ * Plie l'écran d'arrivée et l'emporte. Retombe sur le fondu CSS si le WebGL
+ * manque ou si la capture échoue — la sortie ne doit JAMAIS rester bloquée.
+ */
+async function sortirEnTissu(rideau) {
+  if (!webglOk) return false;
+  const W = rideau.clientWidth, H = rideau.clientHeight;
+  const url = await capturerIntro(rideau);
+  if (!url) return false;
+
+  const p = { ...CLOTH_DEFAUTS, ...PRESET_SORTIE };
+  const canvas = document.createElement('canvas');
+  canvas.setAttribute('aria-hidden', 'true');
+  canvas.style.cssText = `position:absolute;left:50%;top:50%;z-index:20;pointer-events:none;
+    transform:translate(-50%,-50%);width:${Math.round(W * p.debordement)}px;height:${Math.round(H * p.debordement)}px;`;
+  const cloth = creerCloth(canvas, { ...p, ratioCadre: W / H });
+  if (!cloth) return false;
+  try { await cloth.charger(url); } catch (_) { cloth.detruire(); return false; }
+
+  rideau.appendChild(canvas);
+  // L'écran réel disparaît à l'image près où le pli prend le relais.
+  [...rideau.children].forEach(el => { if (el !== canvas) el.style.visibility = 'hidden'; });
+  rideau.style.background = 'transparent';
+
+  // `jouer()` ne va que du froissé vers le posé. La sortie est le trajet
+  // INVERSE : on pilote `figer()` à la main, de 1 vers 0.
+  return new Promise(res => {
+    const t0 = performance.now();
+    const courbe = bezier(...COURBE_SORTIE);
+    const boucle = ts => {
+      const t = Math.min(1, (ts - t0) / p.duree);
+      // Le même trajet que le dépliage, parcouru À L'ENVERS : la courbe fournie
+      // s'applique telle quelle, c'est la progression qui redescend de 1 vers 0.
+      cloth.figer(1 - courbe(t));
+      canvas.style.opacity = String(Math.min(1, (1 - t) * 3.2));
+      if (t < 1) requestAnimationFrame(boucle);
+      else { canvas.remove(); cloth.detruire(); res(true); }
+    };
+    requestAnimationFrame(boucle);
+  });
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// ① LA FENÊTRE
+// Une bande VERTICALE de photogrammes défile dans une fenêtre fixe. Même
+// mécanique dans les deux formats, seule la fenêtre change : l'écran entier en
+// mobile, la moitié droite arrondie en desktop. Deux transitions comparables :
+//   — « saccade » : `steps()`, obturateur et flottement — aucun WebGL ;
+//   — « tissu »   : le shader de production, qui redevient jouable en desktop
+//                   depuis que le cadre y est fixe.
+// ═══════════════════════════════════════════════════════════════════════════
+const FEN = {
+  tissu:   { pas: 1600, pose: 200 },
+  // `pas` = la durée de la transition d'une affiche à la suivante ;
+  // `pose` = le temps où l'affiche reste immobile à l'écran.
+  saccade: { pas: 400, pose: 1200 },
+};
+const INTERIMAGE  = 16;    // px — la barre noire entre deux photogrammes
+// Trois affiches, pas une de plus : la séquence s'ouvre DIRECTEMENT sur la
+// première (aucun défilement d'amorce), et le pli de sortie part pendant que la
+// troisième est encore à l'écran — une quatrième n'apparaît jamais.
+const AFFICHES = 3;
+
+async function protoFenetre(hote, data) {
+  const total = data.nouveautes.length;
+  const mode = (MODE === 'saccade' || !webglOk) ? 'saccade' : 'tissu';
+  const { pas: transition, pose } = mode === 'saccade' ? FEN.saccade : FEN.tissu;
+  const cadence = transition + pose;
+
+  // La durée n'est plus un réglage indépendant : elle EST la séquence.
+  // 1,2 s + 0,2 s + 1,2 s + 0,2 s + 1,2 s = 4 s en saccade.
+  const DUREE_INTRO = AFFICHES * pose + (AFFICHES - 1) * transition;
+  const origine = 0;   // aucune amorce : la première affiche est la première vue
+
+  const base = data.nouveautes.slice(0, 12);
+  const nouv = [];
+  while (nouv.length < AFFICHES && base.length) nouv.push(base[nouv.length % base.length]);
+
+  const dDeb = new Date(data.debut + 'T12:00:00'), dFin = new Date(data.fin + 'T12:00:00');
+  // Le jour de la semaine ne sert que sur la SECONDE ligne : « mercredi » à
+  // l'ouverture n'apprend rien, « mardi » à la fermeture dit jusqu'à quand le
+  // programme tient — c'est la seule des deux bornes qui engage le visiteur.
+  const jour = d => d.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long' });
+  const jourNomme = d => d.toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' });
+
+  const site = siteDeFond(data);
+  const rideau = document.createElement('div');
+  rideau.className = 'rideau';
+
+  const colonne = `
+    <img class="fn-logo" src="../../assets/logo.svg" alt="CinéIndé Lyon">
+    <div class="fn-ligne"><b>Semaine du</b> ${jour(dDeb)}<br>au ${jourNomme(dFin)}</div>
+    <div class="fn-bas">
+      <div class="fn-nb"><b>${total}</b> sortie${total > 1 ? 's' : ''}</div>
+      ${MOBILE ? '' : '<div class="fn-filet"><i></i></div>'}
+    </div>
+    ${MOBILE ? '<div class="fn-filet"><i></i></div>' : ''}`;
+
+  rideau.innerHTML = MOBILE ? `
+    <div class="fn-slot" style="--interimage:${INTERIMAGE}px">
+      <div class="fn-bobine"></div>
+      <div class="fn-lampe"></div>
+    </div>
+    <div class="fn-voile"></div>
+    <div class="fn-txt">${colonne}</div>` : `
+    <div class="fn-fond"><img src="../../assets/texture-abstraite-claire-1.png" alt=""></div>
+    ${colonne}
+    <div class="fn-cadre" style="--interimage:${INTERIMAGE}px">
+      <div class="fn-bobine"></div>
+      <div class="fn-lampe"></div>
+    </div>`;
+
+  const cadre  = rideau.querySelector(MOBILE ? '.fn-slot' : '.fn-cadre');
+  const bobine = rideau.querySelector('.fn-bobine');
+  const jauge  = rideau.querySelector('.fn-filet i');
+
+  nouv.forEach(f => {
+    const ph = document.createElement('div');
+    ph.className = 'fn-photo';
+    ph.innerHTML = '<img alt="">';
+    const img = ph.querySelector('img');
+    img.onerror = () => { img.onerror = null; img.src = AFFICHE_REPLI; };
+    img.src = f.poster || AFFICHE_REPLI;
+    bobine.appendChild(ph);
+  });
+
+  hote.appendChild(site);
+  hote.appendChild(rideau);
+  await attendre(rideau);
+
+  // Le pas d'entraînement inclut l'interimage — sans elle la barre noire ne
+  // traverserait jamais le cadre, et il ne resterait qu'un fondu de coupe.
+  const H = cadre.clientHeight;
+  const inter = parseFloat(getComputedStyle(bobine).gap) || INTERIMAGE;
+  bobine.style.width = cadre.clientWidth + 'px';
+  bobine.style.height = H + 'px';
+  bobine.querySelectorAll('.fn-photo').forEach(ph => { ph.style.flex = `0 0 ${H}px`; });
+  // En vibration les photogrammes sont empilés, pas enfilés : la classe bascule
+  // toute la géométrie de la bande d'un régime à l'autre.
+  if (mode === 'saccade' && TRANS === 'vibration') cadre.classList.add('vib');
+  const pas = H + inter;
+  const decalage = i => `translateY(${-(origine + i) * pas}px)`;
+
+  let i = 0, sorti = false;
+  const duree = DUREE_INTRO;
+
+  // Le filet se remplit d'un trait sur toute la durée : c'est un compte à
+  // rebours, pas une barre de chargement — rien n'est en train de charger.
+  const armerFilet = () => {
+    jauge.style.transition = 'none'; jauge.style.width = '0';
+    requestAnimationFrame(() => {
+      jauge.style.transition = `width ${duree}ms linear`;
+      jauge.style.width = '100%';
+    });
+  };
+  armerFilet();
+
+  // ── Entraînement « saccade » ─────────────────────────────────────────────
+  // Le battement d'obturateur est commun aux deux régimes : c'est la lampe qui
+  // vacille, pas la bande, et elle vacille dans les deux cas.
+  const battre = () => {
+    cadre.style.setProperty('--t-saccade', FEN.saccade.pas + 'ms');
+    // Relancer les keyframes : sans ce reflow, l'obturateur ne bat qu'une fois.
+    cadre.classList.remove('saccade'); void cadre.offsetWidth; cadre.classList.add('saccade');
+  };
+
+  const avancerDefilement = () => {
+    bobine.style.transition = `transform ${FEN.saccade.pas}ms steps(7, end)`;
+    bobine.style.transform = decalage(i);
+    battre();
+  };
+
+  // ── Entraînement « vibration » ───────────────────────────────────────────
+  // Les deux affiches tremblent ENSEMBLE pendant toute la transition ; à
+  // mi-parcours l'opacité bascule d'un coup. Le tremblement seul ne dirait pas
+  // quelle affiche prend la main : c'est la bascule qui tranche, et elle tombe
+  // au milieu du tremblement pour que l'œil ne puisse pas la situer.
+  const photos = [...bobine.querySelectorAll('.fn-photo')];
+  let minuteursVib = [];
+  const avancerVibration = () => {
+    minuteursVib.forEach(clearTimeout); minuteursVib = [];
+    const entrante = photos[origine + i];
+    const sortante = photos[origine + i - 1];
+    if (!entrante) return;
+    // ⚠️ L'affichée est DÉSIGNÉE, jamais « ajoutée » : en labo la séquence
+    // boucle, et un simple `add('on')` laisserait la dernière affiche allumée
+    // sous la première — deux visibles à la fois.
+    const montrer = ph => photos.forEach(p => p.classList.toggle('on', p === ph));
+    if (!sortante) { montrer(entrante); return; }   // première affiche : rien à quitter
+
+    [sortante, entrante].forEach(ph => {
+      ph.classList.remove('tremble'); void ph.offsetWidth; ph.classList.add('tremble');
+    });
+    battre();
+    minuteursVib.push(setTimeout(() => montrer(entrante), FEN.saccade.pas / 2));
+    minuteursVib.push(setTimeout(() => {
+      [sortante, entrante].forEach(ph => ph.classList.remove('tremble'));
+    }, FEN.saccade.pas));
+  };
+
+  const avancerSaccade = () =>
+    TRANS === 'vibration' ? avancerVibration() : avancerDefilement();
+
+  // ── Entraînement « tissu » ───────────────────────────────────────────────
+  // UN SEUL contexte WebGL pour toute la séquence : on recharge la texture dans
+  // le même renderer plutôt que d'en créer un par affiche.
+  let cloth = null, canvas = null;
+  if (mode === 'tissu') {
+    const p = { ...CLOTH_DEFAUTS, ...PRESET_ARRIVEE, duree: FEN.tissu.pli };
+    const k = p.debordement;
+    canvas = document.createElement('canvas');
+    canvas.setAttribute('aria-hidden', 'true');
+    canvas.style.width  = Math.round(cadre.clientWidth * k) + 'px';
+    canvas.style.height = Math.round(H * k) + 'px';
+    cadre.appendChild(canvas);
+    const rayonPx = parseFloat(getComputedStyle(cadre).borderTopLeftRadius) || 0;
+    cloth = creerCloth(canvas, {
+      ...p, ratioCadre: cadre.clientWidth / H,
+      rayon: rayonPx / Math.min(cadre.clientWidth, H), retard: 0,
+    });
+    if (!cloth) canvas.remove();
+  }
+
+  const avancerTissu = async () => {
+    let ok = false;
+    try { await cloth.charger(nouv[origine + i].poster); ok = true; } catch (_) { ok = false; }
+    if (sorti) return;
+    // La bande se cale sur la même affiche AVANT le pli : à la fin du vol le
+    // canvas s'efface et c'est elle qu'on voit — si elle montrait la précédente,
+    // l'image sauterait au dernier instant.
+    bobine.style.transition = 'none';
+    bobine.style.transform = decalage(i);
+    if (!ok) { cadre.classList.remove('plie'); return; }   // sans CORS : la bande suffit
+    cadre.classList.add('plie');
+    cloth.jouer(COURBE_ARRIVEE, () => { if (!sorti) cadre.classList.remove('plie'); });
+  };
+
+  const avancer = () => (mode === 'saccade' || !cloth) ? avancerSaccade() : avancerTissu();
+
+  // ── Ouverture ────────────────────────────────────────────────────────────
+  // Les deux formats démarrent pareil : la première affiche est là d'emblée,
+  // sans amorce ni tirage. Le premier changement vient au bout d'une POSE, pas
+  // d'une cadence — sinon la première affiche resterait plus longtemps que les
+  // deux autres.
+  let minuteur = null;
+  avancer();
+  const amorce = setTimeout(() => {
+    if (sorti) return;
+    tic();
+    minuteur = setInterval(tic, cadence);
+  }, pose);
+
+  // La sortie part pendant la pose de la dernière affiche.
+  if (!TENIR) setTimeout(sortir, DUREE_INTRO);
+
+  function tic() {
+    i++;
+    if (i >= AFFICHES) {
+      // En labo on boucle pour pouvoir regarder ; en vrai la sortie a déjà la
+      // main et il n'y a plus rien à avancer — surtout pas une 4ᵉ affiche.
+      if (TENIR) { i = 0; armerFilet(); }
+      else { clearInterval(minuteur); return; }
+    }
+    avancer();
+  }
+
+  async function sortir() {
+    if (sorti) return; sorti = true;
+    clearTimeout(amorce); clearInterval(minuteur); minuteursVib.forEach(clearTimeout);
+    if (cloth) { canvas.remove(); cloth.detruire(); }
+    // Le pli de sortie emporte l'écran ENTIER. S'il ne peut pas jouer (WebGL
+    // absent, capture teintée), on retombe sur le fondu — jamais bloqué.
+    const plie = await sortirEnTissu(rideau);
+    console.info('[labo] sortie :', plie ? 'pli WebGL' : 'fondu (repli)');
+    if (!plie) { rideau.classList.add('parti'); setTimeout(() => rideau.remove(), 700); }
+    else rideau.remove();
+  }
+  rideau.addEventListener('click', sortir);
+  hote.addEventListener('wheel', sortir, { passive: true });
+  addEventListener('keydown', sortir, { once: true });
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// ② LE RIDEAU
+// L'attente devient un geste : on tire pour entrer, et les affiches se
+// REPLIENT en étoffe au fur et à mesure (cloth.figer piloté par le geste).
+// ═══════════════════════════════════════════════════════════════════════════
+async function proto2(hote, data) {
+  const total = data.nouveautes.length;
+  const nouv = data.nouveautes.slice(0, MOBILE ? 4 : 6);
+  const dDeb = new Date(data.debut + 'T12:00:00'), dFin = new Date(data.fin + 'T12:00:00');
+
+  const site = siteDeFond(data);
+  const rideau = document.createElement('div');
+  rideau.className = 'rideau';
+  rideau.innerHTML = `
+    <div class="rd-scene">
+      <div class="rd-typo">
+        <div class="rd-chiffres">${dDeb.getDate()}<span>→</span>${dFin.getDate()}</div>
+        <div class="rd-mois">${dFin.toLocaleDateString('fr-FR', { month: 'long', year: 'numeric' })}</div>
+        <div class="rd-nb">${total} nouveauté${total > 1 ? 's' : ''} cette semaine</div>
+      </div>
+      <div class="rd-bande"><div class="rd-piste"></div></div>
+    </div>
+    <div class="rd-tirette">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+      Tirez pour entrer
+    </div>
+    <div class="rd-jauge"><i></i></div>`;
+
+  const piste = rideau.querySelector('.rd-piste');
+  const largeur = MOBILE ? 116 : 152;
+  nouv.forEach(f => piste.appendChild(carteAffiche(f, largeur)));
+
+  hote.appendChild(site);
+  hote.appendChild(rideau);
+  await attendre(rideau);
+
+  const cartes = [...piste.querySelectorAll('.aff')];
+  const prises = await monterPli(cartes, { retardBase: 300 });
+  [...piste.querySelectorAll('.vign')].forEach((el, i) => {
+    if (prises.includes(el.querySelector('.aff'))) return;
+    el.classList.add('fondu', 'pose');                 // affiche sans CORS : fondu
+    el.style.animationDelay = (300 + i * DECALAGE) + 'ms';
+  });
+
+  const typo    = rideau.querySelector('.rd-typo');
+  const bande   = rideau.querySelector('.rd-bande');
+  const tirette = rideau.querySelector('.rd-tirette');
+  const jauge   = rideau.querySelector('.rd-jauge i');
+
+  // Dérive lente de la bande tant que le geste n'a pas commencé — une image
+  // qui bouge un peu se lit comme vivante, une image figée comme un écran mort.
+  let derive = 0, deriveOn = true, t0 = performance.now();
+  (function boucle(ts) {
+    if (!deriveOn) return;
+    derive = Math.sin((ts - t0) / 4200) * (MOBILE ? 14 : 26);
+    piste.style.transform = `translateX(${derive}px)`;
+    requestAnimationFrame(boucle);
+  })(t0);
+
+  let p = 0, sorti = false;
+  const appliquer = () => {
+    typo.style.transform = `translateY(${-p * 90}px) scale(${1 - p * .12})`;
+    typo.style.opacity = String(1 - p * 1.2);
+    bande.style.transform = `translateY(${-p * 40}px)`;
+    rideau.style.transform = `translateY(${-p * 12}%)`;
+    // Le voile ne s'ouvre qu'en fin de course. Le faire fondre dès le premier
+    // pixel superposait deux images à moitié transparentes — le programme
+    // apparaissait à travers les affiches, et plus rien n'était lisible.
+    rideau.style.opacity = String(1 - Math.max(0, (p - .55) / .45));
+    jauge.style.width = (p * 100) + '%';
+    // Le pli à l'envers : progression 1 = posée, 0 = étoffe. Décalé par carte,
+    // pour que la bande se défasse en vague et non d'un bloc.
+    vivants.forEach((t, i) => t.cloth.figer(Math.max(0, 1 - p * 1.35 + i * .05)));
+  };
+  const pousser = (dp) => {
+    if (sorti) return;
+    if (deriveOn && dp > 0) { deriveOn = false; tirette.classList.remove('vu'); }
+    p = Math.max(0, Math.min(1, p + dp));
+    appliquer();
+    if (p >= 1) sortir();
+  };
+  const sortir = () => {
+    if (sorti) return; sorti = true;
+    deriveOn = false;
+    toutLacher();
+    rideau.classList.add('parti');
+    setTimeout(() => rideau.remove(), 700);
+  };
+
+  hote.addEventListener('wheel', e => pousser(e.deltaY / 900), { passive: true });
+  let y0 = null;
+  hote.addEventListener('pointerdown', e => { y0 = e.clientY; });
+  hote.addEventListener('pointermove', e => {
+    if (y0 === null) return;
+    pousser((y0 - e.clientY) / 420);
+    y0 = e.clientY;
+  });
+  addEventListener('pointerup', () => {
+    y0 = null;
+    // Relâché à mi-course : on retombe, l'écran ne reste pas coincé entre deux.
+    if (!sorti && p > 0 && p < 1) {
+      const revenir = () => { p = Math.max(0, p - .06); appliquer(); if (p > 0) requestAnimationFrame(revenir); else deriveOn = true; };
+      if (p < .55) { requestAnimationFrame(revenir); t0 = performance.now(); }
+      else { const finir = () => { p = Math.min(1, p + .07); appliquer(); if (p < 1) requestAnimationFrame(finir); else sortir(); }; requestAnimationFrame(finir); }
+    }
+  });
+
+  setTimeout(() => { if (!sorti && p === 0) tirette.classList.add('vu'); }, 1600);
+  // Filet : l'écran ne doit jamais retenir quelqu'un qui ne comprend pas le geste.
+  if (!TENIR) setTimeout(() => { if (!sorti && p === 0) sortir(); }, 9000);
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// AMORÇAGE
+// ═══════════════════════════════════════════════════════════════════════════
+const PROTOS = { '1': protoFenetre, '2': proto2 };
+// Le rideau n'a plus d'onglet dans le banc — il reste ouvrable par `?solo=2`,
+// pour ne pas perdre la piste sans encombrer la barre.
+const NOMS = {
+  '1': 'La fenêtre',
+  '2': 'Le rideau',
+};
+
+async function lancerSolo() {
+  document.body.className = 'solo';
+  // Poignées de labo : inspecter la capture et rejouer la sortie à la main.
+  // `capturerIntro()` renvoie une data-URL — la coller dans un onglet suffit à
+  // juger si la rasterisation ment sur ce qu'on voit.
+  window.__labo = { capturerIntro, sortirEnTissu };
+  const hote = document.createElement('div');
+  hote.id = 'solo';
+  document.getElementById('racine').replaceWith(hote);
+  let data;
+  try { data = forcerVolume(await charger(), VOLUME); }
+  catch (e) {
+    hote.innerHTML = `<div style="padding:40px;color:#b06a4a;font:13px 'DM Mono',monospace">Données indisponibles — ${e.message}</div>`;
+    return;
+  }
+  if (!data.nouveautes.length) {
+    hote.innerHTML = `<div style="padding:40px;color:#7a7060;font:13px 'DM Mono',monospace">Aucune nouveauté cette semaine — l'écran doit alors être sauté.</div>`;
+    return;
+  }
+  PROTOS[SOLO](hote, data);
+}
+
+function lancerBanc() {
+  document.body.className = 'banc';
+  document.getElementById('racine').outerHTML = `
+    <div class="banc-tete">
+      <div class="banc-titre">Labo — l'arrivée sur le site</div>
+      <div class="seg" id="ongVue">
+        <button data-v="desktop" class="on">Desktop 1280</button>
+        <button data-v="mobile">Mobile 375</button>
+      </div>
+      <div class="seg" id="ongTrans">
+        <button data-t="defilement" class="on">Défilement</button>
+        <button data-t="vibration">Vibration</button>
+      </div>
+      <button class="b" id="rejouer">↻ Rejouer</button>
+      <label class="bascule"><input type="checkbox" id="hold"> Garder à l'écran</label>
+    </div>
+    <div class="banc-corps">
+      <div class="scene"><div class="cadre" id="cadre"><iframe id="vue" title="prototype"></iframe></div>
+        <div class="cadre-note" id="note"></div></div>
+    </div>`;
+
+  const cadre = document.getElementById('cadre');
+  const vue   = document.getElementById('vue');
+  const note  = document.getElementById('note');
+  let mode = 'desktop';
+  let trans = 'defilement';
+
+  function dimensionner() {
+    const [L, H] = mode === 'desktop' ? [1280, 800] : [375, 812];
+    const scene = document.querySelector('.scene');
+    const k = Math.min(1, (scene.clientWidth - 60) / L, (scene.clientHeight - 70) / H);
+    cadre.style.width = L + 'px';
+    cadre.style.height = H + 'px';
+    cadre.style.transform = `scale(${k})`;
+    note.textContent = `${NOMS['1']} — ${L}×${H} · ${Math.round(k * 100)} %`;
+  }
+  function recharger() {
+    const opt = (document.getElementById('hold').checked ? '&hold=1' : '')
+              + `&tr=${trans}`;
+    vue.src = `?solo=1${opt}&t=${Date.now()}`;
+    dimensionner();
+  }
+
+  document.getElementById('ongVue').addEventListener('click', e => {
+    const b = e.target.closest('button'); if (!b) return;
+    [...e.currentTarget.children].forEach(x => x.classList.toggle('on', x === b));
+    mode = b.dataset.v; recharger();
+  });
+  document.getElementById('ongTrans').addEventListener('click', e => {
+    const b = e.target.closest('button'); if (!b) return;
+    [...e.currentTarget.children].forEach(x => x.classList.toggle('on', x === b));
+    trans = b.dataset.t; recharger();
+  });
+  document.getElementById('rejouer').addEventListener('click', recharger);
+  document.getElementById('hold').addEventListener('change', recharger);
+  addEventListener('resize', dimensionner);
+  recharger();
+}
+
+SOLO ? lancerSolo() : lancerBanc();
+</script>
+</body>
+</html>
