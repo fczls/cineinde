@@ -1,12 +1,18 @@
 /**
  * L'ÉCRAN D'ARRIVÉE — « la fenêtre »
  * ═══════════════════════════════════════════════════════════════════════════
- * Annonce la semaine programmée, fait défiler ses nouveautés dans une fenêtre
- * fixe, puis s'efface en emportant l'écran ENTIER dans le pli WebGL déjà
- * utilisé par l'éventail des évènements (src/cloth.js). Le pli révèle le site
- * réel, qui s'est chargé derrière pendant la séquence — c'est le seul intérêt
- * défendable d'un écran qui retient : il occupe le temps de chargement au lieu
- * de s'y ajouter.
+ * Annonce la semaine programmée, montre ses nouveautés dans une fenêtre fixe,
+ * puis s'efface en CONSUMANT l'écran ENTIER : la combustion WebGL de
+ * src/brulure.js. Le feu révèle le site réel, qui s'est chargé derrière pendant
+ * la séquence — c'est le seul intérêt défendable d'un écran qui retient : il
+ * occupe le temps de chargement au lieu de s'y ajouter.
+ *
+ * Deux régimes ont été comparés au banc, sous le même entraînement d'affiches ;
+ * « vibration 2 » a été retenu. Les photogrammes n'y défilent pas : ils sont
+ * EMPILÉS au même endroit, tremblent ensemble le temps de la transition, et
+ * l'opacité bascule d'un coup à mi-parcours. Le tremblement seul ne dirait pas
+ * quelle affiche prend la main — c'est la bascule qui tranche, et elle tombe au
+ * milieu du tremblement pour que l'œil ne puisse pas la situer.
  *
  * Prototype et banc d'essai : design/lab/arrivee.html (les autres partis pris
  * y restent ouvrables ; seule « la fenêtre » a été retenue).
@@ -15,7 +21,7 @@
  * que si l'amorce (dans src/template.html) a jugé que l'écran devait jouer.
  * ═══════════════════════════════════════════════════════════════════════════
  */
-import { creerCloth, CLOTH_DEFAUTS, bezier } from './cloth.js';
+import { creerBrulure, BRULURE_DEFAUTS } from './brulure.js';
 
 // ═══════════════════════════════════════════════════════════════════════════
 // RÉGLAGES
@@ -37,22 +43,46 @@ const AFFICHE_REPLI = 'assets/visual-fallback.webp';
 const FOND = 'assets/texture-abstraite-claire-1.webp';
 const LOGO = 'assets/logo.svg';
 
-// Préréglage du pli de sortie, issu du labo (design/lab/cloth.html → « Copier »).
-// `rayon` à 0 : la sortie emporte l'écran ENTIER, qui est rectangulaire — un
-// arrondi y rognerait les quatre coins de la page.
+// Préréglage du feu de sortie, issu du labo de combustion
+// (design/lab/brulure.html → « Copier »), repris verbatim depuis le banc
+// d'arrivée où il porte le nom de « vibration 2 ».
+//
+// Trois clés méritent leur mot. `rayon` reste bas : la sortie emporte l'écran
+// ENTIER, qui est rectangulaire — un arrondi d'affiche y rognerait les quatre
+// coins de la page. `repli` est explicitement à 0, l'écran ne se rabat pas.
+// `ratioCadre` est ABSENT à dessein : le préréglage a été fait en 16:9, l'écran
+// d'arrivée ne l'est pas, et figer la valeur déformerait le front de flamme —
+// il se calcule à l'instant du montage, depuis la taille réelle du rideau.
+//
+// Le feu se lit ici en CENDRE plutôt qu'en flamme : braise brun très sombre,
+// halo blanc chaud, délavage des couleurs. Le magma reste mince, ce qui le
+// garde en liseré plutôt qu'en continent malgré de grosses bulles satellisées.
 const PRESET_SORTIE = {
-  duree: 2400, retard: 0, ampliRebond: 0,
-  angle: -90, nbPlis: 1.5, amplitude: 0.3, arete: 0,
-  desordre: 0.1, derive: 0.2, nbRides: 2.4, amplitudeRides: 0.26,
-  retrait: 1, balayage: 1.2, traineBord: 0.55,
-  chute: 0.05, approche: 0.06, profondeurZ: 0,
-  perspective: 0.32, rotation: 5, debordement: 1.28,
-  lumiereX: -0.45, lumiereY: 0.7, ombre: 0.3, eclat: 0.16, translucide: 0.22,
-  iriIntensite: 0.42, iriFresnel: 2.6, iriEchelle: 1.35,
-  iriDecalage: 0.1, iriVitesse: 0.25, iriRepos: 0.03,
-  grain: 0.03, voile: 0.9, opacite: 1, subdivisions: 64, rayon: 0,
+  duree: 3000, retard: 0, combustion: 1,
+  foyerX: 0.55, foyerY: -0.375, bordure: 0.2,
+  echelle: 5, desordre: 0.4, detail: 0.3,
+  bulles: 0.2, echelleBulles: 3,
+  braise: 0.02, cloque: 0.075, roussi: 0.1,
+  lueur: 2.8, laitage: 0.5, moucheture: 0,
+  magma: 0.098, echelleBulle: 45, satellites: 1.5,
+  distorsion: 0.5, perforation: 1.4, boursouflure: 2,
+  craquelures: 1.5, vernis: 1.5,
+  granulation: 0.2, grainEchelle: 41.76,
+  gonflement: 0.075,
+  coulHalo: '#fff4db', coulCaramel: '#996424', coulBraise: '#140606',
+  coulCendre: '#241b18', coulCloque: '#eff2f6',
+  delavage: 0.3, retraitBord: 0.2, retraitGlobal: 0,
+  gondole: 0.075, largeurChaleur: 0.13,
+  nbPlis: 3, echelleGondole: 6, perspective: 0.35,
+  lumiereX: -0.45, lumiereY: 0.7, ombre: 0.45, eclat: 0.12,
+  iriIntensite: 1.5, iriFresnel: 2.2, iriEchelle: 1.6, iriDecalage: 0.1,
+  grain: 0.045, opacite: 1,
+  repli: 0, repliDebut: 0, repliCharniere: -0.4,
+  repliRayon: 0.32, repliInclinaison: 0,
+  subdivisions: 64, rayon: 0.02, debordement: 1.8,
 };
-const COURBE_SORTIE = [0.291, 0.2388, 0.2864, 0.9742];
+const COURBE_SORTIE = [0.9569768951194184, -0.00011807348014736263,
+                       0.8747196261682243, 0.9309561205997035];
 
 // ═══════════════════════════════════════════════════════════════════════════
 // DONNÉES — « nouveauté » = première séance JAMAIS enregistrée par le système,
@@ -314,51 +344,55 @@ async function capturerIntro(ecran) {
 }
 
 /**
- * Plie l'écran d'arrivée et l'emporte, découvrant le site. Retombe sur le
+ * Consume l'écran d'arrivée et l'emporte, découvrant le site. Retombe sur le
  * fondu CSS si le WebGL manque ou si la capture échoue — la sortie ne doit
  * JAMAIS rester bloquée.
+ *
+ * ⚠️ La combustion va DANS LE SENS de la disparition : progression 0 = écran
+ * intact, 1 = plus rien. Elle se joue donc en avant, par `jouer()`. Le pli
+ * qu'elle remplace demandait l'inverse — un `figer()` piloté à la main de 1
+ * vers 0 — parce qu'il ne sait qu'apparaître. C'est la seule différence de
+ * plomberie entre les deux effets, et elle vaut d'être dite : reprendre ici la
+ * boucle du pli donnerait un écran qui se reconstitue.
  */
-async function sortirEnTissu(ecran, webglOk) {
+async function sortirEnFeu(ecran, webglOk) {
   if (!webglOk) return false;
   const W = ecran.clientWidth, H = ecran.clientHeight;
   const url = await capturerIntro(ecran);
   if (!url) return false;
 
-  const p = { ...CLOTH_DEFAUTS, ...PRESET_SORTIE };
+  const p = { ...BRULURE_DEFAUTS, ...PRESET_SORTIE };
   const canvas = document.createElement('canvas');
   canvas.setAttribute('aria-hidden', 'true');
   canvas.style.cssText = `position:absolute;left:50%;top:50%;z-index:20;pointer-events:none;
     transform:translate(-50%,-50%);width:${Math.round(W * p.debordement)}px;height:${Math.round(H * p.debordement)}px;`;
-  const cloth = creerCloth(canvas, { ...p, ratioCadre: W / H });
-  if (!cloth) return false;
-  try { await cloth.charger(url); } catch (_) { cloth.detruire(); return false; }
+  // `ratioCadre` se calcule ICI, jamais dans le préréglage : le feu doit épouser
+  // la forme réelle du rideau, qui n'est pas celle du banc où il a été réglé.
+  const brulure = creerBrulure(canvas, { ...p, ratioCadre: W / H });
+  if (!brulure) return false;
+  try { await brulure.charger(url); } catch (_) { brulure.detruire(); return false; }
 
   ecran.appendChild(canvas);
-  // L'écran réel disparaît à l'image près où le pli prend le relais.
+  // L'écran réel disparaît à l'image près où le feu prend le relais.
   [...ecran.children].forEach(el => { if (el !== canvas) el.style.visibility = 'hidden'; });
   ecran.style.background = 'transparent';
+  // Pas de dérive verticale : elle était propre au pli. Le feu travaille déjà la
+  // géométrie — retrait des bords, gondole, gonflement — et un glissement
+  // d'ensemble par-dessus se lit comme un décrochage, pas comme une combustion.
 
-  // `jouer()` ne va que du froissé vers le posé. La sortie est le trajet
-  // INVERSE : on pilote `figer()` à la main, de 1 vers 0.
   return new Promise(res => {
-    const t0 = performance.now();
-    const courbe = bezier(...COURBE_SORTIE);
-    const boucle = ts => {
-      const t = Math.min(1, (ts - t0) / p.duree);
-      cloth.figer(1 - courbe(t));
-      canvas.style.opacity = String(Math.min(1, (1 - t) * 3.2));
-      if (t < 1) requestAnimationFrame(boucle);
-      else { canvas.remove(); cloth.detruire(); res(true); }
-    };
-    requestAnimationFrame(boucle);
+    brulure.jouer(COURBE_SORTIE, () => {
+      canvas.remove(); brulure.detruire(); res(true);
+    });
   });
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
 // LA SÉQUENCE
-// Une bande VERTICALE de photogrammes défile dans une fenêtre fixe. Même
-// mécanique dans les deux formats, seule la fenêtre change : l'écran entier en
-// mobile, la moitié droite arrondie en desktop.
+// Des photogrammes EMPILÉS dans une fenêtre fixe : ils tremblent ensemble et
+// l'opacité bascule de l'un à l'autre. Même mécanique dans les deux formats,
+// seule la fenêtre change : l'écran entier en mobile, la moitié droite
+// arrondie en desktop.
 // ═══════════════════════════════════════════════════════════════════════════
 
 // Attend que les <img> soient mesurables : c'est l'image qui donne le gabarit
@@ -445,8 +479,10 @@ async function jouer(ecran, data, webglOk) {
   bobine.style.width = cadre.clientWidth + 'px';
   bobine.style.height = H + 'px';
   bobine.querySelectorAll('.fn-photo').forEach(ph => { ph.style.flex = `0 0 ${H}px`; });
-
-  const pasPx = H + inter;
+  // Les photogrammes sont EMPILÉS au même endroit, pas enfilés : la classe
+  // bascule toute la géométrie de la bande. `inter` reste lu plus haut parce
+  // que la gouttière décide encore de la hauteur du photogramme.
+  cadre.classList.add('vib');
 
   let i = 0, sorti = false;
 
@@ -459,14 +495,38 @@ async function jouer(ecran, data, webglOk) {
     jauge.style.width = '100%';
   });
 
-  const avancer = () => {
-    bobine.style.transition = `transform ${PAS}ms steps(7, end)`;
-    bobine.style.transform = `translateY(${-i * pasPx}px)`;
-    // Battement d'obturateur : la lampe ne délivre pas la même lumière d'un
-    // photogramme à l'autre quand l'entraînement n'est plus synchrone.
-    // Relancer les keyframes demande un reflow, sans quoi elle ne bat qu'une fois.
+  // Battement d'obturateur : la lampe ne délivre pas la même lumière d'un
+  // photogramme à l'autre quand l'entraînement n'est plus synchrone.
+  // Relancer les keyframes demande un reflow, sans quoi elle ne bat qu'une fois.
+  const battre = () => {
     cadre.style.setProperty('--t-saccade', PAS + 'ms');
     cadre.classList.remove('saccade'); void cadre.offsetWidth; cadre.classList.add('saccade');
+  };
+
+  // Les deux affiches tremblent ENSEMBLE pendant toute la transition ; à
+  // mi-parcours l'opacité bascule d'un coup. Le tremblement seul ne dirait pas
+  // laquelle prend la main : c'est la bascule qui tranche, et elle tombe au
+  // milieu du tremblement pour que l'œil ne puisse pas la situer.
+  const photos = [...bobine.querySelectorAll('.fn-photo')];
+  let minuteursVib = [];
+  const avancer = () => {
+    minuteursVib.forEach(clearTimeout); minuteursVib = [];
+    const entrante = photos[i];
+    const sortante = photos[i - 1];
+    if (!entrante) return;
+    // L'affichée est DÉSIGNÉE, jamais « ajoutée » : un simple `add('on')`
+    // laisserait la précédente allumée dessous, donc deux visibles à la fois.
+    const montrer = ph => photos.forEach(p => p.classList.toggle('on', p === ph));
+    if (!sortante) { montrer(entrante); return; }   // la première n'a rien à quitter
+
+    [sortante, entrante].forEach(ph => {
+      ph.classList.remove('tremble'); void ph.offsetWidth; ph.classList.add('tremble');
+    });
+    battre();
+    minuteursVib.push(setTimeout(() => montrer(entrante), PAS / 2));
+    minuteursVib.push(setTimeout(() => {
+      [sortante, entrante].forEach(ph => ph.classList.remove('tremble'));
+    }, PAS));
   };
 
   // ── Ouverture ────────────────────────────────────────────────────────────
@@ -505,7 +565,11 @@ async function jouer(ecran, data, webglOk) {
   async function sortir() {
     if (sorti) return; sorti = true;
     clearTimeout(amorce); clearTimeout(echeance); clearInterval(minuteur);
-    resoudre(await sortirEnTissu(ecran, webglOk));
+    // Les bascules d'opacité en vol doivent tomber AUSSI : la capture est
+    // déjà prise, une affiche qui changerait derrière ne se verrait pas —
+    // mais son minuteur survivrait à l'écran, qui lui est retiré du DOM.
+    minuteursVib.forEach(clearTimeout); minuteursVib = [];
+    resoudre(await sortirEnFeu(ecran, webglOk));
   }
 
   return finie;
