@@ -1205,6 +1205,25 @@ html.intro-on{overflow:hidden;}
 .fn-photo{position:relative;flex:0 0 100%;overflow:hidden;border-radius:var(--radius-3xl);}
 .fn-photo img{width:100%;height:100%;object-fit:cover;display:block;}
 
+/* ── Régime « vibration » ──────────────────────────────────────────────────
+   Les photogrammes ne défilent plus : ils sont EMPILÉS au même endroit et c'est
+   l'opacité qui passe de l'un à l'autre, d'un coup, pendant que les deux
+   tremblent ensemble.
+
+   Le tremblement est porté par `transform`, le seul canal qui ne relance pas la
+   mise en page à chaque cran — sept crans en 400 ms sur `left` feraient
+   recalculer la fenêtre sept fois. Le découpage en `steps(7)` est le même que
+   celui de l'obturateur : c'est la même machine qui tremble et qui bat. */
+.vib .fn-bobine{animation:none;transform:none !important;}
+.vib .fn-photo{position:absolute;inset:0;opacity:0;}
+.vib .fn-photo.on{opacity:1;}
+.vib .fn-photo.tremble{animation:fn-tremblement var(--t-saccade) steps(7,end);}
+@keyframes fn-tremblement{
+  0%,100%{transform:translateX(0);} 20%{transform:translateX(-2px);}
+  45%{transform:translateX(3px);} 70%{transform:translateX(-1px);}
+  90%{transform:translateX(2px);}
+}
+
 /* Battement d'obturateur — la lampe ne délivre pas la même lumière d'un
    photogramme à l'autre quand l'entraînement n'est plus synchrone. */
 .fn-lampe{position:absolute;inset:0;z-index:3;background:var(--bg);opacity:0;pointer-events:none;}

@@ -377,6 +377,7 @@ body.solo{overflow:hidden;background:var(--bg);}
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script type="module">
 import { creerCloth, CLOTH_DEFAUTS, bezier } from '../../src/cloth.js';
+import { creerBrulure, BRULURE_DEFAUTS } from '../../src/brulure.js';
 
 // ═══════════════════════════════════════════════════════════════════════════
 // CONFIG — clés publiques, identiques à celles du front (anon = lecture seule).
@@ -397,7 +398,14 @@ const MODE    = params.get('mode') || 'saccade';    // 'tissu' | 'saccade'
 // Deux façons de passer d'une affiche à l'autre, à comparer depuis le banc :
 //   'defilement' — la bande coulisse, un photogramme chasse l'autre ;
 //   'vibration'  — les deux affiches tremblent sur place et l'opacité bascule.
-const TRANS   = params.get('tr') === 'vibration' ? 'vibration' : 'defilement';
+const TRANS   = ['vibration', 'vibration2'].includes(params.get('tr'))
+              ? params.get('tr') : 'defilement';
+// Les deux « vibration » partagent EXACTEMENT le même entraînement d'affiches
+// (photogrammes empilés, tremblement, bascule d'opacité) : elles ne diffèrent
+// que par le feu qui emporte l'écran à la sortie. D'où ce prédicat, plutôt
+// qu'une comparaison à `'vibration'` répétée — qui laisserait « vibration 2 »
+// défiler comme le régime dont elle n'est pas.
+const VIBRE   = TRANS.startsWith('vibration');
 const MOBILE  = matchMedia('(max-width:520px)').matches;
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -698,6 +706,81 @@ const PRESET_SORTIE = {
 };
 const COURBE_SORTIE = [0.291, 0.2388, 0.2864, 0.9742];
 
+// ── Sortie du régime « vibration » : la BRÛLURE ────────────────────────────
+// Réglage sorti du labo de combustion (design/lab/brulure.html → « Copier »),
+// repris verbatim. Deux clés seulement en sont extraites : `easing`, qui est la
+// courbe et non un paramètre du shader, et `ratioCadre`, donnée géométrique de
+// l'écran — le préréglage a été fait en 16:9, l'écran d'arrivée ne l'est pas,
+// et figer la valeur déformerait le front de flamme.
+//
+// ⚠️ Contrairement au pli, la brûlure va DANS LE SENS de la disparition :
+// progression 0 = affiche intacte, 1 = plus rien. La sortie se joue donc en
+// avant (`jouer`), là où le pli devait être piloté à l'envers de 1 vers 0.
+const PRESET_BRULURE = {
+  duree: 1800, retard: 0,
+  foyerX: 0.55, foyerY: -0.375, bordure: 0.2,
+  echelle: 5, desordre: 0.30000000000000004, detail: 0,
+  bulles: 0, echelleBulles: 6.894736842105264,
+  braise: 0.06, cloque: 0.1375, roussi: 0.1,
+  lueur: 2.4000000000000004, laitage: 0.1, moucheture: 0,
+  magma: 0.08263157894736842, echelleBulle: 24, satellites: 0,
+  distorsion: 1.5, perforation: 1.4, boursouflure: 2,
+  craquelures: 1.5, vernis: 0, gonflement: 0,
+  coulHalo: '#e8cf9a', coulCaramel: '#c98a3c', coulBraise: '#8c3d18',
+  coulCendre: '#241b18', coulCloque: '#d9e0e8',
+  delavage: 0, retraitBord: 0.15000000000000002, retraitGlobal: 0.2,
+  gondole: 0.5, largeurChaleur: 0.28, nbPlis: 1, echelleGondole: 5,
+  perspective: 0.30000000000000004,
+  lumiereX: -0.45, lumiereY: 0.7, ombre: 0.3, eclat: 0,
+  iriIntensite: 1.5, iriFresnel: 6, iriEchelle: 1.4, iriDecalage: 0.1,
+  grain: 0.045, opacite: 1, subdivisions: 64, rayon: 0.02,
+  debordement: 1.8,
+};
+const COURBE_BRULURE = [0.891282450674974, 0.16636882860124103,
+                        0.6438252855659398, 0.8013855785600529];
+
+// ── Sortie du régime « vibration 2 » ───────────────────────────────────────
+// Même mécanique, autre feu : 3 000 ms au lieu de 1 800, de grosses bulles
+// satellisées (échelle 45, satellites 1,5), un vernis franc et un délavage des
+// couleurs. La braise vire au brun très sombre et le halo au blanc chaud — la
+// brûlure se lit ici en cendre plutôt qu'en flamme. Le magma reste mince
+// (0,098, à peine plus que le premier feu) : c'est ce qui la garde en liseré
+// plutôt qu'en continent, malgré des bulles bien plus grosses.
+// Le repli est explicitement désarmé (`repli: 0`), l'affiche ne se rabat pas.
+const PRESET_BRULURE_2 = {
+  duree: 3000, retard: 0, combustion: 1,
+  foyerX: 0.55, foyerY: -0.375, bordure: 0.2,
+  echelle: 5, desordre: 0.4, detail: 0.30000000000000004,
+  bulles: 0.19999999999999998, echelleBulles: 3,
+  braise: 0.02, cloque: 0.07500000000000001, roussi: 0.1,
+  lueur: 2.8000000000000003, laitage: 0.5, moucheture: 0,
+  magma: 0.09815789473684211, echelleBulle: 45, satellites: 1.5,
+  distorsion: 0.5, perforation: 1.4, boursouflure: 2,
+  craquelures: 1.5, vernis: 1.5,
+  granulation: 0.19999999999999998, grainEchelle: 41.76470588235294,
+  gonflement: 0.07500000000000001,
+  coulHalo: '#fff4db', coulCaramel: '#996424', coulBraise: '#140606',
+  coulCendre: '#241b18', coulCloque: '#eff2f6',
+  delavage: 0.3, retraitBord: 0.2, retraitGlobal: 0,
+  gondole: 0.07500000000000001, largeurChaleur: 0.13,
+  nbPlis: 3, echelleGondole: 6, perspective: 0.35,
+  lumiereX: -0.45, lumiereY: 0.7, ombre: 0.45, eclat: 0.12,
+  iriIntensite: 1.5, iriFresnel: 2.2, iriEchelle: 1.6, iriDecalage: 0.1,
+  grain: 0.045, opacite: 1,
+  repli: 0, repliDebut: 0, repliCharniere: -0.4,
+  repliRayon: 0.32, repliInclinaison: 0,
+  subdivisions: 64, rayon: 0.02, debordement: 1.8,
+};
+const COURBE_BRULURE_2 = [0.9569768951194184, -0.00011807348014736263,
+                          0.8747196261682243, 0.9309561205997035];
+
+// Les deux feux, indexés par le régime qui les déclenche. Le tableau est la
+// SEULE liste : ajouter une variante ici suffit, l'aiguillage la trouve.
+const BRULURES = {
+  vibration:  { preset: PRESET_BRULURE,   courbe: COURBE_BRULURE },
+  vibration2: { preset: PRESET_BRULURE_2, courbe: COURBE_BRULURE_2 },
+};
+
 /** object-fit:cover sur un contexte 2D. */
 function couvrir(g, img, x, y, w, h, px = .5, py = .5) {
   const ri = img.naturalWidth / img.naturalHeight, rb = w / h;
@@ -852,16 +935,48 @@ async function capturerIntro(rideau) {
 }
 
 /**
- * Plie l'écran d'arrivée et l'emporte. Retombe sur le fondu CSS si le WebGL
- * manque ou si la capture échoue — la sortie ne doit JAMAIS rester bloquée.
+ * Fait dériver le canvas de 60 px vers le HAUT pendant toute la durée de
+ * l'effet, et pas une milliseconde de plus : le mouvement s'arrête exactement
+ * quand le shader s'arrête, sinon on verrait la matière continuer de glisser
+ * alors qu'il n'y a plus rien à glisser.
+ *
+ * Réservé au PLI (régime « défilement »). Les brûlures n'en veulent pas : elles
+ * déplacent déjà la matière par elles-mêmes.
+ *
+ * Porté par la propriété `translate` et non par `transform` : le canvas est
+ * centré par `transform:translate(-50%,-50%)` (posé dans son cssText), et les
+ * deux longhands se COMPOSENT au lieu de s'écraser. Écrire la dérive dans
+ * `transform` obligerait à recopier le centrage à chaque image — une seule
+ * valeur oubliée et le canvas saute d'un demi-écran.
  */
-async function sortirEnTissu(rideau) {
+function deriveVersLeHaut(canvas, duree) {
+  canvas.style.translate = '0 0';
+  void canvas.offsetWidth;                       // fige l'état de départ
+  canvas.style.transition = `translate ${duree}ms cubic-bezier(.4,0,.2,1)`;
+  requestAnimationFrame(() => { canvas.style.translate = '0 -60px'; });
+}
+
+/**
+ * Emporte l'écran d'arrivée. Le régime de transition choisit l'effet :
+ *   — « défilement » → le PLI, l'étoffe qui se retire (cloth.js) ;
+ *   — « vibration »  → la BRÛLURE, l'écran consumé (brulure.js).
+ * Retombe sur le fondu CSS si le WebGL manque ou si la capture échoue — la
+ * sortie ne doit JAMAIS rester bloquée.
+ *
+ * Les deux effets partagent tout ce qui précède l'animation : la capture, le
+ * canvas surdimensionné par `debordement`, l'escamotage de l'écran réel. Seul
+ * le trajet diffère, et il diffère de SENS — d'où deux fins distinctes.
+ */
+async function emporterEcran(rideau) {
   if (!webglOk) return false;
   const W = rideau.clientWidth, H = rideau.clientHeight;
   const url = await capturerIntro(rideau);
   if (!url) return false;
 
-  const p = { ...CLOTH_DEFAUTS, ...PRESET_SORTIE };
+  const feu = BRULURES[TRANS];
+  const p = feu ? { ...BRULURE_DEFAUTS, ...feu.preset }
+                : { ...CLOTH_DEFAUTS, ...PRESET_SORTIE };
+  if (feu) return brulerEcran(rideau, p, W, H, url, feu.courbe);
   const canvas = document.createElement('canvas');
   canvas.setAttribute('aria-hidden', 'true');
   canvas.style.cssText = `position:absolute;left:50%;top:50%;z-index:20;pointer-events:none;
@@ -874,6 +989,7 @@ async function sortirEnTissu(rideau) {
   // L'écran réel disparaît à l'image près où le pli prend le relais.
   [...rideau.children].forEach(el => { if (el !== canvas) el.style.visibility = 'hidden'; });
   rideau.style.background = 'transparent';
+  deriveVersLeHaut(canvas, p.duree);
 
   // `jouer()` ne va que du froissé vers le posé. La sortie est le trajet
   // INVERSE : on pilote `figer()` à la main, de 1 vers 0.
@@ -890,6 +1006,36 @@ async function sortirEnTissu(rideau) {
       else { canvas.remove(); cloth.detruire(); res(true); }
     };
     requestAnimationFrame(boucle);
+  });
+}
+
+/**
+ * Consume l'écran d'arrivée. Le trajet est celui du module, joué EN AVANT :
+ * la brûlure détruit par construction, il n'y a rien à inverser. Pas de fondu
+ * de fin non plus — le shader garantit qu'il ne reste pas un confetti au
+ * dernier dixième, un fondu par-dessus escamoterait justement la fin du feu.
+ */
+async function brulerEcran(rideau, p, W, H, url, courbe) {
+  const canvas = document.createElement('canvas');
+  canvas.setAttribute('aria-hidden', 'true');
+  canvas.style.cssText = `position:absolute;left:50%;top:50%;z-index:20;pointer-events:none;
+    transform:translate(-50%,-50%);width:${Math.round(W * p.debordement)}px;height:${Math.round(H * p.debordement)}px;`;
+  const brulure = creerBrulure(canvas, { ...p, ratioCadre: W / H });
+  if (!brulure) return false;
+  try { await brulure.charger(url); } catch (_) { brulure.detruire(); return false; }
+
+  rideau.appendChild(canvas);
+  // L'écran réel disparaît à l'image près où le feu prend le relais.
+  [...rideau.children].forEach(el => { if (el !== canvas) el.style.visibility = 'hidden'; });
+  rideau.style.background = 'transparent';
+  // Pas de dérive verticale ici : elle est propre au PLI. Le feu travaille déjà
+  // la géométrie (retrait des bords, gondole, gonflement) — un glissement
+  // d'ensemble par-dessus se lit comme un décrochage, pas comme une combustion.
+
+  return new Promise(res => {
+    brulure.jouer(courbe, () => {
+      canvas.remove(); brulure.detruire(); res(true);
+    });
   });
 }
 
@@ -990,7 +1136,7 @@ async function protoFenetre(hote, data) {
   bobine.querySelectorAll('.fn-photo').forEach(ph => { ph.style.flex = `0 0 ${H}px`; });
   // En vibration les photogrammes sont empilés, pas enfilés : la classe bascule
   // toute la géométrie de la bande d'un régime à l'autre.
-  if (mode === 'saccade' && TRANS === 'vibration') cadre.classList.add('vib');
+  if (mode === 'saccade' && VIBRE) cadre.classList.add('vib');
   const pas = H + inter;
   const decalage = i => `translateY(${-(origine + i) * pas}px)`;
 
@@ -1052,7 +1198,7 @@ async function protoFenetre(hote, data) {
   };
 
   const avancerSaccade = () =>
-    TRANS === 'vibration' ? avancerVibration() : avancerDefilement();
+    VIBRE ? avancerVibration() : avancerDefilement();
 
   // ── Entraînement « tissu » ───────────────────────────────────────────────
   // UN SEUL contexte WebGL pour toute la séquence : on recharge la texture dans
@@ -1123,8 +1269,9 @@ async function protoFenetre(hote, data) {
     if (cloth) { canvas.remove(); cloth.detruire(); }
     // Le pli de sortie emporte l'écran ENTIER. S'il ne peut pas jouer (WebGL
     // absent, capture teintée), on retombe sur le fondu — jamais bloqué.
-    const plie = await sortirEnTissu(rideau);
-    console.info('[labo] sortie :', plie ? 'pli WebGL' : 'fondu (repli)');
+    const plie = await emporterEcran(rideau);
+    console.info('[labo] sortie :',
+      plie ? (VIBRE ? `brûlure WebGL (${TRANS})` : 'pli WebGL') : 'fondu (repli)');
     if (!plie) { rideau.classList.add('parti'); setTimeout(() => rideau.remove(), 700); }
     else rideau.remove();
   }
@@ -1261,7 +1408,7 @@ async function lancerSolo() {
   // Poignées de labo : inspecter la capture et rejouer la sortie à la main.
   // `capturerIntro()` renvoie une data-URL — la coller dans un onglet suffit à
   // juger si la rasterisation ment sur ce qu'on voit.
-  window.__labo = { capturerIntro, sortirEnTissu };
+  window.__labo = { capturerIntro, emporterEcran };
   const hote = document.createElement('div');
   hote.id = 'solo';
   document.getElementById('racine').replaceWith(hote);
@@ -1290,6 +1437,7 @@ function lancerBanc() {
       <div class="seg" id="ongTrans">
         <button data-t="defilement" class="on">Défilement</button>
         <button data-t="vibration">Vibration</button>
+        <button data-t="vibration2">Vibration 2</button>
       </div>
       <button class="b" id="rejouer">↻ Rejouer</button>
       <label class="bascule"><input type="checkbox" id="hold"> Garder à l'écran</label>
