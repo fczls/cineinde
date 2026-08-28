@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Labo — film brûlé · CinéInde</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400,500&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════════════════════════════
+   LABO — page de développement, non lintée par check_tokens.py (qui ne couvre
+   que src/components.css). Les valeurs brutes sont donc assumées ici : ce n'est
+   pas un composant de production, c'est un banc de réglage. Les commandes sont
+   reprises telles quelles de design/lab/cloth.html — même geste, même page.
+   ═══════════════════════════════════════════════════════════════════════════ */
+:root{
+  --bg:#0c0b0b; --bg2:#141312; --bg3:#1c1a19; --bg4:#262421;
+  --texte:#eceae4; --texte2:#a8a49c; --texte3:#6f6b64;
+  --trait:#2a2724; --accent:#e0794a; --pouce:#d6d2c4;
+  --radius-lg:16px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{
+  background:var(--bg);color:var(--texte);
+  font-family:'DM Sans',system-ui,sans-serif;font-size:14px;
+  display:grid;grid-template-columns:1fr 380px;min-height:100vh;
+}
+@media(max-width:1000px){ body{grid-template-columns:1fr;} }
+
+/* ── Scène ────────────────────────────────────────────────────────────── */
+.scene{
+  position:relative;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:28px;padding:56px 24px 40px;
+  background:radial-gradient(120% 90% at 50% 30%, #171512 0%, var(--bg) 70%);
+  overflow:hidden;
+}
+/* Fonds d'épreuve : la brûlure produit de l'ALPHA, et un trou ne se juge que
+   sur ce qu'il laisse voir. Un seul fond sombre mentirait sur les bords. */
+.scene.clair{background:radial-gradient(120% 90% at 50% 30%, #f4f1ea 0%, #cfcabe 70%);}
+.scene.damier{
+  background:
+    conic-gradient(#2a2724 0 25%, #171512 0 50%) 0 0/24px 24px,
+    var(--bg);
+}
+.scene-tag{
+  position:absolute;top:20px;left:24px;
+  font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--texte3);
+}
+.fps{position:absolute;top:20px;right:24px;font-family:'DM Mono',monospace;font-size:11px;color:var(--texte3);}
+
+.plateau{position:relative;display:flex;align-items:center;justify-content:center;}
+.plateau canvas{display:block;}
+/* Repère du cadre réel, pour juger le débordement et le retrait des bords. */
+.cadre{
+  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  border:1px dashed rgba(255,120,60,.45);border-radius:var(--radius-lg);
+  pointer-events:none;opacity:0;transition:opacity .2s;
+}
+.plateau.repere .cadre{opacity:1;}
+
+/* Planche de poses — six arrêts sur image, la seule façon honnête de juger une
+   transition destructrice : à pleine vitesse, l'œil pardonne tout. */
+.planche{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;min-height:0;}
+.planche figure{text-align:center;}
+.planche canvas{
+  display:block;border-radius:8px;background:rgba(255,255,255,.03);
+  box-shadow:0 2px 10px rgba(0,0,0,.35);
+}
+.planche figcaption{
+  font-family:'DM Mono',monospace;font-size:10px;color:var(--texte3);margin-top:4px;
+}
+
+/* ── Panneau ──────────────────────────────────────────────────────────── */
+.panneau{
+  background:var(--bg2);border-left:1px solid var(--trait);
+  /* Pas de padding-haut : il laisserait la barre collante se caler 20px plus
+     bas, et le contenu défilerait dans la fente. */
+  padding:0 18px 60px;overflow-y:auto;max-height:100vh;
+}
+.panneau h1{
+  font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--texte2);margin:20px 0 4px;
+}
+.panneau .sous{font-size:12px;color:var(--texte3);margin-bottom:20px;line-height:1.5;}
+
+.groupe{margin-bottom:22px;}
+.groupe > h2{
+  font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--texte3);
+  padding-bottom:8px;margin-bottom:12px;border-bottom:1px solid var(--trait);
+}
+
+/* ── Potard (repris de cloth.html) ────────────────────────────────────── */
+.pot{margin-bottom:14px;}
+.pot-tete{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px;gap:8px;position:relative;}
+.pot-min,.pot-max{font-size:12.5px;color:var(--texte2);white-space:nowrap;}
+.pot-max{text-align:right;}
+.pot-val{
+  font-family:'DM Mono',monospace;font-size:11px;color:var(--texte3);
+  position:absolute;left:50%;transform:translateX(-50%);
+}
+.pot-rail{
+  position:relative;height:40px;border-radius:12px;
+  background:var(--bg3);border:1px solid var(--trait);
+  cursor:pointer;touch-action:none;user-select:none;
+}
+.pot-rail:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
+.pot-cran{
+  position:absolute;top:50%;width:5px;height:5px;border-radius:50%;
+  background:#4a4640;transform:translate(-50%,-50%);pointer-events:none;
+}
+.pot-cran.fin{background:var(--accent);}
+.pot-pouce{
+  position:absolute;top:50%;width:26px;height:30px;border-radius:8px;
+  background:var(--pouce);transform:translate(-50%,-50%);
+  pointer-events:none;transition:left .12s cubic-bezier(.33,0,.2,1);
+  box-shadow:0 2px 6px rgba(0,0,0,.4);
+}
+.pot-rail.saisi .pot-pouce{transition:none;}
+
+/* ── Nuancier ─────────────────────────────────────────────────────────── */
+.nuance{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+.nuance label{flex:1;font-size:12.5px;color:var(--texte2);}
+.nuance input[type=color]{
+  width:44px;height:30px;padding:0;border:1px solid var(--trait);
+  border-radius:8px;background:none;cursor:pointer;
+}
+.nuance code{font-family:'DM Mono',monospace;font-size:10.5px;color:var(--texte3);}
+
+/* ── Boutons & divers ─────────────────────────────────────────────────── */
+.rangee{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;}
+.barre-actions{
+  position:sticky;top:0;z-index:20;
+  margin:0 -18px 12px;padding:12px 18px;
+  background:var(--bg2);border-bottom:1px solid var(--trait);
+}
+button.b{
+  flex:1;min-width:0;font-family:'DM Sans',sans-serif;font-size:12.5px;font-weight:500;
+  padding:10px 12px;border-radius:10px;border:1px solid var(--trait);
+  background:var(--bg3);color:var(--texte);cursor:pointer;transition:background .15s,border-color .15s;
+}
+button.b:hover{background:var(--bg4);border-color:#3a3733;}
+button.b.actif{background:var(--pouce);color:#17150f;border-color:var(--pouce);}
+button.b.primaire{background:var(--accent);border-color:var(--accent);color:#1a0e07;}
+.vignettes{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px;}
+.vignettes img{
+  width:38px;height:57px;object-fit:cover;border-radius:6px;cursor:pointer;
+  border:2px solid transparent;opacity:.5;transition:opacity .15s,border-color .15s;
+}
+.vignettes img.actif{opacity:1;border-color:var(--pouce);}
+textarea{
+  width:100%;height:120px;background:var(--bg);color:var(--texte2);
+  border:1px solid var(--trait);border-radius:10px;padding:10px;
+  font-family:'DM Mono',monospace;font-size:11px;line-height:1.5;resize:vertical;
+}
+.note{font-size:11.5px;color:var(--texte3);line-height:1.5;margin-top:8px;}
+
+/* ── Éditeur de Bézier ────────────────────────────────────────────────── */
+.bez{background:var(--bg3);border:1px solid var(--trait);border-radius:12px;padding:10px;}
+.bez svg{display:block;width:100%;height:auto;touch-action:none;cursor:crosshair;}
+.bez .zone{fill:rgba(255,255,255,.02);}
+.bez .repere{stroke:var(--trait);stroke-width:1;}
+.bez .repere.plein{stroke:#3a3733;}
+.bez .lien{stroke:var(--texte3);stroke-width:1.5;stroke-dasharray:3 3;}
+.bez .courbe{fill:none;stroke:var(--pouce);stroke-width:2.5;stroke-linecap:round;}
+.bez .poignee{fill:var(--accent);stroke:#fff;stroke-width:1.5;cursor:grab;}
+.bez .ancre{fill:var(--texte3);}
+.bez-val{
+  font-family:'DM Mono',monospace;font-size:10.5px;color:var(--texte2);
+  text-align:center;margin-top:8px;word-break:break-all;
+}
+.err{color:#e0796a;font-size:12px;line-height:1.5;text-align:center;max-width:520px;}
+</style>
+</head>
+<body>
+
+<div class="scene" id="scene">
+  <div class="scene-tag">Labo · film brûlé · disparition d'une affiche</div>
+  <div class="fps" id="fps"></div>
+
+  <div class="plateau" id="plateau">
+    <canvas id="cv"></canvas>
+    <div class="cadre" id="cadre"></div>
+  </div>
+
+  <div class="planche" id="planche"></div>
+  <div class="err" id="err"></div>
+</div>
+
+<div class="panneau">
+  <h1>Réglages</h1>
+  <p class="sous">La combustion se règle ici, puis s'exporte en JSON.
+    Le module rendu est <code>src/brulure.js</code> — le même qu'en production.
+    Il est le pendant de <code>cloth.js</code> : celui-ci fait apparaître,
+    celui-là fait <em>disparaître</em>.</p>
+
+  <div class="rangee barre-actions">
+    <button class="b primaire" id="rejouer">Rejouer</button>
+    <button class="b" id="boucler">Boucle</button>
+    <button class="b" id="repere">Cadre</button>
+    <button class="b" id="fond">Fond</button>
+  </div>
+
+  <div class="groupe">
+    <h2>Format</h2>
+    <div class="rangee" id="formats"></div>
+    <p class="note">Le cadre impose la géométrie ; l'affiche y est
+      <em>recadrée</em> (cover, calée en haut), jamais déformée. Un même réglage
+      doit tenir de la vignette d'éventail à l'écran entier — c'est là que se
+      voient les largeurs de liseré mal choisies.</p>
+  </div>
+
+  <div class="groupe">
+    <h2>Affiche</h2>
+    <div class="vignettes" id="vignettes"></div>
+  </div>
+
+  <div class="groupe">
+    <h2>Progression (scrub)</h2>
+    <div id="g-scrub"></div>
+    <div class="rangee"><button class="b" id="tirer">Tirer la planche</button></div>
+    <p class="note">Six arrêts sur image sous la scène. Une transition qui
+      détruit se juge posée : à pleine vitesse, l'œil pardonne tout.</p>
+  </div>
+
+  <div class="groupe">
+    <h2>Temps</h2>
+    <div id="g-temps"></div>
+    <div class="bez" id="bezier"></div>
+    <div class="bez-val" id="bezierVal"></div>
+    <div class="rangee" id="easings"></div>
+    <p class="note">Un feu <strong>accélère</strong> : il prend lentement puis
+      emporte tout. C'est une courbe qui monte tard, l'inverse de la
+      décélération du dépliage. Le dépassement au-dessus de 1 ne sert à rien
+      ici — il n'y a rien au-delà du vide.</p>
+  </div>
+
+  <div class="groupe">
+    <h2>Où le feu prend</h2>
+    <div id="g-foyer"></div>
+    <p class="note">« Pourtour » arbitre entre deux amorçages : à 0 le feu part
+      du seul foyer, en tache ; à 1 il part de <em>tous les bords</em> et mange
+      vers le cœur — la pellicule qui se rétracte.</p>
+  </div>
+
+  <div class="groupe">
+    <h2>Forme du front</h2>
+    <div id="g-front"></div>
+    <p class="note">« Bouillonnement » sème des cellules rondes dans le champ :
+      le front mord par bouchées au lieu d'avancer en ligne. C'est ce qui
+      distingue une brûlure d'un simple masque animé.</p>
+  </div>
+
+  <div class="groupe">
+    <h2>Matière brûlée</h2>
+    <div id="g-magma"></div>
+    <p class="note">Derrière le front, ce n'est pas un trou : c'est un
+      <strong>dépôt de résine figée</strong>, boursouflé et vitrifié. Le trou ne
+      vient qu'après, quand ce charbon a fini de se consumer et se détache.
+      « Épaisseur » décide si la brûlure est un liseré ou un continent.</p>
+    <p class="note">Les bulles suivent la dévolatilisation des polymères
+      fondus : elles nucléent, grossissent et <em>coalescent</em> tant qu'elles
+      restent au chaud — leur taille suit donc l'ancienneté de la brûlure, le
+      front n'a que des piqûres. Et une macro-bulle grossit en avalant les
+      micro-bulles nées autour d'elle : c'est « Grappes serrées » qui produit
+      les amas des références, qu'une seule échelle de bruit ne donne jamais.</p>
+    <p class="note">Les bulles sont des <strong>vides</strong> : elles
+      absorbent, elles n'ont pas de couleur propre. Une bulle claire se lit
+      comme une perle <em>posée</em> sur la matière — un objet éclairé, pas un
+      creux — et c'est ce qui donnait à la brûlure son air de rendu 3D.</p>
+    <p class="note">Le <strong>grain</strong> module la dose <em>en amont</em>,
+      donc la couleur, la taille des bulles et le percement en héritent tous, et
+      il hache le spéculaire. C'est le principal antidote à l'effet calculé :
+      un dégradé analytique parfaitement lisse ne ressemble à aucune matière
+      réelle, et teinter après coup n'y change rien — il faut que
+      l'irrégularité entre dans le modèle.</p>
+    <p class="note">Chaque bulle a sa <strong>chronologie</strong> : elle
+      nucléé à sa propre dose, se déforme en grossissant, sa paroi s'amincit,
+      puis elle <strong>rompt</strong> — dôme, cratère, trou traversant.
+      « Perforation » décide si la matière finit en dentelle ou en croûte
+      pleine. Sans ce dernier passage, les bulles restent des grumeaux dans
+      une pâte : elles grossissent sans jamais devenir autre chose.</p></div>
+
+  <div class="groupe">
+    <h2>Bandes du front</h2>
+    <div id="g-bandes"></div>
+    <div id="g-couleurs"></div>
+    <p class="note">Quatre largeurs qui s'empilent depuis le trou vers
+      l'extérieur : <strong>cendre</strong> (remplace l'image),
+      <strong>braise</strong> (s'ajoute — elle émet), <strong>cloque</strong>,
+      <strong>roussi</strong> (tous deux teintent l'image encore là).
+      Unité : <strong>1.0 = la hauteur du cadre</strong> — donc 0.05 vaut 13 px
+      sur une affiche de 254 px, et le même réglage tient sur l'écran entier.</p>
+    <p class="note">La <strong>cloque</strong> est ce qui sépare le film du
+      papier, et le photoréalisme du pixel art. Le papier <em>fonce</em> en
+      roussissant ; la gélatine, elle, <em>se décolore</em> et vire au laiteux
+      — plus claire que l'image. C'est la zone la plus large des références :
+      la brûlure s'y détache en faible contraste au lieu de trancher sur une
+      image restée saturée. À 0, on retombe sur du papier brûlé.</p>
+  </div>
+
+  <div class="groupe">
+    <h2>Matière chauffée</h2>
+    <div id="g-matiere"></div>
+    <p class="note">« Retrait des bords » pousse la matière chaude à l'opposé du
+      feu : c'est lui, et lui seul, qui fait que les bords se
+      <em>contractent</em> au lieu de rester découpés net. Il se lit comme la
+      <strong>compression</strong> subie au front — à 0.9 la matière n'y garde
+      qu'un dixième de sa longueur, et le liseré s'écrase avec elle.</p>
+  </div>
+
+  <div class="groupe">
+    <h2>Repli</h2>
+    <div id="g-repli"></div>
+    <p class="note">On saisit le bord <strong>bas</strong> et on le rabat sur le
+      bord haut. La pliure a un <strong>rayon</strong>, ce n'est pas une
+      charnière : la feuille roule sur un arc puis repart droite, tangente. Le
+      pli reste <em>développable</em> — chaque point garde son abscisse
+      curviligne, donc le papier ne s'étire nulle part. C'est le rayon qui fait
+      l'ampleur du geste : à 0 il casse, large il se déploie comme un rouleau.</p>
+    <p class="note">À 180° le bord bas s'arrête à <code>πR</code> du bord haut :
+      le rouleau consomme du papier, c'est juste. Passé 90°, c'est le
+      <strong>revers</strong> du papier qu'on voit — sans image. Mettre
+      « À plat » à 0 désactive tout le repli.</p>
+  </div>
+
+  <div class="groupe"><h2>Lumière</h2><div id="g-lum"></div></div>
+  <div class="groupe">
+    <h2>Irisation</h2>
+    <div id="g-iri"></div>
+    <p class="note">Le voile d'huile de la gélatine bouillie, cantonné au
+      pourtour du trou.</p>
+  </div>
+  <div class="groupe"><h2>Image &amp; rendu</h2><div id="g-rendu"></div></div>
+
+  <div class="groupe">
+    <h2>Comparaison A / B</h2>
+    <div class="rangee">
+      <button class="b" id="memA">Mémoriser A</button>
+      <button class="b" id="memB">Mémoriser B</button>
+    </div>
+    <div class="rangee">
+      <button class="b" id="voirA">Voir A</button>
+      <button class="b" id="voirB">Voir B</button>
+    </div>
+  </div>
+
+  <div class="groupe">
+    <h2>Preset</h2>
+    <div class="rangee">
+      <button class="b" id="copier">Copier</button>
+      <button class="b" id="appliquer">Appliquer</button>
+      <button class="b" id="defauts">Défauts</button>
+    </div>
+    <textarea id="json" spellcheck="false"></textarea>
+    <p class="note">Ce JSON est le livrable du labo : il se colle tel quel dans
+      <code>design/brulure-preset.json</code> à l'intégration.</p>
+  </div>
+</div>
+
+<script type="module">
+import { creerBrulure, BRULURE_DEFAUTS, COURBES } from '../../src/brulure.js';
+
+// ── Affiches de test ───────────────────────────────────────────────────────
+// Uniquement des origines qui servent `Access-Control-Allow-Origin` : une
+// affiche sans CORS ne peut PAS devenir une texture.
+const AFFICHES = [
+  'https://all.web.img.acsta.net/pictures/23/06/27/16/09/1673570.jpg',
+  'https://all.web.img.acsta.net/pictures/24/02/08/15/26/2913149.jpg',
+  'https://all.web.img.acsta.net/pictures/19/06/28/12/11/5522147.jpg',
+  'https://cms-assets.webediamovies.pro/production/945/199dcdf2ccfe9698fd70bc9871e4fff7.jpg',
+  'https://all.web.img.acsta.net/pictures/18/10/15/17/05/4135981.jpg',
+  '../../assets/visual-fallback.webp',
+];
+
+// Les trois échelles auxquelles l'effet doit tenir. Un liseré réglé sur la
+// vignette d'éventail devient une bordure de deuil sur l'écran entier — d'où
+// le passage obligé par les trois.
+const FORMATS = {
+  affiche: { l: 170, h: 254, rayon: 0.094, lbl: 'Affiche 170×254' },
+  ecran:   { l: 380, h: 676, rayon: 0.03,  lbl: 'Écran 9:16' },
+  bandeau: { l: 640, h: 360, rayon: 0.02,  lbl: 'Bandeau 16:9' },
+};
+
+// ── Potard segmenté ────────────────────────────────────────────────────────
+// Crans discrets plutôt qu'une course continue : un réglage se retrouve, se
+// note et se rejoue. Maj enfoncée = course fine.
+function potard({ parent, min, max, crans = 11, valeur, labelMin, labelMax, unite = '', onChange }) {
+  const wrap = document.createElement('div');
+  wrap.className = 'pot';
+  wrap.innerHTML = `
+    <div class="pot-tete">
+      <span class="pot-min"></span>
+      <span class="pot-val"></span>
+      <span class="pot-max"></span>
+    </div>
+    <div class="pot-rail" tabindex="0" role="slider"><div class="pot-pouce"></div></div>`;
+  wrap.querySelector('.pot-min').textContent = labelMin;
+  wrap.querySelector('.pot-max').textContent = labelMax;
+  parent.appendChild(wrap);
+
+  const rail  = wrap.querySelector('.pot-rail');
+  const pouce = wrap.querySelector('.pot-pouce');
+  const val   = wrap.querySelector('.pot-val');
+  const MARGE = 18;   // demi-largeur du pouce + respiration
+
+  for (let i = 0; i < crans; i++) {
+    const d = document.createElement('div');
+    d.className = 'pot-cran' + (i === crans - 1 ? ' fin' : '');
+    d.style.left = `calc(${MARGE}px + ${(i / (crans - 1)).toFixed(4)} * (100% - ${MARGE * 2}px))`;
+    rail.appendChild(d);
+  }
+
+  let v = valeur;
+  const pas = (max - min) / (crans - 1);
+
+  function rendre() {
+    const f = (v - min) / (max - min);
+    pouce.style.left = `calc(${MARGE}px + ${Math.min(1, Math.max(0, f)).toFixed(4)} * (100% - ${MARGE * 2}px))`;
+    const ampl = Math.abs(max - min);
+    const dec = ampl >= 100 ? 0 : ampl >= 10 ? 1 : ampl >= 1 ? 2 : 3;
+    val.textContent = v.toFixed(dec) + unite;
+    rail.setAttribute('aria-valuenow', String(v));
+  }
+
+  function poser(nv, fin) {
+    const clamp = Math.min(max, Math.max(min, nv));
+    const q = fin ? clamp : Math.round((clamp - min) / pas) * pas + min;
+    v = Math.min(max, Math.max(min, q));
+    rendre();
+    onChange(v);
+  }
+
+  function depuisX(clientX, fin) {
+    const r = rail.getBoundingClientRect();
+    const f = (clientX - r.left - MARGE) / (r.width - MARGE * 2);
+    poser(min + f * (max - min), fin);
+  }
+
+  rail.addEventListener('pointerdown', e => {
+    rail.setPointerCapture(e.pointerId);
+    rail.classList.add('saisi');
+    depuisX(e.clientX, e.shiftKey);
+  });
+  rail.addEventListener('pointermove', e => {
+    if (!rail.hasPointerCapture(e.pointerId)) return;
+    depuisX(e.clientX, e.shiftKey);
+  });
+  rail.addEventListener('pointerup', e => {
+    rail.releasePointerCapture(e.pointerId);
+    rail.classList.remove('saisi');
+  });
+  rail.addEventListener('keydown', e => {
+    const d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+    if (!d) return;
+    e.preventDefault();
+    poser(v + d * pas * (e.shiftKey ? 0.1 : 1), e.shiftKey);
+  });
+
+  rendre();
+  return { poser: nv => { v = nv; rendre(); }, valeur: () => v };
+}
+
+// ── Nuancier ───────────────────────────────────────────────────────────────
+function nuancier({ parent, label, valeur, onChange }) {
+  const wrap = document.createElement('div');
+  wrap.className = 'nuance';
+  wrap.innerHTML = `<label></label><code></code><input type="color">`;
+  wrap.querySelector('label').textContent = label;
+  parent.appendChild(wrap);
+  const input = wrap.querySelector('input');
+  const code  = wrap.querySelector('code');
+  const rendre = v => { input.value = v; code.textContent = v; };
+  input.addEventListener('input', () => { code.textContent = input.value; onChange(input.value); });
+  rendre(valeur);
+  return { poser: rendre, valeur: () => input.value };
+}
+
+// ── Éditeur de Bézier (repris de cloth.html) ───────────────────────────────
+function editeurBezier({ parent, valeur, onChange }) {
+  const W = 300, H = 260, M = 26;
+  const YMIN = -0.55, YMAX = 1.55;
+  const NS = 'http://www.w3.org/2000/svg';
+
+  const px = x => M + x * W;
+  const py = y => M + H * (YMAX - y) / (YMAX - YMIN);
+  const ix = sx => (sx - M) / W;
+  const iy = sy => YMAX - (sy - M) / H * (YMAX - YMIN);
+
+  const svg = document.createElementNS(NS, 'svg');
+  svg.setAttribute('viewBox', `0 0 ${W + M * 2} ${H + M * 2}`);
+  const el = (t, a) => { const n = document.createElementNS(NS, t);
+    for (const k in a) n.setAttribute(k, a[k]); svg.appendChild(n); return n; };
+
+  el('rect', { class: 'zone', x: M, y: py(1), width: W, height: py(0) - py(1) });
+  el('line', { class: 'repere plein', x1: M, y1: py(0), x2: M + W, y2: py(0) });
+  el('line', { class: 'repere plein', x1: M, y1: py(1), x2: M + W, y2: py(1) });
+  el('line', { class: 'repere', x1: M, y1: py(YMAX), x2: M, y2: py(YMIN) });
+  el('line', { class: 'repere', x1: M + W, y1: py(YMAX), x2: M + W, y2: py(YMIN) });
+
+  const lien1 = el('line', { class: 'lien' });
+  const lien2 = el('line', { class: 'lien' });
+  const trace = el('path', { class: 'courbe' });
+  el('circle', { class: 'ancre', cx: px(0), cy: py(0), r: 3.5 });
+  el('circle', { class: 'ancre', cx: px(1), cy: py(1), r: 3.5 });
+  const p1 = el('circle', { class: 'poignee', r: 8 });
+  const p2 = el('circle', { class: 'poignee', r: 8 });
+
+  parent.appendChild(svg);
+  let v = [...valeur];
+
+  function rendre() {
+    const [x1, y1, x2, y2] = v;
+    p1.setAttribute('cx', px(x1)); p1.setAttribute('cy', py(y1));
+    p2.setAttribute('cx', px(x2)); p2.setAttribute('cy', py(y2));
+    lien1.setAttribute('x1', px(0)); lien1.setAttribute('y1', py(0));
+    lien1.setAttribute('x2', px(x1)); lien1.setAttribute('y2', py(y1));
+    lien2.setAttribute('x1', px(1)); lien2.setAttribute('y1', py(1));
+    lien2.setAttribute('x2', px(x2)); lien2.setAttribute('y2', py(y2));
+    let d = '';
+    for (let i = 0; i <= 60; i++) {
+      const s = i / 60, u = 1 - s;
+      const bx = 3 * u * u * s * x1 + 3 * u * s * s * x2 + s * s * s;
+      const by = 3 * u * u * s * y1 + 3 * u * s * s * y2 + s * s * s;
+      d += (i ? 'L' : 'M') + px(bx).toFixed(1) + ' ' + py(by).toFixed(1) + ' ';
+    }
+    trace.setAttribute('d', d);
+  }
+
+  let saisi = -1;
+  function placer(e) {
+    if (saisi < 0) return;
+    const r = svg.getBoundingClientRect();
+    const sx = (e.clientX - r.left) / r.width  * (W + M * 2);
+    const sy = (e.clientY - r.top)  / r.height * (H + M * 2);
+    v[saisi]     = Math.min(1, Math.max(0, ix(sx)));
+    v[saisi + 1] = Math.min(YMAX, Math.max(YMIN, iy(sy)));
+    rendre(); onChange([...v]);
+  }
+  function saisir(poignee, idx) {
+    poignee.addEventListener('pointerdown', e => {
+      saisi = idx;
+      try { poignee.setPointerCapture(e.pointerId); } catch (_) {}
+      e.preventDefault();
+      placer(e);
+    });
+  }
+  saisir(p1, 0); saisir(p2, 2);
+  svg.addEventListener('pointermove', placer);
+  const relacher = () => { saisi = -1; };
+  svg.addEventListener('pointerup', relacher);
+  svg.addEventListener('pointercancel', relacher);
+  window.addEventListener('pointerup', relacher);
+
+  rendre();
+  return { poser: nv => { v = [...nv]; rendre(); }, valeur: () => [...v] };
+}
+
+// ── État ───────────────────────────────────────────────────────────────────
+let P = { ...BRULURE_DEFAUTS };
+// Un feu accélère : il prend lentement puis emporte tout. C'est le contraire
+// de la décélération du dépliage, d'où un point de départ à part.
+let easing = [0.42, 0.05, 0.62, 0.72];
+let idxAffiche = 0;
+let boucle = false;
+let format = 'affiche';
+const potards = {};
+const nuances = {};
+
+const cv      = document.getElementById('cv');
+const scene   = document.getElementById('scene');
+const plateau = document.getElementById('plateau');
+const cadreEl = document.getElementById('cadre');
+const err     = document.getElementById('err');
+
+const brul = creerBrulure(cv, P);
+if (!brul) {
+  err.textContent = 'WebGL2 indisponible sur ce navigateur — le labo ne peut pas tourner.';
+}
+
+// Le canvas déborde le cadre du facteur `debordement` : le film gondolé et les
+// bords qui reculent doivent avoir de la place pour sortir sans être coupés.
+function dimensionner() {
+  const F = FORMATS[format];
+  P.ratioCadre = F.l / F.h;
+  const k = P.debordement;
+  cv.style.width  = Math.round(F.l * k) + 'px';
+  cv.style.height = Math.round(F.h * k) + 'px';
+  cadreEl.style.width  = F.l + 'px';
+  cadreEl.style.height = F.h + 'px';
+  brul?.regler({ ratioCadre: P.ratioCadre });
+  brul?.redessiner();
+}
+
+function chargerAffiche() {
+  err.textContent = '';
+  brul?.charger(AFFICHES[idxAffiche])
+    .then(() => { dimensionner(); rejouer(); })
+    .catch(e => { err.textContent = 'Affiche non chargée (CORS ou 404) : ' + e.message; });
+}
+
+function rejouer() {
+  brul?.jouer(easing, () => { if (boucle) setTimeout(rejouer, 700); });
+}
+
+// ── Planche de poses ───────────────────────────────────────────────────────
+// `figer()` dessine de façon SYNCHRONE ; tant qu'on ne rend pas la main au
+// navigateur, le tampon de dessin n'est pas effacé (il ne l'est qu'à la
+// composition). Les six copies se font donc dans la même tâche, sans avoir à
+// payer `preserveDrawingBuffer` sur toute la session.
+const POSES = [0.12, 0.28, 0.44, 0.60, 0.76, 0.92];
+function tirerPlanche() {
+  if (!brul) return;
+  const box = document.getElementById('planche');
+  box.innerHTML = '';
+  const avant = brul.progression();
+  const larg = 96;
+  const haut = Math.round(larg * cv.clientHeight / Math.max(1, cv.clientWidth));
+  for (const p of POSES) {
+    brul.figer(p);
+    const fig = document.createElement('figure');
+    const mini = document.createElement('canvas');
+    mini.width = larg; mini.height = haut;
+    mini.getContext('2d').drawImage(cv, 0, 0, larg, haut);
+    const cap = document.createElement('figcaption');
+    cap.textContent = Math.round(p * 100) + ' %';
+    fig.append(mini, cap);
+    box.appendChild(fig);
+  }
+  brul.figer(avant);
+}
+
+// ── Construction du panneau ────────────────────────────────────────────────
+function lier(cible, cle, opts) {
+  potards[cle] = potard({
+    parent: document.getElementById(cible),
+    valeur: P[cle],
+    onChange: v => {
+      P[cle] = v;
+      brul?.regler({ [cle]: v });
+      if (cle === 'debordement') dimensionner();
+      majJson();
+    },
+    ...opts,
+  });
+}
+function lierCouleur(cible, cle, label) {
+  nuances[cle] = nuancier({
+    parent: document.getElementById(cible),
+    label, valeur: P[cle],
+    onChange: v => { P[cle] = v; brul?.regler({ [cle]: v }); majJson(); },
+  });
+}
+
+potard({
+  parent: document.getElementById('g-scrub'),
+  min: 0, max: 1, crans: 21, valeur: 0,
+  labelMin: 'Intacte', labelMax: 'Consumée',
+  onChange: v => brul?.figer(v),
+});
+
+lier('g-temps', 'duree',      { min: 600, max: 6000, crans: 19, labelMin: 'Vif', labelMax: 'Lent', unite: 'ms' });
+lier('g-temps', 'combustion', { min: 0,   max: 1,    crans: 11, labelMin: 'Repli seul', labelMax: 'Brûlure pleine' });
+
+lier('g-foyer', 'foyerX',  { min: -1, max: 1, crans: 17, labelMin: 'Foyer ←',      labelMax: 'Foyer →' });
+lier('g-foyer', 'foyerY',  { min: -1, max: 1, crans: 17, labelMin: 'Foyer ↓',      labelMax: 'Foyer ↑' });
+lier('g-foyer', 'bordure', { min: 0,  max: 1, crans: 11, labelMin: 'Part du foyer', labelMax: 'Part du pourtour' });
+
+lier('g-front', 'echelle',       { min: 0.5, max: 10,  crans: 20, labelMin: 'Grandes langues', labelMax: 'Petites' });
+lier('g-front', 'desordre',      { min: 0,   max: 1.6, crans: 17, labelMin: 'Auréole nette',   labelMax: 'Front déchiqueté' });
+lier('g-front', 'detail',        { min: 0,   max: 1,   crans: 11, labelMin: 'Contour lisse',   labelMax: 'Dentelé fin' });
+lier('g-front', 'bulles',        { min: 0,   max: 0.6, crans: 13, labelMin: 'Sans bulles',     labelMax: 'Bouillonne' });
+lier('g-front', 'echelleBulles', { min: 3,   max: 40,  crans: 20, labelMin: 'Grosses bulles',  labelMax: 'Fines' });
+
+lier('g-magma', 'magma',         { min: 0.005, max: 0.30, crans: 20, labelMin: 'Simple liseré',  labelMax: 'Large continent' });
+lier('g-magma', 'echelleBulle',  { min: 6,  max: 60,  crans: 19, labelMin: 'Grosses bulles', labelMax: 'Bulles fines' });
+lier('g-magma', 'satellites',    { min: 0,  max: 1.5, crans: 16, labelMin: 'Bulles isolées', labelMax: 'Grappes serrées' });
+lier('g-magma', 'distorsion',    { min: 0,  max: 1.5, crans: 16, labelMin: 'Bulles rondes',   labelMax: 'Bulles déformées' });
+lier('g-magma', 'perforation',   { min: 0,  max: 1.4, crans: 15, labelMin: 'Croûte pleine',   labelMax: 'Dentelle percée' });
+lier('g-magma', 'boursouflure',  { min: 0,  max: 2,   crans: 21, labelMin: 'Matière plate',  labelMax: 'Bulles en relief' });
+lier('g-magma', 'craquelures',   { min: 0,  max: 1.5, crans: 16, labelMin: 'Charbon lisse',  labelMax: 'Charbon fendu' });
+lier('g-magma', 'vernis',        { min: 0,  max: 2.5, crans: 21, labelMin: 'Mat',            labelMax: 'Résine vitrifiée' });
+lier('g-magma', 'granulation',   { min: 0,  max: 1.2, crans: 13, labelMin: 'Matière lisse',  labelMax: 'Grain marqué' });
+lier('g-magma', 'grainEchelle',  { min: 8,  max: 90,  crans: 18, labelMin: 'Grain large',    labelMax: 'Grain fin' });
+lier('g-magma', 'gonflement',    { min: 0,  max: 0.25, crans: 21, labelMin: 'À plat',        labelMax: 'Bourrelet gonflé' });
+
+lier('g-bandes', 'braise',     { min: 0, max: 0.08, crans: 17, labelMin: 'Sans ourlet',   labelMax: 'Ourlet épais' });
+lier('g-bandes', 'cloque',     { min: 0, max: 0.25, crans: 21, labelMin: 'Sans cloque',   labelMax: 'Large cloque' });
+lier('g-bandes', 'roussi',     { min: 0, max: 0.25, crans: 21, labelMin: 'Sans roussi',   labelMax: 'Roussi profond' });
+lier('g-bandes', 'laitage',    { min: 0, max: 1,    crans: 11, labelMin: 'Émulsion tenue', labelMax: 'Blanchie' });
+lier('g-bandes', 'lueur',      { min: 0, max: 3,    crans: 16, labelMin: 'Braise éteinte', labelMax: 'Incandescente' });
+lier('g-bandes', 'moucheture', { min: 0, max: 1,    crans: 11, labelMin: 'Propre',        labelMax: 'Piqûres noires' });
+
+// L'ordre est celui de la RAMPE, parcourue par la dose de combustion.
+lierCouleur('g-couleurs', 'coulHalo',    '1 · Halo (jaunissement)');
+lierCouleur('g-couleurs', 'coulCaramel', '2 · Caramel (ambre)');
+lierCouleur('g-couleurs', 'coulBraise',  '3 · Braise (brun rouge)');
+lierCouleur('g-couleurs', 'coulCendre',  '4 · Cendre (charbon)');
+lierCouleur('g-couleurs', 'coulCloque',  '· Cloque (blanchiment)');
+
+lier('g-matiere', 'retraitBord',    { min: 0, max: 0.9,  crans: 19, labelMin: 'Bords découpés', labelMax: 'Bords qui se rétractent' });
+lier('g-matiere', 'retraitGlobal',  { min: 0, max: 0.3,  crans: 16, labelMin: 'Emprise figée',  labelMax: 'Carte qui se resserre' });
+lier('g-matiere', 'gondole',        { min: 0, max: 0.5,  crans: 21, labelMin: 'Film plat',      labelMax: 'Film gondolé' });
+lier('g-matiere', 'largeurChaleur', { min: 0.01, max: 0.4, crans: 14, labelMin: 'Chaleur locale', labelMax: 'Chauffe large' });
+lier('g-matiere', 'nbPlis',         { min: 0, max: 12,   crans: 13, labelMin: 'Sans vagues',    labelMax: 'Vagues serrées' });
+lier('g-matiere', 'echelleGondole', { min: 1, max: 20,   crans: 20, labelMin: 'Grands plis',    labelMax: 'Froissé fin' });
+lier('g-matiere', 'perspective',    { min: 0, max: 0.9,  crans: 10, labelMin: 'Plat',           labelMax: 'Fuyant' });
+
+lier('g-repli', 'repli',          { min: 0,    max: 1.2,  crans: 13, labelMin: 'À plat',        labelMax: 'Rabattu 180°' });
+lier('g-repli', 'repliDebut',     { min: 0,    max: 0.9,  crans: 19, labelMin: 'Dès le début',  labelMax: 'Tardif' });
+lier('g-repli', 'repliCharniere', { min: -0.4, max: 0.4,  crans: 17, labelMin: 'Pliure basse',  labelMax: 'Pliure haute' });
+lier('g-repli', 'repliRayon',     { min: 0.004, max: 0.32, crans: 21, labelMin: 'Pli cassant',  labelMax: 'Rouleau ample' });
+lier('g-repli', 'repliInclinaison', { min: 0,  max: 60,   crans: 13, labelMin: 'Vu de face',    labelMax: 'Basculé', unite: '°' });
+
+lier('g-lum', 'lumiereX', { min: -1.5, max: 1.5, crans: 13, labelMin: 'Lumière ←',   labelMax: 'Lumière →' });
+lier('g-lum', 'lumiereY', { min: -1.5, max: 1.5, crans: 13, labelMin: 'Lumière ↓',   labelMax: 'Lumière ↑' });
+lier('g-lum', 'ombre',    { min: 0,    max: 1.2, crans: 13, labelMin: 'Sans relief', labelMax: 'Très marqué' });
+lier('g-lum', 'eclat',    { min: 0,    max: 1.2, crans: 13, labelMin: 'Mat',         labelMax: 'Brillant' });
+
+lier('g-iri', 'iriIntensite', { min: 0,   max: 1.5, crans: 16, labelMin: 'Aucune',        labelMax: 'Saturée' });
+lier('g-iri', 'iriFresnel',   { min: 0.5, max: 6,   crans: 12, labelMin: 'Partout',       labelMax: 'Sur les crêtes' });
+lier('g-iri', 'iriEchelle',   { min: 0.2, max: 4,   crans: 20, labelMin: 'Spectre large', labelMax: 'Spectre serré' });
+lier('g-iri', 'iriDecalage',  { min: 0,   max: 1,   crans: 11, labelMin: 'Teinte ↺',      labelMax: 'Teinte ↻' });
+
+lier('g-rendu', 'delavage',     { min: 0, max: 1,    crans: 11, labelMin: 'Couleurs tenues', labelMax: 'Image délavée' });
+lier('g-rendu', 'grain',        { min: 0, max: 0.2,  crans: 11, labelMin: 'Lisse',           labelMax: 'Grainé' });
+lier('g-rendu', 'opacite',      { min: 0, max: 1,    crans: 11, labelMin: 'Transparent',     labelMax: 'Opaque' });
+lier('g-rendu', 'rayon',        { min: 0, max: 0.2,  crans: 11, labelMin: 'Angles vifs',     labelMax: 'Très arrondi' });
+lier('g-rendu', 'debordement',  { min: 1, max: 1.8,  crans: 9,  labelMin: 'Dans le cadre',   labelMax: 'Déborde' });
+lier('g-rendu', 'subdivisions', { min: 16, max: 256, crans: 16, labelMin: 'Grossier',        labelMax: 'Fin' });
+
+// Éditeur de courbe + presets
+const bezVal = document.getElementById('bezierVal');
+function majBezier(v) {
+  const f = n => (Math.round(n * 1000) / 1000).toFixed(3).replace(/0+$/, '').replace(/\.$/, '');
+  const tard = v[1] < 0.35 && v[3] < 0.85;
+  bezVal.innerHTML = `cubic-bezier(${v.map(f).join(', ')})`
+    + (tard ? ' <span style="color:var(--accent)">· le feu prend puis emporte</span>' : '');
+}
+const edBezier = editeurBezier({
+  parent: document.getElementById('bezier'),
+  valeur: easing,
+  onChange: v => { easing = v; majBezier(v); majJson(); },
+});
+majBezier(easing);
+
+const boxE = document.getElementById('easings');
+Object.keys(COURBES).forEach(nom => {
+  const b = document.createElement('button');
+  b.className = 'b';
+  b.textContent = nom;
+  b.onclick = () => {
+    easing = [...COURBES[nom]];
+    edBezier.poser(easing); majBezier(easing); majJson();
+    rejouer();
+  };
+  boxE.appendChild(b);
+});
+
+// Formats
+const boxF = document.getElementById('formats');
+Object.entries(FORMATS).forEach(([cle, F]) => {
+  const b = document.createElement('button');
+  b.className = 'b' + (cle === format ? ' actif' : '');
+  b.textContent = F.lbl;
+  b.onclick = () => {
+    format = cle;
+    [...boxF.children].forEach(c => c.classList.toggle('actif', c === b));
+    // Le rayon suit le format : un arrondi d'affiche sur un écran entier
+    // rognerait les quatre coins de la page.
+    P.rayon = F.rayon;
+    potards.rayon.poser(P.rayon);
+    brul?.regler({ rayon: P.rayon });
+    dimensionner();
+    majJson();
+    rejouer();
+  };
+  boxF.appendChild(b);
+});
+
+// Vignettes
+const boxV = document.getElementById('vignettes');
+AFFICHES.forEach((src, i) => {
+  const im = document.createElement('img');
+  im.src = src;
+  im.className = i === 0 ? 'actif' : '';
+  im.onclick = () => {
+    idxAffiche = i;
+    [...boxV.children].forEach(c => c.classList.toggle('actif', c === im));
+    chargerAffiche();
+  };
+  boxV.appendChild(im);
+});
+
+// ── Preset ─────────────────────────────────────────────────────────────────
+const zone = document.getElementById('json');
+function majJson() {
+  zone.value = JSON.stringify({ easing, ...P }, null, 2);
+}
+function appliquer(obj) {
+  if (Array.isArray(obj.easing) && obj.easing.length === 4) easing = [...obj.easing];
+  else if (typeof obj.easing === 'string' && COURBES[obj.easing]) easing = [...COURBES[obj.easing]];
+  for (const [k, v] of Object.entries(obj)) {
+    if (!(k in P)) continue;
+    P[k] = v;
+    potards[k]?.poser(v);
+    nuances[k]?.poser(v);
+  }
+  // Le FORMAT suit le preset. `dimensionner()` recalcule `ratioCadre` depuis le
+  // format actif : sans ce rattrapage, un preset réglé en 16:9 se rejoue en
+  // portrait sans rien dire, et toutes les largeurs de bandes — mesurées en
+  // hauteur de carte — changent de sens sous les pieds de l'utilisateur.
+  if (typeof obj.ratioCadre === 'number') {
+    const cible = Object.entries(FORMATS)
+      .find(([, F]) => Math.abs(F.l / F.h - obj.ratioCadre) < 0.01);
+    if (cible && cible[0] !== format) {
+      format = cible[0];
+      [...document.querySelectorAll('#formats button')]
+        .forEach(b => b.classList.toggle('actif', b.textContent.trim() === FORMATS[format].lbl));
+    }
+  }
+
+  brul?.regler(P);
+  dimensionner();
+  edBezier.poser(easing);
+  majBezier(easing);
+  majJson();
+  rejouer();
+}
+
+document.getElementById('copier').onclick = () => {
+  navigator.clipboard.writeText(zone.value);
+  const b = document.getElementById('copier');
+  b.textContent = 'Copié ✓';
+  setTimeout(() => (b.textContent = 'Copier'), 1200);
+};
+/**
+ * Lit le preset en tolérant la ponctuation typographique.
+ *
+ * macOS substitue les guillemets droits par des guillemets « français » dès que
+ * la locale l'est, et y colle des espaces insécables — il suffit que le preset
+ * ait transité par un éditeur, un mail ou une note pour qu'il ne soit plus du
+ * JSON. Le message d'erreur brut (« Unexpected token « ») n'aide personne.
+ *
+ * La réparation n'intervient qu'APRÈS l'échec d'une lecture stricte : un preset
+ * valide dont une valeur contiendrait des guillemets — les clés `_` de
+ * commentaire en ont — ne doit surtout pas être réécrit.
+ */
+function lireJson(txt) {
+  try { return { obj: JSON.parse(txt), repare: false }; } catch (_) { /* on répare */ }
+  // Échappements explicites : ces caractères sont invisibles dans la source, et
+  // une classe qui les contiendrait en clair serait impossible à relire.
+  const net = txt
+    .replace(/[\u00A0\u202F\u2007\u2009]/g, ' ')   // espaces insécables et fines
+    .replace(/\u00AB[ \t]*/g, '"')                 // guillemet ouvrant, espace comprise
+    .replace(/[ \t]*\u00BB/g, '"')                 // guillemet fermant
+    .replace(/[\u201C\u201D\u201E]/g, '"')        // guillemets courbes anglais
+    .replace(/[\u2018\u2019]/g, '"')               // apostrophes courbes
+    .replace(/,(\s*[}\]])/g, '$1');                 // virgule traînante
+  return { obj: JSON.parse(net), repare: true };
+}
+
+document.getElementById('appliquer').onclick = () => {
+  let lu;
+  try { lu = lireJson(zone.value); }
+  catch (e) { err.style.color = ''; err.textContent = 'JSON invalide : ' + e.message; return; }
+
+  // Ce que le preset ne dit pas, on le signale plutôt que de le taire : un
+  // preset d'une version antérieure laisse les réglages plus récents à leur
+  // valeur courante, ce qui explique bien des « ça ne fait pas ce que j'ai
+  // enregistré ».
+  const absents = Object.keys(P).filter(k => !(k in lu.obj));
+  const notes = [];
+  if (lu.repare) notes.push('guillemets typographiques réparés');
+  if (absents.length) notes.push('réglages absents du preset, inchangés : ' + absents.join(', '));
+
+  appliquer(lu.obj);
+  err.style.color = notes.length ? 'var(--texte3)' : '';
+  err.textContent = notes.join(' · ');
+};
+document.getElementById('defauts').onclick = () => appliquer({ ...BRULURE_DEFAUTS, easing: [0.42, 0.05, 0.62, 0.72] });
+
+// A / B
+let A = null, B = null;
+document.getElementById('memA').onclick = () => { A = { easing, ...P }; document.getElementById('memA').textContent = 'A ✓'; };
+document.getElementById('memB').onclick = () => { B = { easing, ...P }; document.getElementById('memB').textContent = 'B ✓'; };
+document.getElementById('voirA').onclick = () => A && appliquer(A);
+document.getElementById('voirB').onclick = () => B && appliquer(B);
+
+// Commandes de scène
+document.getElementById('rejouer').onclick = rejouer;
+document.getElementById('tirer').onclick = tirerPlanche;
+document.getElementById('boucler').onclick = e => {
+  boucle = !boucle;
+  e.target.classList.toggle('actif', boucle);
+  if (boucle) rejouer();
+};
+document.getElementById('repere').onclick = e => {
+  plateau.classList.toggle('repere');
+  e.target.classList.toggle('actif', plateau.classList.contains('repere'));
+};
+const FONDS = ['', 'clair', 'damier'];
+let idxFond = 0;
+document.getElementById('fond').onclick = e => {
+  idxFond = (idxFond + 1) % FONDS.length;
+  scene.className = 'scene' + (FONDS[idxFond] ? ' ' + FONDS[idxFond] : '');
+  e.target.classList.toggle('actif', idxFond !== 0);
+};
+document.addEventListener('keydown', e => {
+  if (e.key === ' ' && e.target === document.body) { e.preventDefault(); rejouer(); }
+});
+
+// Compteur d'images — le seul indicateur de perf qui compte pendant le réglage.
+// Il vaut la peine d'être surveillé ici : le fragment évalue un FBM et un
+// Worley par pixel, ce que le dépliage n'avait pas à faire.
+let img = 0, t0 = performance.now();
+(function tick() {
+  img++;
+  const t = performance.now();
+  if (t - t0 > 500) {
+    document.getElementById('fps').textContent = Math.round((img * 1000) / (t - t0)) + ' fps';
+    img = 0; t0 = t;
+  }
+  requestAnimationFrame(tick);
+})();
+
+// Exposé pour bidouiller depuis la console — c'est un labo.
+//   __lab.brul.figer(.4)   → fige la combustion à 40 %
+//   __lab.brul.regler({bulles:.4})
+window.__lab = { brul, rejouer, appliquer, tirerPlanche, get P() { return P; } };
+
+dimensionner();
+chargerAffiche();
+majJson();
+</script>
+</body>
+</html>
