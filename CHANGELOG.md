@@ -20,19 +20,9 @@ Format inspiré de [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/).
 > la même PR. Un `fix:` de parsing/sélecteur/casse qui ne touche aucun de ces points ne
 > demande rien. Le CHANGELOG garde la *chronologie* ; l'architecture garde l'*état stable*.
 
-## 2026-08-12
+## 2026-08-28
 
 ### Ajouté
-
-- **L'écran d'arrivée en production** (`src/intro.js`, `src/components.css`, `src/template.html`) : le prototype « la fenêtre » (`design/lab/arrivee.html`, PR #17) devient l'intro du site. Il annonce la semaine programmée, fait défiler trois nouveautés dans une fenêtre fixe (1,2 s de pose, 0,4 s de transition — 4,4 s en tout), puis **s'efface par le pli WebGL** de `cloth.js` en découvrant le site réel.
-  - **L'écran occupe le chargement au lieu de s'y ajouter.** Le module tourne en parallèle de `boot()` : quand le pli part, la liste des films est rendue depuis longtemps derrière. C'est le seul intérêt défendable d'un écran qui retient.
-  - **Le voile est écrit dans le HTML, pas créé en JS**, et la décision de jouer se prend en synchrone juste en dessous : le créer plus tard laisserait voir un éclair de squelettes.
-  - **Quatre raisons de se taire** : écran déjà vu dans la session, arrivée par lien profond *ciblé* (`#/seances` nu ne compte pas — c'est l'état que le site s'écrit à lui-même au boot), `prefers-reduced-motion`, `?intro=0`. `?intro=1` le force. Semaine sans nouveauté → l'écran se saute.
-  - **La durée est DÉRIVÉE de la séquence**, jamais réglée à part : sinon un changement de tempo laisse l'écran immobile sur la fin ou coupe une affiche. Moins de trois nouveautés → on en montre autant qu'il y en a, plutôt que de répéter une affiche (une transition entre deux images identiques n'est qu'un scintillement).
-  - **Filet à 2,6 s** : passé ce délai sans données, l'écran s'efface sans rien avoir montré. Une intro qui attend le réseau n'est plus une intro.
-  - **Le pli de sortie rasterise l'écran à la main** sur un contexte 2D (ni html2canvas ni `<foreignObject>`, qui ne sérialise pas les images distantes). Deux pièges tenus : le dégradé de la ligne de dates est **relu** sur `background-image` (un texte peint par `background-clip:text` a une couleur de remplissage transparente — recopiée telle quelle, la ligne s'effacerait au moment du pli), et chaque affiche est rechargée en mode anonyme (une image affichée sans `crossOrigin` teinte le canvas *même si* le serveur envoie les en-têtes).
-  - **Nouveautés de la semaine** : `src/intro.js` pagine `seances` sur deux colonnes pour dater la *première* séance de chaque film — le chargeur du site, filtré `date >= today`, ne peut pas le dire. Exception à I8 documentée dans [Frontend](docs/architecture/frontend.md).
-  - **Le flottement de la bande passe de `margin-left` à `translate`** : `transform` est déjà écrit par le JS, les deux longhands se composent, et on ne relance plus la mise en page à chacun des 7 crans.
 
 - **Combustion « film brûlé » d'une affiche** (`src/brulure.js`, `design/lab/brulure.html`) : le pendant de `cloth.js` — celui-ci fait apparaître, celui-là fait **disparaître**. L'affiche n'est pas escamotée, elle est consumée : un front de flamme la traverse en laissant un liseré carbonisé, un ourlet incandescent et une image roussie, et les bords se contractent sous la chaleur. Shader WebGL2 écrit à la main, aucune dépendance.
   - **Un champ d'ordre de combustion**, pas un masque animé. `ordre(p)` dit *quand* chaque point brûle ; il est FIXE, c'est un seuil qui monte et le traverse. Un point brûlé ne repousse donc jamais, et un scrub en arrière est exactement réversible.
@@ -67,6 +57,28 @@ Format inspiré de [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/).
   - **Le format suit le preset.** `ratioCadre` était silencieusement écrasé par le format actif : un preset réglé en 16:9 se rejouait en portrait sans rien dire, et toutes les largeurs de bandes — mesurées en hauteur de carte — changeaient de sens sous les pieds de l'utilisateur.
   - **Labo de réglage** (`design/lab/brulure.html`) : mêmes commandes que le labo de pli, plus quatre nuanciers (cendre, braise, halo, cloque), trois formats d'épreuve (affiche, écran 9:16, bandeau 16:9), trois fonds (sombre, clair, damier — un trou ne se juge que sur ce qu'il laisse voir) et une **planche de six poses**, une transition qui détruit se jugeant à l'arrêt. Mesuré : 1,4 ms par image au format affiche, 1,7 ms sur un écran entier — trois Worley par pixel dans la matière brûlée, c'est le poste à surveiller si l'effet passe un jour sur les cinq cartes de l'éventail.
   - `cloth.js` n'est pas touché : il reste l'apparition de l'éventail, en production. Les deux modules partagent la machinerie de courbes, importée et non recopiée.
+
+- **L'écran d'arrivée se consume** (`src/intro.js`, `src/components.css`) : le parti « vibration 2 », retenu au banc (`design/lab/arrivee.html`), passe en production. Il remplace les deux moitiés de l'écran d'arrivée livré le 12 août — l'entraînement des affiches et la sortie.
+  - **Les photogrammes ne défilent plus** : ils sont EMPILÉS au même endroit, tremblent ensemble le temps de la transition, et l'opacité bascule d'un coup à mi-parcours. Le tremblement seul ne dirait pas laquelle prend la main — c'est la bascule qui tranche, et elle tombe au milieu du tremblement pour que l'œil ne puisse pas la situer.
+  - **La sortie passe du pli à la combustion** (`brulure.js` au lieu de `cloth.js`). ⚠️ Le sens s'inverse : le feu va DANS le sens de la disparition (0 = intact, 1 = plus rien) et se joue par `jouer()`, là où le pli, qui ne sait qu'apparaître, demandait un `figer()` piloté à l'envers de 1 vers 0. Reprendre la boucle du pli donnerait un écran qui se reconstitue.
+  - **`ratioCadre` reste hors du préréglage** : réglé en 16:9 au banc, il se calcule au montage depuis la taille réelle du rideau — figé, il déformerait le front de flamme.
+  - Les minuteurs de bascule sont purgés à la sortie : la capture est déjà prise, mais leur écran ne sera plus dans le DOM.
+  - Le repli de la feuille est désarmé (`repli: 0`) : réglé et disponible dans le module, il ne fait pas partie du parti retenu.
+  - Contrat de repli inchangé : sans WebGL ou si la capture échoue, la sortie retombe sur le fondu CSS. `cloth.js` reste en service pour l'éventail des évènements.
+
+## 2026-08-12
+
+### Ajouté
+
+- **L'écran d'arrivée en production** (`src/intro.js`, `src/components.css`, `src/template.html`) : le prototype « la fenêtre » (`design/lab/arrivee.html`, PR #17) devient l'intro du site. Il annonce la semaine programmée, fait défiler trois nouveautés dans une fenêtre fixe (1,2 s de pose, 0,4 s de transition — 4,4 s en tout), puis **s'efface par le pli WebGL** de `cloth.js` en découvrant le site réel.
+  - **L'écran occupe le chargement au lieu de s'y ajouter.** Le module tourne en parallèle de `boot()` : quand le pli part, la liste des films est rendue depuis longtemps derrière. C'est le seul intérêt défendable d'un écran qui retient.
+  - **Le voile est écrit dans le HTML, pas créé en JS**, et la décision de jouer se prend en synchrone juste en dessous : le créer plus tard laisserait voir un éclair de squelettes.
+  - **Quatre raisons de se taire** : écran déjà vu dans la session, arrivée par lien profond *ciblé* (`#/seances` nu ne compte pas — c'est l'état que le site s'écrit à lui-même au boot), `prefers-reduced-motion`, `?intro=0`. `?intro=1` le force. Semaine sans nouveauté → l'écran se saute.
+  - **La durée est DÉRIVÉE de la séquence**, jamais réglée à part : sinon un changement de tempo laisse l'écran immobile sur la fin ou coupe une affiche. Moins de trois nouveautés → on en montre autant qu'il y en a, plutôt que de répéter une affiche (une transition entre deux images identiques n'est qu'un scintillement).
+  - **Filet à 2,6 s** : passé ce délai sans données, l'écran s'efface sans rien avoir montré. Une intro qui attend le réseau n'est plus une intro.
+  - **Le pli de sortie rasterise l'écran à la main** sur un contexte 2D (ni html2canvas ni `<foreignObject>`, qui ne sérialise pas les images distantes). Deux pièges tenus : le dégradé de la ligne de dates est **relu** sur `background-image` (un texte peint par `background-clip:text` a une couleur de remplissage transparente — recopiée telle quelle, la ligne s'effacerait au moment du pli), et chaque affiche est rechargée en mode anonyme (une image affichée sans `crossOrigin` teinte le canvas *même si* le serveur envoie les en-têtes).
+  - **Nouveautés de la semaine** : `src/intro.js` pagine `seances` sur deux colonnes pour dater la *première* séance de chaque film — le chargeur du site, filtré `date >= today`, ne peut pas le dire. Exception à I8 documentée dans [Frontend](docs/architecture/frontend.md).
+  - **Le flottement de la bande passe de `margin-left` à `translate`** : `transform` est déjà écrit par le JS, les deux longhands se composent, et on ne relance plus la mise en page à chacun des 7 crans.
 
 ### Modifié
 
