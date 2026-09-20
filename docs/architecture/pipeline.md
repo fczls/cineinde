@@ -11,9 +11,54 @@ Chaque source a son parser dédié mais produit le **même « film dict »** (co
 
 | Source | Fonction | Format brut | Modèle de semaine | Métadonnées | Fragilité |
 |---|---|---|---|---|---|
-| **Comoedia** | `scrape_comoedia_pdf()` (scraper.py:1303) | **PDF** hebdo (magazine 2 colonnes) | 1 PDF = 1 semaine, publié 1×/sem | pauvres (titre en CAPS → `_titlecase_fr`) | 🔴 haute (layout PDF, découverte d'URL CDN) |
+| **Comoedia** | `scrape_comoedia_pdf()` (scraper.py:1303) | **PDF** hebdo (magazine 2 colonnes) | 1 PDF = 1 semaine, publié 1×/sem | pauvres (titre en CAPS → `_titlecase_fr`) | 🔴 haute (layout PDF, découverte d'URL CDN) — refondu sans préavis, cf. § ci-dessous |
 | **Lumière** | `scrape_lumiere()` (scraper.py:1610) | **HTML** rendu serveur, param `?week=YYYY-MM-DD` | semaine explicite (`get_last_wednesday`) | pauvres à la liste, enrichies par page détail | 🟡 moyenne (redesign HTML) ; résa cotecine = deep-link **par séance** — le `<a>` est lu au périmètre du `<time>` (`_lumiere_parse_schedule_td`), **pas** du `<td>`, sinon toutes les séances du jour héritent du lien de la 1re → « séance passée » (bug corrigé 2026-07-20, spike SP1). `resa_url` volatil (token horaire `D{epoch}`, I5), filtré par `is_valid_resa_url` (allowlist, C3) |
 | **Le Zola** | `scrape_zola()` | **HTML** WordPress, index `/films-a-laffiche/` → fiches `/movies/{slug}/` (sélecteurs documentés en tête du module dans scraper.py) | pas de param semaine — carrousel roulant ~15 jours, borné ensuite par `filter_current_week` | riches, mais `annee`/`realisateur`/`genres` **volontairement non ingérés** (I2 — année de sortie FR ≠ année de production ; genres FR ≠ vocabulaire OMDb anglais des autres films) | 🟡 moyenne (thème WordPress maison) ; résa TicketingCiné **stable** (pas de token volatil, contrairement au cotecine Lumière → rien à ajouter aux champs volatils I5) |
+
+### Le PDF Comoedia : tout est trouvé, rien n'est indexé (2026-09-20)
+
+Le PDF est refait par l'éditeur du cinéma **sans préavis, et sans compatibilité
+ascendante**. Deux refontes en quatre mois, la seconde changeant trois choses à
+la fois :
+
+| | Numéro du 26 août | Numéro du 16 septembre |
+|---|---|---|
+| Page du tableau | 1 | 2 |
+| Entête de jour | `MERCREDI. 26` | `MER 16` |
+| Séparateur d'heure | `20h00` | `20:30` |
+| Colonne du titre | 0 | 1 — une colonne de garde porte la rubrique à la verticale |
+
+*(Les deux colonnes sont mesurées sur ces deux numéros. Une refonte antérieure,
+en juin 2026, avait déjà déplacé le tableau — c'est elle qui a fait abandonner
+l'index de page fixe.)*
+
+**D'où la règle de conception du parser : dériver, jamais indexer.** Aucune
+position n'est codée en dur, chacune est déduite d'un repère du document :
+
+- La **page** du tableau est celle dont l'entête porte des jours
+  (`parse_comoedia_pdf()` les parcourt toutes, `_is_day_header_row()` juge) — et
+  non un index fixe.
+- Les **jours** sont reconnus en toutes lettres *ou* abrégés, cherchés sur un mot
+  entier — sinon « mars » passerait pour un mardi.
+- La **colonne du titre** est celle qui précède la première colonne de jour, ce
+  qui vaut avec ou sans colonne de garde (`clean_pdf_table()`).
+- Les **heures** acceptent les deux séparateurs, y compris pour décoller les
+  renvois de notes : `20:301` → 20:30 et une note n° 1, pas une séance à 1 h.
+- Le **début de semaine** se lit dans la mention « du … au … » de la couverture
+  si elle y est — elle est **absente des numéros d'août comme de septembre**,
+  donc le repli est aujourd'hui le chemin normal : le numéro du jour de l'entête
+  (`MER 16`). Sans lui, les dates retombent silencieusement sur la semaine
+  courante — une panne muette, la pire espèce.
+
+**Le symptôme d'une refonte est toujours le même et ne dit rien de la cause** :
+0 film Comoedia, donc `exit 4` par le garde-fou asymétrique (I6). D'où
+`tools/inspect_pdf_comoedia.py`, qui montre la structure d'un numéro — rubriques,
+renvois, géométrie des colonnes — au lieu de la faire deviner.
+
+Ce que la maquette expose et que le parser laisse volontairement de côté (rubrique
+du film, renvois de notes, fiche éditoriale de la page éditoriale) est inventorié
+dans [l'exploration du gabarit](../explorations/comoedia-gabarit-septembre-2026.md).
+La **page éditoriale n'est pas parsée** : seule la grille horaire l'est.
 
 ### Les 2 sources d'événements (2026-07-29)
 
