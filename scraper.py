@@ -867,9 +867,16 @@ def parse_comoedia_pdf(
 
 
 def _is_day_header_row(row: "list[str | None]") -> bool:
-    """Vrai si la ligne contient ≥4 noms de jours (entête du planning)."""
+    """Vrai si la ligne contient ≥4 jours (entête du planning).
+
+    Le PDF a basculé en septembre 2026 des noms complets (« MERCREDI. 11 ») aux
+    abréviations (« MER 16 ») : les deux formes valident l'entête, sinon le
+    tableau réel est rejeté et le repli texte ne produit aucun film.
+    """
     joined = " ".join(c or "" for c in row).lower()
-    return sum(1 for day in FR_DAY_NAMES if day in joined) >= 4
+    full = sum(1 for day in FR_DAY_NAMES if day in joined)
+    abbr = sum(1 for a in DAY_ABBREVS if re.search(rf"\b{a}\b", joined))
+    return max(full, abbr) >= 4
 
 
 def _pdf_text_to_rows(text: str) -> "list[list[str | None]]":
@@ -956,7 +963,10 @@ def _infer_col_dates(
             # Essai abréviations courtes
             for abbr, iso_day in DAY_ABBREVS.items():
                 if re.search(rf"\b{abbr}\b", cell_l):
-                    day_col_info[j] = (iso_day, None)
+                    # « MER 16 » : le numéro permet d'inférer la semaine quand la
+                    # page de couverture ne porte pas de plage de dates lisible.
+                    m = re.search(r"\b(\d{1,2})\b", cell_l)
+                    day_col_info[j] = (iso_day, int(m.group(1)) if m else None)
                     break
 
     if not day_col_info:
@@ -1066,12 +1076,17 @@ def clean_pdf_table(
     """
     Transforme les lignes brutes du tableau PDF en liste de films avec séances.
 
-    Format réel du PDF Comoedia (observé mars 2026) :
-      - Ligne 0 = entête : ['', 'MERCREDI. 11', 'JEUDI. 12', …]
+    Format réel du PDF Comoedia (observé septembre 2026) :
+      - Ligne 0 = entête : [None, '', 'MER 16', 'JEU 17', …] — une colonne de
+        garde porte le libellé de rubrique écrit à la verticale (« LES SORTIES »,
+        rendu « SEITROS SEL »), d'où un titre en col 1 et non en col 0. La
+        colonne du titre est donc déduite : celle juste avant le premier jour.
       - Lignes suivantes = films :
-          col 0 = 'TITRE\\nVERSION / DÉTAIL'
-          col 1-7 = horaires du jour, ex '11h15 / 13h35\\n15h50' ou '-'
-      - Chiffres de note de bas de page collés aux heures : '20h001' → '20h00'
+          col titre = 'TITRE\\nVERSION / DÉTAIL'
+          colonnes de jours = horaires, ex '10:55 / 13:45\\n15:55' ou '-'
+      - Chiffres de note de bas de page collés aux heures : '20:301' → '20:30'
+      - Séparateur d'heure : ':' depuis septembre 2026, 'h' avant — les deux
+        sont acceptés.
     """
     if not rows:
         return []
@@ -1102,12 +1117,16 @@ def clean_pdf_table(
         log.warning("Impossible de déterminer les dates des colonnes")
         return []
 
+    # Le titre occupe la colonne juste avant la première colonne de jour : vrai
+    # avec ou sans la colonne de garde « rubrique » du PDF de septembre 2026.
+    title_col = max(min(col_dates) - 1, 0)
+
     # 2. Parcourir les lignes de données (à partir de la ligne après l'entête)
     for row in rows[header_idx + 1:]:
         if not row or all(not c for c in row):
             continue
 
-        first_cell = (row[0] or "").strip()
+        first_cell = (row[title_col] or "").strip() if title_col < len(row) else ""
         if not first_cell or first_cell == "-":
             continue
 
@@ -1154,9 +1173,9 @@ def clean_pdf_table(
             if not cell or cell == "-":
                 continue
             # Retirer les chiffres de note de bas de page collés aux heures
-            # Ex : '20h001' → '20h00', '11h004' → '11h00'
-            cell_clean = re.sub(r"(\d{1,2}h\d{2})(\d)", r"\1", cell)
-            for h, mn in re.findall(r"\b(\d{1,2})h(\d{2})\b", cell_clean):
+            # Ex : '20h001' → '20h00', '20:301' → '20:30'
+            cell_clean = re.sub(r"(\d{1,2}[h:]\d{2})(\d)", r"\1", cell)
+            for h, mn in re.findall(r"\b(\d{1,2})[h:](\d{2})\b", cell_clean):
                 seances.append({
                     "date": col_date.isoformat(),
                     "heure": f"{int(h):02d}:{mn}",

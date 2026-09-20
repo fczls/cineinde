@@ -20,6 +20,18 @@ Format inspiré de [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/).
 > la même PR. Un `fix:` de parsing/sélecteur/casse qui ne touche aucun de ces points ne
 > demande rien. Le CHANGELOG garde la *chronologie* ; l'architecture garde l'*état stable*.
 
+## 2026-09-20
+
+### Corrigé
+
+- **PDF Comoedia : le nouveau gabarit de septembre 2026 n'était plus lu** (`scraper.py`) — le workflow sortait en **code 4**, le garde-fou asymétrique constatant que Lumière avait publié la semaine alors que Comoedia y était absent. Le PDF était bien trouvé et téléchargé : c'est le parsing qui rendait 0 film. Trois changements de gabarit simultanés, chacun suffisant à lui seul pour tout perdre :
+  - **Entête abrégée** : `MER 16` au lieu de `MERCREDI. 26`. `_is_day_header_row()` n'acceptait que les noms complets, donc le vrai tableau (page 2, 23 lignes) était rejeté et le repli `extract_text()` prenait la main — or ce repli agrège l'entête en **une seule cellule**, et la détection d'entête de `clean_pdf_table()` compte les *cellules* portant un jour : elle n'en trouvait qu'une, d'où « Aucun entête de jours trouvé ». Les abréviations valident désormais l'entête, cherchées sur un **mot entier** (sinon « mars » passerait pour un mardi).
+  - **Heures en `:`** : `20:30` au lieu de `20h00`. Les deux séparateurs sont acceptés, y compris pour décoller les chiffres de note de bas de page (`20:301` → `20:30`, et non 20:30 plus une séance à 1 h).
+  - **Une colonne de garde en tête de ligne**, portant la rubrique écrite à la verticale (`LES SORTIES`, extraite `SEITROS SEL`) : le titre est en col 1, plus en col 0. La colonne du titre est maintenant **déduite** — celle qui précède la première colonne de jour — ce qui vaut avec ou sans colonne de garde plutôt que de coder en dur le nouvel index.
+  - L'inférence de semaine lit aussi le numéro du jour dans une **abréviation** (`MER 16`) : le nouveau PDF ne porte plus de plage « du … au … » lisible en couverture, et sans ce numéro les dates retombaient sur la semaine courante.
+  - Vérifié sur les deux gabarits : 22 films sur le PDF du 16 septembre (0 avant), et sortie **identique au bit** sur celui du 26 août.
+- **Tests du tableau PDF** (`tests/test_comoedia_pdf.py`) : les deux gabarits sont verrouillés, entête, heures, colonne de garde et refus d'une ligne de prose. Le parsing du PDF est le seul maillon que le garde-fou puisse casser en silence — l'éditeur du cinéma refait sa maquette sans préavis.
+
 ## 2026-08-28
 
 ### Ajouté
