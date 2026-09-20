@@ -22,6 +22,11 @@ Format inspiré de [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/).
 
 ## 2026-09-20
 
+### Ajouté
+
+- **Inspecteur de PDF Comoedia** (`tools/inspect_pdf_comoedia.py`) : montre la structure d'un numéro — rubriques, renvois de notes, géométrie des colonnes de la page éditoriale — là où le scraper ne dit que « 0 film ». L'éditeur du cinéma refait sa maquette sans préavis ; le diagnostic coûtait jusqu'ici une session d'inspection à la main. Lecture seule, aucun effet de bord.
+- **Exploration du gabarit de septembre 2026** (`docs/explorations/comoedia-gabarit-septembre-2026.md`) : inventaire mesuré de ce que la nouvelle maquette expose et que le parsing jette — rubrique du film (`LES SORTIES` / `EN SALLE` / `ÉVÈNEMENTS`), renvois de notes par séance (12 sur 271), qualificatifs tronqués par `detect_version()`, fiche éditoriale de la page 1. Constat le plus net : l'accessibilité (`ST-SME` au Comoedia, `ST,OCAP,VI` au Zola — 11 séances sur 14 dans l'échantillon) arrive déjà par deux sources et se perd au même étranglement. Cinq pistes chiffrées, une recommandation d'ordre, et une règle préalable : tout champ tiré du PDF reste facultatif et ne doit jamais faire échouer un run, sous peine de convertir un bonus en panne. Document d'exploration — n'engage aucun développement.
+
 ### Corrigé
 
 - **PDF Comoedia : le nouveau gabarit de septembre 2026 n'était plus lu** (`scraper.py`) — le workflow sortait en **code 4**, le garde-fou asymétrique constatant que Lumière avait publié la semaine alors que Comoedia y était absent. Le PDF était bien trouvé et téléchargé : c'est le parsing qui rendait 0 film. Trois changements de gabarit simultanés, chacun suffisant à lui seul pour tout perdre :
