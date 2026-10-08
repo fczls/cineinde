@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-06T01:08:05.025341",
+  "generated_at": "2026-10-08T00:03:08.318174",
   "sources": [
     "https://www.cinema-comoedia.com/programme-semaine/",
     "https://www.cinemas-lumiere.com/calendrier-general.html",
@@ -59,6 +59,30 @@
       "trailer": "https://www.youtube.com/watch?v=RPU4sVSqDYE"
     },
     {
+      "titre": "Naza",
+      "titreOriginal": null,
+      "annee": 2026,
+      "realisateur": "Yuval Abraham & Rachel Szor",
+      "duree": 77,
+      "genres": [],
+      "synopsis": "Filmé la nuit depuis les toits de Tel Aviv, ce documentaire se centre sur les victimes civiles des opérations militaires israéliennes à Gaza.",
+      "imdbId": "tt44766123",
+      "seances": [
+        {
+          "date": "2026-10-13",
+          "heure": "21:00",
+          "version": "VOSTFR"
+        }
+      ],
+      "source": "comoedia",
+      "cinema": "Le Comoedia",
+      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/0dcf52c814211fc2.jpg",
+      "backdrop": "https://image.tmdb.org/t/p/w1280/7EzH0dlEN9OZWWBXBWwT5PbMNUz.jpg",
+      "imdbRating": 8.224,
+      "cast": "Yuval Abraham",
+      "trailer": "https://www.youtube.com/watch?v=40KW6knYMo4"
+    },
+    {
       "titre": "Ton Animal Maternel",
       "titreOriginal": null,
       "annee": 2026,
@@ -71,16 +95,6 @@
       "imdbId": "tt41592077",
       "seances": [
         {
-          "date": "2026-10-07",
-          "heure": "15:55",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-10-07",
-          "heure": "20:40",
-          "version": "VOSTFR"
-        },
-        {
           "date": "2026-10-08",
           "heure": "15:55",
           "version": "VOSTFR"
@@ -127,6 +141,16 @@
         },
         {
           "date": "2026-10-12",
+          "heure": "20:40",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-10-13",
+          "heure": "15:55",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-10-13",
           "heure": "20:40",
           "version": "VOSTFR"
         }
@@ -154,26 +178,6 @@
       "imdbId": "tt38841455",
       "seances": [
         {
-          "date": "2026-10-07",
-          "heure": "10:55",
-          "version": "VF"
-        },
-        {
-          "date": "2026-10-07",
-          "heure": "13:15",
-          "version": "VF"
-        },
-        {
-          "date": "2026-10-07",
-          "heure": "17:10",
-          "version": "VF"
-        },
-        {
-          "date": "2026-10-07",
-          "heure": "21:05",
-          "version": "VF"
-        },
-        {
           "date": "2026-10-08",
           "heure": "13:15",
           "version": "VF"
@@ -255,6 +259,26 @@
         },
         {
           "date": "2026-10-12",
+          "heure": "21:05",
+          "version": "VF"
+        },
+        {
+          "date": "2026-10-13",
+          "heure": "10:55",
+          "version": "VF"
+        },
+        {
+          "date": "2026-10-13",
+          "heure": "13:15",
+          "version": "VF"
+        },
+        {
+          "date": "2026-10-13",
+          "heure": "17:10",
+          "version": "VF"
+        },
+        {
+          "date": "2026-10-13",
           "heure": "21:05",
           "version": "VF"
         }
@@ -277,26 +301,6 @@
       "synopsis": "Corinne Maclou est figurante. Elle enchaîne les tournages, parcourt inlassablement les plateaux dans le seul espoir d’être remarquée et de décrocher enfin un vrai rôle. Lorsqu’elle fait la connaissance de Sandrine Kiberlain, avec qui elle va peu à peu sympathiser, Corinne espère concrétiser son rêve. Mais la célèbre actrice va-t-elle vraiment l'aider à se faire une place au sein de la grande famille du cinéma ?",
       "imdbId": "tt37799310",
       "seances": [
-        {
-          "date": "2026-10-07",
-          "heure": "13:50",
-          "version": "VF"
-        },
-        {
-          "date": "2026-10-07",
-          "heure": "16:10",
-          "version": "VF"
-        },
-        {
-          "date": "2026-10-07",
-          "heure": "18:35",
-          "version": "VF"
-        },
-        {
-          "date": "2026-10-07",
-          "heure": "20:55",
-          "version": "VF"
-        },
         {
           "date": "2026-10-08",
           "heure": "13:50",
@@ -396,14 +400,29 @@
           "date": "2026-10-12",
           "heure": "20:55",
           "version": "VF"
+        },
+        {
+          "date": "2026-10-13",
+          "heure": "13:15",
+          "version": "VF"
+        },
+        {
+          "date": "2026-10-13",
+          "heure": "15:35",
+          "version": "VF"
+        },
+        {
+          "date": "2026-10-13",
+          "heure": "17:50",
+          "version": "VF"
         }
       ],
       "source": "comoedia",
       "cinema": "Le Comoedia",
       "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/d9b69be94e58b75f.jpg",
       "backdrop": "https://image.tmdb.org/t/p/w1280/a6O9MMak7mHDdxwApf2nGlvIs0g.jpg",
-      "imdbRating": 7.0,
-      "cast": "Isabelle Huppert, Sandrine Kiberlain, Vincent Dedienne",
+      "imdbRating": 6.333,
+      "cast": "Isabelle Huppert, Sandrine Kiberlain, Anne Marivin",
       "trailer": "https://www.youtube.com/watch?v=1JKS6qSPb2w"
     },
     {
@@ -425,6 +444,11 @@
         },
         {
           "date": "2026-10-11",
+          "heure": "11:10",
+          "version": "VF"
+        },
+        {
+          "date": "2026-10-13",
           "heure": "11:10",
           "version": "VF"
         }
@@ -449,26 +473,6 @@
       "imdbId": "tt41593304",
       "seances": [
         {
-          "date": "2026-10-07",
-          "heure": "10:45",
-          "version": "VF"
-        },
-        {
-          "date": "2026-10-07",
-          "heure": "13:15",
-          "version": "VF"
-        },
-        {
-          "date": "2026-10-07",
-          "heure": "16:35",
-          "version": "VF"
-        },
-        {
-          "date": "2026-10-07",
-          "heure": "20:15",
-          "version": "VF"
-        },
-        {
           "date": "2026-10-08",
           "heure": "13:15",
           "version": "VF"
@@ -555,6 +559,26 @@
         },
         {
           "date": "2026-10-12",
+          "heure": "20:15",
+          "version": "VF"
+        },
+        {
+          "date": "2026-10-13",
+          "heure": "10:45",
+          "version": "VF"
+        },
+        {
+          "date": "2026-10-13",
+          "heure": "13:15",
+          "version": "VF"
+        },
+        {
+          "date": "2026-10-13",
+          "heure": "16:35",
+          "version": "VF"
+        },
+        {
+          "date": "2026-10-13",
           "heure": "20:15",
           "version": "VF"
         }
@@ -563,7 +587,7 @@
       "cinema": "Le Comoedia",
       "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/5e97af8469404791.jpg",
       "backdrop": "https://image.tmdb.org/t/p/w1280/iQMFLm9Te2IuJTr08RdBLKTGw8n.jpg",
-      "imdbRating": 6.958,
+      "imdbRating": 6.844,
       "cast": "Swann Arlaud, Sandrine Blancke, Mathieu Perotto",
       "trailer": "https://www.youtube.com/watch?v=6V54Q8DaWjU"
     },
@@ -581,31 +605,6 @@
       "imdbId": "tt31450459",
       "seances": [
         {
-          "date": "2026-10-07",
-          "heure": "10:45",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-10-07",
-          "heure": "13:15",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-10-07",
-          "heure": "15:50",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-10-07",
-          "heure": "18:25",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-10-07",
-          "heure": "21:00",
-          "version": "VOSTFR"
-        },
-        {
           "date": "2026-10-08",
           "heure": "13:15",
           "version": "VOSTFR"
@@ -717,15 +716,40 @@
         },
         {
           "date": "2026-10-12",
+          "heure": "21:00",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-10-13",
+          "heure": "10:45",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-10-13",
+          "heure": "13:15",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-10-13",
+          "heure": "15:50",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-10-13",
+          "heure": "18:25",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-10-13",
           "heure": "21:00",
           "version": "VOSTFR"
         }
       ],
       "source": "comoedia",
       "cinema": "Le Comoedia",
-      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/c4bbb62a4fd0ea0f.jpg",
+      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/ff614845fca7c0f5.jpg",
       "backdrop": "https://image.tmdb.org/t/p/w1280/b7t3r39Oll5qPxBKzLZ8eHMBD7l.jpg",
-      "imdbRating": 7.531,
+      "imdbRating": 7.525,
       "cast": "Tom Cruise, Riz Ahmed, John Goodman",
       "trailer": "https://www.youtube.com/watch?v=e2lyQd9t700"
     },
@@ -742,11 +766,6 @@
       "imdbId": "tt39088978",
       "seances": [
         {
-          "date": "2026-10-07",
-          "heure": "15:50",
-          "version": "VF"
-        },
-        {
           "date": "2026-10-08",
           "heure": "15:50",
           "version": "VF"
@@ -768,6 +787,11 @@
         },
         {
           "date": "2026-10-12",
+          "heure": "15:50",
+          "version": "VF"
+        },
+        {
+          "date": "2026-10-13",
           "heure": "15:50",
           "version": "VF"
         }
@@ -792,11 +816,6 @@
       "synopsis": "Sur le point de quitter Malte, Mar hérite de terrains après la mort de sa mère. En parcourant l’île pour récupérer ses terres, elle rencontre Nenu, gardien d’un chant ancestral qui l’entraîne dans des duels musicaux improvisés et met à l’épreuve son désir de fuir. Peu à peu, la jeune femme se réconcilie avec le pays auquel elle voulait tourner le dos.",
       "imdbId": "tt35746577",
       "seances": [
-        {
-          "date": "2026-10-07",
-          "heure": "11:10",
-          "version": "VOSTFR"
-        },
         {
           "date": "2026-10-10",
           "heure": "11:10",
@@ -828,31 +847,6 @@
       "synopsis": "Garance est une jeune actrice sans être une vedette. Elle gère et assure tout de son mieux, vaillante, joyeuse, soldate, et elle trouve dans l’alcool un carburant, un réconfort, inconditionnel. Garance change de vie et commence alors un parcours de huit ans de déménagements, de travail, de rencontres, de fêtes et d’angoisses, de joies et de coups durs… Une révolution intime, amicale et sexuelle, Mais elle consomme, toujours plus. Jusqu'à la potentialité de la mort..",
       "imdbId": "tt38584405",
       "seances": [
-        {
-          "date": "2026-10-07",
-          "heure": "10:50",
-          "version": "VF"
-        },
-        {
-          "date": "2026-10-07",
-          "heure": "14:00",
-          "version": "VF"
-        },
-        {
-          "date": "2026-10-07",
-          "heure": "16:20",
-          "version": "VF"
-        },
-        {
-          "date": "2026-10-07",
-          "heure": "18:45",
-          "version": "VF"
-        },
-        {
-          "date": "2026-10-07",
-          "heure": "21:05",
-          "version": "VF"
-        },
         {
           "date": "2026-10-08",
           "heure": "14:00",
@@ -967,13 +961,38 @@
           "date": "2026-10-12",
           "heure": "21:05",
           "version": "VF"
+        },
+        {
+          "date": "2026-10-13",
+          "heure": "10:50",
+          "version": "VF"
+        },
+        {
+          "date": "2026-10-13",
+          "heure": "14:00",
+          "version": "VF"
+        },
+        {
+          "date": "2026-10-13",
+          "heure": "16:20",
+          "version": "VF"
+        },
+        {
+          "date": "2026-10-13",
+          "heure": "18:45",
+          "version": "VF"
+        },
+        {
+          "date": "2026-10-13",
+          "heure": "21:05",
+          "version": "VF"
         }
       ],
       "source": "comoedia",
       "cinema": "Le Comoedia",
       "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/3cea73cdeb85de54.jpg",
       "backdrop": "https://image.tmdb.org/t/p/w1280/yLZCngaex5380FB6sEy6o10L9wN.jpg",
-      "imdbRating": 6.971,
+      "imdbRating": 7.158,
       "cast": "Adèle Exarchopoulos, Sara Giraudeau, Anne Suarez",
       "trailer": "https://www.youtube.com/watch?v=08WaxJ0KVCw"
     },
@@ -992,26 +1011,6 @@
       "imdbId": "tt34206385",
       "seances": [
         {
-          "date": "2026-10-07",
-          "heure": "11:15",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-10-07",
-          "heure": "13:30",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-10-07",
-          "heure": "18:15",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-10-07",
-          "heure": "20:30",
-          "version": "VOSTFR"
-        },
-        {
           "date": "2026-10-08",
           "heure": "13:30",
           "version": "VOSTFR"
@@ -1098,6 +1097,26 @@
         },
         {
           "date": "2026-10-12",
+          "heure": "20:30",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-10-13",
+          "heure": "11:15",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-10-13",
+          "heure": "13:30",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-10-13",
+          "heure": "18:15",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-10-13",
           "heure": "20:30",
           "version": "VOSTFR"
         }
@@ -1107,7 +1126,7 @@
       "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/8885c01ca6ef9e7b.jpg",
       "backdrop": "https://image.tmdb.org/t/p/w1280/4E5RVsSUG1A4Adwbqupu5w6kofZ.jpg",
       "imdbRating": 6.8,
-      "cast": "Robert Pattinson, Skyler Gisondo, Merritt Wever",
+      "cast": "Robert Pattinson, Merritt Wever, Skyler Gisondo",
       "trailer": "https://www.youtube.com/watch?v=3ftErNDf5Jc"
     },
     {
@@ -1123,16 +1142,6 @@
       "imdbId": "tt31383175",
       "seances": [
         {
-          "date": "2026-10-07",
-          "heure": "15:15",
-          "version": "VF"
-        },
-        {
-          "date": "2026-10-07",
-          "heure": "18:20",
-          "version": "VF"
-        },
-        {
           "date": "2026-10-08",
           "heure": "15:15",
           "version": "VF"
@@ -1179,6 +1188,16 @@
         },
         {
           "date": "2026-10-12",
+          "heure": "18:20",
+          "version": "VF"
+        },
+        {
+          "date": "2026-10-13",
+          "heure": "15:15",
+          "version": "VF"
+        },
+        {
+          "date": "2026-10-13",
           "heure": "18:20",
           "version": "VF"
         }
@@ -1187,14 +1206,14 @@
       "cinema": "Le Comoedia",
       "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/1b382f0a6dd6a67d.jpg",
       "backdrop": "https://image.tmdb.org/t/p/w1280/wVJPuSrEsSWWTMzYH1xLClAWSkb.jpg",
-      "imdbRating": 3.875,
+      "imdbRating": 3.9,
       "cast": "Kaylon Lancel, Kelsie Verdeilles, Louise Podolski",
       "trailer": "https://www.youtube.com/watch?v=9JPgQqRi0HU"
     },
     {
       "titre": "Raison et Sentiments",
       "titreOriginal": null,
-      "annee": 1995,
+      "annee": 1996,
       "realisateur": "Ang Lee",
       "duree": null,
       "genres": [
@@ -1205,16 +1224,6 @@
       "imdbId": "tt0114388",
       "seances": [
         {
-          "date": "2026-10-07",
-          "heure": "16:00",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-10-07",
-          "heure": "20:45",
-          "version": "VOSTFR"
-        },
-        {
           "date": "2026-10-08",
           "heure": "16:00",
           "version": "VOSTFR"
@@ -1261,6 +1270,16 @@
         },
         {
           "date": "2026-10-12",
+          "heure": "20:45",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-10-13",
+          "heure": "16:00",
+          "version": "VOSTFR"
+        },
+        {
+          "date": "2026-10-13",
           "heure": "20:45",
           "version": "VOSTFR"
         }
@@ -1269,7 +1288,7 @@
       "cinema": "Le Comoedia",
       "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/cc3499ec9bc7e8b4.jpg",
       "backdrop": "https://image.tmdb.org/t/p/w1280/cFnyfWHL6HjOOVal6lp8e5gqibK.jpg",
-      "imdbRating": 7.411,
+      "imdbRating": 7.4,
       "cast": "Emma Thompson, Kate Winslet, Alan Rickman",
       "trailer": "https://www.youtube.com/watch?v=8HW1dL0hmco"
     },
@@ -1284,16 +1303,6 @@
       "imdbId": "tt43727059",
       "seances": [
         {
-          "date": "2026-10-07",
-          "heure": "11:15",
-          "version": "VF"
-        },
-        {
-          "date": "2026-10-07",
-          "heure": "18:40",
-          "version": "VF"
-        },
-        {
           "date": "2026-10-08",
           "heure": "18:40",
           "version": "VF"
@@ -1325,6 +1334,16 @@
         },
         {
           "date": "2026-10-12",
+          "heure": "18:40",
+          "version": "VF"
+        },
+        {
+          "date": "2026-10-13",
+          "heure": "11:15",
+          "version": "VF"
+        },
+        {
+          "date": "2026-10-13",
           "heure": "18:40",
           "version": "VF"
         }
@@ -1350,11 +1369,6 @@
       "imdbId": "tt37921158",
       "seances": [
         {
-          "date": "2026-10-07",
-          "heure": "19:10",
-          "version": "VF"
-        },
-        {
           "date": "2026-10-08",
           "heure": "19:10",
           "version": "VF"
@@ -1378,13 +1392,18 @@
           "date": "2026-10-12",
           "heure": "19:10",
           "version": "VF"
+        },
+        {
+          "date": "2026-10-13",
+          "heure": "19:10",
+          "version": "VF"
         }
       ],
       "source": "comoedia",
       "cinema": "Le Comoedia",
       "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/e2e12a60f8e1941b.jpg",
       "backdrop": "https://image.tmdb.org/t/p/w1280/8VjONCVHYgS3PPDuIuzXZBDhFov.jpg",
-      "imdbRating": 7.341,
+      "imdbRating": 7.34,
       "cast": "Monia Chokri, Niels Schneider, Rudgy Pajany",
       "trailer": "https://www.youtube.com/watch?v=b6LmJjJTEp4"
     },
@@ -1401,11 +1420,6 @@
       "imdbId": "tt39299437",
       "seances": [
         {
-          "date": "2026-10-07",
-          "heure": "13:40",
-          "version": "VF"
-        },
-        {
           "date": "2026-10-08",
           "heure": "13:40",
           "version": "VF"
@@ -1429,13 +1443,18 @@
           "date": "2026-10-12",
           "heure": "13:40",
           "version": "VF"
+        },
+        {
+          "date": "2026-10-13",
+          "heure": "13:40",
+          "version": "VF"
         }
       ],
       "source": "comoedia",
       "cinema": "Le Comoedia",
       "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/5f91b47adbaa4111.jpg",
       "backdrop": "https://image.tmdb.org/t/p/w1280/rFST4zAaG20VSIxSvYO57nhkkV4.jpg",
-      "imdbRating": 6.426,
+      "imdbRating": 6.386,
       "cast": "Léa Drucker, Mélanie Thierry, Charles Berling",
       "trailer": "https://www.youtube.com/watch?v=ba4jiv6BIuk"
     },
@@ -1451,11 +1470,6 @@
       "synopsis": "Les Gheorghiu, un couple roumano-norvégien très pieux, s’installent dans un village au bout d’un fjord où ils se lient rapidement d’amitié avec leurs voisins, les Halberg. Les enfants des deux familles deviennent très proches, malgré des éducations différentes. Lorsque le corps enseignant découvre des ecchymoses sur le corps d’Elia, l’aînée des enfants Gheorghiu, la communauté se demande si l’éducation traditionnelle que les enfants Gheorghiu reçoivent de leurs parents pourrait en être la cause.",
       "imdbId": "tt35410859",
       "seances": [
-        {
-          "date": "2026-10-07",
-          "heure": "20:30",
-          "version": "VOSTFR"
-        },
         {
           "date": "2026-10-10",
           "heure": "20:30",
@@ -1491,6 +1505,11 @@
           "date": "2026-10-12",
           "heure": "14:00",
           "version": "VF"
+        },
+        {
+          "date": "2026-10-13",
+          "heure": "14:00",
+          "version": "VF"
         }
       ],
       "source": "comoedia",
@@ -1511,11 +1530,6 @@
       "synopsis": null,
       "imdbId": null,
       "seances": [
-        {
-          "date": "2026-10-07",
-          "heure": "10:55",
-          "version": "VF"
-        },
         {
           "date": "2026-10-08",
           "heure": "13:25",
@@ -1540,11 +1554,6 @@
       "synopsis": null,
       "imdbId": null,
       "seances": [
-        {
-          "date": "2026-10-07",
-          "heure": "16:45",
-          "version": "VF"
-        },
         {
           "date": "2026-10-08",
           "heure": "16:45",
@@ -1588,7 +1597,7 @@
       "cinema": "Le Comoedia",
       "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/5c2246536f71b01e.jpg",
       "backdrop": "https://image.tmdb.org/t/p/w1280/1KUzZMCBOtInUFoGUEJJsQyQKVi.jpg",
-      "imdbRating": 7.708,
+      "imdbRating": 7.7,
       "cast": "Sandra Hüller, Caro Braun, Marisa Growaldt",
       "trailer": "https://www.youtube.com/watch?v=1rgaBWjLYPc"
     },
@@ -1605,11 +1614,6 @@
       "synopsis": "Un souriceau qui vit la tête à l’envers, un tout petit poisson explorateur et des enfants à l’imagination débordante : ces personnages nous invitent à nous mettre à la place de celles et ceux qui perçoivent le monde différemment pour mieux les comprendre.",
       "imdbId": "tt2274562",
       "seances": [
-        {
-          "date": "2026-10-07",
-          "heure": "14:00",
-          "version": "VF"
-        },
         {
           "date": "2026-10-10",
           "heure": "11:00",
@@ -1637,16 +1641,6 @@
       "synopsis": "C’est les vacances ! Elizabeth, 9 ans, rentre chez ses parents qui vivent dans la forêt tropicale. Alors qu’elle espérait passer ses vacances à lire dans un hamac, elle doit garder son petit frère Léo et le voilà qui disparaît… Quand elle comprend qu’il a été emporté dans une pirogue, elle n’a plus le choix : il faut immédiatement partir à sa recherche. Tant pis pour la lecture, cet été, c’est l’aventure !",
       "imdbId": "tt37162310",
       "seances": [
-        {
-          "date": "2026-10-07",
-          "heure": "10:55",
-          "version": "VF"
-        },
-        {
-          "date": "2026-10-07",
-          "heure": "14:00",
-          "version": "VF"
-        },
         {
           "date": "2026-10-10",
           "heure": "10:45",
@@ -1677,6 +1671,114 @@
       "trailer": "https://www.youtube.com/watch?v=NPK01ooGWvY"
     },
     {
+      "titre": "Primetime",
+      "slug": "primetime",
+      "titreOriginal": null,
+      "annee": 2026,
+      "realisateur": "Lance Oppenheim",
+      "duree": 111,
+      "genres": [
+        "Action",
+        "Biography",
+        "Crime"
+      ],
+      "synopsis": "En 2006, Chris Hansen, le présentateur de l'émission To Catch a Predator, entreprend de marquer l'histoire de la télévision.",
+      "imdbId": "tt34206385",
+      "source": "lumiere",
+      "cinema": "Lumière Terreaux",
+      "seances": [
+        {
+          "date": "2026-10-08",
+          "heure": "10:20",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F616348/D1791447600/VO/"
+        },
+        {
+          "date": "2026-10-08",
+          "heure": "13:15",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F616348/D1791458100/VO/"
+        },
+        {
+          "date": "2026-10-08",
+          "heure": "15:45",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F616348/D1791467100/VO/"
+        },
+        {
+          "date": "2026-10-08",
+          "heure": "18:05",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F616348/D1791475500/VO/"
+        },
+        {
+          "date": "2026-10-08",
+          "heure": "20:30",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F616348/D1791484200/VO/"
+        },
+        {
+          "date": "2026-10-09",
+          "heure": "13:15",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F616348/D1791544500/VO/"
+        },
+        {
+          "date": "2026-10-09",
+          "heure": "15:45",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F616348/D1791553500/VO/"
+        },
+        {
+          "date": "2026-10-09",
+          "heure": "18:05",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F616348/D1791561900/VO/"
+        },
+        {
+          "date": "2026-10-09",
+          "heure": "20:30",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F616348/D1791570600/VO/"
+        },
+        {
+          "date": "2026-10-10",
+          "heure": "10:20",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F616348/D1791620400/VO/"
+        },
+        {
+          "date": "2026-10-10",
+          "heure": "13:15",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F616348/D1791630900/VO/"
+        },
+        {
+          "date": "2026-10-10",
+          "heure": "15:45",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F616348/D1791639900/VO/"
+        },
+        {
+          "date": "2026-10-10",
+          "heure": "18:05",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F616348/D1791648300/VO/"
+        },
+        {
+          "date": "2026-10-10",
+          "heure": "20:30",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F616348/D1791657000/VO/"
+        }
+      ],
+      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/728938da7e038f95.jpg",
+      "cast": "R. Pattinson, M. Wever, S. Gisondo",
+      "backdrop": "https://image.tmdb.org/t/p/w1280/4E5RVsSUG1A4Adwbqupu5w6kofZ.jpg",
+      "trailer": "https://www.youtube.com/watch?v=3ftErNDf5Jc",
+      "imdbRating": 6.8
+    },
+    {
       "titre": "Notre salut",
       "slug": "notre-salut",
       "titreOriginal": null,
@@ -1692,36 +1794,6 @@
       "source": "lumiere",
       "cinema": "Lumière Terreaux",
       "seances": [
-        {
-          "date": "2026-10-07",
-          "heure": "10:15",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F608708/D1791360900/VF/"
-        },
-        {
-          "date": "2026-10-07",
-          "heure": "13:15",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F608708/D1791371700/VF/"
-        },
-        {
-          "date": "2026-10-07",
-          "heure": "14:45",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F608708/D1791377100/VF/"
-        },
-        {
-          "date": "2026-10-07",
-          "heure": "17:45",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F608708/D1791387900/VF/"
-        },
-        {
-          "date": "2026-10-07",
-          "heure": "20:45",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F608708/D1791398700/VF/"
-        },
         {
           "date": "2026-10-08",
           "heure": "10:15",
@@ -1871,13 +1943,43 @@
           "heure": "20:45",
           "version": "VF",
           "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F608708/D1791830700/VF/"
+        },
+        {
+          "date": "2026-10-13",
+          "heure": "10:15",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F608708/D1791879300/VF/"
+        },
+        {
+          "date": "2026-10-13",
+          "heure": "13:15",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F608708/D1791890100/VF/"
+        },
+        {
+          "date": "2026-10-13",
+          "heure": "14:45",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F608708/D1791895500/VF/"
+        },
+        {
+          "date": "2026-10-13",
+          "heure": "17:45",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F608708/D1791906300/VF/"
+        },
+        {
+          "date": "2026-10-13",
+          "heure": "20:45",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F608708/D1791917100/VF/"
         }
       ],
       "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4919/120x160-NOTRE-SALUT (1)/s,490,650-q,90-7ce47f.jpg",
       "cast": "S. Arlaud, S. Blancke, M. Perotto",
       "backdrop": "https://image.tmdb.org/t/p/w1280/iQMFLm9Te2IuJTr08RdBLKTGw8n.jpg",
       "trailer": "https://www.youtube.com/watch?v=6V54Q8DaWjU",
-      "imdbRating": 6.958
+      "imdbRating": 6.844
     },
     {
       "titre": "Digger",
@@ -1895,36 +1997,6 @@
       "source": "lumiere",
       "cinema": "Lumière Terreaux",
       "seances": [
-        {
-          "date": "2026-10-07",
-          "heure": "10:15",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F611574/D1791360900/VO/"
-        },
-        {
-          "date": "2026-10-07",
-          "heure": "13:00",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F611574/D1791370800/VO/"
-        },
-        {
-          "date": "2026-10-07",
-          "heure": "15:35",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F611574/D1791380100/VO/"
-        },
-        {
-          "date": "2026-10-07",
-          "heure": "18:10",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F611574/D1791389400/VO/"
-        },
-        {
-          "date": "2026-10-07",
-          "heure": "20:40",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F611574/D1791398400/VO/"
-        },
         {
           "date": "2026-10-08",
           "heure": "10:15",
@@ -2074,13 +2146,43 @@
           "heure": "20:50",
           "version": "VOSTFR",
           "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F611574/D1791831000/VO/"
+        },
+        {
+          "date": "2026-10-13",
+          "heure": "10:20",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F611574/D1791879600/VO/"
+        },
+        {
+          "date": "2026-10-13",
+          "heure": "13:00",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F611574/D1791889200/VO/"
+        },
+        {
+          "date": "2026-10-13",
+          "heure": "15:35",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F611574/D1791898500/VO/"
+        },
+        {
+          "date": "2026-10-13",
+          "heure": "18:10",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F611574/D1791907800/VO/"
+        },
+        {
+          "date": "2026-10-13",
+          "heure": "20:50",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F611574/D1791917400/VO/"
         }
       ],
       "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/4c39ed5b66e02950.jpg",
       "cast": "T. Cruise, S. Huller, S. Berman",
       "backdrop": "https://image.tmdb.org/t/p/w1280/b7t3r39Oll5qPxBKzLZ8eHMBD7l.jpg",
       "trailer": "https://www.youtube.com/watch?v=e2lyQd9t700",
-      "imdbRating": 7.531
+      "imdbRating": 7.525
     },
     {
       "titre": "Garance",
@@ -2097,36 +2199,6 @@
       "source": "lumiere",
       "cinema": "Lumière Terreaux",
       "seances": [
-        {
-          "date": "2026-10-07",
-          "heure": "10:15",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F627998/D1791360900/VF/"
-        },
-        {
-          "date": "2026-10-07",
-          "heure": "12:30",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F627998/D1791369000/VF/"
-        },
-        {
-          "date": "2026-10-07",
-          "heure": "16:15",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F627998/D1791382500/VF/"
-        },
-        {
-          "date": "2026-10-07",
-          "heure": "18:30",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F627998/D1791390600/VF/"
-        },
-        {
-          "date": "2026-10-07",
-          "heure": "20:50",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F627998/D1791399000/VF/"
-        },
         {
           "date": "2026-10-08",
           "heure": "10:15",
@@ -2276,325 +2348,43 @@
           "heure": "20:50",
           "version": "VF",
           "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F627998/D1791831000/VF/"
+        },
+        {
+          "date": "2026-10-13",
+          "heure": "10:15",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F627998/D1791879300/VF/"
+        },
+        {
+          "date": "2026-10-13",
+          "heure": "12:30",
+          "version": "VFST",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F627998/D1791887400/VFST/"
+        },
+        {
+          "date": "2026-10-13",
+          "heure": "16:15",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F627998/D1791900900/VF/"
+        },
+        {
+          "date": "2026-10-13",
+          "heure": "18:30",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F627998/D1791909000/VF/"
+        },
+        {
+          "date": "2026-10-13",
+          "heure": "20:50",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F627998/D1791917400/VF/"
         }
       ],
       "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/af63133c819b283a.jpg",
       "cast": "A. Exarchopoulos, S. Giraudeau, S. Drillaud",
       "backdrop": "https://image.tmdb.org/t/p/w1280/yLZCngaex5380FB6sEy6o10L9wN.jpg",
       "trailer": "https://www.youtube.com/watch?v=08WaxJ0KVCw",
-      "imdbRating": 6.971
-    },
-    {
-      "titre": "Primetime",
-      "slug": "primetime",
-      "titreOriginal": null,
-      "annee": 2026,
-      "realisateur": "Lance Oppenheim",
-      "duree": 111,
-      "genres": [
-        "Action",
-        "Biography",
-        "Crime"
-      ],
-      "synopsis": "En 2006, Chris Hansen, le présentateur de l'émission To Catch a Predator, entreprend de marquer l'histoire de la télévision.",
-      "imdbId": "tt34206385",
-      "source": "lumiere",
-      "cinema": "Lumière Terreaux",
-      "seances": [
-        {
-          "date": "2026-10-07",
-          "heure": "10:20",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F616348/D1791361200/VO/"
-        },
-        {
-          "date": "2026-10-07",
-          "heure": "13:15",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F616348/D1791371700/VO/"
-        },
-        {
-          "date": "2026-10-07",
-          "heure": "15:45",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F616348/D1791380700/VO/"
-        },
-        {
-          "date": "2026-10-07",
-          "heure": "18:05",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F616348/D1791389100/VO/"
-        },
-        {
-          "date": "2026-10-07",
-          "heure": "20:30",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F616348/D1791397800/VO/"
-        },
-        {
-          "date": "2026-10-08",
-          "heure": "10:20",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F616348/D1791447600/VO/"
-        },
-        {
-          "date": "2026-10-08",
-          "heure": "13:15",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F616348/D1791458100/VO/"
-        },
-        {
-          "date": "2026-10-08",
-          "heure": "15:45",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F616348/D1791467100/VO/"
-        },
-        {
-          "date": "2026-10-08",
-          "heure": "18:05",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F616348/D1791475500/VO/"
-        },
-        {
-          "date": "2026-10-08",
-          "heure": "20:30",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F616348/D1791484200/VO/"
-        },
-        {
-          "date": "2026-10-09",
-          "heure": "13:15",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F616348/D1791544500/VO/"
-        },
-        {
-          "date": "2026-10-09",
-          "heure": "15:45",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F616348/D1791553500/VO/"
-        },
-        {
-          "date": "2026-10-09",
-          "heure": "18:05",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F616348/D1791561900/VO/"
-        },
-        {
-          "date": "2026-10-09",
-          "heure": "20:30",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F616348/D1791570600/VO/"
-        },
-        {
-          "date": "2026-10-10",
-          "heure": "10:20",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F616348/D1791620400/VO/"
-        },
-        {
-          "date": "2026-10-10",
-          "heure": "13:15",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F616348/D1791630900/VO/"
-        },
-        {
-          "date": "2026-10-10",
-          "heure": "15:45",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F616348/D1791639900/VO/"
-        },
-        {
-          "date": "2026-10-10",
-          "heure": "18:05",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F616348/D1791648300/VO/"
-        },
-        {
-          "date": "2026-10-10",
-          "heure": "20:30",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-terreaux-vad.cotecine.fr/resa-part/cinemas-lumiere/F616348/D1791657000/VO/"
-        }
-      ],
-      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/728938da7e038f95.jpg",
-      "cast": "R. Pattinson, M. Wever, S. Gisondo",
-      "backdrop": "https://image.tmdb.org/t/p/w1280/4E5RVsSUG1A4Adwbqupu5w6kofZ.jpg",
-      "trailer": "https://www.youtube.com/watch?v=3ftErNDf5Jc",
-      "imdbRating": 6.8
-    },
-    {
-      "titre": "Mémoire de fille",
-      "slug": "memoire-de-fille",
-      "titreOriginal": null,
-      "annee": 2026,
-      "realisateur": "Judith Godrèche",
-      "duree": 117,
-      "genres": [
-        "Drama"
-      ],
-      "synopsis": "Annie Ernaux est sollicitée pour une signature de son dernier ouvrage dans la ville de son enfance, Rouen. Alors qu'elle s'y rend, elle est prise d'un vertige et replonge dans le souvenir de l'été 1958, celui de sa première nuit avec un homme. Nuit dont l'onde de choc s'est propagée violemment dans son corps et sur le reste de son existence.",
-      "imdbId": "tt39088978",
-      "source": "lumiere",
-      "cinema": "Lumière Bellecour",
-      "seances": [
-        {
-          "date": "2026-10-07",
-          "heure": "16:15",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F631242/D1791382500/VF/"
-        },
-        {
-          "date": "2026-10-07",
-          "heure": "20:35",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F631242/D1791398100/VF/"
-        },
-        {
-          "date": "2026-10-08",
-          "heure": "14:00",
-          "version": "VFST",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F631242/D1791460800/VFST/"
-        },
-        {
-          "date": "2026-10-08",
-          "heure": "18:25",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F631242/D1791476700/VF/"
-        },
-        {
-          "date": "2026-10-09",
-          "heure": "16:15",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F631242/D1791555300/VF/"
-        },
-        {
-          "date": "2026-10-09",
-          "heure": "20:35",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F631242/D1791570900/VF/"
-        },
-        {
-          "date": "2026-10-10",
-          "heure": "14:00",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F631242/D1791633600/VF/"
-        },
-        {
-          "date": "2026-10-10",
-          "heure": "18:25",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F631242/D1791649500/VF/"
-        },
-        {
-          "date": "2026-10-11",
-          "heure": "14:10",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F631242/D1791720600/VF/"
-        },
-        {
-          "date": "2026-10-11",
-          "heure": "20:40",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F631242/D1791744000/VF/"
-        },
-        {
-          "date": "2026-10-12",
-          "heure": "14:10",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F631242/D1791807000/VF/"
-        }
-      ],
-      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/a9e73c1468affd45.jpg",
-      "cast": "T. Barthélémy,  V. Dréville,  M. Barthélemy",
-      "backdrop": "https://image.tmdb.org/t/p/w1280/50w3VUxBQge2pUp8COyuGqg6Gqc.jpg",
-      "trailer": "https://www.youtube.com/watch?v=DhH-_4D1mU0",
-      "imdbRating": 7.0
-    },
-    {
-      "titre": "NAZA",
-      "slug": "naza",
-      "titreOriginal": null,
-      "annee": 2026,
-      "realisateur": "Yuval Abraham & Rachel Szor",
-      "duree": 77,
-      "genres": [],
-      "synopsis": "Filmé de nuit sur les toits de Tel Aviv, le film décrit en détail les systèmes derrière le massacre de civils palestiniens à Gaza par Israël.",
-      "imdbId": "tt44766123",
-      "source": "lumiere",
-      "cinema": "Lumière Bellecour",
-      "seances": [
-        {
-          "date": "2026-10-12",
-          "heure": "20:30",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F638193/D1791829800/VO/"
-        }
-      ],
-      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/a359f05b1166f9b0.jpg",
-      "cast": "Yuval Abraham",
-      "backdrop": "https://image.tmdb.org/t/p/w1280/7EzH0dlEN9OZWWBXBWwT5PbMNUz.jpg",
-      "trailer": "https://www.youtube.com/watch?v=40KW6knYMo4",
-      "imdbRating": 8.056
-    },
-    {
-      "titre": "L'Invitation",
-      "slug": "l-invitation",
-      "titreOriginal": null,
-      "annee": 2026,
-      "realisateur": "Olivia Wilde",
-      "duree": 107,
-      "genres": [
-        "Comedy",
-        "Drama",
-        "Romance"
-      ],
-      "synopsis": "Angela et Joe invitent leurs mystérieux nouveaux voisins du dessus à dîner. La soirée va alors rapidement faire voler en éclats toutes leurs certitudes.",
-      "imdbId": "tt14173636",
-      "source": "lumiere",
-      "cinema": "Lumière Bellecour",
-      "seances": [
-        {
-          "date": "2026-10-07",
-          "heure": "16:15",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F586484/D1791382500/VO/"
-        },
-        {
-          "date": "2026-10-08",
-          "heure": "14:10",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F586484/D1791461400/VO/"
-        },
-        {
-          "date": "2026-10-09",
-          "heure": "16:15",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F586484/D1791555300/VO/"
-        },
-        {
-          "date": "2026-10-10",
-          "heure": "14:10",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F586484/D1791634200/VO/"
-        },
-        {
-          "date": "2026-10-11",
-          "heure": "14:00",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F586484/D1791720000/VO/"
-        },
-        {
-          "date": "2026-10-12",
-          "heure": "18:20",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F586484/D1791822000/VO/"
-        }
-      ],
-      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/03404c99537d1cce.jpg",
-      "cast": "S. Rogen, O. Wilde, P. Cruz",
-      "backdrop": "https://image.tmdb.org/t/p/w1280/bs32Ds4L8VADGjBVasSK1ASU7OW.jpg",
-      "imdbRating": 7.222,
-      "trailer": "https://www.youtube.com/watch?v=2zJGY8UW8gI"
+      "imdbRating": 7.158
     },
     {
       "titre": "Butterfly Jam",
@@ -2611,24 +2401,6 @@
       "source": "lumiere",
       "cinema": "Lumière Bellecour",
       "seances": [
-        {
-          "date": "2026-10-07",
-          "heure": "14:00",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F573592/D1791374400/VO/"
-        },
-        {
-          "date": "2026-10-07",
-          "heure": "18:40",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F573592/D1791391200/VO/"
-        },
-        {
-          "date": "2026-10-07",
-          "heure": "20:50",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F573592/D1791399000/VO/"
-        },
         {
           "date": "2026-10-08",
           "heure": "16:15",
@@ -2706,6 +2478,18 @@
           "heure": "20:35",
           "version": "VOSTFR",
           "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F573592/D1791830100/VO/"
+        },
+        {
+          "date": "2026-10-13",
+          "heure": "16:25",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F573592/D1791901500/VO/"
+        },
+        {
+          "date": "2026-10-13",
+          "heure": "20:50",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F573592/D1791917400/VO/"
         }
       ],
       "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/91dcb684d73fd5b5.jpg",
@@ -2713,146 +2497,6 @@
       "backdrop": "https://image.tmdb.org/t/p/w1280/y1JMqbxHEa95Jg67bgm0F9A35SM.jpg",
       "imdbRating": 5.9,
       "trailer": "https://www.youtube.com/watch?v=-VoOLj0cyW0"
-    },
-    {
-      "titre": "Les Elephants dans la brume",
-      "slug": "les-elephants-dans-la-brume",
-      "titreOriginal": null,
-      "annee": 2026,
-      "realisateur": "Abinash Bikram Shah",
-      "duree": 103,
-      "genres": [
-        "Drama"
-      ],
-      "synopsis": "Dans un village népalais niché au coeur d'une forêt peuplée d'éléphants sauvages vit une communauté kinnar aussi vénérée que crainte pour ses pouvoirs de bénédiction et de malédiction. Pirati, l'une des mères de la communauté, rêve de s'échapper avec l'homme qu'elle aime. Mais lorsqu'une de ses filles disparaît, elle se doit mener l'enquête et choisir entre son désir de liberté et ses responsabilités envers sa communauté.",
-      "imdbId": "tt29279937",
-      "source": "lumiere",
-      "cinema": "Lumière Bellecour",
-      "seances": [
-        {
-          "date": "2026-10-07",
-          "heure": "14:05",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F636569/D1791374700/VO/"
-        },
-        {
-          "date": "2026-10-07",
-          "heure": "18:35",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F636569/D1791390900/VO/"
-        },
-        {
-          "date": "2026-10-08",
-          "heure": "16:10",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F636569/D1791468600/VO/"
-        },
-        {
-          "date": "2026-10-08",
-          "heure": "20:35",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F636569/D1791484500/VO/"
-        },
-        {
-          "date": "2026-10-09",
-          "heure": "14:05",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F636569/D1791547500/VO/"
-        },
-        {
-          "date": "2026-10-09",
-          "heure": "18:35",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F636569/D1791563700/VO/"
-        },
-        {
-          "date": "2026-10-10",
-          "heure": "16:10",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F636569/D1791641400/VO/"
-        },
-        {
-          "date": "2026-10-10",
-          "heure": "20:35",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F636569/D1791657300/VO/"
-        },
-        {
-          "date": "2026-10-11",
-          "heure": "14:00",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F636569/D1791720000/VO/"
-        },
-        {
-          "date": "2026-10-11",
-          "heure": "18:30",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F636569/D1791736200/VO/"
-        },
-        {
-          "date": "2026-10-12",
-          "heure": "13:50",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F636569/D1791805800/VO/"
-        },
-        {
-          "date": "2026-10-12",
-          "heure": "16:40",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F636569/D1791816000/VO/"
-        }
-      ],
-      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/ab2457970951def1.jpg",
-      "cast": "P. Thing Lama, D. Yadav, J. Bishwokarma",
-      "backdrop": "https://image.tmdb.org/t/p/w1280/hvVIS83R92hstmUzqA3WVofyUQ1.jpg",
-      "imdbRating": 7.25,
-      "trailer": "https://www.youtube.com/watch?v=voT_HqOvsx8"
-    },
-    {
-      "titre": "La Vie d'une femme",
-      "slug": "la-vie-d-une-femme",
-      "titreOriginal": null,
-      "annee": 2026,
-      "realisateur": "Charline Bourgeois-Tacquet",
-      "duree": 98,
-      "genres": [
-        "Drama"
-      ],
-      "synopsis": "Gabrielle se consacre corps et âme à son métier. Chirurgienne et cheffe de service dans un hôpital public, elle court et se démultiplie, assaillie de responsabilités. Il lui reste peu de temps pour sa vie privée - un mari qui l'aime et une mère dont elle doit s'occuper. Lorsqu'une romancière vient passer quelques semaines dans son service pour les besoins d'un livre, son équilibre vacille. Dans le quotidien que Gabrielle s'est construit, y a-t-il de la place pour l'inattendu ?",
-      "imdbId": "tt39299437",
-      "source": "lumiere",
-      "cinema": "Lumière Bellecour",
-      "seances": [
-        {
-          "date": "2026-10-07",
-          "heure": "14:10",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F616684/D1791375000/VF/"
-        },
-        {
-          "date": "2026-10-08",
-          "heure": "16:25",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F616684/D1791469500/VF/"
-        },
-        {
-          "date": "2026-10-09",
-          "heure": "14:10",
-          "version": "VFST",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F616684/D1791547800/VFST/"
-        },
-        {
-          "date": "2026-10-10",
-          "heure": "16:25",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F616684/D1791642300/VF/"
-        }
-      ],
-      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/6507a8a146c48a32.jpg",
-      "cast": "L. Drucker, M. Thierry, C. Berling",
-      "backdrop": "https://image.tmdb.org/t/p/w1280/rFST4zAaG20VSIxSvYO57nhkkV4.jpg",
-      "trailer": "https://www.youtube.com/watch?v=ba4jiv6BIuk",
-      "imdbRating": 6.426
     },
     {
       "titre": "L'Espèce explosive",
@@ -2871,24 +2515,6 @@
       "source": "lumiere",
       "cinema": "Lumière Bellecour",
       "seances": [
-        {
-          "date": "2026-10-07",
-          "heure": "16:20",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F367154/D1791382800/VF/"
-        },
-        {
-          "date": "2026-10-07",
-          "heure": "18:30",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F367154/D1791390600/VF/"
-        },
-        {
-          "date": "2026-10-07",
-          "heure": "20:50",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F367154/D1791399000/VF/"
-        },
         {
           "date": "2026-10-08",
           "heure": "14:00",
@@ -2966,6 +2592,18 @@
           "heure": "21:45",
           "version": "VF",
           "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F367154/D1791834300/VF/"
+        },
+        {
+          "date": "2026-10-13",
+          "heure": "14:00",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F367154/D1791892800/VF/"
+        },
+        {
+          "date": "2026-10-13",
+          "heure": "20:35",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F367154/D1791916500/VF/"
         }
       ],
       "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/b5b3a1839be4475d.jpg",
@@ -2973,6 +2611,38 @@
       "backdrop": "https://image.tmdb.org/t/p/w1280/7PZCUc6xYm4kHlqnKzwgtHRjm8K.jpg",
       "trailer": "https://www.youtube.com/watch?v=JElCES6kQ6E",
       "imdbRating": 7.5
+    },
+    {
+      "titre": "NAZA",
+      "slug": "naza",
+      "titreOriginal": null,
+      "annee": 2026,
+      "realisateur": "Yuval Abraham & Rachel Szor",
+      "duree": 77,
+      "genres": [],
+      "synopsis": "Filmé de nuit sur les toits de Tel Aviv, le film décrit en détail les systèmes derrière le massacre de civils palestiniens à Gaza par Israël.",
+      "imdbId": "tt44766123",
+      "source": "lumiere",
+      "cinema": "Lumière Bellecour",
+      "seances": [
+        {
+          "date": "2026-10-12",
+          "heure": "20:30",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F638193/D1791829800/VO/"
+        },
+        {
+          "date": "2026-10-13",
+          "heure": "18:30",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F638193/D1791909000/VO/"
+        }
+      ],
+      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/a359f05b1166f9b0.jpg",
+      "cast": "Yuval Abraham",
+      "backdrop": "https://image.tmdb.org/t/p/w1280/7EzH0dlEN9OZWWBXBWwT5PbMNUz.jpg",
+      "trailer": "https://www.youtube.com/watch?v=40KW6knYMo4",
+      "imdbRating": 8.224
     },
     {
       "titre": "Primetime",
@@ -3014,6 +2684,12 @@
           "heure": "16:05",
           "version": "VOSTFR",
           "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F616348/D1791813900/VO/"
+        },
+        {
+          "date": "2026-10-13",
+          "heure": "18:15",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F616348/D1791908100/VO/"
         }
       ],
       "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/728938da7e038f95.jpg",
@@ -3023,172 +2699,286 @@
       "imdbRating": 6.8
     },
     {
-      "titre": "Le Monde à l'endroit",
-      "slug": "le-monde-a-l-endroit",
+      "titre": "Les Elephants dans la brume",
+      "slug": "les-elephants-dans-la-brume",
       "titreOriginal": null,
       "annee": 2026,
-      "realisateur": "Sylvie Meyer",
-      "duree": 88,
+      "realisateur": "Abinash Bikram Shah",
+      "duree": 103,
       "genres": [
-        "Documentary"
+        "Drama"
       ],
-      "synopsis": "Les blessures de l'enfance ne s'effacent pas, elles se réparent.Muriel Salmona, psychiatre de renom et spécialiste des violences sexuelles, consacre sa vie à soigner celles et ceux que l'enfance a brisés.Incarnée à l'écran par Sandrine Bonnaire, Marianne Denicourt et Isild Le Besco, elle accompagne des patients qui affrontent leur passé et ouvrent, pas à pas, le chemin de la réparation.",
-      "imdbId": "tt41969538",
+      "synopsis": "Dans un village népalais niché au coeur d'une forêt peuplée d'éléphants sauvages vit une communauté kinnar aussi vénérée que crainte pour ses pouvoirs de bénédiction et de malédiction. Pirati, l'une des mères de la communauté, rêve de s'échapper avec l'homme qu'elle aime. Mais lorsqu'une de ses filles disparaît, elle se doit mener l'enquête et choisir entre son désir de liberté et ses responsabilités envers sa communauté.",
+      "imdbId": "tt29279937",
       "source": "lumiere",
-      "cinema": "Lumière Fourmi",
+      "cinema": "Lumière Bellecour",
       "seances": [
-        {
-          "date": "2026-10-07",
-          "heure": "13:50",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F608642/D1791373800/VF/"
-        },
-        {
-          "date": "2026-10-09",
-          "heure": "14:00",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F608642/D1791547200/VF/"
-        },
-        {
-          "date": "2026-10-09",
-          "heure": "18:00",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F608642/D1791561600/VF/"
-        },
-        {
-          "date": "2026-10-10",
-          "heure": "12:50",
-          "version": "VFST",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F608642/D1791629400/VFST/"
-        },
-        {
-          "date": "2026-10-11",
-          "heure": "12:40",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F608642/D1791715200/VF/"
-        },
-        {
-          "date": "2026-10-12",
-          "heure": "13:50",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F608642/D1791805800/VF/"
-        }
-      ],
-      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/65f0bbdd810e5ba1.jpg",
-      "cast": "S. Bonnaire,  M. Denicourt,  I. Le Besco",
-      "backdrop": "https://image.tmdb.org/t/p/w1280/zLRci1gyeYDo2xwxHsJnuqMxkFw.jpg",
-      "imdbRating": 7.0,
-      "trailer": "https://www.youtube.com/watch?v=OFRehCQ8bW8"
-    },
-    {
-      "titre": "Un hiver russe",
-      "slug": "un-hiver-russe",
-      "titreOriginal": null,
-      "annee": 2026,
-      "realisateur": "Patric Chiha",
-      "duree": 86,
-      "genres": [
-        "Documentary"
-      ],
-      "synopsis": "Entre Paris et Istanbul, Margarita, Yuri et leurs amis, un groupe de jeunes exilés russes, cherchent leur place dans un monde qui ne semble plus être le leur.",
-      "imdbId": "tt39215225",
-      "source": "lumiere",
-      "cinema": "Lumière Fourmi",
-      "seances": [
-        {
-          "date": "2026-10-07",
-          "heure": "15:45",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F600048/D1791380700/VF/"
-        },
-        {
-          "date": "2026-10-09",
-          "heure": "15:45",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F600048/D1791553500/VF/"
-        },
-        {
-          "date": "2026-10-10",
-          "heure": "12:50",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F600048/D1791629400/VF/"
-        },
-        {
-          "date": "2026-10-11",
-          "heure": "12:50",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F600048/D1791715800/VF/"
-        },
-        {
-          "date": "2026-10-12",
-          "heure": "14:00",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F600048/D1791806400/VF/"
-        }
-      ],
-      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/16a27e53d524b301.jpg",
-      "backdrop": "https://image.tmdb.org/t/p/w1280/pfoqzyrGgVSOyvQ3mprKXv7HWic.jpg",
-      "imdbRating": 0.0
-    },
-    {
-      "titre": "Histoires de la nuit",
-      "slug": "histoires-de-la-nuit",
-      "titreOriginal": null,
-      "annee": 2026,
-      "realisateur": "Léa Mysius",
-      "duree": 114,
-      "genres": [
-        "Action",
-        "Adventure",
-        "Crime"
-      ],
-      "synopsis": "Nora, Thomas et leur fille Ida vivent dans une ferme isolée avec pour seule voisine, Cristina, une peintre italienne. Alors que tout le monde prépare une soirée d'anniversaire surprise pour Nora, trois hommes rôdent autour de la maison et s'invitent à la fête, faisant surgir des secrets bien gardés...",
-      "imdbId": "tt30495381",
-      "source": "lumiere",
-      "cinema": "Lumière Fourmi",
-      "seances": [
-        {
-          "date": "2026-10-07",
-          "heure": "18:00",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F620410/D1791388800/VF/"
-        },
         {
           "date": "2026-10-08",
           "heure": "16:10",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F620410/D1791468600/VF/"
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F636569/D1791468600/VO/"
+        },
+        {
+          "date": "2026-10-08",
+          "heure": "20:35",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F636569/D1791484500/VO/"
         },
         {
           "date": "2026-10-09",
-          "heure": "16:10",
-          "version": "VFST",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F620410/D1791555000/VFST/"
+          "heure": "14:05",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F636569/D1791547500/VO/"
+        },
+        {
+          "date": "2026-10-09",
+          "heure": "18:35",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F636569/D1791563700/VO/"
         },
         {
           "date": "2026-10-10",
-          "heure": "20:40",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F620410/D1791657600/VF/"
+          "heure": "16:10",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F636569/D1791641400/VO/"
+        },
+        {
+          "date": "2026-10-10",
+          "heure": "20:35",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F636569/D1791657300/VO/"
         },
         {
           "date": "2026-10-11",
-          "heure": "18:05",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F620410/D1791734700/VF/"
+          "heure": "14:00",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F636569/D1791720000/VO/"
+        },
+        {
+          "date": "2026-10-11",
+          "heure": "18:30",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F636569/D1791736200/VO/"
         },
         {
           "date": "2026-10-12",
-          "heure": "18:00",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F620410/D1791820800/VF/"
+          "heure": "13:50",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F636569/D1791805800/VO/"
+        },
+        {
+          "date": "2026-10-12",
+          "heure": "16:40",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F636569/D1791816000/VO/"
+        },
+        {
+          "date": "2026-10-13",
+          "heure": "16:00",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F636569/D1791900000/VO/"
+        },
+        {
+          "date": "2026-10-13",
+          "heure": "18:35",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F636569/D1791909300/VO/"
         }
       ],
-      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/fce29c0aa0258b80.jpg",
-      "cast": "H. Herzi, B. Magimel, B. Bouillon",
-      "backdrop": "https://image.tmdb.org/t/p/w1280/3vt3M9IrUvuH4E93ZlZpWvtxX3V.jpg",
-      "imdbRating": 6.3,
-      "trailer": "https://www.youtube.com/watch?v=m5yA7RlZssA"
+      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/ab2457970951def1.jpg",
+      "cast": "P. Thing Lama, D. Yadav, J. Bishwokarma",
+      "backdrop": "https://image.tmdb.org/t/p/w1280/hvVIS83R92hstmUzqA3WVofyUQ1.jpg",
+      "imdbRating": 7.2,
+      "trailer": "https://www.youtube.com/watch?v=voT_HqOvsx8"
+    },
+    {
+      "titre": "La Vie d'une femme",
+      "slug": "la-vie-d-une-femme",
+      "titreOriginal": null,
+      "annee": 2026,
+      "realisateur": "Charline Bourgeois-Tacquet",
+      "duree": 98,
+      "genres": [
+        "Drama"
+      ],
+      "synopsis": "Gabrielle se consacre corps et âme à son métier. Chirurgienne et cheffe de service dans un hôpital public, elle court et se démultiplie, assaillie de responsabilités. Il lui reste peu de temps pour sa vie privée - un mari qui l'aime et une mère dont elle doit s'occuper. Lorsqu'une romancière vient passer quelques semaines dans son service pour les besoins d'un livre, son équilibre vacille. Dans le quotidien que Gabrielle s'est construit, y a-t-il de la place pour l'inattendu ?",
+      "imdbId": "tt39299437",
+      "source": "lumiere",
+      "cinema": "Lumière Bellecour",
+      "seances": [
+        {
+          "date": "2026-10-08",
+          "heure": "16:25",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F616684/D1791469500/VF/"
+        },
+        {
+          "date": "2026-10-09",
+          "heure": "14:10",
+          "version": "VFST",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F616684/D1791547800/VFST/"
+        },
+        {
+          "date": "2026-10-10",
+          "heure": "16:25",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F616684/D1791642300/VF/"
+        }
+      ],
+      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/6507a8a146c48a32.jpg",
+      "cast": "L. Drucker, M. Thierry, C. Berling",
+      "backdrop": "https://image.tmdb.org/t/p/w1280/rFST4zAaG20VSIxSvYO57nhkkV4.jpg",
+      "trailer": "https://www.youtube.com/watch?v=ba4jiv6BIuk",
+      "imdbRating": 6.386
+    },
+    {
+      "titre": "L'Invitation",
+      "slug": "l-invitation",
+      "titreOriginal": null,
+      "annee": 2026,
+      "realisateur": "Olivia Wilde",
+      "duree": 107,
+      "genres": [
+        "Comedy",
+        "Drama",
+        "Romance"
+      ],
+      "synopsis": "Angela et Joe invitent leurs mystérieux nouveaux voisins du dessus à dîner. La soirée va alors rapidement faire voler en éclats toutes leurs certitudes.",
+      "imdbId": "tt14173636",
+      "source": "lumiere",
+      "cinema": "Lumière Bellecour",
+      "seances": [
+        {
+          "date": "2026-10-08",
+          "heure": "14:10",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F586484/D1791461400/VO/"
+        },
+        {
+          "date": "2026-10-09",
+          "heure": "16:15",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F586484/D1791555300/VO/"
+        },
+        {
+          "date": "2026-10-10",
+          "heure": "14:10",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F586484/D1791634200/VO/"
+        },
+        {
+          "date": "2026-10-11",
+          "heure": "14:00",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F586484/D1791720000/VO/"
+        },
+        {
+          "date": "2026-10-12",
+          "heure": "18:20",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F586484/D1791822000/VO/"
+        },
+        {
+          "date": "2026-10-13",
+          "heure": "13:50",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F586484/D1791892200/VO/"
+        }
+      ],
+      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/03404c99537d1cce.jpg",
+      "cast": "S. Rogen, O. Wilde, P. Cruz",
+      "backdrop": "https://image.tmdb.org/t/p/w1280/bs32Ds4L8VADGjBVasSK1ASU7OW.jpg",
+      "imdbRating": 7.2,
+      "trailer": "https://www.youtube.com/watch?v=2zJGY8UW8gI"
+    },
+    {
+      "titre": "Mémoire de fille",
+      "slug": "memoire-de-fille",
+      "titreOriginal": null,
+      "annee": 2026,
+      "realisateur": "Judith Godrèche",
+      "duree": 117,
+      "genres": [
+        "Drama"
+      ],
+      "synopsis": "Annie Ernaux est sollicitée pour une signature de son dernier ouvrage dans la ville de son enfance, Rouen. Alors qu'elle s'y rend, elle est prise d'un vertige et replonge dans le souvenir de l'été 1958, celui de sa première nuit avec un homme. Nuit dont l'onde de choc s'est propagée violemment dans son corps et sur le reste de son existence.",
+      "imdbId": "tt39088978",
+      "source": "lumiere",
+      "cinema": "Lumière Bellecour",
+      "seances": [
+        {
+          "date": "2026-10-08",
+          "heure": "14:00",
+          "version": "VFST",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F631242/D1791460800/VFST/"
+        },
+        {
+          "date": "2026-10-08",
+          "heure": "18:25",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F631242/D1791476700/VF/"
+        },
+        {
+          "date": "2026-10-09",
+          "heure": "16:15",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F631242/D1791555300/VF/"
+        },
+        {
+          "date": "2026-10-09",
+          "heure": "20:35",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F631242/D1791570900/VF/"
+        },
+        {
+          "date": "2026-10-10",
+          "heure": "14:00",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F631242/D1791633600/VF/"
+        },
+        {
+          "date": "2026-10-10",
+          "heure": "18:25",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F631242/D1791649500/VF/"
+        },
+        {
+          "date": "2026-10-11",
+          "heure": "14:10",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F631242/D1791720600/VF/"
+        },
+        {
+          "date": "2026-10-11",
+          "heure": "20:40",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F631242/D1791744000/VF/"
+        },
+        {
+          "date": "2026-10-12",
+          "heure": "14:10",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F631242/D1791807000/VF/"
+        },
+        {
+          "date": "2026-10-13",
+          "heure": "14:00",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F631242/D1791892800/VF/"
+        },
+        {
+          "date": "2026-10-13",
+          "heure": "15:50",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-bellecour-vad.cotecine.fr/resa-part/cinemas-lumiere/F631242/D1791899400/VF/"
+        }
+      ],
+      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/a9e73c1468affd45.jpg",
+      "cast": "T. Barthélémy,  V. Dréville,  M. Barthélemy",
+      "backdrop": "https://image.tmdb.org/t/p/w1280/50w3VUxBQge2pUp8COyuGqg6Gqc.jpg",
+      "trailer": "https://www.youtube.com/watch?v=DhH-_4D1mU0",
+      "imdbRating": 7.0
     },
     {
       "titre": "Fini de rire !",
@@ -3203,12 +2993,6 @@
       "source": "lumiere",
       "cinema": "Lumière Fourmi",
       "seances": [
-        {
-          "date": "2026-10-07",
-          "heure": "13:45",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F637159/D1791373500/VF/"
-        },
         {
           "date": "2026-10-08",
           "heure": "16:45",
@@ -3244,6 +3028,12 @@
           "heure": "13:45",
           "version": "VF",
           "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F637159/D1791805500/VF/"
+        },
+        {
+          "date": "2026-10-13",
+          "heure": "13:45",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F637159/D1791891900/VF/"
         }
       ],
       "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/dd0ae65f58702b27.jpg",
@@ -3251,6 +3041,64 @@
       "backdrop": "https://image.tmdb.org/t/p/w1280/vSN8CZ9r8NLsDHQPWkpwyWzQTtC.jpg",
       "imdbRating": 7.25,
       "trailer": "https://www.youtube.com/watch?v=RPU4sVSqDYE"
+    },
+    {
+      "titre": "Le Monde à l'endroit",
+      "slug": "le-monde-a-l-endroit",
+      "titreOriginal": null,
+      "annee": 2026,
+      "realisateur": "Sylvie Meyer",
+      "duree": 88,
+      "genres": [
+        "Documentary"
+      ],
+      "synopsis": "Les blessures de l'enfance ne s'effacent pas, elles se réparent.Muriel Salmona, psychiatre de renom et spécialiste des violences sexuelles, consacre sa vie à soigner celles et ceux que l'enfance a brisés.Incarnée à l'écran par Sandrine Bonnaire, Marianne Denicourt et Isild Le Besco, elle accompagne des patients qui affrontent leur passé et ouvrent, pas à pas, le chemin de la réparation.",
+      "imdbId": "tt41969538",
+      "source": "lumiere",
+      "cinema": "Lumière Fourmi",
+      "seances": [
+        {
+          "date": "2026-10-09",
+          "heure": "14:00",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F608642/D1791547200/VF/"
+        },
+        {
+          "date": "2026-10-09",
+          "heure": "18:00",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F608642/D1791561600/VF/"
+        },
+        {
+          "date": "2026-10-10",
+          "heure": "12:50",
+          "version": "VFST",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F608642/D1791629400/VFST/"
+        },
+        {
+          "date": "2026-10-11",
+          "heure": "12:40",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F608642/D1791715200/VF/"
+        },
+        {
+          "date": "2026-10-12",
+          "heure": "13:50",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F608642/D1791805800/VF/"
+        },
+        {
+          "date": "2026-10-13",
+          "heure": "13:50",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F608642/D1791892200/VF/"
+        }
+      ],
+      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/65f0bbdd810e5ba1.jpg",
+      "cast": "S. Bonnaire,  M. Denicourt,  I. Le Besco",
+      "backdrop": "https://image.tmdb.org/t/p/w1280/zLRci1gyeYDo2xwxHsJnuqMxkFw.jpg",
+      "imdbRating": 7.0,
+      "trailer": "https://www.youtube.com/watch?v=OFRehCQ8bW8"
     },
     {
       "titre": "Le Garçon et le Monde",
@@ -3270,12 +3118,6 @@
       "cinema": "Lumière Fourmi",
       "seances": [
         {
-          "date": "2026-10-07",
-          "heure": "14:00",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F54099/D1791374400/VF/"
-        },
-        {
           "date": "2026-10-10",
           "heure": "15:00",
           "version": "VF",
@@ -3290,7 +3132,7 @@
       ],
       "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/eadf84a82225e2ca.jpg",
       "backdrop": "https://image.tmdb.org/t/p/w1280/zmIFeh3xutkIFZBKYatzWF1XDu0.jpg",
-      "imdbRating": 7.351,
+      "imdbRating": 7.4,
       "cast": "Vinicius Garcia, Lu Horta, Marco Aurélio Campos",
       "trailer": "https://www.youtube.com/watch?v=BF8E9d1vJWY"
     },
@@ -3307,12 +3149,6 @@
       "source": "lumiere",
       "cinema": "Lumière Fourmi",
       "seances": [
-        {
-          "date": "2026-10-07",
-          "heure": "15:45",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F378034/D1791380700/VF/"
-        },
         {
           "date": "2026-10-08",
           "heure": "16:10",
@@ -3342,10 +3178,66 @@
           "heure": "15:45",
           "version": "VF",
           "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F378034/D1791812700/VF/"
+        },
+        {
+          "date": "2026-10-13",
+          "heure": "15:45",
+          "version": "VFST",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F378034/D1791899100/VFST/"
         }
       ],
       "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/7a640e5ada1f947b.jpg",
       "cast": "S. Abkarian, N. Schneider, A. Vartolomei"
+    },
+    {
+      "titre": "Un hiver russe",
+      "slug": "un-hiver-russe",
+      "titreOriginal": null,
+      "annee": 2026,
+      "realisateur": "Patric Chiha",
+      "duree": 86,
+      "genres": [
+        "Documentary"
+      ],
+      "synopsis": "Entre Paris et Istanbul, Margarita, Yuri et leurs amis, un groupe de jeunes exilés russes, cherchent leur place dans un monde qui ne semble plus être le leur.",
+      "imdbId": "tt39215225",
+      "source": "lumiere",
+      "cinema": "Lumière Fourmi",
+      "seances": [
+        {
+          "date": "2026-10-09",
+          "heure": "15:45",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F600048/D1791553500/VF/"
+        },
+        {
+          "date": "2026-10-10",
+          "heure": "12:50",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F600048/D1791629400/VF/"
+        },
+        {
+          "date": "2026-10-11",
+          "heure": "12:50",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F600048/D1791715800/VF/"
+        },
+        {
+          "date": "2026-10-12",
+          "heure": "14:00",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F600048/D1791806400/VF/"
+        },
+        {
+          "date": "2026-10-13",
+          "heure": "14:00",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F600048/D1791892800/VF/"
+        }
+      ],
+      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/16a27e53d524b301.jpg",
+      "backdrop": "https://image.tmdb.org/t/p/w1280/pfoqzyrGgVSOyvQ3mprKXv7HWic.jpg",
+      "imdbRating": 0.0
     },
     {
       "titre": "Fjord",
@@ -3362,12 +3254,6 @@
       "source": "lumiere",
       "cinema": "Lumière Fourmi",
       "seances": [
-        {
-          "date": "2026-10-07",
-          "heure": "16:20",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F449360/D1791382800/VO/"
-        },
         {
           "date": "2026-10-08",
           "heure": "20:20",
@@ -3397,6 +3283,12 @@
           "heure": "16:20",
           "version": "VOSTFR",
           "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F449360/D1791814800/VO/"
+        },
+        {
+          "date": "2026-10-13",
+          "heure": "20:00",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F449360/D1791914400/VO/"
         }
       ],
       "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/5d1997fd3dd7b03e.jpg",
@@ -3404,6 +3296,66 @@
       "backdrop": "https://image.tmdb.org/t/p/w1280/rCYzSP07jCA1HuFvrwgaEAPHitT.jpg",
       "trailer": "https://www.youtube.com/watch?v=R7d9fl035hE",
       "imdbRating": 7.2
+    },
+    {
+      "titre": "Histoires de la nuit",
+      "slug": "histoires-de-la-nuit",
+      "titreOriginal": null,
+      "annee": 2026,
+      "realisateur": "Léa Mysius",
+      "duree": 114,
+      "genres": [
+        "Action",
+        "Adventure",
+        "Crime"
+      ],
+      "synopsis": "Nora, Thomas et leur fille Ida vivent dans une ferme isolée avec pour seule voisine, Cristina, une peintre italienne. Alors que tout le monde prépare une soirée d'anniversaire surprise pour Nora, trois hommes rôdent autour de la maison et s'invitent à la fête, faisant surgir des secrets bien gardés...",
+      "imdbId": "tt30495381",
+      "source": "lumiere",
+      "cinema": "Lumière Fourmi",
+      "seances": [
+        {
+          "date": "2026-10-08",
+          "heure": "16:10",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F620410/D1791468600/VF/"
+        },
+        {
+          "date": "2026-10-09",
+          "heure": "16:10",
+          "version": "VFST",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F620410/D1791555000/VFST/"
+        },
+        {
+          "date": "2026-10-10",
+          "heure": "20:40",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F620410/D1791657600/VF/"
+        },
+        {
+          "date": "2026-10-11",
+          "heure": "18:05",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F620410/D1791734700/VF/"
+        },
+        {
+          "date": "2026-10-12",
+          "heure": "18:00",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F620410/D1791820800/VF/"
+        },
+        {
+          "date": "2026-10-13",
+          "heure": "15:45",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F620410/D1791899100/VF/"
+        }
+      ],
+      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/fce29c0aa0258b80.jpg",
+      "cast": "H. Herzi, B. Magimel, B. Bouillon",
+      "backdrop": "https://image.tmdb.org/t/p/w1280/3vt3M9IrUvuH4E93ZlZpWvtxX3V.jpg",
+      "imdbRating": 6.053,
+      "trailer": "https://www.youtube.com/watch?v=m5yA7RlZssA"
     },
     {
       "titre": "De la Comédie-Française",
@@ -3420,12 +3372,6 @@
       "source": "lumiere",
       "cinema": "Lumière Fourmi",
       "seances": [
-        {
-          "date": "2026-10-07",
-          "heure": "18:45",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F633174/D1791391500/VF/"
-        },
         {
           "date": "2026-10-08",
           "heure": "18:45",
@@ -3461,12 +3407,18 @@
           "heure": "18:45",
           "version": "VF",
           "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F633174/D1791823500/VF/"
+        },
+        {
+          "date": "2026-10-13",
+          "heure": "18:45",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F633174/D1791909900/VF/"
         }
       ],
       "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/4d705138a28f3cfd.jpg",
       "cast": "P. Clément,  L. Stocker,  J . Frison",
       "backdrop": "https://image.tmdb.org/t/p/w1280/5ikboX1fj7GVjVpgcdkR4E6j16A.jpg",
-      "imdbRating": 6.943,
+      "imdbRating": 6.9,
       "trailer": "https://www.youtube.com/watch?v=nDWeG1U-Hug"
     },
     {
@@ -3484,12 +3436,6 @@
       "source": "lumiere",
       "cinema": "Lumière Fourmi",
       "seances": [
-        {
-          "date": "2026-10-07",
-          "heure": "19:15",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F627218/D1791393300/VO/"
-        },
         {
           "date": "2026-10-08",
           "heure": "19:15",
@@ -3519,6 +3465,12 @@
           "heure": "19:15",
           "version": "VOSTFR",
           "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F627218/D1791825300/VO/"
+        },
+        {
+          "date": "2026-10-13",
+          "heure": "16:20",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F627218/D1791901200/VO/"
         }
       ],
       "poster": "https://www.cinemas-lumiere.com/cache/data/files/cinemas/movie/poster/4920/soudain (1)/s,490,650-q,90-472df8.png",
@@ -3545,12 +3497,6 @@
       "cinema": "Lumière Fourmi",
       "seances": [
         {
-          "date": "2026-10-07",
-          "heure": "20:15",
-          "version": "VOSTFR",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F615318/D1791396900/VO/"
-        },
-        {
           "date": "2026-10-09",
           "heure": "19:45",
           "version": "VOSTFR",
@@ -3573,12 +3519,18 @@
           "heure": "20:15",
           "version": "VOSTFR",
           "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F615318/D1791828900/VO/"
+        },
+        {
+          "date": "2026-10-13",
+          "heure": "20:00",
+          "version": "VOSTFR",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F615318/D1791914400/VO/"
         }
       ],
       "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/47bc85b1b36b8eab.jpg",
       "cast": "M. Damon, T. Holland, A. Hathaway, R. Pattinson, L. Nyong'o",
       "backdrop": "https://image.tmdb.org/t/p/w1280/bulFtfy3oBQtCnAMSi7g6DSSds3.jpg",
-      "imdbRating": 8.014,
+      "imdbRating": 8.013,
       "trailer": "https://www.youtube.com/watch?v=9YGuN8sQpL0"
     },
     {
@@ -3598,12 +3550,6 @@
       "source": "lumiere",
       "cinema": "Lumière Fourmi",
       "seances": [
-        {
-          "date": "2026-10-07",
-          "heure": "20:20",
-          "version": "VF",
-          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F378032/D1791397200/VF/"
-        },
         {
           "date": "2026-10-08",
           "heure": "13:45",
@@ -3627,11 +3573,17 @@
           "heure": "20:20",
           "version": "VF",
           "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F378032/D1791829200/VF/"
+        },
+        {
+          "date": "2026-10-13",
+          "heure": "20:20",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F378032/D1791915600/VF/"
         }
       ],
       "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/d5ec2fe56006e2de.jpg",
       "cast": "S. Abkarian, S. Russell Beale, F. Lesieur",
-      "backdrop": "https://image.tmdb.org/t/p/w1280/eZA5G4Ahe02jpVnF3bzy02F5wqD.jpg",
+      "backdrop": "https://image.tmdb.org/t/p/w1280/mu930fAteJp5tqiXZbxiONTBPnK.jpg",
       "imdbRating": 7.8,
       "trailer": "https://www.youtube.com/watch?v=qHfhN82RvcM"
     },
@@ -3688,6 +3640,12 @@
           "heure": "14:40",
           "version": "VF",
           "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F636970/D1791722400/VF/"
+        },
+        {
+          "date": "2026-10-14",
+          "heure": "15:45",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F636970/D1791985500/VF/"
         }
       ],
       "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/462d86110799b9c1.jpg",
@@ -3720,72 +3678,19 @@
           "heure": "15:45",
           "version": "VFST",
           "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F616684/D1791812700/VFST/"
+        },
+        {
+          "date": "2026-10-13",
+          "heure": "18:00",
+          "version": "VF",
+          "resa_url": "https://cinema-lumiere-fourmi-vad.cotecine.fr/resa-part/cinemas-lumiere/F616684/D1791907200/VF/"
         }
       ],
       "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/6507a8a146c48a32.jpg",
       "cast": "L. Drucker, M. Thierry, C. Berling",
       "backdrop": "https://image.tmdb.org/t/p/w1280/rFST4zAaG20VSIxSvYO57nhkkV4.jpg",
       "trailer": "https://www.youtube.com/watch?v=ba4jiv6BIuk",
-      "imdbRating": 6.426
-    },
-    {
-      "titre": "Sham",
-      "slug": "sham",
-      "titreOriginal": null,
-      "annee": 2025,
-      "realisateur": "Takashi Miike",
-      "duree": 120,
-      "genres": [
-        "Crime",
-        "Drama",
-        "Thriller"
-      ],
-      "synopsis": "Seiichi Yabushita, professeur d’école élémentaire, se veut strict mais juste. Lorsqu’une mère l’accuse d’avoir humilié son fils, tout bascule : la presse s’enflamme, la rumeur enfle, l’opinion s’emballe. Pris dans la tourmente, Yabushita tente de défendre sa propre vérité… Au risque de la voir se retourner contre lui.",
-      "imdbId": "tt34459901",
-      "source": "zola",
-      "cinema": "Le Zola",
-      "seances": [
-        {
-          "heure": "14:30",
-          "version": "VOSTFR",
-          "resa_url": "https://www.ticketingcine.com/EMS1217/FR8PQ75#showsession?id=emsx121700009047&ps=EMS1217",
-          "date": "2026-10-06"
-        }
-      ],
-      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/d07ad24b8ca775ec.jpg",
-      "backdrop": "https://image.tmdb.org/t/p/w1280/qnmevogDW12SP7VT656wRXOdxf6.jpg",
-      "imdbRating": 7.0,
-      "cast": "Go Ayano, Ko Shibasaki, Kazuya Kamenashi",
-      "trailer": "https://www.youtube.com/watch?v=uh6ezCvc24c"
-    },
-    {
-      "titre": "Adieu monde cruel",
-      "slug": "adieu-monde-cruel",
-      "titreOriginal": null,
-      "annee": 2026,
-      "realisateur": "Félix de Givry",
-      "duree": 93,
-      "genres": [
-        "Drama",
-        "Romance"
-      ],
-      "synopsis": "Otto Vidal, 14 ans, a disparu après avoir adressé une lettre d’adieu aux élèves de sa classe. Alors que tout le monde le croit mort, Léna, une fille de son lycée, le reconnaît une nuit en train d’errer dans les rues de la ville.",
-      "imdbId": "tt34427439",
-      "source": "zola",
-      "cinema": "Le Zola",
-      "seances": [
-        {
-          "heure": "17:20",
-          "version": "VF",
-          "resa_url": "https://www.ticketingcine.com/EMS1217/FRIBDBO#showsession?id=emsx121700009052&ps=EMS1217",
-          "date": "2026-10-06"
-        }
-      ],
-      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/ee00d79c9d3aed10.jpg",
-      "backdrop": "https://image.tmdb.org/t/p/w1280/l43i6Exp5wa6OvrN4IgPWkZuBSx.jpg",
-      "imdbRating": 5.786,
-      "cast": "Milo Machado-Graner, Jane Beever, Emmanuelle Destremau",
-      "trailer": "https://www.youtube.com/watch?v=z7QEGX9dJz4"
+      "imdbRating": 6.386
     },
     {
       "titre": "Notre salut",
@@ -3803,18 +3708,6 @@
       "source": "zola",
       "cinema": "Le Zola",
       "seances": [
-        {
-          "heure": "19:30",
-          "version": "VF",
-          "resa_url": "https://www.ticketingcine.com/EMS1217/FRA02S6#showsession?id=emsx121700009042&ps=EMS1217",
-          "date": "2026-10-06"
-        },
-        {
-          "heure": "14:15",
-          "version": "VFST",
-          "resa_url": "https://www.ticketingcine.com/EMS1217/FRA02S6#showsession?id=emsx121700009056&ps=EMS1217",
-          "date": "2026-10-07"
-        },
         {
           "heure": "17:10",
           "version": "VF",
@@ -3849,102 +3742,8 @@
       "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/55661952ea1822f4.jpg",
       "backdrop": "https://image.tmdb.org/t/p/w1280/iQMFLm9Te2IuJTr08RdBLKTGw8n.jpg",
       "trailer": "https://www.youtube.com/watch?v=6V54Q8DaWjU",
-      "imdbRating": 6.958,
+      "imdbRating": 6.844,
       "cast": "Swann Arlaud, Sandrine Blancke, Mathieu Perotto"
-    },
-    {
-      "titre": "Les Éléphants dans la brume",
-      "slug": "les-elephants-dans-la-brume",
-      "titreOriginal": null,
-      "annee": 2026,
-      "realisateur": "Abinash Bikram Shah",
-      "duree": 107,
-      "genres": [
-        "Drama"
-      ],
-      "synopsis": "Dans un village népalais niché au cœur d’une forêt peuplée d’éléphants sauvages vit une communauté kinnar aussi vénérée que crainte pour ses pouvoirs de bénédiction et de malédiction. Pirati, l'une des mères de la communauté, rêve de s’échapper avec l’homme qu’elle aime. Mais lorsqu’une de ses filles disparaît, elle se doit mener l'enquête et choisir entre son désir de liberté et ses responsabilités envers sa communauté.",
-      "imdbId": "tt29279937",
-      "source": "zola",
-      "cinema": "Le Zola",
-      "seances": [
-        {
-          "heure": "17:20",
-          "version": "VOSTFR",
-          "resa_url": "https://www.ticketingcine.com/EMS1217/FRC0095#showsession?id=emsx121700009066&ps=EMS1217",
-          "date": "2026-10-07"
-        },
-        {
-          "heure": "20:15",
-          "version": "VOSTFR",
-          "resa_url": "https://www.ticketingcine.com/EMS1217/FRC0095#showsession?id=emsx121700009067&ps=EMS1217",
-          "date": "2026-10-09"
-        },
-        {
-          "heure": "16:00",
-          "version": "VOSTFR",
-          "resa_url": "https://www.ticketingcine.com/EMS1217/FRC0095#showsession?id=emsx121700009068&ps=EMS1217",
-          "date": "2026-10-10"
-        },
-        {
-          "heure": "17:15",
-          "version": "VOSTFR",
-          "resa_url": "https://www.ticketingcine.com/EMS1217/FRC0095#showsession?id=emsx121700009070&ps=EMS1217",
-          "date": "2026-10-12"
-        }
-      ],
-      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/9a732229a701adca.jpg",
-      "backdrop": "https://image.tmdb.org/t/p/w1280/hvVIS83R92hstmUzqA3WVofyUQ1.jpg",
-      "imdbRating": 7.25,
-      "cast": "Pushpa Thing Lama, Deepika Yadav, Jasmin Bishwokarma",
-      "trailer": "https://www.youtube.com/watch?v=voT_HqOvsx8"
-    },
-    {
-      "titre": "Salvation",
-      "slug": "salvation",
-      "titreOriginal": null,
-      "annee": 2009,
-      "realisateur": "McG",
-      "duree": 120,
-      "genres": [
-        "Action",
-        "Adventure",
-        "Sci-Fi"
-      ],
-      "synopsis": "Deux villages turcs, l’un à flanc de montagne, l’autre dans la plaine. Quand les habitants du bas, exilés, décident de revenir sur leurs terres, des conflits ancestraux ressurgissent avec ceux du haut. Progressivement, croyances, paranoïa et luttes de pouvoir s’exacerbent, mettant en péril la fragile cohabitation des deux communautés.",
-      "imdbId": "tt0438488",
-      "source": "zola",
-      "cinema": "Le Zola",
-      "seances": [
-        {
-          "heure": "19:30",
-          "version": "VOSTFR",
-          "resa_url": "https://www.ticketingcine.com/EMS1217/FR1DJN2#showsession?id=emsx121700009061&ps=EMS1217",
-          "date": "2026-10-07"
-        },
-        {
-          "heure": "13:45",
-          "version": "VOSTFR",
-          "resa_url": "https://www.ticketingcine.com/EMS1217/FR1DJN2#showsession?id=emsx121700009063&ps=EMS1217",
-          "date": "2026-10-10"
-        },
-        {
-          "heure": "18:10",
-          "version": "VOSTFR",
-          "resa_url": "https://www.ticketingcine.com/EMS1217/FR1DJN2#showsession?id=emsx121700009062&ps=EMS1217",
-          "date": "2026-10-10"
-        },
-        {
-          "heure": "14:00",
-          "version": "VOSTFR",
-          "resa_url": "https://www.ticketingcine.com/EMS1217/FR1DJN2#showsession?id=emsx121700009064&ps=EMS1217",
-          "date": "2026-10-11"
-        }
-      ],
-      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/e605119995c77b86.jpg",
-      "backdrop": "https://image.tmdb.org/t/p/w1280/uifaXfJxjTMeNttw5u04nHx1G5w.jpg",
-      "imdbRating": 6.105,
-      "cast": "Christian Bale, Sam Worthington, Moon Bloodgood",
-      "trailer": "https://www.youtube.com/watch?v=xu9YTWZebLs"
     },
     {
       "titre": "Tous empoisonnés : Le fléau des PFAS",
@@ -3971,7 +3770,95 @@
       "imdbRating": 10.0
     },
     {
-      "titre": "Chien bleu et autres belles histoires de l’école des loisirs",
+      "titre": "Les Éléphants dans la brume",
+      "slug": "les-elephants-dans-la-brume",
+      "titreOriginal": null,
+      "annee": 2026,
+      "realisateur": "Abinash Bikram Shah",
+      "duree": 107,
+      "genres": [
+        "Drama"
+      ],
+      "synopsis": "Dans un village népalais niché au cœur d’une forêt peuplée d’éléphants sauvages vit une communauté kinnar aussi vénérée que crainte pour ses pouvoirs de bénédiction et de malédiction. Pirati, l'une des mères de la communauté, rêve de s’échapper avec l’homme qu’elle aime. Mais lorsqu’une de ses filles disparaît, elle se doit mener l'enquête et choisir entre son désir de liberté et ses responsabilités envers sa communauté.",
+      "imdbId": "tt29279937",
+      "source": "zola",
+      "cinema": "Le Zola",
+      "seances": [
+        {
+          "heure": "20:15",
+          "version": "VOSTFR",
+          "resa_url": "https://www.ticketingcine.com/EMS1217/FRC0095#showsession?id=emsx121700009067&ps=EMS1217",
+          "date": "2026-10-09"
+        },
+        {
+          "heure": "16:00",
+          "version": "VOSTFR",
+          "resa_url": "https://www.ticketingcine.com/EMS1217/FRC0095#showsession?id=emsx121700009068&ps=EMS1217",
+          "date": "2026-10-10"
+        },
+        {
+          "heure": "17:15",
+          "version": "VOSTFR",
+          "resa_url": "https://www.ticketingcine.com/EMS1217/FRC0095#showsession?id=emsx121700009070&ps=EMS1217",
+          "date": "2026-10-12"
+        }
+      ],
+      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/9a732229a701adca.jpg",
+      "backdrop": "https://image.tmdb.org/t/p/w1280/hvVIS83R92hstmUzqA3WVofyUQ1.jpg",
+      "imdbRating": 7.2,
+      "cast": "Pushpa Thing Lama, Deepika Yadav, Jasmin Bishwokarma",
+      "trailer": "https://www.youtube.com/watch?v=voT_HqOvsx8"
+    },
+    {
+      "titre": "Salvation",
+      "slug": "salvation",
+      "titreOriginal": null,
+      "annee": 2009,
+      "realisateur": "McG",
+      "duree": 120,
+      "genres": [
+        "Action",
+        "Adventure",
+        "Sci-Fi"
+      ],
+      "synopsis": "Deux villages turcs, l’un à flanc de montagne, l’autre dans la plaine. Quand les habitants du bas, exilés, décident de revenir sur leurs terres, des conflits ancestraux ressurgissent avec ceux du haut. Progressivement, croyances, paranoïa et luttes de pouvoir s’exacerbent, mettant en péril la fragile cohabitation des deux communautés.",
+      "imdbId": "tt0438488",
+      "source": "zola",
+      "cinema": "Le Zola",
+      "seances": [
+        {
+          "heure": "13:45",
+          "version": "VOSTFR",
+          "resa_url": "https://www.ticketingcine.com/EMS1217/FR1DJN2#showsession?id=emsx121700009063&ps=EMS1217",
+          "date": "2026-10-10"
+        },
+        {
+          "heure": "18:10",
+          "version": "VOSTFR",
+          "resa_url": "https://www.ticketingcine.com/EMS1217/FR1DJN2#showsession?id=emsx121700009062&ps=EMS1217",
+          "date": "2026-10-10"
+        },
+        {
+          "heure": "14:00",
+          "version": "VOSTFR",
+          "resa_url": "https://www.ticketingcine.com/EMS1217/FR1DJN2#showsession?id=emsx121700009064&ps=EMS1217",
+          "date": "2026-10-11"
+        },
+        {
+          "heure": "17:10",
+          "version": "VOSTFR",
+          "resa_url": "https://www.ticketingcine.com/EMS1217/FR1DJN2#showsession?id=emsx121700009065&ps=EMS1217",
+          "date": "2026-10-13"
+        }
+      ],
+      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/e605119995c77b86.jpg",
+      "backdrop": "https://image.tmdb.org/t/p/w1280/uifaXfJxjTMeNttw5u04nHx1G5w.jpg",
+      "imdbRating": 6.105,
+      "cast": "Christian Bale, Sam Worthington, Moon Bloodgood",
+      "trailer": "https://www.youtube.com/watch?v=xu9YTWZebLs"
+    },
+    {
+      "titre": "Chien bleu et autres belles histoires",
       "slug": "chien-bleu-et-autres-belles-histoires-de-lecole-des-loisirs",
       "titreOriginal": null,
       "annee": null,
@@ -3998,56 +3885,6 @@
     }
   ],
   "evenements": [
-    {
-      "cle": "rencontre|le monde à l'endroit|2026-10",
-      "type": "rencontre",
-      "forme": null,
-      "titre": "Le Monde à l'endroit",
-      "description": "Les blessures de l'enfance ne s'effacent pas, elles se réparent. Muriel Salmona, psychiatre de renom et spécialiste des violences sexuelles, consacre sa vie à soigner celles et ceux que l'enfance a brisés. Incarnée à l'écran par Sandrine Bonnaire, Marianne Denicourt et Isild Le Besco, elle accompagne des patients qui affrontent leur passé et ouvrent, pas à pas, le chemin de la réparation.",
-      "date_debut": "2026-10-06",
-      "date_fin": "2026-10-06",
-      "precision": "exact",
-      "affiche_url": "https://www.cinemas-lumiere.com/media/le-monde-a-l-endroit.jpeg",
-      "films": [
-        {
-          "titre": "Le Monde à l'endroit",
-          "dates": [],
-          "affiche": null
-        }
-      ],
-      "creneaux": [
-        {
-          "cinema": "Lumière Bellecour",
-          "date": "2026-10-06",
-          "heure": "18:45",
-          "titre_film": "Le Monde à l'endroit",
-          "invite": "En présence de Mié Kohiyama (co-présidente de BeBrave France), Guillaume de La Chapelle et Marie Rabatel (CIVIISE)",
-          "description": null
-        }
-      ]
-    },
-    {
-      "cle": "seance_speciale|le monde à l'envers|2026-10",
-      "type": "seance_speciale",
-      "forme": null,
-      "titre": "Le Monde à l'envers",
-      "description": "Animation avec la Chouette du cinéma ! Projection précédée d’une présentation et d’un concours d’imitation de chouette.",
-      "date_debut": "2026-10-07",
-      "date_fin": "2026-10-07",
-      "precision": "exact",
-      "affiche_url": "https://all.web.img.acsta.net/img/7a/56/7a5662d5a6ff686dc3450c2b4bd0e26b.jpg",
-      "films": [],
-      "creneaux": [
-        {
-          "cinema": "Le Comoedia",
-          "date": "2026-10-07",
-          "heure": "14:00",
-          "titre_film": "Le Monde à l'envers",
-          "invite": null,
-          "description": "Animation avec la Chouette du cinéma ! Projection précédée d’une présentation et d’un concours d’imitation de chouette."
-        }
-      ]
-    },
     {
       "cle": "rencontre|hier, aujourd'hui et demain|2026-10",
       "type": "rencontre",
@@ -4189,6 +4026,14 @@
           "cinema": "Lumière Bellecour",
           "date": "2026-10-12",
           "heure": "20:30",
+          "titre_film": "Naza",
+          "invite": "Séance présentée",
+          "description": null
+        },
+        {
+          "cinema": "Lumière Bellecour",
+          "date": "2026-10-13",
+          "heure": "18:30",
           "titre_film": "Naza",
           "invite": "Séance présentée",
           "description": null
@@ -4814,6 +4659,36 @@
       "creneaux": []
     },
     {
+      "cle": "rencontre|persepolis|2026-10",
+      "type": "rencontre",
+      "forme": null,
+      "titre": "Persepolis",
+      "description": "Projection suivie d’un échange avec Dorna Javan, docteure en science politique et chercheuse postdoctorale à l’INRAE. Une séance en hommage à l’artiste-réalisatrice Marjane Satrapi.",
+      "date_debut": "2026-10-20",
+      "date_fin": "2026-10-20",
+      "precision": "exact",
+      "affiche_url": "https://cms-assets.webediamovies.pro/production/945/2d3581dd4dc0f07a3a40476533e9f08d.jpeg",
+      "films": [
+        {
+          "titre": "Persepolis",
+          "dates": [
+            "2026-10-20"
+          ],
+          "affiche": null
+        }
+      ],
+      "creneaux": [
+        {
+          "cinema": "Le Comoedia",
+          "date": "2026-10-20",
+          "heure": "20:30",
+          "titre_film": "Persepolis",
+          "invite": null,
+          "description": "Projection suivie d’un échange avec Dorna Javan, docteure en science politique et chercheuse postdoctorale à l’INRAE. Une séance en hommage à l’artiste-réalisatrice Marjane Satrapi."
+        }
+      ]
+    },
+    {
       "cle": "rencontre|garde à vue|2026-10",
       "type": "rencontre",
       "forme": null,
@@ -4962,11 +4837,11 @@
       "type": "avant_premiere",
       "forme": null,
       "titre": "Moulin",
-      "description": "Découvrez en avant-première le nouveau film de László Nemes dédié à Jean Moulin.",
+      "description": "Juin 1943, Jean Moulin, chef de la Résistance, est arrêté alors qu'il tente de réunifier les forces de l’Armée Secrète. Interrogé par Klaus Barbie, le chef de la Gestapo de Lyon, Moulin est entraîné dans une confrontation implacable. Son ultime combat face à la manipulation et la brutalité commence. Le destin de la France libre en dépend.",
       "date_debut": "2026-10-25",
-      "date_fin": "2026-10-25",
+      "date_fin": "2026-10-26",
       "precision": "exact",
-      "affiche_url": "https://all.web.img.acsta.net/img/0e/b7/0eb754ba96eb61570ea47ddc22b004ce.jpg",
+      "affiche_url": "https://www.cinemas-lumiere.com/media/moulin.jpeg",
       "films": [
         {
           "titre": "Moulin",
@@ -4984,6 +4859,22 @@
           "titre_film": "Moulin",
           "invite": null,
           "description": "Découvrez en avant-première le nouveau film de László Nemes dédié à Jean Moulin."
+        },
+        {
+          "cinema": "Lumière Terreaux",
+          "date": "2026-10-26",
+          "heure": "20:30",
+          "titre_film": "Moulin",
+          "invite": "Séance présentée",
+          "description": null
+        },
+        {
+          "cinema": "Lumière Terreaux",
+          "date": "2026-10-25",
+          "heure": "20:30",
+          "titre_film": "Moulin",
+          "invite": null,
+          "description": null
         }
       ]
     },
@@ -5022,11 +4913,11 @@
       "type": "rencontre",
       "forme": null,
       "titre": "Terreur Nocturne - Séance Halloween",
-      "description": "On fête Halloween en salle ? Notre groupe d’ambassadeurs 15-25 ans vous donne rendez-vous pour une soirée déguisée, un ciné-quiz et un film qui risque de vous faire frissonner. Oserez-vous venir ?",
+      "description": "On fête Halloween en salle ? Notre groupe d’ambassadeurs vous donne rendez-vous pour une soirée déguisée, un ciné-quiz et un film qui risque de vous faire frissonner : Suspiria de Dario Argento.",
       "date_debut": "2026-10-29",
       "date_fin": "2026-10-29",
       "precision": "exact",
-      "affiche_url": "https://cms-assets.webediamovies.pro/production/945/cf085835123cbe533a0027368049aa45.jpg",
+      "affiche_url": "https://cms-assets.webediamovies.pro/production/945/7a18793f0ae2b623585337942d410a58.jpg",
       "films": [
         {
           "titre": "Terreur Nocturne - Séance Halloween",
@@ -5043,7 +4934,7 @@
           "heure": "20:30",
           "titre_film": "Terreur Nocturne - Séance Halloween",
           "invite": null,
-          "description": "On fête Halloween en salle ? Notre groupe d’ambassadeurs 15-25 ans vous donne rendez-vous pour une soirée déguisée, un ciné-quiz et un film qui risque de vous faire frissonner. Oserez-vous venir ?"
+          "description": "On fête Halloween en salle ? Notre groupe d’ambassadeurs vous donne rendez-vous pour une soirée déguisée, un ciné-quiz et un film qui risque de vous faire frissonner : Suspiria de Dario Argento."
         }
       ]
     },
@@ -5222,7 +5113,7 @@
       "type": "avant_premiere",
       "forme": null,
       "titre": "Les Braves (Coward)",
-      "description": "En présence du réalisateur Lukas Dhont et des comédiens Emmanuel Macchia et Valentin Campagne.",
+      "description": "En présence du réalisateur Lukas Dhont et du comédien Valentin Campagne.",
       "date_debut": "2026-11-13",
       "date_fin": "2026-11-13",
       "precision": "exact",
@@ -5243,7 +5134,35 @@
           "heure": "20:00",
           "titre_film": "Les Braves (Coward)",
           "invite": null,
-          "description": "En présence du réalisateur Lukas Dhont et des comédiens Emmanuel Macchia et Valentin Campagne."
+          "description": "En présence du réalisateur Lukas Dhont et du comédien Valentin Campagne."
+        }
+      ]
+    },
+    {
+      "cle": "rencontre|portrait de la jeune fille en feu|2026-11",
+      "type": "rencontre",
+      "forme": null,
+      "titre": "Portrait de la jeune fille en feu",
+      "description": "SÉANCE SPÉCIALE - Samedi 14 novembre à 20h30 au Lumière Terreaux En présence de l'autrice Aude Ziegelmeyer à l'occasion de la sortie de son prochain roman, L'Ourse et la Rose. En partenariat avec Momie Manga",
+      "date_debut": "2026-11-14",
+      "date_fin": "2026-11-14",
+      "precision": "exact",
+      "affiche_url": "https://www.cinemas-lumiere.com/media/portrait-de-la-jeune-fille-en-feu.png",
+      "films": [
+        {
+          "titre": "Portrait de la jeune fille en feu",
+          "dates": [],
+          "affiche": null
+        }
+      ],
+      "creneaux": [
+        {
+          "cinema": "Lumière Terreaux",
+          "date": "2026-11-14",
+          "heure": "20:30",
+          "titre_film": "Portrait de la jeune fille en feu",
+          "invite": "En présence de l'autrice Aude Ziegelmeyer à l'occasion de la sortie de son prochain roman, L'Ourse et la Rose. En partenariat avec Momie Manga",
+          "description": null
         }
       ]
     },
