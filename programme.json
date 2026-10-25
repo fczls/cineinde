@@ -1,224 +1,11 @@
 {
-  "generated_at": "2026-10-23T22:47:47.940000",
+  "generated_at": "2026-10-25T22:12:41.404405",
   "sources": [
     "https://www.cinema-comoedia.com/programme-semaine/",
     "https://www.cinemas-lumiere.com/calendrier-general.html",
     "https://www.lezola.com/films-a-laffiche/"
   ],
   "films": [
-    {
-      "titre": "Le Corset",
-      "slug": "le-corset",
-      "titreOriginal": null,
-      "annee": 2026,
-      "realisateur": "Louis Clichy",
-      "duree": 91,
-      "genres": [
-        "Animation",
-        "Drama",
-        "Family"
-      ],
-      "synopsis": "Dans une ferme au cœur de la Beauce, Christophe, 11 ans, règle ses pas sur ceux de son père. Mais à l’école, à la maison, sur le tracteur, Christophe penche… et tombe. Il est obligé de porter un corset pour filer droit. Tandis que la ferme traverse des moments difficiles, Christophe grandit comme il peut. Il découvre la musique et fait la rencontre de Clara, avec qui tout semble devenir possible.",
-      "imdbId": "tt36639956",
-      "source": "zola",
-      "cinema": "Le Zola",
-      "seances": [
-        {
-          "heure": "14:15",
-          "version": "VF",
-          "resa_url": "https://www.ticketingcine.com/EMS1217/FRQ0FYB#showsession?id=emsx121700009229&ps=EMS1217",
-          "date": "2026-10-24"
-        },
-        {
-          "heure": "16:00",
-          "version": "VF",
-          "resa_url": "https://www.ticketingcine.com/EMS1217/FRQ0FYB#showsession?id=emsx121700009230&ps=EMS1217",
-          "date": "2026-10-25"
-        },
-        {
-          "heure": "14:00",
-          "version": "VF",
-          "resa_url": "https://www.ticketingcine.com/EMS1217/FRQ0FYB#showsession?id=emsx121700009231&ps=EMS1217",
-          "date": "2026-10-26"
-        },
-        {
-          "heure": "14:00",
-          "version": "VF",
-          "resa_url": "https://www.ticketingcine.com/EMS1217/FRQ0FYB#showsession?id=emsx121700009232&ps=EMS1217",
-          "date": "2026-10-27"
-        },
-        {
-          "heure": "18:30",
-          "version": "VF",
-          "resa_url": "https://www.ticketingcine.com/EMS1217/FRQ0FYB#showsession?id=emsx121700009184&ps=EMS1217",
-          "date": "2026-10-28"
-        }
-      ],
-      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/046c6669237e99e8.jpg",
-      "backdrop": "https://image.tmdb.org/t/p/w1280/3e0Lzs4vDSHjRULFw6vPI4jyHd6.jpg",
-      "imdbRating": 8.152,
-      "cast": "Gary Clichy, Rod Paradot, Dimitri Colas",
-      "trailer": "https://www.youtube.com/watch?v=hBG2AybVRXg"
-    },
-    {
-      "titre": "L’Espèce explosive",
-      "slug": "lespece-explosive",
-      "titreOriginal": null,
-      "annee": 2026,
-      "realisateur": "Sarah Arnold",
-      "duree": 95,
-      "genres": [
-        "Crime",
-        "Drama",
-        "Thriller"
-      ],
-      "synopsis": "Dans le Nord-Est de la France, agriculteurs et chasseurs se font la guerre. Les sangliers, trop gros et trop nombreux, dévastent les cultures. Brun, céréalier au bord du gouffre, craque et disparaît. Un an plus tard, Fulda, un gendarme explosif et Stéphane, une psy en crise, enquêtent. Ce qu’ils découvrent les dépasse. Ce qui naît entre eux aussi.",
-      "imdbId": "tt38841455",
-      "source": "zola",
-      "cinema": "Le Zola",
-      "seances": [
-        {
-          "heure": "16:10",
-          "version": "VFST",
-          "resa_url": "https://www.ticketingcine.com/EMS1217/FRFIS1K#showsession?id=emsx121700009177&ps=EMS1217",
-          "date": "2026-10-24"
-        },
-        {
-          "heure": "18:45",
-          "version": "VF",
-          "resa_url": "https://www.ticketingcine.com/EMS1217/FRFIS1K#showsession?id=emsx121700009176&ps=EMS1217",
-          "date": "2026-10-26"
-        },
-        {
-          "heure": "18:10",
-          "version": "VF",
-          "resa_url": "https://www.ticketingcine.com/EMS1217/FRFIS1K#showsession?id=emsx121700009175&ps=EMS1217",
-          "date": "2026-10-27"
-        }
-      ],
-      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/fbf02d491ba70035.jpg",
-      "backdrop": "https://image.tmdb.org/t/p/w1280/7PZCUc6xYm4kHlqnKzwgtHRjm8K.jpg",
-      "imdbRating": 7.1,
-      "cast": "Alexis Manenti, Ella Rumpf, Vincent Dedienne",
-      "trailer": "https://www.youtube.com/watch?v=JElCES6kQ6E"
-    },
-    {
-      "titre": "Ni vue, ni connue",
-      "slug": "ni-vue-ni-connue",
-      "titreOriginal": null,
-      "annee": 2026,
-      "realisateur": "Marc Fitoussi",
-      "duree": 115,
-      "genres": [],
-      "synopsis": "Corinne Maclou (Isabelle Huppert) est figurante. Elle enchaîne les tournages avec l’espoir d’être remarquée et de décrocher enfin un vrai rôle. Lorsque son chemin croise celui de Sandrine Kiberlain et qu’une relation commence à se nouer entre les deux, Corinne espère concrétiser son rêve. Mais la célèbre actrice va-t-elle vraiment l’aider à se faire une place au sein de la grande famille du cinéma ?",
-      "imdbId": "tt37799310",
-      "source": "zola",
-      "cinema": "Le Zola",
-      "seances": [
-        {
-          "heure": "18:10",
-          "version": "VF",
-          "resa_url": "https://www.ticketingcine.com/EMS1217/FRHPAV1#showsession?id=emsx121700009171&ps=EMS1217",
-          "date": "2026-10-24"
-        },
-        {
-          "heure": "18:00",
-          "version": "VF",
-          "resa_url": "https://www.ticketingcine.com/EMS1217/FRHPAV1#showsession?id=emsx121700009172&ps=EMS1217",
-          "date": "2026-10-25"
-        },
-        {
-          "heure": "16:30",
-          "version": "VF",
-          "resa_url": "https://www.ticketingcine.com/EMS1217/FRHPAV1#showsession?id=emsx121700009173&ps=EMS1217",
-          "date": "2026-10-26"
-        },
-        {
-          "heure": "15:50",
-          "version": "VF",
-          "resa_url": "https://www.ticketingcine.com/EMS1217/FRHPAV1#showsession?id=emsx121700009174&ps=EMS1217",
-          "date": "2026-10-27"
-        }
-      ],
-      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/809f749ba3ab2d76.jpg",
-      "backdrop": "https://image.tmdb.org/t/p/w1280/a6O9MMak7mHDdxwApf2nGlvIs0g.jpg",
-      "imdbRating": 6.028,
-      "cast": "Isabelle Huppert, Sandrine Kiberlain, Anne Marivin",
-      "trailer": "https://www.youtube.com/watch?v=1JKS6qSPb2w"
-    },
-    {
-      "titre": "Digger",
-      "slug": "digger",
-      "titreOriginal": null,
-      "annee": 2026,
-      "realisateur": "Alejandro G. Iñárritu",
-      "duree": 120,
-      "genres": [
-        "Comedy",
-        "Drama"
-      ],
-      "synopsis": "L’homme le plus puissant du monde se lance dans une mission frénétique pour prouver qu’il est le sauveur de l’humanité avant que le désastre qu’il a déclenché ne détruise tout.",
-      "imdbId": "tt31450459",
-      "source": "zola",
-      "cinema": "Le Zola",
-      "seances": [
-        {
-          "heure": "20:30",
-          "version": "VOSTFR",
-          "resa_url": "https://www.ticketingcine.com/EMS1217/FRTEUUP#showsession?id=emsx121700009180&ps=EMS1217",
-          "date": "2026-10-24"
-        },
-        {
-          "heure": "11:00",
-          "version": "VOSTFR",
-          "resa_url": "https://www.ticketingcine.com/EMS1217/FRTEUUP#showsession?id=emsx121700009181&ps=EMS1217",
-          "date": "2026-10-25"
-        },
-        {
-          "heure": "20:20",
-          "version": "VOSTFR",
-          "resa_url": "https://www.ticketingcine.com/EMS1217/FRTEUUP#showsession?id=emsx121700009182&ps=EMS1217",
-          "date": "2026-10-25"
-        },
-        {
-          "heure": "20:40",
-          "version": "VOSTFR",
-          "resa_url": "https://www.ticketingcine.com/EMS1217/FRTEUUP#showsession?id=emsx121700009212&ps=EMS1217",
-          "date": "2026-10-26"
-        }
-      ],
-      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/2eaa70d53bb092dd.jpg",
-      "backdrop": "https://image.tmdb.org/t/p/w1280/vC5IxhgO6cVmw9O4QgkraRzfHvh.jpg",
-      "imdbRating": 7.474,
-      "cast": "Tom Cruise, Riz Ahmed, John Goodman",
-      "trailer": "https://www.youtube.com/watch?v=e2lyQd9t700"
-    },
-    {
-      "titre": "Joyeuse Jungle !",
-      "slug": "joyeuse-jungle",
-      "titreOriginal": null,
-      "annee": null,
-      "realisateur": null,
-      "duree": 70,
-      "genres": [],
-      "synopsis": "Pendant les vacances scolaires, Ilze, neuf ans, rejoint sa famille dans la forêt tropicale où ils vivent avec la tribu Pemón, près de la montagne du Diable. Lorsqu'à la suite d'un accident, maman doit emmener papa à l'hôpital, Ilze se porte volontaire pour s'occuper de son frère Alex, âgé de trois ans. Cependant, au lieu de faire attention à son frère, Ilze a le nez plongé dans un livre. Lorsqu'Ilze lève enfin les yeux, elle découvre qu'Alex a disparu. Tout indique qu'il s'est égaré dans la jung…",
-      "imdbId": "tt37162310",
-      "source": "zola",
-      "cinema": "Le Zola",
-      "seances": [
-        {
-          "heure": "14:15",
-          "version": "VF",
-          "resa_url": "https://www.ticketingcine.com/EMS1217/FRFGMJQ#showsession?id=emsx121700009117&ps=EMS1217",
-          "date": "2026-10-25"
-        }
-      ],
-      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/276d60c449d476a8.jpg",
-      "backdrop": "https://image.tmdb.org/t/p/w1280/x6EA7dnmR2TXfurfU3wDYLOOyLG.jpg",
-      "imdbRating": 0.0,
-      "cast": "Anabella Jasmīna Gerinoviča, Matīss Budovskis, Madara Botmane-Vāgentroca",
-      "trailer": "https://www.youtube.com/watch?v=NPK01ooGWvY"
-    },
     {
       "titre": "Un amour d’épouvantail",
       "slug": "un-amour-depouvantail",
@@ -250,6 +37,175 @@
       "trailer": "https://www.youtube.com/watch?v=zItprTclYqI"
     },
     {
+      "titre": "Le Corset",
+      "slug": "le-corset",
+      "titreOriginal": null,
+      "annee": 2026,
+      "realisateur": "Louis Clichy",
+      "duree": 91,
+      "genres": [
+        "Animation",
+        "Drama",
+        "Family"
+      ],
+      "synopsis": "Dans une ferme au cœur de la Beauce, Christophe, 11 ans, règle ses pas sur ceux de son père. Mais à l’école, à la maison, sur le tracteur, Christophe penche… et tombe. Il est obligé de porter un corset pour filer droit. Tandis que la ferme traverse des moments difficiles, Christophe grandit comme il peut. Il découvre la musique et fait la rencontre de Clara, avec qui tout semble devenir possible.",
+      "imdbId": "tt36639956",
+      "source": "zola",
+      "cinema": "Le Zola",
+      "seances": [
+        {
+          "heure": "16:00",
+          "version": "VF",
+          "resa_url": null,
+          "date": "2026-10-25"
+        },
+        {
+          "heure": "14:00",
+          "version": "VF",
+          "resa_url": "https://www.ticketingcine.com/EMS1217/FRQ0FYB#showsession?id=emsx121700009231&ps=EMS1217",
+          "date": "2026-10-26"
+        },
+        {
+          "heure": "14:00",
+          "version": "VF",
+          "resa_url": "https://www.ticketingcine.com/EMS1217/FRQ0FYB#showsession?id=emsx121700009232&ps=EMS1217",
+          "date": "2026-10-27"
+        },
+        {
+          "heure": "18:30",
+          "version": "VF",
+          "resa_url": "https://www.ticketingcine.com/EMS1217/FRQ0FYB#showsession?id=emsx121700009184&ps=EMS1217",
+          "date": "2026-10-28"
+        },
+        {
+          "heure": "18:35",
+          "version": "VF",
+          "resa_url": "https://www.ticketingcine.com/EMS1217/FRQ0FYB#showsession?id=emsx121700009185&ps=EMS1217",
+          "date": "2026-10-31"
+        }
+      ],
+      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/046c6669237e99e8.jpg",
+      "backdrop": "https://image.tmdb.org/t/p/w1280/3e0Lzs4vDSHjRULFw6vPI4jyHd6.jpg",
+      "imdbRating": 8.208,
+      "cast": "Gary Clichy, Rod Paradot, Dimitri Colas",
+      "trailer": "https://www.youtube.com/watch?v=hBG2AybVRXg"
+    },
+    {
+      "titre": "Ni vue, ni connue",
+      "slug": "ni-vue-ni-connue",
+      "titreOriginal": null,
+      "annee": 2026,
+      "realisateur": "Marc Fitoussi",
+      "duree": 115,
+      "genres": [],
+      "synopsis": "Corinne Maclou (Isabelle Huppert) est figurante. Elle enchaîne les tournages avec l’espoir d’être remarquée et de décrocher enfin un vrai rôle. Lorsque son chemin croise celui de Sandrine Kiberlain et qu’une relation commence à se nouer entre les deux, Corinne espère concrétiser son rêve. Mais la célèbre actrice va-t-elle vraiment l’aider à se faire une place au sein de la grande famille du cinéma ?",
+      "imdbId": "tt37799310",
+      "source": "zola",
+      "cinema": "Le Zola",
+      "seances": [
+        {
+          "heure": "18:00",
+          "version": "VF",
+          "resa_url": null,
+          "date": "2026-10-25"
+        },
+        {
+          "heure": "16:30",
+          "version": "VF",
+          "resa_url": "https://www.ticketingcine.com/EMS1217/FRHPAV1#showsession?id=emsx121700009173&ps=EMS1217",
+          "date": "2026-10-26"
+        },
+        {
+          "heure": "15:50",
+          "version": "VF",
+          "resa_url": "https://www.ticketingcine.com/EMS1217/FRHPAV1#showsession?id=emsx121700009174&ps=EMS1217",
+          "date": "2026-10-27"
+        }
+      ],
+      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/809f749ba3ab2d76.jpg",
+      "backdrop": "https://image.tmdb.org/t/p/w1280/a6O9MMak7mHDdxwApf2nGlvIs0g.jpg",
+      "imdbRating": 6.2,
+      "cast": "Isabelle Huppert, Sandrine Kiberlain, Anne Marivin",
+      "trailer": "https://www.youtube.com/watch?v=1JKS6qSPb2w"
+    },
+    {
+      "titre": "L’Espèce explosive",
+      "slug": "lespece-explosive",
+      "titreOriginal": null,
+      "annee": 2026,
+      "realisateur": "Sarah Arnold",
+      "duree": 95,
+      "genres": [
+        "Crime",
+        "Drama",
+        "Thriller"
+      ],
+      "synopsis": "Dans le Nord-Est de la France, agriculteurs et chasseurs se font la guerre. Les sangliers, trop gros et trop nombreux, dévastent les cultures. Brun, céréalier au bord du gouffre, craque et disparaît. Un an plus tard, Fulda, un gendarme explosif et Stéphane, une psy en crise, enquêtent. Ce qu’ils découvrent les dépasse. Ce qui naît entre eux aussi.",
+      "imdbId": "tt38841455",
+      "source": "zola",
+      "cinema": "Le Zola",
+      "seances": [
+        {
+          "heure": "18:45",
+          "version": "VF",
+          "resa_url": "https://www.ticketingcine.com/EMS1217/FRFIS1K#showsession?id=emsx121700009176&ps=EMS1217",
+          "date": "2026-10-26"
+        },
+        {
+          "heure": "18:10",
+          "version": "VF",
+          "resa_url": "https://www.ticketingcine.com/EMS1217/FRFIS1K#showsession?id=emsx121700009175&ps=EMS1217",
+          "date": "2026-10-27"
+        }
+      ],
+      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/fbf02d491ba70035.jpg",
+      "backdrop": "https://image.tmdb.org/t/p/w1280/7PZCUc6xYm4kHlqnKzwgtHRjm8K.jpg",
+      "imdbRating": 7.1,
+      "cast": "Alexis Manenti, Ella Rumpf, Vincent Dedienne",
+      "trailer": "https://www.youtube.com/watch?v=JElCES6kQ6E"
+    },
+    {
+      "titre": "Digger",
+      "slug": "digger",
+      "titreOriginal": null,
+      "annee": 2026,
+      "realisateur": "Alejandro G. Iñárritu",
+      "duree": 120,
+      "genres": [
+        "Comedy",
+        "Drama"
+      ],
+      "synopsis": "L’homme le plus puissant du monde se lance dans une mission frénétique pour prouver qu’il est le sauveur de l’humanité avant que le désastre qu’il a déclenché ne détruise tout.",
+      "imdbId": "tt31450459",
+      "source": "zola",
+      "cinema": "Le Zola",
+      "seances": [
+        {
+          "heure": "11:00",
+          "version": "VOSTFR",
+          "resa_url": null,
+          "date": "2026-10-25"
+        },
+        {
+          "heure": "20:20",
+          "version": "VOSTFR",
+          "resa_url": null,
+          "date": "2026-10-25"
+        },
+        {
+          "heure": "20:40",
+          "version": "VOSTFR",
+          "resa_url": "https://www.ticketingcine.com/EMS1217/FRTEUUP#showsession?id=emsx121700009212&ps=EMS1217",
+          "date": "2026-10-26"
+        }
+      ],
+      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/2eaa70d53bb092dd.jpg",
+      "backdrop": "https://image.tmdb.org/t/p/w1280/vC5IxhgO6cVmw9O4QgkraRzfHvh.jpg",
+      "imdbRating": 7.494,
+      "cast": "Tom Cruise, Riz Ahmed, John Goodman",
+      "trailer": "https://www.youtube.com/watch?v=e2lyQd9t700"
+    },
+    {
       "titre": "C’est arrivé près de chez vous",
       "slug": "cest-arrive-pres-de-chez-vous",
       "titreOriginal": null,
@@ -275,7 +231,7 @@
       ],
       "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/648e47a273c834a9.jpg",
       "backdrop": "https://image.tmdb.org/t/p/w1280/7QLGk7qKm66dtjTtpVeAIRocoan.jpg",
-      "imdbRating": 7.22,
+      "imdbRating": 7.214,
       "cast": "Benoît Poelvoorde, Rémy Belvaux, André Bonzel",
       "trailer": "https://www.youtube.com/watch?v=3HFuTY3HpV8"
     },
@@ -303,6 +259,12 @@
           "version": "VF",
           "resa_url": "https://www.ticketingcine.com/EMS1217/FRD600L#showsession?id=emsx121700009130&ps=EMS1217",
           "date": "2026-10-29"
+        },
+        {
+          "heure": "11:00",
+          "version": "VF",
+          "resa_url": "https://www.ticketingcine.com/EMS1217/FRD600L#showsession?id=emsx121700009131&ps=EMS1217",
+          "date": "2026-10-30"
         }
       ],
       "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/cffc9d6661f5a67f.jpg",
@@ -332,6 +294,18 @@
           "version": "VF",
           "resa_url": "https://www.ticketingcine.com/EMS1217/FRGIW1R#showsession?id=emsx121700009133&ps=EMS1217",
           "date": "2026-10-29"
+        },
+        {
+          "heure": "14:00",
+          "version": "VF",
+          "resa_url": "https://www.ticketingcine.com/EMS1217/FRGIW1R#showsession?id=emsx121700009134&ps=EMS1217",
+          "date": "2026-10-30"
+        },
+        {
+          "heure": "14:00",
+          "version": "VF",
+          "resa_url": "https://www.ticketingcine.com/EMS1217/FRGIW1R#showsession?id=emsx121700009135&ps=EMS1217",
+          "date": "2026-10-31"
         }
       ],
       "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/dd2e87eac5215873.jpg",
@@ -364,6 +338,12 @@
           "version": "VFST",
           "resa_url": "https://www.ticketingcine.com/EMS1217/FRELTUI#showsession?id=emsx121700009196&ps=EMS1217",
           "date": "2026-10-29"
+        },
+        {
+          "heure": "18:00",
+          "version": "VF",
+          "resa_url": "https://www.ticketingcine.com/EMS1217/FRELTUI#showsession?id=emsx121700009197&ps=EMS1217",
+          "date": "2026-10-30"
         }
       ],
       "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/58f6a4567dab316f.jpg",
@@ -400,13 +380,139 @@
           "version": "VOSTFR",
           "resa_url": "https://www.ticketingcine.com/EMS1217/FRX6EJK#showsession?id=emsx121700009188&ps=EMS1217",
           "date": "2026-10-29"
+        },
+        {
+          "heure": "20:30",
+          "version": "VOSTFR",
+          "resa_url": "https://www.ticketingcine.com/EMS1217/FRX6EJK#showsession?id=emsx121700009189&ps=EMS1217",
+          "date": "2026-10-30"
+        },
+        {
+          "heure": "15:50",
+          "version": "VOSTFR",
+          "resa_url": "https://www.ticketingcine.com/EMS1217/FRX6EJK#showsession?id=emsx121700009190&ps=EMS1217",
+          "date": "2026-10-31"
         }
       ],
       "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/715279dc0969850f.jpg",
       "backdrop": "https://image.tmdb.org/t/p/w1280/i5HacpkXOKQ85lfbnMO3jXvAnPy.jpg",
-      "imdbRating": 7.841,
+      "imdbRating": 7.8,
       "cast": "Dmitriy Mazurov, Iris Lebedeva, Varvara Shmykova",
       "trailer": "https://www.youtube.com/watch?v=SceYxrLYj9I"
+    },
+    {
+      "titre": "Carmen, l’oiseau rebelle",
+      "slug": "carmen-loiseau-rebelle",
+      "titreOriginal": null,
+      "annee": 2026,
+      "realisateur": "Sébastien Laudenbach",
+      "duree": 90,
+      "genres": [
+        "Animation",
+        "Drama",
+        "Family"
+      ],
+      "synopsis": "Dans les ruelles de Séville, Salva, Belén et leur bande de gamins des rues vont affronter tous les dangers pour éloigner la menace qui plane sur Carmen, jeune femme libre et flamboyante. Le destin de Carmen, oiseau rebelle, est entre leurs mains.",
+      "imdbId": "tt29034109",
+      "source": "zola",
+      "cinema": "Le Zola",
+      "seances": [
+        {
+          "heure": "16:00",
+          "version": "VF",
+          "resa_url": "https://www.ticketingcine.com/EMS1217/FRPQB4Y#showsession?id=emsx121700009137&ps=EMS1217",
+          "date": "2026-10-30"
+        }
+      ],
+      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/95c03232e32695b6.jpg",
+      "backdrop": "https://image.tmdb.org/t/p/w1280/ouMmBgmmKOBmUrg710D785ZWCGG.jpg",
+      "imdbRating": 6.5,
+      "cast": "Camélia Jordana, Milo Machado-Graner, Soumaye Bocoum",
+      "trailer": "https://www.youtube.com/watch?v=ESeCaB0FtT0"
+    },
+    {
+      "titre": "Resident Evil",
+      "slug": "resident-evil",
+      "titreOriginal": null,
+      "annee": 2026,
+      "realisateur": "Zach Cregger",
+      "duree": 97,
+      "genres": [
+        "Action",
+        "Horror",
+        "Sci-Fi"
+      ],
+      "synopsis": "Bryan, un coursier médical, est en train d'effectuer une livraison lorsqu'une épidémie soudaine se déclare, le forçant à lutter pour sa survie.",
+      "imdbId": "tt35538033",
+      "source": "zola",
+      "cinema": "Le Zola",
+      "seances": [
+        {
+          "heure": "20:30",
+          "version": "VOSTFR",
+          "resa_url": "https://www.ticketingcine.com/EMS1217/FR6IWLJ#showsession?id=emsx121700009234&ps=EMS1217",
+          "date": "2026-10-31"
+        }
+      ],
+      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/af390a5897895d1a.jpg",
+      "backdrop": "https://image.tmdb.org/t/p/w1280/3icyRAqgakNcQn6aDVz9libFmBA.jpg",
+      "imdbRating": 7.305,
+      "cast": "Austin Abrams, Paul Walter Hauser, Kali Reis",
+      "trailer": "https://www.youtube.com/watch?v=JvUuW2n4lC4"
+    },
+    {
+      "titre": "Flush",
+      "slug": "flush",
+      "titreOriginal": null,
+      "annee": 2025,
+      "realisateur": "Grégory Morin",
+      "duree": 70,
+      "genres": [
+        "Thriller"
+      ],
+      "synopsis": "Quand on essaie de sortir la tête du trou, il y a toujours quelqu’un pour vous y replonger. Prenez Luc, un junkie à la dérive. Sa femme l’a quitté. Sa fille a été confiée aux services sociaux. Alors qu’il tente de reconquérir son ex devenue serveuse dans un bar, il se retrouve mêlé à un trafic de drogue. Une bagarre éclate. Laissé pour mort, le crâne coincé dans le trou d’une toilette à la turque, il aura la nuit pour se sortir de là et recomposer sa famille perdue.",
+      "imdbId": "tt37520267",
+      "source": "zola",
+      "cinema": "Le Zola",
+      "seances": [
+        {
+          "heure": "22:30",
+          "version": "VF",
+          "resa_url": "https://www.ticketingcine.com/EMS1217/FRGH5A1#showsession?id=emsx121700009235&ps=EMS1217",
+          "date": "2026-10-31"
+        }
+      ],
+      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/9c05eeecd01f2302.jpg",
+      "backdrop": "https://image.tmdb.org/t/p/w1280/rx5BlsUw8LBZFf1YPJkv2yuo4H0.jpg",
+      "imdbRating": 6.7,
+      "cast": "Jonathan Lambert, Élodie Navarre, Elliot Jenicot",
+      "trailer": "https://www.youtube.com/watch?v=Ih5VNQsClM0"
+    },
+    {
+      "titre": "Joyeuse Jungle !",
+      "slug": "joyeuse-jungle",
+      "titreOriginal": null,
+      "annee": null,
+      "realisateur": null,
+      "duree": 70,
+      "genres": [],
+      "synopsis": "Pendant les vacances scolaires, Ilze, neuf ans, rejoint sa famille dans la forêt tropicale où ils vivent avec la tribu Pemón, près de la montagne du Diable. Lorsqu'à la suite d'un accident, maman doit emmener papa à l'hôpital, Ilze se porte volontaire pour s'occuper de son frère Alex, âgé de trois ans. Cependant, au lieu de faire attention à son frère, Ilze a le nez plongé dans un livre. Lorsqu'Ilze lève enfin les yeux, elle découvre qu'Alex a disparu. Tout indique qu'il s'est égaré dans la jung…",
+      "imdbId": "tt37162310",
+      "source": "zola",
+      "cinema": "Le Zola",
+      "seances": [
+        {
+          "heure": "14:15",
+          "version": "VF",
+          "resa_url": null,
+          "date": "2026-10-25"
+        }
+      ],
+      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/276d60c449d476a8.jpg",
+      "backdrop": "https://image.tmdb.org/t/p/w1280/x6EA7dnmR2TXfurfU3wDYLOOyLG.jpg",
+      "imdbRating": 0.0,
+      "cast": "Anabella Jasmīna Gerinoviča, Matīss Budovskis, Madara Botmane-Vāgentroca",
+      "trailer": "https://www.youtube.com/watch?v=NPK01ooGWvY"
     }
   ],
   "evenements": [
@@ -429,66 +535,6 @@
           "titre_film": "Les Toiles des Mômes",
           "invite": null,
           "description": "Les Toiles des Mômes est un festival de cinéma jeune public. Sa 21e édition se tiendra du 19 au 31 octobre au Comœdia, avec 4 rendez-vous à ne pas manquer !"
-        }
-      ]
-    },
-    {
-      "cle": "rencontre|edward aux mains d'argent|2026-10",
-      "type": "rencontre",
-      "forme": null,
-      "titre": "Edward aux mains d'argent",
-      "description": "Pour Ma Comœdiathèque du mois d'octobre, nous vous invitons à (re)découvrir le film culte de Tim Burton, « Edward aux mains d'argent » sur grand écran.",
-      "date_debut": "2026-10-24",
-      "date_fin": "2026-10-24",
-      "precision": "exact",
-      "affiche_url": "https://cms-assets.webediamovies.pro/production/945/e7a64b44204c6ad98959bd8778875028.jpg",
-      "films": [
-        {
-          "titre": "Edward aux mains d'argent",
-          "dates": [
-            "2026-10-24"
-          ],
-          "affiche": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/4c1f42085b02cfde.jpg"
-        }
-      ],
-      "creneaux": [
-        {
-          "cinema": "Le Comoedia",
-          "date": "2026-10-24",
-          "heure": "15:30",
-          "titre_film": "Edward aux mains d'argent",
-          "invite": null,
-          "description": "Pour Ma Comœdiathèque du mois d'octobre, nous vous invitons à (re)découvrir le film culte de Tim Burton, « Edward aux mains d'argent » sur grand écran."
-        }
-      ]
-    },
-    {
-      "cle": "avant_premiere|moulin|2026-10",
-      "type": "avant_premiere",
-      "forme": null,
-      "titre": "Moulin",
-      "description": "Découvrez en avant-première le nouveau film de László Nemes dédié à Jean Moulin, figure nationale de la Résistance.",
-      "date_debut": "2026-10-25",
-      "date_fin": "2026-10-25",
-      "precision": "exact",
-      "affiche_url": "https://all.web.img.acsta.net/img/0e/b7/0eb754ba96eb61570ea47ddc22b004ce.jpg",
-      "films": [
-        {
-          "titre": "Moulin",
-          "dates": [
-            "2026-10-25"
-          ],
-          "affiche": null
-        }
-      ],
-      "creneaux": [
-        {
-          "cinema": "Le Comoedia",
-          "date": "2026-10-25",
-          "heure": "16:00",
-          "titre_film": "Moulin",
-          "invite": null,
-          "description": "Découvrez en avant-première le nouveau film de László Nemes dédié à Jean Moulin, figure nationale de la Résistance."
         }
       ]
     },
