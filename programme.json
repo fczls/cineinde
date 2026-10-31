@@ -1,146 +1,11 @@
 {
-  "generated_at": "2026-10-29T23:44:37.593526",
+  "generated_at": "2026-10-31T22:58:01.443841",
   "sources": [
     "https://www.cinema-comoedia.com/programme-semaine/",
     "https://www.cinemas-lumiere.com/calendrier-general.html",
     "https://www.lezola.com/films-a-laffiche/"
   ],
   "films": [
-    {
-      "titre": "Le Monde à l’envers",
-      "slug": "le-monde-a-lenvers",
-      "titreOriginal": null,
-      "annee": null,
-      "realisateur": null,
-      "duree": 45,
-      "genres": [],
-      "synopsis": "Un souriceau qui vit la tête à l’envers, un tout petit poisson explorateur et des enfants à l’imagination débordante : ces personnages nous invitent à nous mettre à la place de celles et ceux qui perçoivent le monde différemment pour mieux les comprendre.",
-      "imdbId": null,
-      "source": "zola",
-      "cinema": "Le Zola",
-      "seances": [
-        {
-          "heure": "11:00",
-          "version": "VF",
-          "resa_url": "https://www.ticketingcine.com/EMS1217/FRD600L#showsession?id=emsx121700009131&ps=EMS1217",
-          "date": "2026-10-30"
-        }
-      ],
-      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/cffc9d6661f5a67f.jpg",
-      "imdbRating": 0.0
-    },
-    {
-      "titre": "Petite Casbah",
-      "slug": "petite-casbah",
-      "titreOriginal": null,
-      "annee": null,
-      "realisateur": null,
-      "duree": 84,
-      "genres": [],
-      "synopsis": "Algérie, juin 1955. Khadidja quitte la Kabylie pour rejoindre son grand frère Malek à Alger. Suite à une altercation au marché, il se fait arrêter par la police et Khadidja se retrouve seule. Heureusement, Lyes, Ahmed et Philippe vont tout mettre en œuvre pour l’aider à retrouver Malek. Depuis les toits de la Casbah, les quatre enfants mènent l’enquête.",
-      "imdbId": null,
-      "source": "zola",
-      "cinema": "Le Zola",
-      "seances": [
-        {
-          "heure": "14:00",
-          "version": "VF",
-          "resa_url": "https://www.ticketingcine.com/EMS1217/FRGIW1R#showsession?id=emsx121700009134&ps=EMS1217",
-          "date": "2026-10-30"
-        },
-        {
-          "heure": "14:00",
-          "version": "VF",
-          "resa_url": "https://www.ticketingcine.com/EMS1217/FRGIW1R#showsession?id=emsx121700009135&ps=EMS1217",
-          "date": "2026-10-31"
-        },
-        {
-          "heure": "14:15",
-          "version": "VF",
-          "resa_url": "https://www.ticketingcine.com/EMS1217/FRGIW1R#showsession?id=emsx121700009136&ps=EMS1217",
-          "date": "2026-11-01"
-        }
-      ],
-      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/dd2e87eac5215873.jpg",
-      "imdbRating": 0.0
-    },
-    {
-      "titre": "Carmen, l’oiseau rebelle",
-      "slug": "carmen-loiseau-rebelle",
-      "titreOriginal": null,
-      "annee": 2026,
-      "realisateur": "Sébastien Laudenbach",
-      "duree": 90,
-      "genres": [
-        "Animation",
-        "Drama",
-        "Family"
-      ],
-      "synopsis": "Dans les ruelles de Séville, Salva, Belén et leur bande de gamins des rues vont affronter tous les dangers pour éloigner la menace qui plane sur Carmen, jeune femme libre et flamboyante. Le destin de Carmen, oiseau rebelle, est entre leurs mains.",
-      "imdbId": "tt29034109",
-      "source": "zola",
-      "cinema": "Le Zola",
-      "seances": [
-        {
-          "heure": "16:00",
-          "version": "VF",
-          "resa_url": "https://www.ticketingcine.com/EMS1217/FRPQB4Y#showsession?id=emsx121700009137&ps=EMS1217",
-          "date": "2026-10-30"
-        }
-      ],
-      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/95c03232e32695b6.jpg",
-      "backdrop": "https://image.tmdb.org/t/p/w1280/ouMmBgmmKOBmUrg710D785ZWCGG.jpg",
-      "imdbRating": 6.5,
-      "cast": "Camélia Jordana, Milo Machado-Graner, Soumaye Bocoum",
-      "trailer": "https://www.youtube.com/watch?v=ESeCaB0FtT0"
-    },
-    {
-      "titre": "Une femme aujourd’hui",
-      "slug": "une-femme-aujourdhui",
-      "titreOriginal": null,
-      "annee": 2026,
-      "realisateur": "Robert Guédiguian",
-      "duree": 120,
-      "genres": [
-        "Comedy",
-        "Drama"
-      ],
-      "synopsis": "Juliette, 30 ans, semble avoir tout pour elle : un poste prestigieux dans la finance, une belle maison, une vie rythmée par les voyages et les amours de passage. Lorsqu’elle est agressée par un collègue, son monde s’effondre. Juliette s'engage alors sur un nouveau chemin pour redonner un sens à sa vie.",
-      "imdbId": "tt43645716",
-      "source": "zola",
-      "cinema": "Le Zola",
-      "seances": [
-        {
-          "heure": "18:00",
-          "version": "VF",
-          "resa_url": "https://www.ticketingcine.com/EMS1217/FRELTUI#showsession?id=emsx121700009197&ps=EMS1217",
-          "date": "2026-10-30"
-        },
-        {
-          "heure": "18:40",
-          "version": "VF",
-          "resa_url": "https://www.ticketingcine.com/EMS1217/FRELTUI#showsession?id=emsx121700009199&ps=EMS1217",
-          "date": "2026-11-01"
-        },
-        {
-          "heure": "16:00",
-          "version": "VF",
-          "resa_url": "https://www.ticketingcine.com/EMS1217/FRELTUI#showsession?id=emsx121700009213&ps=EMS1217",
-          "date": "2026-11-02"
-        },
-        {
-          "heure": "17:00",
-          "version": "VF",
-          "resa_url": "https://www.ticketingcine.com/EMS1217/FRELTUI#showsession?id=emsx121700009233&ps=EMS1217",
-          "date": "2026-11-03"
-        }
-      ],
-      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/58f6a4567dab316f.jpg",
-      "backdrop": "https://image.tmdb.org/t/p/w1280/oFsQkBqmxKa9fMHWf24jymZnXf8.jpg",
-      "imdbRating": 7.071,
-      "cast": "Ariane Ascaride, Jean-Pierre Darroussin, Grégoire Leprince-Ringuet",
-      "trailer": "https://www.youtube.com/watch?v=4WpoJLQzfig"
-    },
     {
       "titre": "Minotaure",
       "slug": "minotaure",
@@ -159,15 +24,9 @@
       "cinema": "Le Zola",
       "seances": [
         {
-          "heure": "20:30",
-          "version": "VOSTFR",
-          "resa_url": "https://www.ticketingcine.com/EMS1217/FRX6EJK#showsession?id=emsx121700009189&ps=EMS1217",
-          "date": "2026-10-30"
-        },
-        {
           "heure": "15:50",
           "version": "VOSTFR",
-          "resa_url": "https://www.ticketingcine.com/EMS1217/FRX6EJK#showsession?id=emsx121700009190&ps=EMS1217",
+          "resa_url": null,
           "date": "2026-10-31"
         },
         {
@@ -191,9 +50,79 @@
       ],
       "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/715279dc0969850f.jpg",
       "backdrop": "https://image.tmdb.org/t/p/w1280/i5HacpkXOKQ85lfbnMO3jXvAnPy.jpg",
-      "imdbRating": 7.7,
+      "imdbRating": 7.867,
       "cast": "Dmitriy Mazurov, Iris Lebedeva, Varvara Shmykova",
       "trailer": "https://www.youtube.com/watch?v=SceYxrLYj9I"
+    },
+    {
+      "titre": "Petite Casbah",
+      "slug": "petite-casbah",
+      "titreOriginal": null,
+      "annee": null,
+      "realisateur": null,
+      "duree": 84,
+      "genres": [],
+      "synopsis": "Algérie, juin 1955. Khadidja quitte la Kabylie pour rejoindre son grand frère Malek à Alger. Suite à une altercation au marché, il se fait arrêter par la police et Khadidja se retrouve seule. Heureusement, Lyes, Ahmed et Philippe vont tout mettre en œuvre pour l’aider à retrouver Malek. Depuis les toits de la Casbah, les quatre enfants mènent l’enquête.",
+      "imdbId": null,
+      "source": "zola",
+      "cinema": "Le Zola",
+      "seances": [
+        {
+          "heure": "14:00",
+          "version": "VF",
+          "resa_url": null,
+          "date": "2026-10-31"
+        },
+        {
+          "heure": "14:15",
+          "version": "VF",
+          "resa_url": "https://www.ticketingcine.com/EMS1217/FRGIW1R#showsession?id=emsx121700009136&ps=EMS1217",
+          "date": "2026-11-01"
+        }
+      ],
+      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/dd2e87eac5215873.jpg",
+      "imdbRating": 0.0
+    },
+    {
+      "titre": "Une femme aujourd’hui",
+      "slug": "une-femme-aujourdhui",
+      "titreOriginal": null,
+      "annee": 2026,
+      "realisateur": "Robert Guédiguian",
+      "duree": 120,
+      "genres": [
+        "Comedy",
+        "Drama"
+      ],
+      "synopsis": "Juliette, 30 ans, semble avoir tout pour elle : un poste prestigieux dans la finance, une belle maison, une vie rythmée par les voyages et les amours de passage. Lorsqu’elle est agressée par un collègue, son monde s’effondre. Juliette s'engage alors sur un nouveau chemin pour redonner un sens à sa vie.",
+      "imdbId": "tt43645716",
+      "source": "zola",
+      "cinema": "Le Zola",
+      "seances": [
+        {
+          "heure": "18:40",
+          "version": "VF",
+          "resa_url": "https://www.ticketingcine.com/EMS1217/FRELTUI#showsession?id=emsx121700009199&ps=EMS1217",
+          "date": "2026-11-01"
+        },
+        {
+          "heure": "16:00",
+          "version": "VF",
+          "resa_url": "https://www.ticketingcine.com/EMS1217/FRELTUI#showsession?id=emsx121700009213&ps=EMS1217",
+          "date": "2026-11-02"
+        },
+        {
+          "heure": "17:00",
+          "version": "VF",
+          "resa_url": "https://www.ticketingcine.com/EMS1217/FRELTUI#showsession?id=emsx121700009233&ps=EMS1217",
+          "date": "2026-11-03"
+        }
+      ],
+      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/58f6a4567dab316f.jpg",
+      "backdrop": "https://image.tmdb.org/t/p/w1280/oFsQkBqmxKa9fMHWf24jymZnXf8.jpg",
+      "imdbRating": 7.1,
+      "cast": "Ariane Ascaride, Jean-Pierre Darroussin, Grégoire Leprince-Ringuet",
+      "trailer": "https://www.youtube.com/watch?v=4WpoJLQzfig"
     },
     {
       "titre": "Le Corset",
@@ -215,7 +144,7 @@
         {
           "heure": "18:35",
           "version": "VF",
-          "resa_url": "https://www.ticketingcine.com/EMS1217/FRQ0FYB#showsession?id=emsx121700009185&ps=EMS1217",
+          "resa_url": null,
           "date": "2026-10-31"
         },
         {
@@ -227,67 +156,9 @@
       ],
       "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/046c6669237e99e8.jpg",
       "backdrop": "https://image.tmdb.org/t/p/w1280/3e0Lzs4vDSHjRULFw6vPI4jyHd6.jpg",
-      "imdbRating": 8.226,
+      "imdbRating": 7.9,
       "cast": "Gary Clichy, Rod Paradot, Dimitri Colas",
       "trailer": "https://www.youtube.com/watch?v=hBG2AybVRXg"
-    },
-    {
-      "titre": "Resident Evil",
-      "slug": "resident-evil",
-      "titreOriginal": null,
-      "annee": 2026,
-      "realisateur": "Zach Cregger",
-      "duree": 97,
-      "genres": [
-        "Action",
-        "Horror",
-        "Sci-Fi"
-      ],
-      "synopsis": "Bryan, coursier médical, s'engage dans une course effrénée pour survivre, alors qu'autour de lui le monde s'enfonce dans un chaos total.",
-      "imdbId": "tt35538033",
-      "source": "zola",
-      "cinema": "Le Zola",
-      "seances": [
-        {
-          "heure": "20:30",
-          "version": "VOSTFR",
-          "resa_url": "https://www.ticketingcine.com/EMS1217/FR6IWLJ#showsession?id=emsx121700009234&ps=EMS1217",
-          "date": "2026-10-31"
-        }
-      ],
-      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/af390a5897895d1a.jpg",
-      "backdrop": "https://image.tmdb.org/t/p/w1280/3icyRAqgakNcQn6aDVz9libFmBA.jpg",
-      "imdbRating": 7.319,
-      "cast": "Austin Abrams, Paul Walter Hauser, Kali Reis",
-      "trailer": "https://www.youtube.com/watch?v=JvUuW2n4lC4"
-    },
-    {
-      "titre": "Flush",
-      "slug": "flush",
-      "titreOriginal": null,
-      "annee": 2025,
-      "realisateur": "Grégory Morin",
-      "duree": 70,
-      "genres": [
-        "Thriller"
-      ],
-      "synopsis": "Quand on essaie de sortir la tête du trou, il y a toujours quelqu’un pour vous y replonger. Prenez Luc, un junkie à la dérive. Sa femme l’a quitté. Sa fille a été confiée aux services sociaux. Alors qu’il tente de reconquérir son ex devenue serveuse dans un bar, il se retrouve mêlé à un trafic de drogue. Une bagarre éclate. Laissé pour mort, le crâne coincé dans le trou d’une toilette à la turque, il aura la nuit pour se sortir de là et recomposer sa famille perdue.",
-      "imdbId": "tt37520267",
-      "source": "zola",
-      "cinema": "Le Zola",
-      "seances": [
-        {
-          "heure": "23:00",
-          "version": "VF",
-          "resa_url": "https://www.ticketingcine.com/EMS1217/FRGH5A1#showsession?id=emsx121700009235&ps=EMS1217",
-          "date": "2026-11-01"
-        }
-      ],
-      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/9c05eeecd01f2302.jpg",
-      "backdrop": "https://image.tmdb.org/t/p/w1280/rx5BlsUw8LBZFf1YPJkv2yuo4H0.jpg",
-      "imdbRating": 6.6,
-      "cast": "Jonathan Lambert, Élodie Navarre, Elliot Jenicot",
-      "trailer": "https://www.youtube.com/watch?v=Ih5VNQsClM0"
     },
     {
       "titre": "Diamanti",
@@ -323,105 +194,200 @@
       "imdbRating": 7.076,
       "cast": "Luisa Ranieri, Jasmine Trinca, Elena Sofia Ricci",
       "trailer": "https://www.youtube.com/watch?v=BuzzzII3LcU"
+    },
+    {
+      "titre": "Doraemon et le château sous-marin",
+      "slug": "doraemon-et-le-chateau-sous-marin",
+      "titreOriginal": null,
+      "annee": 2026,
+      "realisateur": "Tetsuo Yajima",
+      "duree": 101,
+      "genres": [
+        "Animation",
+        "Adventure",
+        "Comedy"
+      ],
+      "synopsis": "Doraemon est un robot-chat bleu qui vient du futur. Il vit avec Nobita, un petit garçon maladroit, et ses parents. Grâce à ses gadgets secrets, Doraemon aide souvent Nobita à s'amuser ou à résoudre ses problèmes. Un été d'ennui, Doraemon propose à Nobita et leurs amis d'aller faire du camping sous la mer. En explorant les fonds marins, la bande découvre une épave et fait la rencontre des Thalassiens. C'est alors qu'une annonce très inquiétante survient : « Le Château sous-marin s'est réveillé ! …",
+      "imdbId": "tt38201958",
+      "source": "zola",
+      "cinema": "Le Zola",
+      "seances": [
+        {
+          "heure": "14:30",
+          "version": "VF",
+          "resa_url": "https://www.ticketingcine.com/EMS1217/FRFFU5L#showsession?id=emsx121700009214&ps=EMS1217",
+          "date": "2026-11-04"
+        }
+      ],
+      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/0e6e0e509fc5d098.jpg",
+      "backdrop": "https://image.tmdb.org/t/p/w1280/pxd9rc03EMMln3tVFdfd427Fpsi.jpg",
+      "imdbRating": 6.9,
+      "cast": "Wasabi Mizuta, Megumi Oohara, Yumi Kakazu"
+    },
+    {
+      "titre": "Les Misérables",
+      "slug": "les-miserables",
+      "titreOriginal": null,
+      "annee": 2012,
+      "realisateur": "Tom Hooper",
+      "duree": 179,
+      "genres": [
+        "Drama",
+        "Musical",
+        "Romance"
+      ],
+      "synopsis": "Libéré après 19 ans de bagne pour le vol d'un pain, Jean Valjean décide de changer de vie et de faire le bien autour de lui. Sous une fausse identité, il devient avec le temps un notable respecté de tous. Mais son passé le rattrape...",
+      "imdbId": "tt1707386",
+      "source": "zola",
+      "cinema": "Le Zola",
+      "seances": [
+        {
+          "heure": "16:35",
+          "version": "VF",
+          "resa_url": "https://www.ticketingcine.com/EMS1217/FR4QY3X#showsession?id=emsx121700009221&ps=EMS1217",
+          "date": "2026-11-04"
+        },
+        {
+          "heure": "16:15",
+          "version": "VF",
+          "resa_url": "https://www.ticketingcine.com/EMS1217/FR4QY3X#showsession?id=emsx121700009222&ps=EMS1217",
+          "date": "2026-11-05"
+        },
+        {
+          "heure": "19:30",
+          "version": "VF",
+          "resa_url": "https://www.ticketingcine.com/EMS1217/FR4QY3X#showsession?id=emsx121700009223&ps=EMS1217",
+          "date": "2026-11-06"
+        }
+      ],
+      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/693c5e18112fb01f.jpg",
+      "backdrop": "https://image.tmdb.org/t/p/w1280/bsG8LkZx1ijrcf3fP6AvBlGTxkX.jpg",
+      "imdbRating": 7.29,
+      "cast": "Hugh Jackman, Russell Crowe, Amanda Seyfried",
+      "trailer": "https://www.youtube.com/watch?v=n694aKtoPu8"
+    },
+    {
+      "titre": "Un jour sans fin",
+      "slug": "un-jour-sans-fin",
+      "titreOriginal": null,
+      "annee": 1993,
+      "realisateur": "Harold Ramis",
+      "duree": 101,
+      "genres": [
+        "Comedy",
+        "Drama",
+        "Fantasy"
+      ],
+      "synopsis": "Phil Connors, présentateur météo grincheux et arrogant, doit tourner un reportage sur la fête de la marmotte. Mais lorsqu'il se réveille le lendemain, il découvre avec stupeur que la date n'a pas changé et qu'il est condamné à revivre un par un les événements de la veille. Connors se voit dès lors obligé de faire face à la répétition infinie du Jour de la marmotte.",
+      "imdbId": "tt0107048",
+      "source": "zola",
+      "cinema": "Le Zola",
+      "seances": [
+        {
+          "heure": "20:30",
+          "version": "VOSTFR",
+          "resa_url": "https://www.ticketingcine.com/EMS1217/FRG574I#showsession?id=emsx121700009243&ps=EMS1217",
+          "date": "2026-11-04"
+        }
+      ],
+      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/5dc4c17e9dc0285e.jpg",
+      "backdrop": "https://image.tmdb.org/t/p/w1280/4W6RYDNe4OByNryOCvJprrutm9h.jpg",
+      "imdbRating": 7.639,
+      "cast": "Bill Murray, Andie MacDowell, Chris Elliott",
+      "trailer": "https://www.youtube.com/watch?v=m8Z3PPOLvm8"
+    },
+    {
+      "titre": "Marie Madeleine",
+      "slug": "marie-madeleine",
+      "titreOriginal": null,
+      "annee": 2026,
+      "realisateur": "Gessica Geneus",
+      "duree": 104,
+      "genres": [],
+      "synopsis": "À Jacmel, en Haïti, la mer, les églises et les esprits façonnent la vie. Marie Madeleine est une femme libre. Elle vit de la prostitution et traverse les nuits sans se soumettre aux règles de ceux qui sauvent les âmes. Sa route croise celle de Joseph, un jeune évangéliste. Une relation se noue entre ces deux êtres que tout oppose. Alors que Joseph vacille dans sa foi, Marie Madeleine l’entraîne vers un monde dans lequel désir et quête de liberté ouvrent un espace où tout peut être réinventé.",
+      "imdbId": "tt42007280",
+      "source": "zola",
+      "cinema": "Le Zola",
+      "seances": [
+        {
+          "heure": "20:00",
+          "version": "VOSTFR",
+          "resa_url": "https://www.ticketingcine.com/EMS1217/FR2GKAJ#showsession?id=emsx121700009220&ps=EMS1217",
+          "date": "2026-11-05"
+        },
+        {
+          "heure": "17:00",
+          "version": "VOSTFR",
+          "resa_url": "https://www.ticketingcine.com/EMS1217/FR2GKAJ#showsession?id=emsx121700009219&ps=EMS1217",
+          "date": "2026-11-06"
+        }
+      ],
+      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/2228f87843e07c1f.jpg",
+      "backdrop": "https://image.tmdb.org/t/p/w1280/jJO3MPRW0uaksOdX8YaotkyB4w7.jpg",
+      "imdbRating": 5.833,
+      "cast": "Gessica Généus, Beonard Monteau, Edouard Baptiste",
+      "trailer": "https://www.youtube.com/watch?v=TNeDdjlk9EU"
+    },
+    {
+      "titre": "Resident Evil",
+      "slug": "resident-evil",
+      "titreOriginal": null,
+      "annee": 2026,
+      "realisateur": "Zach Cregger",
+      "duree": 97,
+      "genres": [
+        "Action",
+        "Horror",
+        "Sci-Fi"
+      ],
+      "synopsis": "Bryan, coursier médical, s'engage dans une course effrénée pour survivre, alors qu'autour de lui le monde s'enfonce dans un chaos total.",
+      "imdbId": "tt35538033",
+      "source": "zola",
+      "cinema": "Le Zola",
+      "seances": [
+        {
+          "heure": "20:30",
+          "version": "VOSTFR",
+          "resa_url": null,
+          "date": "2026-10-31"
+        }
+      ],
+      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/af390a5897895d1a.jpg",
+      "backdrop": "https://image.tmdb.org/t/p/w1280/3icyRAqgakNcQn6aDVz9libFmBA.jpg",
+      "imdbRating": 7.3,
+      "cast": "Austin Abrams, Paul Walter Hauser, Kali Reis",
+      "trailer": "https://www.youtube.com/watch?v=JvUuW2n4lC4"
+    },
+    {
+      "titre": "Flush",
+      "slug": "flush",
+      "titreOriginal": null,
+      "annee": 2025,
+      "realisateur": "Grégory Morin",
+      "duree": 70,
+      "genres": [
+        "Thriller"
+      ],
+      "synopsis": "Quand on essaie de sortir la tête du trou, il y a toujours quelqu’un pour vous y replonger. Prenez Luc, un junkie à la dérive. Sa femme l’a quitté. Sa fille a été confiée aux services sociaux. Alors qu’il tente de reconquérir son ex devenue serveuse dans un bar, il se retrouve mêlé à un trafic de drogue. Une bagarre éclate. Laissé pour mort, le crâne coincé dans le trou d’une toilette à la turque, il aura la nuit pour se sortir de là et recomposer sa famille perdue.",
+      "imdbId": "tt37520267",
+      "source": "zola",
+      "cinema": "Le Zola",
+      "seances": [
+        {
+          "heure": "23:00",
+          "version": "VF",
+          "resa_url": null,
+          "date": "2026-11-01"
+        }
+      ],
+      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/9c05eeecd01f2302.jpg",
+      "backdrop": "https://image.tmdb.org/t/p/w1280/rx5BlsUw8LBZFf1YPJkv2yuo4H0.jpg",
+      "imdbRating": 6.6,
+      "cast": "Jonathan Lambert, Élodie Navarre, Elliot Jenicot",
+      "trailer": "https://www.youtube.com/watch?v=Ih5VNQsClM0"
     }
   ],
   "evenements": [
-    {
-      "cle": "festival|les toiles des mômes|2026-10",
-      "type": "festival",
-      "forme": "festival",
-      "titre": "Les Toiles des Mômes",
-      "description": "Les Toiles des Mômes est un festival de cinéma jeune public. Sa 21e édition se tiendra du 19 au 31 octobre au Comœdia, avec 4 rendez-vous à ne pas manquer !",
-      "date_debut": "2026-10-19",
-      "date_fin": "2026-10-30",
-      "precision": "exact",
-      "affiche_url": "https://cms-assets.webediamovies.pro/production/945/fdb386351a6463c6587121a149a87b0a.jpg",
-      "films": [],
-      "creneaux": [
-        {
-          "cinema": "Le Comoedia",
-          "date": "2026-10-19",
-          "heure": null,
-          "titre_film": "Les Toiles des Mômes",
-          "invite": null,
-          "description": "Les Toiles des Mômes est un festival de cinéma jeune public. Sa 21e édition se tiendra du 19 au 31 octobre au Comœdia, avec 4 rendez-vous à ne pas manquer !"
-        }
-      ]
-    },
-    {
-      "cle": "seance_speciale|shaun le mouton : la bêêête d'halloween|2026-10",
-      "type": "seance_speciale",
-      "forme": null,
-      "titre": "Shaun le Mouton : La Bêêête d'Halloween",
-      "description": "Petits monstres, sortez vos plus beaux costumes et venez déguisés pour fêter Halloween avec nous, autour d'un Ciné-Goûter… une séance qui s’annonce bêêêlement terrifiante !",
-      "date_debut": "2026-10-30",
-      "date_fin": "2026-10-30",
-      "precision": "exact",
-      "affiche_url": "https://all.web.img.acsta.net/img/71/51/7151261c3a772cff0d7e493ca20fc913.jpg",
-      "films": [],
-      "creneaux": [
-        {
-          "cinema": "Le Comoedia",
-          "date": "2026-10-30",
-          "heure": "14:00",
-          "titre_film": "Shaun le Mouton : La Bêêête d'Halloween",
-          "invite": null,
-          "description": "Petits monstres, sortez vos plus beaux costumes et venez déguisés pour fêter Halloween avec nous, autour d'un Ciné-Goûter… une séance qui s’annonce bêêêlement terrifiante !"
-        }
-      ]
-    },
-    {
-      "cle": "seance_speciale|moulin|2026-10",
-      "type": "seance_speciale",
-      "forme": null,
-      "titre": "Moulin",
-      "description": "À l'occasion de la sortie nationale du film Moulin, Le Mémorial National de la prison de Montluc vous propose de (re)découvrir le parcours de Jean Moulin, figure nationale de la Résistance.",
-      "date_debut": "2026-10-31",
-      "date_fin": "2026-10-31",
-      "precision": "exact",
-      "affiche_url": "https://cms-assets.webediamovies.pro/production/945/719da79635186325fa8fa14ad4f29ebd.jpg",
-      "films": [],
-      "creneaux": [
-        {
-          "cinema": "Le Comoedia",
-          "date": "2026-10-31",
-          "heure": "10:45",
-          "titre_film": "Moulin",
-          "invite": null,
-          "description": "À l'occasion de la sortie nationale du film Moulin, Le Mémorial National de la prison de Montluc vous propose de (re)découvrir le parcours de Jean Moulin, figure nationale de la Résistance."
-        }
-      ]
-    },
-    {
-      "cle": "rencontre|montessori : eduquer pour la paix|2026-11",
-      "type": "rencontre",
-      "forme": null,
-      "titre": "Montessori : Eduquer pour la Paix",
-      "description": "Projection du film \"Montessori: Eduquer pour la Paix\" d'Ángel Galmés Sureda (1h00, 2026, VOST), suivie d'une conférence par Dr Angeline Stoll Lillard, professeur de psychologie.",
-      "date_debut": "2026-11-01",
-      "date_fin": "2026-11-01",
-      "precision": "exact",
-      "affiche_url": "https://cms-assets.webediamovies.pro/production/945/dee3dd970a7b1d1e051708b6584c0e95.jpg",
-      "films": [
-        {
-          "titre": "Montessori : Eduquer pour la Paix",
-          "dates": [
-            "2026-11-01"
-          ],
-          "affiche": null
-        }
-      ],
-      "creneaux": [
-        {
-          "cinema": "Le Comoedia",
-          "date": "2026-11-01",
-          "heure": "10:45",
-          "titre_film": "Montessori : Eduquer pour la Paix",
-          "invite": null,
-          "description": "Projection du film \"Montessori: Eduquer pour la Paix\" d'Ángel Galmés Sureda (1h00, 2026, VOST), suivie d'une conférence par Dr Angeline Stoll Lillard, professeur de psychologie."
-        }
-      ]
-    },
     {
       "cle": "avant_premiere|15/18|2026-11",
       "type": "avant_premiere",
