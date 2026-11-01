@@ -1,129 +1,11 @@
 {
-  "generated_at": "2026-10-31T22:58:01.443841",
+  "generated_at": "2026-11-01T23:16:32.686253",
   "sources": [
     "https://www.cinema-comoedia.com/programme-semaine/",
     "https://www.cinemas-lumiere.com/calendrier-general.html",
     "https://www.lezola.com/films-a-laffiche/"
   ],
   "films": [
-    {
-      "titre": "Minotaure",
-      "slug": "minotaure",
-      "titreOriginal": null,
-      "annee": 2026,
-      "realisateur": "Andrey Zvyagintsev",
-      "duree": 140,
-      "genres": [
-        "Crime",
-        "Drama",
-        "Thriller"
-      ],
-      "synopsis": "Russie, 2022. Gleb, chef d’entreprise prospère, vit avec sa femme Galina et leur fils dans une ville de province. Il se retrouve confronté à des problèmes professionnels croissants, dans un monde de plus en plus instable. L’effondrement d’une vie soigneusement construite bascule rapidement dans la violence.",
-      "imdbId": "tt37118301",
-      "source": "zola",
-      "cinema": "Le Zola",
-      "seances": [
-        {
-          "heure": "15:50",
-          "version": "VOSTFR",
-          "resa_url": null,
-          "date": "2026-10-31"
-        },
-        {
-          "heure": "11:00",
-          "version": "VOSTFR",
-          "resa_url": "https://www.ticketingcine.com/EMS1217/FRX6EJK#showsession?id=emsx121700009191&ps=EMS1217",
-          "date": "2026-11-01"
-        },
-        {
-          "heure": "16:00",
-          "version": "VOSTFR",
-          "resa_url": "https://www.ticketingcine.com/EMS1217/FRX6EJK#showsession?id=emsx121700009192&ps=EMS1217",
-          "date": "2026-11-01"
-        },
-        {
-          "heure": "19:00",
-          "version": "VOSTFR",
-          "resa_url": "https://www.ticketingcine.com/EMS1217/FRX6EJK#showsession?id=emsx121700009193&ps=EMS1217",
-          "date": "2026-11-02"
-        }
-      ],
-      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/715279dc0969850f.jpg",
-      "backdrop": "https://image.tmdb.org/t/p/w1280/i5HacpkXOKQ85lfbnMO3jXvAnPy.jpg",
-      "imdbRating": 7.867,
-      "cast": "Dmitriy Mazurov, Iris Lebedeva, Varvara Shmykova",
-      "trailer": "https://www.youtube.com/watch?v=SceYxrLYj9I"
-    },
-    {
-      "titre": "Petite Casbah",
-      "slug": "petite-casbah",
-      "titreOriginal": null,
-      "annee": null,
-      "realisateur": null,
-      "duree": 84,
-      "genres": [],
-      "synopsis": "Algérie, juin 1955. Khadidja quitte la Kabylie pour rejoindre son grand frère Malek à Alger. Suite à une altercation au marché, il se fait arrêter par la police et Khadidja se retrouve seule. Heureusement, Lyes, Ahmed et Philippe vont tout mettre en œuvre pour l’aider à retrouver Malek. Depuis les toits de la Casbah, les quatre enfants mènent l’enquête.",
-      "imdbId": null,
-      "source": "zola",
-      "cinema": "Le Zola",
-      "seances": [
-        {
-          "heure": "14:00",
-          "version": "VF",
-          "resa_url": null,
-          "date": "2026-10-31"
-        },
-        {
-          "heure": "14:15",
-          "version": "VF",
-          "resa_url": "https://www.ticketingcine.com/EMS1217/FRGIW1R#showsession?id=emsx121700009136&ps=EMS1217",
-          "date": "2026-11-01"
-        }
-      ],
-      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/dd2e87eac5215873.jpg",
-      "imdbRating": 0.0
-    },
-    {
-      "titre": "Une femme aujourd’hui",
-      "slug": "une-femme-aujourdhui",
-      "titreOriginal": null,
-      "annee": 2026,
-      "realisateur": "Robert Guédiguian",
-      "duree": 120,
-      "genres": [
-        "Comedy",
-        "Drama"
-      ],
-      "synopsis": "Juliette, 30 ans, semble avoir tout pour elle : un poste prestigieux dans la finance, une belle maison, une vie rythmée par les voyages et les amours de passage. Lorsqu’elle est agressée par un collègue, son monde s’effondre. Juliette s'engage alors sur un nouveau chemin pour redonner un sens à sa vie.",
-      "imdbId": "tt43645716",
-      "source": "zola",
-      "cinema": "Le Zola",
-      "seances": [
-        {
-          "heure": "18:40",
-          "version": "VF",
-          "resa_url": "https://www.ticketingcine.com/EMS1217/FRELTUI#showsession?id=emsx121700009199&ps=EMS1217",
-          "date": "2026-11-01"
-        },
-        {
-          "heure": "16:00",
-          "version": "VF",
-          "resa_url": "https://www.ticketingcine.com/EMS1217/FRELTUI#showsession?id=emsx121700009213&ps=EMS1217",
-          "date": "2026-11-02"
-        },
-        {
-          "heure": "17:00",
-          "version": "VF",
-          "resa_url": "https://www.ticketingcine.com/EMS1217/FRELTUI#showsession?id=emsx121700009233&ps=EMS1217",
-          "date": "2026-11-03"
-        }
-      ],
-      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/58f6a4567dab316f.jpg",
-      "backdrop": "https://image.tmdb.org/t/p/w1280/oFsQkBqmxKa9fMHWf24jymZnXf8.jpg",
-      "imdbRating": 7.1,
-      "cast": "Ariane Ascaride, Jean-Pierre Darroussin, Grégoire Leprince-Ringuet",
-      "trailer": "https://www.youtube.com/watch?v=4WpoJLQzfig"
-    },
     {
       "titre": "Le Corset",
       "slug": "le-corset",
@@ -142,12 +24,6 @@
       "cinema": "Le Zola",
       "seances": [
         {
-          "heure": "18:35",
-          "version": "VF",
-          "resa_url": null,
-          "date": "2026-10-31"
-        },
-        {
           "heure": "14:00",
           "version": "VF",
           "resa_url": "https://www.ticketingcine.com/EMS1217/FRQ0FYB#showsession?id=emsx121700009186&ps=EMS1217",
@@ -159,6 +35,71 @@
       "imdbRating": 7.9,
       "cast": "Gary Clichy, Rod Paradot, Dimitri Colas",
       "trailer": "https://www.youtube.com/watch?v=hBG2AybVRXg"
+    },
+    {
+      "titre": "Une femme aujourd’hui",
+      "slug": "une-femme-aujourdhui",
+      "titreOriginal": null,
+      "annee": 2026,
+      "realisateur": "Robert Guédiguian",
+      "duree": 120,
+      "genres": [
+        "Comedy",
+        "Drama"
+      ],
+      "synopsis": "Juliette, 30 ans, semble avoir tout pour elle : un poste prestigieux dans la finance, une belle maison, une vie rythmée par les voyages et les amours de passage. Lorsqu’elle est agressée par un collègue, son monde s’effondre. Juliette s'engage alors sur un nouveau chemin pour redonner un sens à sa vie.",
+      "imdbId": "tt43645716",
+      "source": "zola",
+      "cinema": "Le Zola",
+      "seances": [
+        {
+          "heure": "16:00",
+          "version": "VF",
+          "resa_url": "https://www.ticketingcine.com/EMS1217/FRELTUI#showsession?id=emsx121700009213&ps=EMS1217",
+          "date": "2026-11-02"
+        },
+        {
+          "heure": "17:00",
+          "version": "VF",
+          "resa_url": "https://www.ticketingcine.com/EMS1217/FRELTUI#showsession?id=emsx121700009233&ps=EMS1217",
+          "date": "2026-11-03"
+        }
+      ],
+      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/58f6a4567dab316f.jpg",
+      "backdrop": "https://image.tmdb.org/t/p/w1280/oFsQkBqmxKa9fMHWf24jymZnXf8.jpg",
+      "imdbRating": 7.125,
+      "cast": "Ariane Ascaride, Jean-Pierre Darroussin, Grégoire Leprince-Ringuet",
+      "trailer": "https://www.youtube.com/watch?v=4WpoJLQzfig"
+    },
+    {
+      "titre": "Minotaure",
+      "slug": "minotaure",
+      "titreOriginal": null,
+      "annee": 2026,
+      "realisateur": "Andrey Zvyagintsev",
+      "duree": 140,
+      "genres": [
+        "Crime",
+        "Drama",
+        "Thriller"
+      ],
+      "synopsis": "Russie, 2022. Gleb, chef d’entreprise prospère, vit avec sa femme Galina et leur fils dans une ville de province. Il se retrouve confronté à des problèmes professionnels croissants, dans un monde de plus en plus instable. L’effondrement d’une vie soigneusement construite bascule rapidement dans la violence.",
+      "imdbId": "tt37118301",
+      "source": "zola",
+      "cinema": "Le Zola",
+      "seances": [
+        {
+          "heure": "19:00",
+          "version": "VOSTFR",
+          "resa_url": "https://www.ticketingcine.com/EMS1217/FRX6EJK#showsession?id=emsx121700009193&ps=EMS1217",
+          "date": "2026-11-02"
+        }
+      ],
+      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/715279dc0969850f.jpg",
+      "backdrop": "https://image.tmdb.org/t/p/w1280/i5HacpkXOKQ85lfbnMO3jXvAnPy.jpg",
+      "imdbRating": 7.779,
+      "cast": "Dmitriy Mazurov, Iris Lebedeva, Varvara Shmykova",
+      "trailer": "https://www.youtube.com/watch?v=SceYxrLYj9I"
     },
     {
       "titre": "Diamanti",
@@ -191,7 +132,7 @@
       ],
       "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/0d06e89fbb1c7907.jpg",
       "backdrop": "https://image.tmdb.org/t/p/w1280/pbcKKVPlySkjr1oMCQyNKZBoI5A.jpg",
-      "imdbRating": 7.076,
+      "imdbRating": 7.078,
       "cast": "Luisa Ranieri, Jasmine Trinca, Elena Sofia Ricci",
       "trailer": "https://www.youtube.com/watch?v=BuzzzII3LcU"
     },
@@ -217,6 +158,12 @@
           "version": "VF",
           "resa_url": "https://www.ticketingcine.com/EMS1217/FRFFU5L#showsession?id=emsx121700009214&ps=EMS1217",
           "date": "2026-11-04"
+        },
+        {
+          "heure": "14:15",
+          "version": "VF",
+          "resa_url": "https://www.ticketingcine.com/EMS1217/FRFFU5L#showsession?id=emsx121700009215&ps=EMS1217",
+          "date": "2026-11-07"
         }
       ],
       "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/0e6e0e509fc5d098.jpg",
@@ -258,6 +205,12 @@
           "version": "VF",
           "resa_url": "https://www.ticketingcine.com/EMS1217/FR4QY3X#showsession?id=emsx121700009223&ps=EMS1217",
           "date": "2026-11-06"
+        },
+        {
+          "heure": "19:00",
+          "version": "VF",
+          "resa_url": "https://www.ticketingcine.com/EMS1217/FR4QY3X#showsession?id=emsx121700009224&ps=EMS1217",
+          "date": "2026-11-07"
         }
       ],
       "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/693c5e18112fb01f.jpg",
@@ -320,6 +273,12 @@
           "version": "VOSTFR",
           "resa_url": "https://www.ticketingcine.com/EMS1217/FR2GKAJ#showsession?id=emsx121700009219&ps=EMS1217",
           "date": "2026-11-06"
+        },
+        {
+          "heure": "16:20",
+          "version": "VOSTFR",
+          "resa_url": "https://www.ticketingcine.com/EMS1217/FR2GKAJ#showsession?id=emsx121700009218&ps=EMS1217",
+          "date": "2026-11-07"
         }
       ],
       "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/2228f87843e07c1f.jpg",
@@ -327,64 +286,6 @@
       "imdbRating": 5.833,
       "cast": "Gessica Généus, Beonard Monteau, Edouard Baptiste",
       "trailer": "https://www.youtube.com/watch?v=TNeDdjlk9EU"
-    },
-    {
-      "titre": "Resident Evil",
-      "slug": "resident-evil",
-      "titreOriginal": null,
-      "annee": 2026,
-      "realisateur": "Zach Cregger",
-      "duree": 97,
-      "genres": [
-        "Action",
-        "Horror",
-        "Sci-Fi"
-      ],
-      "synopsis": "Bryan, coursier médical, s'engage dans une course effrénée pour survivre, alors qu'autour de lui le monde s'enfonce dans un chaos total.",
-      "imdbId": "tt35538033",
-      "source": "zola",
-      "cinema": "Le Zola",
-      "seances": [
-        {
-          "heure": "20:30",
-          "version": "VOSTFR",
-          "resa_url": null,
-          "date": "2026-10-31"
-        }
-      ],
-      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/af390a5897895d1a.jpg",
-      "backdrop": "https://image.tmdb.org/t/p/w1280/3icyRAqgakNcQn6aDVz9libFmBA.jpg",
-      "imdbRating": 7.3,
-      "cast": "Austin Abrams, Paul Walter Hauser, Kali Reis",
-      "trailer": "https://www.youtube.com/watch?v=JvUuW2n4lC4"
-    },
-    {
-      "titre": "Flush",
-      "slug": "flush",
-      "titreOriginal": null,
-      "annee": 2025,
-      "realisateur": "Grégory Morin",
-      "duree": 70,
-      "genres": [
-        "Thriller"
-      ],
-      "synopsis": "Quand on essaie de sortir la tête du trou, il y a toujours quelqu’un pour vous y replonger. Prenez Luc, un junkie à la dérive. Sa femme l’a quitté. Sa fille a été confiée aux services sociaux. Alors qu’il tente de reconquérir son ex devenue serveuse dans un bar, il se retrouve mêlé à un trafic de drogue. Une bagarre éclate. Laissé pour mort, le crâne coincé dans le trou d’une toilette à la turque, il aura la nuit pour se sortir de là et recomposer sa famille perdue.",
-      "imdbId": "tt37520267",
-      "source": "zola",
-      "cinema": "Le Zola",
-      "seances": [
-        {
-          "heure": "23:00",
-          "version": "VF",
-          "resa_url": null,
-          "date": "2026-11-01"
-        }
-      ],
-      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/9c05eeecd01f2302.jpg",
-      "backdrop": "https://image.tmdb.org/t/p/w1280/rx5BlsUw8LBZFf1YPJkv2yuo4H0.jpg",
-      "imdbRating": 6.6,
-      "cast": "Jonathan Lambert, Élodie Navarre, Elliot Jenicot",
-      "trailer": "https://www.youtube.com/watch?v=Ih5VNQsClM0"
     }
   ],
   "evenements": [
@@ -847,7 +748,7 @@
       "type": "avant_premiere",
       "forme": null,
       "titre": "La Détention",
-      "description": "En présence du réalisateur Guillaume Massart. À l'occasion des Journées Nationales Prison.",
+      "description": "En présence du réalisateur Guillaume Massart. À l'occasion des Journées Nationales Prison 2026.",
       "date_debut": "2026-11-23",
       "date_fin": "2026-11-23",
       "precision": "exact",
@@ -868,7 +769,7 @@
           "heure": "19:45",
           "titre_film": "La Détention",
           "invite": null,
-          "description": "En présence du réalisateur Guillaume Massart. À l'occasion des Journées Nationales Prison."
+          "description": "En présence du réalisateur Guillaume Massart. À l'occasion des Journées Nationales Prison 2026."
         }
       ]
     },
