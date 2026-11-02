@@ -20,6 +20,18 @@ Format inspiré de [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/).
 > la même PR. Un `fix:` de parsing/sélecteur/casse qui ne touche aucun de ces points ne
 > demande rien. Le CHANGELOG garde la *chronologie* ; l'architecture garde l'*état stable*.
 
+## 2026-11-02
+
+### Ajouté
+
+- **Repli PDF pour les Cinémas Lumière** (`scraper.py` : `scrape_lumiere_pdf`, `parse_lumiere_pdf`) : quand le site ne rend aucun film, le run lit le programme hebdo publié par l'Institut Lumière (`programme-cinemas-lumiere.pdf`). La grille de la page 2 est lue sans position codée en dur : la colonne du titre est celle qui précède « Mercredi », la salle se lit sur les lignes « LUMIÈRE terreaux / bellecour / fourmi », mois et année se déduisent du numéro du mercredi. Numéro du 28 oct. : 34 films, 316 séances. Limites : ni version (VF par défaut, comme côté front) ni lien de réservation, ni fiche détaillée — l'enrichissement TMDB complète. Ignoré avec `--lumiere-week`.
+- **Reconduction des films Lumière du run précédent** (`scraper.py` : `lumiere_depuis_repli`) : si ni le site ni le PDF ne donnent rien, les films Lumière de `programme.json` sont reconduits au lieu d'être effacés du site de secours. Supabase n'était pas exposé (upsert sans purge).
+- **Tests** (`tests/test_lumiere_repli.py`) : grille PDF (salle, titre sur deux lignes, même titre dans deux salles, mercredi du mois précédent) et repli JSON.
+
+### Corrigé
+
+- **Séances Lumière absentes depuis la maintenance de cinemas-lumiere.com** : le calendrier général répond 404 et toutes les pages affichent « Site temporairement indisponible ». Le scraper HTML lui-même n'est pas en cause et reprendra la main dès la fin de la maintenance.
+
 ## 2026-09-20
 
 ### Ajouté

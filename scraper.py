@@ -2176,6 +2176,123 @@ def scrape_lumiere_multi(depart: "date | None" = None, semaines: int = 8) -> lis
     return list(fusion.values())
 
 
+def lumiere_depuis_repli(chemin: "str | Path") -> list:
+    """
+    Films Lumière du programme.json précédent, pour un run où le site n'a rien
+    rendu (maintenance de novembre 2026 : calendrier en 404).
+
+    Sans ce repli, le run réécrit programme.json avec Comoedia et Zola seuls et
+    les trois salles disparaissent du site de secours alors que leurs séances
+    de la semaine sont encore valides. Supabase, lui, ne perd rien (upsert sans
+    purge). Les séances passées sont élaguées plus loin par filter_current_week.
+    """
+    try:
+        previous = json.loads(Path(chemin).read_text(encoding="utf-8"))
+    except Exception as e:
+        log.warning(f"Repli Lumière impossible ({chemin} illisible : {e})")
+        return []
+    return [f for f in previous.get("films") or [] if f.get("source") == "lumiere"]
+
+
+# ── Repli PDF : programme hebdo publié par l'Institut Lumière ─────────────
+# Structure (numéro du 28 oct. 2026) : la grille est un tableau pdfplumber de
+# la page 2. Entête « Mercredi 28 | Jeudi 29 | … | Mardi 3 » ; une ligne
+# « LUMIÈRE terreaux » ouvre chaque salle ; puis une ligne par film, titre dans
+# la colonne qui précède le premier jour, horaires « 10h15, 13h15 » par cellule.
+# Ni version (VF/VOSTF) ni lien de réservation : la version retombe sur VF,
+# comme côté front quand elle manque.
+
+URL_LUMIERE_PDF = "https://www.institut-lumiere.org/francais/programme-cinemas-lumiere.pdf"
+
+
+def _lumiere_pdf_mercredi(entete: str, ref: date) -> "date | None":
+    """Mercredi de la 1re colonne : seul le jour du mois est imprimé, on cherche
+    le mercredi portant ce numéro autour de la date de référence."""
+    m = re.search(r"mercredi\s+(\d{1,2})", entete, re.I)
+    if not m:
+        return None
+    n = int(m.group(1))
+    for delta in range(-35, 15):
+        d = ref + timedelta(days=delta)
+        if d.isoweekday() == 3 and d.day == n:
+            return d
+    return None
+
+
+def parse_lumiere_pdf(pdf_source: "bytes | str | Path", ref: "date | None" = None) -> list:
+    """Grille du PDF Lumière → films au format de scrape_lumiere()."""
+    import io as _io
+    import pdfplumber
+
+    src = str(pdf_source) if isinstance(pdf_source, (str, Path)) else _io.BytesIO(pdf_source)
+    with pdfplumber.open(src) as pdf:
+        tables = [t for page in pdf.pages for t in page.extract_tables()]
+    return lumiere_films_from_tables(tables, ref or date.today())
+
+
+def lumiere_films_from_tables(tables: list, ref: date) -> list:
+    """Tableaux pdfplumber de la grille Lumière → films (fusion par titre × salle)."""
+    fusion: dict = {}
+    for table in tables:
+        col_jour = mercredi = None
+        cinema = None
+        for row in table:
+            cells = [(c or "").replace("\n", " ").strip() for c in row]
+            if col_jour is None:
+                for i, c in enumerate(cells):
+                    if c.lower().startswith("mercredi"):
+                        col_jour, mercredi = i, _lumiere_pdf_mercredi(c, ref)
+                        break
+                continue
+            if not mercredi or col_jour < 1:
+                break
+            tete = cells[0].lower()
+            if tete.startswith("lumière") or tete.startswith("lumiere"):
+                cinema = next((nom for nom, cle in (
+                    ("Lumière Terreaux", "terreaux"),
+                    ("Lumière Bellecour", "bellecour"),
+                    ("Lumière Fourmi", "fourmi"),
+                ) if cle in tete), None)
+                continue
+            titre = re.sub(r"\s+", " ", cells[col_jour - 1]).strip()
+            if not cinema or len(titre.replace(" ", "")) < 2:
+                continue
+            seances = []
+            for j, cell in enumerate(cells[col_jour:col_jour + 7]):
+                jour = (mercredi + timedelta(days=j)).isoformat()
+                for brut in re.findall(r"\d{1,2}h\d{0,2}", cell):
+                    heure = parse_heure(brut)
+                    if heure:
+                        seances.append({"date": jour, "heure": heure, "version": "VF"})
+            if not seances:
+                continue
+            cle = (_normalize_title_key(titre), cinema)
+            film = fusion.setdefault(cle, {
+                "titre": titre, "slug": None, "titreOriginal": None, "annee": None,
+                "realisateur": None, "duree": None, "genres": [], "synopsis": None,
+                "imdbId": None, "source": "lumiere", "cinema": cinema, "seances": [],
+            })
+            connues = {(s["date"], s["heure"]) for s in film["seances"]}
+            film["seances"] += [s for s in seances if (s["date"], s["heure"]) not in connues]
+            film["seances"].sort(key=lambda x: (x["date"], x["heure"]))
+    return list(fusion.values())
+
+
+def scrape_lumiere_pdf(url: str = URL_LUMIERE_PDF) -> list:
+    """Télécharge et lit le PDF Lumière ; [] si indisponible ou illisible."""
+    pdf_bytes = download_pdf(url)
+    if not pdf_bytes:
+        return []
+    try:
+        films = parse_lumiere_pdf(pdf_bytes)
+    except Exception as e:
+        log.warning(f"PDF Lumière illisible : {e}")
+        return []
+    total = sum(len(f["seances"]) for f in films)
+    log.info(f"Lumière (PDF) : {len(films)} films, {total} séances")
+    return films
+
+
 # ═════════════════════════════════════════════════════════════════════════
 # ÉVÉNEMENTS — avant-premières, rencontres, séances spéciales, festivals
 # ═════════════════════════════════════════════════════════════════════════
@@ -4346,6 +4463,17 @@ def main():
         lumiere_films = scrape_lumiere_multi(
             depart=lumiere_week_override,
             semaines=1 if lumiere_week_override else max(1, args.lumiere_weeks))
+        # Site indisponible : d'abord le PDF hebdo (programme à jour, sans
+        # liens de réservation), sinon les films du run précédent.
+        if not lumiere_films and not args.events_only and not lumiere_week_override:
+            log.warning("Lumière : 0 film scrapé sur le site — repli sur le PDF")
+            lumiere_films = scrape_lumiere_pdf()
+        if not lumiere_films and not args.events_only:
+            lumiere_films = lumiere_depuis_repli(args.output)
+            log.warning(
+                f"Lumière : 0 film scrapé (site indisponible ?) — {len(lumiere_films)} "
+                f"film(s) reconduit(s) depuis {args.output}"
+            )
 
     # 2bis. Scraping Le Zola
     zola_films: list[dict] = []
