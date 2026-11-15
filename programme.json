@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-14T00:36:52.648115",
+  "generated_at": "2026-11-15T23:42:28.733468",
   "sources": [
     "https://www.cinema-comoedia.com/programme-semaine/",
     "https://www.cinemas-lumiere.com/calendrier-general.html",
@@ -21,31 +21,6 @@
       "source": "lumiere",
       "cinema": "Lumière Terreaux",
       "seances": [
-        {
-          "date": "2026-11-14",
-          "heure": "10:15",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-14",
-          "heure": "13:50",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-14",
-          "heure": "16:10",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-14",
-          "heure": "18:15",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-14",
-          "heure": "21:00",
-          "version": "VF"
-        },
         {
           "date": "2026-11-15",
           "heure": "10:15",
@@ -124,7 +99,7 @@
       ],
       "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/c4daef4982683ba3.jpg",
       "backdrop": "https://image.tmdb.org/t/p/w1280/GWr6kRbEGppdbGH1huSl0HfV83.jpg",
-      "imdbRating": 7.875,
+      "imdbRating": 7.9,
       "cast": "Malou Khebizi, Zoé Monpart, Kenji Peyran"
     },
     {
@@ -144,31 +119,6 @@
       "source": "lumiere",
       "cinema": "Lumière Terreaux",
       "seances": [
-        {
-          "date": "2026-11-14",
-          "heure": "10:20",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-14",
-          "heure": "13:30",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-14",
-          "heure": "15:55",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-14",
-          "heure": "18:20",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-14",
-          "heure": "20:50",
-          "version": "VF"
-        },
         {
           "date": "2026-11-15",
           "heure": "10:20",
@@ -247,7 +197,7 @@
       ],
       "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/1734e2c19d6c52e2.jpg",
       "backdrop": "https://image.tmdb.org/t/p/w1280/3uLA0ujne91bkzFStZICCYeqhnt.jpg",
-      "imdbRating": 8.101,
+      "imdbRating": 7.9,
       "cast": "John Malkovich, Sam Rockwell, Steve Buscemi",
       "trailer": "https://www.youtube.com/watch?v=UuSVHYjtkcs"
     },
@@ -267,31 +217,6 @@
       "source": "lumiere",
       "cinema": "Lumière Terreaux",
       "seances": [
-        {
-          "date": "2026-11-14",
-          "heure": "10:15",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-14",
-          "heure": "13:45",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-14",
-          "heure": "15:55",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-14",
-          "heure": "18:25",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-14",
-          "heure": "20:50",
-          "version": "VF"
-        },
         {
           "date": "2026-11-15",
           "heure": "10:15",
@@ -370,7 +295,7 @@
       ],
       "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/8277bb435e40d5e7.jpg",
       "backdrop": "https://image.tmdb.org/t/p/w1280/AjrgF2JZb8WAeIFTvUjJK6VA2CG.jpg",
-      "imdbRating": 7.9,
+      "imdbRating": 7.979,
       "cast": "Jordan Firstman, Reggie Absolom, Cara Delevingne",
       "trailer": "https://www.youtube.com/watch?v=uD5JAfk0o1Q"
     },
@@ -391,26 +316,6 @@
       "source": "lumiere",
       "cinema": "Lumière Terreaux",
       "seances": [
-        {
-          "date": "2026-11-14",
-          "heure": "10:15",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-14",
-          "heure": "13:20",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-14",
-          "heure": "15:50",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-14",
-          "heure": "18:25",
-          "version": "VF"
-        },
         {
           "date": "2026-11-15",
           "heure": "10:15",
@@ -489,34 +394,6 @@
       "trailer": "https://www.youtube.com/watch?v=ASxyB5LElV8"
     },
     {
-      "titre": "Portrait de la jeune fille en feu",
-      "slug": null,
-      "titreOriginal": null,
-      "annee": 2020,
-      "realisateur": "Céline Sciamma",
-      "duree": null,
-      "genres": [
-        "Drama",
-        "Romance"
-      ],
-      "synopsis": "1770. Marianne est peintre et doit réaliser le portrait de mariage d’Héloïse, une jeune femme qui vient de quitter le couvent. Héloïse résiste à son destin d’épouse en refusant de poser. Marianne va devoir la peindre en secret. Introduite auprès d’elle en tant que dame de compagnie, elle la regarde.",
-      "imdbId": "tt8613070",
-      "source": "lumiere",
-      "cinema": "Lumière Terreaux",
-      "seances": [
-        {
-          "date": "2026-11-14",
-          "heure": "20:30",
-          "version": "VF"
-        }
-      ],
-      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/d13c08a759749ba8.jpg",
-      "backdrop": "https://image.tmdb.org/t/p/w1280/ivJ5UzT6IzucLVfbZwCCwiJJoBz.jpg",
-      "imdbRating": 8.1,
-      "cast": "Noémie Merlant, Adèle Haenel, Luàna Bajrami",
-      "trailer": "https://www.youtube.com/watch?v=TCYfE4HuXuA"
-    },
-    {
       "titre": "Un bon petit soldat",
       "slug": null,
       "titreOriginal": null,
@@ -561,16 +438,6 @@
       "cinema": "Lumière Bellecour",
       "seances": [
         {
-          "date": "2026-11-14",
-          "heure": "13:40",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-14",
-          "heure": "20:55",
-          "version": "VF"
-        },
-        {
           "date": "2026-11-15",
           "heure": "13:40",
           "version": "VF"
@@ -598,7 +465,7 @@
       ],
       "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/c71b9cd8a614acd9.jpg",
       "backdrop": "https://image.tmdb.org/t/p/w1280/sRx1eyBP8ydHQixz5ejV09YVZrn.jpg",
-      "imdbRating": 6.7,
+      "imdbRating": 6.705,
       "cast": "Cate Blanchett, Laurence Fox, Clive Owen",
       "trailer": "https://www.youtube.com/watch?v=B08AzPKQo5g"
     },
@@ -618,16 +485,6 @@
       "source": "lumiere",
       "cinema": "Lumière Bellecour",
       "seances": [
-        {
-          "date": "2026-11-14",
-          "heure": "16:25",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-14",
-          "heure": "18:55",
-          "version": "VF"
-        },
         {
           "date": "2026-11-15",
           "heure": "16:40",
@@ -656,7 +513,7 @@
       ],
       "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/ebcee96e14d61b0e.jpg",
       "backdrop": "https://image.tmdb.org/t/p/w1280/bCASckjHVcF3KaI86Oxj3f0Dfjz.jpg",
-      "imdbRating": 5.7,
+      "imdbRating": 4.0,
       "cast": "Anamaria Vartolomei, Sayyid El Alami, Douae Butarbuch Mzaouki",
       "trailer": "https://www.youtube.com/watch?v=uVa4MVSX8h8"
     },
@@ -676,11 +533,6 @@
       "cinema": "Lumière Bellecour",
       "seances": [
         {
-          "date": "2026-11-14",
-          "heure": "13:45",
-          "version": "VF"
-        },
-        {
           "date": "2026-11-15",
           "heure": "21:00",
           "version": "VF"
@@ -698,7 +550,7 @@
       ],
       "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/2434110b9d02ecb3.jpg",
       "backdrop": "https://image.tmdb.org/t/p/w1280/sp5vkGrl9IZFcA8vdIgReA8A5eJ.jpg",
-      "imdbRating": 6.5,
+      "imdbRating": 7.2,
       "cast": "Nina Meurisse, Sofian Khammes, Maria de Medeiros",
       "trailer": "https://www.youtube.com/watch?v=euAlFFqoPL8"
     },
@@ -719,11 +571,6 @@
       "source": "lumiere",
       "cinema": "Lumière Bellecour",
       "seances": [
-        {
-          "date": "2026-11-14",
-          "heure": "20:40",
-          "version": "VF"
-        },
         {
           "date": "2026-11-15",
           "heure": "13:40",
@@ -757,7 +604,7 @@
       ],
       "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/bc31d8bd7467c716.jpg",
       "backdrop": "https://image.tmdb.org/t/p/w1280/j96rurZqmBjyY37Fncl3IB0qJNe.jpg",
-      "imdbRating": 6.756,
+      "imdbRating": 6.806,
       "cast": "Hwang Jung-min, Zo In-sung, Hoyeon",
       "trailer": "https://www.youtube.com/watch?v=0R6TmYtmwh8"
     },
@@ -776,26 +623,6 @@
       "source": "lumiere",
       "cinema": "Lumière Bellecour",
       "seances": [
-        {
-          "date": "2026-11-14",
-          "heure": "13:40",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-14",
-          "heure": "15:40",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-14",
-          "heure": "18:10",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-14",
-          "heure": "20:30",
-          "version": "VF"
-        },
         {
           "date": "2026-11-15",
           "heure": "13:40",
@@ -849,7 +676,7 @@
       ],
       "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/1e05c90938cca7a5.jpg",
       "backdrop": "https://image.tmdb.org/t/p/w1280/dZVZkmzHLnobFszwYZ9DybvhUHW.jpg",
-      "imdbRating": 7.4,
+      "imdbRating": 7.5,
       "cast": "Colas Quignard, Antonia Buresi, Mitia Capellier-Audat",
       "trailer": "https://www.youtube.com/watch?v=qC9Keq5biXw"
     },
@@ -871,11 +698,6 @@
       "cinema": "Lumière Bellecour",
       "seances": [
         {
-          "date": "2026-11-14",
-          "heure": "18:30",
-          "version": "VF"
-        },
-        {
           "date": "2026-11-15",
           "heure": "16:25",
           "version": "VF"
@@ -893,7 +715,7 @@
       ],
       "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/40bd2f7a5a9e0f41.jpg",
       "backdrop": "https://image.tmdb.org/t/p/w1280/qMryViRTIek9SkkOPjNMfnbCuI6.jpg",
-      "imdbRating": 8.052,
+      "imdbRating": 8.09,
       "cast": "Gary Clichy, Rod Paradot, Dimitri Colas",
       "trailer": "https://www.youtube.com/watch?v=hBG2AybVRXg"
     },
@@ -939,11 +761,6 @@
       "cinema": "Lumière Fourmi",
       "seances": [
         {
-          "date": "2026-11-14",
-          "heure": "20:40",
-          "version": "VF"
-        },
-        {
           "date": "2026-11-15",
           "heure": "18:50",
           "version": "VF"
@@ -986,11 +803,6 @@
       "cinema": "Lumière Fourmi",
       "seances": [
         {
-          "date": "2026-11-14",
-          "heure": "17:50",
-          "version": "VF"
-        },
-        {
           "date": "2026-11-15",
           "heure": "17:50",
           "version": "VF"
@@ -1008,7 +820,7 @@
       ],
       "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/5e97af8469404791.jpg",
       "backdrop": "https://image.tmdb.org/t/p/w1280/iQMFLm9Te2IuJTr08RdBLKTGw8n.jpg",
-      "imdbRating": 6.538,
+      "imdbRating": 6.5,
       "cast": "Swann Arlaud, Sandrine Blancke, Mathieu Perotto",
       "trailer": "https://www.youtube.com/watch?v=6V54Q8DaWjU"
     },
@@ -1028,11 +840,6 @@
       "source": "lumiere",
       "cinema": "Lumière Fourmi",
       "seances": [
-        {
-          "date": "2026-11-14",
-          "heure": "12:50",
-          "version": "VF"
-        },
         {
           "date": "2026-11-15",
           "heure": "12:50",
@@ -1070,11 +877,6 @@
       "source": "lumiere",
       "cinema": "Lumière Fourmi",
       "seances": [
-        {
-          "date": "2026-11-14",
-          "heure": "20:50",
-          "version": "VF"
-        },
         {
           "date": "2026-11-15",
           "heure": "20:50",
@@ -1114,11 +916,6 @@
       "cinema": "Lumière Fourmi",
       "seances": [
         {
-          "date": "2026-11-14",
-          "heure": "15:40",
-          "version": "VF"
-        },
-        {
           "date": "2026-11-15",
           "heure": "15:40",
           "version": "VF"
@@ -1155,11 +952,6 @@
       "source": "lumiere",
       "cinema": "Lumière Fourmi",
       "seances": [
-        {
-          "date": "2026-11-14",
-          "heure": "15:50",
-          "version": "VF"
-        },
         {
           "date": "2026-11-15",
           "heure": "16:35",
@@ -1199,11 +991,6 @@
       "cinema": "Lumière Fourmi",
       "seances": [
         {
-          "date": "2026-11-14",
-          "heure": "18:10",
-          "version": "VF"
-        },
-        {
           "date": "2026-11-15",
           "heure": "20:55",
           "version": "VF"
@@ -1221,7 +1008,7 @@
       ],
       "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/34211ffbc13445cb.jpg",
       "backdrop": "https://image.tmdb.org/t/p/w1280/oFsQkBqmxKa9fMHWf24jymZnXf8.jpg",
-      "imdbRating": 7.5,
+      "imdbRating": 7.433,
       "cast": "Ariane Ascaride, Jean-Pierre Darroussin, Grégoire Leprince-Ringuet",
       "trailer": "https://www.youtube.com/watch?v=4WpoJLQzfig"
     },
@@ -1242,11 +1029,6 @@
       "cinema": "Lumière Fourmi",
       "seances": [
         {
-          "date": "2026-11-14",
-          "heure": "20:15",
-          "version": "VF"
-        },
-        {
           "date": "2026-11-15",
           "heure": "20:15",
           "version": "VF"
@@ -1264,7 +1046,7 @@
       ],
       "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/ff614845fca7c0f5.jpg",
       "backdrop": "https://image.tmdb.org/t/p/w1280/vC5IxhgO6cVmw9O4QgkraRzfHvh.jpg",
-      "imdbRating": 7.488,
+      "imdbRating": 7.48,
       "cast": "Tom Cruise, Riz Ahmed, John Goodman",
       "trailer": "https://www.youtube.com/watch?v=e2lyQd9t700"
     },
@@ -1283,11 +1065,6 @@
       "source": "lumiere",
       "cinema": "Lumière Fourmi",
       "seances": [
-        {
-          "date": "2026-11-14",
-          "heure": "12:40",
-          "version": "VF"
-        },
         {
           "date": "2026-11-15",
           "heure": "12:40",
@@ -1328,19 +1105,14 @@
       "cinema": "Lumière Fourmi",
       "seances": [
         {
-          "date": "2026-11-14",
-          "heure": "12:40",
-          "version": "VF"
-        },
-        {
           "date": "2026-11-15",
           "heure": "12:40",
           "version": "VF"
         }
       ],
       "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/d598fdcabc6a97da.jpg",
-      "backdrop": "https://image.tmdb.org/t/p/w1280/8atC3ghkXK0cr3HutnzsffKWCbR.jpg",
-      "imdbRating": 7.817,
+      "backdrop": "https://image.tmdb.org/t/p/w1280/eZA5G4Ahe02jpVnF3bzy02F5wqD.jpg",
+      "imdbRating": 7.8,
       "cast": "Simon Abkarian, Simon Russell Beale, Florian Lesieur",
       "trailer": "https://www.youtube.com/watch?v=qHfhN82RvcM"
     },
@@ -1362,11 +1134,6 @@
       "cinema": "Lumière Fourmi",
       "seances": [
         {
-          "date": "2026-11-14",
-          "heure": "17:10",
-          "version": "VF"
-        },
-        {
           "date": "2026-11-15",
           "heure": "17:10",
           "version": "VF"
@@ -1378,7 +1145,7 @@
         }
       ],
       "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/75b3adbad3332b31.jpg",
-      "backdrop": "https://image.tmdb.org/t/p/w1280/wHdq0odV5ppfXvCYQQ8vlzBpmDH.jpg",
+      "backdrop": "https://image.tmdb.org/t/p/w1280/1Q16imE9WMYAoVlenG5fUuul4A2.jpg",
       "imdbRating": 7.9,
       "cast": "Simon Abkarian, Niels Schneider, Thierry Lhermitte",
       "trailer": "https://www.youtube.com/watch?v=owa5IeGlXCE"
@@ -1400,11 +1167,6 @@
       "source": "lumiere",
       "cinema": "Lumière Fourmi",
       "seances": [
-        {
-          "date": "2026-11-14",
-          "heure": "15:00",
-          "version": "VF"
-        },
         {
           "date": "2026-11-15",
           "heure": "15:00",
@@ -1430,11 +1192,6 @@
       "source": "lumiere",
       "cinema": "Lumière Fourmi",
       "seances": [
-        {
-          "date": "2026-11-14",
-          "heure": "14:40",
-          "version": "VF"
-        },
         {
           "date": "2026-11-15",
           "heure": "14:50",
@@ -1525,6 +1282,12 @@
           "version": "VOSTFR",
           "resa_url": "https://www.ticketingcine.com/EMS1217/FRTZJRA#showsession?id=emsx121700009302&ps=EMS1217",
           "date": "2026-11-20"
+        },
+        {
+          "heure": "18:30",
+          "version": "VOSTFR",
+          "resa_url": "https://www.ticketingcine.com/EMS1217/FRTZJRA#showsession?id=emsx121700009301&ps=EMS1217",
+          "date": "2026-11-21"
         }
       ],
       "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/4d8d65d5a6da467a.jpg",
@@ -1555,11 +1318,17 @@
           "version": "VF",
           "resa_url": "https://www.ticketingcine.com/EMS1217/FR3CQ6X#showsession?id=emsx121700009282&ps=EMS1217",
           "date": "2026-11-18"
+        },
+        {
+          "heure": "14:15",
+          "version": "VF",
+          "resa_url": "https://www.ticketingcine.com/EMS1217/FR3CQ6X#showsession?id=emsx121700009283&ps=EMS1217",
+          "date": "2026-11-21"
         }
       ],
       "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/5385358bf5894101.jpg",
       "backdrop": "https://image.tmdb.org/t/p/w1280/mG8tVv1RPAKnARWxKTND5dRgMpw.jpg",
-      "imdbRating": 7.328,
+      "imdbRating": 7.306,
       "cast": "Justin Fletcher, John Sparkes, Nina Sosanya",
       "trailer": "https://www.youtube.com/watch?v=57hFLYcIXYQ"
     },
@@ -1591,6 +1360,12 @@
           "version": "VF",
           "resa_url": "https://www.ticketingcine.com/EMS1217/FRLXIDH#showsession?id=emsx121700009289&ps=EMS1217",
           "date": "2026-11-20"
+        },
+        {
+          "heure": "16:00",
+          "version": "VF",
+          "resa_url": "https://www.ticketingcine.com/EMS1217/FRLXIDH#showsession?id=emsx121700009290&ps=EMS1217",
+          "date": "2026-11-21"
         }
       ],
       "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/ac2a665dd7ae81b5.jpg",
@@ -1656,12 +1431,18 @@
           "version": "VOSTFR",
           "resa_url": "https://www.ticketingcine.com/EMS1217/FR9AKWK#showsession?id=emsx121700009297&ps=EMS1217",
           "date": "2026-11-20"
+        },
+        {
+          "heure": "20:30",
+          "version": "VOSTFR",
+          "resa_url": "https://www.ticketingcine.com/EMS1217/FR9AKWK#showsession?id=emsx121700009296&ps=EMS1217",
+          "date": "2026-11-21"
         }
       ],
       "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/8dbae273aa6e54b4.jpg",
       "backdrop": "https://image.tmdb.org/t/p/w1280/j96rurZqmBjyY37Fncl3IB0qJNe.jpg",
       "trailer": "https://www.youtube.com/watch?v=0R6TmYtmwh8",
-      "imdbRating": 6.756,
+      "imdbRating": 6.806,
       "cast": "Hwang Jung-min, Zo In-sung, Hoyeon"
     },
     {
@@ -1720,66 +1501,6 @@
           "titre_film": "La semaine anniversaire",
           "invite": null,
           "description": "2006-2026 : 20 ans d'indépendance et de cinéma art et essai au Comœdia ! Pour célébrer cet événement, nous vous invitons à une semaine de festivités."
-        }
-      ]
-    },
-    {
-      "cle": "rencontre|west side story|2026-11",
-      "type": "rencontre",
-      "forme": null,
-      "titre": "West Side Story",
-      "description": "Pour Ma Comœdiathèque du mois de novembre, et à l'occasion du 20e anniversaire du Comœdia, notre équipe vous propose de (re)découvrir « West Side Story ».",
-      "date_debut": "2026-11-14",
-      "date_fin": "2026-11-14",
-      "precision": "exact",
-      "affiche_url": "https://cms-assets.webediamovies.pro/production/945/408b0c1e4c496ffa6cc73e757285118e.jpg",
-      "films": [
-        {
-          "titre": "West Side Story",
-          "dates": [
-            "2026-11-14"
-          ],
-          "affiche": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/6b7ee23a4b9d4649.jpg"
-        }
-      ],
-      "creneaux": [
-        {
-          "cinema": "Le Comoedia",
-          "date": "2026-11-14",
-          "heure": null,
-          "titre_film": "West Side Story",
-          "invite": null,
-          "description": "Pour Ma Comœdiathèque du mois de novembre, et à l'occasion du 20e anniversaire du Comœdia, notre équipe vous propose de (re)découvrir « West Side Story »."
-        }
-      ]
-    },
-    {
-      "cle": "avant_premiere|carmen, l'oiseau rebelle|2026-11",
-      "type": "avant_premiere",
-      "forme": null,
-      "titre": "Carmen, l’oiseau rebelle",
-      "description": "Découvrez le troisième long-métrage de Sébastien Laudenbach (le réalisateur des films \"La Jeune Fille Sans Mains\" et \"Linda veut du poulet !\") en avant-première. Dès 8 ans.",
-      "date_debut": "2026-11-15",
-      "date_fin": "2026-11-15",
-      "precision": "exact",
-      "affiche_url": "https://all.web.img.acsta.net/img/07/d7/07d74958b64edb3488dc12701b90d0e0.jpg",
-      "films": [
-        {
-          "titre": "Carmen, l’oiseau rebelle",
-          "dates": [
-            "2026-11-15"
-          ],
-          "affiche": null
-        }
-      ],
-      "creneaux": [
-        {
-          "cinema": "Le Comoedia",
-          "date": "2026-11-15",
-          "heure": "11:00",
-          "titre_film": "Carmen, l’oiseau rebelle",
-          "invite": null,
-          "description": "Découvrez le troisième long-métrage de Sébastien Laudenbach (le réalisateur des films \"La Jeune Fille Sans Mains\" et \"Linda veut du poulet !\") en avant-première. Dès 8 ans."
         }
       ]
     },
