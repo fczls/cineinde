@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-20T01:36:28.029269",
+  "generated_at": "2026-11-22T00:02:12.328883",
   "sources": [
     "https://www.cinema-comoedia.com/programme-semaine/",
     "https://www.cinemas-lumiere.com/calendrier-general.html",
@@ -7,44 +7,64 @@
   ],
   "films": [
     {
-      "titre": "Irish Travellers",
-      "slug": "irish-travellers",
+      "titre": "Hope",
+      "slug": "hope",
       "titreOriginal": null,
       "annee": 2026,
-      "realisateur": "Alexander Murphy",
-      "duree": 96,
+      "realisateur": "Na Hong-jin",
+      "duree": 157,
       "genres": [
-        "Documentary"
+        "Action",
+        "Drama",
+        "Horror"
       ],
-      "synopsis": "Le long d'une route oubliée, la famille O'Reilly vit dans une vieille caravane échouée au milieu des champs. Pa, Lisa et leurs dix enfants traversent les saisons dans ce fragile château de tôle, héritiers d'un mode de vie en sursis. Menacés d'expulsion, leur équilibre de fortune vacille mais ils résistent, fidèles à leurs traditions. Les enfants rient, les chiens aboient, la caravane tient encore, mais pour combien de temps ?",
-      "imdbId": "tt42053546",
+      "synopsis": "Au poste de police de Hope, Bum-seok et Sung-ae se démènent pour défendre leur village à la population vieillissante. Pendant ce temps, Sung-ki et ses amis partent à la poursuite de la bête dans la montagne mais se retrouvent eux-mêmes pris pour cible.",
+      "imdbId": "tt27369017",
       "source": "zola",
       "cinema": "Le Zola",
       "seances": [
         {
-          "heure": "15:45",
+          "heure": "11:00",
           "version": "VOSTFR",
-          "resa_url": "https://www.ticketingcine.com/EMS1217/FRTZJRA#showsession?id=emsx121700009302&ps=EMS1217",
-          "date": "2026-11-20"
-        },
-        {
-          "heure": "18:30",
-          "version": "VOSTFR",
-          "resa_url": "https://www.ticketingcine.com/EMS1217/FRTZJRA#showsession?id=emsx121700009301&ps=EMS1217",
-          "date": "2026-11-21"
-        },
-        {
-          "heure": "18:15",
-          "version": "VOSTFR",
-          "resa_url": "https://www.ticketingcine.com/EMS1217/FRTZJRA#showsession?id=emsx121700009300&ps=EMS1217",
-          "date": "2026-11-23"
+          "resa_url": "https://www.ticketingcine.com/EMS1217/FR9AKWK#showsession?id=emsx121700009295&ps=EMS1217",
+          "date": "2026-11-22"
         }
       ],
-      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/4d8d65d5a6da467a.jpg",
-      "backdrop": "https://image.tmdb.org/t/p/w1280/Akqa9HFQA7PeVbX6BaG1eKP4kQL.jpg",
-      "trailer": "https://www.youtube.com/watch?v=rK_E5reoeTM",
-      "imdbRating": 7.125,
-      "cast": "Pa O’Reilly, Lisa O’Reilly, Sean O’Reilly"
+      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/8dbae273aa6e54b4.jpg",
+      "backdrop": "https://image.tmdb.org/t/p/w1280/qqHFLg90IUSoTmSMpKOOW5RyqN3.jpg",
+      "trailer": "https://www.youtube.com/watch?v=0R6TmYtmwh8",
+      "imdbRating": 6.8,
+      "cast": "Hwang Jung-min, Zo In-sung, Hoyeon"
+    },
+    {
+      "titre": "Shaun le Mouton : La Bêêête d’Halloween",
+      "slug": "shaun-le-mouton-la-beeete-dhalloween",
+      "titreOriginal": null,
+      "annee": 2026,
+      "realisateur": "Steve Cox, Matthew Walker",
+      "duree": 81,
+      "genres": [
+        "Animation",
+        "Comedy",
+        "Family"
+      ],
+      "synopsis": "À Halloween, les habitants de la ferme de Mossy Bottom se réjouissent des festivités, jusqu’à ce que le Fermier maladroit saccage les citrouilles bien-aimées du troupeau. Lorsque Shaun se transforme en scientifique fou pour résoudre le problème, les choses dérapent : le Fermier disparaît et une bête sauvage rôde dans les bois.",
+      "imdbId": "tt36841161",
+      "source": "zola",
+      "cinema": "Le Zola",
+      "seances": [
+        {
+          "heure": "14:15",
+          "version": "VF",
+          "resa_url": "https://www.ticketingcine.com/EMS1217/FR3CQ6X#showsession?id=emsx121700009284&ps=EMS1217",
+          "date": "2026-11-22"
+        }
+      ],
+      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/5385358bf5894101.jpg",
+      "backdrop": "https://image.tmdb.org/t/p/w1280/mG8tVv1RPAKnARWxKTND5dRgMpw.jpg",
+      "imdbRating": 7.306,
+      "cast": "Justin Fletcher, John Sparkes, Nina Sosanya",
+      "trailer": "https://www.youtube.com/watch?v=57hFLYcIXYQ"
     },
     {
       "titre": "Moulin",
@@ -63,18 +83,6 @@
       "source": "zola",
       "cinema": "Le Zola",
       "seances": [
-        {
-          "heure": "17:45",
-          "version": "VF",
-          "resa_url": "https://www.ticketingcine.com/EMS1217/FRLXIDH#showsession?id=emsx121700009289&ps=EMS1217",
-          "date": "2026-11-20"
-        },
-        {
-          "heure": "16:00",
-          "version": "VF",
-          "resa_url": "https://www.ticketingcine.com/EMS1217/FRLXIDH#showsession?id=emsx121700009290&ps=EMS1217",
-          "date": "2026-11-21"
-        },
         {
           "heure": "16:00",
           "version": "VF",
@@ -107,84 +115,6 @@
       "cast": "Ewan McGregor, Nicole Kidman, John Leguizamo"
     },
     {
-      "titre": "Hope",
-      "slug": "hope",
-      "titreOriginal": null,
-      "annee": 2026,
-      "realisateur": "Na Hong-jin",
-      "duree": 157,
-      "genres": [
-        "Action",
-        "Drama",
-        "Horror"
-      ],
-      "synopsis": "Au poste de police de Hope, Bum-seok et Sung-ae se démènent pour défendre leur village à la population vieillissante. Pendant ce temps, Sung-ki et ses amis partent à la poursuite de la bête dans la montagne mais se retrouvent eux-mêmes pris pour cible.",
-      "imdbId": "tt27369017",
-      "source": "zola",
-      "cinema": "Le Zola",
-      "seances": [
-        {
-          "heure": "20:20",
-          "version": "VOSTFR",
-          "resa_url": "https://www.ticketingcine.com/EMS1217/FR9AKWK#showsession?id=emsx121700009297&ps=EMS1217",
-          "date": "2026-11-20"
-        },
-        {
-          "heure": "20:30",
-          "version": "VOSTFR",
-          "resa_url": "https://www.ticketingcine.com/EMS1217/FR9AKWK#showsession?id=emsx121700009296&ps=EMS1217",
-          "date": "2026-11-21"
-        },
-        {
-          "heure": "11:00",
-          "version": "VOSTFR",
-          "resa_url": "https://www.ticketingcine.com/EMS1217/FR9AKWK#showsession?id=emsx121700009295&ps=EMS1217",
-          "date": "2026-11-22"
-        }
-      ],
-      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/8dbae273aa6e54b4.jpg",
-      "backdrop": "https://image.tmdb.org/t/p/w1280/qqHFLg90IUSoTmSMpKOOW5RyqN3.jpg",
-      "trailer": "https://www.youtube.com/watch?v=0R6TmYtmwh8",
-      "imdbRating": 6.828,
-      "cast": "Hwang Jung-min, Zo In-sung, Hoyeon"
-    },
-    {
-      "titre": "Shaun le Mouton : La Bêêête d’Halloween",
-      "slug": "shaun-le-mouton-la-beeete-dhalloween",
-      "titreOriginal": null,
-      "annee": 2026,
-      "realisateur": "Steve Cox, Matthew Walker",
-      "duree": 81,
-      "genres": [
-        "Animation",
-        "Comedy",
-        "Family"
-      ],
-      "synopsis": "À Halloween, les habitants de la ferme de Mossy Bottom se réjouissent des festivités, jusqu’à ce que le Fermier maladroit saccage les citrouilles bien-aimées du troupeau. Lorsque Shaun se transforme en scientifique fou pour résoudre le problème, les choses dérapent : le Fermier disparaît et une bête sauvage rôde dans les bois.",
-      "imdbId": "tt36841161",
-      "source": "zola",
-      "cinema": "Le Zola",
-      "seances": [
-        {
-          "heure": "14:15",
-          "version": "VF",
-          "resa_url": "https://www.ticketingcine.com/EMS1217/FR3CQ6X#showsession?id=emsx121700009283&ps=EMS1217",
-          "date": "2026-11-21"
-        },
-        {
-          "heure": "14:15",
-          "version": "VF",
-          "resa_url": "https://www.ticketingcine.com/EMS1217/FR3CQ6X#showsession?id=emsx121700009284&ps=EMS1217",
-          "date": "2026-11-22"
-        }
-      ],
-      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/5385358bf5894101.jpg",
-      "backdrop": "https://image.tmdb.org/t/p/w1280/mG8tVv1RPAKnARWxKTND5dRgMpw.jpg",
-      "imdbRating": 7.3,
-      "cast": "Justin Fletcher, John Sparkes, Nina Sosanya",
-      "trailer": "https://www.youtube.com/watch?v=57hFLYcIXYQ"
-    },
-    {
       "titre": "RUSHES HOUR 2026",
       "slug": "rushes-hour-2026",
       "titreOriginal": null,
@@ -205,6 +135,34 @@
         }
       ],
       "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/61e05206ff063de3.jpg"
+    },
+    {
+      "titre": "Irish Travellers",
+      "slug": "irish-travellers",
+      "titreOriginal": null,
+      "annee": 2026,
+      "realisateur": "Alexander Murphy",
+      "duree": 96,
+      "genres": [
+        "Documentary"
+      ],
+      "synopsis": "Le long d'une route oubliée, la famille O'Reilly vit dans une vieille caravane échouée au milieu des champs. Pa, Lisa et leurs dix enfants traversent les saisons dans ce fragile château de tôle, héritiers d'un mode de vie en sursis. Menacés d'expulsion, leur équilibre de fortune vacille mais ils résistent, fidèles à leurs traditions. Les enfants rient, les chiens aboient, la caravane tient encore, mais pour combien de temps ?",
+      "imdbId": "tt42053546",
+      "source": "zola",
+      "cinema": "Le Zola",
+      "seances": [
+        {
+          "heure": "18:15",
+          "version": "VOSTFR",
+          "resa_url": "https://www.ticketingcine.com/EMS1217/FRTZJRA#showsession?id=emsx121700009300&ps=EMS1217",
+          "date": "2026-11-23"
+        }
+      ],
+      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/4d8d65d5a6da467a.jpg",
+      "backdrop": "https://image.tmdb.org/t/p/w1280/Akqa9HFQA7PeVbX6BaG1eKP4kQL.jpg",
+      "trailer": "https://www.youtube.com/watch?v=rK_E5reoeTM",
+      "imdbRating": 7.125,
+      "cast": "Pa O’Reilly, Lisa O’Reilly, Sean O’Reilly"
     },
     {
       "titre": "La Détention",
@@ -575,6 +533,28 @@
           "titre_film": null,
           "invite": null,
           "description": "Projection suivie d’un atelier d’initiation au stop-motion avec Capelito, puis d’un goûter 100 % Bio."
+        }
+      ]
+    },
+    {
+      "cle": "seance_speciale|quand je serai grand...|2026-12",
+      "type": "seance_speciale",
+      "forme": null,
+      "titre": "Quand je serai grand...",
+      "description": "Les rendez-vous d'humour : un jeudi par mois, retrouvez le spectacle \"Quand je serai grand...\" d'Aaadri au Bistrot du Comœdia !",
+      "date_debut": "2026-12-10",
+      "date_fin": "2026-12-10",
+      "precision": "exact",
+      "affiche_url": "https://cms-assets.webediamovies.pro/production/945/df35bb35de6f85b53b163cf7789689b5.jpg",
+      "films": [],
+      "creneaux": [
+        {
+          "cinema": "Le Comoedia",
+          "date": "2026-12-10",
+          "heure": "19:30",
+          "titre_film": "Quand je serai grand...",
+          "invite": null,
+          "description": "Les rendez-vous d'humour : un jeudi par mois, retrouvez le spectacle \"Quand je serai grand...\" d'Aaadri au Bistrot du Comœdia !"
         }
       ]
     },
