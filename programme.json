@@ -1,1849 +1,11 @@
 {
-  "generated_at": "2026-11-24T04:37:02.123092",
+  "generated_at": "2026-11-26T02:36:13.889060",
   "sources": [
     "https://www.cinema-comoedia.com/programme-semaine/",
     "https://www.cinemas-lumiere.com/calendrier-general.html",
     "https://www.lezola.com/films-a-laffiche/"
   ],
   "films": [
-    {
-      "titre": "Fatherland",
-      "titreOriginal": null,
-      "annee": 1994,
-      "realisateur": "Christopher Menaul",
-      "duree": null,
-      "genres": [
-        "Drama",
-        "Romance",
-        "Sci-Fi"
-      ],
-      "synopsis": "1964. Les allemands ont gagné la Seconde Guerre mondiale. On s'apprête à fêter les soixante-quinze ans du Führer Adolf Hitler, et pour cet événement, le président du dernier pays à ne pas s'être soumis à la domination allemande, les États-Unis, s'apprête à signer un traité de paix, ce qui aurait assis définitivement l'emprise du Troisième Reich sur le monde. Lorsque le Sturmbannführer Xavier March est chargé d'une enquête sur deux morts, anciens hauts dignitaires, et qu'il est stoppé dans son in…",
-      "imdbId": "tt0109779",
-      "seances": [
-        {
-          "date": "2026-11-27",
-          "heure": "18:30",
-          "version": "VOSTFR"
-        }
-      ],
-      "source": "comoedia",
-      "cinema": "Le Comoedia",
-      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/a06e66735cafd1ed.jpg",
-      "backdrop": "https://image.tmdb.org/t/p/w1280/znWxInJXM4GZ3SzMYbfRZMjlEtQ.jpg",
-      "imdbRating": 6.3,
-      "cast": "Rutger Hauer, Miranda Richardson, Peter Vaughan",
-      "trailer": "https://www.youtube.com/watch?v=42wWvOwxw7s"
-    },
-    {
-      "titre": "Il a Suffi d'une Nuit",
-      "titreOriginal": null,
-      "annee": 1961,
-      "realisateur": "Joseph Anthony",
-      "duree": null,
-      "genres": [
-        "Comedy",
-        "Romance"
-      ],
-      "synopsis": "Une grande maison d'édition new-yorkaise perd son respectable président, décédé dans une suite d'un grand hôtel de Palm Beach. Or, on a vu sortir de sa chambre, en pleine nuit, une jeune femme drapée dans une serviette éponge. Cette nouvelle fait craindre au conseil d'administration un scandale qui l'empêcherait d'obtenir un important prêt bancaire. Tony Ryder, le neveu du défunt, est chargé de retrouver la jeune femme et d'acheter son silence. Encore faut-il identifier la dame. Lors des funérai…",
-      "imdbId": "tt0054615",
-      "seances": [
-        {
-          "date": "2026-11-30",
-          "heure": "18:00",
-          "version": "VF"
-        }
-      ],
-      "source": "comoedia",
-      "cinema": "Le Comoedia",
-      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/a38c2ae2a6cac102.jpg",
-      "backdrop": "https://image.tmdb.org/t/p/w1280/hf52AuzBiLekqlSOYI1GvO1IhRK.jpg",
-      "imdbRating": 5.935,
-      "cast": "Dean Martin, Shirley MacLaine, Cliff Robertson",
-      "trailer": "https://www.youtube.com/watch?v=plrSvL8SXvE"
-    },
-    {
-      "titre": "Paper Tiger",
-      "titreOriginal": null,
-      "annee": 2026,
-      "realisateur": "James Gray",
-      "duree": null,
-      "genres": [
-        "Crime",
-        "Drama",
-        "Thriller"
-      ],
-      "synopsis": "New York, Queens, 1986. Deux frères que tout oppose s’unissent pour une affaire douteuse liée à la mafia russe. Mais ce qui devait être une opportunité devient un cauchemar, mettant en péril leur famille, leur intégrité, et leur lien fraternel.",
-      "imdbId": "tt34385689",
-      "seances": [
-        {
-          "date": "2026-11-25",
-          "heure": "10:55",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-11-25",
-          "heure": "13:20",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-11-25",
-          "heure": "15:50",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-11-25",
-          "heure": "18:20",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-11-25",
-          "heure": "20:45",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-11-26",
-          "heure": "13:20",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-11-26",
-          "heure": "15:50",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-11-26",
-          "heure": "18:20",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-11-26",
-          "heure": "20:45",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-11-27",
-          "heure": "13:20",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-11-27",
-          "heure": "15:50",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-11-27",
-          "heure": "18:20",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-11-27",
-          "heure": "20:45",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-11-28",
-          "heure": "10:55",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-11-28",
-          "heure": "13:20",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-11-28",
-          "heure": "15:50",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-11-28",
-          "heure": "18:20",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-11-28",
-          "heure": "20:45",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-11-29",
-          "heure": "10:55",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-11-29",
-          "heure": "13:20",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-11-29",
-          "heure": "15:50",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-11-29",
-          "heure": "18:20",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-11-29",
-          "heure": "20:45",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-11-30",
-          "heure": "13:20",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-11-30",
-          "heure": "15:50",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-11-30",
-          "heure": "18:20",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-11-30",
-          "heure": "20:45",
-          "version": "VOSTFR"
-        }
-      ],
-      "source": "comoedia",
-      "cinema": "Le Comoedia",
-      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/902b2ac4bef7160f.jpg",
-      "backdrop": "https://image.tmdb.org/t/p/w1280/7QshsnWS3NIZp60qMgcYm1C6dxm.jpg",
-      "imdbRating": 8.0,
-      "cast": "Adam Driver, Miles Teller, Scarlett Johansson",
-      "trailer": "https://www.youtube.com/watch?v=IXWOWVBUfko"
-    },
-    {
-      "titre": "Un Bon Petit Soldat",
-      "titreOriginal": null,
-      "annee": 2026,
-      "realisateur": "Stéphane Brizé",
-      "duree": null,
-      "genres": [
-        "Drama"
-      ],
-      "synopsis": "Nouvellement embauchée dans le département des Ressources Humaines d’une grande compagnie d’assurances, Carla Moretti doit travailler à réconcilier le bien-être des salariés avec les objectifs de performance de l’entreprise. Jusqu’à ce qu’elle découvre un cas de management toxique dans un des services dont elle a la responsabilité. Entre compromis et compromissions, la ligne de crête sur laquelle elle évolue devient de plus en plus étroite.",
-      "imdbId": "tt41802342",
-      "seances": [
-        {
-          "date": "2026-11-25",
-          "heure": "11:10",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-25",
-          "heure": "13:35",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-25",
-          "heure": "16:00",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-25",
-          "heure": "18:10",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-25",
-          "heure": "20:30",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-26",
-          "heure": "13:35",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-26",
-          "heure": "16:00",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-26",
-          "heure": "18:10",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-26",
-          "heure": "20:30",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-27",
-          "heure": "13:35",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-27",
-          "heure": "16:00",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-27",
-          "heure": "18:10",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-27",
-          "heure": "21:00",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-28",
-          "heure": "11:10",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-28",
-          "heure": "13:35",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-28",
-          "heure": "16:00",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-28",
-          "heure": "18:10",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-28",
-          "heure": "20:30",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-29",
-          "heure": "11:10",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-29",
-          "heure": "13:35",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-29",
-          "heure": "16:00",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-29",
-          "heure": "18:10",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-29",
-          "heure": "20:30",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-30",
-          "heure": "13:35",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-30",
-          "heure": "16:00",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-30",
-          "heure": "18:10",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-30",
-          "heure": "20:30",
-          "version": "VF"
-        }
-      ],
-      "source": "comoedia",
-      "cinema": "Le Comoedia",
-      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/a90269f5fea56ff9.jpg",
-      "backdrop": "https://image.tmdb.org/t/p/w1280/4NNWt9lFG3VY6SnsttrT9Cph9Fm.jpg",
-      "imdbRating": 0.0,
-      "cast": "Alba Rohrwacher, Vincent Lindon, Sharif Andoura",
-      "trailer": "https://www.youtube.com/watch?v=De3Am0hSQu8"
-    },
-    {
-      "titre": "Merci d'Être Venu",
-      "titreOriginal": null,
-      "annee": 2026,
-      "realisateur": "Alain Cavalier",
-      "duree": null,
-      "genres": [
-        "Documentary"
-      ],
-      "synopsis": "Ceci est l’histoire d’un filmeur. Alain Cavalier, toujours accompagné de sa caméra continue de filmer passionnément la vie, apprenant encore sur lui et surtout sur les autres.  Cependant il prend de l’âge et voit sa vitesse, sa fraîcheur, son audace, sa légèreté baisser.  La gorge un peu serrée mais en riant, il tient un journal filmé de son adieu au cinéma.  Cela sera son dernier film.",
-      "imdbId": "tt41829928",
-      "seances": [
-        {
-          "date": "2026-11-25",
-          "heure": "15:55",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-25",
-          "heure": "19:10",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-26",
-          "heure": "15:55",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-26",
-          "heure": "19:10",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-27",
-          "heure": "15:55",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-27",
-          "heure": "19:10",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-28",
-          "heure": "15:55",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-28",
-          "heure": "19:10",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-29",
-          "heure": "15:55",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-29",
-          "heure": "19:10",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-30",
-          "heure": "15:55",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-30",
-          "heure": "19:10",
-          "version": "VF"
-        }
-      ],
-      "source": "comoedia",
-      "cinema": "Le Comoedia",
-      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/d1ce64c2f929611f.jpg",
-      "backdrop": "https://image.tmdb.org/t/p/w1280/uxUwpYPlFSidyaF7g4NyZvpoksE.jpg",
-      "imdbRating": 0.0,
-      "cast": "Alain Cavalier, Françoise Widhoff, Vincent Lindon",
-      "trailer": "https://www.youtube.com/watch?v=gX9-u-PAxxw"
-    },
-    {
-      "titre": "Congo Boy",
-      "titreOriginal": null,
-      "annee": 2026,
-      "realisateur": "Rafiki Fariala",
-      "duree": null,
-      "genres": [
-        "Drama"
-      ],
-      "synopsis": "Bangui. Robert a 17 ans et rêve de faire carrière dans la musique. Mais il n'est pas un Centrafricain comme les autres. Il est un réfugié congolais. Lorsque ses parents sont arrêtés, il doit s'occuper seul de ses quatre jeunes frère et sœurs. Il jongle alors entre petits boulots et révisions du bac, tout en évitant les milices qui font régner la terreur dans la ville. Un jour, il apprend qu'un concours musical est organisé. Gagner devient son seul espoir.",
-      "imdbId": "tt41592086",
-      "seances": [
-        {
-          "date": "2026-11-25",
-          "heure": "13:15",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-11-25",
-          "heure": "20:30",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-11-26",
-          "heure": "13:15",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-11-26",
-          "heure": "20:50",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-11-27",
-          "heure": "13:15",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-11-27",
-          "heure": "20:50",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-11-28",
-          "heure": "13:15",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-11-28",
-          "heure": "20:50",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-11-29",
-          "heure": "13:15",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-11-29",
-          "heure": "20:50",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-11-30",
-          "heure": "13:15",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-11-30",
-          "heure": "20:50",
-          "version": "VOSTFR"
-        }
-      ],
-      "source": "comoedia",
-      "cinema": "Le Comoedia",
-      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/d6b9406be3cb784a.jpg",
-      "backdrop": "https://image.tmdb.org/t/p/w1280/mCF79jj7s5KZAyqxvNGJxEnF32P.jpg",
-      "imdbRating": 4.7,
-      "cast": "Bradley Fiomona Dembeasset, Christy Djomanda Louba, Pétruche Mbomba",
-      "trailer": "https://www.youtube.com/watch?v=CJux7slLVFk"
-    },
-    {
-      "titre": "Le Sabre des Gardiens",
-      "titreOriginal": null,
-      "annee": 2026,
-      "realisateur": "Yuen Woo-Ping",
-      "duree": null,
-      "genres": [
-        "Action",
-        "Adventure",
-        "Drama"
-      ],
-      "synopsis": "Dao Ma, le « deuxième fugitif le plus recherché », se voit confier par son bienfaiteur, le chef du clan Mo, une mystérieuse mission d'escorte : accompagner le « fugitif le plus recherché » jusqu'à Chang'an.",
-      "imdbId": "tt32649961",
-      "seances": [
-        {
-          "date": "2026-11-25",
-          "heure": "20:40",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-11-26",
-          "heure": "20:40",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-11-27",
-          "heure": "20:40",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-11-28",
-          "heure": "20:40",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-11-29",
-          "heure": "20:40",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-11-30",
-          "heure": "20:40",
-          "version": "VOSTFR"
-        }
-      ],
-      "source": "comoedia",
-      "cinema": "Le Comoedia",
-      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/d32ca1e3883a4030.jpg",
-      "backdrop": "https://image.tmdb.org/t/p/w1280/29pJrsosphUdOMRDm4gCdhSkluI.jpg",
-      "imdbRating": 8.219,
-      "cast": "Wu Jing, Nicholas Tse Ting-fung, Chen Lijun",
-      "trailer": "https://www.youtube.com/watch?v=7jkL4-uYriY"
-    },
-    {
-      "titre": "Les Braves (coward)",
-      "titreOriginal": null,
-      "annee": 2026,
-      "realisateur": "Lukas Dhont",
-      "duree": null,
-      "genres": [
-        "Drama",
-        "Romance",
-        "War"
-      ],
-      "synopsis": "Le jeune soldat Pierre veut faire ses preuves sur le front pendant la Première Guerre mondiale. Derrière les lignes, il rencontre Francis, chargé de remonter le moral des troupes.",
-      "imdbId": "tt39328391",
-      "seances": [
-        {
-          "date": "2026-11-25",
-          "heure": "13:20",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-25",
-          "heure": "17:20",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-25",
-          "heure": "20:15",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-26",
-          "heure": "13:20",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-26",
-          "heure": "17:20",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-26",
-          "heure": "20:15",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-27",
-          "heure": "13:20",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-27",
-          "heure": "17:20",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-27",
-          "heure": "20:15",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-28",
-          "heure": "13:20",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-28",
-          "heure": "17:20",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-28",
-          "heure": "20:15",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-29",
-          "heure": "13:20",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-29",
-          "heure": "17:20",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-29",
-          "heure": "20:15",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-30",
-          "heure": "13:20",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-30",
-          "heure": "17:20",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-30",
-          "heure": "20:15",
-          "version": "VF"
-        }
-      ],
-      "source": "comoedia",
-      "cinema": "Le Comoedia",
-      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/65408f206f2d7f36.jpg",
-      "backdrop": "https://image.tmdb.org/t/p/w1280/zrgjYP1YEZUJshVzsIhT63GAoMJ.jpg",
-      "imdbRating": 7.42,
-      "cast": "Emmanuel Macchia, Valentin Campagne, Jef Jacobs",
-      "trailer": "https://www.youtube.com/watch?v=vyRlBGfVlvQ"
-    },
-    {
-      "titre": "Gabin",
-      "titreOriginal": null,
-      "annee": 2026,
-      "realisateur": "Maxence Voiseux",
-      "duree": null,
-      "genres": [
-        "Documentary"
-      ],
-      "synopsis": "Dans le nord de la France, Gabin, le petit dernier de la famille Jourdel, est destiné à reprendre la boucherie de son père. Tiraillé entre loyauté familiale et envies d’échappées, il a d’autres rêves : dresser une vache de concours, devenir éleveur canin, sauver la ferme de sa mère de la faillite. GABIN nous plonge dans la vie de ce jeune garçon, de ses 8 à ses 18 ans.",
-      "imdbId": "tt41829787",
-      "seances": [
-        {
-          "date": "2026-11-25",
-          "heure": "11:10",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-25",
-          "heure": "18:00",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-26",
-          "heure": "18:40",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-27",
-          "heure": "18:40",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-28",
-          "heure": "11:10",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-28",
-          "heure": "18:40",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-29",
-          "heure": "11:10",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-29",
-          "heure": "18:40",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-30",
-          "heure": "18:40",
-          "version": "VF"
-        }
-      ],
-      "source": "comoedia",
-      "cinema": "Le Comoedia",
-      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/22c053d6851fac51.jpg",
-      "backdrop": "https://image.tmdb.org/t/p/w1280/ofuOuq4xd8oF5Q3v5Kg69jfoFhj.jpg",
-      "imdbRating": 7.5,
-      "cast": "Gabin Jourdel, Patricia Jourdel, Dominique Jourdel",
-      "trailer": "https://www.youtube.com/watch?v=e5-OCne8jRs"
-    },
-    {
-      "titre": "15/18",
-      "titreOriginal": null,
-      "annee": 2026,
-      "realisateur": "Cédric Kahn",
-      "duree": 104,
-      "genres": [
-        "Drama"
-      ],
-      "synopsis": "Lucia, 17 ans, est amenée par la police dans une unité de soins pédopsychiatriques de l’hôpital public. Ici tous les patients ont entre 15 et 18 ans. Lucia connaît l’endroit, elle y a fait de nombreux séjours. Elle retrouve son amie Eloïse, en hospitalisation longue durée, mais aussi Yasmine, Camilia, Ulysse, André… tous ont des pathologies et des parcours différents. Les médecins les soignent, les écoutent, reçoivent leurs parents, tout en gérant un service en surchauffe. Mais un jour, l’arrivé…",
-      "imdbId": "tt42826707",
-      "seances": [
-        {
-          "date": "2026-11-25",
-          "heure": "15:55",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-26",
-          "heure": "16:25",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-27",
-          "heure": "16:25",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-28",
-          "heure": "16:25",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-29",
-          "heure": "16:25",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-30",
-          "heure": "16:25",
-          "version": "VF"
-        }
-      ],
-      "source": "comoedia",
-      "cinema": "Le Comoedia",
-      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/c4daef4982683ba3.jpg",
-      "backdrop": "https://image.tmdb.org/t/p/w1280/GWr6kRbEGppdbGH1huSl0HfV83.jpg",
-      "imdbRating": 6.091,
-      "cast": "Malou Khebizi, Zoé Monpart, Kenji Peyran"
-    },
-    {
-      "titre": "Il Faut Brûler Maman",
-      "titreOriginal": null,
-      "annee": 2026,
-      "realisateur": "Albert Dupontel",
-      "duree": 82,
-      "genres": [
-        "Comedy"
-      ],
-      "synopsis": "Dans une famille de croque-morts, deux sœurs et un frère se retrouvent pour les funérailles de leur mère. Le personnel étant en grève, ils doivent accomplir le protocole funéraire par eux-mêmes.  Comment s’accorder pour brûler maman ?",
-      "imdbId": "tt39562962",
-      "seances": [
-        {
-          "date": "2026-11-25",
-          "heure": "14:00",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-25",
-          "heure": "16:20",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-25",
-          "heure": "18:15",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-25",
-          "heure": "20:20",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-26",
-          "heure": "14:00",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-26",
-          "heure": "16:20",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-26",
-          "heure": "18:15",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-26",
-          "heure": "20:20",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-27",
-          "heure": "14:00",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-27",
-          "heure": "16:20",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-27",
-          "heure": "20:50",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-28",
-          "heure": "11:15",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-28",
-          "heure": "14:00",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-28",
-          "heure": "16:20",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-28",
-          "heure": "18:15",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-28",
-          "heure": "20:20",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-29",
-          "heure": "14:00",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-29",
-          "heure": "16:20",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-29",
-          "heure": "18:15",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-29",
-          "heure": "20:20",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-30",
-          "heure": "14:00",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-30",
-          "heure": "16:20",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-30",
-          "heure": "20:50",
-          "version": "VF"
-        }
-      ],
-      "source": "comoedia",
-      "cinema": "Le Comoedia",
-      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/00afe56222c07ec5.jpg",
-      "backdrop": "https://image.tmdb.org/t/p/w1280/h5sUWuxdA1PkPK7p3Y5jFy0eqQa.jpg",
-      "imdbRating": 5.308,
-      "cast": "Louise Coldefy, Julia Piaton, Artus",
-      "trailer": "https://www.youtube.com/watch?v=deJSWzIU1H0"
-    },
-    {
-      "titre": "L'Âge d'or",
-      "titreOriginal": null,
-      "annee": 2007,
-      "realisateur": "Shekhar Kapur",
-      "duree": null,
-      "genres": [
-        "Biography",
-        "Drama",
-        "History"
-      ],
-      "synopsis": "En 1585, Elizabeth Ière règne sur l'Angleterre depuis près de trente ans. Le vent destructeur du catholicisme fondamentaliste souffle sur l'Europe, sous la conduite de Philippe II d'Espagne. Soutenu par l'Eglise de Rome, le roi dispose d'une armée puissante et d'une Armada qui domine les mers. Philippe II est déterminé à renverser la reine \"hérétique\" et à ramener l'Angleterre au sein de l'Église romaine catholique.Elizabeth se prépare à la guerre contre l'Espagne mais doit aussi mener un combat…",
-      "imdbId": "tt0414055",
-      "seances": [
-        {
-          "date": "2026-11-28",
-          "heure": "10:45",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-29",
-          "heure": "10:45",
-          "version": "VF"
-        }
-      ],
-      "source": "comoedia",
-      "cinema": "Le Comoedia",
-      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/c71b9cd8a614acd9.jpg",
-      "backdrop": "https://image.tmdb.org/t/p/w1280/sRx1eyBP8ydHQixz5ejV09YVZrn.jpg",
-      "imdbRating": 6.707,
-      "cast": "Cate Blanchett, Laurence Fox, Clive Owen",
-      "trailer": "https://www.youtube.com/watch?v=B08AzPKQo5g"
-    },
-    {
-      "titre": "Club Kid",
-      "titreOriginal": null,
-      "annee": 2026,
-      "realisateur": "Jordan Firstman",
-      "duree": null,
-      "genres": [
-        "Comedy",
-        "Drama"
-      ],
-      "synopsis": "Peter (Jordan Firstman), organisateur de soirées branchées à New York, mène une existence aussi effrénée qu’insouciante, rythmée par les nuits festives et les excès. Sa vie bascule lorsqu'Arlo, le fils de 10 ans dont il ignorait l'existence, frappe à sa porte. Dépassé par ce rôle de père qu'il n'avait jamais envisagé, il est rapidement conquis par le charme et la spontanéité de l’enfant. Au fil du temps, un lien aussi inattendu que profond se tisse entre eux, et Peter découvre enfin qu’il existe…",
-      "imdbId": "tt38058097",
-      "seances": [
-        {
-          "date": "2026-11-25",
-          "heure": "13:20",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-11-25",
-          "heure": "16:15",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-11-25",
-          "heure": "18:45",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-11-25",
-          "heure": "21:15",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-11-26",
-          "heure": "13:20",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-11-26",
-          "heure": "16:15",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-11-26",
-          "heure": "18:45",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-11-26",
-          "heure": "21:15",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-11-27",
-          "heure": "13:20",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-11-27",
-          "heure": "16:15",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-11-27",
-          "heure": "18:45",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-11-27",
-          "heure": "21:15",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-11-28",
-          "heure": "13:20",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-11-28",
-          "heure": "16:15",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-11-28",
-          "heure": "18:45",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-11-28",
-          "heure": "21:15",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-11-29",
-          "heure": "13:20",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-11-29",
-          "heure": "16:15",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-11-29",
-          "heure": "18:45",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-11-29",
-          "heure": "21:15",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-11-30",
-          "heure": "13:20",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-11-30",
-          "heure": "16:15",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-11-30",
-          "heure": "18:45",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-11-30",
-          "heure": "21:15",
-          "version": "VOSTFR"
-        }
-      ],
-      "source": "comoedia",
-      "cinema": "Le Comoedia",
-      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/8277bb435e40d5e7.jpg",
-      "backdrop": "https://image.tmdb.org/t/p/w1280/m5zcXuV4qR9fBgXjPndLIPOcasF.jpg",
-      "imdbRating": 7.9,
-      "cast": "Jordan Firstman, Reggie Absolom, Cara Delevingne",
-      "trailer": "https://www.youtube.com/watch?v=uD5JAfk0o1Q"
-    },
-    {
-      "titre": "Wild Horse Nine",
-      "titreOriginal": null,
-      "annee": 2026,
-      "realisateur": "Martin McDonagh",
-      "duree": null,
-      "genres": [
-        "Comedy",
-        "Crime",
-        "Drama"
-      ],
-      "synopsis": "Peu avant le coup d'État chilien de 1973, deux agents de la CIA, Chris et Lee, sont envoyés de Santiago vers l'île de Pâques par leur supérieur, MJ. Au milieu des statues emblématiques de l'île, tandis que ces partenaires de longue date sont confrontés à leur sombre passé et aux complots en cours, Chris noue une relation avec deux étudiantes rebelles qui menace de faire basculer dans le chaos leur séjour dans ce paradis isolé…",
-      "imdbId": "tt15799564",
-      "seances": [
-        {
-          "date": "2026-11-25",
-          "heure": "11:15",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-11-25",
-          "heure": "13:30",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-11-25",
-          "heure": "16:10",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-11-25",
-          "heure": "18:40",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-11-25",
-          "heure": "21:10",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-11-26",
-          "heure": "13:30",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-11-26",
-          "heure": "16:10",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-11-26",
-          "heure": "18:40",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-11-26",
-          "heure": "21:10",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-11-27",
-          "heure": "13:30",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-11-27",
-          "heure": "16:10",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-11-27",
-          "heure": "18:40",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-11-27",
-          "heure": "21:10",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-11-28",
-          "heure": "13:30",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-11-28",
-          "heure": "16:10",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-11-28",
-          "heure": "18:40",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-11-28",
-          "heure": "21:10",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-11-29",
-          "heure": "13:30",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-11-29",
-          "heure": "16:10",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-11-29",
-          "heure": "18:40",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-11-29",
-          "heure": "21:10",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-11-30",
-          "heure": "13:30",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-11-30",
-          "heure": "16:10",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-11-30",
-          "heure": "18:40",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-11-30",
-          "heure": "21:10",
-          "version": "VOSTFR"
-        }
-      ],
-      "source": "comoedia",
-      "cinema": "Le Comoedia",
-      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/1734e2c19d6c52e2.jpg",
-      "backdrop": "https://image.tmdb.org/t/p/w1280/3uLA0ujne91bkzFStZICCYeqhnt.jpg",
-      "imdbRating": 7.931,
-      "cast": "John Malkovich, Sam Rockwell, Steve Buscemi",
-      "trailer": "https://www.youtube.com/watch?v=UuSVHYjtkcs"
-    },
-    {
-      "titre": "Moulin",
-      "titreOriginal": null,
-      "annee": 2001,
-      "realisateur": "Baz Luhrmann",
-      "duree": 134,
-      "genres": [
-        "Drama",
-        "Musical",
-        "Romance"
-      ],
-      "synopsis": "À la fin du XIXe siècle, dans le Paris de la Belle Époque, Christian, un jeune poète désargenté, s'installe dans le quartier de Montmartre. Il découvre un univers où se mêlent sexe, drogue et french cancan, mais se rebelle contre ce milieu décadent en menant une vie de bohème. Christian rêve d'écrire une grande pièce, et le peintre Henri de Toulouse-Lautrec est prêt à lui donner sa chance. Celui-ci a besoin d'un spectacle grandiose pour le Moulin Rouge et le poète est embauché pour rédiger le li…",
-      "imdbId": "tt0203009",
-      "seances": [
-        {
-          "date": "2026-11-25",
-          "heure": "16:30",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-25",
-          "heure": "17:50",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-26",
-          "heure": "16:30",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-26",
-          "heure": "17:50",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-27",
-          "heure": "16:30",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-27",
-          "heure": "17:50",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-28",
-          "heure": "16:30",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-28",
-          "heure": "17:50",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-29",
-          "heure": "16:30",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-29",
-          "heure": "17:50",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-30",
-          "heure": "16:30",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-30",
-          "heure": "17:50",
-          "version": "VF"
-        }
-      ],
-      "source": "comoedia",
-      "cinema": "Le Comoedia",
-      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/3f3df9e1ada32cc5.jpg",
-      "backdrop": "https://image.tmdb.org/t/p/w1280/vvcLSgiviCIU0J0UcwLqWdU8Iup.jpg",
-      "imdbRating": 7.517,
-      "cast": "Ewan McGregor, Nicole Kidman, John Leguizamo",
-      "trailer": "https://www.youtube.com/watch?v=ASxyB5LElV8"
-    },
-    {
-      "titre": "La Gradiva",
-      "titreOriginal": null,
-      "annee": 2026,
-      "realisateur": "Marine Atlan",
-      "duree": 145,
-      "genres": [
-        "Drama"
-      ],
-      "synopsis": "Un groupe de lycéens français part en voyage scolaire à Naples pour découvrir les ruines de Pompéi et ses corps pétrifiés par le Vésuve. C’est là que le vertige les saisit brutalement. L’un après l’autre, ils se laissent submerger par le désir et la colère jusqu’à s’y abandonner complètement.",
-      "imdbId": "tt36107185",
-      "seances": [
-        {
-          "date": "2026-11-25",
-          "heure": "13:30",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-25",
-          "heure": "21:00",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-26",
-          "heure": "13:30",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-26",
-          "heure": "21:00",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-27",
-          "heure": "13:30",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-28",
-          "heure": "13:30",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-28",
-          "heure": "21:00",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-29",
-          "heure": "13:30",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-29",
-          "heure": "21:00",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-30",
-          "heure": "13:30",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-30",
-          "heure": "21:00",
-          "version": "VF"
-        }
-      ],
-      "source": "comoedia",
-      "cinema": "Le Comoedia",
-      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/1e05c90938cca7a5.jpg",
-      "backdrop": "https://image.tmdb.org/t/p/w1280/kt8bR6HCWto7MRzLy1J67OVeOpy.jpg",
-      "imdbRating": 7.188,
-      "cast": "Colas Quignard, Antonia Buresi, Mitia Capellier-Audat",
-      "trailer": "https://www.youtube.com/watch?v=qC9Keq5biXw"
-    },
-    {
-      "titre": "Minotaure",
-      "titreOriginal": null,
-      "annee": 2026,
-      "realisateur": "Andrey Zvyagintsev",
-      "duree": null,
-      "genres": [
-        "Crime",
-        "Drama",
-        "Thriller"
-      ],
-      "synopsis": "Russie, 2022. Gleb, chef d’entreprise prospère, vit avec sa femme Galina et leur fils dans une ville de province. Il se retrouve confronté à des problèmes professionnels croissants, dans un monde de plus en plus instable. L’effondrement d’une vie soigneusement construite bascule rapidement dans la violence.",
-      "imdbId": "tt37118301",
-      "seances": [
-        {
-          "date": "2026-11-26",
-          "heure": "13:15",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-11-28",
-          "heure": "13:15",
-          "version": "VOSTFR"
-        },
-        {
-          "date": "2026-11-30",
-          "heure": "13:15",
-          "version": "VOSTFR"
-        }
-      ],
-      "source": "comoedia",
-      "cinema": "Le Comoedia",
-      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/ed54179e789cbbb7.jpg",
-      "backdrop": "https://image.tmdb.org/t/p/w1280/m992n3hkPkncKK2n2UDi5FJabRv.jpg",
-      "imdbRating": 7.421,
-      "cast": "Dmitriy Mazurov, Iris Lebedeva, Varvara Shmykova",
-      "trailer": "https://www.youtube.com/watch?v=SceYxrLYj9I"
-    },
-    {
-      "titre": "Le Corset",
-      "titreOriginal": null,
-      "annee": 2026,
-      "realisateur": "Louis Clichy",
-      "duree": null,
-      "genres": [
-        "Animation",
-        "Drama",
-        "Family"
-      ],
-      "synopsis": "Dans une ferme au cœur de la Beauce, Christophe, 11 ans, règle ses pas sur ceux de son père. Mais à l’école, à la maison, sur le tracteur, Christophe penche… et tombe. Il est obligé de porter un corset pour filer droit. Tandis que la ferme traverse des moments difficiles, Christophe grandit comme il peut. Il découvre la musique et fait la rencontre de Clara, avec qui tout semble devenir possible.",
-      "imdbId": "tt36639956",
-      "seances": [
-        {
-          "date": "2026-11-25",
-          "heure": "15:15",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-26",
-          "heure": "15:15",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-27",
-          "heure": "15:15",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-28",
-          "heure": "15:15",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-29",
-          "heure": "10:45",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-29",
-          "heure": "15:15",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-30",
-          "heure": "15:15",
-          "version": "VF"
-        }
-      ],
-      "source": "comoedia",
-      "cinema": "Le Comoedia",
-      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/40bd2f7a5a9e0f41.jpg",
-      "backdrop": "https://image.tmdb.org/t/p/w1280/15xJ819H4W6bBt5buS9wHJ86HTp.jpg",
-      "imdbRating": 8.143,
-      "cast": "Gary Clichy, Rod Paradot, Dimitri Colas",
-      "trailer": "https://www.youtube.com/watch?v=hBG2AybVRXg"
-    },
-    {
-      "titre": "Notre Salut",
-      "titreOriginal": null,
-      "annee": 2026,
-      "realisateur": "Emmanuel Marre",
-      "duree": null,
-      "genres": [
-        "Drama",
-        "War"
-      ],
-      "synopsis": "Septembre 1940, le régime de Pétain se met en place. Henri Marre, 49 ans, débarque à Vichy sans le sou, sans contact, loin de sa femme et ses enfants. Il voit dans la nouvelle administration l’opportunité de trouver enfin la place qu’il mérite. Dans sa valise, son traité politique édité à compte d’auteur, Notre Salut, où il défend ses convictions patriotiques et ses méthodes d'ingénieur. Son credo: « gagner en efficacité » pour relever la France de la débâcle. Mais peut-être qu’Henri cherche ava…",
-      "imdbId": "tt41593304",
-      "seances": [
-        {
-          "date": "2026-11-27",
-          "heure": "13:15",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-29",
-          "heure": "13:15",
-          "version": "VF"
-        }
-      ],
-      "source": "comoedia",
-      "cinema": "Le Comoedia",
-      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/5e97af8469404791.jpg",
-      "backdrop": "https://image.tmdb.org/t/p/w1280/iQMFLm9Te2IuJTr08RdBLKTGw8n.jpg",
-      "imdbRating": 6.538,
-      "cast": "Swann Arlaud, Sandrine Blancke, Mathieu Perotto",
-      "trailer": "https://www.youtube.com/watch?v=6V54Q8DaWjU"
-    },
-    {
-      "titre": "Le Noël d'Ernest et Célestine",
-      "titreOriginal": null,
-      "annee": null,
-      "realisateur": null,
-      "duree": 71,
-      "genres": [],
-      "synopsis": "La vie d’Ernest et Célestine est toujours pleine de surprises et de fantaisie : cuisiner de délicieuses charabiettes au miel, chercher le cadeau parfait ou encore préparer un spectacle de patinage… les deux complices ne s’ennuient jamais. Et au moment de préparer Noël, tout devient encore plus palpitant ! Avec Ernest et Célestine, Noël est une célébration pleine de poésie, de douceur et de tendresse !",
-      "imdbId": null,
-      "seances": [
-        {
-          "date": "2026-11-25",
-          "heure": "11:15",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-25",
-          "heure": "14:00",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-28",
-          "heure": "10:55",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-29",
-          "heure": "10:55",
-          "version": "VF"
-        }
-      ],
-      "source": "comoedia",
-      "cinema": "Le Comoedia",
-      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/9a062bdc4fcef154.jpg",
-      "backdrop": "https://image.tmdb.org/t/p/w1280/d9fdoxoPKpHsdEZXDsUqRAHnRjI.jpg",
-      "imdbRating": 0.0
-    },
-    {
-      "titre": "Gruffalo, de Père en Fils",
-      "titreOriginal": null,
-      "annee": null,
-      "realisateur": null,
-      "duree": null,
-      "genres": [],
-      "synopsis": "Il n’est jamais très bon qu’un Gruffalo, père ou fils, se montre dans le grand bois profond. Il pourrait être poursuivi par la Grande Méchante Souris. Mais entre un Gruffalo et une souris, lequel des deux est le plus effrayant ?",
-      "imdbId": null,
-      "seances": [
-        {
-          "date": "2026-11-25",
-          "heure": "11:00",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-28",
-          "heure": "11:00",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-29",
-          "heure": "11:00",
-          "version": "VF"
-        }
-      ],
-      "source": "comoedia",
-      "cinema": "Le Comoedia",
-      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/4d083bd72e5b2ecc.jpg",
-      "backdrop": "https://image.tmdb.org/t/p/w1280/xBZLagWx5YuhbGZ6pnvAUwO40J1.jpg",
-      "imdbRating": 0.0
-    },
-    {
-      "titre": "À la Poursuite de L'Affreunard",
-      "titreOriginal": null,
-      "annee": 2022,
-      "realisateur": "Benjamin Botella",
-      "duree": null,
-      "genres": [
-        "Animation"
-      ],
-      "synopsis": "L'hiver arrive. Pour Yaya, Moumou et Pic, les trois petites marmottes, il est temps d'effectuer leur première hibernation. L'excitation est à son comble au moment du coucher. Heureusement, l'histoire du soir résout souvent tout, sauf quand les parents s'endorment sans avoir fini de la lire. Les trois marmottons n'entendant pas attendre six mois avant de connaître la suite, ils partent dans la montagne pour demander la fin de leur histoire directement au protagoniste : l'horrible Affreunard.",
-      "imdbId": "tt32991524",
-      "seances": [
-        {
-          "date": "2026-11-28",
-          "heure": "11:05",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-29",
-          "heure": "11:05",
-          "version": "VF"
-        }
-      ],
-      "source": "comoedia",
-      "cinema": "Le Comoedia",
-      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/4bfffd193faf6145.jpg",
-      "backdrop": "https://image.tmdb.org/t/p/w1280/abhidDOdrKxz1XkV1QHiM28SDHQ.jpg",
-      "imdbRating": 0.0,
-      "cast": "Amine Gaye, Djiby Gaye, Cléo Dauvillier",
-      "trailer": "https://www.youtube.com/watch?v=7fdC3Wwj-Og"
-    },
-    {
-      "titre": "Le Merveilleux Hiver de Tom le Chat",
-      "titreOriginal": null,
-      "annee": null,
-      "realisateur": null,
-      "duree": null,
-      "genres": [],
-      "synopsis": "Les enfants, vous vous souvenez de Tom, le petit chat roux, toujours accompagné de son amie Chat-Souris ? Imaginez un peu : cet hiver, ils vont découvrir la neige pour la première fois ! Mais les deux compères vont aussi faire la connaissance de leur nouveau voisin : un énorme chien tout poilu, qui se lance très vite à leur poursuite… Que la course en luge commence !",
-      "imdbId": null,
-      "seances": [
-        {
-          "date": "2026-11-25",
-          "heure": "10:55",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-28",
-          "heure": "11:15",
-          "version": "VF"
-        },
-        {
-          "date": "2026-11-29",
-          "heure": "11:15",
-          "version": "VF"
-        }
-      ],
-      "source": "comoedia",
-      "cinema": "Le Comoedia",
-      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/fdc690a1357635e8.jpg",
-      "backdrop": "https://image.tmdb.org/t/p/w1280/sEIuh01YzU02OHjJxCqAkPOu28q.jpg",
-      "imdbRating": 0.0,
-      "cast": "André van Duin, Jan Decleir, Tim Gunther",
-      "trailer": "https://www.youtube.com/watch?v=M7bweX0KNDI"
-    },
-    {
-      "titre": "Moulin",
-      "slug": "moulin",
-      "titreOriginal": null,
-      "annee": 2001,
-      "realisateur": "Baz Luhrmann",
-      "duree": 134,
-      "genres": [
-        "Drama",
-        "Musical",
-        "Romance"
-      ],
-      "synopsis": "Juin 1943, Jean Moulin, chef de la Résistance, est arrêté alors qu’il tente de réunifier les forces de l’Armée Secrète Interrogé par Klaus Barbie, le chef de la Gestapo de Lyon, Moulin est entraîné dans une confrontation implacable. Son ultime combat face à la manipulation et la brutalité commence. Le destin de la France libre en dépend.",
-      "imdbId": "tt0203009",
-      "source": "zola",
-      "cinema": "Le Zola",
-      "seances": [
-        {
-          "heure": "16:00",
-          "version": "VF",
-          "resa_url": "https://www.ticketingcine.com/EMS1217/FRLXIDH#showsession?id=emsx121700009294&ps=EMS1217",
-          "date": "2026-11-24"
-        }
-      ],
-      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/ac2a665dd7ae81b5.jpg",
-      "backdrop": "https://image.tmdb.org/t/p/w1280/vvcLSgiviCIU0J0UcwLqWdU8Iup.jpg",
-      "trailer": "https://www.youtube.com/watch?v=ASxyB5LElV8",
-      "imdbRating": 7.517,
-      "cast": "Ewan McGregor, Nicole Kidman, John Leguizamo"
-    },
-    {
-      "titre": "La Détention",
-      "slug": "la-detention",
-      "titreOriginal": null,
-      "annee": 2026,
-      "realisateur": "Guillaume Massart",
-      "duree": 132,
-      "genres": [
-        "Documentary"
-      ],
-      "synopsis": "Ouvrir une porte. Gérer une crise. Rédiger un compte-rendu d’incident. À l’École nationale d’administration pénitentiaire, des centaines de femmes et d’hommes apprennent le métier de surveillant. Au fil des cours, sur les visages, le doute se fait de plus en plus rare.",
-      "imdbId": "tt42435292",
-      "source": "zola",
-      "cinema": "Le Zola",
-      "seances": [
-        {
-          "heure": "19:30",
-          "version": "VF",
-          "resa_url": "https://www.ticketingcine.com/EMS1217/FR1UZQD#showsession?id=emsx121700009299&ps=EMS1217",
-          "date": "2026-11-24"
-        }
-      ],
-      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/5f92b304d061feab.jpg",
-      "backdrop": "https://image.tmdb.org/t/p/w1280/pZOXl9cbwcO0ao5YmSKzfbIN3u6.jpg",
-      "imdbRating": 7.0
-    },
-    {
-      "titre": "Le Mystère Lucy Lost",
-      "slug": "le-mystere-lucy-lost",
-      "titreOriginal": null,
-      "annee": 2026,
-      "realisateur": "Olivier Clert",
-      "duree": 89,
-      "genres": [
-        "Animation",
-        "Adventure",
-        "Drama"
-      ],
-      "synopsis": "Lucy vit avec sa famille dans un village sur une petite île isolée. Ses dons extraordinaires suscitent le rejet des habitants. Lorsqu'elle rencontre Milly, une petite fille qu'elle seule peut voir, Lucy embarque dans une grande aventure pour percer le secret de ses mystérieux pouvoirs.",
-      "imdbId": "tt10569744",
-      "source": "zola",
-      "cinema": "Le Zola",
-      "seances": [
-        {
-          "heure": "14:15",
-          "version": "VF",
-          "resa_url": "https://www.ticketingcine.com/EMS1217/FRLPWEP#showsession?id=emsx121700009314&ps=EMS1217",
-          "date": "2026-11-25"
-        },
-        {
-          "heure": "14:10",
-          "version": "VF",
-          "resa_url": "https://www.ticketingcine.com/EMS1217/FRLPWEP#showsession?id=emsx121700009315&ps=EMS1217",
-          "date": "2026-11-28"
-        },
-        {
-          "heure": "14:15",
-          "version": "VF",
-          "resa_url": "https://www.ticketingcine.com/EMS1217/FRLPWEP#showsession?id=emsx121700009316&ps=EMS1217",
-          "date": "2026-11-29"
-        }
-      ],
-      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/96e9a17029320c98.jpg",
-      "backdrop": "https://image.tmdb.org/t/p/w1280/lhb1NoiKScRaApfn9rqaG9uS4MY.jpg",
-      "imdbRating": 8.0,
-      "cast": "Charlie Rosenzweig, Zach Valentin-Dattas, Jessica Monceau",
-      "trailer": "https://www.youtube.com/watch?v=6s4q4BuJPyA"
-    },
-    {
-      "titre": "L’Affaire Marie-Claire",
-      "slug": "laffaire-marie-claire",
-      "titreOriginal": null,
-      "annee": 2026,
-      "realisateur": null,
-      "duree": 102,
-      "genres": [
-        "Biography",
-        "Drama"
-      ],
-      "synopsis": "Novembre 1972. Au tribunal de Bobigny, un procès hors norme secoue la France entière. Marie-Claire Chevalier, 16 ans, est accusée d’avoir avorté illégalement. À la barre, sa mère et toutes les femmes qui l’ont aidée. Leur avocate, Gisèle Halimi, fait un pari fou, insensé : elle leur demande de ne pas plaider coupable. Gisèle va faire ce qui n’a jamais été fait auparavant, elle va accuser et attaquer la loi, au risque de tout perdre. Au nom de toutes.",
-      "imdbId": "tt35494574",
-      "source": "zola",
-      "cinema": "Le Zola",
-      "seances": [
-        {
-          "heure": "16:15",
-          "version": "VFST",
-          "resa_url": "https://www.ticketingcine.com/EMS1217/FRITYIL#showsession?id=emsx121700009321&ps=EMS1217",
-          "date": "2026-11-25"
-        },
-        {
-          "heure": "18:30",
-          "version": "VF",
-          "resa_url": "https://www.ticketingcine.com/EMS1217/FRITYIL#showsession?id=emsx121700009322&ps=EMS1217",
-          "date": "2026-11-26"
-        },
-        {
-          "heure": "16:30",
-          "version": "VF",
-          "resa_url": "https://www.ticketingcine.com/EMS1217/FRITYIL#showsession?id=emsx121700009323&ps=EMS1217",
-          "date": "2026-11-27"
-        },
-        {
-          "heure": "16:00",
-          "version": "VF",
-          "resa_url": "https://www.ticketingcine.com/EMS1217/FRITYIL#showsession?id=emsx121700009324&ps=EMS1217",
-          "date": "2026-11-28"
-        }
-      ],
-      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/0dc06559281b7a25.jpg",
-      "backdrop": "https://image.tmdb.org/t/p/w1280/rIxB1b3nBfjxP0nHrWyjJArcVwa.jpg",
-      "imdbRating": 7.457,
-      "cast": "Charlotte Gainsbourg, Cécile de France, Grégory Gadebois",
-      "trailer": "https://www.youtube.com/watch?v=v5U17gR-M8k"
-    },
     {
       "titre": "Quelques mots d’amour",
       "slug": "quelques-mots-damour",
@@ -1860,12 +22,6 @@
       "source": "zola",
       "cinema": "Le Zola",
       "seances": [
-        {
-          "heure": "18:20",
-          "version": "VF",
-          "resa_url": "https://www.ticketingcine.com/EMS1217/FR8376B#showsession?id=emsx121700009331&ps=EMS1217",
-          "date": "2026-11-25"
-        },
         {
           "heure": "16:30",
           "version": "VF",
@@ -1889,6 +45,12 @@
           "version": "VF",
           "resa_url": "https://www.ticketingcine.com/EMS1217/FR8376B#showsession?id=emsx121700009327&ps=EMS1217",
           "date": "2026-11-30"
+        },
+        {
+          "heure": "16:10",
+          "version": "VFST",
+          "resa_url": "https://www.ticketingcine.com/EMS1217/FR8376B#showsession?id=emsx121700009326&ps=EMS1217",
+          "date": "2026-12-01"
         }
       ],
       "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/d152872c93058bff.jpg",
@@ -1896,6 +58,53 @@
       "trailer": "https://www.youtube.com/watch?v=kBJGhdd0AeU",
       "imdbRating": 7.316,
       "cast": "Hafsia Herzi, Nour Salam, Ella Bedoucha"
+    },
+    {
+      "titre": "L’Affaire Marie-Claire",
+      "slug": "laffaire-marie-claire",
+      "titreOriginal": null,
+      "annee": 2026,
+      "realisateur": null,
+      "duree": 102,
+      "genres": [
+        "Biography",
+        "Drama"
+      ],
+      "synopsis": "Novembre 1972. Au tribunal de Bobigny, un procès hors norme secoue la France entière. Marie-Claire Chevalier, 16 ans, est accusée d’avoir avorté illégalement. À la barre, sa mère et toutes les femmes qui l’ont aidée. Leur avocate, Gisèle Halimi, fait un pari fou, insensé : elle leur demande de ne pas plaider coupable. Gisèle va faire ce qui n’a jamais été fait auparavant, elle va accuser et attaquer la loi, au risque de tout perdre. Au nom de toutes.",
+      "imdbId": "tt35494574",
+      "source": "zola",
+      "cinema": "Le Zola",
+      "seances": [
+        {
+          "heure": "18:30",
+          "version": "VF",
+          "resa_url": "https://www.ticketingcine.com/EMS1217/FRITYIL#showsession?id=emsx121700009322&ps=EMS1217",
+          "date": "2026-11-26"
+        },
+        {
+          "heure": "16:30",
+          "version": "VF",
+          "resa_url": "https://www.ticketingcine.com/EMS1217/FRITYIL#showsession?id=emsx121700009323&ps=EMS1217",
+          "date": "2026-11-27"
+        },
+        {
+          "heure": "16:00",
+          "version": "VF",
+          "resa_url": "https://www.ticketingcine.com/EMS1217/FRITYIL#showsession?id=emsx121700009324&ps=EMS1217",
+          "date": "2026-11-28"
+        },
+        {
+          "heure": "18:15",
+          "version": "VF",
+          "resa_url": "https://www.ticketingcine.com/EMS1217/FRITYIL#showsession?id=emsx121700009325&ps=EMS1217",
+          "date": "2026-12-01"
+        }
+      ],
+      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/0dc06559281b7a25.jpg",
+      "backdrop": "https://image.tmdb.org/t/p/w1280/rIxB1b3nBfjxP0nHrWyjJArcVwa.jpg",
+      "imdbRating": 7.458,
+      "cast": "Charlotte Gainsbourg, Cécile de France, Grégory Gadebois",
+      "trailer": "https://www.youtube.com/watch?v=v5U17gR-M8k"
     },
     {
       "titre": "La Gradiva",
@@ -1912,12 +121,6 @@
       "source": "zola",
       "cinema": "Le Zola",
       "seances": [
-        {
-          "heure": "20:20",
-          "version": "VFST",
-          "resa_url": "https://www.ticketingcine.com/EMS1217/FR324CZ#showsession?id=emsx121700009337&ps=EMS1217",
-          "date": "2026-11-25"
-        },
         {
           "heure": "20:35",
           "version": "VFST",
@@ -1946,7 +149,7 @@
       "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/ab2f9e883261ef2b.jpg",
       "backdrop": "https://image.tmdb.org/t/p/w1280/kt8bR6HCWto7MRzLy1J67OVeOpy.jpg",
       "trailer": "https://www.youtube.com/watch?v=qC9Keq5biXw",
-      "imdbRating": 7.188,
+      "imdbRating": 7.2,
       "cast": "Colas Quignard, Antonia Buresi, Mitia Capellier-Audat"
     },
     {
@@ -1988,91 +191,182 @@
       "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/8dbae273aa6e54b4.jpg",
       "backdrop": "https://image.tmdb.org/t/p/w1280/qqHFLg90IUSoTmSMpKOOW5RyqN3.jpg",
       "trailer": "https://www.youtube.com/watch?v=0R6TmYtmwh8",
-      "imdbRating": 6.859,
+      "imdbRating": 6.892,
       "cast": "Hwang Jung-min, Zo In-sung, Hoyeon"
+    },
+    {
+      "titre": "Le Mystère Lucy Lost",
+      "slug": "le-mystere-lucy-lost",
+      "titreOriginal": null,
+      "annee": 2026,
+      "realisateur": "Olivier Clert",
+      "duree": 89,
+      "genres": [
+        "Animation",
+        "Adventure",
+        "Drama"
+      ],
+      "synopsis": "Lucy vit avec sa famille dans un village sur une petite île isolée. Ses dons extraordinaires suscitent le rejet des habitants. Lorsqu'elle rencontre Milly, une petite fille qu'elle seule peut voir, Lucy embarque dans une grande aventure pour percer le secret de ses mystérieux pouvoirs.",
+      "imdbId": "tt10569744",
+      "source": "zola",
+      "cinema": "Le Zola",
+      "seances": [
+        {
+          "heure": "14:10",
+          "version": "VF",
+          "resa_url": "https://www.ticketingcine.com/EMS1217/FRLPWEP#showsession?id=emsx121700009315&ps=EMS1217",
+          "date": "2026-11-28"
+        },
+        {
+          "heure": "14:15",
+          "version": "VF",
+          "resa_url": "https://www.ticketingcine.com/EMS1217/FRLPWEP#showsession?id=emsx121700009316&ps=EMS1217",
+          "date": "2026-11-29"
+        }
+      ],
+      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/96e9a17029320c98.jpg",
+      "backdrop": "https://image.tmdb.org/t/p/w1280/lhb1NoiKScRaApfn9rqaG9uS4MY.jpg",
+      "imdbRating": 8.0,
+      "cast": "Charlie Rosenzweig, Zach Valentin-Dattas, Jessica Monceau",
+      "trailer": "https://www.youtube.com/watch?v=6s4q4BuJPyA"
+    },
+    {
+      "titre": "Une journée particulière",
+      "slug": "une-journee-particuliere",
+      "titreOriginal": null,
+      "annee": 1977,
+      "realisateur": "Ettore Scola",
+      "duree": 106,
+      "genres": [
+        "Drama"
+      ],
+      "synopsis": "8 mai 1938 : Rome en fête organise un grand défilé en l'honneur d'Adolf Hitler, venu en Italie pour consolider son alliance avec le Duce. Dans un immeuble d'un quartier populaire, Antonietta, épouse d'un petit fonctionnaire fasciste, se consacre aux tâches ménagères. Son mainate s'échappe et se pose sur le rebord d'une fenêtre. Antonietta en avertit le locataire concerné. C'est ainsi qu'elle fait la connaissance de Gabriele, un commentateur de radio homosexuel, récemment licencié, qui attend son…",
+      "imdbId": "tt0076085",
+      "source": "zola",
+      "cinema": "Le Zola",
+      "seances": [
+        {
+          "heure": "14:00",
+          "version": "VOSTFR",
+          "resa_url": "https://www.ticketingcine.com/EMS1217/FRKXJJQ#showsession?id=emsx121700009333&ps=EMS1217",
+          "date": "2026-12-01"
+        },
+        {
+          "heure": "20:30",
+          "version": "VOSTFR",
+          "resa_url": "https://www.ticketingcine.com/EMS1217/FRKXJJQ#showsession?id=emsx121700009332&ps=EMS1217",
+          "date": "2026-12-01"
+        }
+      ],
+      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/01488c7d566c9ef9.jpg",
+      "backdrop": "https://image.tmdb.org/t/p/w1280/6d7ymk1OWX6AkfkhOnSEfwiqo2y.jpg",
+      "imdbRating": 8.066,
+      "cast": "Sophia Loren, Marcello Mastroianni, John Vernon",
+      "trailer": "https://www.youtube.com/watch?v=UbiNV9EOYVQ"
+    },
+    {
+      "titre": "Le Noël d’Ernest et Célestine",
+      "slug": "le-noel-dernest-et-celestine",
+      "titreOriginal": null,
+      "annee": null,
+      "realisateur": null,
+      "duree": 71,
+      "genres": [],
+      "synopsis": "La vie d’Ernest et Célestine est toujours pleine de surprises et de fantaisie : cuisiner de délicieuses charabiettes au miel, chercher le cadeau parfait ou encore préparer un spectacle de patinage… les deux complices ne s’ennuient jamais. Et au moment de préparer Noël, tout devient encore plus palpitant ! Avec Ernest et Célestine, Noël est une célébration pleine de poésie, de douceur et de tendresse !",
+      "imdbId": null,
+      "source": "zola",
+      "cinema": "Le Zola",
+      "seances": [
+        {
+          "heure": "14:30",
+          "version": "VF",
+          "resa_url": "https://www.ticketingcine.com/EMS1217/FRTS47I#showsession?id=emsx121700009341&ps=EMS1217",
+          "date": "2026-12-02"
+        }
+      ],
+      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/e55f0708c7f88dbe.jpg",
+      "backdrop": "https://image.tmdb.org/t/p/w1280/d9fdoxoPKpHsdEZXDsUqRAHnRjI.jpg",
+      "imdbRating": 0.0
+    },
+    {
+      "titre": "Il faut brûler Maman",
+      "slug": "il-faut-bruler-maman",
+      "titreOriginal": null,
+      "annee": 2026,
+      "realisateur": "Albert Dupontel",
+      "duree": 82,
+      "genres": [
+        "Comedy"
+      ],
+      "synopsis": "Dans une famille de croque-morts, deux sœurs et un frère se retrouvent pour les funérailles de leur mère. Le personnel étant en grève, ils doivent accomplir le protocole funéraire par eux-mêmes.  Comment s’accorder pour brûler maman ?",
+      "imdbId": "tt39562962",
+      "source": "zola",
+      "cinema": "Le Zola",
+      "seances": [
+        {
+          "heure": "16:10",
+          "version": "VF",
+          "resa_url": "https://www.ticketingcine.com/EMS1217/FRAVK3D#showsession?id=emsx121700009345&ps=EMS1217",
+          "date": "2026-12-02"
+        }
+      ],
+      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/3f8a13d31fa65e58.jpg",
+      "backdrop": "https://image.tmdb.org/t/p/w1280/h5sUWuxdA1PkPK7p3Y5jFy0eqQa.jpg",
+      "imdbRating": 5.37,
+      "cast": "Louise Coldefy, Julia Piaton, Artus",
+      "trailer": "https://www.youtube.com/watch?v=deJSWzIU1H0"
+    },
+    {
+      "titre": "15/18",
+      "slug": "15-18",
+      "titreOriginal": null,
+      "annee": 2026,
+      "realisateur": "Cédric Kahn",
+      "duree": 104,
+      "genres": [
+        "Drama"
+      ],
+      "synopsis": "Lucia, 17 ans, est amenée par la police dans une unité de soins pédopsychiatriques de l’hôpital public. Ici tous les patients ont entre 15 et 18 ans. Lucia connaît l’endroit, elle y a fait de nombreux séjours. Elle retrouve son amie Eloïse, en hospitalisation longue durée, mais aussi Yasmine, Camilia, Ulysse, André… tous ont des pathologies et des parcours différents. Les médecins les soignent, les écoutent, reçoivent leurs parents, tout en gérant un service en surchauffe. Mais un jour, l’arrivé…",
+      "imdbId": "tt42826707",
+      "source": "zola",
+      "cinema": "Le Zola",
+      "seances": [
+        {
+          "heure": "18:00",
+          "version": "VF",
+          "resa_url": "https://www.ticketingcine.com/EMS1217/FRITK1Q#showsession?id=emsx121700009352&ps=EMS1217",
+          "date": "2026-12-02"
+        }
+      ],
+      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/a8b3884d0a3c0947.jpg",
+      "backdrop": "https://image.tmdb.org/t/p/w1280/GWr6kRbEGppdbGH1huSl0HfV83.jpg",
+      "imdbRating": 6.091,
+      "cast": "Malou Khebizi, Zoé Monpart, Kenji Peyran"
+    },
+    {
+      "titre": "Film d’amour et d’anarchie – Rue des fleurs",
+      "slug": "film-damour-et-danarchie-rue-des-fleurs",
+      "titreOriginal": null,
+      "annee": null,
+      "realisateur": null,
+      "duree": 120,
+      "genres": [],
+      "synopsis": "La tenancière d’une maison close à Rome, Salomé de Bologne, accueille un soi-disant cousin qui est en réalité un camarade anarchiste. Ce dernier, un simple paysan nommé Tonino, est chargé de préparer un attentat contre Mussolini. Il ne va pas tarder à s’amouracher d’une des pensionnaires, Tripolina, qui cherche à le détourner de sa mission. Tonino se retrouve alors tiraillé entre ses idéaux politiques et son histoire d’amour contrariée...",
+      "imdbId": null,
+      "source": "zola",
+      "cinema": "Le Zola",
+      "seances": [
+        {
+          "heure": "20:30",
+          "version": "VOSTFR",
+          "resa_url": "https://www.ticketingcine.com/EMS1217/FRM9Q0R#showsession?id=emsx121700009364&ps=EMS1217",
+          "date": "2026-12-02"
+        }
+      ],
+      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/6ed935c2e183f82b.jpg"
     }
   ],
   "evenements": [
-    {
-      "cle": "rencontre|salò ou les 120 journées de sodome|2026-11",
-      "type": "rencontre",
-      "forme": null,
-      "titre": "Salò ou les 120 journées de Sodome",
-      "description": "Carte Blanche à Sylvain Creuzevault, metteur en scène de la pièce « Pétrole », d’après l’œuvre de Pier Paolo Pasolini, programmée au Théâtre des Célestins du 26 novembre au 2 décembre.",
-      "date_debut": "2026-11-24",
-      "date_fin": "2026-11-24",
-      "precision": "exact",
-      "affiche_url": "https://all.web.img.acsta.net/medias/nmedia/18/35/91/05/19079688.jpg",
-      "films": [
-        {
-          "titre": "Salò ou les 120 journées de Sodome",
-          "dates": [
-            "2026-11-24"
-          ],
-          "affiche": null
-        }
-      ],
-      "creneaux": [
-        {
-          "cinema": "Le Comoedia",
-          "date": "2026-11-24",
-          "heure": "20:30",
-          "titre_film": "Salò ou les 120 journées de Sodome",
-          "invite": null,
-          "description": "Carte Blanche à Sylvain Creuzevault, metteur en scène de la pièce « Pétrole », d’après l’œuvre de Pier Paolo Pasolini, programmée au Théâtre des Célestins du 26 novembre au 2 décembre."
-        }
-      ]
-    },
-    {
-      "cle": "rencontre|congo boy|2026-11",
-      "type": "rencontre",
-      "forme": null,
-      "titre": "Congo Boy",
-      "description": "Séance présentée par Joachim Kalonji Mukendi, Thomas Makumbu et Nicolas Nlele, membres du bureau d'ASAPO (Association de la Diaspora Congolaise à Lyon) et par Souadou Dembele, membre de Bissai.",
-      "date_debut": "2026-11-25",
-      "date_fin": "2026-11-25",
-      "precision": "exact",
-      "affiche_url": "https://all.web.img.acsta.net/img/83/1e/831eb7893e62376a0191ba965c41f57b.jpg",
-      "films": [
-        {
-          "titre": "Congo Boy",
-          "dates": [],
-          "affiche": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/4d75ea8b281d69e4.jpg"
-        }
-      ],
-      "creneaux": [
-        {
-          "cinema": "Le Comoedia",
-          "date": "2026-11-25",
-          "heure": "20:30",
-          "titre_film": null,
-          "invite": null,
-          "description": "Séance présentée par Joachim Kalonji Mukendi, Thomas Makumbu et Nicolas Nlele, membres du bureau d'ASAPO (Association de la Diaspora Congolaise à Lyon) et par Souadou Dembele, membre de Bissai."
-        }
-      ]
-    },
-    {
-      "cle": "seance_speciale|le noël d'ernest et célestine|2026-11",
-      "type": "seance_speciale",
-      "forme": null,
-      "titre": "Le Noël d’Ernest et Célestine",
-      "description": "Venez célébrer les préparatifs de Noël avec Ernest et Célestine ! Projection suivie d'un atelier créatif \"Viens fabriquer tes propres décorations de Noël !\" puis d'un goûter 100% Bio.",
-      "date_debut": "2026-11-25",
-      "date_fin": "2026-11-25",
-      "precision": "exact",
-      "affiche_url": "https://cms-assets.webediamovies.pro/production/945/d8ef335cef9df37b89fd911505abb019.jpg",
-      "films": [],
-      "creneaux": [
-        {
-          "cinema": "Le Comoedia",
-          "date": "2026-11-25",
-          "heure": "14:00",
-          "titre_film": "Le Noël d’Ernest et Célestine",
-          "invite": null,
-          "description": "Venez célébrer les préparatifs de Noël avec Ernest et Célestine ! Projection suivie d'un atelier créatif \"Viens fabriquer tes propres décorations de Noël !\" puis d'un goûter 100% Bio."
-        }
-      ]
-    },
     {
       "cle": "rencontre|midnight shift|2026-11",
       "type": "rencontre",
@@ -2214,6 +508,36 @@
           "titre_film": "JSA (Joint Security Area)",
           "invite": null,
           "description": "Projection de \"JSA (Joint Security Area)\" suivie d'une rencontre avec l'auteur Frederik Peeters et d'une vente-dédicace à l'espace-rencontre."
+        }
+      ]
+    },
+    {
+      "cle": "rencontre|le lièvre|2026-12",
+      "type": "rencontre",
+      "forme": null,
+      "titre": "Le Lièvre",
+      "description": "En présence du réalisateur Gonzague Legout, de la comédienne Naïlia Harzoune et de Mounir Akbache, lièvre international lyonnais et entraîneur de l'acteur Dali Benssalah pour le film.",
+      "date_debut": "2026-12-03",
+      "date_fin": "2026-12-03",
+      "precision": "exact",
+      "affiche_url": "https://all.web.img.acsta.net/img/7c/e3/7ce3a73685551efc7e44b8ce7fa42cfa.jpg",
+      "films": [
+        {
+          "titre": "Le Lièvre",
+          "dates": [
+            "2026-12-03"
+          ],
+          "affiche": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/3a1b114d7f197b84.jpg"
+        }
+      ],
+      "creneaux": [
+        {
+          "cinema": "Le Comoedia",
+          "date": "2026-12-03",
+          "heure": null,
+          "titre_film": "Le Lièvre",
+          "invite": null,
+          "description": "En présence du réalisateur Gonzague Legout, de la comédienne Naïlia Harzoune et de Mounir Akbache, lièvre international lyonnais et entraîneur de l'acteur Dali Benssalah pour le film."
         }
       ]
     },
