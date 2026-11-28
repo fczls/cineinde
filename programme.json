@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-26T02:36:13.889060",
+  "generated_at": "2026-11-28T02:27:32.724904",
   "sources": [
     "https://www.cinema-comoedia.com/programme-semaine/",
     "https://www.cinemas-lumiere.com/calendrier-general.html",
@@ -7,57 +7,40 @@
   ],
   "films": [
     {
-      "titre": "Quelques mots d’amour",
-      "slug": "quelques-mots-damour",
+      "titre": "Le Mystère Lucy Lost",
+      "slug": "le-mystere-lucy-lost",
       "titreOriginal": null,
       "annee": 2026,
-      "realisateur": "Rudi Rosenberg",
-      "duree": 97,
+      "realisateur": "Olivier Clert",
+      "duree": 89,
       "genres": [
-        "Comedy",
+        "Animation",
+        "Adventure",
         "Drama"
       ],
-      "synopsis": "Sarcelles, 1995. Erika élève seule ses deux enfants. Sa fille Abigaëlle se persuade que son père, qu’elle n’a jamais connu, l’aime en silence quelque part. Lorsqu’elle se met en tête de le retrouver, Erika se sent obligée de l’aider, tout en cherchant à la protéger. En grandissant, la quête d’Abigaëlle se transforme en obsession, entraînant avec elle sa mère, sa meilleure amie, et tous ceux qui comptent.",
-      "imdbId": "tt39969491",
+      "synopsis": "Lucy vit avec sa famille dans un village sur une petite île isolée. Ses dons extraordinaires suscitent le rejet des habitants. Lorsqu'elle rencontre Milly, une petite fille qu'elle seule peut voir, Lucy embarque dans une grande aventure pour percer le secret de ses mystérieux pouvoirs.",
+      "imdbId": "tt10569744",
       "source": "zola",
       "cinema": "Le Zola",
       "seances": [
         {
-          "heure": "16:30",
+          "heure": "14:10",
           "version": "VF",
-          "resa_url": "https://www.ticketingcine.com/EMS1217/FR8376B#showsession?id=emsx121700009330&ps=EMS1217",
-          "date": "2026-11-26"
+          "resa_url": "https://www.ticketingcine.com/EMS1217/FRLPWEP#showsession?id=emsx121700009315&ps=EMS1217",
+          "date": "2026-11-28"
         },
         {
-          "heure": "18:35",
+          "heure": "14:15",
           "version": "VF",
-          "resa_url": "https://www.ticketingcine.com/EMS1217/FR8376B#showsession?id=emsx121700009329&ps=EMS1217",
-          "date": "2026-11-27"
-        },
-        {
-          "heure": "16:15",
-          "version": "VF",
-          "resa_url": "https://www.ticketingcine.com/EMS1217/FR8376B#showsession?id=emsx121700009328&ps=EMS1217",
+          "resa_url": "https://www.ticketingcine.com/EMS1217/FRLPWEP#showsession?id=emsx121700009316&ps=EMS1217",
           "date": "2026-11-29"
-        },
-        {
-          "heure": "20:10",
-          "version": "VF",
-          "resa_url": "https://www.ticketingcine.com/EMS1217/FR8376B#showsession?id=emsx121700009327&ps=EMS1217",
-          "date": "2026-11-30"
-        },
-        {
-          "heure": "16:10",
-          "version": "VFST",
-          "resa_url": "https://www.ticketingcine.com/EMS1217/FR8376B#showsession?id=emsx121700009326&ps=EMS1217",
-          "date": "2026-12-01"
         }
       ],
-      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/d152872c93058bff.jpg",
-      "backdrop": "https://image.tmdb.org/t/p/w1280/prU8Cabt75JCukKiSiXKpOIBXIK.jpg",
-      "trailer": "https://www.youtube.com/watch?v=kBJGhdd0AeU",
-      "imdbRating": 7.316,
-      "cast": "Hafsia Herzi, Nour Salam, Ella Bedoucha"
+      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/96e9a17029320c98.jpg",
+      "backdrop": "https://image.tmdb.org/t/p/w1280/lhb1NoiKScRaApfn9rqaG9uS4MY.jpg",
+      "imdbRating": 8.0,
+      "cast": "Charlie Rosenzweig, Zach Valentin-Dattas, Jessica Monceau",
+      "trailer": "https://www.youtube.com/watch?v=6s4q4BuJPyA"
     },
     {
       "titre": "L’Affaire Marie-Claire",
@@ -76,18 +59,6 @@
       "cinema": "Le Zola",
       "seances": [
         {
-          "heure": "18:30",
-          "version": "VF",
-          "resa_url": "https://www.ticketingcine.com/EMS1217/FRITYIL#showsession?id=emsx121700009322&ps=EMS1217",
-          "date": "2026-11-26"
-        },
-        {
-          "heure": "16:30",
-          "version": "VF",
-          "resa_url": "https://www.ticketingcine.com/EMS1217/FRITYIL#showsession?id=emsx121700009323&ps=EMS1217",
-          "date": "2026-11-27"
-        },
-        {
           "heure": "16:00",
           "version": "VF",
           "resa_url": "https://www.ticketingcine.com/EMS1217/FRITYIL#showsession?id=emsx121700009324&ps=EMS1217",
@@ -102,7 +73,7 @@
       ],
       "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/0dc06559281b7a25.jpg",
       "backdrop": "https://image.tmdb.org/t/p/w1280/rIxB1b3nBfjxP0nHrWyjJArcVwa.jpg",
-      "imdbRating": 7.458,
+      "imdbRating": 7.473,
       "cast": "Charlotte Gainsbourg, Cécile de France, Grégory Gadebois",
       "trailer": "https://www.youtube.com/watch?v=v5U17gR-M8k"
     },
@@ -121,12 +92,6 @@
       "source": "zola",
       "cinema": "Le Zola",
       "seances": [
-        {
-          "heure": "20:35",
-          "version": "VFST",
-          "resa_url": "https://www.ticketingcine.com/EMS1217/FR324CZ#showsession?id=emsx121700009338&ps=EMS1217",
-          "date": "2026-11-26"
-        },
         {
           "heure": "18:10",
           "version": "VFST",
@@ -170,12 +135,6 @@
       "cinema": "Le Zola",
       "seances": [
         {
-          "heure": "20:40",
-          "version": "VOSTFR",
-          "resa_url": "https://www.ticketingcine.com/EMS1217/FR9AKWK#showsession?id=emsx121700009319&ps=EMS1217",
-          "date": "2026-11-27"
-        },
-        {
           "heure": "21:00",
           "version": "VOSTFR",
           "resa_url": "https://www.ticketingcine.com/EMS1217/FR9AKWK#showsession?id=emsx121700009318&ps=EMS1217",
@@ -191,44 +150,49 @@
       "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/8dbae273aa6e54b4.jpg",
       "backdrop": "https://image.tmdb.org/t/p/w1280/qqHFLg90IUSoTmSMpKOOW5RyqN3.jpg",
       "trailer": "https://www.youtube.com/watch?v=0R6TmYtmwh8",
-      "imdbRating": 6.892,
+      "imdbRating": 6.9,
       "cast": "Hwang Jung-min, Zo In-sung, Hoyeon"
     },
     {
-      "titre": "Le Mystère Lucy Lost",
-      "slug": "le-mystere-lucy-lost",
+      "titre": "Quelques mots d’amour",
+      "slug": "quelques-mots-damour",
       "titreOriginal": null,
       "annee": 2026,
-      "realisateur": "Olivier Clert",
-      "duree": 89,
+      "realisateur": "Rudi Rosenberg",
+      "duree": 97,
       "genres": [
-        "Animation",
-        "Adventure",
+        "Comedy",
         "Drama"
       ],
-      "synopsis": "Lucy vit avec sa famille dans un village sur une petite île isolée. Ses dons extraordinaires suscitent le rejet des habitants. Lorsqu'elle rencontre Milly, une petite fille qu'elle seule peut voir, Lucy embarque dans une grande aventure pour percer le secret de ses mystérieux pouvoirs.",
-      "imdbId": "tt10569744",
+      "synopsis": "Sarcelles, 1995. Erika élève seule ses deux enfants. Sa fille Abigaëlle se persuade que son père, qu’elle n’a jamais connu, l’aime en silence quelque part. Lorsqu’elle se met en tête de le retrouver, Erika se sent obligée de l’aider, tout en cherchant à la protéger. En grandissant, la quête d’Abigaëlle se transforme en obsession, entraînant avec elle sa mère, sa meilleure amie, et tous ceux qui comptent.",
+      "imdbId": "tt39969491",
       "source": "zola",
       "cinema": "Le Zola",
       "seances": [
         {
-          "heure": "14:10",
+          "heure": "16:15",
           "version": "VF",
-          "resa_url": "https://www.ticketingcine.com/EMS1217/FRLPWEP#showsession?id=emsx121700009315&ps=EMS1217",
-          "date": "2026-11-28"
+          "resa_url": "https://www.ticketingcine.com/EMS1217/FR8376B#showsession?id=emsx121700009328&ps=EMS1217",
+          "date": "2026-11-29"
         },
         {
-          "heure": "14:15",
+          "heure": "20:10",
           "version": "VF",
-          "resa_url": "https://www.ticketingcine.com/EMS1217/FRLPWEP#showsession?id=emsx121700009316&ps=EMS1217",
-          "date": "2026-11-29"
+          "resa_url": "https://www.ticketingcine.com/EMS1217/FR8376B#showsession?id=emsx121700009327&ps=EMS1217",
+          "date": "2026-11-30"
+        },
+        {
+          "heure": "16:10",
+          "version": "VFST",
+          "resa_url": "https://www.ticketingcine.com/EMS1217/FR8376B#showsession?id=emsx121700009326&ps=EMS1217",
+          "date": "2026-12-01"
         }
       ],
-      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/96e9a17029320c98.jpg",
-      "backdrop": "https://image.tmdb.org/t/p/w1280/lhb1NoiKScRaApfn9rqaG9uS4MY.jpg",
-      "imdbRating": 8.0,
-      "cast": "Charlie Rosenzweig, Zach Valentin-Dattas, Jessica Monceau",
-      "trailer": "https://www.youtube.com/watch?v=6s4q4BuJPyA"
+      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/d152872c93058bff.jpg",
+      "backdrop": "https://image.tmdb.org/t/p/w1280/prU8Cabt75JCukKiSiXKpOIBXIK.jpg",
+      "trailer": "https://www.youtube.com/watch?v=kBJGhdd0AeU",
+      "imdbRating": 7.316,
+      "cast": "Hafsia Herzi, Nour Salam, Ella Bedoucha"
     },
     {
       "titre": "Une journée particulière",
@@ -308,11 +272,23 @@
           "version": "VF",
           "resa_url": "https://www.ticketingcine.com/EMS1217/FRAVK3D#showsession?id=emsx121700009345&ps=EMS1217",
           "date": "2026-12-02"
+        },
+        {
+          "heure": "16:00",
+          "version": "VFST",
+          "resa_url": "https://www.ticketingcine.com/EMS1217/FRAVK3D#showsession?id=emsx121700009346&ps=EMS1217",
+          "date": "2026-12-03"
+        },
+        {
+          "heure": "20:30",
+          "version": "VF",
+          "resa_url": "https://www.ticketingcine.com/EMS1217/FRAVK3D#showsession?id=emsx121700009347&ps=EMS1217",
+          "date": "2026-12-04"
         }
       ],
       "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/3f8a13d31fa65e58.jpg",
       "backdrop": "https://image.tmdb.org/t/p/w1280/h5sUWuxdA1PkPK7p3Y5jFy0eqQa.jpg",
-      "imdbRating": 5.37,
+      "imdbRating": 5.467,
       "cast": "Louise Coldefy, Julia Piaton, Artus",
       "trailer": "https://www.youtube.com/watch?v=deJSWzIU1H0"
     },
@@ -336,11 +312,17 @@
           "version": "VF",
           "resa_url": "https://www.ticketingcine.com/EMS1217/FRITK1Q#showsession?id=emsx121700009352&ps=EMS1217",
           "date": "2026-12-02"
+        },
+        {
+          "heure": "18:10",
+          "version": "VF",
+          "resa_url": "https://www.ticketingcine.com/EMS1217/FRITK1Q#showsession?id=emsx121700009353&ps=EMS1217",
+          "date": "2026-12-04"
         }
       ],
       "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/a8b3884d0a3c0947.jpg",
       "backdrop": "https://image.tmdb.org/t/p/w1280/GWr6kRbEGppdbGH1huSl0HfV83.jpg",
-      "imdbRating": 6.091,
+      "imdbRating": 6.25,
       "cast": "Malou Khebizi, Zoé Monpart, Kenji Peyran"
     },
     {
@@ -364,67 +346,70 @@
         }
       ],
       "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/6ed935c2e183f82b.jpg"
+    },
+    {
+      "titre": "Ulya",
+      "slug": "ulya",
+      "titreOriginal": null,
+      "annee": 2026,
+      "realisateur": "Viesturs Kairiss",
+      "duree": 102,
+      "genres": [
+        "Biography",
+        "Drama"
+      ],
+      "synopsis": "Lettonie, 1964. Ulya, une adolescente mesurant près de deux mètres, grandit dans une ferme isolée. Sa taille hors norme inquiète sa famille. Elle est envoyée à Riga pour intégrer une équipe renommée de basket-ball. Confrontée à sa taille et à des questionnements sur son identité, elle se trouve face à un choix : se cacher ou devenir la meilleure joueuse de basket-ball au monde.",
+      "imdbId": "tt26751523",
+      "source": "zola",
+      "cinema": "Le Zola",
+      "seances": [
+        {
+          "heure": "18:00",
+          "version": "VOSTFR",
+          "resa_url": "https://www.ticketingcine.com/EMS1217/FRC568U#showsession?id=emsx121700009357&ps=EMS1217",
+          "date": "2026-12-03"
+        },
+        {
+          "heure": "16:00",
+          "version": "VOSTFR",
+          "resa_url": "https://www.ticketingcine.com/EMS1217/FRC568U#showsession?id=emsx121700009358&ps=EMS1217",
+          "date": "2026-12-04"
+        }
+      ],
+      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/ece5abead89fb9b7.jpg",
+      "backdrop": "https://image.tmdb.org/t/p/w1280/4AUbTl7sHzYEAZAVlaiB21luaQo.jpg",
+      "imdbRating": 6.5,
+      "cast": "Karlis Arnolds Avots, Chulpan Khamatova, Aleksas Kazanavičius",
+      "trailer": "https://www.youtube.com/watch?v=BxP4wB8qIAU"
+    },
+    {
+      "titre": "Transmettre",
+      "slug": "transmettre",
+      "titreOriginal": null,
+      "annee": 2021,
+      "realisateur": "Michèle Saint-Michel",
+      "duree": 52,
+      "genres": [
+        "Short"
+      ],
+      "synopsis": "Au cœur d'une vallée vosgienne d'Alsace, la ferme du Runtzenbach incarne un modèle d'agriculture paysanne, biologique et citoyenne. Ce refuge face au monde consumériste est l'œuvre de Monique et Francis Schirck. Elle leur aura apporté, mais aussi beaucoup pris, parfois jusqu'au plus profond de leur chair. De cette vie de labeur, un équilibre, fragile, est enfin trouvé. Mais Francis a 67 ans: l'heure de la retraite a sonné.",
+      "imdbId": "tt15402478",
+      "source": "zola",
+      "cinema": "Le Zola",
+      "seances": [
+        {
+          "heure": "20:15",
+          "version": "VF",
+          "resa_url": "https://www.ticketingcine.com/EMS1217/FRH9IGV#showsession?id=emsx121700009344&ps=EMS1217",
+          "date": "2026-12-03"
+        }
+      ],
+      "poster": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/ac6bf887f4f77c31.jpg",
+      "imdbRating": 7.0,
+      "cast": "Guy Carcassone, Olivier Duhamel, Julie Benetti"
     }
   ],
   "evenements": [
-    {
-      "cle": "rencontre|midnight shift|2026-11",
-      "type": "rencontre",
-      "forme": null,
-      "titre": "Midnight Shift",
-      "description": "Découvrez une exposition du dessinateur lyonnais Aurélien Maury, à l’occasion de la parution de son nouveau livre \"Midnight Shift\" (éd. Tanibis, 2026).",
-      "date_debut": "2026-11-26",
-      "date_fin": "2026-11-26",
-      "precision": "exact",
-      "affiche_url": "https://cms-assets.webediamovies.pro/production/945/79a87c19285031adf105d1337aa52e63.jpg",
-      "films": [
-        {
-          "titre": "Midnight Shift",
-          "dates": [
-            "2026-11-26"
-          ],
-          "affiche": null
-        }
-      ],
-      "creneaux": [
-        {
-          "cinema": "Le Comoedia",
-          "date": "2026-11-26",
-          "heure": null,
-          "titre_film": "Midnight Shift",
-          "invite": null,
-          "description": "Découvrez une exposition du dessinateur lyonnais Aurélien Maury, à l’occasion de la parution de son nouveau livre \"Midnight Shift\" (éd. Tanibis, 2026)."
-        }
-      ]
-    },
-    {
-      "cle": "avant_premiere|fatherland|2026-11",
-      "type": "avant_premiere",
-      "forme": null,
-      "titre": "Fatherland",
-      "description": "Projection de Fatherland, en présence du philosophe André Hirt. Séance offerte par le Parlement européen, suivie d'un échange avec le public sur la culture en Europe, à travers l'œuvre de Thomas Mann.",
-      "date_debut": "2026-11-27",
-      "date_fin": "2026-11-27",
-      "precision": "exact",
-      "affiche_url": "https://cms-assets.webediamovies.pro/production/945/3d342a7ae791b11fc38a95a0d631b13d.jpg",
-      "films": [
-        {
-          "titre": "Fatherland",
-          "dates": [],
-          "affiche": "https://aaquwublsnfvpklxwxzz.supabase.co/storage/v1/object/public/affiches/8c65548f8b3357b8.jpg"
-        }
-      ],
-      "creneaux": [
-        {
-          "cinema": "Le Comoedia",
-          "date": "2026-11-27",
-          "heure": "18:30",
-          "titre_film": null,
-          "invite": null,
-          "description": "Projection de Fatherland, en présence du philosophe André Hirt. Séance offerte par le Parlement européen, suivie d'un échange avec le public sur la culture en Europe, à travers l'œuvre de Thomas Mann."
-        }
-      ]
-    },
     {
       "cle": "rencontre|il a suffi d'une nuit|2026-11",
       "type": "rencontre",
